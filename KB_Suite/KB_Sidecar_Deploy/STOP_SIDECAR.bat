@@ -1,15 +1,15 @@
-﻿@echo off
-title KB Sidecar Shutdown
+@echo off
+title KB2 Sidecar Shutdown
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo   KB KNOWLEDGE SYSTEM: SIDECAR STOP
+echo   KB2 KNOWLEDGE SYSTEM: SIDECAR STOP
 echo ========================================
 
 :: Port for the Sidecar
 set PORT=5002
 
-echo Searching for KB processes on port %PORT%...
+echo Searching for KB2 processes on port %PORT%...
 
 set FOUND=0
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr :%PORT% ^| findstr LISTENING') do (
@@ -27,4 +27,3 @@ if %FOUND%==0 (
 echo.
 echo DONE.
 timeout /t 3
-

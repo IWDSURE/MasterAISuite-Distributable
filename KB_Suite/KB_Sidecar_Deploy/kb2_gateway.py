@@ -1,7 +1,7 @@
-﻿"""
-KB Knowledge Base 2.0 â€” Python Agent Gateway
+"""
+KB2 Knowledge Base 2.0 — Python Agent Gateway
 ==============================================
-Gives AI agents direct, structured access to the KB graph knowledge base.
+Gives AI agents direct, structured access to the KB2 graph knowledge base.
 Running on Oracle AI Database 26ai with native VECTOR support.
 
 CAPABILITIES:
@@ -17,40 +17,40 @@ CAPABILITIES:
   - vector_stats()         : Detailed embedding coverage report
 
 USAGE (import):
-  from KB_gateway import KB
-  kb = KB()
+  from kb2_gateway import KB2
+  kb = KB2()
 
   # Keyword search (always works)
   results = kb.search("XSLT namespace")
 
-  # Semantic search (requires: pip install sentence-transformers + run KB_embed.py)
+  # Semantic search (requires: pip install sentence-transformers + run kb2_embed.py)
   results = kb.semantic_search("how to fix VBS authentication errors")
 
   node = kb.get_node(66)
   kb.push_node("My New Finding", kind="LESSON", summary="...", content="...", tags="oic,xslt")
 
 USAGE (CLI):
-  python KB_gateway.py search "XSLT namespace"         # keyword search
-  python KB_gateway.py semantic "VBS auth token error" # semantic search
-  python KB_gateway.py get 66
-  python KB_gateway.py get 66 --verbose
-  python KB_gateway.py neighbors 66
-  python KB_gateway.py list --kind DOCUMENT
-  python KB_gateway.py stats
-  python KB_gateway.py vecstats                        # vector embedding coverage
-  python KB_gateway.py push --title "My Lesson" --kind LESSON --summary "..." --content "Full text" --tags "oic,hcm"
-  python KB_gateway.py add  --title "My Lesson" --kind LESSON --content @myfile.md
-  python KB_gateway.py link 66 68 --type RELATED_TO --weight 8 --note "related"
-  python KB_gateway.py push --title "From file" --content @myfile.md
+  python kb2_gateway.py search "XSLT namespace"         # keyword search
+  python kb2_gateway.py semantic "VBS auth token error" # semantic search
+  python kb2_gateway.py get 66
+  python kb2_gateway.py get 66 --verbose
+  python kb2_gateway.py neighbors 66
+  python kb2_gateway.py list --kind DOCUMENT
+  python kb2_gateway.py stats
+  python kb2_gateway.py vecstats                        # vector embedding coverage
+  python kb2_gateway.py push --title "My Lesson" --kind LESSON --summary "..." --content "Full text" --tags "oic,hcm"
+  python kb2_gateway.py add  --title "My Lesson" --kind LESSON --content @myfile.md
+  python kb2_gateway.py link 66 68 --type RELATED_TO --weight 8 --note "related"
+  python kb2_gateway.py push --title "From file" --content @myfile.md
 
 SEMANTIC SEARCH SETUP:
   pip install sentence-transformers
-  python KB_embed.py          # populate vec columns (run once)
-  python KB_gateway.py vecstats
+  python kb2_embed.py          # populate vec columns (run once)
+  python kb2_gateway.py vecstats
 
-CONNECTION (optional overrides â€” defaults work out of the box):
-  python KB_gateway.py --dsn localhost:1521/FREEPDB1 search "term"
-  python KB_gateway.py --user ctx_user --password ctx_pass123 stats
+CONNECTION (optional overrides — defaults work out of the box):
+  python kb2_gateway.py --dsn localhost:1521/FREEPDB1 search "term"
+  python kb2_gateway.py --user ctx_user --password ctx_pass123 stats
 
 CREDENTIALS: Loaded automatically from the .env file. No manual setup needed.
 
@@ -67,7 +67,7 @@ import argparse
 import textwrap
 from typing import Optional, List, Dict, Any
 
-# â”€â”€ Fix 1: Unicode resilience â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Fix 1: Unicode resilience ──────────────────────────────────────────────────
 # PowerShell and some terminals default to non-UTF-8 encoding.
 # Reconfigure stdout/stderr to UTF-8 so emoji and special chars print cleanly.
 try:
@@ -76,7 +76,7 @@ try:
     if hasattr(sys.stderr, 'reconfigure'):
         sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 except Exception:
-    pass  # Never crash on I/O config â€” degrade gracefully
+    pass  # Never crash on I/O config — degrade gracefully
 
 try:
     import oracledb
@@ -84,30 +84,30 @@ except ImportError:
     print("ERROR: oracledb not installed. Run: pip install oracledb")
     sys.exit(1)
 
-# â”€â”€ Fix 2: LOB connection persistence â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Fix 2: LOB connection persistence ─────────────────────────────────────────
 # fetch_lobs=False tells oracledb to inline LOB data during fetch, so CLOB
-# values are returned as plain Python strings â€” no separate .read() call needed,
+# values are returned as plain Python strings — no separate .read() call needed,
 # and no DPY-1001 "not connected" error when reading after connection closes.
 oracledb.defaults.fetch_lobs = False
 
 try:
     from dotenv import load_dotenv
-    load_dotenv(os.path.join(os.path.dirname(__file__), 'KB-webapp', 'backend', '.env'))
+    load_dotenv(os.path.join(os.path.dirname(__file__), 'kb2-webapp', 'backend', '.env'))
 except ImportError:
     pass  # dotenv optional
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 # Default Configuration (overridable via CLI or constructor)
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 DB_USER = os.getenv("DB_USER", "ctx_user")
 DB_PASS = os.getenv("DB_PASS", "ctx_pass123")
 DB_DSN  = os.getenv("DB_DSN",  "localhost:1521/FREEPDB1")
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# Semantic Search â€” Embedding Model Cache
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
+# Semantic Search — Embedding Model Cache
+# ─────────────────────────────────────────────────────────────
 # The model is loaded once per process and cached here.
-# sentence-transformers is an optional dependency â€” all other
+# sentence-transformers is an optional dependency — all other
 # gateway functions work fine without it.
 
 _embed_model = None   # module-level singleton
@@ -146,9 +146,9 @@ def _make_vec(text: str):
     return _array.array('f', embedding.tolist())
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 # Helpers
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 
 def _row_to_dict(cursor, row):
     """Convert a cursor row to a dict using lowercase column names."""
@@ -163,19 +163,19 @@ def _safe_print(text: str) -> None:
         print(text.encode('ascii', errors='replace').decode('ascii'))
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-# KB Gateway Class
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
+# KB2 Gateway Class
+# ─────────────────────────────────────────────────────────────
 
-class KB:
+class KB2:
     """
-    AI Agent gateway to the KB Knowledge Base.
+    AI Agent gateway to the KB2 Knowledge Base.
 
-    Thin-mode Oracle connection â€” no Oracle Client installation required.
-    No credentials needed â€” configured automatically from environment.
+    Thin-mode Oracle connection — no Oracle Client installation required.
+    No credentials needed — configured automatically from environment.
 
     Usage:
-        kb = KB()
+        kb = KB2()
         results = kb.search("XSLT")
         node = kb.get_node(66)
         node_id = kb.push_node("Title", kind="LESSON", summary="...", content="...")
@@ -214,9 +214,9 @@ class KB:
                 rows = cur.fetchall() if fetch_all else [cur.fetchone()]
                 return [_row_to_dict(cur, r) for r in rows if r]
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # SEARCH
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def search(self, term: str, limit: int = 30) -> list:
         """
@@ -224,7 +224,7 @@ class KB:
         and all CLOB chunk content (4).
 
         Args:
-            term:  Search term â€” case-insensitive, partial match
+            term:  Search term — case-insensitive, partial match
             limit: Max results returned (default 30)
 
         Returns:
@@ -245,7 +245,7 @@ class KB:
                 SELECT n.id, n.title, n.kind, n.summary,
                        n.importance_score, n.source,
                        'TITLE' AS match_in, 10 AS relevance
-                FROM KB_NODE n
+                FROM KB2_NODE n
                 WHERE UPPER(n.title) LIKE :1
 
                 UNION
@@ -253,7 +253,7 @@ class KB:
                 SELECT n.id, n.title, n.kind, n.summary,
                        n.importance_score, n.source,
                        'SUMMARY' AS match_in, 7 AS relevance
-                FROM KB_NODE n
+                FROM KB2_NODE n
                 WHERE UPPER(n.summary) LIKE :2
                   AND UPPER(n.title) NOT LIKE :3
 
@@ -262,8 +262,8 @@ class KB:
                 SELECT DISTINCT n.id, n.title, n.kind, n.summary,
                        n.importance_score, n.source,
                        'CONTENT' AS match_in, 4 AS relevance
-                FROM KB_NODE n
-                JOIN KB_NODE_CONTENT c ON c.node_id = n.id
+                FROM KB2_NODE n
+                JOIN KB2_NODE_CONTENT c ON c.node_id = n.id
                 WHERE DBMS_LOB.INSTR(UPPER(c.content), :4) > 0
                   AND UPPER(n.title)   NOT LIKE :5
                   AND UPPER(n.summary) NOT LIKE :6
@@ -273,9 +273,9 @@ class KB:
         """
         return self._execute(sql, [pattern, pattern, pattern, u, pattern, pattern, limit])
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # GET NODE
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def get_node(self, node_id: int, include_chunks: bool = True,
                  include_edges: bool = True) -> dict | None:
@@ -283,7 +283,7 @@ class KB:
         Retrieve a complete node with all content chunks and relationships.
 
         With oracledb.defaults.fetch_lobs=False, CLOB content is returned
-        as plain Python strings â€” no connection persistence issues.
+        as plain Python strings — no connection persistence issues.
 
         Args:
             node_id:        Node ID to retrieve
@@ -302,7 +302,7 @@ class KB:
         """
         nodes = self._execute(
             "SELECT id, title, kind, summary, importance_score, source, "
-            "metadata, created_at, last_used_at FROM KB_NODE WHERE id = :1",
+            "metadata, created_at, last_used_at FROM KB2_NODE WHERE id = :1",
             [node_id]
         )
         if not nodes:
@@ -315,7 +315,7 @@ class KB:
             with self._connect() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "UPDATE KB_NODE SET last_used_at = CURRENT_TIMESTAMP WHERE id = :1",
+                        "UPDATE KB2_NODE SET last_used_at = CURRENT_TIMESTAMP WHERE id = :1",
                         [node_id]
                     )
                     conn.commit()
@@ -323,10 +323,10 @@ class KB:
             pass
 
         if include_chunks:
-            # fetch_lobs=False means content is already a string â€” no .read() needed
+            # fetch_lobs=False means content is already a string — no .read() needed
             node['chunks'] = self._execute(
                 "SELECT id, node_id, chunk_seq, chunk_summary, content, created_at "
-                "FROM KB_NODE_CONTENT WHERE node_id = :1 ORDER BY chunk_seq",
+                "FROM KB2_NODE_CONTENT WHERE node_id = :1 ORDER BY chunk_seq",
                 [node_id]
             )
         else:
@@ -336,9 +336,9 @@ class KB:
 
         return node
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # NEIGHBORS
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def get_neighbors(self, node_id: int) -> list:
         """
@@ -356,22 +356,22 @@ class KB:
                    e.relation_type, e.weight, e.note,
                    n.id AS related_id, n.title AS related_title,
                    n.kind AS related_kind, n.summary AS related_summary
-            FROM KB_EDGE e JOIN KB_NODE n ON n.id = e.to_id
+            FROM KB2_EDGE e JOIN KB2_NODE n ON n.id = e.to_id
             WHERE e.from_id = :1
             UNION ALL
             SELECT 'IN' AS direction, e.id AS edge_id,
                    e.relation_type, e.weight, e.note,
                    n.id AS related_id, n.title AS related_title,
                    n.kind AS related_kind, n.summary AS related_summary
-            FROM KB_EDGE e JOIN KB_NODE n ON n.id = e.from_id
+            FROM KB2_EDGE e JOIN KB2_NODE n ON n.id = e.from_id
             WHERE e.to_id = :2
             ORDER BY weight DESC
         """
         return self._execute(sql, [node_id, node_id])
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # LIST NODES
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def list_nodes(self, kind: str = None, source: str = None,
                    page: int = 1, limit: int = 20) -> list:
@@ -397,23 +397,23 @@ class KB:
         sql = f"""
             SELECT id, title, kind, summary, importance_score, source,
                    created_at, last_used_at
-            FROM KB_NODE
+            FROM KB2_NODE
             {where}
             ORDER BY importance_score DESC, created_at DESC
             OFFSET {offset} ROWS FETCH NEXT {limit} ROWS ONLY
         """
         return self._execute(sql, params)
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # PUSH / ADD NODE
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def push_node(self, title: str, kind: str = 'NOTE', summary: str = None,
                   source: str = 'AI_AGENT', importance: int = 5,
                   content: str = None, content_summary: str = None,
                   tags: str = None) -> int:
         """
-        Push new knowledge into the KB system. Alias: add_node()
+        Push new knowledge into the KB2 system. Alias: add_node()
 
         Args:
             title:           Concise, searchable node title
@@ -448,7 +448,7 @@ class KB:
             with conn.cursor() as cur:
                 out_id = cur.var(oracledb.NUMBER)
                 cur.execute(
-                    "INSERT INTO KB_NODE "
+                    "INSERT INTO KB2_NODE "
                     "(title, kind, summary, source, importance_score, metadata, created_at) "
                     "VALUES (:1, :2, :3, :4, :5, :6, CURRENT_TIMESTAMP) RETURNING id INTO :7",
                     [title, kind, summary, source, importance, metadata, out_id]
@@ -462,7 +462,7 @@ class KB:
             if vec is not None:
                 with self._connect() as conn:
                     with conn.cursor() as cur:
-                        cur.execute("UPDATE KB_NODE SET vec = :1 WHERE id = :2",
+                        cur.execute("UPDATE KB2_NODE SET vec = :1 WHERE id = :2",
                                     [vec, node_id])
                         conn.commit()
         except Exception:
@@ -483,12 +483,12 @@ class KB:
         Args:
             node_id: Target node ID
             summary: Short label for this chunk (shown in web UI)
-            content: Full text (CLOB â€” no practical size limit)
+            content: Full text (CLOB — no practical size limit)
         """
         with self._connect() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT NVL(MAX(chunk_seq), 0) + 1 FROM KB_NODE_CONTENT WHERE node_id = :1",
+                    "SELECT NVL(MAX(chunk_seq), 0) + 1 FROM KB2_NODE_CONTENT WHERE node_id = :1",
                     [node_id]
                 )
                 next_seq = cur.fetchone()[0]
@@ -497,7 +497,7 @@ class KB:
                 vec = _make_vec(f"{summary or ''}. {str(content or '')[:1200]}")
 
                 cur.execute(
-                    "INSERT INTO KB_NODE_CONTENT "
+                    "INSERT INTO KB2_NODE_CONTENT "
                     "(node_id, chunk_seq, chunk_summary, content, vec, created_at) "
                     "VALUES (:1, :2, :3, :4, :5, CURRENT_TIMESTAMP)",
                     [node_id, next_seq, summary, content, vec]
@@ -508,7 +508,7 @@ class KB:
                   relation_type: str = 'RELATED_TO',
                   weight: int = 5, note: str = None) -> None:
         """
-        Create a relationship between two nodes (idempotent â€” skips duplicates).
+        Create a relationship between two nodes (idempotent — skips duplicates).
 
         Args:
             from_id:       Source node ID
@@ -520,13 +520,13 @@ class KB:
         with self._connect() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT COUNT(*) FROM KB_EDGE "
+                    "SELECT COUNT(*) FROM KB2_EDGE "
                     "WHERE from_id=:1 AND to_id=:2 AND relation_type=:3",
                     [from_id, to_id, relation_type]
                 )
                 if cur.fetchone()[0] == 0:
                     cur.execute(
-                        "INSERT INTO KB_EDGE "
+                        "INSERT INTO KB2_EDGE "
                         "(from_id, to_id, relation_type, weight, note, created_at) "
                         "VALUES (:1, :2, :3, :4, :5, CURRENT_TIMESTAMP)",
                         [from_id, to_id, relation_type, weight, note]
@@ -540,43 +540,43 @@ class KB:
         """Return system-wide counts including vector embedding coverage."""
         rows = self._execute(
             "SELECT "
-            "(SELECT COUNT(*) FROM KB_NODE) AS total_nodes, "
-            "(SELECT COUNT(*) FROM KB_EDGE) AS total_edges, "
-            "(SELECT COUNT(*) FROM KB_NODE_CONTENT) AS total_chunks, "
-            "(SELECT COUNT(*) FROM KB_NODE WHERE vec IS NOT NULL) AS nodes_embedded, "
-            "(SELECT COUNT(*) FROM KB_NODE_CONTENT WHERE vec IS NOT NULL) AS chunks_embedded "
+            "(SELECT COUNT(*) FROM KB2_NODE) AS total_nodes, "
+            "(SELECT COUNT(*) FROM KB2_EDGE) AS total_edges, "
+            "(SELECT COUNT(*) FROM KB2_NODE_CONTENT) AS total_chunks, "
+            "(SELECT COUNT(*) FROM KB2_NODE WHERE vec IS NOT NULL) AS nodes_embedded, "
+            "(SELECT COUNT(*) FROM KB2_NODE_CONTENT WHERE vec IS NOT NULL) AS chunks_embedded "
             "FROM DUAL"
         )
         return rows[0] if rows else {}
 
     def vector_stats(self) -> dict:
-        """Detailed embedding coverage â€” how many nodes/chunks have vec populated."""
+        """Detailed embedding coverage — how many nodes/chunks have vec populated."""
         rows = self._execute(
             "SELECT "
-            "(SELECT COUNT(*) FROM KB_NODE) AS total_nodes, "
-            "(SELECT COUNT(*) FROM KB_NODE WHERE vec IS NOT NULL) AS nodes_embedded, "
-            "(SELECT COUNT(*) FROM KB_NODE WHERE vec IS NULL) AS nodes_pending, "
-            "(SELECT COUNT(*) FROM KB_NODE_CONTENT) AS total_chunks, "
-            "(SELECT COUNT(*) FROM KB_NODE_CONTENT WHERE vec IS NOT NULL) AS chunks_embedded, "
-            "(SELECT COUNT(*) FROM KB_NODE_CONTENT WHERE vec IS NULL) AS chunks_pending "
+            "(SELECT COUNT(*) FROM KB2_NODE) AS total_nodes, "
+            "(SELECT COUNT(*) FROM KB2_NODE WHERE vec IS NOT NULL) AS nodes_embedded, "
+            "(SELECT COUNT(*) FROM KB2_NODE WHERE vec IS NULL) AS nodes_pending, "
+            "(SELECT COUNT(*) FROM KB2_NODE_CONTENT) AS total_chunks, "
+            "(SELECT COUNT(*) FROM KB2_NODE_CONTENT WHERE vec IS NOT NULL) AS chunks_embedded, "
+            "(SELECT COUNT(*) FROM KB2_NODE_CONTENT WHERE vec IS NULL) AS chunks_pending "
             "FROM DUAL"
         )
         return rows[0] if rows else {}
 
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
     # SEMANTIC SEARCH (Oracle 26ai VECTOR_DISTANCE)
-    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ─────────────────────────────────────────────────────────
 
     def semantic_search(self, query: str, limit: int = 10) -> list:
         """
         Semantic similarity search using Oracle 26ai VECTOR_DISTANCE().
 
-        Finds nodes whose meaning is similar to the query â€” even when exact
+        Finds nodes whose meaning is similar to the query — even when exact
         words don't match. Searches both node-level and chunk-level embeddings.
 
         Requires:
           1. pip install sentence-transformers
-          2. python KB_embed.py  (populate vec columns â€” run once)
+          2. python kb2_embed.py  (populate vec columns — run once)
 
         Args:
             query: Natural language query (e.g. "VBS authentication token error")
@@ -596,7 +596,7 @@ class KB:
         if query_vec is None:
             sys.stderr.write("[ERROR] semantic_search requires sentence-transformers.\n")
             sys.stderr.write("        Run: pip install sentence-transformers\n")
-            sys.stderr.write("        Then: python KB_embed.py\n")
+            sys.stderr.write("        Then: python kb2_embed.py\n")
             return []
 
         results = []
@@ -608,7 +608,7 @@ class KB:
             SELECT n.id, n.title, n.kind, n.summary, n.importance_score, n.source,
                    'NODE' AS match_in,
                    VECTOR_DISTANCE(n.vec, :1, COSINE) AS distance
-            FROM KB_NODE n
+            FROM KB2_NODE n
             WHERE n.vec IS NOT NULL
             ORDER BY distance ASC
             FETCH FIRST :2 ROWS ONLY
@@ -623,7 +623,7 @@ class KB:
                     seen_ids.add(d['id'])
         except Exception as e:
             sys.stderr.write(f"[WARN] Node vector search failed: {e}\n")
-            sys.stderr.write("       Run 'python KB_embed.py' to populate vectors.\n")
+            sys.stderr.write("       Run 'python kb2_embed.py' to populate vectors.\n")
             return []
 
         # 2. Chunk-level: finds knowledge buried in content chunks
@@ -631,8 +631,8 @@ class KB:
             SELECT n.id, n.title, n.kind, n.summary, n.importance_score, n.source,
                    'CHUNK' AS match_in,
                    MIN(VECTOR_DISTANCE(c.vec, :1, COSINE)) AS distance
-            FROM KB_NODE_CONTENT c
-            JOIN KB_NODE n ON n.id = c.node_id
+            FROM KB2_NODE_CONTENT c
+            JOIN KB2_NODE n ON n.id = c.node_id
             WHERE c.vec IS NOT NULL
             GROUP BY n.id, n.title, n.kind, n.summary, n.importance_score, n.source
             ORDER BY distance ASC
@@ -661,9 +661,9 @@ class KB:
         return results[:limit]
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 # CLI Display Helpers
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 
 def _print_node_card(node: dict, verbose: bool = False) -> None:
     """Print a formatted node summary card."""
@@ -712,7 +712,7 @@ def _print_node_card(node: dict, verbose: bool = False) -> None:
 def _print_search_results(results: list, term: str) -> None:
     """Print formatted search results."""
     _safe_print(f"\n[SEARCH] \"{term}\" -- {len(results)} result(s)\n")
-    _safe_print(f"{'â”€'*70}")
+    _safe_print(f"{'─'*70}")
     for r in results:
         match_label = {
             'TITLE':   '[TITLE]  ',
@@ -723,38 +723,38 @@ def _print_search_results(results: list, term: str) -> None:
         summary = str(r.get('summary') or '')
         if summary:
             _safe_print(f"               {summary[:80]}{'...' if len(summary) > 80 else ''}")
-    _safe_print(f"{'â”€'*70}\n")
-    _safe_print(f"  Get full details: python KB_gateway.py get <ID>")
-    _safe_print(f"  Get neighbors:    python KB_gateway.py neighbors <ID>\n")
+    _safe_print(f"{'─'*70}\n")
+    _safe_print(f"  Get full details: python kb2_gateway.py get <ID>")
+    _safe_print(f"  Get neighbors:    python kb2_gateway.py neighbors <ID>\n")
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 # CLI Entry Point
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
-        description='KB Knowledge Base Gateway -- AI Agent CLI',
+        description='KB2 Knowledge Base Gateway -- AI Agent CLI',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent("""
         Examples:
-          python KB_gateway.py search "XSLT namespace"
-          python KB_gateway.py get 66
-          python KB_gateway.py get 66 --verbose
-          python KB_gateway.py neighbors 66
-          python KB_gateway.py list
-          python KB_gateway.py list --kind LESSON
-          python KB_gateway.py stats
-          python KB_gateway.py push --title "My Lesson" --kind LESSON --summary "Brief" --content "Full text" --tags "oic,xslt"
-          python KB_gateway.py add  --title "My Lesson" --kind LESSON --content @myfile.md
-          python KB_gateway.py link 66 68 --type RELATED_TO --weight 8 --note "Both about OIC mapper"
+          python kb2_gateway.py search "XSLT namespace"
+          python kb2_gateway.py get 66
+          python kb2_gateway.py get 66 --verbose
+          python kb2_gateway.py neighbors 66
+          python kb2_gateway.py list
+          python kb2_gateway.py list --kind LESSON
+          python kb2_gateway.py stats
+          python kb2_gateway.py push --title "My Lesson" --kind LESSON --summary "Brief" --content "Full text" --tags "oic,xslt"
+          python kb2_gateway.py add  --title "My Lesson" --kind LESSON --content @myfile.md
+          python kb2_gateway.py link 66 68 --type RELATED_TO --weight 8 --note "Both about OIC mapper"
 
         Connection override (optional -- defaults work out of the box):
-          python KB_gateway.py --dsn localhost:1521/FREEPDB1 search "term"
+          python kb2_gateway.py --dsn localhost:1521/FREEPDB1 search "term"
         """)
     )
 
-    # â”€â”€ Fix 3: Global connection override flags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ── Fix 3: Global connection override flags ─────────────────────────────
     parser.add_argument('--dsn',      default=None, help='DB connection string (default: from env)')
     parser.add_argument('--user',     default=None, help='DB username (default: from env)')
     parser.add_argument('--password', default=None, help='DB password (default: from env)')
@@ -800,7 +800,7 @@ def main():
     p_sem.add_argument('--limit', type=int, default=10, help='Max results (default: 10)')
     p_sem.add_argument('--json', action='store_true', help='Output raw JSON')
 
-    # â”€â”€ Fix 4 & 5: push + add alias, plus --tags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ── Fix 4 & 5: push + add alias, plus --tags ────────────────────────────
     def _add_push_args(p):
         p.add_argument('--title',    required=True, help='Node title (concise, searchable)')
         p.add_argument('--kind',     default='NOTE',
@@ -816,10 +816,10 @@ def main():
         p.add_argument('--importance', type=int, default=5,
                        help='Score 1-10. Use 8-9 for hard-won lessons (default: 5)')
 
-    p_push = sub.add_parser('push', help='Push new knowledge node to KB')
+    p_push = sub.add_parser('push', help='Push new knowledge node to KB2')
     _add_push_args(p_push)
 
-    # 'add' is a natural alias for 'push' â€” same arguments
+    # 'add' is a natural alias for 'push' — same arguments
     p_add = sub.add_parser('add', help='Add new knowledge node (alias for push)')
     _add_push_args(p_add)
 
@@ -839,13 +839,13 @@ def main():
         return
 
     # Instantiate with optional connection overrides
-    kb = KB(
+    kb = KB2(
         user     = args.user     or DB_USER,
         password = args.password or DB_PASS,
         dsn      = args.dsn      or DB_DSN,
     )
 
-    # â”€â”€ Command dispatch â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ── Command dispatch ────────────────────────────────────────────────────
 
     if args.command == 'search':
         results = kb.search(args.term, args.limit)
@@ -892,8 +892,8 @@ def main():
         if args.json:
             print(json.dumps(s, default=str, indent=2))
         else:
-            _safe_print(f"\n  KB System Stats  (Oracle 26ai)")
-            _safe_print(f"  {'â”€'*30}")
+            _safe_print(f"\n  KB2 System Stats  (Oracle 26ai)")
+            _safe_print(f"  {'─'*30}")
             _safe_print(f"  Nodes:  {s.get('total_nodes', '?')}")
             _safe_print(f"  Edges:  {s.get('total_edges', '?')}")
             _safe_print(f"  Chunks: {s.get('total_chunks', '?')}")
@@ -906,14 +906,14 @@ def main():
         if args.json:
             print(json.dumps(vs, default=str, indent=2))
         else:
-            _safe_print(f"\n  KB Vector Coverage  (Oracle 26ai)")
-            _safe_print(f"  {'â”€'*34}")
+            _safe_print(f"\n  KB2 Vector Coverage  (Oracle 26ai)")
+            _safe_print(f"  {'─'*34}")
             _safe_print(f"  Nodes:  {vs.get('nodes_embedded','?'):>4} / {vs.get('total_nodes','?'):>4} embedded  "
                         f"({vs.get('nodes_pending','?')} pending)")
             _safe_print(f"  Chunks: {vs.get('chunks_embedded','?'):>4} / {vs.get('total_chunks','?'):>4} embedded  "
                         f"({vs.get('chunks_pending','?')} pending)")
             if vs.get('nodes_pending', 0) > 0 or vs.get('chunks_pending', 0) > 0:
-                _safe_print(f"\n  Run: python KB_embed.py  (to fill pending)\n")
+                _safe_print(f"\n  Run: python kb2_embed.py  (to fill pending)\n")
             else:
                 _safe_print(f"\n  All vectors populated. Semantic search is fully operational.\n")
 
@@ -923,7 +923,7 @@ def main():
             print(json.dumps(results, default=str, indent=2))
         else:
             _safe_print(f"\n[SEMANTIC] \"{args.query}\" -- {len(results)} result(s)\n")
-            _safe_print(f"{'â”€'*70}")
+            _safe_print(f"{'─'*70}")
             for r in results:
                 dist  = r.get('distance', '?')
                 dist_s = f"{float(dist):.3f}" if dist != '?' else '?'
@@ -933,8 +933,8 @@ def main():
                 summary = str(r.get('summary') or '')
                 if summary:
                     _safe_print(f"                 {summary[:80]}{'...' if len(summary) > 80 else ''}")
-            _safe_print(f"{'â”€'*70}\n")
-            _safe_print(f"  Get full details: python KB_gateway.py get <ID>\n")
+            _safe_print(f"{'─'*70}\n")
+            _safe_print(f"  Get full details: python kb2_gateway.py get <ID>\n")
 
     elif args.command in ('push', 'add'):
         content = args.content
@@ -953,7 +953,7 @@ def main():
             tags     = args.tags,
         )
         _safe_print(f"\nNode created: ID={node_id}\n")
-        _safe_print(f"   python KB_gateway.py get {node_id} --verbose\n")
+        _safe_print(f"   python kb2_gateway.py get {node_id} --verbose\n")
 
     elif args.command == 'link':
         kb.push_edge(args.from_id, args.to_id, args.rel_type, args.weight, args.note)
@@ -962,4 +962,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
