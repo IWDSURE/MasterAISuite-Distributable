@@ -1,4 +1,4 @@
-# HR_GEN_AI_AGENTS_TL_
+﻿# HR_GEN_AI_AGENTS_TL_
 
 This table stores the seeded Gen AI Agents name and description.
 
@@ -12,7 +12,7 @@ This table stores the seeded Gen AI Agents name and description.
 
 **Tablespace:** REFERENCE
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagentstl-28543.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagentstl-28543.html)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtl-28543.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtl-28543.html)
 
 ## Primary Key
 
@@ -49,4 +49,5 @@ This table stores the seeded Gen AI Agents name and description.
 
 ---
 
-[← Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+[â† Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+

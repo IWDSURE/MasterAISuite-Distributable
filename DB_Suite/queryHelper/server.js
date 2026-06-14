@@ -1,4 +1,4 @@
-require('dotenv').config();
+﻿require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const oracledb = require('oracledb');
@@ -89,7 +89,7 @@ app.get('/api/table/:name', async (req, res) => {
   }
 });
 
-// 4. Semantic Search (Hybrid Metadata + KB2 Context)
+// 4. Semantic Search (Hybrid Metadata + KB Context)
 app.get('/api/search', async (req, res) => {
   const { q } = req.query;
   if (!q) return res.status(400).json({ error: 'Search term required' });
@@ -119,7 +119,7 @@ app.get('/api/search', async (req, res) => {
     // Step 2: Semantic Metadata Search (Native Oracle Vector Search)
     let semanticMetaResults = [];
     try {
-      // Get embedding from KB2 sidecar for the user's query
+      // Get embedding from KB sidecar for the user's query
       const embedResp = await axios.get(`http://localhost:5002/embed?text=${encodeURIComponent(q)}`);
       if (embedResp.data.vec) {
         const queryVec = JSON.stringify(embedResp.data.vec);
@@ -149,3 +149,4 @@ app.get('/api/search', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`[Query Helper API] Running on http://localhost:${PORT}`);
 });
+

@@ -1,4 +1,4 @@
-# HR_GEN_AI_AGENT_TOOL_MAPPINGS
+﻿# HR_GEN_AI_AGENT_TOOL_MAPPINGS
 
 This table stores the relationships between Agents and Tools.
 
@@ -12,7 +12,7 @@ This table stores the relationships between Agents and Tools.
 
 **Tablespace:** REFERENCE
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagenttoolmappings-22444.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagenttoolmappings-22444.html)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtoolmappings-22444.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtoolmappings-22444.html)
 
 ## Primary Key
 
@@ -48,4 +48,5 @@ This table stores the relationships between Agents and Tools.
 
 ---
 
-[← Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+[â† Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+

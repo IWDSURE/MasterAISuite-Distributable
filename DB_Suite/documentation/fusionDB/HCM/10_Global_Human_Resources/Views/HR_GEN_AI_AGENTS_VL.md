@@ -1,4 +1,4 @@
-# HR_GEN_AI_AGENTS_VL
+﻿# HR_GEN_AI_AGENTS_VL
 
 ## Details
 
@@ -8,7 +8,7 @@
 
 **Object type:** VIEW
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagentsvl-3524.html#hrgenaiagentsvl-3524](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagentsvl-3524.html#hrgenaiagentsvl-3524)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBvl-3524.html#hrgenKBvl-3524](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBvl-3524.html#hrgenKBvl-3524)
 
 ## Columns
 
@@ -50,4 +50,5 @@ SELECT B.AGENT_ID, B.AGENT_CODE, B.FAMILY, B.PRODUCT, B.AGENT_CREATED_DATE, B.OW
 
 ---
 
-[← Back to Index](../10_Global_Human_Resources_Views_Index.md)
+[â† Back to Index](../10_Global_Human_Resources_Views_Index.md)
+

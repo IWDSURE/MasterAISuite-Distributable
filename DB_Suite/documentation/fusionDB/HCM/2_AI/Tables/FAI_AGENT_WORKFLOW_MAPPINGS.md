@@ -1,4 +1,4 @@
-# FAI_AGENT_WORKFLOW_MAPPINGS
+﻿# FAI_AGENT_WORKFLOW_MAPPINGS
 
 Define mapping between agents and workflows.
 
@@ -12,7 +12,7 @@ Define mapping between agents and workflows.
 
 **Tablespace:** REFERENCE
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagentworkflowmappings-31231.html#faiagentworkflowmappings-31231](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagentworkflowmappings-31231.html#faiagentworkflowmappings-31231)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBworkflowmappings-31231.html#fKBworkflowmappings-31231](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBworkflowmappings-31231.html#fKBworkflowmappings-31231)
 
 ## Primary Key
 
@@ -47,4 +47,5 @@ Define mapping between agents and workflows.
 
 ---
 
-[← Back to Index](../2_AI_Tables_Index.md)
+[â† Back to Index](../2_AI_Tables_Index.md)
+

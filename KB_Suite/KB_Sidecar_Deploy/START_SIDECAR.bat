@@ -1,9 +1,9 @@
-@echo off
-title KB2 Sidecar Launcher
+﻿@echo off
+title KB Sidecar Launcher
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo   KB2 KNOWLEDGE SYSTEM: SIDECAR START
+echo   KB KNOWLEDGE SYSTEM: SIDECAR START
 echo ========================================
 
 :: Port for the Sidecar
@@ -16,23 +16,24 @@ for /f "tokens=5" %%a in ('netstat -aon ^| findstr :%PORT% ^| findstr LISTENING'
 )
 
 echo [2/3] Verifying environment...
-if not exist "kb2_embed_server.py" (
-    echo [ERROR] kb2_embed_server.py not found in current directory!
+if not exist "KB_embed_server.py" (
+    echo [ERROR] KB_embed_server.py not found in current directory!
     pause
     exit /b
 )
-if not exist "kb2_gateway.py" (
-    echo [ERROR] kb2_gateway.py not found in current directory!
+if not exist "KB_gateway.py" (
+    echo [ERROR] KB_gateway.py not found in current directory!
     pause
     exit /b
 )
 
 echo [3/3] Launching Embedding Sidecar...
 :: Start in a new window so logs are visible
-start "KB2-Sidecar-Process" python kb2_embed_server.py
+start "KB-Sidecar-Process" python KB_embed_server.py
 
 echo.
 echo SUCCESS: Sidecar triggered.
 echo Please wait ~30 seconds for the AI model to load in the new window.
 echo.
 timeout /t 5
+

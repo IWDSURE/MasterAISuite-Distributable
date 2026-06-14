@@ -1,4 +1,4 @@
-# HR_GEN_AI_AGENT_TOOLS
+﻿# HR_GEN_AI_AGENT_TOOLS
 
 This table stores the Gen AI Agent Tools
 
@@ -12,7 +12,7 @@ This table stores the Gen AI Agent Tools
 
 **Tablespace:** HR_GEN_AI_AGENT_TOOLS
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagenttools-24060.html#hrgenaiagenttools-24060](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagenttools-24060.html#hrgenaiagenttools-24060)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtools-24060.html#hrgenKBtools-24060](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKBtools-24060.html#hrgenKBtools-24060)
 
 ## Primary Key
 
@@ -44,4 +44,5 @@ This table stores the Gen AI Agent Tools
 
 ---
 
-[← Back to Index](../10_Global_Human_Resources_Tables_Index.md)
+[â† Back to Index](../10_Global_Human_Resources_Tables_Index.md)
+

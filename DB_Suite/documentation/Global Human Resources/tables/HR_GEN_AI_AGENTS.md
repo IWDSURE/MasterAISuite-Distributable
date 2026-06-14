@@ -1,4 +1,4 @@
-# HR_GEN_AI_AGENTS
+﻿# HR_GEN_AI_AGENTS
 
 This table stores the Gen AI Agents
 
@@ -12,7 +12,7 @@ This table stores the Gen AI Agents
 
 **Tablespace:** HR_GEN_AI_AGENTS
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagents-30649.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenaiagents-30649.html)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKB-30649.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgenKB-30649.html)
 
 ## Primary Key
 
@@ -47,4 +47,5 @@ This table stores the Gen AI Agents
 
 ---
 
-[← Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+[â† Back to HRMS Tables Index](../HRMS_Tables_Index.md)
+

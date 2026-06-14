@@ -1,4 +1,4 @@
-# FAI_AGENT_PREFERENCES
+﻿# FAI_AGENT_PREFERENCES
 
 This table will store agent user preferences.
 
@@ -12,7 +12,7 @@ This table will store agent user preferences.
 
 **Tablespace:** Default
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagentpreferences-19107.html#faiagentpreferences-19107](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagentpreferences-19107.html#faiagentpreferences-19107)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBpreferences-19107.html#fKBpreferences-19107](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBpreferences-19107.html#fKBpreferences-19107)
 
 ## Primary Key
 
@@ -45,4 +45,5 @@ This table will store agent user preferences.
 
 ---
 
-[← Back to Index](../2_AI_Tables_Index.md)
+[â† Back to Index](../2_AI_Tables_Index.md)
+

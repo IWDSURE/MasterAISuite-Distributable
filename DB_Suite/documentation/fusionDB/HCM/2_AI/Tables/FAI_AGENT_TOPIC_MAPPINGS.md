@@ -1,4 +1,4 @@
-# FAI_AGENT_TOPIC_MAPPINGS
+﻿# FAI_AGENT_TOPIC_MAPPINGS
 
 This table stores the relationships between Agent and Topics.
 
@@ -12,7 +12,7 @@ This table stores the relationships between Agent and Topics.
 
 **Tablespace:** REFERENCE
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagenttopicmappings-28205.html#faiagenttopicmappings-28205](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagenttopicmappings-28205.html#faiagenttopicmappings-28205)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBtopicmappings-28205.html#fKBtopicmappings-28205](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBtopicmappings-28205.html#fKBtopicmappings-28205)
 
 ## Primary Key
 
@@ -45,4 +45,5 @@ This table stores the relationships between Agent and Topics.
 
 ---
 
-[← Back to Index](../2_AI_Tables_Index.md)
+[â† Back to Index](../2_AI_Tables_Index.md)
+

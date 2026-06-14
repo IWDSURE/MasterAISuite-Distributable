@@ -1,4 +1,4 @@
-# FAI_AGENT_TAGS
+﻿# FAI_AGENT_TAGS
 
 Stores the tags that can be associated with the workflow
 
@@ -12,7 +12,7 @@ Stores the tags that can be associated with the workflow
 
 **Tablespace:** Default
 
-**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagenttags-5667.html#faiagenttags-5667](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiagenttags-5667.html#faiagenttags-5667)
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBtags-5667.html#fKBtags-5667](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/fKBtags-5667.html#fKBtags-5667)
 
 ## Primary Key
 
@@ -47,4 +47,5 @@ Stores the tags that can be associated with the workflow
 
 ---
 
-[← Back to Index](../2_AI_Tables_Index.md)
+[â† Back to Index](../2_AI_Tables_Index.md)
+
