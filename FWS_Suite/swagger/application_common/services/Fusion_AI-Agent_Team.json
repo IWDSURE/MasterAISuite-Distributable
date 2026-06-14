@@ -1,0 +1,201 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Fusion AI/Agent Team",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/orchestrator/agent/v2/{workflowCode}/invokeAsync": {
+      "post": {
+        "tags": [
+          "Fusion AI/Agent Team"
+        ],
+        "summary": "Send an asynchronous request",
+        "description": "Initiates an asynchronous request to the AI agent team to process user query and generate the response from the LLM. The response contains the job ID and the initial status of the agent team.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workflowCode",
+            "required": true,
+            "schema": {
+              "pattern": "\\S",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-internal-id": "orchestrator-agent-v2-{workflowCode}-invokeAsync-post",
+        "x-filename-id": "orchestrator-agent-v2-workflowcode-invokeasync-post"
+      }
+    },
+    "/orchestrator/agent/v2/{workflowCode}/status/{jobId}": {
+      "get": {
+        "tags": [
+          "Fusion AI/Agent Team"
+        ],
+        "summary": "Get status",
+        "description": "Gets the final status of the given job ID that's returned by the agent team.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "required": true,
+            "schema": {
+              "pattern": "\\S",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workflowCode",
+            "required": true,
+            "schema": {
+              "pattern": "\\S",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "invocationMode",
+            "schema": {
+              "default": "END_USER",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-internal-id": "orchestrator-agent-v2-{workflowCode}-status-{jobId}-get",
+        "x-filename-id": "orchestrator-agent-v2-workflowcode-status-jobid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgentRequest": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "conversational": {
+            "type": "boolean"
+          },
+          "conversationId": {
+            "type": "string"
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "invocationMode": {
+            "type": "string"
+          },
+          "version": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "workflowName": {
+            "type": "string"
+          },
+          "architecture": {
+            "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "agentCodes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "toolCodes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "resumeNodeInput": {
+            "type": "object"
+          },
+          "streamOutput": {
+            "type": "boolean"
+          },
+          "progressMessage": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

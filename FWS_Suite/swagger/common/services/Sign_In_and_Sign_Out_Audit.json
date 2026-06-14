@@ -1,0 +1,313 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Sign In and Sign Out Audit",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "https://<servername>/oam/services/rest/access/api/v1/audit/stats": {
+      "get": {
+        "summary": "Returns the total number of recorded events",
+        "description": "Returns a count of the total number of recorded events for the specified time period",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The UTC time from when the events are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The UTC time up to when the events are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the total number of recorded events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stats"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stats"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Invalid Credentials supplied",
+            "content": {}
+          },
+          "403": {
+            "description": "Access Denied",
+            "content": {}
+          },
+          "503": {
+            "description": "Service Temporarily Unavailable. Please retry request after some time",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "audit_auth": []
+          }
+        ],
+        "tags": [
+          "Sign In and Sign Out Audit"
+        ],
+        "x-internal-id": "https:--<servername>-oam-services-rest-access-api-v1-audit-stats-get",
+        "x-filename-id": "https-servername-oam-services-rest-access-api-v1-audit-stats-get"
+      }
+    },
+    "https://<servername>/oam/services/rest/access/api/v1/audit/events": {
+      "get": {
+        "summary": "Returns the recorded events",
+        "description": "Returns the recorded events for the specified time period",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The UTC time from when the events are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The UTC time up to when the events are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of events to retrieve",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "The UTC time from when the events are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the recorded events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Events"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Events"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Invalid Credentials supplied",
+            "content": {}
+          },
+          "403": {
+            "description": "Access Denied",
+            "content": {}
+          },
+          "503": {
+            "description": "Service Temporarily Unavailable. Please retry request after some time",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "audit_auth": []
+          }
+        ],
+        "tags": [
+          "Sign In and Sign Out Audit"
+        ],
+        "x-internal-id": "https:--<servername>-oam-services-rest-access-api-v1-audit-events-get",
+        "x-filename-id": "https-servername-oam-services-rest-access-api-v1-audit-events-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Stats": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "total # of events",
+            "format": "int32"
+          }
+        }
+      },
+      "Events": {
+        "type": "object",
+        "properties": {
+          "eventData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventData"
+            }
+          }
+        },
+        "description": "Collection of data associated with a specific audit event"
+      },
+      "EventData": {
+        "type": "object",
+        "properties": {
+          "eventID": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "userID": {
+            "$ref": "#/components/schemas/User"
+          },
+          "type": {
+            "type": "string",
+            "description": "Specifies the type of Event (e.g. AuthN, Logout)"
+          },
+          "ipAddress": {
+            "type": "string",
+            "description": "IP Address of the User Agent"
+          },
+          "status": {
+            "type": "string",
+            "description": "Indicates whether sign-on was successful or denied"
+          },
+          "accessTime": {
+            "type": "string",
+            "description": "Specifies the UTC timestamp of the sign-on"
+          },
+          "mfaUsed": {
+            "type": "boolean",
+            "description": "Indicates whether multi factor authentication was used to sign-on"
+          },
+          "oracleECID": {
+            "type": "string",
+            "description": "Execution Context Identifier"
+          },
+          "attributeMap": {
+            "$ref": "#/components/schemas/AttributeMap"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "loginID": {
+            "type": "string",
+            "description": "Login ID of the User"
+          },
+          "loginType": {
+            "type": "string",
+            "description": "Type of Login"
+          },
+          "userDN": {
+            "type": "string",
+            "description": "Distinguished Name of the User"
+          },
+          "userGUID": {
+            "type": "string",
+            "description": "GUID of the User"
+          }
+        }
+      },
+      "AttributeMap": {
+        "type": "array",
+        "description": "List of Attribute Values",
+        "items": {
+          "$ref": "#/components/schemas/Attribute"
+        }
+      },
+      "Attribute": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Name of the Attribute"
+          },
+          "value": {
+            "type": "array",
+            "description": "Value of the Attribute (format is defined by named attribute)",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

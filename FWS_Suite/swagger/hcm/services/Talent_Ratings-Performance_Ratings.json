@@ -1,0 +1,4646 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Talent Ratings/Performance Ratings",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/talentRatings/{talentRatingsUniqID}/child/performanceRatings": {
+      "get": {
+        "tags": [
+          "Talent Ratings/Performance Ratings"
+        ],
+        "summary": "Get all performance rating items",
+        "operationId": "getall_talentRatings-performanceRatings",
+        "parameters": [
+          {
+            "name": "talentRatingsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Ratings resource and used to uniquely identify an instance of Talent Ratings. The client should not generate the hash key value. Instead, the client should query on the Talent Ratings collection resource in order to navigate to a specific instance of Talent Ratings to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignmentId; integer; Unique identifier of the worker assignment.</li><li>CreatedBy; string; User who created the performance rating item.</li><li>CreationDate; string; Date and time when the performance rating item was created.</li><li>FromDate; string; Date and time when the performance rating item becomes valid.</li><li>LastUpdateDate; string; Date and time when the performance rating item was last updated.</li><li>LastUpdatedBy; string; User who last updated the performance rating item.</li><li>PerformanceLevel; string; Name of the rating level associated with the performance rating item.</li><li>PerformanceLevelCode; string; Code representing the rating level associated with performance rating item. Valid values are defined in the ratingLevelsLOV.</li><li>PerformanceLevelId; integer; Unique identifier of the rating level associated with the performance rating item.</li><li>PerformanceRatingId; integer; Unique identifier of the performance rating item.</li><li>PerformanceRatingModelId; integer; Unique identifier of the rating model associated with the performance rating item.</li><li>SectionContentTypeId; integer; Unique identifier of the section content type.</li><li>Source; string; Indicates whether the source of the performance rating item is compensation management, performance management, profile, talent review, or talent review meeting. Valid values are CWB, PR, PROFILE, TR, and TRMP.</li><li>SourceDescription; string; Source of the performance rating item.</li><li>SourceKey; integer; Unique identifier of the source where the performance rating item is used.</li><li>SourceType; string; Code representing the source of the performance rating item.</li><li>SubmittedBy; string; User who submitted the performance rating item.</li><li>ToDate; string; Date and time until which the performance rating item is valid.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the performance rating items that match the primary key criteria specified. <br>Finder Variables <ul><li>PerformanceRatingId; integer;  Unique identifier of the performance rating item. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the performance rating items that match the primary key criteria specified.",
+                "properties": {
+                  "PerformanceRatingId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of the performance rating item.",
+                    "type": "integer",
+                    "title": "Performance Rating ID"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentRatings-performanceRatings"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentRatings-{talentRatingsUniqID}-child-performanceRatings-get",
+        "x-filename-id": "talentratings-talentratingsuniqid-child-performanceratings-get"
+      },
+      "post": {
+        "tags": [
+          "Talent Ratings/Performance Ratings"
+        ],
+        "summary": "Create a performance rating item",
+        "operationId": "create_talentRatings-performanceRatings",
+        "parameters": [
+          {
+            "name": "talentRatingsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Ratings resource and used to uniquely identify an instance of Talent Ratings. The client should not generate the hash key value. Instead, the client should query on the Talent Ratings collection resource in order to navigate to a specific instance of Talent Ratings to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/talentRatings-performanceRatings-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentRatings-performanceRatings-item-response"
+                }
+              }
+            },
+            "links": {
+              "performanceRatingLevelsLOV": {
+                "operationRef": "#/paths/~1ratingLevelsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: PerformanceLevelCode; Target Attribute: RatingLevelCode</li><li>Display Attribute: RatingDescription</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/PerformanceLevelCode",
+                  "displayValues": [
+                    "RatingDescription"
+                  ],
+                  "derivedFieldsMapping": {
+                    "ratingLevelsLOV.RatingLevelId": [
+                      "PerformanceLevelId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "RatingLevelCode",
+                  "displayFields": [
+                    "RatingDescription"
+                  ]
+                }
+              },
+              "performanceRatingsDFF": {
+                "operationRef": "#/paths/~1talentRatings~1{talentRatingsUniqID}~1child~1performanceRatings~1{PerformanceRatingId}~1child~1performanceRatingsDFF/get",
+                "parameters": {
+                  "talentRatingsUniqID": "$request.path.talentRatingsUniqID",
+                  "PerformanceRatingId": "$request.path.PerformanceRatingId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentRatings-{talentRatingsUniqID}-child-performanceRatings-post",
+        "x-filename-id": "talentratings-talentratingsuniqid-child-performanceratings-post"
+      }
+    },
+    "/talentRatings/{talentRatingsUniqID}/child/performanceRatings/{PerformanceRatingId}": {
+      "get": {
+        "tags": [
+          "Talent Ratings/Performance Ratings"
+        ],
+        "summary": "Get a performance rating item",
+        "operationId": "get_talentRatings-performanceRatings",
+        "parameters": [
+          {
+            "name": "talentRatingsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Ratings resource and used to uniquely identify an instance of Talent Ratings. The client should not generate the hash key value. Instead, the client should query on the Talent Ratings collection resource in order to navigate to a specific instance of Talent Ratings to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PerformanceRatingId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Performance Rating ID",
+              "type": "integer",
+              "description": "Unique identifier of the performance rating item.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentRatings-performanceRatings-item-response"
+                }
+              }
+            },
+            "links": {
+              "performanceRatingLevelsLOV": {
+                "operationRef": "#/paths/~1ratingLevelsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: PerformanceLevelCode; Target Attribute: RatingLevelCode</li><li>Display Attribute: RatingDescription</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/PerformanceLevelCode",
+                  "displayValues": [
+                    "RatingDescription"
+                  ],
+                  "derivedFieldsMapping": {
+                    "ratingLevelsLOV.RatingLevelId": [
+                      "PerformanceLevelId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "RatingLevelCode",
+                  "displayFields": [
+                    "RatingDescription"
+                  ]
+                }
+              },
+              "performanceRatingsDFF": {
+                "operationRef": "#/paths/~1talentRatings~1{talentRatingsUniqID}~1child~1performanceRatings~1{PerformanceRatingId}~1child~1performanceRatingsDFF/get",
+                "parameters": {
+                  "talentRatingsUniqID": "$request.path.talentRatingsUniqID",
+                  "PerformanceRatingId": "$request.path.PerformanceRatingId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentRatings-{talentRatingsUniqID}-child-performanceRatings-{PerformanceRatingId}-get",
+        "x-filename-id": "talentratings-talentratingsuniqid-child-performanceratings-performanceratingid-get"
+      },
+      "patch": {
+        "tags": [
+          "Talent Ratings/Performance Ratings"
+        ],
+        "summary": "Update a performance rating item",
+        "operationId": "update_talentRatings-performanceRatings",
+        "parameters": [
+          {
+            "name": "talentRatingsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Ratings resource and used to uniquely identify an instance of Talent Ratings. The client should not generate the hash key value. Instead, the client should query on the Talent Ratings collection resource in order to navigate to a specific instance of Talent Ratings to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PerformanceRatingId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Performance Rating ID",
+              "type": "integer",
+              "description": "Unique identifier of the performance rating item.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/talentRatings-performanceRatings-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentRatings-performanceRatings-item-response"
+                }
+              }
+            },
+            "links": {
+              "performanceRatingLevelsLOV": {
+                "operationRef": "#/paths/~1ratingLevelsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: PerformanceLevelCode; Target Attribute: RatingLevelCode</li><li>Display Attribute: RatingDescription</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/PerformanceLevelCode",
+                  "displayValues": [
+                    "RatingDescription"
+                  ],
+                  "derivedFieldsMapping": {
+                    "ratingLevelsLOV.RatingLevelId": [
+                      "PerformanceLevelId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "RatingLevelCode",
+                  "displayFields": [
+                    "RatingDescription"
+                  ]
+                }
+              },
+              "performanceRatingsDFF": {
+                "operationRef": "#/paths/~1talentRatings~1{talentRatingsUniqID}~1child~1performanceRatings~1{PerformanceRatingId}~1child~1performanceRatingsDFF/get",
+                "parameters": {
+                  "talentRatingsUniqID": "$request.path.talentRatingsUniqID",
+                  "PerformanceRatingId": "$request.path.PerformanceRatingId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentRatings-{talentRatingsUniqID}-child-performanceRatings-{PerformanceRatingId}-patch",
+        "x-filename-id": "talentratings-talentratingsuniqid-child-performanceratings-performanceratingid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "talentRatings-performanceRatings": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "talentRatings-performanceRatings-item-response": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "title": "Assignment",
+            "type": "integer",
+            "description": "Unique identifier of the worker assignment.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the performance rating item.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the performance rating item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date and time when the performance rating item was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "FromDate": {
+            "title": "From Date",
+            "type": "string",
+            "description": "Date and time when the performance rating item becomes valid.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "Date and time when the performance rating item was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the performance rating item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "PerformanceLevel": {
+            "title": "Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the rating level associated with the performance rating item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PerformanceLevelCode": {
+            "title": "Performance Rating Level Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the rating level associated with performance rating item. Valid values are defined in the ratingLevelsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "PerformanceLevelId": {
+            "title": "Performance Rating Level ID",
+            "type": "integer",
+            "description": "Unique identifier of the rating level associated with the performance rating item.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PerformanceRatingId": {
+            "title": "Performance Rating ID",
+            "type": "integer",
+            "description": "Unique identifier of the performance rating item.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PerformanceRatingModelId": {
+            "title": "Performance Rating Model",
+            "type": "integer",
+            "description": "Unique identifier of the rating model associated with the performance rating item.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "default": 4,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SectionContentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the section content type.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Source": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the source of the performance rating item is compensation management, performance management, profile, talent review, or talent review meeting. Valid values are CWB, PR, PROFILE, TR, and TRMP.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "SourceDescription": {
+            "title": "Source",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Source of the performance rating item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SourceKey": {
+            "type": "integer",
+            "description": "Unique identifier of the source where the performance rating item is used.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SourceType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the source of the performance rating item.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "dependencies": [
+                "QualifierId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "SubmittedBy": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who submitted the performance rating item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ToDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "Date and time until which the performance rating item is valid.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "performanceRatingsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-performanceRatingsDFF-item-response"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "talentRatings-performanceRatings-performanceRatingsDFF-item-response": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "JOB_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-response",
+            "ORGANIZATION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-response",
+            "PERSON_CAREER_STATEMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-response",
+            "PERSON_CATEGORY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-response",
+            "PERSON_COMPONENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-response",
+            "PERSON_N_BOX_ASSIGNMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-response",
+            "PERSON_PERFORMANCE_RATING": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-response",
+            "PERSON_PLATFORM": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-response",
+            "PERSON_POTENTIAL": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-response",
+            "PERSON_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-response",
+            "PERSON_PRODUCT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-response",
+            "PERSON_PRODUCT_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-response",
+            "PERSON_READINESS": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-response",
+            "PERSON_RISK": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-response",
+            "PERSON_TALENT_SCORE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-response",
+            "POSITION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-response"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-response"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "JOB_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "ORGANIZATION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CAREER_STATEMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CATEGORY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_COMPONENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_N_BOX_ASSIGNMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PERFORMANCE_RATING",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PLATFORM",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_POTENTIAL",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_READINESS",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_RISK",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_TALENT_SCORE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-response": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "POSITION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "talentRatings-performanceRatings-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the performance rating item.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformanceLevelCode": {
+            "title": "Performance Rating Level Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the rating level associated with performance rating item. Valid values are defined in the ratingLevelsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PerformanceLevelId": {
+            "title": "Performance Rating Level ID",
+            "type": "integer",
+            "description": "Unique identifier of the rating level associated with the performance rating item.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "PerformanceRatingId": {
+            "title": "Performance Rating ID",
+            "type": "integer",
+            "description": "Unique identifier of the performance rating item.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "Source": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the source of the performance rating item is compensation management, performance management, profile, talent review, or talent review meeting. Valid values are CWB, PR, PROFILE, TR, and TRMP.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "SourceType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the source of the performance rating item.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "dependencies": [
+                "QualifierId"
+              ]
+            }
+          },
+          "performanceRatingsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-performanceRatingsDFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "talentRatings-performanceRatings-performanceRatingsDFF-item-post-request": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "JOB_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-post-request",
+            "ORGANIZATION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-post-request",
+            "PERSON_CAREER_STATEMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-post-request",
+            "PERSON_CATEGORY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-post-request",
+            "PERSON_COMPONENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-post-request",
+            "PERSON_N_BOX_ASSIGNMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-post-request",
+            "PERSON_PERFORMANCE_RATING": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-post-request",
+            "PERSON_PLATFORM": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-post-request",
+            "PERSON_POTENTIAL": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-post-request",
+            "PERSON_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-post-request",
+            "PERSON_PRODUCT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-post-request",
+            "PERSON_PRODUCT_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-post-request",
+            "PERSON_READINESS": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-post-request",
+            "PERSON_RISK": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-post-request",
+            "PERSON_TALENT_SCORE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-post-request",
+            "POSITION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-post-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-post-request"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "JOB_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "ORGANIZATION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CAREER_STATEMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CATEGORY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_COMPONENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_N_BOX_ASSIGNMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PERFORMANCE_RATING",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PLATFORM",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_POTENTIAL",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_READINESS",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_RISK",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_TALENT_SCORE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "PerfRatingId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "POSITION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "talentRatings-performanceRatings-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the performance rating item.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformanceLevelCode": {
+            "title": "Performance Rating Level Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the rating level associated with performance rating item. Valid values are defined in the ratingLevelsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PerformanceLevelId": {
+            "title": "Performance Rating Level ID",
+            "type": "integer",
+            "description": "Unique identifier of the rating level associated with the performance rating item.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SourceType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code representing the source of the performance rating item.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "dependencies": [
+                "QualifierId"
+              ]
+            }
+          },
+          "performanceRatingsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-performanceRatingsDFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "talentRatings-performanceRatings-performanceRatingsDFF-item-patch-request": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "JOB_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-patch-request",
+            "ORGANIZATION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-patch-request",
+            "PERSON_CAREER_STATEMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-patch-request",
+            "PERSON_CATEGORY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-patch-request",
+            "PERSON_COMPONENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-patch-request",
+            "PERSON_N_BOX_ASSIGNMENT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-patch-request",
+            "PERSON_PERFORMANCE_RATING": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-patch-request",
+            "PERSON_PLATFORM": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-patch-request",
+            "PERSON_POTENTIAL": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-patch-request",
+            "PERSON_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-patch-request",
+            "PERSON_PRODUCT": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-patch-request",
+            "PERSON_PRODUCT_PROBLEM_CODE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-patch-request",
+            "PERSON_READINESS": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-patch-request",
+            "PERSON_RISK": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-patch-request",
+            "PERSON_TALENT_SCORE": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-patch-request",
+            "POSITION_CRITICALITY": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-patch-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-patch-request"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemJOB__5FCRITICALITYVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "JOB_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemORGANIZATION__5FCRITICALITYVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "ORGANIZATION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCAREER__5FSTATEMENTVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CAREER_STATEMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCATEGORYVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_CATEGORY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FCOMPONENTVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_COMPONENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FN__5FBOX__5FASSIGNMENTVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_N_BOX_ASSIGNMENT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPERFORMANCE__5FRATINGVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PERFORMANCE_RATING",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPLATFORMVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PLATFORM",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPOTENTIALVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_POTENTIAL",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPROBLEM__5FCODEVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCTVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FPRODUCT__5FPROBLEM__5FCODEVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_PRODUCT_PROBLEM_CODE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FREADINESSVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_READINESS",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FRISKVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_RISK",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPERSON__5FTALENT__5FSCOREVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "PERSON_TALENT_SCORE",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_flex_hcm_profiles_core_performanceRatingItem_view_PerformanceRatingItemPOSITION__5FCRITICALITYVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "default": "POSITION_CRITICALITY",
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "talentRatings-performanceRatings-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-item-post-request"
+            }
+          }
+        }
+      },
+      "talentRatings-performanceRatings-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/talentRatings-performanceRatings-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

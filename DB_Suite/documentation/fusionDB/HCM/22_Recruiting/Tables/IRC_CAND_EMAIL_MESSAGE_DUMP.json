@@ -1,0 +1,112 @@
+{
+  "name": "IRC_CAND_EMAIL_MESSAGE_DUMP",
+  "object_type": "TABLE",
+  "description": "This table stores a dump of the email content as it is used to process newly received emails from the mailbox.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandemailmessagedump-4217.html#irccandemailmessagedump-4217",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_EMAIL_MESSAGE_DUMP_PK",
+      "columns": "CAND_EMAIL_MESSAGE_DUMP_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_EMAIL_MESSAGE_DUMP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the IRC_CAND_EMAIL_MESSAGE_DUMP table."
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The processing status for the inbound message. 'ORA_NEW' when the message dump row is created, 'ORA_PROCESSING' when the processing is ongoing and 'ORA_PROCESSED' when the processing is successful, 'ORA_FAILED' if the processing fails even after retries."
+    },
+    {
+      "Name": "EMAIL_MESSAGE_DUMP",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores all of the content that needs to be saved for an inbound email message."
+    },
+    {
+      "Name": "PROCESSING_ERROR_MESSAGE",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the error in processing the inbound message,, in case there is one."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGE_DUMP_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_EMAIL_MESSAGE_DUMP_ID"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGE_DUMP_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESSING_STATUS, CAND_EMAIL_MESSAGE_DUMP_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:45:59"
+}

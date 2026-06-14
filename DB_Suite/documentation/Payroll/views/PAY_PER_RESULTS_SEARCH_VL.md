@@ -1,0 +1,76 @@
+# PAY_PER_RESULTS_SEARCH_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperresultssearchvl-8446.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperresultssearchvl-8446.html)
+
+## Columns
+
+- OBJECT_TYPE
+- OBJECT_ID
+- OBJECT_NAME
+- OBJECT_ACTION_ID
+- CHILD_OBJECT_ACTION_ID
+- SOURCE_ACTION_ID
+- OBJECT_TYPE_CODE
+- STATUS
+- ACTION_STATUS_CODE
+- ACTION_STATUS_LOOKUP_TYPE
+- ACTION_TYPE
+- ACTION_TYPE_CODE
+- PAYROLL_ACTION_ID
+- PROCESS_DATE
+- PROCESS_START_DATE
+- PROCESS_END_DATE
+- FLOW_NAME
+- FLOW_INSTANCE_NAME
+- SUBMISSION_DATE
+- SUBMITTED_BY
+- TASK_NAME
+- OBJECT_REFERENCE
+- PERSON_ID
+- PERSON_NUMBER
+- RELATIONSHIP_NUMBER
+- PAYROLL
+- PAYROLL_ID
+- CONSOLIDATION_SET_NAME
+- CONSOLIDATION_SET_ID
+- PAYROLL_PERIOD_NAME
+- PAYROLL_PERIOD_NUMBER
+- DATE_EARNED
+- ASSIGNMENT_NUMBER
+- ASSIGNMENT_ID
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATIVE_DATA_GROUP_NAME
+- LEGISLATION_CODE
+- TASK_INSTANCE_ID
+- PAY_REQUEST_ID
+- FLOW_INSTANCE_ID
+- TASK_ID
+- BASE_FLOW_ID
+- RUN_TYPE_NAME
+- RUN_TYPE_ID
+- RETRO_RUN_ID
+- PRIMARY_RESULTS
+- ADDITIONAL_RESULTS
+- EARN_START_DATE
+- EARN_END_DATE
+- EARN_TIME_PERIOD_ID
+- PAYMENT_REASON
+- PAYROLL_ACTION_STATUS
+
+## Query
+
+```sql
+SELECT null OBJECT_TYPE, zzz.OBJECT_ID , null object_name, zzz.OBJECT_ACTION_ID , (select min(ch.payroll_rel_action_id) FROM pay_payroll_rel_actions ch WHERE ch.payroll_action_id = zzz.payroll_action_id AND ch.source_action_id = zzz.OBJECT_ACTION_ID AND ch.RETRO_COMPONENT_ID IS NULL) CHILD_OBJECT_ACTION_ID, zzz.SOURCE_ACTION_ID, null OBJECT_TYPE_CODE, zzz.STATUS , zzz.ACTION_STATUS_CODE , zzz.ACTION_STATUS_LOOKUP_TYPE , zzz.ACTION_TYPE , zzz.ACTION_TYPE_CODE , zzz.PAYROLL_ACTION_ID , zzz.PROCESS_DATE, zzz.process_start_date, zzz.process_end_date, zzz.flow_name, zzz.flow_name FLOW_INSTANCE_NAME, zzz.submission_date, zzz.SUBMITTED_BY, zzz.TASK_NAME, null object_reference, zzz.person_id, null person_number, zzz.relationship_number, null payroll, null PAYROLL_ID, zzz.CONSOLIDATION_SET_NAME, zzz.CONSOLIDATION_SET_ID, null payroll_period_name, null payroll_period_number, zzz.date_earned, null assignment_number, null ASSIGNMENT_ID, zzz.legislative_data_group_id, zzz.legislative_data_group_name, zzz.LEGISLATION_CODE, zzz.task_instance_id, zzz.pay_request_id, zzz.flow_instance_id, zzz.task_id, zzz.base_flow_id, zzz.RUN_TYPE_NAME, zzz.RUN_TYPE_ID, zzz.retro_run_id, DECODE(zzz.action_status_code,'U','NONE','E','MESSAGES', decode(base_task_name,'PAYSLIP','ATTACHMENT', case (select CLASSIFICATION_NAME from pay_action_classifications cls where cls.ACTION_TYPE=zzz.ACTION_TYPE_CODE and CLASSIFICATION_NAME like '%DEFAULT') when 'SOE_RESULTS_DEFAULT' then 'SOE_RESULTS' when 'RETRO_RESULTS_DEFAULT' then 'RETRO_RESULTS' when 'RUN_RESULTS_DEFAULT' then 'RUN_RESULTS' when 'PREPAY_RESULTS_DEFAULT' then 'PREPAY_RESULTS' when 'PAYMENT_RESULTS_DEFAULT' then 'PAYMENT_RESULTS' when 'COST_RESULTS_DEFAULT' then 'COST_RESULTS' when 'COST_PAY_RESULTS_DEFAULT' then 'COST_PAY_RESULTS' when 'BAL_ADJ_RESULTS_DEFAULT' then 'BAL_ADJ_RESULTS' when 'BAL_RESULTS_DEFAULT' then 'BAL_RESULTS' when 'ARCHIVE_RESULTS_DEFAULT' then 'ARCHIVE_RESULTS' else 'MESSAGES' end )) PRIMARY_RESULTS, DECODE(zzz.action_status_code,'E',null,(select LISTAGG(CLASSIFICATION_NAME,'|') WITHIN GROUP (ORDER BY CLASSIFICATION_NAME ASC) from pay_action_classifications cls where cls.ACTION_TYPE=zzz.ACTION_TYPE_CODE and CLASSIFICATION_NAME like '%RESULTS' )) ADDITIONAL_RESULTS, null Earn_start_date, null Earn_end_date, null earn_time_period_id, PAYMENT_REASON, PAYROLL_ACTION_STATUS FROM ( SELECT prl.payroll_relationship_id as OBJECT_ID, pay_obj_act.payroll_rel_action_id OBJECT_ACTION_ID, pay_obj_act.SOURCE_ACTION_ID, decode(payrollactioneo.action_type,'L',pay_obj_act.payroll_rel_action_id,pay_obj_act.source_id) retro_run_id, actionstatuslookup.meaning status, actionstatuslookup.lookup_code action_status_code, actionstatuslookup.lookup_type action_status_lookup_type, actiontypelookup.meaning action_type, actiontypelookup.lookup_code action_type_code, pay_obj_act.PAYROLL_ACTION_ID AS payroll_action_id, payrollactioneo.effective_date AS process_date, payrollactioneo.start_date process_start_date, payrollactioneo.end_date process_end_date, NVL(pt.task_name,actiontypelookup.meaning) AS task_name, pt.base_task_name, prl.person_id, prl.payroll_relationship_number relationship_number, pcs.CONSOLIDATION_SET_NAME, pcs.CONSOLIDATION_SET_ID, payrollactioneo.date_earned date_earned, ldg.legislative_data_group_id legislative_data_group_id, ldg.name legislative_data_group_name, ldg.LEGISLATION_CODE, prq.flow_task_instance_id task_instance_id, RunTypeDPEO.RUN_TYPE_NAME, RunTypeDPEO.RUN_TYPE_ID, pfi.instance_name as flow_name, pfi.base_flow_id as base_flow_id, (pfi.creation_date) submission_date, (pfi.CREATED_BY) SUBMITTED_BY, payrollactioneo.pay_request_id, pfi.flow_instance_id, pt.task_id, payrollactioneo.PAYMENT_REASON, payrollactioneo.ACTION_STATUS PAYROLL_ACTION_STATUS FROM hcm_lookups actiontypelookup, hcm_lookups actionstatuslookup, pay_payroll_rel_actions pay_obj_act, pay_payroll_actions payrollactioneo, pay_requests prq, FUSION.pay_task_actions pta, pay_tasks_vl pt, per_legislative_data_groups_vl ldg, pay_pay_relationships_dn prl, pay_consolidation_sets pcs, PAY_RUN_TYPES_VL RunTypeDPEO, pay_flow_instances pfi WHERE pfi.flow_instance_id(+)=prq.flow_instance_id and actiontypelookup.lookup_type = 'ACTION_TYPE' AND actiontypelookup.lookup_code = payrollactioneo.action_type AND actionstatuslookup.lookup_type = 'ORA_PAY_WU_ACTION_STATUS' AND actionstatuslookup.lookup_code = pay_obj_act.ACTION_STATUS AND payrollactioneo.payroll_action_id =pay_obj_act.payroll_action_id AND pay_obj_act.RUN_TYPE_ID = RunTypeDPEO.RUN_TYPE_ID (+) AND pay_obj_act.SOURCE_ACTION_ID is NULL and payrollactioneo.creation_date >= decode(nvl(FND_PROFILE.value('ORA_PAY_ELASTIC_SEARCH_ENABLED'),'N'),'N',sysdate -1,ADD_MONTHS(sysdate,-2)) and ( (payrollactioneo.action_type in('R','Q','P','U','M','H','A','E','PP','PS','CP','L','T','D','TC','TP','V')) or exists ( select 1 from pay_report_categories prc, pay_report_groups prg where payrollactioneo.REPORT_CATEGORY_ID=prc.REPORT_CATEGORY_ID and prc.REPORT_GROUP_ID= prg.REPORT_GROUP_ID and prg.short_name = 'PAYSLIP') ) AND prq.pay_request_id (+) = payrollactioneo.pay_request_id AND prq.pay_task_action_id = pta.task_action_id (+) AND pta.base_task_id = pt.task_id (+) AND payrollactioneo.legislative_data_group_id = ldg.legislative_data_group_id (+) AND ((pt.legislative_data_group_id IS NOT NULL AND pt.legislation_code IS NULL AND pt.legislative_data_group_id = ldg.legislative_data_group_id) OR (pt.legislation_code IS NOT NULL AND pt.legislative_data_group_id IS NULL AND pt.legislation_code =ldg.legislation_code AND ( NOT EXISTS (SELECT TASK_ID FROM FUSION.PAY_TASK_ACTIONS_VL c1 WHERE pt.BASE_TASK_ID = c1.BASE_TASK_ID AND (c1.legislative_data_group_id IS NOT NULL AND c1.legislation_code IS NULL AND c1.legislative_data_group_id = ldg.legislative_data_group_id ) ))) OR ( pt.legislative_data_group_id IS NULL AND pt.legislation_code IS NULL AND ( NOT EXISTS (SELECT TASK_ID FROM FUSION.PAY_TASK_ACTIONS_VL c2 WHERE pt.BASE_TASK_ID = c2.BASE_TASK_ID AND (( c2.legislative_data_group_id IS NOT NULL AND c2.legislation_code IS NULL AND c2.legislative_data_group_id = ldg.legislative_data_group_id) OR ( c2.legislation_code IS NOT NULL AND c2.legislative_data_group_id IS NULL AND c2.legislation_code = ldg.legislation_code )) )))) and prl.payroll_relationship_id = pay_obj_act.payroll_relationship_id and pcs.CONSOLIDATION_SET_ID(+)=payrollactioneo.CONSOLIDATION_SET_ID AND (payrollactioneo.EFFECTIVE_DATE BETWEEN RunTypeDPEO.EFFECTIVE_START_DATE (+) AND RunTypeDPEO.EFFECTIVE_END_DATE (+) ) ) zzz
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

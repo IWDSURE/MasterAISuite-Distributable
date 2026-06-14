@@ -1,0 +1,438 @@
+{
+  "name": "HTS_WORKLOAD_PLANS",
+  "object_type": "TABLE",
+  "description": "Workload demand items planned to repeat each day inside some date range.",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsworkloadplans-28207.html#htsworkloadplans-28207",
+  "primary_keys": [
+    {
+      "name": "HTS_WORKLOAD_PLANS_PK",
+      "columns": "WORKLOAD_PLAN_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "WORKLOAD_PLAN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key identifiying the publish event record by a system generated ID"
+    },
+    {
+      "Name": "WORKLOAD_MODE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The import type will indicate either 'T' for time based imports or 'S' for shift based imports."
+    },
+    {
+      "Name": "SHIFT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Shift ID"
+    },
+    {
+      "Name": "WORKLOAD_PLAN_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Unique identifier for a record provided by the user"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "DELETED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flag to support soft delete. Value 'Y' indicates that the record is deleted. Null or 'N' values indicate the record is not deleted."
+    },
+    {
+      "Name": "WORKLOAD_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Workload import type"
+    },
+    {
+      "Name": "SKILL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Skill ID"
+    },
+    {
+      "Name": "SHIFT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Indicates whether the shift is Regular or On-Call or any custom shift type"
+    },
+    {
+      "Name": "SCHED_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Scheduling Unit ID"
+    },
+    {
+      "Name": "START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Start of the date range for which the window plan is defined"
+    },
+    {
+      "Name": "END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "End of the date range for which the workload plan is defined"
+    },
+    {
+      "Name": "START_TIME_OFFSET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Start time of the workload plan saved as offset in minutes from the day start"
+    },
+    {
+      "Name": "END_TIME_OFFSET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "End time of the workload plan saved as offset in minutes from the day start"
+    },
+    {
+      "Name": "INPUT_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Record source, either import or UI"
+    },
+    {
+      "Name": "WORKLOAD_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Workload value"
+    },
+    {
+      "Name": "WORKLOAD_UOM",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Unit of Measure for the Workload Vaue"
+    },
+    {
+      "Name": "ORIGIN_SYSTEM_REF",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "External source system for an imported workload plan"
+    },
+    {
+      "Name": "SOURCE_SYSTEM_KEY",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "External source system ID for the workload plan"
+    },
+    {
+      "Name": "WORKLOAD_IMPORT_TAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Optional tag to identify an imported set of records"
+    },
+    {
+      "Name": "MON_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Monday is part of day of week for this workload"
+    },
+    {
+      "Name": "TUE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Tuesday is part of day of week for this workload"
+    },
+    {
+      "Name": "WED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Wednesday is part of day of week for this workload"
+    },
+    {
+      "Name": "THU_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Thursday is part of day of week for this workload"
+    },
+    {
+      "Name": "FRI_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Friday is part of day of week for this workload"
+    },
+    {
+      "Name": "SAT_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Saturday is part of day of week for this workload"
+    },
+    {
+      "Name": "SUN_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Sunday is part of day of week for this workload"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "MOCK_DISCRIMINATOR",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MOCK_DISCRIMINATOR"
+    },
+    {
+      "Name": "ATTRIBUTE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: structure definition of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE1",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE2",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE3",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE4",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE5",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_WORKLOAD_PLANS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SKILL_ID, SCHED_UNIT_ID, WORKLOAD_TYPE, START_DATE, END_DATE"
+    },
+    {
+      "Index": "HTS_WORKLOAD_PLANS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "WORKLOAD_PLAN_CODE"
+    },
+    {
+      "Index": "HTS_WORKLOAD_PLANS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "WORKLOAD_PLAN_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:27:57"
+}

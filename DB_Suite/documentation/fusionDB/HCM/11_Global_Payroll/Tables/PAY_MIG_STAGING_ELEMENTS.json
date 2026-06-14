@@ -1,0 +1,364 @@
+{
+  "name": "PAY_MIG_STAGING_ELEMENTS",
+  "object_type": "TABLE",
+  "description": "This table contains information that is useful for element migration itself and related areas. It contains a mapping between a PeopleSoft earning or deduction and the Fusion element that it will be migrated to. It contains the status of the migration, including whether an element should be migrated and has been migrated successfully. It also contains information that is common between all elements, such as the primary classifications and the legislative data group.",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paymigstagingelements-29727.html#paymigstagingelements-29727",
+  "primary_keys": [
+    {
+      "name": "PAY_MIG_STAGING_ELEMENTS_PK",
+      "columns": "STAGING_ELEMENTS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "STAGING_ELEMENTS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key."
+    },
+    {
+      "Name": "TRANSFERRED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates whether the associated definition has been either transferred via template or created manually by customer. We cannot re-run for any that have been transferred already."
+    },
+    {
+      "Name": "MIGRATE_DEFINITION_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates that the user wishes to transfer the earning."
+    },
+    {
+      "Name": "DEFINITION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates if this is an earnings or deduction definition."
+    },
+    {
+      "Name": "SOURCE_ELEMENT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "18",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Populated with whatever is considered the unique name of the earnings definition."
+    },
+    {
+      "Name": "SOURCE_ELEMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Will be populated with the identifier of the PeopleSoft source definition record."
+    },
+    {
+      "Name": "SOURCE_SHORT_DESC",
+      "Datatype": "VARCHAR2",
+      "Length": "18",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Value from PeopleSoft database. Not relevant for GPUK."
+    },
+    {
+      "Name": "SOURCE_DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Value from PeopleSoft database."
+    },
+    {
+      "Name": "ELEMENT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of element to create on fusion.\n(PAY_ELEMENT_TYPES_F.BASE_ELEMENT_NAME)."
+    },
+    {
+      "Name": "ELEMENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Primary key ID of element created (PAY_ELEMENT_TYPES_F.ELEMENT_TYPE_ID). This will be populated when the element is actually created on the Fusion system. It is intended to make it easy to map between the PeopleSoft and Fusion definitions."
+    },
+    {
+      "Name": "REPORTING_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The reporting name of the created element."
+    },
+    {
+      "Name": "LEGISLATIVE_DATA_GROUP_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Legislative data group name that element will belong to."
+    },
+    {
+      "Name": "LEGISLATIVE_DATA_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_LEGISLATIVE_DATA_GROUPS."
+    },
+    {
+      "Name": "PRIMARY_CLASSIFICATION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Primary classification name that element will belong to."
+    },
+    {
+      "Name": "PRIMARY_CLASSIFICATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PAY_ELE_CLASSIFICATIONS.CLASSIFICATION_ID (for a primary classification, i.e. where PAY_ELE_CLASSIFICATIONS.PARENT_CLASSIFICATION_ID is NULL)."
+    },
+    {
+      "Name": "SECONDARY_CLASSIFICATION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "160",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Secondary classification name that element will belong to."
+    },
+    {
+      "Name": "SECONDARY_CLASSIFICATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PAY_ELE_CLASSIFICATIONS.CLASSIFICATION_ID."
+    },
+    {
+      "Name": "EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+    },
+    {
+      "Name": "DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Description of element to create on fusion."
+    },
+    {
+      "Name": "INPUT_CURRENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Input currency for the element."
+    },
+    {
+      "Name": "OUTPUT_CURRENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Output currency for the element."
+    },
+    {
+      "Name": "STANDARD_LINK_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This sets the PAY_ELEMENT_TYPES_F.STANDARD_LINK_FLAG (which would also default PAY_ELEMENT_LINKS_F.STANDARD_LINK_FLAG)."
+    },
+    {
+      "Name": "STARTING_TIME_DEF_SHORT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Starting time definition short code value. Equivalent to PAY_TIME_DEFINITIONS.SHORT_NAME."
+    },
+    {
+      "Name": "STARTING_TIME_DEF_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to PAY_TIME_DEFINITIONS.TIME_DEFINITION_ID."
+    },
+    {
+      "Name": "ENDING_TIME_DEF_SHORT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Ending time definition short code value. Equivalent to PAY_TIME_DEFINITIONS.SHORT_NAME."
+    },
+    {
+      "Name": "ENDING_TIME_DEF_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to PAY_TIME_DEFINITIONS.TIME_DEFINITION_ID."
+    },
+    {
+      "Name": "EMPLOYMENT_LEVEL",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Which level in three tier model will entries for this definition be attached."
+    },
+    {
+      "Name": "PROCESSING_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Recurring (R) or non-recurring (N) definition."
+    },
+    {
+      "Name": "ONCE_EACH_PERIOD_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Processed only once per period?"
+    },
+    {
+      "Name": "MULTIPLE_ENTRIES_ALLOWED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Whether or not more than one entry for this definition can exist over same span of time."
+    },
+    {
+      "Name": "INVOL_DEDUCTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The PeopleSoft involuntary deduction code. If set, indicates the definition is to be used for voluntary deduction mapping for a particular deduction type."
+    },
+    {
+      "Name": "PLAN_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "2",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Required for PNA migration."
+    },
+    {
+      "Name": "DED_CLASS",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Required for PNA migration."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_ENTERPRISES."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_MIG_STAGING_ELEMENTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_ELEMENT_NAME"
+    },
+    {
+      "Index": "PAY_MIG_STAGING_ELEMENTS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_ELEMENT_ID"
+    },
+    {
+      "Index": "PAY_MIG_STAGING_ELEMENTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "STAGING_ELEMENTS_ID"
+    },
+    {
+      "Index": "PAY_MIG_STAGING_ELEMENTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGISLATIVE_DATA_GROUP_ID, ELEMENT_NAME"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:08:55"
+}

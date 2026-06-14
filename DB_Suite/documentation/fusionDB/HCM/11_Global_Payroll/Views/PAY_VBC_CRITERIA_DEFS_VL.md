@@ -1,0 +1,52 @@
+# PAY_VBC_CRITERIA_DEFS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payvbccriteriadefsvl-6795.html#payvbccriteriadefsvl-6795](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payvbccriteriadefsvl-6795.html#payvbccriteriadefsvl-6795)
+
+## Columns
+
+- VBC_CRITERIA_ID
+- VBC_DEFINITION_ID
+- BASE_NAME
+- NAME
+- DISPLAY_TAG
+- DESCRIPTION
+- LANGUAGE
+- CRITERIA_TYPE
+- CRITERIA_ID
+- DEFAULT_ALLOWED
+- FLEXIBLE_FLAG
+- EXPRESSION
+- PARENT_CRITERIA_DEF_ID
+- VALUE_SET_CODE
+- VO_NAME
+- ENTERPRISE_ID
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATION_CODE
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATION_DATE
+- CREATED_BY
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- SEED_STATUS
+- SGUID
+- SEED_DATA_SOURCE
+
+## Query
+
+```sql
+SELECT pvcd.VBC_CRITERIA_ID, pvcd.VBC_DEFINITION_ID, pvcd.BASE_NAME, pvcdtl.NAME, pvcdtl.DISPLAY_TAG, pvcdtl.DESCRIPTION, pvcdtl.LANGUAGE, pvcd.CRITERIA_TYPE, pvcd.CRITERIA_ID, pvcd.DEFAULT_ALLOWED, pvcd.FLEXIBLE_FLAG, pvcd.EXPRESSION, pvcd.PARENT_CRITERIA_DEF_ID, pvcd.VALUE_SET_CODE, pvcd.VO_NAME, pvcd.ENTERPRISE_ID, pvcd.LEGISLATIVE_DATA_GROUP_ID, pvcd.LEGISLATION_CODE, pvcd.MODULE_ID, pvcd.OBJECT_VERSION_NUMBER, pvcd.CREATION_DATE, pvcd.CREATED_BY, pvcd.LAST_UPDATED_BY, pvcd.LAST_UPDATE_DATE, pvcd.LAST_UPDATE_LOGIN, pvcd.SEED_STATUS, pvcd.SGUID, pvcd.SEED_DATA_SOURCE FROM PAY_VBC_CRITERIA_DEFS pvcd, PAY_VBC_CRITERIA_DEFS_TL pvcdtl WHERE pvcd.VBC_CRITERIA_ID = pvcdtl.VBC_CRITERIA_ID AND pvcdtl.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

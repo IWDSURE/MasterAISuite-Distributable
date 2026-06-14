@@ -1,0 +1,220 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Fusion AI Agent-to-Agent API/Agent Card",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/api/fusion-ai/orchestrator/a2a/v1/{workflowCode}/.well-known/agent.json": {
+      "get": {
+        "tags": [
+          "Fusion AI Agent-to-Agent API/Agent Card"
+        ],
+        "summary": "Get agent card",
+        "description": "Retrieve the A2A agent card for a published workflow identified by workflow code.",
+        "operationId": "getAgentCard",
+        "parameters": [
+          {
+            "name": "workflowCode",
+            "in": "path",
+            "description": "Published workflow code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent card retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentCard"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workflow not found.",
+            "content": {}
+          }
+        },
+        "x-internal-id": "<servername>-api-fusion-ai-orchestrator-a2a-v1-{workflowCode}-.well-known-agent.json-get",
+        "x-filename-id": "servername-api-fusion-ai-orchestrator-a2a-v1-workflowcode-well-known-agent-json-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgentCard": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Agent name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Agent description."
+          },
+          "url": {
+            "type": "string",
+            "description": "Base A2A URL for the workflow."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/AgentProvider"
+          },
+          "version": {
+            "type": "string",
+            "description": "Workflow version represented as a string."
+          },
+          "documentationUrl": {
+            "type": "string",
+            "description": "Optional documentation URL."
+          },
+          "capabilities": {
+            "$ref": "#/components/schemas/AgentCapabilities"
+          },
+          "authentication": {
+            "$ref": "#/components/schemas/AgentAuthentication"
+          },
+          "defaultInputModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defaultOutputModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentSkill"
+            }
+          }
+        }
+      },
+      "AgentProvider": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "AgentCapabilities": {
+        "type": "object",
+        "properties": {
+          "streaming": {
+            "type": "boolean",
+            "description": "Indicates whether the agent supports streaming."
+          },
+          "pushNotifications": {
+            "type": "boolean",
+            "description": "Indicates whether push notifications are supported."
+          },
+          "stateTransitionHistory": {
+            "type": "boolean",
+            "description": "Indicates whether task state transition history is supported."
+          }
+        }
+      },
+      "AgentAuthentication": {
+        "type": "object",
+        "properties": {
+          "schemes": {
+            "type": "array",
+            "description": "Supported authentication schemes.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "credentials": {
+            "type": "string",
+            "description": "Optional credential hint or reference."
+          }
+        }
+      },
+      "AgentSkill": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outputModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

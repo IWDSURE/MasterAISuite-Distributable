@@ -1,0 +1,191 @@
+{
+  "name": "HWM_XFR_TRANS",
+  "object_type": "TABLE",
+  "description": "A time record transferred to a consuming application",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmxfrtrans-24856.html#hwmxfrtrans-24856",
+  "primary_keys": [
+    {
+      "name": "HWM_XFR_TRANS_PK",
+      "columns": "XFR_TRANS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "XFR_TRANS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The primary key for the object being transferred."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "XFR_JOB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The Transfer Job which is Transferring to the Time Consumer"
+    },
+    {
+      "Name": "XFR_TM_UNQ_REC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "XFR_TM_UNQ_REC_ID"
+    },
+    {
+      "Name": "XFR_ROW_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "XFR_ROW_STATUS"
+    },
+    {
+      "Name": "XFR_GRP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "XFR_GRP_ID"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "TCSMRS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Time Consumer ID related with XFR_JOB_ID"
+    },
+    {
+      "Name": "TM_REC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "TM_REC_ID"
+    },
+    {
+      "Name": "TM_REC_VERSION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "TM_REC_VERSION"
+    },
+    {
+      "Name": "TM_REC_GRP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "TM_REC_GRP_ID"
+    },
+    {
+      "Name": "TM_REC_GRP_VERSION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "TM_REC_GRP_VERSION"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HWM_XFR_TRANS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "XFR_JOB_ID, TM_REC_GRP_ID, TM_REC_GRP_VERSION",
+      "Status": ""
+    },
+    {
+      "Index": "HWM_XFR_TRANS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "XFR_ROW_STATUS, TCSMRS_ID, TM_REC_ID, ENTERPRISE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HWM_XFR_TRANS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "XFR_GRP_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HWM_XFR_TRANS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "XFR_TM_UNQ_REC_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "HWM_XFR_TRANS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "XFR_TRANS_ID",
+      "Status": ""
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:49:32"
+}

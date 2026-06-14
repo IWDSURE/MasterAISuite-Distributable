@@ -1,0 +1,1528 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Plan Balances",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/planBalances/{planBalancesUniqID}": {
+      "get": {
+        "tags": [
+          "Plan Balances"
+        ],
+        "summary": "Get a plan balance",
+        "operationId": "get_planBalances",
+        "parameters": [
+          {
+            "name": "planBalancesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Plan Balances resource and used to uniquely identify an instance of Plan Balances. The client should not generate the hash key value. Instead, the client should query on the Plan Balances collection resource in order to navigate to a specific instance of Plan Balances to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/planBalances-item-response"
+                }
+              }
+            },
+            "links": {
+              "planBalanceSummary": {
+                "operationRef": "#/paths/~1planBalances~1{planBalancesUniqID}~1child~1planBalanceSummary/get",
+                "parameters": {
+                  "planBalancesUniqID": "$request.path.planBalancesUniqID"
+                },
+                "description": "The planBalanceSummary resource is a child of the planBalances resource and provides summary-level information on all transactions that impact the balance on the plan."
+              },
+              "unvestedDetails": {
+                "operationRef": "#/paths/~1planBalances~1{planBalancesUniqID}~1child~1unvestedDetails/get",
+                "parameters": {
+                  "planBalancesUniqID": "$request.path.planBalancesUniqID"
+                },
+                "description": "The unvestedBalanceDetails resource is a child of the planBalances resource and provides the details of balance transactions that are unvested."
+              },
+              "yearEndDetails": {
+                "operationRef": "#/paths/~1planBalances~1{planBalancesUniqID}~1child~1yearEndDetails/get",
+                "parameters": {
+                  "planBalancesUniqID": "$request.path.planBalancesUniqID"
+                },
+                "description": "The yearEndDetails resource is a child of the planBalances resource and provides the details for the plan year end transactions."
+              },
+              "details": {
+                "operationRef": "#/paths/~1planBalances~1{planBalancesUniqID}~1child~1details/get",
+                "parameters": {
+                  "planBalancesUniqID": "$request.path.planBalancesUniqID"
+                },
+                "description": "The details resource is a child of the planBalances resource and provides details of each transaction type available for the absence plan."
+              },
+              "planBalanceDetails": {
+                "operationRef": "#/paths/~1planBalances~1{planBalancesUniqID}~1child~1planBalanceDetails/get",
+                "parameters": {
+                  "planBalancesUniqID": "$request.path.planBalancesUniqID"
+                },
+                "description": "The planBalanceDetails resource is a child of the planBalances resource and provides detailed information on all transactions that impact the balance on the plan."
+              }
+            }
+          }
+        },
+        "x-internal-id": "planBalances-{planBalancesUniqID}-get",
+        "x-filename-id": "planbalances-planbalancesuniqid-get"
+      }
+    },
+    "/planBalances": {
+      "get": {
+        "tags": [
+          "Plan Balances"
+        ],
+        "summary": "Get all plan balances",
+        "operationId": "getall_planBalances",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>SysEffectiveDate; string</li><li>assignmentId; integer; Unique identifier of the worker's assignment to which the plan is enrolled.</li><li>assignmentName; string; Name of the worker's assignment to which the plan is enrolled.</li><li>assignmentNumber; string; Number of the worker's assignment to which the plan is enrolled.</li><li>balanceAsOfBalanceCalculationDate; number; Remaining plan balance amount for a person on the balance calculation date.</li><li>balanceCalculationDate; string; Date on which accrual is run to calculate the balance for the person.</li><li>ceilingAmount; number; Ceiling amount shown on the donation absence plan.</li><li>effectiveEndDate; string</li><li>effectiveStartDate; string</li><li>enrollPositiveBalanceFlag; boolean; Disburse checkbox enabled in absence plan.</li><li>enrollmentEndDate; string; Date on which the person is removed from plan when plan enrollment ends.</li><li>enrollmentStartDate; string; Date on which the person is enrolled to the plan.</li><li>formattedBalance; string; Remaining plan balance amount for a person on the balance calculation date, formatted according to user preference.</li><li>level; string</li><li>personId; integer; Unique identifier for the person.</li><li>personPlanEnrollmentId; integer; Unique identifier for a worker's plan enrollment.</li><li>planDisplayStatusFlag; boolean; Indicates whether the plan balance can be displayed to users, as defined in the absence type. If true, balance can be displayed to users. If false, balance can't be displayed to users.</li><li>planEnrollmentStatus; string; Status of plan enrollment as of current date, such as Active or Inactive.</li><li>planId; integer; Unique identifier of the plan.</li><li>planName; string; Name of the plan.</li><li>planPeriodEndDate; string; End date of the plan period.</li><li>planPeriodStartDate; string; Start date of the plan period.</li><li>planStatus; string; Status of plan, such as A for Active or V for Inactive.</li><li>planStatusMeaning; string; Meaning of plan status, such as Active, Inactive.</li><li>planType; string; Type of absence plan used to record an absence, such as Accrual, Donation.</li><li>planTypeCode; string; Code of the plan type.</li><li>planUnitOfMeasure; string; Unique identifier assigned to a unit of measure for absence plan, such as D or H.</li><li>recipientAliasName; string; Alias name of the donation recipient.</li><li>transferRule; string; Potential transfer of absence plan to be evaluated for transfer of plan balance after global transfer transaction.</li><li>unitOfMeasureMeaning; string; Meaning of plan unit of measure, such as Days or Hours.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the plan balances that match the primary key criteria specified. <br>Finder Variables <ul><li>personPlanEnrollmentId; integer;  Unique identifier of a plan enrollment. </li></ul></li><li>findByAssignmentIdPlanIdLevelDate Finds plan balances based on the specified attributes. <br>Finder Variables <ul><li>SysEffectiveDate; object;   </li><li>assignmentId; integer;  Unique Identifier of the worker's assignment. </li><li>balanceAsOfDate; string;  Date for which balance is calculated. </li><li>includeFutureNegative; string;  Plan balances that include negative value in the future. </li><li>level; string;  Level of detail expected in the response. Possible values are balanceSummary, balanceDetail or all. </li><li>planId; integer;  Unique identifier of the plan. </li></ul></li><li>findByCurrentDate Finds plan balances based on the current date. <br>Finder Variables <ul><li>SysEffectiveDate; object;   </li><li>assignmentId; integer;  Unique Identifier for the worker's assignment. </li><li>personId; integer;  Unique identifier for the person. </li><li>planId; integer;  Unique identifier for the plan. </li></ul></li><li>findByLastCalculationDate Finds the balance as of the last calculation date. <br>Finder Variables <ul><li>SysEffectiveDate; object;   </li><li>assignmentId; integer;  Unique Identifier of the worker's assignment. </li><li>personId; integer;  Unique identifier for the person. </li><li>planId; integer;  Unique identifier for the plan. </li></ul></li><li>findByPersonIdPlanIdLevelDate Finds plan balances based on the specified attributes. <br>Finder Variables <ul><li>SysEffectiveDate; object;   </li><li>balanceAsOfDate; string;  Date for which balance is calculated. </li><li>level; string;  Level of detail expected in the response. Possible values are balanceSummary, balanceDetail or all. </li><li>personId; integer;  Unique identifier of the person. </li><li>planId; integer;  Unique identifier of the plan. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the plan balances that match the primary key criteria specified.",
+                "properties": {
+                  "personPlanEnrollmentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of a plan enrollment.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByAssignmentIdPlanIdLevelDate",
+                "description": "Finds plan balances based on the specified attributes.",
+                "title": "findByAssignmentIdPlanIdLevelAndDate",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "includeFutureNegative": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Plan balances that include negative value in the future.",
+                    "type": "string"
+                  },
+                  "level": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Level of detail expected in the response. Possible values are balanceSummary, balanceDetail or all.",
+                    "type": "string"
+                  },
+                  "planId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the plan.",
+                    "type": "integer"
+                  },
+                  "balanceAsOfDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date for which balance is calculated.",
+                    "type": "string"
+                  },
+                  "assignmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique Identifier of the worker's assignment.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByCurrentDate",
+                "description": "Finds plan balances based on the current date.",
+                "title": "findByCurrentDate",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "personId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "description": "Unique identifier for the person.",
+                    "type": "integer"
+                  },
+                  "planId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the plan.",
+                    "type": "integer"
+                  },
+                  "assignmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "description": "Unique Identifier for the worker's assignment.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByLastCalculationDate",
+                "description": "Finds the balance as of the last calculation date.",
+                "title": "findByLastCalculationDate",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "personId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "description": "Unique identifier for the person.",
+                    "type": "integer"
+                  },
+                  "planId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the plan.",
+                    "type": "integer"
+                  },
+                  "assignmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "description": "Unique Identifier of the worker's assignment.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPersonIdPlanIdLevelDate",
+                "description": "Finds plan balances based on the specified attributes.",
+                "title": "findByPersonIdPlanIdLevelAndDate",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "level": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Level of detail expected in the response. Possible values are balanceSummary, balanceDetail or all.",
+                    "type": "string"
+                  },
+                  "personId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the person.",
+                    "type": "integer"
+                  },
+                  "planId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the plan.",
+                    "type": "integer"
+                  },
+                  "balanceAsOfDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date for which balance is calculated.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/planBalances"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "planBalances-get",
+        "x-filename-id": "planbalances-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "planBalances-item-response": {
+        "type": "object",
+        "properties": {
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "assignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier of the worker's assignment to which the plan is enrolled.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "assignmentName": {
+            "title": "Assignment Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the worker's assignment to which the plan is enrolled.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "assignmentNumber": {
+            "title": "Assignment Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Number of the worker's assignment to which the plan is enrolled.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "balanceAsOfBalanceCalculationDate": {
+            "type": "number",
+            "description": "Remaining plan balance amount for a person on the balance calculation date.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "balanceCalculationDate": {
+            "type": "string",
+            "description": "Date on which accrual is run to calculate the balance for the person.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ceilingAmount": {
+            "type": "number",
+            "description": "Ceiling amount shown on the donation absence plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "details": {
+            "title": "Details",
+            "type": "array",
+            "description": "The details resource is a child of the planBalances resource and provides details of each transaction type available for the absence plan.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-details-item-response"
+            }
+          },
+          "effectiveEndDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "effectiveStartDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "enrollPositiveBalanceFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Disburse checkbox enabled in absence plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "enrollmentEndDate": {
+            "type": "string",
+            "description": "Date on which the person is removed from plan when plan enrollment ends.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "enrollmentStartDate": {
+            "type": "string",
+            "description": "Date on which the person is enrolled to the plan.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "formattedBalance": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Remaining plan balance amount for a person on the balance calculation date, formatted according to user preference.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedCeilingAmount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the ceiling amount displayed on a donation plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "level": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "multiYearCarryOverFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the plan has multiyear carryover enabled. If true, multiple years of carryover will be displayed. If false, carryover will only show for one year.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "personId": {
+            "type": "integer",
+            "description": "Unique identifier for the person.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "personPlanEnrollmentId": {
+            "type": "integer",
+            "description": "Unique identifier for a worker's plan enrollment.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "planBalanceDetails": {
+            "title": "Plan Balance Details",
+            "type": "array",
+            "description": "The planBalanceDetails resource is a child of the planBalances resource and provides detailed information on all transactions that impact the balance on the plan.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-planBalanceDetails-item-response"
+            }
+          },
+          "planBalanceSummary": {
+            "title": "Plan Balance Summaries",
+            "type": "array",
+            "description": "The planBalanceSummary resource is a child of the planBalances resource and provides summary-level information on all transactions that impact the balance on the plan.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-planBalanceSummary-item-response"
+            }
+          },
+          "planDisplayStatusFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the plan balance can be displayed to users, as defined in the absence type. If true, balance can be displayed to users. If false, balance can't be displayed to users.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "planEnrollmentStatus": {
+            "type": "string",
+            "description": "Status of plan enrollment as of current date, such as Active or Inactive.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planId": {
+            "type": "integer",
+            "description": "Unique identifier of the plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "planName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planPeriodEndDate": {
+            "type": "string",
+            "description": "End date of the plan period.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planPeriodStartDate": {
+            "type": "string",
+            "description": "Start date of the plan period.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planStatus": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of plan, such as A for Active or V for Inactive.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planStatusMeaning": {
+            "type": "string",
+            "description": "Meaning of plan status, such as Active, Inactive.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "planType": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of absence plan used to record an absence, such as Accrual, Donation.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of the plan type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planUnitOfMeasure": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier assigned to a unit of measure for absence plan, such as D or H.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "recipientAliasName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Alias name of the donation recipient.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transferRule": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Potential transfer of absence plan to be evaluated for transfer of plan balance after global transfer transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "unitOfMeasureMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of plan unit of measure, such as Days or Hours.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "unvestedDetails": {
+            "title": "Unvested Balance Details",
+            "type": "array",
+            "description": "The unvestedBalanceDetails resource is a child of the planBalances resource and provides the details of balance transactions that are unvested.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-unvestedDetails-item-response"
+            }
+          },
+          "yearEndDetails": {
+            "title": "Year End Details",
+            "type": "array",
+            "description": "The yearEndDetails resource is a child of the planBalances resource and provides the details for the plan year end transactions.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-yearEndDetails-item-response"
+            }
+          }
+        }
+      },
+      "planBalances-details-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Display of additional information about the transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketSequence": {
+            "type": "integer",
+            "description": "Displayed sequence of the transaction types for the plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "carryoverExpiryDate": {
+            "type": "string",
+            "description": "Date the carryover balance will expire.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiration date of the transaction or balance.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDateOverReasonCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the expiration date override.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDateOverReasonMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Reason the expiration date was overridden on the transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedRemainingBalance": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the remaining carryover balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedTransactionAmount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the absence transaction amount.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "manualAdjustmentReasonCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the manual adjustment reason.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "manualAdjustmentReasonMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Reason for the manual adjustment transaction on the plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "overrideExpiryDate": {
+            "type": "string",
+            "description": "Override expiry date for a compensatory plan transaction.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planBalanceDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier of the plan balance details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planEndDate": {
+            "type": "string",
+            "description": "End date of the absence plan term.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "projectedStatusFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the transaction type balance is projected. If true, the balance is a projected balance. If false, the balance is the actual balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "remainingBalance": {
+            "type": "number",
+            "description": "Remaining balance available for carryover.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionAmount": {
+            "type": "number",
+            "description": "Amount of the absence transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "Date of the absence transaction.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionStatus": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of the absence transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "voidFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a transaction has been voided. If true, the transaction is no longer valid. If false, the transaction is still valid and not voided.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "planBalances-planBalanceDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Any additional Information that qualifies the transaction.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "personAccrualEntryDtlId": {
+            "type": "integer",
+            "description": "Unique identifier for the plan balance detail record.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "status": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of a transaction detail record, such as Projected or Rejected.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "Date of the plan balance detail transaction.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "transactionTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction type identifier for a plan balance detail record, such as ACRL or ABS.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "transactionTypeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction type name for a plan balance detail record, such as Periodic Accrual or Absence.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction value expressed in the unit of measure of the absence plan.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "planBalances-planBalanceSummary-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional information for the plan balance summary transactions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketSequence": {
+            "type": "integer",
+            "description": "Sequence of the plan balance summary transactions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type code of the plan balance summary transactions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketTypeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of plan balance summary transactions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "transactionTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction type identifier for a plan balance summary record, such as ACRL or ABS.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "transactionTypeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction type name for a plan balance summary record, such as Accrual or Absence.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Transaction value of absence type expressed in the unit of measure of the absence plan.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "planBalances-unvestedDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "earnedAmount": {
+            "type": "number",
+            "description": "Amount of accrual balance earned that's unvested.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "earnedDate": {
+            "type": "string",
+            "description": "Date on which the unvested accrual amount was earned.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedEarnedAmount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the earned unvested balance amount.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "projectedStatusFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the unvested balance amount is a projected balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionStatus": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of the unvested balance transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "unvestedDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier of the unvested balance transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "vestingDate": {
+            "type": "string",
+            "description": "Date on which the unvested balance will vest.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "planBalances-yearEndDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Display of additional information about the transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketSequence": {
+            "type": "integer",
+            "description": "Sequence of the plan balance year-end transactions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "carryOverExpiryDate": {
+            "type": "string",
+            "description": "Date on which the carryover balance will expire.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "formattedTransactionAmount": {
+            "type": "string",
+            "description": "Format of the absence transaction amount.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "planBalanceYearEndId": {
+            "type": "integer",
+            "description": "Unique identifier of the plan year end details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planEndDate": {
+            "type": "string",
+            "description": "End date of the absence plan term.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "projectedStatusFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the transaction type balance is projected. If true, the balance is a projected balance. If false, the balance is the actual balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionAmount": {
+            "type": "number",
+            "description": "Amount of the absence transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "Date of the absence transaction.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeCode": {
+            "type": "string",
+            "description": "Code of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeName": {
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "planBalances": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

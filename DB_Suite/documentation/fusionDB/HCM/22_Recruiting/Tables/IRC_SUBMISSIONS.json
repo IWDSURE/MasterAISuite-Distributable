@@ -1,0 +1,464 @@
+{
+  "name": "IRC_SUBMISSIONS",
+  "object_type": "TABLE",
+  "description": "This table contains candidate submissions.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircsubmissions-31196.html#ircsubmissions-31196",
+  "primary_keys": [
+    {
+      "name": "IRC_SUBMISSIONS_PK",
+      "columns": "SUBMISSION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "CONFIRMED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This flag is used to determine whether submission is confirmed or not."
+    },
+    {
+      "Name": "CONFIRMED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_PERSONS table."
+    },
+    {
+      "Name": "SUBMISSION_CONFIRMED_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To track when the submission changed from Unconfirmed to Confirmed."
+    },
+    {
+      "Name": "INTERNAL_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For reporting, to know if submission was internal application, at the time it was made."
+    },
+    {
+      "Name": "DISQUALIFIED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To track if submission overall was disqualified (aggregate snapshot of DQ answers)."
+    },
+    {
+      "Name": "MERGED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To track if the submission has been delinked/merged."
+    },
+    {
+      "Name": "QSTNR_SCORE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The total questionnaire score for this submission."
+    },
+    {
+      "Name": "AF_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_AF_VERSIONS.AF_VERSION_ID."
+    },
+    {
+      "Name": "LEGAL_DESC_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "To track the legal disclaimer accepted by the applicant. Foreign key to IRC_DESC_VERSIONS_B.DESC_VERSION_ID."
+    },
+    {
+      "Name": "ESIGN_DESC_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "To track the Signature statement accepted by the applicant. Foreign key to IRC_DESC_VERSIONS_B.DESC_VERSION_ID."
+    },
+    {
+      "Name": "OBJECT_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the status of the object."
+    },
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_REQUISITIONS_B table."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_CANDIDATES table."
+    },
+    {
+      "Name": "SYSTEM_PERSON_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Person type of the job applicant when they applied for the job"
+    },
+    {
+      "Name": "PIPELINE_SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the SUBMISSION_ID of the pipeline requisition's submission,  if this submission is created based on a pipeline requisition's submission."
+    },
+    {
+      "Name": "IS_COMPLETED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether this submission is completed or not i.e whether the candidate completed filling this submission."
+    },
+    {
+      "Name": "CURRENT_PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to IRC_PHASES_B table."
+    },
+    {
+      "Name": "CURRENT_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to IRC_STATES_B table."
+    },
+    {
+      "Name": "PUBLIC_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to IRC_STATES_B table. This refers to public job application status that can be shared with candidate."
+    },
+    {
+      "Name": "IS_RESTRICTED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the job application is restricted to access based on the user privilage."
+    },
+    {
+      "Name": "ACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the Submission is active or not."
+    },
+    {
+      "Name": "DISCARDED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the applicant has reapplied for the job and the current job is discarded."
+    },
+    {
+      "Name": "SUBMISSION_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the date when this submission was submitted."
+    },
+    {
+      "Name": "SUBM_LAST_MODIFIED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the last modified date for the Submission. This is updated even when the child entitiies of the Submission table are updated. This can be used by customers to export submissions which were updated after a certain date."
+    },
+    {
+      "Name": "SUBMISSION_LANGUAGE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "4",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the language code for the submission"
+    },
+    {
+      "Name": "PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to profiles table HRT_PROIFLES_B."
+    },
+    {
+      "Name": "PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to process table IRC_PROCESS_B."
+    },
+    {
+      "Name": "SITE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Foreign Key to sites table IRC_CX_SITES_B.SITE_NUMBER."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "CATEGORY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Extensible Flexfield Category Code"
+    },
+    {
+      "Name": "ADDED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Person who has submitted the job application."
+    },
+    {
+      "Name": "ADDED_BY_CONTEXT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of the context through which this JA was submitted."
+    },
+    {
+      "Name": "SUB_ID_CHAR",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This column is used to convert Long Submission Id to Char Submission Id. One of the main reason for this column to exists is to join with HRQ_QSTNR_PARTICIPANTS Table where  the SUBJECT_ID is of type varchar."
+    },
+    {
+      "Name": "CANDIDATE_WORK_SUMMARY",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the work summary of job application generated by AI based on candidate input information"
+    },
+    {
+      "Name": "CURRENT_RANK",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Current rank number of current job application"
+    },
+    {
+      "Name": "RANKED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Person id of person who ranked this job application"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_SUBMISSIONS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK10",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PUBLIC_STATE_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK11",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PIPELINE_SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK12",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "default",
+      "Columns": "RANKED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK13",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "default",
+      "Columns": "PROFILE_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESS_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "AF_VERSION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGAL_DESC_VERSION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ESIGN_DESC_VERSION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_FK9",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONFIRMED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ADDED_BY_CONTEXT_CODE"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBM_LAST_MODIFIED_DATE"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_DATE"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CURRENT_STATE_ID, CURRENT_PHASE_ID, OBJECT_STATUS"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CREATION_DATE"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_SUBMISSIONS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SUB_ID_CHAR"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:02:04"
+}

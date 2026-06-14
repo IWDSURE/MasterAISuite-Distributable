@@ -1,0 +1,36 @@
+# WLF_REQ_COURSE_VOL_CLASS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfreqcoursevolclassv-5522.html#wlfreqcoursevolclassv-5522](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfreqcoursevolclassv-5522.html#wlfreqcoursevolclassv-5522)
+
+## Columns
+
+- LEARNING_ITEM_ID
+- CORRECT_COURSE_AREC
+- COURSE_LEARNER_ID
+- COURSE_STATUS
+- COURSE_SUB_STATUS
+- CORRECT_COURSE_ROWID
+- CLASS_AREC
+- CLASS_STATUS
+- CLASS_SUB_STATUS
+- INCORRECT_COURSE_AREC
+- INCORRECT_COURSE_ROWID
+- AR_ROW_ID
+
+## Query
+
+```sql
+WITH vol_classes AS ( SELECT classes.course_learning_item_id course_lid, classes.learning_item_id class_lid, class_assignment.assignment_record_id class_arec, class_assignment.status class_status, class_assignment.sub_status class_sub_status, class_assignment.learner_id class_learner_id FROM FUSION.wlf_assignment_records_f class_assignment INNER JOIN FUSION.wlf_li_classes_f classes ON classes.learning_item_id = class_assignment.learning_item_id AND trunc(SYSDATE) BETWEEN classes.effective_start_date AND classes.effective_end_date WHERE trunc(SYSDATE) BETWEEN class_assignment.effective_start_date AND class_assignment.effective_end_date AND class_assignment.event_type = 'ORA_JOIN_ASSIGNMENT' ),required_courses AS ( SELECT courses.learning_item_id, courses_assignment.assignment_record_id correct_course_arec, courses_assignment.status course_status, courses_assignment.sub_status course_sub_status, courses_assignment.rowid correct_course_rowid, courses_assignment.learner_id course_learner_id FROM FUSION.wlf_assignment_records_f courses_assignment INNER JOIN FUSION.wlf_li_courses_f courses ON courses.learning_item_id = courses_assignment.learning_item_id AND trunc(SYSDATE) BETWEEN courses.effective_start_date AND courses.effective_end_date WHERE trunc(SYSDATE) BETWEEN courses_assignment.effective_start_date AND courses_assignment.effective_end_date AND courses_assignment.event_type = 'ORA_REQUIRE_ASSIGNMENT' ),current_no_ar_match AS ( SELECT required_courses.learning_item_id, required_courses.correct_course_arec, required_courses.course_status, required_courses.course_sub_status, required_courses.course_learner_id, required_courses.correct_course_rowid, vol_classes.class_lid, vol_classes.class_arec, vol_classes.class_status, vol_classes.class_sub_status FROM vol_classes INNER JOIN required_courses ON required_courses.learning_item_id = vol_classes.course_lid AND class_learner_id = course_learner_id LEFT OUTER JOIN FUSION.wlf_ar_relations_f ar ON ar.assignment_record_id = class_arec AND ar.related_object_id = correct_course_arec AND trunc(SYSDATE) BETWEEN ar.effective_start_date AND ar.effective_end_date WHERE ar.relation_id IS NULL ),req_course_vol_class AS ( SELECT current_no_ar_match.*, class_ar.relation_id, incorrect_courses_arec.assignment_record_id incorrect_course_arec, incorrect_courses_arec.status incorrect_course_status, incorrect_courses_arec.event_type incorrect_course_eventtype, incorrect_courses_arec.rowid incorrect_course_rowid, class_ar.rowid ar_row_id FROM current_no_ar_match INNER JOIN FUSION.wlf_ar_relations_f class_ar ON class_ar.assignment_record_id = current_no_ar_match.class_arec AND trunc(SYSDATE) BETWEEN class_ar.effective_start_date AND class_ar.effective_end_date INNER JOIN FUSION.wlf_assignment_records_f incorrect_courses_arec ON class_ar.related_object_id = incorrect_courses_arec.assignment_record_id AND trunc(SYSDATE) BETWEEN incorrect_courses_arec.effective_start_date AND incorrect_courses_arec.effective_end_date AND incorrect_courses_arec.learner_id = current_no_ar_match.course_learner_id WHERE current_no_ar_match.course_status NOT IN ('ORA_ASSN_REC_COMPLETE', 'ORA_ASSN_REC_DELETED', 'ORA_ASSN_REC_WITHDRAWN', 'ORA_ASSN_REC_REJECTED') AND current_no_ar_match.class_status NOT IN ('ORA_ASSN_REC_COMPLETE', 'ORA_ASSN_REC_DELETED', 'ORA_ASSN_REC_WITHDRAWN', 'ORA_ASSN_REC_REJECTED') AND incorrect_courses_arec.status != 'ORA_ASSN_REC_COMPLETE' ) SELECT learning_item_id, correct_course_arec, course_learner_id, course_status, course_sub_status, correct_course_rowid, class_arec, class_status, class_sub_status, incorrect_course_arec, incorrect_course_rowid, ar_row_id FROM req_course_vol_class ORDER BY learning_item_id, course_learner_id, class_lid
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

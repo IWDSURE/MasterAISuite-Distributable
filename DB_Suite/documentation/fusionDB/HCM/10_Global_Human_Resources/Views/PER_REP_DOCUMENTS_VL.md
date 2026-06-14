@@ -1,0 +1,38 @@
+# PER_REP_DOCUMENTS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perrepdocumentsvl-6935.html#perrepdocumentsvl-6935](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perrepdocumentsvl-6935.html#perrepdocumentsvl-6935)
+
+## Columns
+
+- REP_DOCUMENT_ID
+- ENTERPRISE_ID
+- LEGISLATION_CODE
+- DOCUMENT_CODE
+- DOCUMENT_NAME
+- DESCRIPTION
+- CATEGORY
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT doc.rep_document_id ,doc.enterprise_id ,doc.legislation_code ,doc.document_code ,doc_tl.document_name ,doc_tl.description ,doc.category ,doc.created_by ,doc.creation_date ,doc.last_updated_by ,doc.last_update_date ,doc.last_update_login ,doc.object_version_number ,doc.module_id FROM PER_REP_DOCUMENTS_B doc, PER_REP_DOCUMENTS_TL doc_tl WHERE doc.rep_document_id = doc_tl.rep_document_id AND doc_tl.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

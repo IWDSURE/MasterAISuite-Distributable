@@ -1,0 +1,926 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Questionnaires List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/questionnairesLOV/{questionnairesLOVUniqID}": {
+      "get": {
+        "tags": [
+          "List of Values/Questionnaires List of Values"
+        ],
+        "summary": "Get a questionnaire",
+        "operationId": "get_questionnairesLOV",
+        "parameters": [
+          {
+            "name": "questionnairesLOVUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Questionnaires List of Values resource and used to uniquely identify an instance of Questionnaires List of Values. The client should not generate the hash key value. Instead, the client should query on the Questionnaires List of Values collection resource in order to navigate to a specific instance of Questionnaires List of Values to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/questionnairesLOV-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "questionnairesLOV-{questionnairesLOVUniqID}-get",
+        "x-filename-id": "questionnaireslov-questionnaireslovuniqid-get"
+      }
+    },
+    "/questionnairesLOV": {
+      "get": {
+        "tags": [
+          "List of Values/Questionnaires List of Values"
+        ],
+        "summary": "Get all questionnaires",
+        "operationId": "getall_questionnairesLOV",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CalculationRuleCode; string; Code for the calculation rule for scored questionnaires.</li><li>CategoryId; integer; Unique identifier of the folder where the questionnaire is stored.</li><li>CategoryName; string; Name of the folder where the questionnaire is stored.</li><li>CreationDate; string; Who column for creation date</li><li>Description; string; Description of the questionnaire.</li><li>InUse; string; Indicates whether the questionnaire has at least one response.</li><li>InUseMeaning; string; Meaning of the In Use code.</li><li>IntroText; string; Introduction of the questionnaire displayed to a respondent.</li><li>LatestVersion; string; Indicates whether the version of the questionnaire is the latest. The default value is Y. The latest version is used in new questionnaire responses.</li><li>MaximumPossibleScore; integer; Maximum score that you can achieve in the questionnaire.</li><li>Name; string; Name of the questionnaire.</li><li>Owner; string; Owner of the questionnaire. Indicates the person ID who can edit the questionnaire, when private.</li><li>PageLayout; string; Layout of the questionnaire on a page. This isn't applicable to mobile responsive pages.</li><li>PrivacyFlag; boolean; Indicates whether the questionnaire is private. Y indicates that the questionnaire is private and only the owner can edit. N indicates that the questionnaire is public and anyone can edit it with the required privileges.</li><li>QstnrTemplateId; integer; Unique identifier of the template used to create the questionnaire.</li><li>QstnrVersionNumber; integer; Version of the questionnaire. When the definition of a questionnaire changes, you can version the change and retain the original definition of the questionnaire.</li><li>QstnsPERPage; integer; Number of questions displayed on a page. This isn't applicable to mobile responsive pages.</li><li>QuestionnaireCode; string; User-defined identifier of the questionnaire.</li><li>QuestionnaireId; integer; Application generated primary key of the questionnaire.</li><li>ScoredFlag; boolean; Indicates whether a score is calculated for the questionnaire.</li><li>SectionOrder; string; Section order when responding to the questionnaire. Valid options are Sequential and Random.</li><li>SectionPresentation; string; Presentation of sections when responding to the questionnaire. Valid options are Stack Regions and No Sections.</li><li>Status; string; Status of the questionnaire. Valid values are Active, Draft, and Inactive.</li><li>SubscriberCode; string; Unique code of the subscribing application where the questionnaire is used.</li><li>SubscriberId; integer; Identifier of the subscribing application where the questionnaire is used.</li><li>TemplateFlag; boolean; Indicates whether the questionnaire is a template.</li><li>VersionDescription; string; Description of the version of the questionnaire.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the questionnaires that match the specified primary key criteria. <br>Finder Variables <ul><li>QstnrVersionNumber; integer;  Version of the questionnaire. </li><li>QuestionnaireId; integer;  Application generated primary key of the questionnaire. </li></ul></li><li>findByWord Finds all the questionnaires that match the specified criteria. <br>Finder Variables <ul><li>FilterAttributes; string;  Attributes for the search parameters. </li><li>Include; string;  Indicates whether to include or exclude questionnaires in the list of category IDs. </li><li>ListOfCategoryIDs; string;  List of folder identifiers where questionnaires are stored. </li><li>ListOfQstnrIDs; string;  List of identifiers for the questionnaires. </li><li>ListOfQstnrTmpltIDs; string;  List of unique identifiers for the questionnaire templates. </li><li>SearchTerms; string;  Search terms used to retrieve questionnaire data. </li><li>StartsWithFlag; boolean;  Option to start with the specified criteria for searching the questionnaires. </li><li>SubscriberCode; string;  Unique code of the subscribing application where the questionnaire is used. </li><li>SysEffectiveDate; object;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the questionnaires that match the specified primary key criteria.",
+                "properties": {
+                  "QstnrVersionNumber": {
+                    "default": 1,
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Version of the questionnaire.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Questionnaire Version Number"
+                  },
+                  "QuestionnaireId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Application generated primary key of the questionnaire.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Questionnaire ID"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all the questionnaires that match the specified criteria.",
+                "title": "findByWord",
+                "properties": {
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Attributes for the search parameters.",
+                    "type": "string"
+                  },
+                  "SubscriberCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique code of the subscribing application where the questionnaire is used.",
+                    "type": "string"
+                  },
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "ListOfQstnrIDs": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of identifiers for the questionnaires.",
+                    "type": "string"
+                  },
+                  "StartsWithFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Option to start with the specified criteria for searching the questionnaires.",
+                    "type": "boolean"
+                  },
+                  "ListOfQstnrTmpltIDs": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of unique identifiers for the questionnaire templates.",
+                    "type": "string"
+                  },
+                  "Include": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates whether to include or exclude questionnaires in the list of category IDs.",
+                    "type": "string"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search terms used to retrieve questionnaire data.",
+                    "type": "string"
+                  },
+                  "ListOfCategoryIDs": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of folder identifiers where questionnaires are stored.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/questionnairesLOV"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "questionnairesLOV-get",
+        "x-filename-id": "questionnaireslov-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "questionnairesLOV-item-response": {
+        "type": "object",
+        "properties": {
+          "CalculationRuleCode": {
+            "title": "Overall Score Calculation Rule",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the calculation rule for scored questionnaires.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CategoryId": {
+            "title": "Folder",
+            "type": "integer",
+            "description": "Unique identifier of the folder where the questionnaire is stored.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CategoryName": {
+            "title": "Folder",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the folder where the questionnaire is stored.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Who column for creation date",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Description of the questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InUse": {
+            "title": "In Use",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the questionnaire has at least one response.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "N",
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "InUseMeaning": {
+            "title": "In Use",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the In Use code.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IntroText": {
+            "title": "Introduction",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Introduction of the questionnaire displayed to a respondent.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LatestVersion": {
+            "title": "Latest Version",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the version of the questionnaire is the latest. The default value is Y. The latest version is used in new questionnaire responses.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "N",
+            "x-queryable": true
+          },
+          "MaximumPossibleScore": {
+            "title": "Maximum Possible Score",
+            "type": "integer",
+            "description": "Maximum score that you can achieve in the questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "Questionnaire Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the questionnaire.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Owner": {
+            "title": "Owner",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Owner of the questionnaire. Indicates the person ID who can edit the questionnaire, when private.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PageLayout": {
+            "title": "Page Layout",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Layout of the questionnaire on a page. This isn't applicable to mobile responsive pages.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "1",
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "false"
+            },
+            "x-queryable": true
+          },
+          "PrivacyFlag": {
+            "title": "Privacy",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the questionnaire is private. Y indicates that the questionnaire is private and only the owner can edit. N indicates that the questionnaire is public and anyone can edit it with the required privileges.",
+            "nullable": false,
+            "readOnly": true,
+            "default": false,
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "false"
+            },
+            "x-queryable": true
+          },
+          "QstnrTemplateId": {
+            "title": "Questionnaire Template ID",
+            "type": "integer",
+            "description": "Unique identifier of the template used to create the questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QstnrVersionNumber": {
+            "title": "Questionnaire Version Number",
+            "type": "integer",
+            "description": "Version of the questionnaire. When the definition of a questionnaire changes, you can version the change and retain the original definition of the questionnaire.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "default": 1,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QstnsPERPage": {
+            "title": "Maximum Number of Questions per Page",
+            "type": "integer",
+            "description": "Number of questions displayed on a page. This isn't applicable to mobile responsive pages.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QuestionnaireCode": {
+            "title": "Questionnaire Code",
+            "maxLength": 240,
+            "type": "string",
+            "description": "User-defined identifier of the questionnaire.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QuestionnaireId": {
+            "title": "Questionnaire ID",
+            "type": "integer",
+            "description": "Application generated primary key of the questionnaire.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ScoredFlag": {
+            "title": "Score Questionnaire",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether a score is calculated for the questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionOrder": {
+            "title": "Section Order",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Section order when responding to the questionnaire. Valid options are Sequential and Random.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "S",
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "false"
+            },
+            "x-queryable": true
+          },
+          "SectionPresentation": {
+            "title": "Section Presentation",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Presentation of sections when responding to the questionnaire. Valid options are Stack Regions and No Sections.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "S",
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "false"
+            },
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the questionnaire. Valid values are Active, Draft, and Inactive.",
+            "nullable": false,
+            "readOnly": true,
+            "default": "D",
+            "x-queryable": true
+          },
+          "SubscriberCode": {
+            "title": "Subscriber",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code of the subscribing application where the questionnaire is used.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberId": {
+            "title": "Subscriber",
+            "type": "integer",
+            "description": "Identifier of the subscribing application where the questionnaire is used.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TemplateFlag": {
+            "title": "Template",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the questionnaire is a template.",
+            "nullable": true,
+            "readOnly": true,
+            "default": false,
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "false"
+            },
+            "x-queryable": true
+          },
+          "VersionDescription": {
+            "title": "Version Description",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Description of the version of the questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "questionnairesLOV": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/questionnairesLOV-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

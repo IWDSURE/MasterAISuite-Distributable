@@ -1,0 +1,39 @@
+# HRT_ESTABLISHMENTS_CI_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtestablishmentsciv-8661.html#hrtestablishmentsciv-8661](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtestablishmentsciv-8661.html#hrtestablishmentsciv-8661)
+
+## Columns
+
+- ESTABLISHMENT_ID
+- BUSINESS_GROUP_ID
+- NAME
+- SCHOOL_CODE
+- LOCATION
+- DESCRIPTION
+- PARTY_ID
+- COUNTRY_ID
+- STATE_PROVINCE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT EstablishmentPEO.ESTABLISHMENT_ID, EstablishmentPEO.BUSINESS_GROUP_ID, EstablishmentPEO.NAME, EstablishmentPEO.SCHOOL_CODE, EstablishmentPEO.LOCATION, EstablishmentPEO.DESCRIPTION, EstablishmentPEO.PARTY_ID, EstablishmentPEO.COUNTRY_ID, EstablishmentPEO.STATE_PROVINCE_ID, EstablishmentPEO.OBJECT_VERSION_NUMBER, EstablishmentPEO.CREATED_BY, EstablishmentPEO.CREATION_DATE, EstablishmentPEO.LAST_UPDATE_DATE, EstablishmentPEO.LAST_UPDATED_BY, EstablishmentPEO.LAST_UPDATE_LOGIN FROM HRT_ESTABLISHMENTS_VL EstablishmentPEO WHERE (select FND_PROFILE.VALUE('ORA_HRT_PROFILE_DATA_MIGRATED') from DUAL) IS NULL OR (select FND_PROFILE.VALUE('ORA_HRT_PROFILE_DATA_MIGRATED') from DUAL) <> EstablishmentPEO.BUSINESS_GROUP_ID UNION SELECT ContentItemPEO.CONTENT_ITEM_ID AS ESTABLISHMENT_ID, ContentItemPEO.BUSINESS_GROUP_ID, ContentItemPEO.NAME, ContentItemPEO.ITEM_TEXT_1 AS SCHOOL_CODE, ContentItemPEO.ITEM_TEXT_TL_1 AS LOCATION, ContentItemPEO.ITEM_DESCRIPTION AS DESCRIPTION, ContentItemPEO.ITEM_NUMBER_1 AS PARTY_ID, ContentItemPEO.COUNTRY_ID, ContentItemPEO.STATE_PROVINCE_ID, ContentItemPEO.OBJECT_VERSION_NUMBER, ContentItemPEO.CREATED_BY, ContentItemPEO.CREATION_DATE, ContentItemPEO.LAST_UPDATE_DATE, ContentItemPEO.LAST_UPDATED_BY, ContentItemPEO.LAST_UPDATE_LOGIN FROM HRT_CONTENT_ITEMS_VL ContentItemPEO WHERE CONTENT_TYPE_ID = 135 AND (select FND_PROFILE.VALUE('ORA_HRT_PROFILE_DATA_MIGRATED') from DUAL) IS NOT NULL AND (select FND_PROFILE.VALUE('ORA_HRT_PROFILE_DATA_MIGRATED') from DUAL) = ContentItemPEO.BUSINESS_GROUP_ID
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

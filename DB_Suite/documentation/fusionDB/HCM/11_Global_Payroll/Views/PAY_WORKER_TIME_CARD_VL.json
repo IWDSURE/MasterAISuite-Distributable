@@ -1,0 +1,32 @@
+{
+  "name": "PAY_WORKER_TIME_CARD_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payworkertimecardvl-7581.html#payworkertimecardvl-7581",
+  "columns": [
+    "TIME_CARD_INSTANCE_ID",
+    "OBJECT_VERSION_NUMBER",
+    "EFFECTIVE_START_DATE",
+    "EFFECTIVE_END_DATE",
+    "TIME_CARD_ID",
+    "TIME_CARD_SOURCE",
+    "CARD_SEQUENCE",
+    "TIME_CARD_SEQUENCE",
+    "LEGISLATIVE_DATA_GROUP_ID",
+    "GROUP_TYPE",
+    "PAYROLL_TERM_ID",
+    "HR_TERM_ID",
+    "TERM_NUMBER",
+    "PAYROLL_ASSIGNMENT_ID",
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "ASSIGNMENT_NUMBER",
+    "PAYROLL_RELATIONSHIP_ID",
+    "PERIOD_START_DATE",
+    "PERIOD_END_DATE"
+  ],
+  "query": "select pdcc.DIR_CARD_COMP_ID Time_Card_Instance_ID, pdcc.object_version_number, pdcc.effective_start_date effective_start_date, pdcc.effective_end_date effective_end_date, pdcc.CREATOR_ID Time_Card_ID, pdcc.CREATOR_TYPE as TIME_CARD_SOURCE, pdcc.COMPONENT_SEQUENCE as CARD_SEQUENCE, (SELECT pdcc1.COMPONENT_SEQUENCE FROM PAY_DIR_CARD_COMPONENTS_F pdcc1, (SELECT DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID = pdcc.DIR_CARD_COMP_ID) pdcc_t where pdcc1.DIR_CARD_COMP_ID = pdcc_t.DIR_CARD_COMP_ID START WITH pdcc1.PARENT_DIR_CARD_COMP_ID IS NULL CONNECT BY PRIOR pdcc1.DIR_CARD_COMP_ID = pdcc1.PARENT_DIR_CARD_COMP_ID) TIME_CARD_SEQUENCE, rel.LEGISLATIVE_DATA_GROUP_ID, term.group_type, term.relationship_group_id payroll_term_id, term.TERM_ID HR_TERM_ID, term.assignment_number Term_number, assign.relationship_group_id payroll_assignment_id, rel.person_id, assign.ASSIGNMENT_ID ASSIGNMENT_ID, assign.Assignment_number Assignment_number, rel.PAYROLL_RELATIONSHIP_ID, null period_start_date, null period_end_date from PAY_DIR_CARD_COMPONENTS_F pdcc, pay_dir_rep_card_usages_f pdrcu, PAY_PAY_RELATIONSHIPS_DN rel, PAY_REL_GROUPS_DN term, PAY_REL_GROUPS_DN assign, PAY_REL_GROUPS_F assignf where pdcc.DIR_CARD_COMP_ID = pdrcu.DIR_CARD_COMP_ID and pdcc.PARENT_DIR_CARD_COMP_ID is null and pdrcu.relationship_group_id = assign.relationship_group_id and pdcc.CREATOR_TYPE in ('TLFUS','TLXML','TLHDL') and assign.group_type='A' and rel.PAYROLL_RELATIONSHIP_ID = term.PAYROLL_RELATIONSHIP_ID AND term.RELATIONSHIP_GROUP_ID = assign.parent_rel_group_id AND assign.PAYROLL_RELATIONSHIP_ID = rel.PAYROLL_RELATIONSHIP_ID AND assignf.RELATIONSHIP_GROUP_ID = assign.RELATIONSHIP_GROUP_ID AND pdcc.effective_start_date between assignf.effective_start_date and assignf.effective_end_date",
+  "_parsed_at": "2026-06-09T17:28:51"
+}

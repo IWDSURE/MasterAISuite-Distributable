@@ -1,0 +1,38 @@
+# PAY_PAYSLIP_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paypayslipvl-5009.html#paypayslipvl-5009](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paypayslipvl-5009.html#paypayslipvl-5009)
+
+## Columns
+
+- DOCUMENTS_OF_RECORD_ID
+- PAYROLL_RELATIONSHIP_NUMBER
+- AMOUNT
+- CURRENCY_CODE
+- PAYMENT_DATE
+- PAYSLIP_VIEW_DATE
+- PERIOD_START_DATE
+- PERIOD_END_DATE
+- CREATION_DATE
+- REL_ACTION_ID
+- PAYROLL_RELATIONSHIP_ID
+- PERSON_ID
+- ATTACHMENTENTITYNAME
+- STORE_ENABLED
+
+## Query
+
+```sql
+select DOCUMENTS_OF_RECORD_ID, PAYROLL_RELATIONSHIP_NUMBER, AMOUNT, CURRENCY_CODE, NVL(PAYMENT_DATE,PERIOD_START_DATE) AS PAYMENT_DATE, Payslip_View_Date, NVL(PERIOD_START_DATE,SYSDATE) AS PERIOD_START_DATE, NVL(PERIOD_END_DATE,SYSDATE) PERIOD_END_DATE, CREATION_DATE, REL_ACTION_ID, PAYROLL_RELATIONSHIP_ID, PERSON_ID, ('HR_DOCUMENTS_OF_RECORD') AS AttachmentEntityName, store_enabled from ( SELECT hdr.documents_of_record_id , prd.payroll_relationship_id payroll_relationship_id , prd.PAYROLL_RELATIONSHIP_NUMBER, hdr.person_id PERSON_ID , decode(nvl(fnd_profile.value('ORA_PAY_PAYSLIP_DISPLAY_NET_PAY_BALANCE_CURRENCY'),'N'),'N', nvl((select MAX(OPM.CURRENCY_CODE) from PAY_PERSONAL_PAYMENT_METHODS_F ppm , PAY_ORG_PAY_METHODS_F opm where ppm.ORG_PAYMENT_METHOD_ID=opm.ORG_PAYMENT_METHOD_ID and ppm.PAYROLL_RELATIONSHIP_ID=PRD.PAYROLL_RELATIONSHIP_ID AND hdr.issued_date BETWEEN OPM.EFFECTIVE_START_DATE AND OPM.EFFECTIVE_END_DATE),ldg.default_currency_code),ldg.default_currency_code) CURRENCY_CODE, nvl(hdr.issued_date,hdr.dei_information_date2) PAYMENT_DATE, hdr.date_from PERIOD_START_DATE, hdr.date_to PERIOD_END_DATE, hdr.dei_information_number3 AMOUNT, hdr.CREATION_DATE, nvl(hdr.dei_information_date1,hdr.issued_date) as Payslip_View_Date, hdr.related_object_id REL_ACTION_ID, nvl(hdr.DEI_INFORMATION30,'N') store_enabled FROM hr_document_types_vl hdt , hr_documents_of_record hdr , pay_payroll_rel_actions pra , pay_pay_relationships_dn prd, per_legislative_data_groups ldg WHERE hdt.system_document_type = 'GLB_PAYSLIP' AND hdt.category_code = 'PAYROLL' AND hdt.sub_category_code = 'PAYROLL_PAYMENT' AND hdr.document_type_id = hdt.document_type_id and ldg.legislative_data_group_id = prd.legislative_data_group_id AND prd.PERSON_ID = hdr.person_id AND pra.payroll_rel_action_id = hdr.related_object_id AND prd.payroll_relationship_id = pra.payroll_relationship_id union SELECT hdr.documents_of_record_id , hpir.PAYROLL_RELATIONSHIP_ID , pprd.PAYROLL_RELATIONSHIP_NUMBER, hdr.person_id PERSON_ID , decode(nvl(fnd_profile.value('ORA_PAY_PAYSLIP_DISPLAY_NET_PAY_BALANCE_CURRENCY'),'N'),'N', nvl((select MAX(OPM.CURRENCY_CODE) from PAY_PERSONAL_PAYMENT_METHODS_F ppm , PAY_ORG_PAY_METHODS_F opm where ppm.ORG_PAYMENT_METHOD_ID=opm.ORG_PAYMENT_METHOD_ID and ppm.PAYROLL_RELATIONSHIP_ID=hpir.PAYROLL_RELATIONSHIP_ID AND hdr.issued_date BETWEEN OPM.EFFECTIVE_START_DATE AND OPM.EFFECTIVE_END_DATE),ldg.default_currency_code),ldg.default_currency_code) CURRENCY_CODE, nvl(hdr.issued_date,hdr.dei_information_date2) PAYMENT_DATE, hdr.date_from PERIOD_START_DATE, hdr.date_to PERIOD_END_DATE, hpiri.IRI_INFORMATION_NUMBER2 AMOUNT, hdr.CREATION_DATE, nvl(hpiri.IRI_INFORMATION_DATE1,hdr.issued_date) as Payslip_View_Date, hdr.related_object_id, 'Y' store_enabled FROM fusion.hr_document_types_vl hdt , fusion.hr_documents_of_record hdr , fusion.HRY_PI_INBD_RECORDS hpir , fusion.hry_pi_inbd_record_information hpiri, pay_pay_relationships_dn pprd, per_legislative_data_groups ldg WHERE hdt.system_document_type = 'GLB_THIRD_PARTY_PAYSLIP' AND hdt.category_code = 'PAYROLL' AND hdr.document_type_id = hdt.document_type_id and ldg.legislative_data_group_id = pprd.legislative_data_group_id AND hpir.inbd_record_id = hpiri.INBD_RECORD_ID(+) AND hpir.documents_of_record_id(+) = hdr.DOCUMENTS_OF_RECORD_ID and nvl(hpir.record_type,'ORA_HRY_PAYSLIP_DOR') = 'ORA_HRY_PAYSLIP_DOR' and nvl(hpiri.IRI_INFORMATION_CONTEXT,'ORA_HRY_THIRD_PARTY_PAYSLIP') = 'ORA_HRY_THIRD_PARTY_PAYSLIP' and pprd.payroll_relationship_id(+) =hpir.PAYROLL_RELATIONSHIP_ID ) order by PAYMENT_DATE desc, CREATION_DATE desc
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

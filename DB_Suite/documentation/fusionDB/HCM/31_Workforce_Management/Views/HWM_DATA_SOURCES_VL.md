@@ -1,0 +1,38 @@
+# HWM_DATA_SOURCES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmdatasourcesvl-5791.html#hwmdatasourcesvl-5791](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmdatasourcesvl-5791.html#hwmdatasourcesvl-5791)
+
+## Columns
+
+- DATA_SOURCE_ID
+- DATA_SOURCE_CODE
+- EXECUTABLE_CODE
+- DISPLAY_NAME
+- IMPLEMENTATION_TYPE
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- MODULE_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- SGUID
+
+## Query
+
+```sql
+SELECT BASE.DATA_SOURCE_ID, BASE.DATA_SOURCE_CODE, BASE.EXECUTABLE_CODE, TL.DISPLAY_NAME, BASE.IMPLEMENTATION_TYPE, BASE.OBJECT_VERSION_NUMBER, BASE.ENTERPRISE_ID, BASE.MODULE_ID, BASE.CREATED_BY, BASE.CREATION_DATE, BASE.LAST_UPDATED_BY, BASE.LAST_UPDATE_DATE, BASE.LAST_UPDATE_LOGIN, BASE.SGUID FROM HWM_DATA_SOURCES_B BASE, HWM_DATA_SOURCES_TL TL WHERE BASE.DATA_SOURCE_ID = TL.DATA_SOURCE_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

@@ -1,0 +1,310 @@
+{
+  "name": "IRC_INTERACTIONS",
+  "object_type": "TABLE",
+  "description": "This table stores the interaction for a person in the context of a Submission, Candidate Pool and Candidate General Profile.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircinteractions-4284.html#ircinteractions-4284",
+  "primary_keys": [
+    {
+      "name": "IRC_INTERACTIONS_PK",
+      "columns": "INTERACTION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "INTERACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of the table. System generated."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores ID of the person for whom the Interaction note is added"
+    },
+    {
+      "Name": "ADDED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Stores ID of the person creating the interaction"
+    },
+    {
+      "Name": "CONTEXT_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the context. Submission, Pool, General Profile etc. Lookup type is ORA_IRC_INTERACTION_CTXT_TYPE"
+    },
+    {
+      "Name": "CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Stores the ID of the context object ??? Reference to SUBMISSION_ID or POOL_ID or PERSON_ID(In case of General Profile) etc"
+    },
+    {
+      "Name": "SUB_CONTEXT_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "added for tracking LinkedIn InMail session.  Every session will have the same SubContextId so they could be displayed together as interactions."
+    },
+    {
+      "Name": "INTERACTION_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the interaction type. Email, Phone, In Person etc. This is a lookup. Lookup type ORA_IRC_INTERACTION_TYPE"
+    },
+    {
+      "Name": "INTERACTION_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the date when the interaction happened."
+    },
+    {
+      "Name": "TEXT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the text for this interaction."
+    },
+    {
+      "Name": "MASKED_BODY_TEXT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Store the body text without PII data"
+    },
+    {
+      "Name": "HIRING_TEAM_INTR_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flag to indicate whether the current interaction entry was sent to hiring team"
+    },
+    {
+      "Name": "SUBJECT",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the subject for this interaction."
+    },
+    {
+      "Name": "MESSAGE_IDENTIFIER",
+      "Datatype": "VARCHAR2",
+      "Length": "400",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Contains the message identifier for both email and SMS. For email stores the UMS SMTP message id and for SMS stores the id sent by the provider."
+    },
+    {
+      "Name": "MESSAGE_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the status of the message"
+    },
+    {
+      "Name": "CONTENT_LIBRARY_ITEM_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The Recruiting Content Library's DESCRIPTION_CODE that points to the table IRC_DESCRIPTIONS_B."
+    },
+    {
+      "Name": "RESEND_ALLOWED_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Status controls the resend ability of the interaction"
+    },
+    {
+      "Name": "CONTENT_LIBRARY_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Contains the content library item identifier associated to the interaction. Foreign key to the table irc_descriptions_b"
+    },
+    {
+      "Name": "CHANNEL_TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Contains the channel specific template identifier associated to the interaction"
+    },
+    {
+      "Name": "INTERACTION_SUB_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores additional details about the interaction type, such as whether the interaction was initiated by the user or the agent/system."
+    },
+    {
+      "Name": "REFERENCE_INFORMATION",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores additional reference information, such as a candidate's phone number, for the visitor use case."
+    },
+    {
+      "Name": "REFERENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores an additional reference ID, such as a visitor ID, for the visitor use case."
+    },
+    {
+      "Name": "SUB_REFERENCE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores additional sub-reference information, such as an agent conversation id."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_INTERACTIONS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTENT_LIBRARY_ITEM_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, CONTEXT_ID, CONTEXT_TYPE_CODE"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUB_CONTEXT_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTEXT_TYPE_CODE, CONTEXT_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MESSAGE_IDENTIFIER"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INTERACTION_DATE, INTERACTION_TYPE_CODE"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, INTERACTION_TYPE_CODE, INTERACTION_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REFERENCE_INFORMATION, INTERACTION_TYPE_CODE, INTERACTION_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_N8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REFERENCE_ID, INTERACTION_TYPE_CODE, INTERACTION_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_INTERACTIONS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "INTERACTION_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:54:01"
+}

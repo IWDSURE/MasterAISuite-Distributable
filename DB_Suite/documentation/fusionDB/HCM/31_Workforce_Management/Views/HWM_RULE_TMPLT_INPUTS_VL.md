@@ -1,0 +1,44 @@
+# HWM_RULE_TMPLT_INPUTS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmruletmpltinputsvl-3419.html#hwmruletmpltinputsvl-3419](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmruletmpltinputsvl-3419.html#hwmruletmpltinputsvl-3419)
+
+## Columns
+
+- RULE_TMPLT_INPUT_ID
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- RULE_TMPLTS_ID
+- DISPLAY_SEQUENCE
+- INPUT_NAME
+- USER_DEFINED_NAME
+- USER_DEFINED_IN_NAME
+- IN_NAME_DESCRIPTION
+- RULE_PARAMETER_TYPE
+- PARM_VALUE_REQUIRED
+- VALUE_SET_ID
+- LOOKUP_TYPE
+- ROW_SEQUENCE
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- SGUID
+
+## Query
+
+```sql
+SELECT ri.RULE_TMPLT_INPUT_ID, ri.OBJECT_VERSION_NUMBER, ri.ENTERPRISE_ID, ri.RULE_TMPLTS_ID, ri.DISPLAY_SEQUENCE, ri.INPUT_NAME, ri.USER_DEFINED_NAME, rti.USER_DEFINED_IN_NAME, rti.IN_NAME_DESCRIPTION, ri.RULE_PARAMETER_TYPE, ri.PARM_VALUE_REQUIRED, ri.VALUE_SET_ID, ri.LOOKUP_TYPE, ri.ROW_SEQUENCE, ri.CREATED_BY, ri.CREATION_DATE, ri.LAST_UPDATED_BY, ri.LAST_UPDATE_DATE, ri.LAST_UPDATE_LOGIN, ri.SGUID SGUID FROM HWM_RULE_TMPLT_INPUTS ri, HWM_RULE_TMPLT_INPUTS_TL rti WHERE ri.RULE_TMPLT_INPUT_ID = rti.RULE_TMPLT_INPUT_ID AND rti.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

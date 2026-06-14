@@ -1,0 +1,242 @@
+{
+  "name": "IRC_LC_HISTORY",
+  "object_type": "TABLE",
+  "description": "Stores the history tracking data for the process flexibility.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irclchistory-5103.html#irclchistory-5103",
+  "primary_keys": [
+    {
+      "name": "IRC_LC_HISTORY_PK",
+      "columns": "HISTORY_EVENT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "HISTORY_EVENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of the table. System generated."
+    },
+    {
+      "Name": "STEP_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Duration of the step in seconds"
+    },
+    {
+      "Name": "EVENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The identifier of the event type."
+    },
+    {
+      "Name": "SOURCE_OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The unique identifier of associated source object."
+    },
+    {
+      "Name": "SUBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The instance key of associated source object."
+    },
+    {
+      "Name": "EVENT_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date at which the event occurred. Can be different from CREATION_DATE who column value."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the person who triggered the event."
+    },
+    {
+      "Name": "TRACE_LOG",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Lifecycle API internal data for troubleshooting purposes."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The identifier of the lifecycle process for the event."
+    },
+    {
+      "Name": "PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the phase at the time of the event."
+    },
+    {
+      "Name": "STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the state at the time of the event."
+    },
+    {
+      "Name": "ROUTING_STEP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the routing step that triggered the event."
+    },
+    {
+      "Name": "ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the action that triggered the event."
+    },
+    {
+      "Name": "REASON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The identifier of the selected reason for the event update"
+    },
+    {
+      "Name": "COMMENTS",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "User entered comments for the event"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_LC_HISTORY_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "EVENT_TYPE_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESS_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PHASE_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STATE_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_FK6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ROUTING_STEP_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_FK7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_OBJECT_ID, SUBJECT_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_OBJECT_ID, STATE_ID, EVENT_DATE, SUBJECT_ID"
+    },
+    {
+      "Index": "IRC_LC_HISTORY_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "HISTORY_EVENT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:56:06"
+}

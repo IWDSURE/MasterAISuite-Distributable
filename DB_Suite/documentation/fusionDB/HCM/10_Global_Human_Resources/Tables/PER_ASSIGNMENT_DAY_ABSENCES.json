@@ -1,0 +1,202 @@
+{
+  "name": "PER_ASSIGNMENT_DAY_ABSENCES",
+  "object_type": "TABLE",
+  "description": "The effect of an Absence on different Assignments can vary based on the Work Schedule assigned to them. This table stores the calculated Day level Absence breakup details of individual Assignment records that have an impact of the Absence being created.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perassignmentdayabsences-31462.html#perassignmentdayabsences-31462",
+  "primary_keys": [
+    {
+      "name": "PER_ASSIGNMENT_DAY_ABSENCES_PK",
+      "columns": "ASSIGNMENT_DAY_ABSENCE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ASSIGNMENT_DAY_ABSENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "ASG_ABSENCE_RECORDING_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_ASG_ABSENCE_RECORDING table."
+    },
+    {
+      "Name": "ABSENCE_ATTENDANCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_ABSENCE_ATTENDANCES table."
+    },
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_ALL_ASSIGNMENTS_M table."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_PERSONS table. Identifies the person."
+    },
+    {
+      "Name": "ABSENCE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Absence date for which the daily break up information was calculated."
+    },
+    {
+      "Name": "DAY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the day is a working day or a day that is associated with a calendar event that marks it as a non working day."
+    },
+    {
+      "Name": "SCHEDULE_WORK_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Total scheduled work duration for the selected day."
+    },
+    {
+      "Name": "CALENDAR_EVENT_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Total calendar event duration for the selected day."
+    },
+    {
+      "Name": "WORK_SCHEDULE_UNIT",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the work schedule unit."
+    },
+    {
+      "Name": "ABSENCE_DURATION_DAYS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Absence duration value in days."
+    },
+    {
+      "Name": "ABSENCE_DURATION_HOURS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Absence duration value in hours."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_ASSGN_DAY_ABSENCES_F1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ABSENCE_ATTENDANCE_ID"
+    },
+    {
+      "Index": "PER_ASSGN_DAY_ABSENCES_F2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASG_ABSENCE_RECORDING_ID"
+    },
+    {
+      "Index": "PER_ASSGN_DAY_ABSENCES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, ASSIGNMENT_ID"
+    },
+    {
+      "Index": "PER_ASSGN_DAY_ABSENCES_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_DAY_ABSENCE_ID"
+    },
+    {
+      "Index": "PER_ASSIGNMENT_DAY_ABSENCES_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LAST_UPDATE_DATE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:25:15"
+}

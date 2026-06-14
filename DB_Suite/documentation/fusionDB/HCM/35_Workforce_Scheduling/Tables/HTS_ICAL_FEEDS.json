@@ -1,0 +1,208 @@
+{
+  "name": "HTS_ICAL_FEEDS",
+  "object_type": "TABLE",
+  "description": "Stores the employee calendar feed preferences, along with feed security properties, rate limiting settings etc.",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsicalfeeds-30284.html#htsicalfeeds-30284",
+  "primary_keys": [
+    {
+      "name": "HTS_ICAL_FEEDS_PK",
+      "columns": "ICAL_FEED_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ICAL_FEED_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Application-generated primary key"
+    },
+    {
+      "Name": "ACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates if the feed is active"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of the person associated with the feed"
+    },
+    {
+      "Name": "SALT",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Base64-encoded 128-bit randomly generated value used to enhance the security of person id and expiration time"
+    },
+    {
+      "Name": "TOKEN",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "URL encoded security token generated when creating the feed"
+    },
+    {
+      "Name": "EXPIRATION_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Feed or URL expiration time"
+    },
+    {
+      "Name": "RANGE_LEFT_EXTENT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "Number of pastweeks to consider relative to the request instant"
+    },
+    {
+      "Name": "RANGE_RIGHT_EXTENT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "Number of future weeks to consider relative the the request instant"
+    },
+    {
+      "Name": "INCL_SHIFTS_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Boolean indicating if the calendar content contains events corresponding to schedule shifts"
+    },
+    {
+      "Name": "INCL_ABSENCES_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Boolean indicating if the calendar content contains events denoting absences intersecting the datarange"
+    },
+    {
+      "Name": "INCL_PUBLIC_HOLIDAYS_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Boolean indicating if the calendar content contains public holidays"
+    },
+    {
+      "Name": "FIXED_WINDOW_START_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Start time for the current fixed time window"
+    },
+    {
+      "Name": "FIXED_WINDOW_END_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "End time for the current fixed time window"
+    },
+    {
+      "Name": "ACCESS_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "6",
+      "Not-null": "",
+      "Comments": "Counter used to limit access within the fixed window"
+    },
+    {
+      "Name": "LAST_ACCESS_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "When the most recent access to the ical feed was requested"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Enterprise id or Business group id to identify in a multi tenant system"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_ICAL_FEEDS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ICAL_FEED_ID"
+    },
+    {
+      "Index": "HTS_ICAL_FEEDS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, CASE WHEN \"ACTIVE_FLAG\" = 'Y' OR \"ACTIVE_FLAG\" IS NULL THEN 'Y' ELSE TO_CHAR(\"ICAL_FEED_ID\") END"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:22:03"
+}

@@ -1,0 +1,52 @@
+# IRC_JD_REQ_POST_HISTORY
+
+Stores posting history from JD partners for a requisition
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** TABLE
+
+**Tablespace:** Default
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjdreqposthistory-8608.html#ircjdreqposthistory-8608](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjdreqposthistory-8608.html#ircjdreqposthistory-8608)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| IRC_JD_REQ_POST_HISTORY_PK | RESULT_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| RESULT_ID | NUMBER |  | 18 | Yes | Primary key for this table. System generated. |
+| POSTING_ID | NUMBER |  | 18 | Yes | Foreign key to IRC_JD_REQ_POSTINGS |
+| JOB_BOARD_ID | VARCHAR2 | 200 |  |  | Stores identifier for job board to which requisition was posted |
+| JOB_BOARD_NAME | VARCHAR2 | 500 |  | Yes | Stores name of the job board to which requisition was posted |
+| POSTING_START_DATE | DATE |  |  |  | Stores start date of posting in job board |
+| POSTING_END_DATE | DATE |  |  |  | Stores end date of posting in job board |
+| POSTING_STATUS_CODE | VARCHAR2 | 30 |  | Yes | Stores Status of posting in job board. The corresponding lookup type is ORA_IRC_TP_POSTING_STATUS |
+| POSTING_LANG | VARCHAR2 | 200 |  |  | Stores comma delimited list of languages to which job is posted on job board |
+| ERROR_DESC | CLOB |  |  |  | Stores description of error that occured when posting to job board |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| IRC_JD_REQ_POST_HISTORY_FK1 | Non Unique | Default | POSTING_ID |
+| IRC_JD_REQ_POST_HISTORY_PK | Unique | Default | RESULT_ID |
+
+---
+
+[← Back to Index](../22_Recruiting_Tables_Index.md)

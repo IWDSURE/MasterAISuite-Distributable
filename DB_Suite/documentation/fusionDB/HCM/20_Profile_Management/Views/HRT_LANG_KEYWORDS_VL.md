@@ -1,0 +1,38 @@
+# HRT_LANG_KEYWORDS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtlangkeywordsvl-5128.html#hrtlangkeywordsvl-5128](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtlangkeywordsvl-5128.html#hrtlangkeywordsvl-5128)
+
+## Columns
+
+- KEYWORD_ID
+- ENTERPRISE_ID
+- SUGGESTION_ID
+- KEYWORD_CODE
+- SUPPLIER_CODE
+- KEYWORDS
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- STATUS_CODE
+
+## Query
+
+```sql
+SELECT LKB.KEYWORD_ID, LKB.ENTERPRISE_ID, LKB.SUGGESTION_ID, LKB.KEYWORD_CODE, LKB.SUPPLIER_CODE, LKTL.KEYWORDS, LKB.MODULE_ID, LKB.OBJECT_VERSION_NUMBER, LKB.CREATED_BY, LKB.CREATION_DATE, LKB.LAST_UPDATE_DATE, LKB.LAST_UPDATED_BY, LKB.LAST_UPDATE_LOGIN, LKB.STATUS_CODE FROM HRT_LANG_KEYWORDS_B LKB, HRT_LANG_KEYWORDS_TL LKTL WHERE LKB.KEYWORD_ID = LKTL.KEYWORD_ID AND LKB.ENTERPRISE_ID = LKTL.ENTERPRISE_ID AND LKTL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

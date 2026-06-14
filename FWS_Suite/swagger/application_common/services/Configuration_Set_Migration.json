@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Configuration Set Migration",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/fscmUI/applcoreApi/v2/csm/cancel/{csId}": {
+      "post": {
+        "tags": [
+          "Configuration Set Migration"
+        ],
+        "summary": "Cancel migration process",
+        "description": "Cancel migration process.",
+        "operationId": "cancel",
+        "parameters": [
+          {
+            "name": "csId",
+            "in": "path",
+            "description": "Configuration Set ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "MDS File ID (optional).",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MdsFileIdRequestBody"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "202": {
+            "description": "Operation started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not start operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration Set not found.",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "mdsFileId",
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-cancel-{csId}-post",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-cancel-csid-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MdsFileIdRequestBody": {
+        "type": "object",
+        "properties": {
+          "mdsFileId": {
+            "type": "string",
+            "description": "MDS File ID for specific identification when trying to access older configuration sets with same csId as new configuration set."
+          }
+        }
+      },
+      "StandardResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the current operational status."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the current operational state."
+          },
+          "csId": {
+            "type": "string",
+            "description": "The identifier of created Configuration Set."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          },
+          "detailedLog": {
+            "type": "string",
+            "description": "Detailed log of current operation."
+          },
+          "targetPushStatus": {
+            "type": "string",
+            "description": "Status of the configuration set archive being uploaded to target environment."
+          },
+          "csmSandboxId": {
+            "type": "string",
+            "description": "The identifier of the CSM Sandbox created on target environment as part of `Import` operation."
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

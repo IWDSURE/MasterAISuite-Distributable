@@ -1,0 +1,136 @@
+{
+  "name": "HRY_EXT_PARSE_DTLS",
+  "object_type": "TABLE",
+  "description": "Stores the sub xmls after parsing the large xml based on the xml tag.",
+  "schema": "FUSION",
+  "owner": "HRY",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hryextparsedtls-15113.html#hryextparsedtls-15113",
+  "primary_keys": [
+    {
+      "name": "HRY_EXT_PARSE_DTLS_PK",
+      "columns": "PARSE_DETAIL_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PARSE_DETAIL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key for HRY_EXT_PARSE_DETAIL."
+    },
+    {
+      "Name": "OBJ_GRP_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "For storing the object group number that is stored during splitting so thatwhile stitching the xml back, the parent is known."
+    },
+    {
+      "Name": "TRANSFORMATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HRY_ENT_TRANSFORMATION table"
+    },
+    {
+      "Name": "RAW_XML",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For storing the sub raw xmls after parsing"
+    },
+    {
+      "Name": "CHUNK_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "For storing the assigned chunk number needed for multithreading"
+    },
+    {
+      "Name": "ALLOCATION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "200",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For checking if the row is already assigned to a thread. This column will be used for multithreading."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_ENTERPRISES."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRY_EXT_PARSE_DTLS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TRANSFORMATION_ID, CHUNK_NUMBER"
+    },
+    {
+      "Index": "HRY_EXT_PARSE_DTLS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PARSE_DETAIL_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:30:19"
+}

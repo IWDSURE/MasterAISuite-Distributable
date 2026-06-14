@@ -1,0 +1,55 @@
+# HWM_TE_ALT_NAMES
+
+This table holds information relating to the workforce management alternate name definition.  In particular, it identifies the time attribute field set to use with the alternate name.
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** TABLE
+
+**Tablespace:** REFERENCE
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtealtnames-16387.html#hwmtealtnames-16387](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtealtnames-16387.html#hwmtealtnames-16387)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| HWM_TE_ALT_NAMES_PK | TE_ALT_NAME_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| TE_ALT_NAME_ID | NUMBER |  | 18 | Yes | TE_ALT_NAME_ID |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| TM_ATRB_FLD_SET_ID | NUMBER |  | 18 |  | TM_ATRB_FLD_SET_ID |
+| NAME | VARCHAR2 | 64 |  |  | NAME |
+| DESCRIPTION | VARCHAR2 | 240 |  |  | DESCRIPTION |
+| ENTERPRISE_ID | NUMBER |  | 18 | Yes | ENTERPRISE_ID |
+| MODULE_ID | VARCHAR2 | 32 |  |  | Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data. |
+| VALUE_SET_ID | NUMBER |  | 18 |  | VALUE_SET_ID |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| SGUID | VARCHAR2 | 32 |  |  | The seed global unique identifier. Oracle internal use only. |
+| SEED_DATA_SOURCE | VARCHAR2 | 512 |  |  | Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file. |
+| ORA_SEED_SET1 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N. |
+| ORA_SEED_SET2 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| HWM_TE_ALT_NAMES_N20 | Non Unique | Default | SGUID |
+| HWM_TE_ALT_NAMES_U1 | Unique | Default | TE_ALT_NAME_ID, ORA_SEED_SET1 |
+| HWM_TE_ALT_NAMES_U11 | Unique | Default | TE_ALT_NAME_ID, ORA_SEED_SET2 |
+
+---
+
+[← Back to Index](../31_Workforce_Management_Tables_Index.md)

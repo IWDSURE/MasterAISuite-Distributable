@@ -1,0 +1,1727 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Source Tracking",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUISourceTrackings/{SourceTrackingId}": {
+      "get": {
+        "tags": [
+          "Source Tracking"
+        ],
+        "summary": "Get a source",
+        "operationId": "get_recruitingUISourceTrackings",
+        "parameters": [
+          {
+            "name": "SourceTrackingId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Source tracking identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUISourceTrackings-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUISourceTrackings-{SourceTrackingId}-get",
+        "x-filename-id": "recruitinguisourcetrackings-sourcetrackingid-get"
+      },
+      "patch": {
+        "tags": [
+          "Source Tracking"
+        ],
+        "summary": "Update a source",
+        "operationId": "update_recruitingUISourceTrackings",
+        "parameters": [
+          {
+            "name": "SourceTrackingId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Source tracking identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUISourceTrackings-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUISourceTrackings-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUISourceTrackings-{SourceTrackingId}-patch",
+        "x-filename-id": "recruitinguisourcetrackings-sourcetrackingid-patch"
+      }
+    },
+    "/recruitingUISourceTrackings/action/getDaSourceNames": {
+      "post": {
+        "tags": [
+          "Source Tracking"
+        ],
+        "summary": "Get source name for the Direct Apply partner",
+        "description": "Gets the source name for the Direct Apply partner",
+        "operationId": "doall_getDaSourceNames_recruitingUISourceTrackings",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Response containing the source name configured for the Direct Apply partner.",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Response containing the source name configured for the Direct Apply partner.",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUISourceTrackings-action-getDaSourceNames-post",
+        "x-filename-id": "recruitinguisourcetrackings-action-getdasourcenames-post"
+      }
+    },
+    "/recruitingUISourceTrackings": {
+      "get": {
+        "tags": [
+          "Source Tracking"
+        ],
+        "summary": "Get all sources",
+        "operationId": "getall_recruitingUISourceTrackings",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AgencyName; string; Agency name.</li><li>AgentFirstName; string; Agent first name.</li><li>AgentLastName; string; Agent last name.</li><li>AssetName; string; Asset name.</li><li>CampaignCode; string; Campaign code.</li><li>CampaignName; string; Campaign name.</li><li>CampaignPostId; integer; Campaign post identifier.</li><li>CandidateNumber; string; Candidate number.</li><li>Context; string; Context.</li><li>ContextId; integer; Context identifier.</li><li>CustomSourceName; string; Custom source name.</li><li>DimensionId; integer; Dimension identifier.</li><li>EventId; integer; Event identifier.</li><li>EventName; string; Event name.</li><li>FromEventId; integer; From event identifier.</li><li>FromPoolId; integer; From pool identifier.</li><li>FromRequisitionId; integer; From requisition identifier.</li><li>IsExtensibleSource; string; Extensible source indicator.</li><li>IsRecordEditable; string; Editable record indicator.</li><li>OrigSourceMedium; string; Original source medium.</li><li>OrigSourceName; string; Original source name.</li><li>PersonId; integer; Person identifier</li><li>PoolId; integer; Pool identifier.</li><li>PoolMemberId; integer; Pool member identifier.</li><li>PoolName; string; Pool name.</li><li>ProspectId; integer; Prospect identifier.</li><li>RecruiterId; integer; Recruiter identifier.</li><li>RecruiterName; string; Recruiter name.</li><li>ReferrerId; integer; Referrer identifier.</li><li>ReferrerName; string; Referrer name.</li><li>RequisitionId; integer; Requisition identifier.</li><li>RequisitionTitle; string; Requisition title.</li><li>SharerId; integer; Sharer identifier.</li><li>SharerName; string; Sharer name.</li><li>SiteCode; string; Site code.</li><li>SiteName; string; Site name.</li><li>SiteNumber; string; Site number.</li><li>SourceDisplayName; string; Source display name.</li><li>SourceLevel; string; Source level.</li><li>SourceMedium; string; Source medium.</li><li>SourceMediumDisplayValue; string; Source medium display value.</li><li>SourceMediumURLValue; string; Source medium URL value.</li><li>SourceName; string; Source name.</li><li>SourceNameExistInDAFlag; boolean; Attribute to validate if the source name matches the Direct Apply partner configuration.</li><li>SourceTrackingId; integer; Source tracking identifier.</li><li>SourceURLValue; string; Source URL value.</li><li>SubmissionId; integer; Submission identifier.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all sources by a unique identifier. <br>Finder Variables <ul><li>SourceTrackingId; integer;  Source tracking ID and unique identifier used to find sources. </li></ul></li><li>findBySourceInfo Finds all sources by source info. <br>Finder Variables <ul><li>CandidateNumber; string;  Candidate number and source info used to find sources. </li><li>Context; string;  Context; string;  and source info used to find sources. </li><li>ContextId; integer;  Context; string;  identifier and source info used to find sources. </li><li>PersonId; integer;  Person ID and source info used to find sources. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all sources by a unique identifier.",
+                "properties": {
+                  "SourceTrackingId": {
+                    "nullable": true,
+                    "description": "Source tracking ID and unique identifier used to find sources.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findBySourceInfo",
+                "description": "Finds all sources by source info.",
+                "title": "findSourceTrackingInfo",
+                "properties": {
+                  "Context": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Context and source info used to find sources.",
+                    "type": "string"
+                  },
+                  "CandidateNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Candidate number and source info used to find sources.",
+                    "type": "string"
+                  },
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Person ID and source info used to find sources.",
+                    "type": "integer"
+                  },
+                  "ContextId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Context identifier and source info used to find sources.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUISourceTrackings"
+                }
+              }
+            },
+            "links": {
+              "getDaSourceNames": {
+                "operationRef": "#/paths/~1recruitingUISourceTrackings~1action~1getDaSourceNames/post",
+                "description": "Gets the source name for the Direct Apply partner"
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUISourceTrackings-get",
+        "x-filename-id": "recruitinguisourcetrackings-get"
+      },
+      "post": {
+        "tags": [
+          "Source Tracking"
+        ],
+        "summary": "Create a source",
+        "operationId": "create_recruitingUISourceTrackings",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUISourceTrackings-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUISourceTrackings-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUISourceTrackings-post",
+        "x-filename-id": "recruitinguisourcetrackings-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUISourceTrackings-item-response": {
+        "type": "object",
+        "properties": {
+          "AgencyName": {
+            "title": "Agency Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agency name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AgentFirstName": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Agent first name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AgentLastName": {
+            "title": "Agent",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agent last name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AssetName": {
+            "title": "Post",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Asset name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CampaignCode": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign code.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CampaignName": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CampaignPostId": {
+            "title": "Post",
+            "type": "integer",
+            "description": "Campaign post identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "type": "string",
+            "description": "Candidate number.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Context": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Context.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextId": {
+            "type": "integer",
+            "description": "Context identifier.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CustomSourceName": {
+            "title": "Add or Create a Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Custom source name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DimensionId": {
+            "type": "integer",
+            "description": "Dimension identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Event identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventName": {
+            "title": "Event",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FromEventId": {
+            "title": "Event",
+            "type": "integer",
+            "description": "From event identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FromPoolId": {
+            "title": "Candidate Pool",
+            "type": "integer",
+            "description": "From pool identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FromRequisitionId": {
+            "title": "Job Requisition",
+            "type": "integer",
+            "description": "From requisition identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IsExtensibleSource": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extensible source indicator.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IsRecordEditable": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Editable record indicator.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OrigSourceMedium": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source medium.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OrigSourceName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person identifier",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PoolId": {
+            "type": "integer",
+            "description": "Pool identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PoolMemberId": {
+            "type": "integer",
+            "description": "Pool member identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PoolName": {
+            "title": "Candidate Pool",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Pool name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProspectId": {
+            "type": "integer",
+            "description": "Prospect identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RecruiterId": {
+            "title": "Added By",
+            "type": "integer",
+            "description": "Recruiter identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RecruiterName": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Recruiter name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReferrerId": {
+            "type": "integer",
+            "description": "Referrer identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReferrerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Referrer name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequisitionTitle": {
+            "title": "Job Requisition",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Requisition title.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SharerId": {
+            "type": "integer",
+            "description": "Sharer identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SharerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Sharer name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SiteCode": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site code.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SiteName": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SiteNumber": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site number.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceDisplayName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source display name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceLevel": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source level.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SourceMedium": {
+            "title": "Source Medium",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceMediumDisplayValue": {
+            "title": "Source Medium",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium display value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SourceMediumURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium URL value.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceNameExistInDAFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Attribute to validate if the source name matches the Direct Apply partner configuration.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceTrackingId": {
+            "type": "integer",
+            "description": "Source tracking identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source URL value.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingUISourceTrackings-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AgencyName": {
+            "title": "Agency Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agency name.",
+            "nullable": true
+          },
+          "AgentFirstName": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Agent first name.",
+            "nullable": true
+          },
+          "AgentLastName": {
+            "title": "Agent",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agent last name.",
+            "nullable": true
+          },
+          "AssetName": {
+            "title": "Post",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Asset name.",
+            "nullable": true
+          },
+          "CampaignCode": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign code.",
+            "nullable": true
+          },
+          "CampaignName": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign name.",
+            "nullable": true
+          },
+          "CampaignPostId": {
+            "title": "Post",
+            "type": "integer",
+            "description": "Campaign post identifier.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "type": "string",
+            "description": "Candidate number.",
+            "nullable": true
+          },
+          "Context": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Context.",
+            "nullable": true
+          },
+          "CustomSourceName": {
+            "title": "Add or Create a Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Custom source name.",
+            "nullable": true
+          },
+          "DimensionId": {
+            "type": "integer",
+            "description": "Dimension identifier.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Event identifier.",
+            "nullable": true
+          },
+          "EventName": {
+            "title": "Event",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event name.",
+            "nullable": true
+          },
+          "FromEventId": {
+            "title": "Event",
+            "type": "integer",
+            "description": "From event identifier.",
+            "nullable": true
+          },
+          "FromPoolId": {
+            "title": "Candidate Pool",
+            "type": "integer",
+            "description": "From pool identifier.",
+            "nullable": true
+          },
+          "FromRequisitionId": {
+            "title": "Job Requisition",
+            "type": "integer",
+            "description": "From requisition identifier.",
+            "nullable": true
+          },
+          "IsExtensibleSource": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extensible source indicator.",
+            "nullable": true
+          },
+          "IsRecordEditable": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Editable record indicator.",
+            "nullable": true
+          },
+          "OrigSourceMedium": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source medium.",
+            "nullable": true
+          },
+          "OrigSourceName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source name.",
+            "nullable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person identifier",
+            "nullable": true
+          },
+          "PoolId": {
+            "type": "integer",
+            "description": "Pool identifier.",
+            "nullable": true
+          },
+          "PoolMemberId": {
+            "type": "integer",
+            "description": "Pool member identifier.",
+            "nullable": true
+          },
+          "PoolName": {
+            "title": "Candidate Pool",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Pool name.",
+            "nullable": true
+          },
+          "ProspectId": {
+            "type": "integer",
+            "description": "Prospect identifier.",
+            "nullable": true
+          },
+          "RecruiterId": {
+            "title": "Added By",
+            "type": "integer",
+            "description": "Recruiter identifier.",
+            "nullable": true
+          },
+          "RecruiterName": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Recruiter name.",
+            "nullable": true
+          },
+          "ReferrerId": {
+            "type": "integer",
+            "description": "Referrer identifier.",
+            "nullable": true
+          },
+          "ReferrerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Referrer name.",
+            "nullable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition identifier.",
+            "nullable": true
+          },
+          "RequisitionTitle": {
+            "title": "Job Requisition",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Requisition title.",
+            "nullable": true
+          },
+          "SharerId": {
+            "type": "integer",
+            "description": "Sharer identifier.",
+            "nullable": true
+          },
+          "SharerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Sharer name.",
+            "nullable": true
+          },
+          "SiteCode": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site code.",
+            "nullable": true
+          },
+          "SiteName": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site name.",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site number.",
+            "nullable": true
+          },
+          "SourceDisplayName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source display name.",
+            "nullable": true
+          },
+          "SourceMedium": {
+            "title": "Source Medium",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium.",
+            "nullable": true
+          },
+          "SourceMediumURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium URL value.",
+            "nullable": true
+          },
+          "SourceName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source name.",
+            "nullable": true
+          },
+          "SourceNameExistInDAFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Attribute to validate if the source name matches the Direct Apply partner configuration.",
+            "nullable": true
+          },
+          "SourceTrackingId": {
+            "type": "integer",
+            "description": "Source tracking identifier.",
+            "nullable": true
+          },
+          "SourceURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source URL value.",
+            "nullable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission identifier.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUISourceTrackings": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUISourceTrackings-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingUISourceTrackings-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AgencyName": {
+            "title": "Agency Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agency name.",
+            "nullable": true
+          },
+          "AgentFirstName": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Agent first name.",
+            "nullable": true
+          },
+          "AgentLastName": {
+            "title": "Agent",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Agent last name.",
+            "nullable": true
+          },
+          "AssetName": {
+            "title": "Post",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Asset name.",
+            "nullable": true
+          },
+          "CampaignCode": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign code.",
+            "nullable": true
+          },
+          "CampaignName": {
+            "title": "Campaign",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Campaign name.",
+            "nullable": true
+          },
+          "CampaignPostId": {
+            "title": "Post",
+            "type": "integer",
+            "description": "Campaign post identifier.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "type": "string",
+            "description": "Candidate number.",
+            "nullable": true
+          },
+          "Context": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Context.",
+            "nullable": true
+          },
+          "CustomSourceName": {
+            "title": "Add or Create a Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Custom source name.",
+            "nullable": true
+          },
+          "DimensionId": {
+            "type": "integer",
+            "description": "Dimension identifier.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Event identifier.",
+            "nullable": true
+          },
+          "EventName": {
+            "title": "Event",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event name.",
+            "nullable": true
+          },
+          "FromEventId": {
+            "title": "Event",
+            "type": "integer",
+            "description": "From event identifier.",
+            "nullable": true
+          },
+          "FromPoolId": {
+            "title": "Candidate Pool",
+            "type": "integer",
+            "description": "From pool identifier.",
+            "nullable": true
+          },
+          "FromRequisitionId": {
+            "title": "Job Requisition",
+            "type": "integer",
+            "description": "From requisition identifier.",
+            "nullable": true
+          },
+          "IsExtensibleSource": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extensible source indicator.",
+            "nullable": true
+          },
+          "IsRecordEditable": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Editable record indicator.",
+            "nullable": true
+          },
+          "OrigSourceMedium": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source medium.",
+            "nullable": true
+          },
+          "OrigSourceName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Original source name.",
+            "nullable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person identifier",
+            "nullable": true
+          },
+          "PoolId": {
+            "type": "integer",
+            "description": "Pool identifier.",
+            "nullable": true
+          },
+          "PoolMemberId": {
+            "type": "integer",
+            "description": "Pool member identifier.",
+            "nullable": true
+          },
+          "PoolName": {
+            "title": "Candidate Pool",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Pool name.",
+            "nullable": true
+          },
+          "ProspectId": {
+            "type": "integer",
+            "description": "Prospect identifier.",
+            "nullable": true
+          },
+          "RecruiterId": {
+            "title": "Added By",
+            "type": "integer",
+            "description": "Recruiter identifier.",
+            "nullable": true
+          },
+          "RecruiterName": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Recruiter name.",
+            "nullable": true
+          },
+          "ReferrerId": {
+            "type": "integer",
+            "description": "Referrer identifier.",
+            "nullable": true
+          },
+          "ReferrerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Referrer name.",
+            "nullable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition identifier.",
+            "nullable": true
+          },
+          "RequisitionTitle": {
+            "title": "Job Requisition",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Requisition title.",
+            "nullable": true
+          },
+          "SharerId": {
+            "type": "integer",
+            "description": "Sharer identifier.",
+            "nullable": true
+          },
+          "SharerName": {
+            "title": "Referred By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Sharer name.",
+            "nullable": true
+          },
+          "SiteCode": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site code.",
+            "nullable": true
+          },
+          "SiteName": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site name.",
+            "nullable": true
+          },
+          "SiteNumber": {
+            "title": "Career Site",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site number.",
+            "nullable": true
+          },
+          "SourceDisplayName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source display name.",
+            "nullable": true
+          },
+          "SourceMedium": {
+            "title": "Source Medium",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium.",
+            "nullable": true
+          },
+          "SourceMediumURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source medium URL value.",
+            "nullable": true
+          },
+          "SourceName": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source name.",
+            "nullable": true
+          },
+          "SourceNameExistInDAFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Attribute to validate if the source name matches the Direct Apply partner configuration.",
+            "nullable": true
+          },
+          "SourceTrackingId": {
+            "type": "integer",
+            "description": "Source tracking identifier.",
+            "nullable": true
+          },
+          "SourceURLValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source URL value.",
+            "nullable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission identifier.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingUISourceTrackings-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUISourceTrackings-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingUISourceTrackings-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUISourceTrackings-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

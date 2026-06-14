@@ -1,0 +1,79 @@
+# HRC_DL_DATASET_SUMMARY
+
+Table to save the dataset summary information when purge program is run.
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRC
+
+**Object type:** TABLE
+
+**Tablespace:** Default
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcdldatasetsummary-13347.html#hrcdldatasetsummary-13347](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcdldatasetsummary-13347.html#hrcdldatasetsummary-13347)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| HRC_DL_DATASET_SUMMARY_PK | DATA_SET_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| DATA_SET_ID | NUMBER |  | 18 | Yes | DATA_SET_ID |
+| UCM_CONTENT_ID | VARCHAR2 | 30 |  | Yes | UCM_CONTENT_ID |
+| DATA_SET_NAME | VARCHAR2 | 200 |  | Yes | DATA_SET_NAME |
+| SUBMITTED_BY | VARCHAR2 | 64 |  | Yes | SUBMITTED_BY |
+| DS_CREATION_DATE | TIMESTAMP |  |  |  | DS_CREATION_DATE |
+| DS_LAST_UPDATE_DATE | TIMESTAMP |  |  |  | DS_LAST_UPDATE_DATE |
+| SOURCE_TYPE | VARCHAR2 | 30 |  | Yes | SOURCE_TYPE |
+| TRANSFER_STATUS | VARCHAR2 | 30 |  | Yes | TRANSFER_STATUS |
+| IMPORTED_STATUS | VARCHAR2 | 30 |  | Yes | IMPORTED_STATUS |
+| LOADED_STATUS | VARCHAR2 | 30 |  | Yes | LOADED_STATUS |
+| IMPORT_LINES_SUCCESS_COUNT | NUMBER |  | 9 | Yes | IMPORT_LINES_SUCCESS_COUNT |
+| IMPORT_LINES_ERROR_COUNT | NUMBER |  | 9 | Yes | IMPORT_LINES_ERROR_COUNT |
+| IMPORT_LINES_TOTAL_COUNT | NUMBER |  | 9 | Yes | IMPORT_LINES_TOTAL_COUNT |
+| IMPORT_SUCCESS_COUNT | NUMBER |  | 9 | Yes | IMPORT_SUCCESS_COUNT |
+| IMPORT_ERROR_COUNT | NUMBER |  | 9 | Yes | IMPORT_ERROR_COUNT |
+| UNPROCESSED_COUNT | NUMBER |  | 9 | Yes | UNPROCESSED_COUNT |
+| VALIDATED_COUNT | NUMBER |  | 9 | Yes | VALIDATED_COUNT |
+| LOADED_COUNT | NUMBER |  | 9 | Yes | LOADED_COUNT |
+| ERROR_COUNT | NUMBER |  | 9 | Yes | ERROR_COUNT |
+| REQUEST_ID | NUMBER |  | 18 |  | Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row. |
+| INTEGRATION_TYPE | VARCHAR2 | 30 |  |  | INTEGRATION_TYPE |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| ENTERPRISE_ID | NUMBER |  | 18 | Yes | ENTERPRISE_ID |
+| PURGED_BY | VARCHAR2 | 64 |  |  | Purged By column indicates the user who purged the data set. |
+| PURGED_DATE | TIMESTAMP |  |  |  | Purged Date column indicates when the user has purged the data set. |
+| PURGED_BY_REQUEST_ID | NUMBER |  | 18 |  | Purged by request ID column indicates the request through which user purged the data set. |
+| HSDL_PURGE_REQUEST_ID | NUMBER |  | 18 |  | Hsdl purge request ID column indicates the request through which user purged the hsdl data set. |
+| CORRECTED_COUNT | NUMBER |  | 9 | Yes | CORRECTED_COUNT |
+| ROLLBACK_ERROR_COUNT | NUMBER |  | 9 | Yes | ROLLBACK_ERROR_COUNT |
+| PROTECTED_FLAG | VARCHAR2 | 5 |  |  | This flag is used to indicate whether the data set is protected or not. |
+| LOAD_CATEGORY | VARCHAR2 | 200 |  |  | This denotes the process from which load job is invoked |
+| LOAD_SUB_CATEGORY | VARCHAR2 | 200 |  |  | This denotes the ess job from which load job is invoked as child |
+| ZIP_FILE_SIZE | NUMBER |  | 18 |  | This denotes the total zip file size in bytes |
+| BLOB_FILES_SIZE | NUMBER |  | 18 |  | This denotes the total blob files size in bytes |
+| CLOB_FILES_SIZE | NUMBER |  | 18 |  | This denotes the total clob files size in bytes |
+| MSG_COUNT | NUMBER |  | 9 |  | This denotes the data set messages count. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| HRC_DL_DATASET_SUMMARY_N1 | Non Unique | Default | DATA_SET_NAME |
+| HRC_DL_DATASET_SUMMARY_N2 | Non Unique | Default | UCM_CONTENT_ID |
+| HRC_DL_DATASET_SUMMARY_U1 | Unique | Default | DATA_SET_ID |
+
+---
+
+[← Back to Index](../14_HCM_Common_Tables_Index.md)

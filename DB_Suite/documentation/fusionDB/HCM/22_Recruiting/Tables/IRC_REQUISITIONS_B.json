@@ -1,0 +1,1568 @@
+{
+  "name": "IRC_REQUISITIONS_B",
+  "object_type": "TABLE",
+  "description": "Base table for Requisition details.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircrequisitionsb-10898.html#ircrequisitionsb-10898",
+  "primary_keys": [
+    {
+      "name": "IRC_REQUISITIONS_B_PK",
+      "columns": "REQUISITION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table. System generated."
+    },
+    {
+      "Name": "APPROVED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Approved date of the requisition"
+    },
+    {
+      "Name": "INT_FIRST_POSTED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "First Internal Posted Date of Requisition"
+    },
+    {
+      "Name": "FILLED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the date at which Job Requisition is Filled"
+    },
+    {
+      "Name": "SUSPENDED_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Suspended duration of the requisition in seconds"
+    },
+    {
+      "Name": "EXT_FIRST_POSTED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "First External Posted Date of Requisition"
+    },
+    {
+      "Name": "REQ_SOURCE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the source type of the Requisition."
+    },
+    {
+      "Name": "OBJECT_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the status of the Object as a lookup code. The corresponding lookup type is ORA_IRC_OBJECT_STATUS."
+    },
+    {
+      "Name": "REQUISITION_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Unique readable number for the Requistion."
+    },
+    {
+      "Name": "REQ_USAGE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Whether this instance is an actual Requisition or a Requisition Template. Stores the Requisition usage type as a lookup code. The corresponding lookup type is ORA_IRC_REQUISITION_USAGE."
+    },
+    {
+      "Name": "RECRUITING_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the type of Recruiting as a lookup code. The corresponding lookup type is ORA_IRC_RECRUITING_TYPE. This colums accept NULL values."
+    },
+    {
+      "Name": "CURRENT_PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_PHASES_B table."
+    },
+    {
+      "Name": "CURRENT_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_STATES_B table."
+    },
+    {
+      "Name": "PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to process table IRC_PROCESS_B : store the PROCESS_ID use to track the lifecycle of this Requisition."
+    },
+    {
+      "Name": "PROCESS_TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to process table IRC_PROCESS_B : store the initial PROCESS_ID from which the proper PROCESS_ID of this requisition is an instance."
+    },
+    {
+      "Name": "HIRING_MANAGER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the PERSON_ID of the hiring manager for this Requisition. Foreign key to PER_PERSONS table."
+    },
+    {
+      "Name": "MANAGER_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ASSIGNMENT_ID of the hiring manager's assignment for this Requisition. Foreign key to PER_ALL_ASSIGNMENTS_M table."
+    },
+    {
+      "Name": "RECRUITER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_PERSONS table."
+    },
+    {
+      "Name": "RECRUITER_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ASSIGNMENT_ID of the recruiter's assignment for this Requisition. Foreign key to PER_ALL_ASSIGNMENTS_M table."
+    },
+    {
+      "Name": "REQUISITION_TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the template associated to the requisition. Foreign key to IRC_REQUISITIONS_B table."
+    },
+    {
+      "Name": "MANAGER_LEVEL",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the manager level as a lookup code. The corresponding lookup type is MANAGER_LEVEL."
+    },
+    {
+      "Name": "FULL_PART_TIME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the opening is for a full or part time job, as a lookup code. The corresponding lookup type is FULL_PART_TIME."
+    },
+    {
+      "Name": "WORKER_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the worker type as a lookup code. The corresponding lookup type is PER_PERIOD_TYPE."
+    },
+    {
+      "Name": "WORK_START_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Work start date of the job requisition."
+    },
+    {
+      "Name": "WORK_END_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Work end date of the job requisition."
+    },
+    {
+      "Name": "JOB_SHIFT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the job shift for this Requisition as a lookup code. The corresponding lookup type is ORA_IRC_JOB_SHIFT."
+    },
+    {
+      "Name": "JOB_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the job type for this Requisition as a lookup code. The corresponding lookup type is ORA_IRC_JOB_TYPE."
+    },
+    {
+      "Name": "STUDY_LEVEL_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the study level for this Requisition as a lookup code. The corresponding lookup type is HRT_EDUCATION_LEVEL."
+    },
+    {
+      "Name": "INT_EMPLOYER_DESC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the internal employer description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "EXT_EMPLOYER_DESC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the external employer description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "INT_ORGANIZATION_DESC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the internal organization description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "EXT_ORGANIZATION_DESC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the external organization description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "JOB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_JOBS_F table."
+    },
+    {
+      "Name": "BUSINESS_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS_F table."
+    },
+    {
+      "Name": "JOB_FAMILY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_JOB_FAMILY_F"
+    },
+    {
+      "Name": "JOB_FUNCTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the job function code for this Requisition as a lookup code. The corresponding lookup type is JOB_FUNCTION_CODE."
+    },
+    {
+      "Name": "GEOGRAPHY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HZ_GEOGRAPHIES table."
+    },
+    {
+      "Name": "GEOGRAPHY_NODE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_GEO_HIER_NODES table."
+    },
+    {
+      "Name": "LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the primary work location of the requisition. Foreign key to PER_LOCATIONS."
+    },
+    {
+      "Name": "ORGANIZATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS_F table."
+    },
+    {
+      "Name": "LEGAL_EMPLOYER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS_F table."
+    },
+    {
+      "Name": "GRADE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_GRADES_F table."
+    },
+    {
+      "Name": "DEPARTMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS_F table."
+    },
+    {
+      "Name": "JUSTIFICATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Justification for this Requisition as a lookup code. The corresponding lookup type is ORA_IRC_REQ_JUSTIFICATION."
+    },
+    {
+      "Name": "REGULAR_TEMPORARY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the opening is for a regular or temporary job, as a lookup code. The corresponding lookup type is REGULAR_TEMPORARY."
+    },
+    {
+      "Name": "NUMBER_TO_HIRE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Stores the number of people to hire for this Requisition."
+    },
+    {
+      "Name": "UNLIMITED_HIRE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether this Requisition can hire unlimited number of people."
+    },
+    {
+      "Name": "HOT_JOB_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores whether this Requisition should be considerate as a Hot Job or not"
+    },
+    {
+      "Name": "WORKPLACE_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Workplace type value for this Requisition, as a lookup code.The corresponding lookup type is ORA_IRC_WORKPLACE_TYPE."
+    },
+    {
+      "Name": "EXT_CONTACT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the External Contact name"
+    },
+    {
+      "Name": "EXT_CONTACT_EMAIL",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the External Contact email"
+    },
+    {
+      "Name": "INT_CONTACT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Internal contact name"
+    },
+    {
+      "Name": "INT_CONTACT_EMAIL",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Internal contact email"
+    },
+    {
+      "Name": "INT_PUBLISH_JOB_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Internal published job status"
+    },
+    {
+      "Name": "INT_PUBLISH_JOB_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Internal published job start date."
+    },
+    {
+      "Name": "INT_PUBLISH_JOB_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Internal published job end date."
+    },
+    {
+      "Name": "EXT_PUBLISH_JOB_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the external published job status"
+    },
+    {
+      "Name": "EXT_PUBLISH_JOB_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "External published job start date"
+    },
+    {
+      "Name": "EXT_PUBLISH_JOB_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "External published job end date"
+    },
+    {
+      "Name": "BUDGET_CURRENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the currency code for the budget for this Requisition. Foreign key to FND_CURRENCIES table."
+    },
+    {
+      "Name": "SOURCING_BUDGET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the sourcing budget for this Requisition."
+    },
+    {
+      "Name": "TRAVEL_BUDGET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the travel budget for this Requisition."
+    },
+    {
+      "Name": "RELOCATION_BUDGET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the relocation budget allocated for this Requisition."
+    },
+    {
+      "Name": "EMPLOYEE_REFERRAL_BONUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the amount for employee referral bonus."
+    },
+    {
+      "Name": "MIN_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the minimum salary for this Requisition."
+    },
+    {
+      "Name": "MAX_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the maximum salary for this Requisition."
+    },
+    {
+      "Name": "SALARY_FREQUENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the salary frequency as a lookup code. The corresponding lookup type is CMP_SALARY_BASIS."
+    },
+    {
+      "Name": "SALARY_CURRENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the salary currency information. Foreign key to FND_CURRENCIES table."
+    },
+    {
+      "Name": "SALARY_PERIOD_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the salary period as a lookup code. The corresponding lookup type is ORA_IRC_SALARY_PERIOD. This colums accept NULL values."
+    },
+    {
+      "Name": "PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the corresponding job profile ID. Foreign key to HRT_PROFILES_B table."
+    },
+    {
+      "Name": "DISPLAY_IN_ORG_CHART_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the requisition should appear in the Org Chart or not."
+    },
+    {
+      "Name": "SYNC_JOB_VALUES_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Store the boolean to indicate if, for a particular template, the values from \"Job\" object should always be synched with template"
+    },
+    {
+      "Name": "COMMENTS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores comments about this requisition."
+    },
+    {
+      "Name": "REQ_LAST_MODIFIED_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the last modified date of the Requisition. It should be considered the equivalent of last update."
+    },
+    {
+      "Name": "HIRED_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Stores the number of candidates hired on this Requisition."
+    },
+    {
+      "Name": "SUBS_PROCESS_TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the process template that submissions on this requisition will follow."
+    },
+    {
+      "Name": "EXTERNAL_APPLY_FLOW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Apply Flow used for external candidates applying on this requisition. Foreign key to IRC_APPLY_FLOWS_B table."
+    },
+    {
+      "Name": "PIPELINE_REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the pipeline requisition the hiring requisition was created from Foreign key to IRC_REQUISITIONS_B"
+    },
+    {
+      "Name": "PIPELINE_REQUISITION_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the requisition is a pipeline requisition"
+    },
+    {
+      "Name": "APPLY_WHEN_NOT_POSTED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the candidate can apply on a requisition when not posted."
+    },
+    {
+      "Name": "POSITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the corresponding position ID. Foreign key to HR_ALL_POSITIONS_F table."
+    },
+    {
+      "Name": "AUTOMATIC_FILL_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the requisition can be auto-filled."
+    },
+    {
+      "Name": "EXTERNAL_DESCRIPTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the external description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "INTERNAL_DESCRIPTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the internal description of the Requisition. Foreign key to IRC_DESCRIPTIONS_B table."
+    },
+    {
+      "Name": "REQ_USAGE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Whether this instance is an actual Stand Alone, Job Based or Position Based requisition template. Stores the Requisition usage type as a lookup code. The corresponding lookup type is ORA_IRC_REQUISITION_USAGE_TYPE."
+    },
+    {
+      "Name": "OPEN_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the date at which the job requisition was changed to Open phase."
+    },
+    {
+      "Name": "AUTO_OPEN_REQUISITION",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the requisition can be auto posted."
+    },
+    {
+      "Name": "AUTO_UNPOST_REQUISITION",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the requisition can be auto unposted.  The corresponding lookup type is ORA_IRC_REQ_AUTO_UNPOST."
+    },
+    {
+      "Name": "POSTING_EXPIRE_IN_DAYS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the number of days after which the postings must expire."
+    },
+    {
+      "Name": "UNPOST_FORMULA_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "References the formula used to unpost the requisition."
+    },
+    {
+      "Name": "TN_AGENCY_STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Talent Network Agency Status code. The corresponding lookup type is ORA_IRC_AGENCY_REQUISITION_STATUS. This column accepts NULL values."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP1",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP2",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP3",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP4",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP5",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP6",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP7",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP8",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP9",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_TIMESTAMP10",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_DATE10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER11",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER12",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER13",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER14",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER15",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER16",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER17",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER18",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER19",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER20",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR1",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR2",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR3",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR4",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR5",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR6",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR7",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR8",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR9",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR10",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR11",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR12",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR13",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR14",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR15",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR16",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR17",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR18",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR19",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR20",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR21",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR22",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR23",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR24",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR25",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR26",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR27",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR28",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR29",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CHAR30",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "ATTRIBUTE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: structure definition of the user descriptive flexfield."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_REQUISITIONS_B_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "HIRING_MANAGER_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK10",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "EXTERNAL_APPLY_FLOW_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK12",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LOCATION_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK13",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROFILE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK16",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INT_EMPLOYER_DESC_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK17",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "EXT_EMPLOYER_DESC_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK18",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INT_ORGANIZATION_DESC_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK19",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "EXT_ORGANIZATION_DESC_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "RECRUITER_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBS_PROCESS_TEMPLATE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK21",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PIPELINE_REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK24",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "POSITION_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GEOGRAPHY_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CURRENT_PHASE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CURRENT_STATE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_TEMPLATE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESS_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESS_TEMPLATE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_FK9",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GEOGRAPHY_NODE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BUDGET_CURRENCY_CODE"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N10",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "RECRUITER_ASSIGNMENT_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N11",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SALARY_CURRENCY_CODE"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N12",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"REQUISITION_NUMBER\")"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N13",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQ_LAST_MODIFIED_DATE"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_UNIT_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "DEPARTMENT_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GRADE_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "JOB_FAMILY_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "JOB_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGAL_EMPLOYER_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ASSIGNMENT_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_N9",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ORGANIZATION_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_REQUISITIONS_B_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "REQ_USAGE_CODE, REQUISITION_NUMBER"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:00:12"
+}

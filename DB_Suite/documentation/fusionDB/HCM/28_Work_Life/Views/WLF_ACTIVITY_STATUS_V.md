@@ -1,0 +1,39 @@
+# WLF_ACTIVITY_STATUS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfactivitystatusv-3531.html#wlfactivitystatusv-3531](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfactivitystatusv-3531.html#wlfactivitystatusv-3531)
+
+## Columns
+
+- ACTIVITY_LEARNING_ITEM_ID
+- ASSIGNMENT_RECORD_ID
+- ACTIVITY_TYPE
+- ASSIGNMENT_TASK_ID
+- ASSIGNMENT_STATUS
+- COMPLETION_DATE
+- RELATED_CONTENT_ID
+- LEARNER_ID
+- ATTEMPT_EVENT_ID
+- TASK_STATUS
+- PROGRESS_MEASURE
+- COMPLETION_STATUS
+- ROOT_ATTEMPT_ID
+- FIRST_ROOT_ATTEMPT
+- CLASS_LEARNING_ITEM_ID
+
+## Query
+
+```sql
+WITH ASSIGNED_CLASSES AS ( SELECT learning_assignments.learning_item_id, learning_assignments.learner_id, learning_assignments.completion_date, learning_assignments.record_status assignment_status, learning_assignments.Event_Attribution_ID CREATED_BY_ID, learning_assignments.ASSIGNED_ON_DATE EVENT_CREATION_DATE, CASE WHEN (learning_assignments.ASSIGNED_ON_DATE IS NOT NULL AND learning_assignments.ASSIGNED_ON_DATE = (MAX(learning_assignments.ASSIGNED_ON_DATE) OVER (PARTITION BY learning_assignments.learner_id, learning_assignments.learning_item_id))) THEN 'Y' ELSE 'N' END AS LATEST_EVENT_FLAG, classLearningitems.learning_item_id ClassLearningItemId, classes.DELIVERY_MODE, learning_assignments.EVENT_TYPE, learning_assignments.assignment_record_id, learning_assignments.learning_item_id class_learning_item_id FROM WLF_ALL_ASSIGNMENTS_V learning_assignments, WLF_learning_items_F_vl classLearningitems, WLF_LI_CLASSES_F classes WHERE TRUNC(SYSDATE) between learning_assignments.ASG_EFFECTIVE_START_DATE and learning_assignments.ASG_EFFECTIVE_END_DATE AND TRUNC(SYSDATE) between classLearningitems.EFFECTIVE_START_DATE and classLearningitems.EFFECTIVE_END_DATE AND TRUNC(SYSDATE) between classes.EFFECTIVE_START_DATE and classes.EFFECTIVE_END_DATE AND classes.learning_item_id = classLearningitems.learning_item_id AND classLearningitems.learning_item_TYPE = 'ORA_CLASS' AND learning_assignments.learner_id = HRC_SESSION_UTIL.GET_USER_PERSONID AND learning_assignments.EVENT_TYPE IN ('ORA_JOIN_ASSIGNMENT','ORA_REQUIRE_ASSIGNMENT') and learning_assignments.learning_item_id = classLearningitems.learning_item_id AND learning_assignments.record_status NOT IN ('ORA_ASSN_REC_DELETED') ), CLASS_ACTIVITY_TASKS AS ( SELECT activities.learning_item_id activity_learning_item_id, activities.related_content_id, activities.activity_type, assignment_tasks.assignment_task_id assignment_task_id, class_assignments.assignment_record_id, class_assignments.learning_item_id, class_assignments.latest_event_flag, class_assignments.completion_date, class_assignments.assignment_status, assignment_tasks.task_status, class_assignments.class_learning_item_id FROM WLF_LI_ACTIVITIES_F activities inner join ASSIGNED_CLASSES class_assignments on class_assignments.learning_item_id = activities.parent_learning_item_id left outer join WLF_ASSIGNMENT_TASKS_F assignment_tasks on activities.learning_item_id = assignment_tasks.learning_item_id AND class_assignments.assignment_record_id = assignment_tasks.assignment_record_id and class_assignments.learner_id = assignment_tasks.task_owner_id AND TRUNC(SYSDATE) between assignment_tasks.effective_start_date and assignment_tasks.effective_end_date WHERE TRUNC(SYSDATE) BETWEEN activities.effective_start_date and activities.effective_end_date AND activities.activity_type = 'ORA_ONLINE_SP' ), ACTIVITY_ATTEMPTS AS ( select class_act_tasks.activity_learning_item_id, class_act_tasks.assignment_record_id, class_act_tasks.activity_type, class_act_tasks.assignment_task_id, class_act_tasks.completion_date, class_act_tasks.assignment_status, class_act_tasks.task_status, class_act_tasks.class_learning_item_id, we.learning_item_id related_content_id , we.created_by_id learner_id, we.event_id attempt_event_id, wa.progress_measure, CASE WHEN (wa.creation_date IS NOT NULL AND wa.creation_date = (MIN(wa.creation_date) OVER (PARTITION BY wa.event_attempt_id,we.created_by_id))) THEN 'Y' ELSE 'N' END AS FIRST_ROOT_ATTEMPT, wa.completion_status, wa.event_attempt_id root_attempt_id from wlf_events we ,wlf_event_attempts wa , CLASS_ACTIVITY_TASKS class_act_tasks where we.event_type = 'ORA_LI_ATTEMPT' and wa.event_id = we.event_id and class_act_tasks.related_content_id = we.learning_item_id and class_act_tasks.latest_event_flag = 'Y' and we.created_by_id = HRC_SESSION_UTIL.GET_USER_PERSONID and wa.event_attempt_id = wa.root_attempt_id ) SELECT activity_attempts.activity_learning_item_id, activity_attempts.assignment_record_id, activity_attempts.activity_type, activity_attempts.assignment_task_id, activity_attempts.assignment_status, activity_attempts.completion_date, activity_attempts.related_content_id , activity_attempts.learner_id learner_id, activity_attempts.attempt_event_id attempt_event_id, activity_attempts.task_status, activity_attempts.progress_measure, activity_attempts.completion_status, activity_attempts.root_attempt_id root_attempt_id, activity_attempts.FIRST_ROOT_ATTEMPT, activity_attempts.class_learning_item_id FROM ACTIVITY_ATTEMPTS activity_attempts WHERE activity_attempts.FIRST_ROOT_ATTEMPT = 'Y'
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

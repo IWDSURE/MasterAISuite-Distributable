@@ -1,0 +1,35 @@
+# BEN_DIAG_FF_ATCHMNT_G2_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** BEN
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/bendiagffatchmntg2v-5375.html#bendiagffatchmntg2v-5375](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/bendiagffatchmntg2v-5375.html#bendiagffatchmntg2v-5375)
+
+## Columns
+
+- Object Name
+- Object Type
+- Table Name
+- Column Name
+- Formula Name
+- Formula Id
+- Formula Type Name
+- Formula Type Id
+- Effective Start Date
+- Effective End Date
+- Enterprise ID
+
+## Query
+
+```sql
+SELECT NAME "Object Name", 'Rate' "Object Type", 'BEN_ACTY_BASE_RT_F' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", ART.EFFECTIVE_START_DATE "Effective Start Date", ART.EFFECTIVE_END_DATE "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_ACTY_BASE_RT_F ART, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE ART.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Rate' "Object Type", 'BEN_ACTY_BASE_RT_F' "Table Name", 'VAL_RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", ART.EFFECTIVE_START_DATE "Effective Start Date", ART.EFFECTIVE_END_DATE "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_ACTY_BASE_RT_F ART, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE ART.VAL_RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Derived Factor' "Object Type", 'BEN_AGE_FCTR' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_AGE_FCTR AGF, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE AGF.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Derived Factor' "Object Type", 'BEN_COMP_LVL_FCTR' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_COMP_LVL_FCTR CLF, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE CLF.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Coverage' "Object Type", 'BEN_CVG_AMT_CALC_MTHD_F' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", CACM.EFFECTIVE_START_DATE "Effective Start Date", CACM.EFFECTIVE_END_DATE "Effective End Date" , FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_CVG_AMT_CALC_MTHD_F CACM, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE CACM.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Eligy Prfl' "Object Type", 'BEN_ELIG_POE_PRTE' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_ELIGY_PRFL ELP,BEN_ELIG_POE_PRTE EPP, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE ELP.ELIGY_PRFL_ID=EPP.ELIGY_PRFL_ID AND EPP.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Eligy Prfl' "Object Type", 'BEN_ELIG_SCHEDD_HRS_PRTE' "Table Name", 'ROUNDING_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_ELIGY_PRFL ELP,BEN_ELIG_SCHEDD_HRS_PRTE ESHP, FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE ELP.ELIGY_PRFL_ID=ESHP.ELIGY_PRFL_ID AND ESHP.ROUNDING_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Derived Factor' "Object Type", 'BEN_HRS_WKD_IN_PERD_FCTR' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_HRS_WKD_IN_PERD_FCTR HWF,FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE HWF.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Derived Factor' "Object Type", 'BEN_LOS_FCTR' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_LOS_FCTR LOS,FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE LOS.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Derived Factor' "Object Type", 'BEN_PCT_FL_TM_FCTR' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", TO_DATE(NULL) "Effective Start Date", TO_DATE(NULL) "Effective End Date", FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_PCT_FL_TM_FCTR PFTF,FF_FORMULAS_F FFL, FF_FORMULA_TYPES FFT WHERE PFTF.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID UNION ALL SELECT NAME "Object Name", 'Variable Profile' "Object Type", 'BEN_VRBL_RT_PRFL_F' "Table Name", 'RNDG_RL' "Column Name", FFL.FORMULA_NAME "Formula Name", FFL.FORMULA_ID "Formula Id", FFT.FORMULA_TYPE_NAME "Formula Type Name", FFT.FORMULA_TYPE_ID "Formula Type Id", VRP.EFFECTIVE_START_DATE "Effective Start Date", VRP.EFFECTIVE_END_DATE "Effective End Date" , FFL.ENTERPRISE_ID "Enterprise ID" FROM BEN_VRBL_RT_PRFL_F VRP , FF_FORMULAS_F FFL , FF_FORMULA_TYPES FFT WHERE VRP.RNDG_RL=FFL.FORMULA_ID AND FFL.FORMULA_TYPE_ID=FFT.FORMULA_TYPE_ID
+```
+
+---
+
+[← Back to Index](../4_Benefits_Views_Index.md)

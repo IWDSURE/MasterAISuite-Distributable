@@ -1,0 +1,1844 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Incident Kiosks",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/incidentKiosks": {
+      "get": {
+        "tags": [
+          "Incident Kiosks"
+        ],
+        "summary": "Get all incidents",
+        "operationId": "getall_incidentKiosks",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EmployeeId; integer; Identification value of the employee.</li><li>IncidentDate; string; Incident date and time.</li><li>IncidentId; integer; The unique identifier of the incident.</li><li>IncidentNo; string; Value that uniquely identifies the incident.</li><li>IncidentOwnerId; integer; Value that uniquely identifies the incident owner.</li><li>IncidentReportedDate; string; Date of notification of the incident.</li><li>IncidentSourceCode; string; The source of the incident.</li><li>IncidentSummary; string; Summary of the incident.</li><li>IncidentTypeCode; string; Type of the incident.</li><li>LocationId; integer; The unique identifier of the location.</li><li>LocationTypeCode; string; Type of location.</li><li>NotifiedPersonId; integer; Person notified of the incident.</li><li>ReporterTypeCode; string; The reporter of the incident.</li><li>ReptrAddrLine1; string; First line of address.</li><li>ReptrAddrLine2; string; Second line of address.</li><li>ReptrAreaCode; string; The area code of the incident reporter.</li><li>ReptrCity; string; City of the incident reporter.</li><li>ReptrCountry; string; Country of the incident reporter.</li><li>ReptrCountryCodeNum; string; Country code for the incident reporter.</li><li>ReptrEmail; string; Email address of incident reporter.</li><li>ReptrName; string; Name of incident reporter.</li><li>ReptrPhoneNo; string; Phone number of incident reporter.</li><li>ReptrSpecificLocation; string; The incident reporter specific location.</li><li>ReptrState; string; The state of the incident reporter.</li><li>ReptrZipCode; string; Postal code of incident reporter.</li><li>SeverityLevelCode; string; Level of severity of incident.</li><li>TargetCompletionDate; string; The date that the incident is targeted for completion.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all incidents that match the primary key criteria specified. <br>Finder Variables <ul><li>IncidentId; integer;  Unique identifier of an incident. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all incidents that match the primary key criteria specified.",
+                "properties": {
+                  "IncidentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of an incident.",
+                    "type": "integer",
+                    "title": "Incident ID"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incidentKiosks"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "incidentKiosks-get",
+        "x-filename-id": "incidentkiosks-get"
+      },
+      "post": {
+        "tags": [
+          "Incident Kiosks"
+        ],
+        "summary": "Create an incident",
+        "operationId": "create_incidentKiosks",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/incidentKiosks-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incidentKiosks-item-response"
+                }
+              }
+            },
+            "links": {
+              "IncidentDetailKiosk": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1IncidentDetailKiosk/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                },
+                "description": "A kiosk version of incident events."
+              },
+              "HnsIncidentsDFF": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1HnsIncidentsDFF/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "incidentKiosks-post",
+        "x-filename-id": "incidentkiosks-post"
+      }
+    },
+    "/incidentKiosks/{IncidentId}": {
+      "get": {
+        "tags": [
+          "Incident Kiosks"
+        ],
+        "summary": "Get an incident",
+        "operationId": "get_incidentKiosks",
+        "parameters": [
+          {
+            "name": "IncidentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Incident ID",
+              "type": "integer",
+              "description": "The unique identifier of the incident.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incidentKiosks-item-response"
+                }
+              }
+            },
+            "links": {
+              "IncidentDetailKiosk": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1IncidentDetailKiosk/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                },
+                "description": "A kiosk version of incident events."
+              },
+              "HnsIncidentsDFF": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1HnsIncidentsDFF/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "incidentKiosks-{IncidentId}-get",
+        "x-filename-id": "incidentkiosks-incidentid-get"
+      },
+      "patch": {
+        "tags": [
+          "Incident Kiosks"
+        ],
+        "summary": "Update an incident",
+        "operationId": "update_incidentKiosks",
+        "parameters": [
+          {
+            "name": "IncidentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Incident ID",
+              "type": "integer",
+              "description": "The unique identifier of the incident.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/incidentKiosks-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incidentKiosks-item-response"
+                }
+              }
+            },
+            "links": {
+              "IncidentDetailKiosk": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1IncidentDetailKiosk/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                },
+                "description": "A kiosk version of incident events."
+              },
+              "HnsIncidentsDFF": {
+                "operationRef": "#/paths/~1incidentKiosks~1{IncidentId}~1child~1HnsIncidentsDFF/get",
+                "parameters": {
+                  "IncidentId": "$request.path.IncidentId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "incidentKiosks-{IncidentId}-patch",
+        "x-filename-id": "incidentkiosks-incidentid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "incidentKiosks": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "incidentKiosks-item-response": {
+        "type": "object",
+        "properties": {
+          "EmployeeId": {
+            "title": "Employee",
+            "type": "integer",
+            "description": "Identification value of the employee.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "HnsIncidentsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-HnsIncidentsDFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "IncidentDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "Incident date and time.",
+            "format": "date-time",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "IncidentDescription": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the incident.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentDetailKiosk": {
+            "title": "Incident Detail Kiosks",
+            "type": "array",
+            "description": "A kiosk version of incident events.",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-IncidentDetailKiosk-item-response"
+            }
+          },
+          "IncidentId": {
+            "title": "Incident ID",
+            "type": "integer",
+            "description": "The unique identifier of the incident.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "IncidentImmeActDescr": {
+            "title": "Immediate Actions",
+            "type": "string",
+            "description": "Immediate actions to take.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentNo": {
+            "title": "Incident Number",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Value that uniquely identifies the incident.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IncidentOwnerId": {
+            "title": "Name",
+            "type": "integer",
+            "description": "Value that uniquely identifies the incident owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "IncidentReportedDate": {
+            "type": "string",
+            "description": "Date of notification of the incident.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IncidentSourceCode": {
+            "title": "Incident Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The source of the incident.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IncidentSummary": {
+            "title": "Summary",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Summary of the incident.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "IncidentTypeCode": {
+            "title": "Incident Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of the incident.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "title": "Location ID",
+            "type": "integer",
+            "description": "The unique identifier of the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LocationTypeCode": {
+            "title": "Location Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of location.",
+            "nullable": true,
+            "default": "ORA_ON_SITE",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "NotifiedPersonId": {
+            "type": "integer",
+            "description": "Person notified of the incident.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ReporterTypeCode": {
+            "title": "Incident Reporter",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The reporter of the incident.",
+            "nullable": true,
+            "default": "ORA_EMPLOYEE",
+            "x-queryable": true
+          },
+          "ReptrAddrLine1": {
+            "title": "Address Line 1",
+            "maxLength": 255,
+            "type": "string",
+            "description": "First line of address.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrAddrLine2": {
+            "title": "Address Line 2",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Second line of address.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrAreaCode": {
+            "title": "Area Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The area code of the incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrCity": {
+            "title": "City",
+            "maxLength": 100,
+            "type": "string",
+            "description": "City of the incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrCountry": {
+            "title": "Country",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Country of the incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrCountryCodeNum": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrEmail": {
+            "title": "Email",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Email address of incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrName": {
+            "title": "Name",
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrPhoneNo": {
+            "title": "Phone",
+            "maxLength": 18,
+            "type": "string",
+            "description": "Phone number of incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrSpecificLocation": {
+            "title": "Specific Location",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The incident reporter specific location.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ReptrState": {
+            "title": "State",
+            "maxLength": 100,
+            "type": "string",
+            "description": "The state of the incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReptrZipCode": {
+            "title": "Postal Code",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Postal code of incident reporter.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SeverityLevelCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Level of severity of incident.",
+            "nullable": true,
+            "default": "ORA_NO_EFFECT",
+            "x-queryable": true
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "The date that the incident is targeted for completion.",
+            "format": "date-time",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "incidentKiosks-HnsIncidentsDFF-item-response": {
+        "type": "object",
+        "properties": {
+          "IncidentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "incidentKiosks-IncidentDetailKiosk-item-response": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "type": "string",
+            "description": "The date that the incident is targeted for actual completion.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IncidentDetailId": {
+            "type": "integer",
+            "description": "An identification value used for the incident event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "IncidentEventCode": {
+            "title": "Incident Event",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Description of the incident event.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "IncidentEventDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "The date when the incident event happened.",
+            "format": "date-time",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "IncidentEventSummary": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Audit detail for incident event summary.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "incidentKiosks-item-post-request": {
+        "required": [
+          "IncidentSummary",
+          "ReptrSpecificLocation",
+          "TargetCompletionDate"
+        ],
+        "type": "object",
+        "properties": {
+          "EmployeeId": {
+            "title": "Employee",
+            "type": "integer",
+            "description": "Identification value of the employee.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "HnsIncidentsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-HnsIncidentsDFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "IncidentDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "Incident date and time.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "IncidentDescription": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the incident.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentDetailKiosk": {
+            "title": "Incident Detail Kiosks",
+            "type": "array",
+            "description": "A kiosk version of incident events.",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-IncidentDetailKiosk-item-post-request"
+            }
+          },
+          "IncidentId": {
+            "title": "Incident ID",
+            "type": "integer",
+            "description": "The unique identifier of the incident.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentImmeActDescr": {
+            "title": "Immediate Actions",
+            "type": "string",
+            "description": "Immediate actions to take.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentOwnerId": {
+            "title": "Name",
+            "type": "integer",
+            "description": "Value that uniquely identifies the incident owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentReportedDate": {
+            "type": "string",
+            "description": "Date of notification of the incident.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IncidentSourceCode": {
+            "title": "Incident Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The source of the incident.",
+            "nullable": true
+          },
+          "IncidentSummary": {
+            "title": "Summary",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Summary of the incident.",
+            "nullable": false
+          },
+          "IncidentTypeCode": {
+            "title": "Incident Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of the incident.",
+            "nullable": true
+          },
+          "LocationId": {
+            "title": "Location ID",
+            "type": "integer",
+            "description": "The unique identifier of the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LocationTypeCode": {
+            "title": "Location Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of location.",
+            "nullable": true,
+            "default": "ORA_ON_SITE",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "NotifiedPersonId": {
+            "type": "integer",
+            "description": "Person notified of the incident.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReporterTypeCode": {
+            "title": "Incident Reporter",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The reporter of the incident.",
+            "nullable": true,
+            "default": "ORA_EMPLOYEE"
+          },
+          "ReptrAddrLine1": {
+            "title": "Address Line 1",
+            "maxLength": 255,
+            "type": "string",
+            "description": "First line of address.",
+            "nullable": true
+          },
+          "ReptrAddrLine2": {
+            "title": "Address Line 2",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Second line of address.",
+            "nullable": true
+          },
+          "ReptrAreaCode": {
+            "title": "Area Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The area code of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCity": {
+            "title": "City",
+            "maxLength": 100,
+            "type": "string",
+            "description": "City of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCountry": {
+            "title": "Country",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Country of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCountryCodeNum": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the incident reporter.",
+            "nullable": true
+          },
+          "ReptrEmail": {
+            "title": "Email",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Email address of incident reporter.",
+            "nullable": true
+          },
+          "ReptrName": {
+            "title": "Name",
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of incident reporter.",
+            "nullable": true
+          },
+          "ReptrPhoneNo": {
+            "title": "Phone",
+            "maxLength": 18,
+            "type": "string",
+            "description": "Phone number of incident reporter.",
+            "nullable": true
+          },
+          "ReptrSpecificLocation": {
+            "title": "Specific Location",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The incident reporter specific location.",
+            "nullable": false
+          },
+          "ReptrState": {
+            "title": "State",
+            "maxLength": 100,
+            "type": "string",
+            "description": "The state of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrZipCode": {
+            "title": "Postal Code",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Postal code of incident reporter.",
+            "nullable": true
+          },
+          "SeverityLevelCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Level of severity of incident.",
+            "nullable": true,
+            "default": "ORA_NO_EFFECT"
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "The date that the incident is targeted for completion.",
+            "format": "date-time",
+            "nullable": false
+          }
+        }
+      },
+      "incidentKiosks-HnsIncidentsDFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "IncidentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "incidentKiosks-IncidentDetailKiosk-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "type": "string",
+            "description": "The date that the incident is targeted for actual completion.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IncidentDetailId": {
+            "type": "integer",
+            "description": "An identification value used for the incident event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentEventCode": {
+            "title": "Incident Event",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Description of the incident event.",
+            "nullable": false
+          },
+          "IncidentEventDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "The date when the incident event happened.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "IncidentEventSummary": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Audit detail for incident event summary.",
+            "nullable": false
+          }
+        }
+      },
+      "incidentKiosks-item-patch-request": {
+        "required": [
+          "IncidentSummary",
+          "ReptrSpecificLocation",
+          "TargetCompletionDate"
+        ],
+        "type": "object",
+        "properties": {
+          "EmployeeId": {
+            "title": "Employee",
+            "type": "integer",
+            "description": "Identification value of the employee.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "HnsIncidentsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-HnsIncidentsDFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "IncidentDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "Incident date and time.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "IncidentDescription": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the incident.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentDetailKiosk": {
+            "title": "Incident Detail Kiosks",
+            "type": "array",
+            "description": "A kiosk version of incident events.",
+            "items": {
+              "$ref": "#/components/schemas/incidentKiosks-IncidentDetailKiosk-item-patch-request"
+            }
+          },
+          "IncidentId": {
+            "title": "Incident ID",
+            "type": "integer",
+            "description": "The unique identifier of the incident.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentImmeActDescr": {
+            "title": "Immediate Actions",
+            "type": "string",
+            "description": "Immediate actions to take.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "IncidentOwnerId": {
+            "title": "Name",
+            "type": "integer",
+            "description": "Value that uniquely identifies the incident owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentReportedDate": {
+            "type": "string",
+            "description": "Date of notification of the incident.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IncidentSourceCode": {
+            "title": "Incident Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The source of the incident.",
+            "nullable": true
+          },
+          "IncidentSummary": {
+            "title": "Summary",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Summary of the incident.",
+            "nullable": false
+          },
+          "IncidentTypeCode": {
+            "title": "Incident Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of the incident.",
+            "nullable": true
+          },
+          "LocationId": {
+            "title": "Location ID",
+            "type": "integer",
+            "description": "The unique identifier of the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LocationTypeCode": {
+            "title": "Location Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of location.",
+            "nullable": true,
+            "default": "ORA_ON_SITE",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "NotifiedPersonId": {
+            "type": "integer",
+            "description": "Person notified of the incident.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReporterTypeCode": {
+            "title": "Incident Reporter",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The reporter of the incident.",
+            "nullable": true,
+            "default": "ORA_EMPLOYEE"
+          },
+          "ReptrAddrLine1": {
+            "title": "Address Line 1",
+            "maxLength": 255,
+            "type": "string",
+            "description": "First line of address.",
+            "nullable": true
+          },
+          "ReptrAddrLine2": {
+            "title": "Address Line 2",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Second line of address.",
+            "nullable": true
+          },
+          "ReptrAreaCode": {
+            "title": "Area Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The area code of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCity": {
+            "title": "City",
+            "maxLength": 100,
+            "type": "string",
+            "description": "City of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCountry": {
+            "title": "Country",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Country of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrCountryCodeNum": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the incident reporter.",
+            "nullable": true
+          },
+          "ReptrEmail": {
+            "title": "Email",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Email address of incident reporter.",
+            "nullable": true
+          },
+          "ReptrName": {
+            "title": "Name",
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of incident reporter.",
+            "nullable": true
+          },
+          "ReptrPhoneNo": {
+            "title": "Phone",
+            "maxLength": 18,
+            "type": "string",
+            "description": "Phone number of incident reporter.",
+            "nullable": true
+          },
+          "ReptrSpecificLocation": {
+            "title": "Specific Location",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The incident reporter specific location.",
+            "nullable": false
+          },
+          "ReptrState": {
+            "title": "State",
+            "maxLength": 100,
+            "type": "string",
+            "description": "The state of the incident reporter.",
+            "nullable": true
+          },
+          "ReptrZipCode": {
+            "title": "Postal Code",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Postal code of incident reporter.",
+            "nullable": true
+          },
+          "SeverityLevelCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Level of severity of incident.",
+            "nullable": true,
+            "default": "ORA_NO_EFFECT"
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "The date that the incident is targeted for completion.",
+            "format": "date-time",
+            "nullable": false
+          }
+        }
+      },
+      "incidentKiosks-HnsIncidentsDFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "IncidentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "incidentKiosks-IncidentDetailKiosk-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "type": "string",
+            "description": "The date that the incident is targeted for actual completion.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IncidentDetailId": {
+            "type": "integer",
+            "description": "An identification value used for the incident event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "IncidentEventCode": {
+            "title": "Incident Event",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Description of the incident event.",
+            "nullable": false
+          },
+          "IncidentEventDate": {
+            "title": "Date and Time",
+            "type": "string",
+            "description": "The date when the incident event happened.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "IncidentEventSummary": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Audit detail for incident event summary.",
+            "nullable": false
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "incidentKiosks-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/incidentKiosks-item-post-request"
+            }
+          }
+        }
+      },
+      "incidentKiosks-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/incidentKiosks-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

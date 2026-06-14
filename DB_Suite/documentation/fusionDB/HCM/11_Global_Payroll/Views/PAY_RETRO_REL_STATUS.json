@@ -1,0 +1,24 @@
+{
+  "name": "PAY_RETRO_REL_STATUS",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payretrorelstatus-5895.html#payretrorelstatus-5895",
+  "columns": [
+    "RETRO_RELATIONSHIP_ID",
+    "PAYROLL_RELATIONSHIP_ID",
+    "REPROCESS_DATE",
+    "START_DATE",
+    "APPROVAL_STATUS",
+    "RETRO_REL_ACTION_ID",
+    "SUPERSEDING_RETRO_REL_ID",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATE_DATE",
+    "LAST_UPDATE_LOGIN",
+    "LAST_UPDATED_BY"
+  ],
+  "query": "SELECT prr.RETRO_RELATIONSHIP_ID, prr.PAYROLL_RELATIONSHIP_ID, prr.REPROCESS_DATE, prr.START_DATE, decode (pra.action_status, null, prr.APPROVAL_STATUS, 'C', pra.action_status, 'E', pra.action_status, prr.APPROVAL_STATUS) APPROVAL_STATUS, prr.RETRO_REL_ACTION_ID, prr.SUPERSEDING_RETRO_REL_ID, prr.CREATED_BY, prr.CREATION_DATE, prr.LAST_UPDATE_DATE, prr.LAST_UPDATE_LOGIN, prr.LAST_UPDATED_BY FROM PAY_RETRO_RELATIONSHIPS prr, PAY_PAYROLL_REL_ACTIONS pra WHERE prr.retro_rel_action_id = pra.payroll_rel_action_id (+)",
+  "_parsed_at": "2026-06-09T17:26:38"
+}

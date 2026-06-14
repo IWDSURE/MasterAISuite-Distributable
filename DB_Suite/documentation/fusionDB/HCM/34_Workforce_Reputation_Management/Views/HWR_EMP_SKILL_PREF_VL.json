@@ -1,0 +1,15 @@
+{
+  "name": "HWR_EMP_SKILL_PREF_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HWR",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrempskillprefvl-8538.html#hwrempskillprefvl-8538",
+  "columns": [
+    "PRFL_ID",
+    "DISPLAY_TEXT",
+    "LAST_UPDATE_DATE"
+  ],
+  "query": "SELECT FUS_PRFL_ID PRFL_ID, NVL(TOPIC_TL.DISPLAY_TEXT, (SELECT DISPLAY_TEXT FROM HWR_CAT_TOPIC_TL TL1 WHERE TL1.TOPIC_ID = TOPIC_B.TOPIC_ID AND ROWNUM = 1)) AS DISPLAY_TEXT, SKILL_PREF.LAST_UPDATE_DATE FROM HWR_EMP_SKILL_PREF SKILL_PREF, HWR_CAT_TOPIC_TL TOPIC_TL, HWR_CAT_TOPIC_B TOPIC_B WHERE SKILL_PREF.TOPIC_ID = TOPIC_B.TOPIC_ID AND TOPIC_TL.LANGUAGE(+) = 'US' AND TOPIC_TL.TOPIC_ID(+) = TOPIC_B.TOPIC_ID",
+  "_parsed_at": "2026-06-09T20:18:44"
+}

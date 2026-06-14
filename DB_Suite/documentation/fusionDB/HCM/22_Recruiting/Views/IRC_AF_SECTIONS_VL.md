@@ -1,0 +1,34 @@
+# IRC_AF_SECTIONS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircafsectionsvl-6414.html#ircafsectionsvl-6414](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircafsectionsvl-6414.html#ircafsectionsvl-6414)
+
+## Columns
+
+- SECTION_ID
+- AF_VERSION_ID
+- SECTION_SEQ_NUM
+- SECTION_NAME
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.SECTION_ID SECTION_ID, B.AF_VERSION_ID AF_VERSION_ID, B.SECTION_SEQ_NUM SECTION_SEQ_NUM, TL.SECTION_NAME SECTION_NAME, B.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, B.CREATED_BY CREATED_BY, B.CREATION_DATE CREATION_DATE, B.LAST_UPDATED_BY LAST_UPDATED_BY, B.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN FROM IRC_AF_SECTIONS_B B, IRC_AF_SECTIONS_TL TL WHERE B.SECTION_ID = TL.SECTION_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

@@ -1,0 +1,748 @@
+{
+  "name": "WLF_CM_SHARES_F",
+  "object_type": "TABLE",
+  "description": "Table to store of content shares",
+  "schema": "FUSION",
+  "owner": "WLF",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfcmsharesf-4523.html#wlfcmsharesf-4523",
+  "primary_keys": [
+    {
+      "name": "WLF_CM_SHARES_F_PK",
+      "columns": "SHARE_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SHARE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated unique identifier."
+    },
+    {
+      "Name": "EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+    },
+    {
+      "Name": "EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+    },
+    {
+      "Name": "SHARE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Polymorphic discriminator column {SHARE, PRESCRIPTION}."
+    },
+    {
+      "Name": "SHARE_PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Associated share profile. Foreign key to WLF_CM_SHARE_PROFILE_F."
+    },
+    {
+      "Name": "SHARED_TO_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Indicates the person identifier who destination of the share."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Current status of the share {ACTIVE, COMPLETED, EXPIRED, REVOKED, DELETED}."
+    },
+    {
+      "Name": "NOTIFICATION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Current status of the share's notification {START, ..., END}."
+    },
+    {
+      "Name": "DUE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Due date for the share."
+    },
+    {
+      "Name": "COMPLETION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The date and time of the completion of the share."
+    },
+    {
+      "Name": "GENERATION_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ESS job source for the share."
+    },
+    {
+      "Name": "GENERATION_PROGRAM_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "200",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ESS job program for the share."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE1",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE2",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE3",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE4",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE5",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE6",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE7",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE8",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE9",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE10",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE11",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE12",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE13",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE14",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE15",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE16",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE17",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE18",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE19",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE20",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE21",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE22",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE23",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE24",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE25",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE26",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE27",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE28",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE29",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE30",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER11",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER12",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER13",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER14",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER15",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER16",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER17",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER18",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER19",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_NUMBER20",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE11",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE12",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE13",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE14",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    },
+    {
+      "Name": "SH_ATTRIBUTE_DATE15",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "WLF_CM_SHARES_F_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SHARE_PROFILE_ID"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SHARED_TO_ID"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STATUS"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "DUE_DATE"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "COMPLETION_DATE"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GENERATION_PROGRAM_ID"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "NOTIFICATION_STATUS"
+    },
+    {
+      "Index": "WLF_CM_SHARES_F_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SHARE_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:16:45"
+}

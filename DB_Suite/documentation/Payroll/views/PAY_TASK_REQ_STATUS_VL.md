@@ -1,0 +1,45 @@
+# PAY_TASK_REQ_STATUS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paytaskreqstatusvl-5242.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paytaskreqstatusvl-5242.html)
+
+## Columns
+
+- CHECKLIST_NAME
+- TASK_REQ_PARAM_FULL_MAP
+- TASK_TYPE
+- FLOW_INSTANCE_ID
+- TASK_INSTANCE_ID
+- ESSREQUESTID
+- REQUESTID
+- ESS_CALL_ID
+- TASK_STATUS
+- PAYROLL_ACTION_ID
+- ACTION_TYPE
+- TASK_PROGRESS
+- NUMBER_OF_OBJECTS
+- OBJECT_NAME
+- ERRORS_AND_WARNINGS
+- EXPORT
+- PHASE_DESCRIPTION
+- TASK_PHASE
+- ARCHIVEDINFO
+- STATS_ENABLED_FLAG
+- STATS_BINDS
+
+## Query
+
+```sql
+select NVL(SUBSTR(Checklist_Name, 0, INSTR(Checklist_Name, '|')-1), Checklist_Name) Checklist_Name, NVL(SUBSTR(Checklist_Name, INSTR(Checklist_Name, '|')+1, -1), Checklist_Name) as TASK_REQ_PARAM_FULL_MAP, TASK_TYPE, FLOW_INSTANCE_ID, TASK_INSTANCE_ID, Essrequestid, Requestid, ESS_CALL_ID, TASK_STATUS, payroll_action_id, action_type, TASK_PROGRESS, NUMBER_OF_OBJECTS, OBJECT_NAME, ERRORS_AND_WARNINGS, EXPORT, PHASE_DESCRIPTION, TASK_PHASE, ARCHIVEDINFO, STATS_ENABLED_FLAG, STATS_BINDS from( select (select distinct 'Counter:'||max(fpv.value_2)||' | '||listagg( ftp.parameter_name||':'|| decode(ftp.param_disp_type,'D',fnd_date.date_to_displaydate(to_Date(fpv.value_4,'YYYY-MM-DD HH24:MI:SS')), 'T',fpv.value_4, 'N',fpv.value_4, PAY_FLOW_COMMON_UTIL_PKG.convert_value (to_char(sysdate,'YYYYMMDDHHMISS'),sysdate, PFT.LEGISLATION_CODE,PFT.LEGISLATIVE_DATA_GROUP_ID, decode(ftp.param_disp_type,'LK','LOOKUP','LOV','VO','L','VO','ORA_VALUESET','VALUESET'), ftp.param_lookup ,fpv.value_4,'Y') ) ,' | ') within group (order by ftp.param_sequence) from table(pay_process_flow_utils.get_tab_pay_requests_tf(pfti.flow_task_instance_id)) fpv, pay_task_parameters_vl ftp where ftp.BASE_TASK_PARAMETER_ID = fpv.value_3 and ftp.DISPLAY_FLAG != 'N' and fpv.value_3 is not null AND fpv.value_1 =pprq.pay_request_id and fpv.value_4 is not null)Checklist_Name, 'AUTOMATIC' TASK_TYPE, pfti.Flow_Instance_Id FLOW_INSTANCE_ID, pfti.flow_Task_Instance_Id TASK_INSTANCE_ID, eprq.pay_request_id Essrequestid, pprq.pay_request_id Requestid, eprq.call_id ESS_CALL_ID, decode(ppa.action_status,null, decode((SELECT max( l.meaning) Status FROM FUSION_ORA_ESS.REQUEST_HISTORY_VIEW essa, hr_lookups l WHERE essa.requestid= eprq.call_id AND l.lookup_type (+) = 'HRC_LOADER_ESS_STATE' AND l.lookup_code (+) = essa.state),'Error','COMPLETE_WITH_ISSUES','Running','IN_PROCESSING','Succeeded','COMPLETE','COMPLETE') ,'C','COMPLETE', 'E','COMPLETE_WITH_ISSUES', 'P','IN_PROCESSING', 'I','INITIALIZING', 'M','MARKED_FOR_RETRY', 'U','NOT_STARTED', 'S','SKIPPED', ppa.action_status) TASK_STATUS, ppa.payroll_action_id, ppa.action_type, NULL TASK_PROGRESS, NULL NUMBER_OF_OBJECTS, NULL OBJECT_NAME, NULL ERRORS_AND_WARNINGS, nvl((select max('Y') from fusion.fnd_attached_documents doc where to_char(eprq.pay_request_id) = doc.pk1_value and doc.entity_name='FLOW_BI_OUTPUT'),'N') EXPORT, null PHASE_DESCRIPTION, (SELECT max( l.meaning) Status FROM FUSION_ORA_ESS.REQUEST_HISTORY_VIEW essa, hr_lookups l WHERE essa.requestid= eprq.call_id AND l.lookup_type (+) = 'HRC_LOADER_ESS_STATE' AND l.lookup_code (+) = essa.state) TASK_PHASE, null TASK_REQ_PARAM_FULL_MAP, null ARCHIVEDINFO, null STATS_ENABLED_FLAG, null STATS_BINDS from fusion.pay_flow_task_instances pfti, fusion.pay_flow_tasks pft, fusion.pay_requests eprq ,fusion.pay_requests pprq , fusion.pay_payroll_actions ppa where pft.base_flow_task_id = pfti.base_flow_task_id and eprq.flow_task_instance_id=pfti.flow_task_instance_id and eprq.call_type='ESS' and pprq.flow_task_instance_id=pfti.flow_task_instance_id and not exists( SELECT NULL FROM fusion.pay_task_actions TA WHERE TA.BASE_TASK_ACTION_NAME IN('SUBMIT_ANOTHER_TASK_ACTION','SUBMIT_ANOTHER_TASK_ROLLBACK_ACTION') AND TA.TASK_ACTION_ID=pprq.pay_task_action_id ) and pprq.call_type='FLOW_TASK_INSTANCE' and ppa.pay_request_id(+)=pprq.pay_request_id and eprq.pay_request_id = (select min(aaa.pay_request_id) from pay_requests aaa where aaa.flow_Task_Instance_Id = pfti.flow_task_instance_id and aaa.pay_request_id > pprq.pay_request_id) )
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

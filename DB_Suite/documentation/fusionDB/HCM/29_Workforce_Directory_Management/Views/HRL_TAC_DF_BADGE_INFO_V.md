@@ -1,0 +1,33 @@
+# HRL_TAC_DF_BADGE_INFO_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRL
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrltacdfbadgeinfov-5968.html#hrltacdfbadgeinfov-5968](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrltacdfbadgeinfov-5968.html#hrltacdfbadgeinfov-5968)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- PK1_NUM_VALUE
+- PK2_NUM_VALUE
+- PK3_NUM_VALUE
+- PK1_CHAR_VALUE
+- PK2_CHAR_VALUE
+- NEED_ATTENTION_BADGE_CNT
+- ENGAGEMENT_BADGE_CNT
+
+## Query
+
+```sql
+select asg.person_id, asg.assignment_id, null pk1_num_value, null pk2_num_value, null pk3_num_value, null pk1_char_value, null pk2_char_value, NVL(need_attention_badge_cnt,0) NEED_ATTENTION_BADGE_CNT, eb_cnt ENGAGEMENT_BADGE_CNT from per_all_assignments_f asg, ( SELECT /*+ LEADING(asg hdfs ana) */ asg.person_id, asg.assignment_id, count(*) need_attention_badge_cnt FROM per_all_assignments_f asg, hrl_data_feed_settings_vl hdfs, fnd_lookup_values_b flvb, TABLE ( hrl_df_main.get_analytic_dtls(hdfs.setting_id, asg.person_id, asg.assignment_id) ) ana WHERE trunc(sysdate) BETWEEN asg.effective_start_date AND asg.effective_end_date AND hdfs.flow_code = 'ORA_DF_PS' AND hdfs.section_code = 'ORA_DF_ANALYTIC' AND hdfs.active_flag = 'Y' and visibility_code = 'MGR' AND ana.badge_text IS NOT NULL AND flvb.lookup_type = 'ORA_HRL_TAC_NA_ANALYTIC_CARDS' AND flvb.lookup_code = hdfs.source_code AND flvb.enabled_flag = 'Y' AND trunc(sysdate) between flvb.start_date_active and flvb.end_date_active group by asg.person_id, asg.assignment_id ) na_cnt, (select 0 eb_cnt from dual) eb_cnt where trunc(sysdate) BETWEEN asg.effective_start_date AND asg.effective_end_date and asg.person_id = na_cnt.person_id(+) and asg.assignment_id = na_cnt.assignment_id(+) and asg.assignment_type IN ('E','C','N') and asg.assignment_status_type IN ( 'ACTIVE' , 'SUSPENDED' )
+```
+
+---
+
+[← Back to Index](../29_Workforce_Directory_Management_Views_Index.md)

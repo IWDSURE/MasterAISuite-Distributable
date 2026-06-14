@@ -1,0 +1,52 @@
+# CMP_TCS_STMT_CAT
+
+Table holds cmp Tcs Stmt Cat records.
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** TABLE
+
+**Tablespace:** FUSION_TS_TX_DATA
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmptcsstmtcat-18292.html#cmptcsstmtcat-18292](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmptcsstmtcat-18292.html#cmptcsstmtcat-18292)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| CMP_TCS_STMT_CAT_PK | STMT_CAT_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| STMT_CAT_ID | NUMBER |  | 18 | Yes | System generated primary key
+                                               column. |
+| STMT_ID | NUMBER |  | 18 | Yes | Foreign Key to CMP_TCS_STMT. |
+| CAT_ID | NUMBER |  | 18 | Yes | Foreign Key to CMP_TCS_CAT. |
+| ORDR_NUM | NUMBER |  | 18 | Yes | Display order of categories with
+                                               in a statement. |
+| DISPLAY_NAME | VARCHAR2 | 240 |  |  | DISPLAY_NAME |
+| BUSINESS_GROUP_ID | NUMBER |  | 18 | Yes | Foreign Key to
+                                               HR_ORGANIZATION_UNITS |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| CMP_TCS_STMT_CAT_N1 | Non Unique | Default | CAT_ID |
+| CMP_TCS_STMT_CAT_UK1 | Unique | Default | STMT_CAT_ID |
+
+---
+
+[← Back to Index](../7_Compensation_Tables_Index.md)

@@ -1,0 +1,36 @@
+# HHR_VLTR_CAUSE_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HHR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hhrvltrcausevl-6151.html#hhrvltrcausevl-6151](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hhrvltrcausevl-6151.html#hhrvltrcausevl-6151)
+
+## Columns
+
+- ID
+- IMAGE_ID
+- IS_SEEDED
+- IMAGE_URL
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- LAST_UPDATE_DATE
+- NAME
+- IS_ENABLED
+- IMAGE_URL_1
+
+## Query
+
+```sql
+SELECT A.ID ID, A.IMAGE_ID IMAGE_ID, A.IS_SEEDED IS_SEEDED, A.IMAGE_URL IMAGE_URL, A.CREATED_BY CREATED_BY, A.CREATION_DATE CREATION_DATE, A.LAST_UPDATED_BY LAST_UPDATED_BY, A.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN, A.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.NAME NAME, A.IS_ENABLED IS_ENABLED, A.IMAGE_URL_1 IMAGE_URL_1 FROM HHR_VLTR_CAUSE_B A, HHR_VLTR_CAUSE_TL B WHERE A.ID = B.ID AND B.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../8_Corporate_Social_Responsibility_Views_Index.md)

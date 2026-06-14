@@ -1,0 +1,25 @@
+{
+  "name": "HRA_MT_ANA_PERF_GOALS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HRA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hramtanaperfgoalsv-3889.html#hramtanaperfgoalsv-3889",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TEXT_TITLE",
+    "TEXT_METRIC",
+    "TEXT_META",
+    "BADGE_TEXT",
+    "BADGE_STATUS",
+    "PERIOD_CHN_IND_VAL",
+    "PERIOD_CHN_IND_CMP",
+    "CHART_TYPE",
+    "CHART_COLOR",
+    "CHART_DATA",
+    "LINK_TEXT"
+  ],
+  "query": "SELECT sup.manager_id person_id, sup.manager_assignment_id assignment_id, '{\"strKey\":\"HdrSAchieve\"}' text_title, '{\"strKey\":\"PgHIGOALSCMPLTDofGOALSTOTALgoalscompleted\", \"tokens\":{\"GOALS_CMPLTD\":\"' || COUNT(decode(goalseo.status_code, 'COMPLETED', goalseo.goal_id)) || '\",\"GOALS_TOTAL\":\"' || COUNT(goalseo.goal_id) || '\"}}' text_metric, '{\"strKey\":\"PgHIByyourdirects\"}' text_meta, NULL badge_text, NULL badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, NULL link_text FROM per_assignment_supervisors_f sup, hrg_goals goalseo, hrg_goal_plan_goals goalplangoalseo, hrg_goal_plans_b goalplanseo WHERE trunc(sysdate) between sup.effective_start_date and sup.effective_end_date AND sup.manager_type = 'LINE_MANAGER' AND goalseo.person_id = sup.person_id AND goalseo.assignment_id = sup.assignment_id AND goalseo.goal_id = goalplangoalseo.goal_id AND goalplangoalseo.goal_plan_id = goalplanseo.goal_plan_id AND goalseo.private_flag = 'N' AND goalseo.goal_version_type_code = 'ACTIVE' AND goalseo.goal_type_code = 'PERFORMANCE' AND goalseo.status_code != 'CANCEL' AND goalplanseo.goal_plan_active_flag = 'A' AND ( ( goalplanseo.review_period_id IS NOT NULL AND goalplanseo.review_period_id IN ( SELECT review_period_id FROM hrt_review_periods_b WHERE status_code = 'A' AND trunc(sysdate) BETWEEN start_date AND end_date ) ) OR ( goalplangoalseo.review_period_id IN ( SELECT review_period_id FROM hrt_review_periods_b WHERE status_code = 'A' AND trunc(sysdate) BETWEEN start_date AND end_date ) AND goalplanseo.primary_goal_plan_flag = 'Y' ) ) AND EXISTS ( SELECT 1 FROM hrg_goal_plan_goals goalplangoaleo1, hrg_goal_plans_b goalplaneo1 WHERE goalseo.goal_id = goalplangoaleo1.goal_id AND goalplaneo1.goal_plan_id = goalplangoaleo1.goal_plan_id AND goalplaneo1.review_period_id IN ( SELECT review_period_id FROM hrt_review_periods_b WHERE status_code = 'A' AND trunc(sysdate) BETWEEN start_date AND end_date ) UNION ALL SELECT 1 FROM hrg_goal_plan_goals goalplangoaleo1 WHERE goalseo.goal_id = goalplangoaleo1.goal_id AND goalplangoaleo1.review_period_id IN ( SELECT review_period_id FROM hrt_review_periods_b WHERE status_code = 'A' AND trunc(sysdate) BETWEEN start_date AND end_date ) ) GROUP BY sup.manager_id, sup.manager_assignment_id",
+  "_parsed_at": "2026-06-09T18:19:06"
+}

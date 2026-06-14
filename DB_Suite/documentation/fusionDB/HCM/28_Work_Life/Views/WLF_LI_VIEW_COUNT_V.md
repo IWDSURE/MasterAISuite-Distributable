@@ -1,0 +1,28 @@
+# WLF_LI_VIEW_COUNT_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfliviewcountv-7880.html#wlfliviewcountv-7880](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfliviewcountv-7880.html#wlfliviewcountv-7880)
+
+## Columns
+
+- LEARNING_ITEM_ID
+- LEARNING_ITEM_TYPE
+- STATUS
+- VIEWS_COUNT
+
+## Query
+
+```sql
+SELECT Events.LEARNING_ITEM_ID, Learning_Items.LEARNING_ITEM_TYPE, Event_Attempts.COMPLETION_STATUS AS STATUS, COUNT(Events.LEARNING_ITEM_ID) AS VIEWS_COUNT FROM WLF_LEARNING_ITEMS_F Learning_Items, WLF_EVENTS Events, WLF_EVENT_ATTEMPTS Event_Attempts WHERE TRUNC(SYSDATE) BETWEEN Learning_Items.EFFECTIVE_START_DATE AND Learning_Items.EFFECTIVE_END_DATE AND Events.LEARNING_ITEM_ID=Learning_Items.LEARNING_ITEM_ID AND Events.EVENT_ID = Event_Attempts.EVENT_ID AND EVENT_TYPE = 'ORA_LI_ATTEMPT' GROUP BY Events.LEARNING_ITEM_ID, Learning_Items.LEARNING_ITEM_TYPE, Event_Attempts.COMPLETION_STATUS
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

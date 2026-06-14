@@ -1,0 +1,184 @@
+{
+  "name": "IRC_FOLLOWUP_TASKS",
+  "object_type": "TABLE",
+  "description": "This table stores the interaction for a person in the context of a Submission, Candidate Pool, Prospect and Candidate General Profile.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircfollowuptasks-8156.html#ircfollowuptasks-8156",
+  "primary_keys": [
+    {
+      "name": "IRC_FOLLOWUP_TASKS_PK",
+      "columns": "TASK_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TASK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of the table. System generated value."
+    },
+    {
+      "Name": "ENTITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Stores the ID of entity object for which the followup task is created. Eg. PERSON_ID etc."
+    },
+    {
+      "Name": "ENTITY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the entity against which the followup task is created. Eg. ORA_CANDIDATE etc."
+    },
+    {
+      "Name": "CONTEXT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the context against which the followup task is created. Eg. Submission, Pool, Prospect, General Profile etc."
+    },
+    {
+      "Name": "CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the context object for which the followup task is created. Eg. SUBMISSION_ID, POOL_ID, PERSON_ID etc."
+    },
+    {
+      "Name": "DUE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the date by which the followup task has to be done."
+    },
+    {
+      "Name": "COMPLETION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the timestamp when the followup task was marked as completed."
+    },
+    {
+      "Name": "STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the status of the followup task. Lookup type is ORA_IRC_FOLLOWUP_TASK_STATUS"
+    },
+    {
+      "Name": "NOTE_TEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the text for the followup task."
+    },
+    {
+      "Name": "COMPLETED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to per_persons table. Stores the PERSON_ID of the person who completed the followup task."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "COMPLETED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTEXT_ID, CONTEXT_TYPE, ENTITY_ID, ENTITY_TYPE, STATUS_CODE"
+    },
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ENTITY_ID, ENTITY_TYPE, STATUS_CODE"
+    },
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTEXT_TYPE"
+    },
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "DUE_DATE"
+    },
+    {
+      "Index": "IRC_FOLLOWUP_TASKS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "TASK_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:52:06"
+}

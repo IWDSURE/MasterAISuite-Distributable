@@ -1,0 +1,27 @@
+# IRC_CAND_PREFERRED_LANGUAGE_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandpreferredlanguagev-8595.html#irccandpreferredlanguagev-8595](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandpreferredlanguagev-8595.html#irccandpreferredlanguagev-8595)
+
+## Columns
+
+- PERSON_ID
+- LANGUAGE_CODE
+- CANDIDATE_NUMBER
+
+## Query
+
+```sql
+SELECT C.PERSON_ID, (CASE WHEN EXISTS (select 1 from per_person_type_usages_m u where ( (EXISTS (SELECT 1 FROM fnd_profile_options profileoptions, fnd_profile_option_values profileoptionvalues WHERE profileoptions.profile_option_name = 'IRC_TREAT_CWK_AS_EXTERNAL' AND profileoptions.profile_option_id = profileoptionvalues.profile_option_id AND profileoptionvalues.profile_option_value = 'Y' AND profileoptionvalues.LEVEL_VALUE='SITE') AND u.system_person_type IN ( 'EMP' )) OR (NOT EXISTS (SELECT 1 FROM fnd_profile_options profileoptions, fnd_profile_option_values profileoptionvalues WHERE profileoptions.profile_option_name = 'IRC_TREAT_CWK_AS_EXTERNAL' AND profileoptions.profile_option_id = profileoptionvalues.profile_option_id AND profileoptionvalues.profile_option_value = 'Y' AND profileoptionvalues.LEVEL_VALUE='SITE') AND u.system_person_type IN ( 'EMP','CWK' ) )) and c.person_id = u.person_id and trunc(sysdate) between u.effective_start_date and u.effective_end_date and u.effective_latest_change = 'Y') THEN (SELECT fnd.language_code FROM FND_PROFILE_OPTIONS_B b, fnd_profile_option_values v, per_users per, fnd_languages_vl fnd WHERE v.level_value = per.user_guid AND b.profile_option_id = v.profile_option_id AND per.person_id is NOT null AND b.profile_option_name = 'FND_LANGUAGE' AND v.level_name = 'USER' AND v.PROFILE_OPTION_VALUE = fnd.language_tag AND fnd.activation_status = 'ACTIVE' AND per.person_id = C.person_id) ELSE (C.CAND_PREF_LANGUAGE_CODE) END ) AS LANGUAGE_CODE, C.CANDIDATE_NUMBER FROM IRC_CANDIDATES C
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

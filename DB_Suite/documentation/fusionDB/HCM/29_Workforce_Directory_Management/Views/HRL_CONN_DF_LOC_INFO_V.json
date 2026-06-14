@@ -1,0 +1,24 @@
+{
+  "name": "HRL_CONN_DF_LOC_INFO_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HRL",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrlconndflocinfov-3893.html#hrlconndflocinfov-3893",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "PK1_NUM_VALUE",
+    "PK2_NUM_VALUE",
+    "PK3_NUM_VALUE",
+    "PK1_CHAR_VALUE",
+    "PK2_CHAR_VALUE",
+    "DIRECT_REPORTS_CNT",
+    "ALL_REPORTS_CNT",
+    "ALL_REPORTS_EMP_CNT",
+    "ALL_REPORTS_CWK_CNT",
+    "ALL_REPORTS_NWK_CNT"
+  ],
+  "query": "select person_id, assignment_id, location_id pk1_num_value, null pk2_num_value, null pk3_num_value, null pk1_char_value, null pk2_char_value, DIRECT_REPORTS_CNT, ALL_REPORTS_CNT, ALL_REPORTS_EMP_CNT,ALL_REPORTS_CWK_CNT,ALL_REPORTS_NWK_CNT from ( select manager_id person_id, manager_assignment_id assignment_id , paam.location_id, SUM(decode(manager_level, 1, 1, 0)) DIRECT_REPORTS_CNT, count(1) ALL_REPORTS_CNT, sum(decode(assignment_type,'E',1,0)) ALL_REPORTS_EMP_CNT, sum(decode(assignment_type,'C',1,0)) ALL_REPORTS_CWK_CNT, sum(decode(assignment_type,'N',1,0)) ALL_REPORTS_NWK_CNT from per_manager_hrchy_dn pmdh, hrl_conn_public_workers_v paam where pmdh.person_id = paam.person_id and pmdh.assignment_id = paam.assignment_id and trunc(sysdate) between pmdh.effective_start_date and pmdh.effective_end_date and trunc(sysdate) between paam.effective_start_date and paam.effective_end_date and paam.effective_latest_change = 'Y' and paam.assignment_type IN ('E','C','N') and paam.assignment_status_type IN ( 'ACTIVE' , 'SUSPENDED' ) and exists (select 1 from per_all_assignments_m where person_id = pmdh.manager_id and assignment_id = pmdh.manager_assignment_id and trunc(sysdate) between effective_start_date and effective_end_date and effective_latest_change = 'Y' and assignment_type IN ('E','C','N') and assignment_status_type IN ( 'ACTIVE' , 'SUSPENDED' )) group by pmdh.manager_id, pmdh.manager_assignment_id, paam.location_id )",
+  "_parsed_at": "2026-06-09T19:29:46"
+}

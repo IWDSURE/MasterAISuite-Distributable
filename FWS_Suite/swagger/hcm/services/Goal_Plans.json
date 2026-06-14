@@ -1,0 +1,4798 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Goal Plans",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/goalPlans": {
+      "get": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Get all goal plans",
+        "operationId": "getall_goalPlans",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CanDelHRGoal; string; Indicates the actions managers and workers can perform on performance goals assigned by the HR specialist.</li><li>CanDelHRGoalMeaning; string; Description corresponding to the actions managers and workers can perform on performance goals assigned by the HR specialist.</li><li>CreatedBy; string; User who created the goal plan.</li><li>CreationDate; string; Date the goal plan was created.</li><li>Description; string; Description of the goal plan.</li><li>EnableWeightingFlag; boolean; Indicates whether weights are enabled for the goals in the goal plan.</li><li>EndDate; string; End date of the goal plan.</li><li>EnforceGoalWeightFlag; boolean; Indicates if the sum of weights of goals in the goal plan can exceed 100% or not.</li><li>EnforceMaximumGoalsInGpFlag; boolean; Indicates if maximum goals in goal plan is enforced or not.</li><li>EvaluationType; string; Specifies the type of evaluation in the performance document template. Goal plans that have the same evaluation type as that defined in the performance template are automatically added as evaluation topics.</li><li>EvaluationTypeMeaning; string; Description of the evaluation type.</li><li>GoalAccessLevelCode; string; Code that specifies the roles that can access the goals in the goal plan.</li><li>GoalAccessLevelMeaning; string; Description of the goal access level code. This value is validated against HCM_LOOKUPS with the lookup type HRG_GOAL_ACCESS_LEVELS.</li><li>GoalPlanActiveCode; string; Indicates if the goal plan is active or inactive. Valid values are A and I.</li><li>GoalPlanActiveCodeMeaning; string; Description of the goal plan active indicator. This value is validated against HCM_LOOKUPS with lookup type ACTIVE_INACTIVE.</li><li>GoalPlanExternalId; string; Unique external identifier of the goal plan.</li><li>GoalPlanId; integer; Unique identifier of the goal plan.</li><li>GoalPlanName; string; Name of the goal plan.</li><li>GoalPlanTypeCode; string; Indicates the type of goal plan. The default value is Worker.</li><li>GoalSettingEndDate; string; End date of the goal setting period.</li><li>GoalSettingStartDate; string; Start date of the goal setting period.</li><li>GoalSubTypeCode; string; Indicates the type of goal plan. The default value is Worker.</li><li>GoalSubTypeLookupCode; string; Code that indicates the goal's subtype.</li><li>GoalSubTypeMeaning; string; Code used in HCM_LOOKUPS for the goal's subtype.</li><li>GoalsCount; integer; Count of performance goals in the goal plan.</li><li>LastUpdateDate; string; Date the goal plan was last updated.</li><li>LastUpdatedBy; string; User who last updated the goal plan.</li><li>MassRequestId; integer; Unique identifier for the goal plan mass request.</li><li>MaximumGoalsNumberInGoalPlan; integer; Maximum goals allowed in the goal plan.</li><li>MinimumGoalsNumberInGoalPlan; integer; Minimum number of goals that the goal plan needs to have.</li><li>PrimaryGoalPlanFlag; boolean; Indicates if the goal plan is the primary goal plan.</li><li>RequestStatus; string; Status of the performance document synchronization process.</li><li>RestrictGoalCreationFlag; boolean; Indicates if goals can be added to the goal plan after the end of the goal setting period.</li><li>RestrictGoalUpdateFlag; boolean; Indicates if goals in the goal plan can be updated after the end of the goal setting period.</li><li>ReviewPeriodId; integer; Unique identifier of the review period associated with the goal plan.</li><li>ReviewPeriodName; string; Name of the review period.</li><li>StartDate; string; Start date of the goal plan.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all goal plans that match the primary key criteria specified. <br>Finder Variables <ul><li>GoalPlanId; integer;  Unique identifier of the goal plan. </li></ul></li><li>findbyAdvanceSearch Finds all goal plans that match the criteria specified. The criteria can be weights enabled, review period name, or active goal plans. <br>Finder Variables <ul><li>EnableWeightingFlag; string;  Indicates whether weights are enabled for the goal plan. </li><li>EndDate; string;  End date of the goal plan. </li><li>GoalPlanActiveCode; string;  Indicates if the goal plan is active or inactive. Valid values are A and I. </li><li>GoalPlanExternalId; string;  Unique identifier for the review period associated with the goal plan. </li><li>GoalSubTypeCode; string;  Code that indicates the goal plan's subtype. </li><li>ReviewPeriodId; string;  Finds all goal plans that match the primary key criteria specified. </li><li>StartDate; string;  Start date of the goal plan. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all goal plans that match the primary key criteria specified.",
+                "properties": {
+                  "GoalPlanId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of the goal plan.",
+                    "type": "integer",
+                    "title": "Goal Plan Name"
+                  }
+                }
+              },
+              {
+                "name": "findbyAdvanceSearch",
+                "description": "Finds all goal plans that match the criteria specified. The criteria can be weights enabled, review period name, or active goal plans.",
+                "title": "findbyAdvanceSearch",
+                "properties": {
+                  "StartDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Start date of the goal plan.",
+                    "type": "string"
+                  },
+                  "GoalPlanActiveCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates if the goal plan is active or inactive. Valid values are A and I.",
+                    "type": "string"
+                  },
+                  "ReviewPeriodId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds all goal plans that match the primary key criteria specified.",
+                    "type": "string"
+                  },
+                  "GoalPlanExternalId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the review period associated with the goal plan.",
+                    "type": "string"
+                  },
+                  "GoalSubTypeCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Code that indicates the goal plan's subtype.",
+                    "type": "string"
+                  },
+                  "EndDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "End date of the goal plan.",
+                    "type": "string"
+                  },
+                  "EnableWeightingFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates whether weights are enabled for the goal plan.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans"
+                }
+              }
+            },
+            "links": {
+              "importGoals": {
+                "operationRef": "#/paths/~1goalPlans~1action~1importGoals/post",
+                "description": "Imports performance goals from a mass assignment request and creates a new mass assignment request."
+              },
+              "essProcessTrigger": {
+                "operationRef": "#/paths/~1goalPlans~1action~1essProcessTrigger/post",
+                "description": "Invokes a process that synchronizes goals with performance documents that have the same review period and performance document type."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1goalPlans~1action~1findByAdvancedSearchQuery/post",
+                "description": "Finds a goal plan that matches the specified goal plan name."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-get",
+        "x-filename-id": "goalplans-get"
+      },
+      "post": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Create a goal plan",
+        "operationId": "create_goalPlans",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/goalPlans-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-item-response"
+                }
+              }
+            },
+            "links": {
+              "goalPlansDFF": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1goalPlansDFF/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                }
+              },
+              "perfGoalIncludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalIncludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan."
+              },
+              "associatedPerfDocumentTypes": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1associatedPerfDocumentTypes/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan."
+              },
+              "perfGoalExcludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalExcludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan."
+              },
+              "perfGoalEligibilityProfiles": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalEligibilityProfiles/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan."
+              },
+              "performanceGoals": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The performanceGoalsV2 resource provides performance goals of workers."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-post",
+        "x-filename-id": "goalplans-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}": {
+      "get": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Get a goal plan",
+        "operationId": "get_goalPlans",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-item-response"
+                }
+              }
+            },
+            "links": {
+              "goalPlansDFF": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1goalPlansDFF/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                }
+              },
+              "perfGoalIncludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalIncludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan."
+              },
+              "associatedPerfDocumentTypes": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1associatedPerfDocumentTypes/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan."
+              },
+              "perfGoalExcludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalExcludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan."
+              },
+              "perfGoalEligibilityProfiles": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalEligibilityProfiles/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan."
+              },
+              "performanceGoals": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The performanceGoalsV2 resource provides performance goals of workers."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-get",
+        "x-filename-id": "goalplans-goalplanid-get"
+      },
+      "delete": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Delete a goal plan",
+        "operationId": "delete_goalPlans",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-delete",
+        "x-filename-id": "goalplans-goalplanid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Update a goal plan",
+        "operationId": "update_goalPlans",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/goalPlans-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-item-response"
+                }
+              }
+            },
+            "links": {
+              "goalPlansDFF": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1goalPlansDFF/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                }
+              },
+              "perfGoalIncludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalIncludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan."
+              },
+              "associatedPerfDocumentTypes": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1associatedPerfDocumentTypes/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan."
+              },
+              "perfGoalExcludedWorkers": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalExcludedWorkers/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan."
+              },
+              "perfGoalEligibilityProfiles": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1perfGoalEligibilityProfiles/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan."
+              },
+              "performanceGoals": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals/get",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "The performanceGoalsV2 resource provides performance goals of workers."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-patch",
+        "x-filename-id": "goalplans-goalplanid-patch"
+      }
+    },
+    "/goalPlans/action/essProcessTrigger": {
+      "post": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Sync with performance documents",
+        "description": "Invokes a process that synchronizes goals with performance documents that have the same review period and performance document type.",
+        "operationId": "doall_essProcessTrigger_goalPlans",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "List of parameters needed for the performance document synchronization process.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Unique identifier for the performance document synchronization process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Unique identifier for the performance document synchronization process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-action-essProcessTrigger-post",
+        "x-filename-id": "goalplans-action-essprocesstrigger-post"
+      }
+    },
+    "/goalPlans/action/importGoals": {
+      "post": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Import performance goals",
+        "description": "Imports performance goals from a mass assignment request and creates a new mass assignment request.",
+        "operationId": "doall_importGoals_goalPlans",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reviewPeriodId": {
+                    "type": "number",
+                    "description": "Unique identifier for the review period associated with the target mass assignment request.",
+                    "nullable": true
+                  },
+                  "inputPayload": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Details of the performance goals that needs to be imported. It includes attributes such as the goal name and goal description.",
+                    "nullable": true
+                  },
+                  "massRequestId": {
+                    "type": "number",
+                    "description": "Unique identifier for the source mass assignment request.",
+                    "nullable": true
+                  },
+                  "targetMassRequestId": {
+                    "type": "number",
+                    "description": "Unique identifier for the target mass assignment request.",
+                    "nullable": true
+                  },
+                  "goalPlanId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal plan associated with the target mass assignment request.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "New mass assignment request that has the performance goals included in the source mass assignment request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "New mass assignment request that has the performance goals included in the source mass assignment request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-action-importGoals-post",
+        "x-filename-id": "goalplans-action-importgoals-post"
+      }
+    },
+    "/goalPlans/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "Goal Plans"
+        ],
+        "summary": "Find a goal plan",
+        "description": "Finds a goal plan that matches the specified goal plan name.",
+        "operationId": "doall_findByAdvancedSearchQuery_goalPlans",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Defines the starting position of the resource collection. If the offset exceeds the resource count, then no resources are returned. Default value is 0.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Defines the where clause for the search. The resource collection is queried using the provided expressions. The value of this query parameter is one or more expressions.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Restriction for the number of goal plans returned. If the limit exceeds the resource count, then the framework returns only the available goal plans.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search fields for the find a goal plan keyword query. The search field can be the goal plan name.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Facet filters for the goal plan search. These filters can include attributes such as the goal plan name, status, and weight.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort criteria for the goal plan search. The criteria can include the goal plan name.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Display fields for the goal plan search response. The display fields can include fields such as the goal plan name, review period name, and last update date for the goal plan.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "Indicates whether the query is auto completed. Valid values are Y and N. The default value is Y.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for the find a goal plan action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for the find a goal plan action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "goalplans-action-findbyadvancedsearchquery-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "goalPlans": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject",
+          "isCompactViewByDefault": true
+        }
+      },
+      "goalPlans-item-response": {
+        "type": "object",
+        "properties": {
+          "Assignees": {
+            "title": "Assignees",
+            "type": "integer",
+            "description": "Number of goal plan assignees.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CanDelHRGoal": {
+            "title": "Actions for Workers and Managers on HR-Assigned Goals",
+            "maxLength": 60,
+            "type": "string",
+            "description": "Indicates the actions managers and workers can perform on performance goals assigned by the HR specialist.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CanDelHRGoalMeaning": {
+            "title": "Actions for Workers and Managers on HR-Assigned Goals",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description corresponding to the actions managers and workers can perform on performance goals assigned by the HR specialist.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date the goal plan was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the goal plan.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EnableWeightingFlag": {
+            "title": "Enable weights",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether weights are enabled for the goals in the goal plan.",
+            "nullable": true,
+            "default": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EnforceGoalWeightFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the sum of weights of goals in the goal plan can exceed 100% or not.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EnforceMaximumGoalsInGpFlag": {
+            "title": "Enforce maximum goals",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if maximum goals in goal plan is enforced or not.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EvaluationType": {
+            "title": "Evaluation Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Specifies the type of evaluation in the performance document template. Goal plans that have the same evaluation type as that defined in the performance template are automatically added as evaluation topics.",
+            "nullable": true,
+            "default": "ORA_HRA_EVAL_TYPE_DEFAULT",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EvaluationTypeMeaning": {
+            "title": "Evaluation Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the evaluation type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalAccessLevelCode": {
+            "title": "Allow Updates to Goals By",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that specifies the roles that can access the goals in the goal plan.",
+            "nullable": true,
+            "default": "ALL",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalAccessLevelMeaning": {
+            "title": "Allow Updates to Goals By",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the goal access level code. This value is validated against HCM_LOOKUPS with the lookup type HRG_GOAL_ACCESS_LEVELS.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanActiveCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the goal plan is active or inactive. Valid values are A and I.",
+            "nullable": true,
+            "default": "A",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanActiveCodeMeaning": {
+            "title": "Status",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the goal plan active indicator. This value is validated against HCM_LOOKUPS with lookup type ACTIVE_INACTIVE.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanExternalId": {
+            "title": "External ID",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Unique external identifier of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan Name",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanName": {
+            "title": "Goal Plan Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanTypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": false,
+            "default": "ORA_HRG_WORKER",
+            "x-queryable": true
+          },
+          "GoalSettingEndDate": {
+            "title": "End Date for Setting Goals",
+            "type": "string",
+            "description": "End date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalSettingStartDate": {
+            "title": "Start Date for Setting Goals",
+            "type": "string",
+            "description": "Start date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalSubTypeLookupCode": {
+            "title": "Lookup Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalSubTypeMeaning": {
+            "title": "Subtype",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code used in HCM_LOOKUPS for the goal's subtype.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalsCount": {
+            "type": "integer",
+            "description": "Count of performance goals in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date the goal plan was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the goal plan mass request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MaximumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Maximum goals allowed in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Minimum number of goals that the goal plan needs to have.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "NbrOfPDConsumed": {
+            "type": "integer",
+            "description": "Number of performance documents in which the performance goal is included.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PrimaryGoalPlanFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the goal plan is the primary goal plan.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "RequestStatus": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the performance document synchronization process.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RestrictGoalCreationFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals can be added to the goal plan after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "RestrictGoalUpdateFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals in the goal plan can be updated after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ReviewPeriodId": {
+            "title": "Review Period",
+            "type": "integer",
+            "description": "Unique identifier of the review period associated with the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ReviewPeriodName": {
+            "title": "Review Period",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the review period.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "associatedPerfDocumentTypes": {
+            "title": "Associated Performance Document Types",
+            "type": "array",
+            "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-associatedPerfDocumentTypes-item-response"
+            }
+          },
+          "goalPlansDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-goalPlansDFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "perfGoalEligibilityProfiles": {
+            "title": "Performance Goal Eligibility Profiles",
+            "type": "array",
+            "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalEligibilityProfiles-item-response"
+            }
+          },
+          "perfGoalExcludedWorkers": {
+            "title": "Performance Goal Excluded Workers",
+            "type": "array",
+            "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalExcludedWorkers-item-response"
+            }
+          },
+          "perfGoalIncludedWorkers": {
+            "title": "Performance Goal Included Workers",
+            "type": "array",
+            "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalIncludedWorkers-item-response"
+            }
+          },
+          "performanceGoals": {
+            "title": "Performance Goals",
+            "type": "array",
+            "description": "The performanceGoalsV2 resource provides performance goals of workers.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-response"
+            }
+          }
+        }
+      },
+      "goalPlans-associatedPerfDocumentTypes-item-response": {
+        "type": "object",
+        "properties": {
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the performance document type associated with the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date the performance document type associated with the goal plan was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanDocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date the performance document type associated with the goal plan was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the performance document type associated with the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the performance document type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "goalPlans-goalPlansDFF-item-response": {
+        "type": "object",
+        "properties": {
+          "GoalPlanId": {
+            "title": "Goal Plan Name",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalEligibilityProfiles-item-response": {
+        "type": "object",
+        "properties": {
+          "EligObjId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile that's included in the mass assignment process.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EligibilityProfileDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the eligibility profile associated with the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EligibilityProfileId": {
+            "title": "Eligibility Profile",
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EligibilityProfileName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the eligibility profile associated with the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EligibilityProfileObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile in the associated goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates if the eligibility profile is required or not.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "TalentObjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of talent object associated with the eligibility profile. For Goal Management, the talent object type is goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalExcludedWorkers-item-response": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker excluded from the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentName": {
+            "title": "Assignment Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the excluded worker's assignment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "AssignmentNumber": {
+            "title": "Assignment Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Assignment number of the excluded worker.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "AssignmentStatusType": {
+            "title": "Assignment Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status type for the assignment of the excluded worker.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "BusinessTitle": {
+            "title": "Job",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business title of the excluded worker.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Name of the person who excluded the worker from the goal plan assignment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date the worker was excluded from the goal plan assignment.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DepartmentName": {
+            "title": "Department",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the excluded worker's department.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DisplayName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the worker who's excluded from the goal plan assignment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Global user ID of the excluded worker.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Date the details of the worker excluded from the goal plan was last updated.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ManagerName": {
+            "title": "Manager Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the person who last updated the details of the worker who's excluded from the goal plan assignment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "MassRequestExemptionId": {
+            "type": "integer",
+            "description": "Name of the excluded worker's manager.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MassRequestHierarchyId": {
+            "type": "integer",
+            "description": "Type of manager that excluded the worker.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "default": -1,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier for the mass request hierarchy.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "title": "Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the mass goal plan assignment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "PositionName": {
+            "title": "Position",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the excluded worker.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalIncludedWorkers-item-response": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "title": "Manager Assignment",
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentName": {
+            "title": "Assignment Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the assignment of the worker included in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "AssignmentNumber": {
+            "title": "Assignment Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Assignment number of the worker included in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AssignmentStatusType": {
+            "title": "Assignment Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Assignment status type of the worker included in the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "BusinessTitle": {
+            "title": "Job",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business title of the worker included in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CascadingLevel": {
+            "title": "Assignees",
+            "type": "integer",
+            "description": "Code that determines which employees reporting to the requester will be assigned the performance goals in the goal plan. The performance goals can be assigned only to the requester, all direct reports of the requester, requester and their direct reports, all persons reporting to the requester, and requester and all persons reporting to the requester.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who added the worker to the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date the worker was included in the goal plan.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DepartmentName": {
+            "title": "Department",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the department that the included worker belongs to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DirectsCount": {
+            "type": "integer",
+            "description": "Count of direct reports of a manager.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DisplayName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the included worker.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date the details of the worker included in the goal plan was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the details of the worker included in the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ManagerName": {
+            "title": "Manager Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the manager of the included worker.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "MassRequestHierarchyId": {
+            "title": "Mass Request Hierarchy ID",
+            "type": "integer",
+            "description": "Unique identifier for the mass request hierarchy.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "title": "Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Person number of the worker included in the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "PositionName": {
+            "title": "Position",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the position of the worker included in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-response": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true,
+            "x-queryable": true
+          },
+          "AssignedByPersonId": {
+            "title": "Assigned by Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the HR specialist or manager who assigns the performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentNumber": {
+            "title": "Assignment Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique assignment number for a worker assignment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "CategoryMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description for the associated category code of a performance goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date the performance goal was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "GoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for a performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanEndDate": {
+            "title": "Goal Plan End Date",
+            "type": "string",
+            "description": "End date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanGoalId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan ID",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanName": {
+            "title": "Goal Plan Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanStartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanWeightEnabled": {
+            "type": "string",
+            "description": "Indicates whether weights are enabled for the goals in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalSourceCode": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Source code that indicates who created the performance goal. A performance goal can be created by a worker, a manager, or an HR specialist.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "GoalSubtypeMeaning": {
+            "title": "Subtype",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code used in HCM_LOOKUPS for the goal's subtype.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE",
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "description": "Date the performance goal was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "LevelMeaning": {
+            "title": "Level",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Performance goal level, which can be Target or Stretch.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoggedInPersonType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique person identifier for the logged in person.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the mass assignment or mass share request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "title": "Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the worker who's assigned the performance goal.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "title": "Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Person number of the worker who's assigned the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "PriorityMeaning": {
+            "title": "Priority",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Priority of the performance goal, which can be High, Medium, or Low.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false,
+            "x-queryable": true
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequestContext": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Page from which the performance goal was created. Performance goals can be created on the employee's Goals page, the manager page, or the goal administrator page.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodEndDate": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "End Date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ReviewPeriodName": {
+            "title": "Review Period",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the review period.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReviewPeriodStartDate": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Start Date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "StatusMeaning": {
+            "title": "Status",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of the performance goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "goalPlans-item-post-request": {
+        "required": [
+          "EndDate",
+          "GoalPlanName",
+          "StartDate"
+        ],
+        "type": "object",
+        "properties": {
+          "CanDelHRGoal": {
+            "title": "Actions for Workers and Managers on HR-Assigned Goals",
+            "maxLength": 60,
+            "type": "string",
+            "description": "Indicates the actions managers and workers can perform on performance goals assigned by the HR specialist.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the goal plan.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnableWeightingFlag": {
+            "title": "Enable weights",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether weights are enabled for the goals in the goal plan.",
+            "nullable": true,
+            "default": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnforceGoalWeightFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the sum of weights of goals in the goal plan can exceed 100% or not.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnforceMaximumGoalsInGpFlag": {
+            "title": "Enforce maximum goals",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if maximum goals in goal plan is enforced or not.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EvaluationType": {
+            "title": "Evaluation Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Specifies the type of evaluation in the performance document template. Goal plans that have the same evaluation type as that defined in the performance template are automatically added as evaluation topics.",
+            "nullable": true,
+            "default": "ORA_HRA_EVAL_TYPE_DEFAULT",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalAccessLevelCode": {
+            "title": "Allow Updates to Goals By",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that specifies the roles that can access the goals in the goal plan.",
+            "nullable": true,
+            "default": "ALL",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanActiveCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the goal plan is active or inactive. Valid values are A and I.",
+            "nullable": true,
+            "default": "A",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanExternalId": {
+            "title": "External ID",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Unique external identifier of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan Name",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanName": {
+            "title": "Goal Plan Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanTypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": false,
+            "default": "ORA_HRG_WORKER"
+          },
+          "GoalSettingEndDate": {
+            "title": "End Date for Setting Goals",
+            "type": "string",
+            "description": "End date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSettingStartDate": {
+            "title": "Start Date for Setting Goals",
+            "type": "string",
+            "description": "Start date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the goal plan mass request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MaximumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Maximum goals allowed in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "MinimumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Minimum number of goals that the goal plan needs to have.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PrimaryGoalPlanFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the goal plan is the primary goal plan.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "RequestStatus": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the performance document synchronization process.",
+            "nullable": true
+          },
+          "RestrictGoalCreationFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals can be added to the goal plan after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "RestrictGoalUpdateFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals in the goal plan can be updated after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ReviewPeriodId": {
+            "title": "Review Period",
+            "type": "integer",
+            "description": "Unique identifier of the review period associated with the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "associatedPerfDocumentTypes": {
+            "title": "Associated Performance Document Types",
+            "type": "array",
+            "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-associatedPerfDocumentTypes-item-post-request"
+            }
+          },
+          "goalPlansDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-goalPlansDFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "perfGoalEligibilityProfiles": {
+            "title": "Performance Goal Eligibility Profiles",
+            "type": "array",
+            "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalEligibilityProfiles-item-post-request"
+            }
+          },
+          "perfGoalExcludedWorkers": {
+            "title": "Performance Goal Excluded Workers",
+            "type": "array",
+            "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalExcludedWorkers-item-post-request"
+            }
+          },
+          "perfGoalIncludedWorkers": {
+            "title": "Performance Goal Included Workers",
+            "type": "array",
+            "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalIncludedWorkers-item-post-request"
+            }
+          },
+          "performanceGoals": {
+            "title": "Performance Goals",
+            "type": "array",
+            "description": "The performanceGoalsV2 resource provides performance goals of workers.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-post-request"
+            }
+          }
+        }
+      },
+      "goalPlans-associatedPerfDocumentTypes-item-post-request": {
+        "type": "object",
+        "properties": {
+          "DocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanDocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          }
+        }
+      },
+      "goalPlans-goalPlansDFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "GoalPlanId": {
+            "title": "Goal Plan Name",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalEligibilityProfiles-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EligObjId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile that's included in the mass assignment process.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EligibilityProfileId": {
+            "title": "Eligibility Profile",
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "EligibilityProfileObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile in the associated goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates if the eligibility profile is required or not.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TalentObjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of talent object associated with the eligibility profile. For Goal Management, the talent object type is goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalExcludedWorkers-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker excluded from the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "MassRequestExemptionId": {
+            "type": "integer",
+            "description": "Name of the excluded worker's manager.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier for the mass request hierarchy.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "goalPlans-perfGoalIncludedWorkers-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "title": "Manager Assignment",
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "CascadingLevel": {
+            "title": "Assignees",
+            "type": "integer",
+            "description": "Code that determines which employees reporting to the requester will be assigned the performance goals in the goal plan. The performance goals can be assigned only to the requester, all direct reports of the requester, requester and their direct reports, all persons reporting to the requester, and requester and all persons reporting to the requester.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "MassRequestHierarchyId": {
+            "title": "Mass Request Hierarchy ID",
+            "type": "integer",
+            "description": "Unique identifier for the mass request hierarchy.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true
+          },
+          "AssignedByPersonId": {
+            "title": "Assigned by Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the HR specialist or manager who assigns the performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true
+          },
+          "GoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for a performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanGoalId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan ID",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "GoalSourceCode": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Source code that indicates who created the performance goal. A performance goal can be created by a worker, a manager, or an HR specialist.",
+            "nullable": false
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE"
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the mass assignment or mass share request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true
+          },
+          "PersonId": {
+            "title": "Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the worker who's assigned the performance goal.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true
+          },
+          "RequestContext": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Page from which the performance goal was created. Performance goals can be created on the employee's Goals page, the manager page, or the goal administrator page.",
+            "nullable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            }
+          }
+        }
+      },
+      "goalPlans-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CanDelHRGoal": {
+            "title": "Actions for Workers and Managers on HR-Assigned Goals",
+            "maxLength": 60,
+            "type": "string",
+            "description": "Indicates the actions managers and workers can perform on performance goals assigned by the HR specialist.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the goal plan.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnableWeightingFlag": {
+            "title": "Enable weights",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether weights are enabled for the goals in the goal plan.",
+            "nullable": true,
+            "default": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnforceGoalWeightFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the sum of weights of goals in the goal plan can exceed 100% or not.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EnforceMaximumGoalsInGpFlag": {
+            "title": "Enforce maximum goals",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if maximum goals in goal plan is enforced or not.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EvaluationType": {
+            "title": "Evaluation Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Specifies the type of evaluation in the performance document template. Goal plans that have the same evaluation type as that defined in the performance template are automatically added as evaluation topics.",
+            "nullable": true,
+            "default": "ORA_HRA_EVAL_TYPE_DEFAULT",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalAccessLevelCode": {
+            "title": "Allow Updates to Goals By",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that specifies the roles that can access the goals in the goal plan.",
+            "nullable": true,
+            "default": "ALL",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanActiveCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the goal plan is active or inactive. Valid values are A and I.",
+            "nullable": true,
+            "default": "A",
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanExternalId": {
+            "title": "External ID",
+            "maxLength": 250,
+            "type": "string",
+            "description": "Unique external identifier of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanName": {
+            "title": "Goal Plan Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the goal plan.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanTypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": false,
+            "default": "ORA_HRG_WORKER"
+          },
+          "GoalSettingEndDate": {
+            "title": "End Date for Setting Goals",
+            "type": "string",
+            "description": "End date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSettingStartDate": {
+            "title": "Start Date for Setting Goals",
+            "type": "string",
+            "description": "Start date of the goal setting period.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the type of goal plan. The default value is Worker.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MaximumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Maximum goals allowed in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "MinimumGoalsNumberInGoalPlan": {
+            "type": "integer",
+            "description": "Minimum number of goals that the goal plan needs to have.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PrimaryGoalPlanFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the goal plan is the primary goal plan.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "RequestStatus": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the performance document synchronization process.",
+            "nullable": true
+          },
+          "RestrictGoalCreationFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals can be added to the goal plan after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "RestrictGoalUpdateFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if goals in the goal plan can be updated after the end of the goal setting period.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ReviewPeriodId": {
+            "title": "Review Period",
+            "type": "integer",
+            "description": "Unique identifier of the review period associated with the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "associatedPerfDocumentTypes": {
+            "title": "Associated Performance Document Types",
+            "type": "array",
+            "description": "The associatedPerfDocumentTypes resource provides all performance document types associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-associatedPerfDocumentTypes-item-patch-request"
+            }
+          },
+          "goalPlansDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-goalPlansDFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "perfGoalEligibilityProfiles": {
+            "title": "Performance Goal Eligibility Profiles",
+            "type": "array",
+            "description": "The perfGoalEligibilityProfiles resource provides all eligibility profiles associated with a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalEligibilityProfiles-item-patch-request"
+            }
+          },
+          "perfGoalExcludedWorkers": {
+            "title": "Performance Goal Excluded Workers",
+            "type": "array",
+            "description": "The perfGoalExcludedWorkers resource is a child of the goalPlans resource and provides all workers excluded from the goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalExcludedWorkers-item-patch-request"
+            }
+          },
+          "perfGoalIncludedWorkers": {
+            "title": "Performance Goal Included Workers",
+            "type": "array",
+            "description": "The perfGoalInccludedWorkers resource provides all workers included in a goal plan.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-perfGoalIncludedWorkers-item-patch-request"
+            }
+          },
+          "performanceGoals": {
+            "title": "Performance Goals",
+            "type": "array",
+            "description": "The performanceGoalsV2 resource provides performance goals of workers.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-patch-request"
+            }
+          }
+        }
+      },
+      "goalPlans-associatedPerfDocumentTypes-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "DocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanDocumentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan document type.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanId": {
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          }
+        }
+      },
+      "goalPlans-goalPlansDFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalEligibilityProfiles-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EligObjId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile that's included in the mass assignment process.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EligibilityProfileId": {
+            "title": "Eligibility Profile",
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "EligibilityProfileObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the eligibility profile in the associated goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates if the eligibility profile is required or not.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          }
+        }
+      },
+      "goalPlans-perfGoalExcludedWorkers-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker excluded from the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier for the mass request hierarchy.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "goalPlans-perfGoalIncludedWorkers-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AssignmentId": {
+            "title": "Manager Assignment",
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "CascadingLevel": {
+            "title": "Assignees",
+            "type": "integer",
+            "description": "Code that determines which employees reporting to the requester will be assigned the performance goals in the goal plan. The performance goals can be assigned only to the requester, all direct reports of the requester, requester and their direct reports, all persons reporting to the requester, and requester and all persons reporting to the requester.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "title": "Person",
+            "type": "integer",
+            "description": "Unique identifier of the worker included in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SysEffectiveDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE"
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "goalPlans-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/goalPlans-item-post-request"
+            }
+          }
+        }
+      },
+      "goalPlans-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/goalPlans-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "name": "HR_NAME_FORMATS",
+  "object_type": "TABLE",
+  "description": "This table stores the setup data defining name formats, which are the rules for constructing various formatted names from individual name components",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrnameformats-31467.html#hrnameformats-31467",
+  "primary_keys": [
+    {
+      "name": "HR_NAME_FORMATS_PK",
+      "columns": "NAME_FORMAT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "NAME_FORMAT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated part of primary key. Surrogate key"
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "FORMAT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Identifies the type of formatted name this applies to"
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the legislation of the formatted name"
+    },
+    {
+      "Name": "USER_FORMAT_CHOICE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Identifies the target audience of the formatted name, whether the name is to be understood in a Global or a Local (legislation specific) context"
+    },
+    {
+      "Name": "FORMAT_MASK",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores coded string that system understands to use in constructing formatted names."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HR_NAME_FORMATS_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HR_NAME_FORMATS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "NAME_FORMAT_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_NAME_FORMATS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "NAME_FORMAT_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HR_NAME_FORMATS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, FORMAT_NAME, LEGISLATION_CODE, USER_FORMAT_CHOICE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_NAME_FORMATS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, FORMAT_NAME, LEGISLATION_CODE, USER_FORMAT_CHOICE, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:21:41"
+}

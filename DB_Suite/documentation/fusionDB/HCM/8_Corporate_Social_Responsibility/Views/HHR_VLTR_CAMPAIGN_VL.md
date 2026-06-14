@@ -1,0 +1,36 @@
+# HHR_VLTR_CAMPAIGN_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HHR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hhrvltrcampaignvl-6443.html#hhrvltrcampaignvl-6443](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hhrvltrcampaignvl-6443.html#hhrvltrcampaignvl-6443)
+
+## Columns
+
+- CAMPAIGN_ID
+- CAMPAIGN_NAME
+- CAMPAIGN_DESCRIPTION
+- START_DATE
+- END_DATE
+- STATUS
+- CREATED_BY
+- CREATOR_PERSON_ID
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT A.CAMPAIGN_ID CAMPAIGN_ID, B.CAMPAIGN_NAME, B.CAMPAIGN_DESCRIPTION, A.START_DATE START_DATE, A.END_DATE END_DATE, A.STATUS STATUS, A.CREATED_BY CREATED_BY, A.CREATOR_PERSON_ID CREATOR_PERSON_ID, A.CREATION_DATE CREATION_DATE, A.LAST_UPDATED_BY LAST_UPDATED_BY, A.LAST_UPDATE_DATE LAST_UPDATE_DATE, A.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN FROM HHR_VLTR_CAMPAIGN_B A, HHR_VLTR_CAMPAIGN_TL B WHERE A.CAMPAIGN_ID = B.CAMPAIGN_ID AND B.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../8_Corporate_Social_Responsibility_Views_Index.md)

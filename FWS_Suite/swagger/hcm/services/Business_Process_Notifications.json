@@ -1,0 +1,3156 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Business Process Notifications",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/businessProcessNotifications/action/getNotificationsForAllTaskDefinitions": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Business Process Notifications",
+        "description": "Business Process Notifications",
+        "operationId": "doall_getNotificationsForAllTaskDefinitions_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskDefinitionDetails": {
+                    "type": "string",
+                    "description": "Business Process Notifications",
+                    "nullable": true
+                  },
+                  "additionalAttributes": {
+                    "type": "string",
+                    "description": "Additional properties of notifications.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Business Process Notifications",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Business Process Notifications",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getNotificationsForAllTaskDefinitions-post",
+        "x-filename-id": "businessprocessnotifications-action-getnotificationsforalltaskdefinitions-post"
+      }
+    },
+    "/businessProcessNotifications": {
+      "get": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get all notification content",
+        "operationId": "getall_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>additionalTaskInformation; string; Lists details of attributes with corresponding values, and notification properties.</li><li>applicableActions; string; List of applicable actions for a task.</li><li>approvalHistory; string; History of the approval transaction.</li><li>approvers; string; Business Process Notifications</li><li>assignees; string; Business Process Notifications</li><li>content; string; Content of the approval transaction.</li><li>contentWithHistory; string; Content that includes approval history for the transaction.</li><li>contentWithoutHistory; string; Content that excludes approval history for the transaction.</li><li>creator; string; User who initiated the task.</li><li>fromUserDisplayName; string; User who submitted the transaction.</li><li>identificationKey; string; Identifier of the workflow tasks for a specific transaction.</li><li>lastUpdatedBy; string; User who last updated the task.</li><li>observerApprovalHistory; string; History of the approval transaction for an observer.</li><li>observerContentWithoutHistory; string; Content that excludes transaction approval history for an observer.</li><li>taskDefinitionName; string; Task definition name.</li><li>taskId; string; Identifier of the transaction to fetch the BIP notification content.</li><li>taskNumber; integer; Number of a particular task.</li><li>title; string; Title of the task.</li><li>updatedDate; string; Date when the notification was last updated.</li><li>workFlowPattern; string; Workflow pattern of a task.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the notification content for the specified task identifier. <br>Finder Variables <ul><li>taskId; string;  Identifier for the task used to find the notification content. </li></ul></li><li>filterBy Finds all the notification content based on a specified task identifier or a task definition name. <br>Finder Variables <ul><li>additionalAttributes; string;  Business Process Notifications </li><li>advancedFilters; string;  List of additional filters based on multiple column values of the task. </li><li>customQueryType; string;  Keyword to logically identify database column filters for fetching notifications using custom query. </li><li>identificationKeys; string;  List of transaction identifiers to get the notification content. </li><li>taskDefinitions; string;  List of task definition names to get the notification content. </li><li>taskIds; string;  List of task identifiers to get the notification content. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the notification content for the specified task identifier.",
+                "properties": {
+                  "taskId": {
+                    "nullable": true,
+                    "description": "Identifier for the task used to find the notification content.",
+                    "readOnly": true,
+                    "type": "string",
+                    "maxLength": 255
+                  }
+                }
+              },
+              {
+                "name": "filterBy",
+                "description": "Finds all the notification content based on a specified task identifier or a task definition name.",
+                "title": "filterBy",
+                "properties": {
+                  "customQueryType": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Keyword to logically identify database column filters for fetching notifications using custom query.",
+                    "type": "string"
+                  },
+                  "taskDefinitions": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of task definition names to get the notification content.",
+                    "type": "string"
+                  },
+                  "taskIds": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of task identifiers to get the notification content.",
+                    "type": "string"
+                  },
+                  "advancedFilters": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of additional filters based on multiple column values of the task.",
+                    "type": "string"
+                  },
+                  "additionalAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Business Process Notifications",
+                    "type": "string"
+                  },
+                  "identificationKeys": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of transaction identifiers to get the notification content.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/businessProcessNotifications"
+                }
+              }
+            },
+            "links": {
+              "fetchApprovalHistory": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1fetchApprovalHistory/post",
+                "description": "Gets the approval history of a transaction for which the identification key is passed."
+              },
+              "translateTaskTitleAttributeValues": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1translateTaskTitleAttributeValues/post",
+                "description": "Generates translated parameter values for the notification title in all available languages."
+              },
+              "getDeeplinkForResumeTransaction": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getDeeplinkForResumeTransaction/post",
+                "description": "Generates a deep link URL to resume a saved transaction."
+              },
+              "performActionOnBulkTransactionWithComments": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1performActionOnBulkTransactionWithComments/post",
+                "description": "Performs action on multiple transactions that are applicable to each task with comments."
+              },
+              "getActionsBasedOnIdentificationKey": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getActionsBasedOnIdentificationKey/post",
+                "description": "Retrieves the list of actions that can be performed on the task based on the identifier."
+              },
+              "performAction": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1performAction/post",
+                "description": "Performs actions that are applicable to a particular task."
+              },
+              "getDeeplinkUrlForEditAction": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getDeeplinkUrlForEditAction/post",
+                "description": "Generates a deep link URL for the edit action for a specific task."
+              },
+              "getBIPContent": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getBIPContent/post",
+                "description": "Gets BIP notification content for a given report metadata and report parameter values."
+              },
+              "getContextForLoggedInUser": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getContextForLoggedInUser/post",
+                "description": "Gets user context for logged in user to retrieve worklist notifications."
+              },
+              "performDismissAction": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1performDismissAction/post",
+                "description": "Dismisses a selected notification."
+              },
+              "getActionsBasedOnTaskId": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getActionsBasedOnTaskId/post",
+                "description": "Retrieves the list of task actions using the task identifier."
+              },
+              "getTotalNotificationCounts": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getTotalNotificationCounts/post",
+                "description": "Gets notification count for each task."
+              },
+              "getNotificationsForAllTaskDefinitions": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getNotificationsForAllTaskDefinitions/post",
+                "description": "Business Process Notifications"
+              },
+              "getApplicableActionsForBulkTransactions": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getApplicableActionsForBulkTransactions/post",
+                "description": "Gets all applicable actions for the selected transactions."
+              },
+              "downloadAttachmentData": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1downloadAttachmentData/post",
+                "description": "Downloads the attachment content in string format."
+              },
+              "getNotificationCountForAllTaskDefinitions": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getNotificationCountForAllTaskDefinitions/post",
+                "description": "Gets notification count for each task."
+              },
+              "getTransactionDetailsForShifts": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getTransactionDetailsForShifts/post",
+                "description": "Gets all details for transactions or groups."
+              },
+              "performActionWithComments": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1performActionWithComments/post",
+                "description": "Performs action on a transaction applicable to a particular task with comments."
+              },
+              "getActionsMap": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1getActionsMap/post",
+                "description": "Retrieves the list of task actions based on the specified task identifier or transaction identifier."
+              },
+              "fetchCommentsAttachments": {
+                "operationRef": "#/paths/~1businessProcessNotifications~1action~1fetchCommentsAttachments/post",
+                "description": "Gets comments and attachments of a transaction for which the identification key is passed."
+              }
+            }
+          }
+        },
+        "x-internal-id": "businessProcessNotifications-get",
+        "x-filename-id": "businessprocessnotifications-get"
+      }
+    },
+    "/businessProcessNotifications/action/fetchApprovalHistory": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get the approval history of a transaction",
+        "description": "Gets the approval history of a transaction for which the identification key is passed.",
+        "operationId": "doall_fetchApprovalHistory_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Custom key to identify a set of tasks.",
+                    "nullable": true
+                  },
+                  "rootTaskId": {
+                    "type": "string",
+                    "description": "Identifier of the root task of a transaction for which approval history needs to be retrieved.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Returns approval history of a transaction.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Returns approval history of a transaction.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-fetchApprovalHistory-post",
+        "x-filename-id": "businessprocessnotifications-action-fetchapprovalhistory-post"
+      }
+    },
+    "/businessProcessNotifications/{taskId}": {
+      "get": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get a notification content",
+        "operationId": "get_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/businessProcessNotifications-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "businessProcessNotifications-{taskId}-get",
+        "x-filename-id": "businessprocessnotifications-taskid-get"
+      }
+    },
+    "/businessProcessNotifications/action/getActionsBasedOnIdentificationKey": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Retrieve the list of actions",
+        "description": "Retrieves the list of actions that can be performed on the task based on the identifier.",
+        "operationId": "doall_getActionsBasedOnIdentificationKey_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Identifier for the task used to retrieve the list of actions.",
+                    "nullable": true
+                  },
+                  "transactionId": {
+                    "type": "number",
+                    "description": "Identifier for the transaction associated to the user who submitted the transaction.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Internal identifier for the task based on which actions are returned."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Internal identifier for the task based on which actions are returned."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getActionsBasedOnIdentificationKey-post",
+        "x-filename-id": "businessprocessnotifications-action-getactionsbasedonidentificationkey-post"
+      }
+    },
+    "/businessProcessNotifications/action/getTotalNotificationCounts": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get notification count",
+        "description": "Gets notification count for each task.",
+        "operationId": "doall_getTotalNotificationCounts_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskDefinitionsList": {
+                    "type": "array",
+                    "description": "List of task definition names used to get the notification count.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Notification count for each task."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Notification count for each task."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getTotalNotificationCounts-post",
+        "x-filename-id": "businessprocessnotifications-action-gettotalnotificationcounts-post"
+      }
+    },
+    "/businessProcessNotifications/action/getApplicableActionsForBulkTransactions": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get all applicable actions for the selected transactions",
+        "description": "Gets all applicable actions for the selected transactions.",
+        "operationId": "doall_getApplicableActionsForBulkTransactions_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionIdList": {
+                    "type": "string",
+                    "description": "List of transaction IDs used to determine applicable actions.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Map of transactions and their applicable actions along with the list of common actions."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Map of transactions and their applicable actions along with the list of common actions."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getApplicableActionsForBulkTransactions-post",
+        "x-filename-id": "businessprocessnotifications-action-getapplicableactionsforbulktransactions-post"
+      }
+    },
+    "/businessProcessNotifications/action/getContextForLoggedInUser": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get user context for logged in user",
+        "description": "Gets user context for logged in user to retrieve worklist notifications.",
+        "operationId": "doall_getContextForLoggedInUser_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Logged in user's context."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Logged in user's context."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getContextForLoggedInUser-post",
+        "x-filename-id": "businessprocessnotifications-action-getcontextforloggedinuser-post"
+      }
+    },
+    "/businessProcessNotifications/action/translateTaskTitleAttributeValues": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Generate translated parameter values for the notification title",
+        "description": "Generates translated parameter values for the notification title in all available languages.",
+        "operationId": "doall_translateTaskTitleAttributeValues_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskDefinitionName": {
+                    "type": "string",
+                    "description": "Task definition name.",
+                    "nullable": true
+                  },
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Identifier of the workflow tasks for a specific transaction.",
+                    "nullable": true
+                  },
+                  "usLocaleAtrributeValMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "US locale parameter name value pairs.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Parameter name value pairs in all available languages."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Parameter name value pairs in all available languages."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-translateTaskTitleAttributeValues-post",
+        "x-filename-id": "businessprocessnotifications-action-translatetasktitleattributevalues-post"
+      }
+    },
+    "/businessProcessNotifications/action/getNotificationCountForAllTaskDefinitions": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get notification count",
+        "description": "Gets notification count for each task.",
+        "operationId": "doall_getNotificationCountForAllTaskDefinitions_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskDefinitionDetails": {
+                    "type": "string",
+                    "description": "Business Process Notifications",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Business Process Notifications"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Business Process Notifications"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getNotificationCountForAllTaskDefinitions-post",
+        "x-filename-id": "businessprocessnotifications-action-getnotificationcountforalltaskdefinitions-post"
+      }
+    },
+    "/businessProcessNotifications/action/performActionOnBulkTransactionWithComments": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Perform action on multiple transaction with comments",
+        "description": "Performs action on multiple transactions that are applicable to each task with comments.",
+        "operationId": "doall_performActionOnBulkTransactionWithComments_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "performActionBulkTransaction": {
+                    "type": "array",
+                    "description": "List of maps which accepts multiple task identifiers and action to be performed along with comments.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "commonActionComment": {
+                    "type": "string",
+                    "description": "Comments that are applicable for multiple identifiers.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Success or error message for multiple task identifiers."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Success or error message for multiple task identifiers."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-performActionOnBulkTransactionWithComments-post",
+        "x-filename-id": "businessprocessnotifications-action-performactiononbulktransactionwithcomments-post"
+      }
+    },
+    "/businessProcessNotifications/action/performAction": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Perform action on a transaction",
+        "description": "Performs actions that are applicable to a particular task.",
+        "operationId": "doall_performAction_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rfiUser": {
+                    "type": "string",
+                    "description": "User from whom information is required.",
+                    "nullable": true
+                  },
+                  "returnOptions": {
+                    "type": "string",
+                    "description": "Options to return the task to the user.",
+                    "nullable": true
+                  },
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Identifier for the task used to perform an action.",
+                    "nullable": true
+                  },
+                  "isApprovalCommentMandated": {
+                    "type": "boolean",
+                    "description": "Indicates whether approval comments are mandatory or not. Valid values yes or no. Default is none.",
+                    "nullable": true
+                  },
+                  "action": {
+                    "type": "string",
+                    "description": "Actions to perform on the task.",
+                    "nullable": true
+                  },
+                  "personId": {
+                    "type": "number",
+                    "description": "Identifier of the person from whom the information is required.",
+                    "nullable": true
+                  },
+                  "transactionId": {
+                    "type": "number",
+                    "description": "Identifier of the transaction associated to the user who submitted the transaction.",
+                    "nullable": true
+                  },
+                  "bpmWorklistTaskId": {
+                    "type": "string",
+                    "description": "Task identifier associated with the user of the submitted transaction.",
+                    "nullable": true
+                  },
+                  "isCommentsNotAllowed": {
+                    "type": "boolean",
+                    "description": "Indicates whether comments are allowed on the task or not. Valid values yes or no. Default is none.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "businessProcessNotifications-action-performAction-post",
+        "x-filename-id": "businessprocessnotifications-action-performaction-post"
+      }
+    },
+    "/businessProcessNotifications/action/getDeeplinkForResumeTransaction": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Generate a deep link URL for resume action",
+        "description": "Generates a deep link URL to resume a saved transaction.",
+        "operationId": "doall_getDeeplinkForResumeTransaction_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transactionId": {
+                    "type": "number",
+                    "description": "Identifier of the transaction which is to be resumed.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the deep link URL for resume."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the deep link URL for resume."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getDeeplinkForResumeTransaction-post",
+        "x-filename-id": "businessprocessnotifications-action-getdeeplinkforresumetransaction-post"
+      }
+    },
+    "/businessProcessNotifications/action/fetchCommentsAttachments": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get comments and attachments of a transaction",
+        "description": "Gets comments and attachments of a transaction for which the identification key is passed.",
+        "operationId": "doall_fetchCommentsAttachments_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Custom key to identify a set of tasks for which comments and attachments need to be retrieved.",
+                    "nullable": true
+                  },
+                  "rootTaskId": {
+                    "type": "string",
+                    "description": "Identifier of the root task of the transaction for which comments and attachments need to be retrieved.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Returns comments and attachments of a transaction.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Returns comments and attachments of a transaction.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-fetchCommentsAttachments-post",
+        "x-filename-id": "businessprocessnotifications-action-fetchcommentsattachments-post"
+      }
+    },
+    "/businessProcessNotifications/action/getDeeplinkUrlForEditAction": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Generate a deep link URL for the edit action",
+        "description": "Generates a deep link URL for the edit action for a specific task.",
+        "operationId": "doall_getDeeplinkUrlForEditAction_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Identifier of the task on which the edit action is performed.",
+                    "nullable": true
+                  },
+                  "transactionId": {
+                    "type": "number",
+                    "description": "Identifier of the transaction on which the edit action is performed.",
+                    "nullable": true
+                  },
+                  "taskId": {
+                    "type": "string",
+                    "description": "Identifier of the task for which the deep link URL is generated and the edit action is performed.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Deep link URL for the edit action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Deep link URL for the edit action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getDeeplinkUrlForEditAction-post",
+        "x-filename-id": "businessprocessnotifications-action-getdeeplinkurlforeditaction-post"
+      }
+    },
+    "/businessProcessNotifications/action/getActionsMap": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Retrieve the list of task actions",
+        "description": "Retrieves the list of task actions based on the specified task identifier or transaction identifier.",
+        "operationId": "doall_getActionsMap_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identificationKey": {
+                    "type": "string",
+                    "description": "Identifier for the task used to fetch the list of actions permissible for the logged-in user.",
+                    "nullable": true
+                  },
+                  "taskId": {
+                    "type": "string",
+                    "description": "Task identifier associated with the user of the submitted transaction.",
+                    "nullable": true
+                  },
+                  "transactionId": {
+                    "type": "number",
+                    "description": "Identifier for the transaction used to fetch the list of actions permissible for the logged-in user.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Returns list of actions along with basic details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Returns list of actions along with basic details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getActionsMap-post",
+        "x-filename-id": "businessprocessnotifications-action-getactionsmap-post"
+      }
+    },
+    "/businessProcessNotifications/action/performDismissAction": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Dismiss a selected notification",
+        "description": "Dismisses a selected notification.",
+        "operationId": "doall_performDismissAction_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bpmWorklistTaskId": {
+                    "type": "string",
+                    "description": "Task identifier associated with the user of the submitted transaction.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-performDismissAction-post",
+        "x-filename-id": "businessprocessnotifications-action-performdismissaction-post"
+      }
+    },
+    "/businessProcessNotifications/action/downloadAttachmentData": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Download attachment data",
+        "description": "Downloads the attachment content in string format.",
+        "operationId": "doall_downloadAttachmentData_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "description": "Name of the file to be downloaded.",
+                    "nullable": true
+                  },
+                  "taskId": {
+                    "type": "string",
+                    "description": "Identifier of the task to which the attachment belongs.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Attachment content in string format."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Attachment content in string format."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-downloadAttachmentData-post",
+        "x-filename-id": "businessprocessnotifications-action-downloadattachmentdata-post"
+      }
+    },
+    "/businessProcessNotifications/action/performActionWithComments": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Perform action on a transaction with comments",
+        "description": "Performs action on a transaction applicable to a particular task with comments.",
+        "operationId": "doall_performActionWithComments_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "performActionMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Map which accepts identifier of the task and action to be performed along with comments.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message for particular identifier or the task."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Success or error message for particular identifier or the task."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-performActionWithComments-post",
+        "x-filename-id": "businessprocessnotifications-action-performactionwithcomments-post"
+      }
+    },
+    "/businessProcessNotifications/action/getActionsBasedOnTaskId": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Retrieve the list of task actions",
+        "description": "Retrieves the list of task actions using the task identifier.",
+        "operationId": "doall_getActionsBasedOnTaskId_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": {
+                    "type": "string",
+                    "description": "Identifier using which the list of actions are fetched.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the task based on which actions are returned."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the task based on which actions are returned."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getActionsBasedOnTaskId-post",
+        "x-filename-id": "businessprocessnotifications-action-getactionsbasedontaskid-post"
+      }
+    },
+    "/businessProcessNotifications/action/getBIPContent": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get BIP notification content for a report",
+        "description": "Gets BIP notification content for a given report metadata and report parameter values.",
+        "operationId": "doall_getBIPContent_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reportMetaData": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Metadata such as the path of the BIP report, format in which BIP content needs to be fetched.",
+                    "nullable": true
+                  },
+                  "reportParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Report parameters in the form of key value pairs.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns BIP notification content.",
+                      "format": "byte"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns BIP notification content.",
+                      "format": "byte"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getBIPContent-post",
+        "x-filename-id": "businessprocessnotifications-action-getbipcontent-post"
+      }
+    },
+    "/businessProcessNotifications/action/getTransactionDetailsForShifts": {
+      "post": {
+        "tags": [
+          "Business Process Notifications"
+        ],
+        "summary": "Get all details for transactions or groups",
+        "description": "Gets all details for transactions or groups.",
+        "operationId": "doall_getTransactionDetailsForShifts_businessProcessNotifications",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "additionalColumnList": {
+                    "type": "array",
+                    "description": "Task definition name.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "requestIdList": {
+                    "type": "string",
+                    "description": "List of transaction identifiers for which details are fetched.",
+                    "nullable": true
+                  },
+                  "shiftIdList": {
+                    "type": "string",
+                    "description": "List of object identifiers for which details are fetched.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Map of transaction identifiers with the details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Map of transaction identifiers with the details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "businessProcessNotifications-action-getTransactionDetailsForShifts-post",
+        "x-filename-id": "businessprocessnotifications-action-gettransactiondetailsforshifts-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "businessProcessNotifications": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/businessProcessNotifications-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "businessProcessNotifications-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalTaskInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Lists details of attributes with corresponding values, and notification properties.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "applicableActions": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "List of applicable actions for a task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "approvalHistory": {
+            "type": "string",
+            "description": "History of the approval transaction.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "approvers": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business Process Notifications",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "assignees": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business Process Notifications",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the approval transaction.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "contentWithHistory": {
+            "type": "string",
+            "description": "Content that includes approval history for the transaction.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "contentWithoutHistory": {
+            "type": "string",
+            "description": "Content that excludes approval history for the transaction.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "creator": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who initiated the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "fromUserDisplayName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who submitted the transaction.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "identificationKey": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Identifier of the workflow tasks for a specific transaction.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "lastUpdatedBy": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who last updated the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "observerApprovalHistory": {
+            "type": "string",
+            "description": "History of the approval transaction for an observer.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "observerContentWithoutHistory": {
+            "type": "string",
+            "description": "Content that excludes transaction approval history for an observer.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "taskDefinitionName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Task definition name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "taskId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Identifier of the transaction to fetch the BIP notification content.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "taskNumber": {
+            "type": "integer",
+            "description": "Number of a particular task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Title of the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "updatedDate": {
+            "type": "string",
+            "description": "Date when the notification was last updated.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "workFlowPattern": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Workflow pattern of a task.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

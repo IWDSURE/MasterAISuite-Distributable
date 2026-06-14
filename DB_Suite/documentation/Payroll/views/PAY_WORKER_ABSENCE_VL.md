@@ -1,0 +1,87 @@
+# PAY_WORKER_ABSENCE_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payworkerabsencevl-3518.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payworkerabsencevl-3518.html)
+
+## Columns
+
+- ABSENCE_INSTANCE_DEF_ID
+- OBJECT_VERSION_NUMBER
+- ABSENCE_INSTANCE_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- ABSENCE_ID
+- BASE_COMPONENT_NAME
+- MAPPING_ID
+- ABSENCE_PLAN_NAME
+- ABSENCE_ELEMENT_COMPONENT_NAME
+- ABSENCE_PLAN_ID
+- ABSENCE_TYPE
+- ABSENCE_CARD_SOURCE
+- LEGISLATIVE_DATA_GROUP_ID
+- GROUP_TYPE
+- PAYROLL_TERM_ID
+- HR_TERM_ID
+- TERM_NUMBER
+- PAYROLL_ASSIGNMENT_ID
+- ASSIGNMENT_ID
+- ASSIGNMENT_NUMBER
+- PAYROLL_RELATIONSHIP_ID
+- PERSON_ID
+- TIME
+- UNIT_OF_MEASURE
+- PERIODICITY
+- RATE_DEFINITION_ID
+- RATE_NAME
+- ADJUSTMENT_UNIT
+- FACTOR
+- CALCULATION_DATE
+- PERIOD_START_DATE
+- PERIOD_END_DATE
+- SEGMENT1
+- SEGMENT2
+- SEGMENT3
+- SEGMENT4
+- SEGMENT5
+- SEGMENT6
+- SEGMENT7
+- SEGMENT8
+- SEGMENT9
+- SEGMENT10
+- SEGMENT11
+- SEGMENT12
+- SEGMENT13
+- SEGMENT14
+- SEGMENT15
+- SEGMENT16
+- SEGMENT17
+- SEGMENT18
+- SEGMENT19
+- SEGMENT20
+- SEGMENT21
+- SEGMENT22
+- SEGMENT23
+- SEGMENT24
+- SEGMENT25
+- SEGMENT26
+- SEGMENT27
+- SEGMENT28
+- SEGMENT29
+- SEGMENT30
+
+## Query
+
+```sql
+select pdcc.DIR_CARD_COMP_DEF_ID ABSENCE_Instance_Def_ID, pdcc.object_version_number, pdcc.DIR_CARD_COMP_ID ABSENCE_Instance_ID, pdcc.effective_start_date effective_start_date, pdcc.effective_end_date effective_end_date, pdcc.CREATOR_ID ABSENCE_ID, pdccd.BASE_COMPONENT_NAME, null mapping_Id, (select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID) Absence_Plan_Name, (select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID) Absence_Element_Component_Name, (select cdef.DIR_CARD_COMP_DEF_ID from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID) Absence_Plan_Id, (decode(INSTR(pdccd.BASE_COMPONENT_NAME,'Donation Pool'),0, decode(INSTR(pdccd.BASE_COMPONENT_NAME,'Entitlement'),0, decode(INSTR(pdccd.BASE_COMPONENT_NAME,'Discretionary Disbursement'),0, decode(INSTR(pdccd.BASE_COMPONENT_NAME,'Final Disbursement'),0, 'ACCRUAL','PAYOUT'),'CASHOUT'),'LEAVE'),'DONATION')) Absence_Type, pdcc.CREATOR_TYPE ABSENCE_CARD_SOURCE, rel.LEGISLATIVE_DATA_GROUP_ID, term.group_type, term.relationship_group_id payroll_term_id, term.TERM_ID HR_TERM_ID, term.assignment_number Term_number, assign.relationship_group_id payroll_assignment_id, assign.ASSIGNMENT_ID ASSIGNMENT_ID, assign.Assignment_number Assignment_number, rel.PAYROLL_RELATIONSHIP_ID, rel.person_id, (select to_number(pri.value1) from PAY_VALUE_DEFS_V pvd, pay_allow_overrides_f pov, pay_dir_override_usages_f pou, PAY_VALUE_INSTANCES_V pvd2, PAY_RANGE_INST_V pri where pvd2.source_id = pdcc.DIR_CARD_COMP_ID and pvd2.source_type = 'PDCC' and pvd2.value_defn_id = pri.value_defn_id and ((pvd.LEGISLATIVE_DATA_GROUP_ID = pdc.LEGISLATIVE_DATA_GROUP_ID and pvd.legislation_code is null) or (pvd.LEGISLATIVE_DATA_GROUP_ID is null and pvd.legislation_code is null) or (pvd.LEGISLATIVE_DATA_GROUP_ID is null and pvd.legislation_code = ldg.legislation_code)) and pov.value_defn_id = pvd.value_defn_id and pov.allow_overrides_id = pou.allow_overrides_id and pvd2.parent_value_defn_id = pvd.value_defn_id and pou.dir_override_usage_id = pvd2.dir_override_usage_id and pov.type = 'T' and pvd2.base_name IN('ORA_DONATION_POOL_UNIT','GLB_ACCRUAL_UNIT','GLB_ENTITLEMENT_UNIT','GLB_DISCRETIONARY_DISBURSEMENT_UNIT','GLB_FINAL_DISBURSEMENT_UNIT')) TIME, (select max(pvd.UOM) from PAY_VALUE_INSTANCES_V pvd, hcm_lookups lk where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and lk.lookup_code=pvd.UOM and lk.lookup_type='PAY_UNITS' and pvd.base_name IN('ORA_DONATION_POOL_UNIT','GLB_ACCRUAL_UNIT','GLB_ENTITLEMENT_UNIT','GLB_DISCRETIONARY_DISBURSEMENT_UNIT','GLB_FINAL_DISBURSEMENT_UNIT')) UNIT_OF_MEASURE, (select max(pvd.periodicity) from PAY_VALUE_INSTANCES_V pvd where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and pvd.base_name IN('ORA_DONATION_POOL_UNIT','GLB_ACCRUAL_UNIT','GLB_ENTITLEMENT_UNIT','GLB_DISCRETIONARY_DISBURSEMENT_UNIT','GLB_FINAL_DISBURSEMENT_UNIT')) periodicity, (select pri.value1 from PAY_VALUE_INSTANCES_V pvd, PAY_RANGE_INST_V pri where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and pvd.value_defn_id = pri.value_defn_id and pvd.base_name IN((select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_BOOKED_LIABILITY_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_ENTITLEMENT_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_DONATION_POOL_RATE', (select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_DISCRETIONARY_DISBURSEMENT_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_FINAL_DISBURSEMENT_RATE')) RATE_DEFINITION_ID, (select RDT.NAME from PAY_RATE_DEFINITIONS_F_TL RDT where (select pri.value1 from PAY_VALUE_INSTANCES_V pvd, PAY_RANGE_INST_V pri where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and pvd.value_defn_id = pri.value_defn_id and pvd.base_name IN((select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_BOOKED_LIABILITY_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_ENTITLEMENT_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_DONATION_POOL_RATE', (select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_DISCRETIONARY_DISBURSEMENT_RATE',(select cdef.BASE_COMPONENT_NAME from (select pdcc1.PARENT_DIR_CARD_COMP_ID from (select DIR_CARD_ID,COMPONENT_SEQUENCE, DIR_CARD_COMP_DEF_ID,DIR_CARD_COMP_ID,PARENT_DIR_CARD_COMP_ID FROM PAY_DIR_CARD_COMPONENTS_F WHERE DIR_CARD_COMP_ID =pdcc.PARENT_DIR_CARD_COMP_ID) pdcc1) pdcc2, PAY_DIR_CARD_COMPONENTS_F pdcc3, Pay_Dir_Card_Comp_Defs_vl cdef where cdef.DIR_CARD_COMP_DEF_ID = pdcc3.DIR_CARD_COMP_DEF_ID and pdcc2.PARENT_DIR_CARD_COMP_ID =pdcc3.DIR_CARD_COMP_ID)||'_FINAL_DISBURSEMENT_RATE'))=RDT.RATE_DEFINITION_ID and pdcc.EFFECTIVE_START_DATE >= RDT.EFFECTIVE_START_DATE and pdcc.EFFECTIVE_END_DATE <= RDT.EFFECTIVE_END_DATE and (RDT.LANGUAGE=SYS_CONTEXT('USERENV','LANG'))) RATE_NAME, (select to_number(pri.value1) from PAY_VALUE_DEFS_V pvd, pay_allow_overrides_f pov, pay_dir_override_usages_f pou, PAY_VALUE_INSTANCES_V pvd2, PAY_RANGE_INST_V pri where pvd2.source_id = pdcc.DIR_CARD_COMP_ID and pvd2.source_type = 'PDCC' and pvd2.value_defn_id = pri.value_defn_id and ((pvd.LEGISLATIVE_DATA_GROUP_ID = pdc.LEGISLATIVE_DATA_GROUP_ID and pvd.legislation_code is null) or (pvd.LEGISLATIVE_DATA_GROUP_ID is null and pvd.legislation_code is null) or (pvd.LEGISLATIVE_DATA_GROUP_ID is null and pvd.legislation_code = ldg.legislation_code)) and pov.value_defn_id = pvd.value_defn_id and pov.allow_overrides_id = pou.allow_overrides_id and pvd2.parent_value_defn_id = pvd.value_defn_id and pou.dir_override_usage_id = pvd2.dir_override_usage_id and pov.type = 'AA' and pvd2.base_name = 'GLB_ENTITLEMENT_UNIT') Adjustment_UNIT, (select max(to_number(pri.value1)) from PAY_VALUE_INSTANCES_V pvd, PAY_RANGE_INST_V pri where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and pvd.value_defn_id = pri.value_defn_id and pvd.base_name in('ORA_DONATION_POOL_FACTOR','ORA_DISCRETIONARY_DISBURSEMENT_FACTOR','GLB_FINAL_DISBURSEMENT_FACTOR','GLB_ENTITLEMENT_FACTOR')) FACTOR, (select pri.value1 from PAY_VALUE_INSTANCES_V pvd, PAY_RANGE_INST_V pri where pvd.source_id = pdcc.DIR_CARD_COMP_ID and pvd.source_type = 'PDCC' and pvd.value_defn_id = pri.value_defn_id and pvd.base_name = 'GLB_CALCULATION_DATE') CALCULATION_DATE, null period_start_date, null period_end_date, null segment1, null segment2, null segment3, null segment4, null segment5, null segment6, null segment7, null segment8, null segment9, null segment10, null segment11, null segment12, null segment13, null segment14, null segment15, null segment16, null segment17, null segment18, null segment19, null segment20, null segment21, null segment22, null segment23, null segment24, null segment25, null segment26, null segment27, null segment28, null segment29, null segment30 from PAY_DIR_CARDS_F pdc, PAY_DIR_CARD_COMPONENTS_F pdcc, PAY_DIR_CARD_COMP_DEFS_F pdccd, pay_dir_rep_card_usages_f pdrcu, PAY_PAY_RELATIONSHIPS_DN rel, PAY_REL_GROUPS_DN term, PAY_REL_GROUPS_DN assign, PAY_REL_GROUPS_F assignf, per_legislative_data_groups_vl ldg where ldg.legislative_data_group_id = pdc.legislative_data_group_id and pdc.DIR_CARD_ID=pdcc.DIR_CARD_ID and pdcc.DIR_CARD_COMP_ID = pdrcu.DIR_CARD_COMP_ID and pdccd.DIR_CARD_COMP_DEF_ID = pdcc.DIR_CARD_COMP_DEF_ID and pdrcu.relationship_group_id = assign.relationship_group_id and pdcc.CREATOR_TYPE in ('ABSXML','ABSFUS') and assign.group_type='A' and rel.PAYROLL_RELATIONSHIP_ID = term.PAYROLL_RELATIONSHIP_ID AND term.RELATIONSHIP_GROUP_ID = assign.parent_rel_group_id AND assign.PAYROLL_RELATIONSHIP_ID = rel.PAYROLL_RELATIONSHIP_ID AND assignf.RELATIONSHIP_GROUP_ID = assign.RELATIONSHIP_GROUP_ID AND pdcc.effective_start_date between assignf.effective_start_date and assignf.effective_end_date
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

@@ -1,0 +1,810 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Audit Setup",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/fscmRestApi/fndAuditRESTService/audittrail/check-auditstatus": {
+      "post": {
+        "tags": [
+          "Audit Setup"
+        ],
+        "description": "Get the audit status of an object",
+        "operationId": "check-auditstatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "auditDate": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/auditData-checkStatus"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/auditData-checkStatusResponse"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The following table describes the response for authentication failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The following table describes the response for authorization failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "Check Status",
+        "summary": "Get the audit status of an object",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-check-auditstatus-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-check-auditstatus-post"
+      }
+    },
+    "/fscmRestApi/fndAuditRESTService/audittrail/get-auditsetup": {
+      "post": {
+        "tags": [
+          "Audit Setup"
+        ],
+        "description": "Get all objects for a product",
+        "operationId": "get-auditsetup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "application": {
+                    "$ref": "#/components/schemas/application"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "objectDetails": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/auditData-setupResponse"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The following table describes the response for authentication failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The following table describes the response for authorization failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "Get Audit Setup",
+        "summary": "Get all objects for a product",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-get-auditsetup-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-get-auditsetup-post"
+      }
+    },
+    "/fscmRestApi/fndAuditRESTService/audittrail/update-auditstatus": {
+      "post": {
+        "tags": [
+          "Audit Setup"
+        ],
+        "description": "Set the audit status for an object",
+        "operationId": "update-auditstatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "auditDate": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/auditData-updateStatus"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "objectDetails": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/auditData-updateStatusResponse"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The following table describes the error response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "objectDetails": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/auditUpdateStatusOnError"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The following table describes the response for authentication failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The following table describes the response for authorization failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "Update Status",
+        "summary": "Set the audit status for an object",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-update-auditstatus-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-update-auditstatus-post"
+      }
+    },
+    "/fscmRestApi/fndAuditRESTService/audittrail/get-auditlevel": {
+      "post": {
+        "tags": [
+          "Audit Setup"
+        ],
+        "description": "Get the audit level for products",
+        "operationId": "get-auditlevel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/product"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/auditData-auditLevel"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The following table describes the response for authentication failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The following table describes the response for authorization failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "Get Level",
+        "summary": "Get the audit level for products",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-get-auditlevel-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-get-auditlevel-post"
+      }
+    },
+    "/fscmRestApi/fndAuditRESTService/audittrail/set-auditlevel": {
+      "post": {
+        "tags": [
+          "Audit Setup"
+        ],
+        "description": "Set the audit level for products",
+        "operationId": "set-auditlevel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "auditDate": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/auditData-auditLevel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/status"
+                    },
+                    "actionName": {
+                      "$ref": "#/components/schemas/actionName"
+                    },
+                    "auditDate": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/auditData-auditLevel"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The following table describes the response for authentication failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The following table describes the response for authorization failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditSetupOnError"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "Set Level",
+        "summary": "Set the audit level for products",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-set-auditlevel-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-set-auditlevel-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "auditData-checkStatus": {
+        "required": [
+          "businessObject",
+          "parentBusinessObject"
+        ],
+        "type": "object",
+        "properties": {
+          "businessObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "parentBusinessObject": {
+            "$ref": "#/components/schemas/parentBusinessObject"
+          }
+        }
+      },
+      "businessObject": {
+        "title": "businessObject",
+        "type": "string",
+        "description": "The fully qualified view object name to be set up for audit. This name must not be a null string."
+      },
+      "parentBusinessObject": {
+        "title": "parentBusinessObject",
+        "type": "string",
+        "description": "The fully qualified parent view object name, as defined by the view link in the Application Module where the view object instance exists. If the view object does'nt a parent, use the view object name as it's parent. This name must not be null string."
+      },
+      "status": {
+        "title": "Status",
+        "type": "string",
+        "description": "The status of the audit setup request. The valid values are SUCCESS and FAIL."
+      },
+      "actionName": {
+        "title": "Action Name",
+        "type": "string",
+        "description": "The request method for which response is retrieved such as get-auditsetup."
+      },
+      "auditData-checkStatusResponse": {
+        "type": "object",
+        "properties": {
+          "businessObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "parentBusinessObject": {
+            "$ref": "#/components/schemas/parentBusinessObject"
+          },
+          "auditSwitch": {
+            "$ref": "#/components/schemas/auditSwitch"
+          },
+          "lastUpdatedTime": {
+            "$ref": "#/components/schemas/lastUpdatedTime"
+          }
+        }
+      },
+      "auditSwitch": {
+        "title": "Audit Switch",
+        "type": "string",
+        "description": "The value indicates whether or not the business object is setup for audit."
+      },
+      "lastUpdatedTime": {
+        "title": "Last Updated Time",
+        "type": "string",
+        "description": "The time when the audit status of the business object was last updated."
+      },
+      "auditSetupOnError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/status"
+          },
+          "actionName": {
+            "$ref": "#/components/schemas/actionName"
+          },
+          "error": {
+            "$ref": "#/components/schemas/auditData-error"
+          }
+        }
+      },
+      "auditData-error": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "$ref": "#/components/schemas/detail"
+          },
+          "status": {
+            "$ref": "#/components/schemas/status"
+          },
+          "title": {
+            "$ref": "#/components/schemas/title"
+          },
+          "type": {
+            "$ref": "#/components/schemas/type"
+          }
+        }
+      },
+      "detail": {
+        "title": "Detail",
+        "type": "string",
+        "description": "Detail."
+      },
+      "title": {
+        "title": "Title",
+        "type": "string",
+        "description": "Title."
+      },
+      "type": {
+        "title": "Type",
+        "type": "string",
+        "description": "Type."
+      },
+      "application": {
+        "title": "application",
+        "type": "string",
+        "description": "The product for which the business objects, along with the attribute details, are retrieved."
+      },
+      "auditData-setupResponse": {
+        "type": "object",
+        "properties": {
+          "webApplication": {
+            "$ref": "#/components/schemas/application"
+          },
+          "amname": {
+            "$ref": "#/components/schemas/amname"
+          },
+          "amdisplayName": {
+            "$ref": "#/components/schemas/amdisplayName"
+          },
+          "viewObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "viewObjectDisplayName": {
+            "$ref": "#/components/schemas/viewObjectDisplayName"
+          },
+          "parentObjectList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/parentBusinessObject"
+            }
+          },
+          "attributesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributesList-setup"
+            }
+          }
+        }
+      },
+      "amname": {
+        "title": "Application Module Name",
+        "type": "string",
+        "description": "The Application Module that contains the view object to set up for audit."
+      },
+      "amdisplayName": {
+        "title": "Application Module Display Name",
+        "type": "string",
+        "description": "The display name of the Application Module, for example FndDocumentCategoriesAdminUIAM."
+      },
+      "viewObjectDisplayName": {
+        "title": "Business Object Display Name",
+        "type": "string",
+        "description": "Business Object Display Name."
+      },
+      "attributesList-setup": {
+        "type": "object",
+        "properties": {
+          "attributeName": {
+            "$ref": "#/components/schemas/attributeName"
+          },
+          "isAuditable": {
+            "$ref": "#/components/schemas/isAuditable"
+          },
+          "displayName": {
+            "$ref": "#/components/schemas/displayName"
+          },
+          "attributeDataType": {
+            "$ref": "#/components/schemas/attributeDataType"
+          },
+          "attributeSize": {
+            "$ref": "#/components/schemas/attributeSize"
+          }
+        }
+      },
+      "attributeName": {
+        "title": "Attribute Name",
+        "type": "string",
+        "description": "An attribute specified in the attribute list of the business object for which you want to setup audit."
+      },
+      "isAuditable": {
+        "title": "Auditable",
+        "type": "string",
+        "description": "The value indicates whether this attribute of the business object is enabled or not for audit."
+      },
+      "displayName": {
+        "title": "Attribute Display Name",
+        "type": "string",
+        "description": "The display name of the attribute, which is specified in the attribute list enabled for audit."
+      },
+      "attributeDataType": {
+        "title": "Attribute DataType",
+        "type": "string",
+        "description": "The data type of the attribute, for example, java.lang.Long."
+      },
+      "attributeSize": {
+        "title": "Attribute Size",
+        "type": "string",
+        "description": "The size of the attribute. For example, CategoryID with data type as java.lang.Long has size defined as 18."
+      },
+      "auditData-updateStatus": {
+        "required": [
+          "businessObject",
+          "enable",
+          "parentBusinessObject"
+        ],
+        "type": "object",
+        "properties": {
+          "businessObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "parentBusinessObject": {
+            "$ref": "#/components/schemas/parentBusinessObject"
+          },
+          "enable": {
+            "$ref": "#/components/schemas/enable"
+          },
+          "attributesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributesList"
+            }
+          }
+        }
+      },
+      "enable": {
+        "title": "enable",
+        "type": "string",
+        "description": "Value to indicate whether to turn auditing ON or OFF for the business object."
+      },
+      "attributesList": {
+        "type": "object",
+        "properties": {
+          "attributeName": {
+            "$ref": "#/components/schemas/attributeName"
+          },
+          "isAuditable": {
+            "$ref": "#/components/schemas/isAuditable"
+          }
+        }
+      },
+      "auditData-updateStatusResponse": {
+        "type": "object",
+        "properties": {
+          "viewObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "parentObject": {
+            "$ref": "#/components/schemas/parentBusinessObject"
+          },
+          "attributesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributesList"
+            }
+          }
+        }
+      },
+      "auditUpdateStatusOnError": {
+        "type": "object",
+        "properties": {
+          "viewObject": {
+            "$ref": "#/components/schemas/businessObject"
+          },
+          "parentObject": {
+            "$ref": "#/components/schemas/parentBusinessObject"
+          },
+          "errorMessage": {
+            "$ref": "#/components/schemas/errorMessage"
+          },
+          "attributesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributesList-error"
+            }
+          }
+        }
+      },
+      "errorMessage": {
+        "title": "Error Message",
+        "type": "string",
+        "description": "Error Message."
+      },
+      "attributesList-error": {
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "$ref": "#/components/schemas/errorMessage"
+          },
+          "attributeName": {
+            "$ref": "#/components/schemas/attributeName"
+          },
+          "isAuditable": {
+            "$ref": "#/components/schemas/isAuditable"
+          }
+        }
+      },
+      "product": {
+        "title": "product",
+        "type": "string",
+        "description": "The products for which you can set up audit and get audit status. The valid values are ODI, ESS, MDS, SOA, ADF, and OPSS."
+      },
+      "auditData-auditLevel": {
+        "required": [
+          "auditLevel",
+          "product"
+        ],
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/product"
+          },
+          "auditLevel": {
+            "$ref": "#/components/schemas/auditLevel"
+          }
+        }
+      },
+      "auditLevel": {
+        "title": "auditLevel",
+        "type": "string",
+        "description": "The audit level of the product. The valid values are High, Medium, Low, and None. If you don't want to setup audit for an object, set the audit level to None."
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "IRC_JA_MISSING_RESP_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjamissingrespv-3178.html#ircjamissingrespv-3178",
+  "columns": [
+    "REQUISITION_NUMBER",
+    "REQUISITION_ID",
+    "SUBMISSION_ID",
+    "PERSON_ID",
+    "INTERNAL_FLAG",
+    "CREATED_BY",
+    "QUESTIONNAIRE_ID",
+    "QSTNR_TYPE_CODE",
+    "QSTNR_PARTICIPANT_ID",
+    "STATUS",
+    "SUB_CREATION_DATE",
+    "CAND_CREATION_DATE",
+    "CANDIDATE_NUMBER",
+    "CAND_CONFIRMED_FLAG",
+    "SUB_CONFIRMED_FLAG"
+  ],
+  "query": "SELECT r.requisition_number requisition_number, r.requisition_id requisition_id, s.submission_id submission_id, s.person_id person_id, s.INTERNAL_FLAG INTERNAL_FLAG, s.created_by created_by, rq.QUESTIONNAIRE_ID QUESTIONNAIRE_ID, rq.QSTNR_TYPE_CODE QSTNR_TYPE_CODE, qp.QSTNR_PARTICIPANT_ID QSTNR_PARTICIPANT_ID, qp.STATUS STATUS, s.creation_date AS SUB_CREATION_DATE, c.creation_date AS CAND_CREATION_DATE, c.CANDIDATE_NUMBER CANDIDATE_NUMBER, c.CONFIRMED_FLAG AS CAND_CONFIRMED_FLAG, s.CONFIRMED_FLAG AS SUB_CONFIRMED_FLAG FROM irc_submissions s, irc_candidates c, irc_requisitions_b r, irc_im_req_qstnrs rq, hrq_qstnr_participants qp WHERE s.person_id = c.person_id AND s.REQUISITION_ID = r.requisition_id AND (s.REQUISITION_ID = rq.requisition_id AND rq.QSTNR_TYPE_CODE = DECODE(s.INTERNAL_FLAG,'Y','ORA_INTERNAL_APPLYFLOW_QSTNR','ORA_EXTERNAL_APPLYFLOW_QSTNR')) AND (TO_CHAR(s.person_id) = qp.participant_id(+) AND qp.subject_id(+) = TO_CHAR(s.submission_id) AND rq.QUESTIONNAIRE_ID = qp.questionnaire_id(+)) AND (NOT EXISTS (SELECT 1 FROM hrq_qstnr_responses qr WHERE qp.QSTNR_PARTICIPANT_ID = qr.QSTNR_PARTICIPANT_ID ) OR qp.QSTNR_PARTICIPANT_ID IS NULL) AND EXISTS (SELECT 1 FROM irc_af_sections_vl afs INNER JOIN IRC_AF_PAGES_VL p ON afs.section_id = p.section_id INNER JOIN IRC_AF_PAGE_BLOCKS_VL pb ON p.page_id = pb.PAGE_ID INNER JOIN IRC_AF_BLOCKS_VL b ON pb.block_id = b.block_id WHERE b.block_code = 'ORA_DQ_QUESTIONS' AND afs.af_version_id = s.af_version_id ) AND s.PIPELINE_SUBMISSION_ID IS NULL AND s.object_status = 'ORA_ACTIVE' AND r.object_status = 'ORA_ACTIVE' AND c.object_status = 'ORA_ACTIVE' AND (NOT EXISTS (SELECT 1 FROM irc_offers OFE WHERE OFE.SUBMISSION_ID = s.SUBMISSION_ID )) AND s.creation_date < (SYSDATE - INTERVAL '10' MINUTE) AND s.added_by_context_code = 'ORA_CANDIDATE' AND (s.current_state_id NOT IN (1005,1004) or s.current_state_id is null) AND (s.current_phase_id NOT IN (14, 16) or s.current_phase_id is null) AND (NOT EXISTS (SELECT 1 FROM irc_sgas_entries sgas WHERE s.SUBMISSION_ID = sgas.REFERENCE_ID AND (sgas.CONTEXT = 'INITIATE_REAPP_ON_JA.FAILURE' OR sgas.CONTEXT = 'INITIATE_REAPP_ON_JA.SUCCESS') ))",
+  "_parsed_at": "2026-06-09T19:07:22"
+}

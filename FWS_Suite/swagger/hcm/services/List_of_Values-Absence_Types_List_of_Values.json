@@ -1,0 +1,917 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Absence Types List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/absenceTypesLOV/{CompositeKey}": {
+      "get": {
+        "tags": [
+          "List of Values/Absence Types List of Values"
+        ],
+        "summary": "Get an absence type for a worker",
+        "operationId": "get_absenceTypesLOV",
+        "parameters": [
+          {
+            "name": "CompositeKey",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/absenceTypesLOV-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "absenceTypesLOV-{CompositeKey}-get",
+        "x-filename-id": "absencetypeslov-compositekey-get"
+      }
+    },
+    "/absenceTypesLOV": {
+      "get": {
+        "tags": [
+          "List of Values/Absence Types List of Values"
+        ],
+        "summary": "Get all absence types for a worker",
+        "operationId": "getall_absenceTypesLOV",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AbsTypeWithEmployerName; string; Name of the absence type, if the employee has a single work relationship. For employees with multiple work relationships, it's name of the absence type and legal name of the employer, separated with a hyphen. For example: Vacation - Vision Corporation.</li><li>AbsenceTypeId; integer; Unique numeric identifier of the absence type.</li><li>AbsenceTypeName; string; Name of the absence type, such as Vacation.</li><li>BiddingFlag; boolean; Indicates whether bidding is enabled for the absence type. Valid values are Y and N. The default value is null.</li><li>CompositeKey; string; Unique combination identifier for the numeric identifier of the person and the person's work relationship that are separated by an underscore.</li><li>Description; string; Description of the absence type.</li><li>DisplaySequence; integer; Absence type display order for absence and bid entry.</li><li>DurationCalculationBasis; string; Basis for calculating the duration of an absence.</li><li>EmployerId; integer; Unique numeric identifier of the employer.</li><li>EmployerName; string; Legal name of the employer, such as Vision Corporation.</li><li>EnableForTimeCardEntry; string; Enable absence entry from the time card.</li><li>LegGroupingCd; string; Legislative grouping code at the absence type level.</li><li>LegislationCode; string; Legislation code of the legislative data group for the absence type.</li><li>LinkageRuleCode; string; Code for the linkage rule. For example Manual, Duration based or Chained.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the absence types that match the specified primary key criteria.. <br>Finder Variables <ul><li>CompositeKey; string;  Unique combination identifier for the numeric identifier of the person and the person's work relationship, separated by an underscore. </li></ul></li><li>findAbsenceTypesWithQualPlans Finds all the absence types with qualification plans. <br>Finder Variables <ul><li>AbsenceTypeEffectiveDate; string;  Effective date of the absence with absence type associated with a qualification plan. </li><li>LEFlag; string;  Indicates whether the absence type has only qualification plans attached to it. </li><li>PersonId; integer;  Unique identifier of a person. </li><li>UserMode; string;  User mode for the absence types with qualification plans. </li></ul></li><li>findByWord Finds all the absence types that match the specified criteria. You need to specify the personId to get a result. <br>Finder Variables <ul><li>AbsenceTypeEffectiveDate; string;  Effective date of the absence type. It defaults to current date. </li><li>FilterAttributes; string;  Space separated list of fields to query on. </li><li>PersonId; integer;  Unique numeric identifier for the person. You must specify this to get results. </li><li>SearchTerms; string;  Search phrase to query with. It can be a single word or multiple words separated by space. </li><li>UserMode; string;   </li></ul></li><li>findDefaultAbsenceType Finds all the default absence types defined by the configuration option. <br>Finder Variables <ul><li>AbsenceTypeEffectiveDate; string;  Effective date of the absence type. It defaults to current date. </li><li>LEFlag; string;  Legal employer of the absence type. </li><li>PersonId; integer;  Unique numeric identifier for the person. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the absence types that match the specified primary key criteria..",
+                "properties": {
+                  "CompositeKey": {
+                    "nullable": true,
+                    "description": "Unique combination identifier for the numeric identifier of the person and the person's work relationship, separated by an underscore.",
+                    "readOnly": true,
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                }
+              },
+              {
+                "name": "findAbsenceTypesWithQualPlans",
+                "description": "Finds all the absence types with qualification plans.",
+                "title": "findAbsenceTypesWithQualPlans",
+                "properties": {
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier of a person.",
+                    "type": "integer"
+                  },
+                  "LEFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates whether the absence type has only qualification plans attached to it.",
+                    "type": "string"
+                  },
+                  "UserMode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "User mode for the absence types with qualification plans.",
+                    "type": "string"
+                  },
+                  "AbsenceTypeEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Effective date of the absence with absence type associated with a qualification plan.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all the absence types that match the specified criteria. You need to specify the personId to get a result.",
+                "title": "findByWord",
+                "properties": {
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Space separated list of fields to query on.",
+                    "type": "string"
+                  },
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique numeric identifier for the person. You must specify this to get results.",
+                    "type": "integer"
+                  },
+                  "UserMode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "AbsenceTypeEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Effective date of the absence type. It defaults to current date.",
+                    "type": "string"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search phrase to query with. It can be a single word or multiple words separated by space.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findDefaultAbsenceType",
+                "description": "Finds all the default absence types defined by the configuration option.",
+                "title": "findDefaultAbsenceType",
+                "properties": {
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique numeric identifier for the person.",
+                    "type": "integer"
+                  },
+                  "LEFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Legal employer of the absence type.",
+                    "type": "string"
+                  },
+                  "AbsenceTypeEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Effective date of the absence type. It defaults to current date.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/absenceTypesLOV"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "absenceTypesLOV-get",
+        "x-filename-id": "absencetypeslov-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "absenceTypesLOV-item-response": {
+        "type": "object",
+        "properties": {
+          "AbsTypeWithEmployerName": {
+            "maxLength": 483,
+            "type": "string",
+            "description": "Name of the absence type, if the employee has a single work relationship. For employees with multiple work relationships, it's name of the absence type and legal name of the employer, separated with a hyphen. For example: Vacation - Vision Corporation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AbsenceTypeAgreement": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the agreement.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AbsenceTypeBasicAssignmentFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates basic assignment of the absence type. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AbsenceTypeId": {
+            "type": "integer",
+            "description": "Unique numeric identifier of the absence type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AbsenceTypeMapEventTypeCd": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event type of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AbsenceTypeName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the absence type, such as Vacation.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AbsenceTypePartialDay": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Partial day of absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AbsenceTypePatternCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Pattern code of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentDurationFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the attachment duration exceeds a specific period. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentDurationPeriod": {
+            "type": "number",
+            "description": "Duration period of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentEmployeeFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the Employee option for the Attachments rule on the absence type is selected. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentManagerFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Manager option for the Attachments rule on the absence type. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Absence type configured with attachment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "BiddingFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether bidding is enabled for the absence type. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompositeKey": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique combination identifier for the numeric identifier of the person and the person's work relationship that are separated by an underscore.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Description of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Absence type display order for absence and bid entry.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DurationCalculationBasis": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Basis for calculating the duration of an absence.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DurationUOMCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unit of measure for absence duration.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "DurationUOMCodeMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the unit of measure (UOM) for absence duration.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EmployeeAllowUpdatesFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether an employee can update the absence record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EmployeeLockIfConfirmFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the Lock if completed for employee option for the absence type is selected. Valid values are Y and N. The default value is N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EmployerId": {
+            "type": "integer",
+            "description": "Unique numeric identifier of the employer.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EmployerName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Legal name of the employer, such as Vision Corporation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EnableForTimeCardEntry": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Enable absence entry from the time card.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegGroupingCd": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Legislative grouping code at the absence type level.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Legislation code of the legislative data group for the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LinkageRuleCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the linkage rule. For example Manual, Duration based or Chained.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ManagerAllowUpdatesFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether a manager can update the absence record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ManagerLockIfConfirmFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether absence record is locked if completed for manager. Valid values are Y and N. The default value is N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "MaximumDuration": {
+            "type": "number",
+            "description": "Maximum duration value of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "MaximumDurationRuleCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Maximum duration rule code of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "MinimumDuration": {
+            "type": "number",
+            "description": "Minimum duration value of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "MinimumDurationRuleCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Minimum duration rule code of the absence type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PreventMultipleAssignmentFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether multiple assignments are allowed for this absence type. Valid values are Y and N. The default value is null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "SpecialCondition": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Special conditions entered for the absence request.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "absenceTypesLOV": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/absenceTypesLOV-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

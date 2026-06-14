@@ -1,0 +1,42 @@
+# HWR_WLNS_TOPICS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrwlnstopicsvl-7358.html#hwrwlnstopicsvl-7358](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrwlnstopicsvl-7358.html#hwrwlnstopicsvl-7358)
+
+## Columns
+
+- TOPIC_ID
+- TOPIC_SOURCE
+- IS_ACTIVE
+- PARENT_ID
+- CATEGORY_ID
+- CATEGORY_KEY
+- TOPIC_KEY
+- WLNS_TOPICS_ATTR_1
+- WLNS_TOPICS_ATTR_2
+- WLNS_TOPICS_ATTR_3
+- TOPIC_NAME
+- DESCRIPTION
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.TOPIC_ID, B.TOPIC_SOURCE, B.IS_ACTIVE, B.PARENT_ID, B.CATEGORY_ID, B.CATEGORY_KEY, B.TOPIC_KEY, B.WLNS_TOPICS_ATTR_1, B.WLNS_TOPICS_ATTR_2, B.WLNS_TOPICS_ATTR_3, T.TOPIC_NAME, T.DESCRIPTION, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HWR_WLNS_TOPICS_B B, HWR_WLNS_TOPICS_TL T WHERE B.TOPIC_ID = T.TOPIC_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

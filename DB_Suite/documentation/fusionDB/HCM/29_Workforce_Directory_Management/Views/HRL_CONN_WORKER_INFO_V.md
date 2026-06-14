@@ -1,0 +1,40 @@
+# HRL_CONN_WORKER_INFO_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRL
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrlconnworkerinfov-7595.html#hrlconnworkerinfov-7595](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrlconnworkerinfov-7595.html#hrlconnworkerinfov-7595)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- GLOBAL_DISPLAY_NAME
+- LOCAL_DISPLAY_NAME
+- DISPLAY_NAME_CONTEXT
+- BUSINESS_TITLE
+- ASSIGNMENT_TYPE
+- DIRECT_REPORTS_CNTS
+- ALL_REPORTS_CNTS
+- ALL_REPORTS_EMP_CNTS
+- ALL_REPORTS_CWK_CNTS
+- ALL_REPORTS_NWK_CNTS
+- ALL_REPORTS_DEPT_CNTS
+- ALL_REPORTS_LOC_CNTS
+- RDATE
+- RTYPE
+
+## Query
+
+```sql
+select "PERSON_ID","ASSIGNMENT_ID","GLOBAL_DISPLAY_NAME","LOCAL_DISPLAY_NAME","DISPLAY_NAME_CONTEXT","BUSINESS_TITLE","ASSIGNMENT_TYPE","DIRECT_REPORTS_CNTS","ALL_REPORTS_CNTS","ALL_REPORTS_EMP_CNTS","ALL_REPORTS_CWK_CNTS","ALL_REPORTS_NWK_CNTS","ALL_REPORTS_DEPT_CNTS","ALL_REPORTS_LOC_CNTS","RDATE","RTYPE" from ( select person_id, assignment_id, df_information1 global_display_name, df_information2 local_display_name, df_information3 display_name_context, df_information4 business_title, df_information5 assignment_type, df_information_number1 direct_reports_cnts, df_information_number2 all_reports_cnts, df_information_number3 all_reports_emp_cnts, df_information_number4 all_reports_cwk_cnts, df_information_number5 all_reports_nwk_cnts, df_information_number6 all_reports_dept_cnts, df_information_number7 all_reports_loc_cnts, last_update_date rdate, 'PP' rtype from hrl_data_feed_information x where df_information_category = 'ORA_DF_MGR_WRK_COUNTS' UNION SELECT asg.person_id, asg.assignment_id, gname.display_name global_display_name, lname.display_name local_display_name, lname.char_set_context display_name_context, asg.assignment_name, asg.assignment_type, NVL(DIRECT_REPORTS_CNT,0) DIRECT_REPORTS_CNT, NVL(ALL_REPORTS_CNT,0) ALL_REPORTS_CNT, NVL(ALL_REPORTS_EMP_CNT,0) ALL_REPORTS_EMP_CNT, NVL(ALL_REPORTS_CWK_CNT,0) ALL_REPORTS_CWK_CNT, NVL(ALL_REPORTS_NWK_CNT,0) ALL_REPORTS_NWK_CNT, NVL(ALL_REPORTS_DEPT_CNT,0) ALL_REPORTS_DEPT_CNT, NVL(ALL_REPORTS_LOC_CNT,0) ALL_REPORTS_LOC_CNT, sysdate rdate, 'RT' rtype from ( select manager_id person_id, manager_assignment_id assignment_id , 'ORA_DF_MGR_WRK_COUNTS' info_catg, SUM(decode(manager_level, 1, 1, 0)) DIRECT_REPORTS_CNT, count(1) ALL_REPORTS_CNT, sum(decode(assignment_type,'E',1,0)) ALL_REPORTS_EMP_CNT, sum(decode(assignment_type,'C',1,0)) ALL_REPORTS_CWK_CNT, sum(decode(assignment_type,'N',1,0)) ALL_REPORTS_NWK_CNT, count(distinct NVL(organization_id,0)) ALL_REPORTS_DEPT_CNT, count(distinct NVL(location_id,0)) ALL_REPORTS_LOC_CNT from per_manager_hrchy_dn pmdh, hrl_conn_public_workers_v paam where 1=1 and pmdh.person_id = paam.person_id and pmdh.assignment_id = paam.assignment_id and trunc(sysdate) between pmdh.effective_start_date and pmdh.effective_end_date and trunc(sysdate) between paam.effective_start_date and paam.effective_end_date and paam.effective_latest_change = 'Y' and paam.assignment_type IN ('E','C','N') group by pmdh.manager_id, pmdh.manager_assignment_id ) cnts, per_person_names_f gname, per_person_names_f lname, per_all_assignments_m asg where asg.person_id = gname.person_id and gname.name_type = 'GLOBAL' and asg.person_id = lname.person_id and lname.name_type != 'GLOBAL' and trunc(sysdate) between gname.effective_start_date and gname.effective_end_date and trunc(sysdate) between lname.effective_start_date and lname.effective_end_date and cnts.person_id(+) = asg.person_id and cnts.assignment_id(+) = asg.assignment_id and trunc(sysdate) between asg.effective_start_date and asg.effective_end_date and asg.effective_latest_change = 'Y' and asg.assignment_type IN ('E','C','N') and asg.assignment_status_type != 'INACTIVE' and not exists (select 1 from hrl_data_feed_information x where person_id = asg.person_id and assignment_id = asg.assignment_id and df_information_category = 'ORA_DF_MGR_WRK_COUNTS') )
+```
+
+---
+
+[← Back to Index](../29_Workforce_Directory_Management_Views_Index.md)

@@ -1,0 +1,39 @@
+# WLF_GEN_AI_CONSUMER_CONFIG_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfgenaiconsumerconfigvl-5051.html#wlfgenaiconsumerconfigvl-5051](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfgenaiconsumerconfigvl-5051.html#wlfgenaiconsumerconfigvl-5051)
+
+## Columns
+
+- GEN_AI_CONSUMER_CONFIG_ID
+- OBJECT_TYPE
+- CONSUMER_IMPL_CLASS
+- NAME
+- DESCRIPTION
+- LANGUAGE
+- SOURCE_LANG
+- ENABLED_FLAG
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT b.GEN_AI_CONSUMER_CONFIG_ID, b.OBJECT_TYPE, b.CONSUMER_IMPL_CLASS, tl.NAME , tl.DESCRIPTION , tl.LANGUAGE , tl.SOURCE_LANG , b.ENABLED_FLAG , b.CREATED_BY , b.CREATION_DATE , b.LAST_UPDATED_BY , b.LAST_UPDATE_DATE , b.LAST_UPDATE_LOGIN , b.OBJECT_VERSION_NUMBER , b.MODULE_ID FROM WLF_GEN_AI_CONSUMER_CONFIG_B b, WLF_GEN_AI_CONSUMER_CONFIG_TL tl WHERE b.GEN_AI_CONSUMER_CONFIG_ID = tl.GEN_AI_CONSUMER_CONFIG_ID AND tl.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

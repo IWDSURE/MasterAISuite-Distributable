@@ -1,0 +1,311 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Object Snapshots",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/hcmRestApi/objectSnapshots": {
+      "post": {
+        "tags": [
+          "Object Snapshots"
+        ],
+        "summary": "Extract an object snapshot",
+        "description": "Retrieves data for a specific key attribute synchronously based on the data structure configured using HCM Extracts.",
+        "operationId": "Extract an object snapshot",
+        "requestBody": {
+          "description": "Request payload with parameters to the HCM Extract is provided as a name-value pair.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OK"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BAD_REQUEST"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/INTERNAL_SERVER_ERROR"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-codegen-request-body-name": "Request Body",
+        "x-internal-id": "hcmRestApi-objectSnapshots-post",
+        "x-filename-id": "hcmrestapi-objectsnapshots-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Request": {
+        "required": [
+          "ExtractsDefinitionName",
+          "parameters",
+          "snapshotKey"
+        ],
+        "type": "object",
+        "properties": {
+          "ExtractsDefinitionName": {
+            "type": "string",
+            "description": "Name of the extract that defines the data elements to be extracted using the REST method."
+          },
+          "snapshotKey": {
+            "type": "string",
+            "description": "Parameter configured in the Extracts definition, which is also the threading database item defined in the Extracts."
+          },
+          "parameters": {
+            "type": "array",
+            "description": "Parameters defined in the Extracts and passed as a name-value pair.",
+            "items": {
+              "$ref": "#/components/schemas/parameter"
+            }
+          }
+        },
+        "example": {
+          "ExtractsDefinitionName": "PER_EXT_SEC_PERSON_Test",
+          "snapshotKey": "300100067510809",
+          "parameters": [
+            {
+              "name": "start_date",
+              "value": "2020-10-01"
+            },
+            {
+              "name": "effective_date",
+              "value": "2020-10-31"
+            }
+          ]
+        }
+      },
+      "parameter": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "OK": {
+        "required": [
+          "ExtractsDefinitionName",
+          "FileContent",
+          "message",
+          "parameters",
+          "snapshotKey",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Definition of the HTTP response code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status of the object snapshot request."
+          },
+          "ExtractsDefinitionName": {
+            "type": "string",
+            "description": "Name of the extract that defines the data elements to be extracted using the REST method."
+          },
+          "snapshotKey": {
+            "type": "string",
+            "description": "Parameter configured in the Extracts definition, which is also the threading database item defined in the Extracts."
+          },
+          "parameters": {
+            "type": "array",
+            "description": "Parameters defined in the Extracts and passed as a name-value pair.",
+            "items": {
+              "$ref": "#/components/schemas/parameter"
+            }
+          },
+          "FileContent": {
+            "type": "string",
+            "description": "Base64 encoded XML data extracted for the request payload."
+          }
+        },
+        "example": {
+          "status": "OK",
+          "message": "Success",
+          "ExtractsDefinitionName": "PER_EXT_SEC_PERSON_Test",
+          "snapshotKey": "300100067510809",
+          "parameters": [
+            {
+              "name": "start_date",
+              "value": "2020-10-01"
+            },
+            {
+              "name": "effective_date",
+              "value": "2020-10-31"
+            }
+          ],
+          "FileContent": "PFBFUl9FWFRfU0VDX1BFUlNPTj48UkVQX0NBVEVHT1JZX05BTUU+UEVSX0VYVF9TRUNfUEVSU09OX1Rlc3Q8L1JFUF9DQVRFR09SWV9OQU1FPjxwYXJhbWV0ZXJzPjxyZXF1ZXN0X2lkLz48RkxPV19OQU1FLz48bGVnaXNsYXRpdmVfZGF0YV9ncm91cF9pZC8+PGVmZmVjdGl2ZV9kYXRlPjIwMjAtMTAtMzE8L2VmZmVjdGl2ZV9kYXRlPjxzdGFydF9kYXRlPjIwMjAtMTAtMDE8L3N0YXJ0X2RhdGU+PHJlcG9ydF9jYXRlZ29yeV9pZD4zMDAxMDA1NDY5MzU5NjM8L3JlcG9ydF9jYXRlZ29yeV9pZD48YWN0aW9uX3BhcmFtZXRlcl9ncm91cF9pZC8+PGNoYW5nZXNfb25seS8+PC9wYXJhbWV0ZXJzPjxQZXJzb25fRXh0cmFjdF9EYXRhX0dyb3VwPjxPQkpFQ1RfQUNUSU9OX0lEPjMwMzY1MDU8L09CSkVDVF9BQ1RJT05fSUQ+PFBlcnNvbkRldGFpbHNSZWNvcmQ+PFBlcnNvbklEPjMwMDEwMDA2NzUxMDgwOTwvUGVyc29uSUQ+PFBlcnNvbk51bWJlcj45NTUxNjAwMDgxODMxOTc8L1BlcnNvbk51bWJlcj48UGVyc29uVHlwZUlEPjEzPC9QZXJzb25UeXBlSUQ+PFBlcnNvbk5JRE51bWJlcj43ODktNjctODU2NzwvUGVyc29uTklETnVtYmVyPjwvUGVyc29uRGV0YWlsc1JlY29yZD48L1BlcnNvbl9FeHRyYWN0X0RhdGFfR3JvdXA+PC9QRVJfRVhUX1NFQ19QRVJTT04+Cg=="
+        }
+      },
+      "BAD_REQUEST": {
+        "required": [
+          "ExtractsDefinitionName",
+          "message",
+          "parameters",
+          "snapshotKey",
+          "status",
+          "FileContent"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Definition of the HTTP response code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status of the object snapshot request."
+          },
+          "ExtractsDefinitionName": {
+            "type": "string",
+            "description": "Name of the extract that defines the data elements to be extracted using the REST method."
+          },
+          "snapshotKey": {
+            "type": "string",
+            "description": "Parameter configured in the Extracts definition, which is also the threading database item defined in the Extracts."
+          },
+          "parameters": {
+            "type": "array",
+            "description": "Parameters defined in the Extracts and passed as a name-value pair.",
+            "items": {
+              "$ref": "#/components/schemas/parameter"
+            }
+          }
+        },
+        "example": {
+          "status": "BAD_REQUEST",
+          "message": "You need to enable the Extracts for object snapshot support.",
+          "ExtractsDefinitionName": "PER_EXT_SEC_PERSON_Test",
+          "snapshotKey": "300100067510809",
+          "parameters": [
+            {
+              "name": "start_date",
+              "value": "2020-10-01"
+            },
+            {
+              "name": "effective_date",
+              "value": "2020-10-31"
+            }
+          ]
+        }
+      },
+      "INTERNAL_SERVER_ERROR": {
+        "required": [
+          "message",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Definition of the HTTP response code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Status of the object snapshot request."
+          },
+          "ExtractsDefinitionName": {
+            "type": "string",
+            "description": "Name of the extract that defines the data elements to be extracted using the REST method."
+          },
+          "snapshotKey": {
+            "type": "string",
+            "description": "Parameter configured in the Extracts definition, which is also the threading database item defined in the Extracts."
+          },
+          "parameters": {
+            "type": "array",
+            "description": "Parameters defined in the Extracts and passed as a name-value pair.",
+            "items": {
+              "$ref": "#/components/schemas/parameter"
+            }
+          }
+        },
+        "example": {
+          "status": "INTERNAL_SERVER_ERROR",
+          "message": "Error while fetching details",
+          "ExtractsDefinitionName": "PER_EXT_SEC_PERSON_Test",
+          "snapshotKey": "300100067510809",
+          "parameters": [
+            {
+              "name": "start_date",
+              "value": "2020-10-01"
+            },
+            {
+              "name": "effective_date",
+              "value": "2020-10-31"
+            }
+          ]
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

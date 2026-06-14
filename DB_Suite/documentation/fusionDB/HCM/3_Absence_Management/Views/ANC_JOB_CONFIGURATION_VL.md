@@ -1,0 +1,41 @@
+# ANC_JOB_CONFIGURATION_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** ANC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancjobconfigurationvl-4652.html#ancjobconfigurationvl-4652](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancjobconfigurationvl-4652.html#ancjobconfigurationvl-4652)
+
+## Columns
+
+- BATCH_EXE_CD
+- CHUNK_SIZE
+- CREATED_BY
+- CREATION_DATE
+- ENTERPRISE_ID
+- JOB_CONFIGURATION_ALTCD
+- JOB_CONFIGURATION_ID
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- LAST_UPDATED_BY
+- MAX_ERR_NUM
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- THREAD_CNT_NUM
+- JOB_DESCRIPTION
+- JOB_NAME
+- SGUID
+
+## Query
+
+```sql
+SELECT JobConfigurationSeedEO.BATCH_EXE_CD, JobConfigurationSeedEO.CHUNK_SIZE, JobConfigurationSeedEO.CREATED_BY, JobConfigurationSeedEO.CREATION_DATE, JobConfigurationSeedEO.ENTERPRISE_ID, JobConfigurationSeedEO.JOB_CONFIGURATION_ALTCD, JobConfigurationSeedEO.JOB_CONFIGURATION_ID, JobConfigurationSeedEO.LAST_UPDATE_DATE, JobConfigurationSeedEO.LAST_UPDATE_LOGIN, JobConfigurationSeedEO.LAST_UPDATED_BY, JobConfigurationSeedEO.MAX_ERR_NUM, JobConfigurationSeedEO.MODULE_ID, JobConfigurationSeedEO.OBJECT_VERSION_NUMBER, JobConfigurationSeedEO.THREAD_CNT_NUM, JobConfigurationTranslationS1.JOB_DESCRIPTION , JobConfigurationTranslationS1.JOB_NAME, JobConfigurationSeedEO.SGUID FROM ANC_JOB_CONFIGURATION JobConfigurationSeedEO, ANC_JOB_CONFIGURATION_TL JobConfigurationTranslationS1 WHERE JobConfigurationSeedEO.JOB_CONFIGURATION_ID = JobConfigurationTranslationS1.JOB_CONFIGURATION_ID AND (JobConfigurationTranslationS1.LANGUAGE = SYS_CONTEXT('USERENV','LANG'))
+```
+
+---
+
+[← Back to Index](../3_Absence_Management_Views_Index.md)

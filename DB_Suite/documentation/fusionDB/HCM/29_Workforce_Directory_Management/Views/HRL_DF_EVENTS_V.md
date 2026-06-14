@@ -1,0 +1,40 @@
+# HRL_DF_EVENTS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRL
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrldfeventsv-3857.html#hrldfeventsv-3857](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrldfeventsv-3857.html#hrldfeventsv-3857)
+
+## Columns
+
+- FLOW_CODE
+- EVENT_SOURCE
+- CATEGORY_CODE
+- VISIBILITY_CODE
+- DISPLAY_SEQUENCE
+- COLOR_CODE
+- IMAGE_NAME
+- PERSON_ID
+- ASSIGNMENT_ID
+- EVENT_YEAR
+- EVENT_DATE
+- EVENT_DAYS
+- EVENT_TITLE
+- EVENT_DETAILS
+- LINK_TYPE
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT /*+ LEADING(asg hdfs evt) */ hdfs.flow_code flow_code , hdfs.source_code event_source, hdfs.category_code category_code , hdfs.visibility_code visibility_code, hdfs.display_sequence display_sequence, hdfs.color_code color_code, hdfs.image_name image_name, asg.person_id person_id, asg.assignment_id assignment_id, evt.event_year event_year, evt.event_date event_date, evt.event_days event_days, evt.event_title event_title, evt.event_details event_details, hdfs.link_type link_type, ( hdfs.link_text || evt.link_text ) link_text FROM per_all_assignments_f asg, hrl_data_feed_settings_vl hdfs, TABLE ( hrl_df_main.get_event_details(hdfs.setting_id, asg.person_id, asg.assignment_id) ) evt WHERE trunc(sysdate) BETWEEN asg.effective_start_date AND asg.effective_end_date AND hdfs.section_code = 'ORA_DF_EVENT' AND hdfs.active_flag = 'Y' AND ((hdfs.visibility_code = 'SELF' and asg.person_id = NVL(HRC_SESSION_UTIL.GET_USER_PERSONID,-1)) OR (hdfs.visibility_code = 'MGR' and exists (select 1 from per_manager_hrchy_dn where manager_id = NVL(HRC_SESSION_UTIL.GET_USER_PERSONID,-1) and person_id = asg.person_id and trunc(sysdate) between effective_start_date and effective_end_date and manager_type = 'LINE_MANAGER')) )
+```
+
+---
+
+[← Back to Index](../29_Workforce_Directory_Management_Views_Index.md)

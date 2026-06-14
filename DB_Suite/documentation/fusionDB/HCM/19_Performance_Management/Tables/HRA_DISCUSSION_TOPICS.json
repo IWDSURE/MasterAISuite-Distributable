@@ -1,0 +1,180 @@
+{
+  "name": "HRA_DISCUSSION_TOPICS",
+  "object_type": "TABLE",
+  "description": "It will store UI field values for creating different discussion topics for a check-in meeting.",
+  "schema": "FUSION",
+  "owner": "HRA",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hradiscussiontopics-27366.html#hradiscussiontopics-27366",
+  "primary_keys": [
+    {
+      "name": "HRA_DISCUSSION_TOPICS_PK",
+      "columns": "DISCUSSION_TOPIC_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "DISCUSSION_TOPIC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of Discussion Topics"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS"
+    },
+    {
+      "Name": "CHECK_IN_MEETING_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HRA_CHECK_IN_MEETINGS"
+    },
+    {
+      "Name": "OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to tables like HRG_GOALS"
+    },
+    {
+      "Name": "NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Generic Discussion Topic name of the Check-In meeting"
+    },
+    {
+      "Name": "TOPIC_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Discussion Topic Type of the Check-In meeting"
+    },
+    {
+      "Name": "DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Context or description of Discussion Topic."
+    },
+    {
+      "Name": "DISCUSSED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identify if the discussion topic has been discussed or not."
+    },
+    {
+      "Name": "SCHEDULE_OWNER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Parent key for PER_CHECKLIST_SCHEDULES.\tSCHEDULE_OWNER_ID for recurring check-ins"
+    },
+    {
+      "Name": "RECURRENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies recurring discussion topic series within recurring check-ins."
+    },
+    {
+      "Name": "CREATED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies the person who created this discussion topic."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRA_DISCUSSION_TOPICS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CHECK_IN_MEETING_ID"
+    },
+    {
+      "Index": "HRA_DISCUSSION_TOPICS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TOPIC_TYPE"
+    },
+    {
+      "Index": "HRA_DISCUSSION_TOPICS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_ID, CHECK_IN_MEETING_ID, TOPIC_TYPE"
+    },
+    {
+      "Index": "HRA_DISCUSSION_TOPICS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "DISCUSSION_TOPIC_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:15:43"
+}

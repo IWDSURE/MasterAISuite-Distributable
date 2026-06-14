@@ -1,0 +1,27 @@
+{
+  "name": "HWM_EXT_TIMEENTRY_PREV_XFR_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmexttimeentryprevxfrv-5396.html#hwmexttimeentryprevxfrv-5396",
+  "columns": [
+    "TM_REC_ID",
+    "TM_REC_VERSION",
+    "TM_REC_TYPE",
+    "MEASURE",
+    "UNIT_OF_MEASURE",
+    "START_TIME_TRUNCATED",
+    "START_TIME",
+    "STOP_TIME",
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TIME_REPORTER_ID",
+    "DELETE_STATUS",
+    "TM_LATEST_REC_ID",
+    "TM_LATEST_REC_VERSION",
+    "TCSMR_CODE"
+  ],
+  "query": "SELECT previous_rec.tm_rec_id tm_rec_id , previous_rec.tm_rec_version tm_rec_version, previous_rec.tm_rec_type tm_rec_type , previous_rec.measure measure , previous_rec.unit_of_measure unit_of_measure , TRUNC(previous_rec.start_time) start_time_truncated , previous_rec.start_time start_time , previous_rec.stop_time stop_time , previous_rec.resource_id person_id , previous_rec.subresource_id assignment_id , previous_rec.time_reporter_id time_reporter_id , previous_rec.delete_flag delete_status , rec.tm_rec_id tm_latest_rec_id , rec.tm_rec_version tm_latest_rec_version , para_values.status_def_cd tcsmr_code FROM hwm_tm_rec rec , hwm_tm_rec previous_rec, ( SELECT 'PJC' status_def_cd FROM dual WHERE pay_report_utils.get_parameter_value('CONSUMER') = 'ORA_HWM_TIME_CONSUMER_PJC' OR pay_report_utils.get_parameter_value('CONSUMER') IS NULL UNION SELECT 'PYR' status_def_cd FROM dual WHERE pay_report_utils.get_parameter_value('CONSUMER') = 'ORA_HWM_TIME_CONSUMER_PYR' OR pay_report_utils.get_parameter_value('CONSUMER') IS NULL ) para_values WHERE rec.tm_rec_id = previous_rec.tm_rec_id AND previous_rec.tm_rec_version = ( SELECT DISTINCT MAX(stat.tm_bldg_blk_version) FROM hwm_tm_statuses stat, hwm_tm_status_def_b stat_def WHERE stat.status_value = 'SUCCESS' AND stat.tm_status_def_id = stat_def.tm_status_def_id AND stat_def.status_def_cd = 'A_XFR_STATUS_' ||para_values.status_def_cd AND stat.tm_bldg_blk_id = rec.tm_rec_id AND stat.tm_bldg_blk_version < rec.tm_rec_version GROUP BY stat.tm_bldg_blk_id)",
+  "_parsed_at": "2026-06-09T19:50:43"
+}

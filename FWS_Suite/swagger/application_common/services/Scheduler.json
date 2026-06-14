@@ -1,0 +1,3249 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Scheduler",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "ess/rest/scheduler/v1": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "List the resources",
+        "description": "Lists the scheduler API resources",
+        "operationId": "describeScheduler",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RootResource"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RootResource"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-get",
+        "x-filename-id": "ess-rest-scheduler-v1-get"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/search/{pageIndex}": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Query job requests with pageIndex",
+        "description": "Queries job requests with pageIndexJob requests represent executable instances of job definitions or job sets.",
+        "operationId": "listPaginatedSchedulerRequests",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "path",
+            "description": "Requested Index number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string in SCIM filtering format. Fields that can be queried include [requestId, absParentRequestId, description, application, product, requestCategory, runAsUser, executionType, jobDefinitionId, state, scheduleDefinition, priority, processStartTime, processEndTime, requestedStartTime, requestedEndTime, submissionTime, parentRequestId, elapsedTime, waitTime, scheduledTime, processor, submitter, submitterGUID, instanceParentId, requestType, errorType, processPhase, completedTime, retriedCount, readyWaitTime, enterpriseId, isTimedOut, isAsynchronous, logicalClusterName, submitterDmsECID, submitterFlowId, requestDmsECID, requestFlowId, elapsedTime, className, jobType, externalJobType, externalId]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Common-separated list of fields to return. For example, ?fields=\"requestId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeFields",
+            "in": "query",
+            "description": "Common-separated list of fields to exclude in the information returned. For example, ?excludeFields=\"jobDefinitionId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Specify a query field by which to order the results.\nThe value of this query parameter must follow the format of fieldName[:(asc/desc)].\nFor example, ?orderBy=name:asc. If more than one field is listed, only the first will\nbe used.\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A scheduling sub-system error occurred",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-search-{pageIndex}-get",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-search-pageindex-get"
+      }
+    },
+    "ess/rest/scheduler/v1/query/{application}/requests": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Query job requests with pagination",
+        "description": "Queries job requests for an application with pagination.",
+        "operationId": "listPaginatedSchedulerRequestsWithApp",
+        "parameters": [
+          {
+            "name": "application",
+            "in": "path",
+            "description": "Requested application",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "Requested Index number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string in SCIM filtering format. Fields that can be queried include [requestId, absParentRequestId, description, product, requestCategory, runAsUser, executionType, jobDefinitionId, state, scheduleDefinition, priority, processStartTime, processEndTime, requestedStartTime, requestedEndTime, submissionTime, parentRequestId, elapsedTime, waitTime, scheduledTime, processor, submitter, submitterGUID, instanceParentId, requestType, errorType, processPhase, completedTime, retriedCount, readyWaitTime, enterpriseId, isTimedOut, isAsynchronous, logicalClusterName, submitterDmsECID, submitterFlowId, requestDmsECID, requestFlowId, elapsedTime, className, jobType, externalJobType, externalId]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Common-separated list of fields to return. For example, ?fields=\"requestId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeFields",
+            "in": "query",
+            "description": "Common-separated list of fields to exclude in the information returned. For example, ?excludeFields=\"jobDefinitionId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Specify a query field by which to order the results.\nThe value of this query parameter must follow the format of fieldName[:(asc/desc)].\nFor example, ?orderBy=name:asc. If more than one field is listed, only the first will\nbe used.\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A scheduling sub-system error occurred",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-query-{application}-requests-get",
+        "x-filename-id": "ess-rest-scheduler-v1-query-application-requests-get"
+      }
+    },
+    "ess/rest/scheduler/v1/requests": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Query job requests",
+        "description": "Queries job requests. Job requests represent executable instances of job definitions or job sets.",
+        "operationId": "listSchedulerRequests",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string in SCIM filtering format. Fields that can be queried include [requestId, absParentRequestId, description, application, product, requestCategory, runAsUser, executionType, jobDefinitionId, state, scheduleDefinition, priority, processStartTime, processEndTime, requestedStartTime, requestedEndTime, submissionTime, parentRequestId, elapsedTime, waitTime, scheduledTime, processor, submitter, submitterGUID, instanceParentId, requestType, errorType, processPhase, completedTime, retriedCount, readyWaitTime, enterpriseId, isTimedOut, isAsynchronous, logicalClusterName, submitterDmsECID, submitterFlowId, requestDmsECID, requestFlowId, elapsedTime, className, jobType, externalJobType, externalId]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "A comma-separated list of request IDs to return request information for.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Common-separated list of fields to return. For example, ?fields=\"requestId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeFields",
+            "in": "query",
+            "description": "Common-separated list of fields to exclude in the information returned. For example, ?excludeFields=\"jobDefinitionId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Specify a query field by which to order the results.\nThe value of this query parameter must follow the format of fieldName[:(asc/desc)].\nFor example, ?orderBy=name:asc. If more than one field is listed, only the first will\nbe used.\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A scheduling sub-system error occurred",
+            "content": {
+              "application/vnd.oracle.resource+json;type=collection": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-get",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-get"
+      },
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Submit a new job request",
+        "description": "Creates a new job request using an existing job definition to run according to the specified schedule.",
+        "operationId": "createSchedulerRequest",
+        "requestBody": {
+          "description": "Note that only one of schedule and scheduleId should be specified.",
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSubmissionBody"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSubmissionBody"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "description": "URL of new resource",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRequestResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Get job request information",
+        "description": "Retrieves the runtime details of the specified request.",
+        "operationId": "readSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Common-separated list of fields to return. For example, ?fields=\"requestId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "Common-separated list of links to return. For example, ?links=cancel",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeFields",
+            "in": "query",
+            "description": "Common-separated list of fields to exclude in the information returned. For example, ?excludeFields=\"jobDefinitionId\"",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestDetails"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/vnd.oracle.resource+json;type=singular": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-get",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-get"
+      },
+      "patch": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Update the scheduler request",
+        "description": "Creates or updates the request. Items that can be updated include one or more request parameters, the schedule information, or the callback URL.\nFor request parameters, if the parameter does not exist, this operation will create a request. If the parameter exists, the request will get updated. If the schedule is replaced, all previously scheduled instances of this request that have not started running will be canceled. The new schedule will be effective immediately for scheduling new instances.",
+        "operationId": "updateSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequestBody"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A scheduling sub-system error occurred.",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-patch",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-patch"
+      },
+      "delete": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Mark a submitted request as deleted",
+        "description": "Marks a submitted request as deleted. For parent requests, this\noperation will cascade to all children.\n\nThe target request must be a submitted request that has finished and\nis in a terminal state. An error occurs if the target request is not\nin a terminal state, or if it is a child request of some kind, for\nexample, a JobSet step, a sub-request, or a Schedule instance request.\n\nThis does not physically remove request data, although the request\nwill no longer be accessible (visible) for most operations.\n",
+        "operationId": "deleteSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request logically deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "Deletion of the request cannot be performed due to the state of the request.",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-delete",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-delete"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/subscribe": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Registers the callback URL",
+        "description": "Registers for the callback URL in case it is not done during request submission.",
+        "operationId": "subscribeForCallback",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackSubscriptionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation initiated",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported request for registration",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-subscribe-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-subscribe-post"
+      },
+      "delete": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Cancel callback subscription",
+        "description": "Cancel the callback subscription for the given request.\n",
+        "operationId": "unsubscribeCallback",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Callback subscription for the request has been cancelled.",
+            "content": {}
+          },
+          "400": {
+            "description": "Deletion of the request cannot be performed due to the state of the request.",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-subscribe-delete",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-subscribe-delete"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/cancel": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Cancel an ongoing request",
+        "description": "Cancels the processing of a request that is not in a terminal state.\n\nFor a singleton and child request in WAIT, READY, BLOCKED or\nHOLD state, this operation will cause change the status to CANCELLED state.\n\nFor a singleton and child request in RUNNING or\nCOMPLETED state, cancellation is best effort and the\nstate will go to a transitory CANCELLING state which will\npersist until the request is cancelled and transitions to\nCANCELLED or some other terminal state.\n\nFor parent requests, this operation cascades to all its children.\n",
+        "operationId": "cancelSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation initiated",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported state for operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized to cancel this request",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-cancel-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-cancel-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/hold": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Hold operation",
+        "description": "Withholds further processing of a request that is in WAIT or READY state.\nFor parent requests, this operation will cascade to all eligible child requests.\n",
+        "operationId": "holdSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation initiated",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported state for operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized to hold this request",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-hold-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-hold-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/release": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Release operation",
+        "description": "Releases a request from the HOLD state. For parent requests, this operation will cascade\nto all eligible child requests.\n",
+        "operationId": "releaseSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation initiated",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported state for operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized to release this request",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-release-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-release-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/forceCancel": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Force cancel an operation",
+        "description": "Complete an asynchronous request with a CANCEL status. The request will\nbe transitioned to CANCELLED state if the prerequisites are met.\n\n1. The caller must make sure the remote job is no longer executing.\n\n2. The request must be waiting for an asynchronous response and be in CANCELLING state\n\n3. It must be at least 30 minutes since the request was put in CANCELLING state or the last\ntime the job checked in for this request.\n",
+        "operationId": "forceCancelSchedulerRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation initiated",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported state for operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized to force cancel this request",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-forceCancel-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-forcecancel-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/executionStatus": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Set the status of the request execution",
+        "description": "Sets the status of the request execution. It is meant to be invoked from a job request to signal the result of its execution to the scheduler. The scheduler uses it as an indicator to transition the request state.",
+        "operationId": "setSchedulerRequestExecutionStatus",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionStatusBody"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionStatusBody"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Links"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A scheduling sub-system error occurred.",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-executionStatus-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-executionstatus-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/permissions": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Get permission details",
+        "description": "Retrieves the permission details of the specified request for the current user.",
+        "operationId": "getPermissions",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermissionsResponse"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermissionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-permissions-get",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-permissions-get"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/{requestId}/checkInCancelling": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Validate the cancellation state",
+        "description": "Retrieves the detail if job is in cancelling state.",
+        "operationId": "checkInCancelling",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "the job request ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The job request execution context in string form.",
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInCancellingRequest"
+              }
+            },
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInCancellingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-{requestId}-checkInCancelling-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-requestid-checkincancelling-post"
+      }
+    },
+    "ess/rest/scheduler/v1/requests/submitArgs": {
+      "post": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Set Step Args",
+        "description": "Marshals various information in the existing CP style into an ESS request parameters object for a list of steps in a jobset request. It would be invoked prior to submitting the request.",
+        "operationId": "submitArgs",
+        "requestBody": {
+          "description": "Set submit Args request body",
+          "content": {
+            "application/vnd.oracle.resource+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSetSubmitBody"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSetSubmitBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestSetSubmitBody"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestSetSubmitBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Scheduling sub-system error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "ess-rest-scheduler-v1-requests-submitArgs-post",
+        "x-filename-id": "ess-rest-scheduler-v1-requests-submitargs-post"
+      }
+    },
+    "ess/rest/scheduler/v1/server/quiesceState": {
+      "get": {
+        "tags": [
+          "Scheduler"
+        ],
+        "summary": "Get ESS Cluster Quiesce State",
+        "description": "Gets the ESS cluster Quiesc State. If servername is not provided, all server's Quiesce state will be returned. The clusterName argument is mandatory while serverName argument is optional.",
+        "operationId": "getEssClusterQuiesceState",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "clusterName",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "serverName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not allowed for this operation",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "request ID not found",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/vnd.oracle.resource+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              },
+              "application/json;charset=utf-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleExceptionDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "ess-rest-scheduler-v1-server-quiesceState-get",
+        "x-filename-id": "ess-rest-scheduler-v1-server-quiescestate-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RootResource": {
+        "description": "Collection resource describing a list of versions of an API.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/collectionBaseResource"
+          }
+        ]
+      },
+      "collectionBaseResource": {
+        "title": "Base Collection Resource",
+        "description": "Oracle base collection resource schema definition. ",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/singularResource"
+          }
+        ]
+      },
+      "singularResource": {
+        "title": "Singular Resource",
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/instanceLink"
+            }
+          }
+        },
+        "description": "Oracle base singular resource schema definition."
+      },
+      "instanceLink": {
+        "required": [
+          "href",
+          "rel"
+        ],
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the \n\\\"templated\\\" property must be set to true.\"\n"
+          },
+          "rel": {
+            "type": "string",
+            "description": "Name of the link relation that, in addition to the type property, can be used to retrieve link details.\nFor example, href or profile.\n"
+          },
+          "templated": {
+            "type": "boolean",
+            "description": "Boolean flag that specifies that \\\"href\\\" property is a URI or URI Template.\nIf the property is a URI template, set this value to true. By default, this value is false.\n"
+          },
+          "mediaType": {
+            "type": "string",
+            "description": "Media type, as defined by RFC 2046, describing the link target.\n"
+          },
+          "method": {
+            "type": "string",
+            "description": "HTTP method for requesting the target of the link."
+          },
+          "profile": {
+            "type": "string",
+            "description": "Link to the metadata of the resource, such as JSON-schema, that describes the resource\nexpected when dereferencing the target resource..\n"
+          }
+        },
+        "description": "Metadata describing link description objects that MAY appear in the JSON instance representation."
+      },
+      "SimpleExceptionDetail": {
+        "required": [
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "URI. It will be beneficial if teams can provide application specific problem types. If not, at least we should link to HTTP error code page."
+          },
+          "title": {
+            "type": "string",
+            "description": "Summary error message"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "Detailed error message"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "ESS-specific error code. For example ESS-00500."
+          }
+        }
+      },
+      "RequestQueryResponse": {
+        "required": [
+          "links"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "The resource items returned for a normal query. This element is not\nreturned when multi-select is used.\n",
+            "items": {
+              "$ref": "#/components/schemas/RequestDetails"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "pageIndex": {
+            "type": "integer",
+            "description": "The page number requested by the user."
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of items returned in this response. This element is not\nreturned when multi-select is used.\n"
+          },
+          "batch": {
+            "type": "array",
+            "description": "The items returned for multi-selection. This element is not returned\nfor a normal query.\n",
+            "items": {
+              "$ref": "#/components/schemas/RequestBatchItem"
+            }
+          }
+        }
+      },
+      "RequestDetails": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "integer",
+            "format": "int64",
+            "x-o:queryable": true,
+            "x-o:fieldGroups": {
+              "detailType": [
+                "basic",
+                "full",
+                "monitoring"
+              ]
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of this request.",
+            "x-o:queryable": true,
+            "x-o:fieldGroups": {
+              "detailType": [
+                "basic",
+                "full",
+                "monitoring"
+              ]
+            }
+          },
+          "requestParameters": {
+            "type": "array",
+            "description": "All request parameters, including system properties, associated with this request.",
+            "items": {
+              "$ref": "#/components/schemas/RequestParameter"
+            }
+          },
+          "absParentRequestId": {
+            "type": "integer",
+            "description": "The submitted request ID. All child requests created on behalf of that request have the same absolute parent.\n",
+            "format": "int64",
+            "x-o:queryable": true
+          },
+          "jobDescription": {
+            "type": "string",
+            "description": "the description of the job definition or job set specified for this request",
+            "x-o:queryable": true
+          },
+          "jobDefinitionId": {
+            "type": "string",
+            "description": "The job or job set definition associated with this request.",
+            "x-o:queryable": true
+          },
+          "application": {
+            "type": "string",
+            "description": "The application name associated with this request.",
+            "x-o:queryable": true
+          },
+          "deployedApplicationName": {
+            "type": "string",
+            "description": "The deployedApplicationName name associated with this request.",
+            "x-o:queryable": true
+          },
+          "scheduleDefinition": {
+            "type": "string",
+            "description": "Identifies the schedule associated with this request only if the schedule is a separate resource.\nFor a schedule specified inline during request submission (ad-hoc schedule), see 'schedule' field.\n",
+            "x-o:queryable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of the request.",
+            "x-o:queryable": true
+          },
+          "stateDescription": {
+            "type": "string",
+            "description": "A localized string describing the state of the job request."
+          },
+          "errorType": {
+            "type": "string",
+            "description": "The error type of the request.",
+            "enum": [
+              "SYSTEM",
+              "BUSINESS",
+              "TIMEOUT",
+              "MIXED_NON_BUSINESS",
+              "MIXED_BUSINESS"
+            ],
+            "x-o:queryable": true
+          },
+          "errorTypeDescription": {
+            "type": "string",
+            "description": "Localized error type message."
+          },
+          "priority": {
+            "type": "integer",
+            "description": "The request priority. The priorty range is [0..9] with 0 as the lowest priority and 9 as the highest priority.\n",
+            "x-o:queryable": true
+          },
+          "executionType": {
+            "type": "string",
+            "description": "The execution type of the request. The only type supported now is REST.",
+            "x-o:queryable": true
+          },
+          "requestCategory": {
+            "type": "string",
+            "description": "The request category property of this request.",
+            "x-o:queryable": true
+          },
+          "product": {
+            "type": "string",
+            "description": "The product associated with the request. This corresponds to the value of SYS_product system property.",
+            "x-o:queryable": true
+          },
+          "requestType": {
+            "type": "string",
+            "description": "The immutable type of the request.",
+            "enum": [
+              "SINGLETON",
+              "RECUR_PARENT",
+              "RECUR_CHILD",
+              "JOBSET_SINGLETON",
+              "JOBSET_STEP",
+              "JOBSET_RECUR_PARENT",
+              "JOBSET_RECUR_CHILD",
+              "SUB_REQUEST",
+              "UNKNOWN"
+            ],
+            "x-o:queryable": true
+          },
+          "processPhase": {
+            "type": "string",
+            "description": "The process phase for this request.",
+            "x-o:queryable": true
+          },
+          "processPhaseDescription": {
+            "type": "string",
+            "description": "Localized description of the process phase."
+          },
+          "cause": {
+            "type": "string",
+            "description": "The cause that led to the request being in a terminal state.",
+            "enum": [
+              "NON_TERMINAL",
+              "REQUEST_EXPIRED",
+              "REQUEST_LOGIN_ERROR",
+              "REQUEST_AUTHORIZATION_FAILED",
+              "SYSTEM_ERROR",
+              "VALIDATION_ERROR",
+              "METADATA_NOT_FOUND",
+              "OPERATOR_CANCEL",
+              "RECOVER_CANCEL",
+              "RECOVER_GROUP_CANCEL",
+              "PARENT_NOT_PAUSED",
+              "PROCESS_WARNING",
+              "PROCESS_ERROR",
+              "PROCESS_CANCEL",
+              "PROCESS_SUCCESS",
+              "PROCESS_SYSTEM_ERROR",
+              "PROCESS_BIZ_ERROR",
+              "PROCESS_TIMED_OUT",
+              "PROCESS_UNKNOWN_STATUS",
+              "PROCESS_RECOVER",
+              "PROCESS_MANUAL_RECOVER_ERROR",
+              "PROCESS_MANUAL_RECOVER_ERROR_FINALIZE",
+              "PROCESS_SUSPEND",
+              "PROCESS_KILLED",
+              "POSTPROCESS_SYSTEM_ERROR",
+              "POSTPROCESS_CANCEL",
+              "POSTPROCESS_WARNING",
+              "POSTPROCESS_ERROR",
+              "POSTPROCESS_BIZ_ERROR",
+              "PROCESS_UPDATE_WARNING",
+              "PROCESS_UPDATE_ERROR",
+              "PROCESS_UPDATE_CANCEL",
+              "PROCESS_UPDATE_BIZ_ERROR",
+              "MANUAL_RECOVER_ERROR",
+              "PREPROCESS_SYSTEM_ERROR",
+              "PREPROCESS_CANCEL",
+              "PREPROCESS_INITIATE_CANCEL",
+              "PREPROCESS_ERROR",
+              "PREPROCESS_BIZ_ERROR"
+            ]
+          },
+          "causeDescription": {
+            "type": "string",
+            "description": "A localized string describing the general cause of the state of the job request."
+          },
+          "parentRequestId": {
+            "type": "integer",
+            "description": "The request ID of the immediate parent of this request. If the request has no immediate parent,\nthe value returned by this method as not meaningful.\n",
+            "format": "int64",
+            "x-o:queryable": true
+          },
+          "stepId": {
+            "type": "string",
+            "description": "The JobSet stepID for this request. The request may or may not be a step within a JobSet, which\ncan be indicated by the stepID value.\n"
+          },
+          "instanceParentId": {
+            "type": "integer",
+            "description": "The request id of the instance parent of this request. Any child requests of request tree of the\ninstance parent request have he same instance parent id. For example, any sub-requests or JobSet\nstep requests, and any of their children, will have the same instance parent id.\n\nIf a request is submitted without a Schedule the submitted request is considered the instance parent.\nThe instance parent id value is the same as the absolute parent id value.\n\nIf a request is submitted with a Schedule, a new child request is created for each occurance of the\nSchedule and each child request represents an instance parent request.\n",
+            "format": "int64",
+            "x-o:queryable": true
+          },
+          "processGroup": {
+            "type": "string",
+            "description": "The process group of the request."
+          },
+          "isAsynchronous": {
+            "type": "boolean",
+            "description": "Indicates if the request is asynchronous. A value of 'true' indicates that this is an asynchronous request.\n",
+            "x-o:queryable": true
+          },
+          "jobDisplayName": {
+            "type": "string",
+            "description": "The display name for job definition/ job set of this request."
+          },
+          "jobType": {
+            "type": "string",
+            "description": "The job type identifier associated with this request."
+          },
+          "processor": {
+            "type": "string",
+            "description": "The mid-tier instance name that processed the request.",
+            "x-o:queryable": true
+          },
+          "dispatcher": {
+            "type": "string",
+            "description": "The mid-tier instance name that dispatched the request."
+          },
+          "executionAttempt": {
+            "type": "integer",
+            "description": "The current execution attempt for this request. The first execution attempt is 1."
+          },
+          "retriedCount": {
+            "type": "integer",
+            "description": "The number of times this request has been retried.",
+            "x-o:queryable": true
+          },
+          "isCancellable": {
+            "type": "boolean",
+            "description": "Indicates if the request is cancellable. This is based on the request type and current state of this request. This is only a hint, not a guarantee, as to whether or not this request can be cancelled."
+          },
+          "isHoldable": {
+            "type": "boolean",
+            "description": "Indicates if the request is holdable. This is based on the request type and current state of this request. This is only a hint, not a guarantee, as to whether or not this request can be held."
+          },
+          "submitter": {
+            "type": "string",
+            "description": "The name of the user who submitted the request.",
+            "x-o:queryable": true
+          },
+          "submitterGUID": {
+            "type": "string",
+            "description": "The GUID of the user who submitted the request."
+          },
+          "runAsUser": {
+            "type": "string",
+            "description": "The RunAs user for the request."
+          },
+          "requestedStartTime": {
+            "type": "string",
+            "description": "The time at which the request was requested to run. The string is in ISO 8601 date time format.",
+            "x-o:queryable": true
+          },
+          "requestedEndTime": {
+            "type": "string",
+            "description": "This represents the requested end time of the request. The string is in ISO 8601 date time format.",
+            "x-o:queryable": true
+          },
+          "scheduledTime": {
+            "type": "string",
+            "description": "The scheduled start time of the request. The string is in ISO 8601 date time format.",
+            "x-o:queryable": true
+          },
+          "submissionTime": {
+            "type": "string",
+            "description": "Time of request submission in ISO8601 date time format.",
+            "x-o:queryable": true
+          },
+          "processStartTime": {
+            "type": "string",
+            "description": "Time processing of the request began in ISO 8601 date time format.",
+            "x-o:queryable": true
+          },
+          "processEndTime": {
+            "type": "string",
+            "description": "Time processing of the request ended in ISO 8601 date time format.",
+            "x-o:queryable": true
+          },
+          "elapsedTime": {
+            "type": "integer",
+            "description": "The elapsed milliseconds spent processing request. This will be zero 0 if the request processing not started.\n",
+            "format": "int64",
+            "x-o:queryable": true
+          },
+          "completedTime": {
+            "type": "string",
+            "description": "The time, in ISO 8601 date time format, that ESS finished all tasks associated with this request.\nThis represents the time that the request process phase was set to ProcessPhase.Complete.\nThis value will always be set once all tasks for the request has finished, even if the request was\nnever executed for some reason. Null is returned if ESS has not yet finished all work for this requests.\n",
+            "x-o:queryable": true
+          },
+          "expiration": {
+            "type": "string",
+            "description": "The time, in ISO 8601 date time format, that the request will expire. A request may not expire.\n"
+          },
+          "errorWarningMessage": {
+            "type": "string",
+            "description": "The message associated with an error or warning that occured while processing this request.\n"
+          },
+          "errorWarningTime": {
+            "type": "string",
+            "description": "The time, in ISO 8601 date time format, of the error or warning if one occurred while\nprocessing this request.\n"
+          },
+          "errorWarningDetail": {
+            "type": "string",
+            "description": "The details, such as stack trace, of the error or warning, if one occurred while processing this request.\n"
+          },
+          "ecid": {
+            "type": "string",
+            "description": "The ECID of the DMS ExecutionContext associated with the processing of this request.\n"
+          },
+          "lastScheduleInstanceId": {
+            "type": "integer",
+            "description": "The last Schedule instance request id associated with this request. This value is meaningful only for\ncertain request types. For other request types it is meaningless and will be zero (0).\n\nFor a RequestType.RECUR_PARENT or RequestType.JOBSET_RECUR_PARENT request, this value represents\nthe id of the instance parent request that was most recently created. If the Schedule has ended, or been\ncancelled, this is the id of the last instance request created for the Schedule.\n\nFor a RequestType.RECUR_CHILD or RequestType.JOBSET_RECUR_CHILD request, this value represents the\nid of the request for the previous instance of the Schedule. The value is zero (0) for the first instance\nrequest of the Schedule.\n",
+            "format": "int64"
+          },
+          "isTimedOut": {
+            "type": "boolean",
+            "description": "Indicates if the request has timed out.",
+            "x-o:queryable": true
+          },
+          "parentExecAttempt": {
+            "type": "integer",
+            "description": "The value of execution attempt of the immediate parent request when this request was created.\nThis value will be zero if this request does not have an immediate parent.\n"
+          },
+          "instanceParentExecAttempt": {
+            "type": "integer",
+            "description": "The value of execution attempt of the instance parent request when this request was created.\nThis value will be zero if this request does not have an instance parent\n"
+          },
+          "pausedCount": {
+            "type": "integer",
+            "description": "The number of times this request has been paused during its current execution attempt.\nThis value is incremented when a request has been paused to allow to allow sub-requests to run.\nThis value will be zero if this request has never been paused.\n"
+          },
+          "lastSubRequestSet": {
+            "type": "integer",
+            "description": "The set number assigned to the last subrequest submitted by this request during its current execution attempt.\nThis value will be zero if no subrequests have been submitted by this request.\n\nIf pausedCount equals lastSubrequestSet, then this request has paused since the last subrequests were\nsubmitted. This value represents the set number assigned to those subrequests.\n\nIf pausedCount is not equal to lastSubrequestSet, then one or more subrequests have been submitted\nsince this request last paused. This value represents the set number assigned to those subrequests\nthat are waiting for this request to pause.\n"
+          },
+          "subRequestSet": {
+            "type": "integer",
+            "description": "The set number assigned to a subrequest when it was submitted. If a parent submits multiple subrequests\nbefore it pauses all those subrequests will have the same set number.\n\nThis is meaningful only for a subrequest, in which case this value will be greater than zero.\nThe value is zero for a request that is not a subrequest.\n"
+          },
+          "preprocessStatus": {
+            "type": "string"
+          },
+          "preProcessMessage": {
+            "type": "string"
+          },
+          "postProcessStatus": {
+            "type": "string"
+          },
+          "postProcessMessage": {
+            "type": "string"
+          },
+          "executableState": {
+            "type": "string"
+          },
+          "isAsyncRecoverable": {
+            "type": "boolean"
+          },
+          "isRecoverable": {
+            "type": "boolean"
+          },
+          "requestMode": {
+            "type": "string"
+          },
+          "executionMode": {
+            "type": "string"
+          },
+          "logicalClusterName": {
+            "type": "string",
+            "x-o:queryable": true
+          },
+          "submitterDmsECID": {
+            "type": "string",
+            "x-o:queryable": true
+          },
+          "submitterDmsRID": {
+            "type": "string"
+          },
+          "submitterFlowId": {
+            "type": "string",
+            "x-o:queryable": true
+          },
+          "previousState": {
+            "type": "string",
+            "description": "The previous state for this request. It may be empty if the request has never changed state."
+          },
+          "stateChangeTime": {
+            "type": "string",
+            "description": "The time the request state was last changed in ISO 8601 date time format. It may be empty if the request\nhas never changed state.\n"
+          },
+          "enterpriseId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dmsRID": {
+            "type": "string"
+          },
+          "flowId": {
+            "type": "string",
+            "x-o:queryable": true
+          },
+          "isForceCancelAllowed": {
+            "type": "boolean",
+            "description": "Check whether the prerequisites for forcing a request to CANCELLED using\nforceCancelAsyncRequest are met.\n\nThe checks do NOT include verification that  the job request is no longer executing. That check must be done\nmanually.\n"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/ScheduleOut"
+          },
+          "notificationUrl": {
+            "type": "string",
+            "description": "URL for an optional notification callback when the request is complete to be made as the user who submitted\nthe request.\n"
+          },
+          "links": {
+            "$ref": "#/components/schemas/RequestLinks"
+          }
+        }
+      },
+      "RequestParameter": {
+        "required": [
+          "name",
+          "paramType"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The parameter name."
+          },
+          "value": {
+            "type": "string"
+          },
+          "paramType": {
+            "type": "string",
+            "enum": [
+              "BOOLEAN",
+              "LONG",
+              "INTEGER",
+              "DATETIME",
+              "STRING"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          }
+        },
+        "description": "A request parameter."
+      },
+      "ScheduleOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScheduleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "resource ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "The unique name to be given to this resource. It must not be null.\nThe name is also used as the default display name unless otherwise specifially set.\n"
+              },
+              "description": {
+                "type": "string"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "packageName": {
+                "type": "string",
+                "description": "The namespace for this metadata object."
+              },
+              "resourceBundles": {
+                "type": "array",
+                "description": "Java resource bundles associated with this job.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "permissions": {
+                "type": "array",
+                "description": "The set of permissions the current user of this API has on this resource.",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "READ",
+                    "CREATE",
+                    "UPDATE",
+                    "DELETE",
+                    "EXECUTE"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ScheduleBase": {
+        "type": "object",
+        "properties": {
+          "recurrences": {
+            "type": "array",
+            "description": "A set of recurrences. The resulting occurrences for the schedule would be the union of\noccurrences generated by the individual recurrences.\n",
+            "items": {
+              "$ref": "#/components/schemas/Recurrence"
+            }
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Timezone in Olson database format."
+          },
+          "inclusions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Explicit inclusion date in ISO 8601 format."
+            }
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Explicit exclusion date in ISO 8601 format."
+            }
+          }
+        }
+      },
+      "Recurrence": {
+        "required": [
+          "icalString"
+        ],
+        "type": "object",
+        "properties": {
+          "icalString": {
+            "type": "string",
+            "description": "Defines a recurrence pattern for use by a schedule. The string must conform to RFC 5445 RRULE.\nRestrictions include\n  UNTIL, COUNT, BYSETPOS and WKST are not supported.\n  \n  BY* clauses (Rotors) in the RRULE can have minimun value of -1. i.e. for eg, BYDAY=-2MO(second to last monday)\n  is not supported.\n  \n  BYMONTH and BYWEEKNO can't be present in one RECUR expression.\n  \n  BYDAY, BYMONTHDAY and BYYEARDAY can't be present in one RECUR expression.\n"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Sets the start date/time for this Recurrence object. The object only extracts the time up to the seconds. Milliseconds precision is not supported. The value is a string in ISO 8601 format."
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Sets the end date/time for this Recurrence object. The object only extracts the time up to the seconds. Milliseconds precision is not supported. The value is a string in ISO 8601 format."
+          }
+        }
+      },
+      "RequestLinks": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RequestLink"
+        }
+      },
+      "RequestLink": {
+        "required": [
+          "href",
+          "rel"
+        ],
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string",
+            "enum": [
+              "self",
+              "parentRequest",
+              "cancel",
+              "forceCancel",
+              "hold",
+              "release",
+              "subscribe",
+              "permissions",
+              "executionStatus",
+              "absParentRequest",
+              "instanceParent"
+            ]
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "Links": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Link"
+        }
+      },
+      "Link": {
+        "required": [
+          "href",
+          "rel"
+        ],
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string",
+            "enum": [
+              "self",
+              "cancel",
+              "forceCancel",
+              "hold",
+              "release",
+              "subscribe",
+              "permissions",
+              "executionStatus"
+            ]
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestBatchItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "HTTP code"
+          },
+          "body": {
+            "$ref": "#/components/schemas/RequestDetails"
+          }
+        }
+      },
+      "RequestSubmissionBody": {
+        "description": "This object specifies information used to create a request for a jobDefinition or jobSet. Note that only\none of schedule and scheduleId should be specified.\n",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RequestSystemProperties"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "An optional search tag for the request.\n"
+              },
+              "requestExecutionContext": {
+                "$ref": "#/components/schemas/RequestExecutionContextIn"
+              },
+              "jobDefinitionId": {
+                "type": "string",
+                "description": "metadata object ID for the job definition or job set"
+              },
+              "requestParameters": {
+                "type": "array",
+                "description": "the request submission parameters",
+                "items": {
+                  "$ref": "#/components/schemas/RequestParameter"
+                }
+              },
+              "schedule": {
+                "$ref": "#/components/schemas/ScheduleBase"
+              },
+              "scheduleId": {
+                "type": "string",
+                "description": "ID for a schedule that is already created as a seperate resource. Only one of scheduleId and schedule\nshould be specified.\n"
+              },
+              "startTime": {
+                "type": "string",
+                "description": "The requested start time for the request in ISO 8601 date time format. The request will not run prior to\nthis time. If not specified, the current time will be used. If a schedule has been specified or the\nrequest is meant to begin immediately, a start time should not be specified.\n"
+              },
+              "endTime": {
+                "type": "string",
+                "description": "The time past which this request or its child requests will not be dispatched for execution.\n"
+              },
+              "application": {
+                "type": "string",
+                "description": "Property that specifies the application name."
+              },
+              "callbackSubscription": {
+                "$ref": "#/components/schemas/CallbackSubscriptionRequest"
+              }
+            }
+          }
+        ]
+      },
+      "RequestSystemProperties": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string",
+            "description": "Property that specifies the product within the application that submitted the request.\n"
+          },
+          "requestCategory": {
+            "type": "string",
+            "description": "Property that specifies a label for a request. The label allows grouping of\njob requests for resource optimization.\n"
+          },
+          "priority": {
+            "type": "integer",
+            "description": "Property that specifies the request processing priority.\nThe priority interval is [0..9] with 0 as the lowest priority\nand 9 as the highest.\nIf this property is not specified, the system default value used is 4.\n"
+          },
+          "retries": {
+            "type": "integer",
+            "description": "Property that specifies the retry limit for a failed request.\nIf request execution fails, the request will retried up to the\nnumber of times specified by this property until the request succeeds.\nIf retry limit is zero (0), a failed request will not be retried.\nIf this property is not specified, the system default used is 0.\n"
+          },
+          "executePast": {
+            "type": "boolean",
+            "description": "Property that specifies whether instances of a repeating request\nwith an execution time in the past should be generated.  Instances\nwill never be generated before the requested start time nor\nafter the requested end time.\n\nNote that a null requested start time defaults to the current time.\nTo cause past instances to be generated, you must set this property\nto true and specify the requested start time as the initial\ntime from which instances should be generated.\n\nValid values for this property are:\n\ntrue -- All instances specified by a schedule that are\nwithin the range specified by requested start time to requested\nend time will be generated regardless of the time of generation.\n\nfalse Instances with a scheduled execution time in the\npast (that is, before the time of generation) will not be generated.\n\nIf this property is not specified, system default used is true.\n"
+          },
+          "requestTimeout": {
+            "type": "integer",
+            "description": "Property that specifies the time, in minutes, that the processor will\nwait for an asynchronous after it has begun execution. After the\ntime elapses, the request will be marked as timed out. There is no\nother direct effect on the state of the request.\n\nIf this property is not specified, the system default is to never timeout.\n",
+            "format": "int64"
+          },
+          "requestLogLevel": {
+            "type": "string",
+            "description": "Property that specifies the log level for request logging.\n\nThe value of this property is not used internally by the scheduler,\nbut is available to be passed to the job for its use.\n"
+          }
+        }
+      },
+      "RequestExecutionContextIn": {
+        "required": [
+          "requestHandle",
+          "requestId"
+        ],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "integer",
+            "description": "It is the identifier of the request that is invoking this operation.\nIt can be retrieved from the information supplied to the job\nrequest when execution commenced.\n",
+            "format": "int64"
+          },
+          "requestHandle": {
+            "type": "string",
+            "description": "The request handle associated with the executing request represents\nan opaque identifer for the executing instance of the request. The\nvalue can be retrieved from information supplied to the job request\nwhen execution commenced.\n"
+          }
+        },
+        "description": "The request execution context of the current job request. This\nidentifier is only used when creating sub-requests.\n"
+      },
+      "CallbackSubscriptionRequest": {
+        "required": [
+          "callbackUrlPrefix",
+          "callbackResourcePath"
+        ],
+        "type": "object",
+        "properties": {
+          "securityScheme": {
+            "type": "string",
+            "description": "One among \"OWSM_GPA\", \"OWSM_LPA\", \"DIRECT_OAUTH\". \nIf unspecified, the default will be assumed as OWSM_GPA. For OWSM_LPA, the default policy attached from client will be \"oracle/http_oauth2_token_client_policy\".\nFor \"ouath2ClientCsfKey\" property of \"OWSM_LAP\" security scheme, the subscribers need to ensure the password credential is configured in CSF under the csf map \"oracle.wsm.security\".\nFor \"clientId\" and \"clientSecret\" properties of \"DIRECT_OAUTH security\" scheme, the subscribers need to ensure the clientId and secret is configured in IDCS. \n",
+            "enum": [
+              "OWSM_GPA",
+              "OWSM_LPA",
+              "DIRECT_OAUTH"
+            ]
+          },
+          "callbackUrlPrefix": {
+            "type": "string",
+            "description": "Property that specifies the base URL of a REST Resource that can be used in conjunction with callbackResourcePath property to provide a full URL for the resource. This property is required for all the security schemes.\n"
+          },
+          "callbackResourcePath": {
+            "type": "string",
+            "description": "Property that specifies the relative Path for REST Resource. The base Resource URL is given by callbackUrlPrefix property. This property is required for all the security schemes.\n"
+          },
+          "accessTokenUri": {
+            "type": "string",
+            "description": "URL to obtain access tokens from the Identity store. This property is usually required for DIRECT_OAUTH security scheme.\n"
+          },
+          "ouath2ClientCsfKey": {
+            "type": "string",
+            "description": "Property to set the client's CSF key. Eg: \"idcs.client.credentials\". This will be specified in OWSM's ConfigOverride.CO_OAUTH2_CLIENT_CSF_KEY while creating PolicySetFeature. This property is usually required for OWSM_LPA security scheme.\n"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "The clientId issued by OAuth server during client registration that should be added to credential store and provided as a policy parameter before making a call. This property is usually required for OWSM_LPA and DIRECT_OAUTH security schemes.\n"
+          },
+          "clientSecret": {
+            "type": "string",
+            "description": "The client secret issued by OAuth server during client registration that should be added to credential store and provided as a policy parameter before making a call. This property is usually required for OWSM_LPA and DIRECT_OAUTH security schemes.\n"
+          }
+        },
+        "description": "The typical set of properties that are required to invoke the callback rest endpoint. These properties need to be specified as per the securityScheme.\n"
+      },
+      "CreateRequestResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "links": {
+            "$ref": "#/components/schemas/RequestLinks"
+          }
+        }
+      },
+      "UpdateRequestBody": {
+        "type": "object",
+        "properties": {
+          "requestParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RequestParameter"
+            }
+          }
+        }
+      },
+      "ExecutionStatusBody": {
+        "type": "object",
+        "properties": {
+          "requestHandle": {
+            "type": "string",
+            "description": "The request handle associated with the executing request represents an opaque identifer for the executing instance of the request."
+          },
+          "status": {
+            "type": "string",
+            "description": "Callback status of an asynchronous job. Returning an asynchronous status does not guarantee\nthat the state of the request will change to the corresponding value. The new state of the request\nwill depend on the old state, the async status, and any errors that may occur in subsequent processing.\n\nSUCCESS         -- the job ran successfully\n\nUPDATE          -- the asynchronous job is updated\n\nPAUSE           -- the job has paused for the execution of sub-requests\n\nWARNING         -- the job is issuing a warning\n\nERROR           -- the job encountered a retryable error\n\nCANCEL          -- The job has cancelled its execution. Usually this originates from cancelling the job using the scheduler APIs\n\nSUSPEND         -- the job has suspended itself\n\nBUSINESS_ERROR  -- the job encountered a non-retryable error\n",
+            "enum": [
+              "SUCCESS",
+              "UPDATE",
+              "PAUSE",
+              "WARNING",
+              "ERROR",
+              "BUSINESS_ERROR",
+              "CANCEL",
+              "SUSPEND"
+            ]
+          },
+          "statusMessage": {
+            "type": "string",
+            "description": "An error message if the status is ERROR or BUSINESS_ERROR, a warning message if the status\nis WARNING, the paused state if the status is PAUSED. The value will be ignored if the\nstatus is SUCCESS or CANCEL.\n"
+          }
+        }
+      },
+      "PermissionsResponse": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "boolean"
+        }
+      },
+      "CheckInCancellingRequest": {
+        "type": "object",
+        "properties": {
+          "requestExecutionContext": {
+            "type": "string",
+            "description": "request execution context in string form"
+          }
+        }
+      },
+      "RequestSetSubmitBody": {
+        "description": "This object specifies information used for setSubmitArgs function call.\n",
+        "type": "object",
+        "properties": {
+          "requestParameters": {
+            "type": "array",
+            "description": "The request submission parameters.",
+            "items": {
+              "$ref": "#/components/schemas/RequestParameter"
+            }
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "application": {
+            "type": "string",
+            "description": "Property that specifies the application name."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

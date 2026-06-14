@@ -1,0 +1,35 @@
+# IRC_MP_TEAM_MEMBERS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmpteammembersvl-8450.html#ircmpteammembersvl-8450](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmpteammembersvl-8450.html#ircmpteammembersvl-8450)
+
+## Columns
+
+- TEAM_MEMBER_ID
+- PERSON_ID
+- SOURCE_ID
+- SOURCE_TYPE
+- ROLE
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.TEAM_MEMBER_ID TEAM_MEMBER_ID, B.PERSON_ID PERSON_ID, B.SOURCE_ID SOURCE_ID, B.SOURCE_TYPE SOURCE_TYPE, TL.ROLE ROLE, B.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, B.CREATED_BY CREATED_BY, B.CREATION_DATE CREATION_DATE, B.LAST_UPDATED_BY LAST_UPDATED_BY, B.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN FROM IRC_MP_TEAM_MEMBERS_B B, IRC_MP_TEAM_MEMBERS_TL TL WHERE B.TEAM_MEMBER_ID = TL.TEAM_MEMBER_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

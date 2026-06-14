@@ -1,0 +1,61 @@
+# PAY_PERSON_SOE_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paypersonsoevl-3128.html#paypersonsoevl-3128](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paypersonsoevl-3128.html#paypersonsoevl-3128)
+
+## Columns
+
+- PAYROLL_REL_ACTION_ID
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATION_CODE
+- BAL_GRP_UE_BASE_NAME
+- BALANCE_TYPE_ID
+- BALANCE_NAME
+- CTX_STRING
+- CTX_USER_STRING
+- TOTAL_VALUE1
+- TOTAL_VALUE2
+- VALUE1
+- VALUE2
+- VALUE3
+- VALUE4
+- VALUE5
+- VALUE6
+- VALUE7
+- VALUE8
+- VALUE9
+- VALUE10
+- DEFBAL_ID1
+- DEFBAL_ID2
+- DEFBAL_ID3
+- DEFBAL_ID4
+- DEFBAL_ID5
+- DEFBAL_ID6
+- DEFBAL_ID7
+- DEFBAL_ID8
+- DEFBAL_ID9
+- DEFBAL_ID10
+- FEED_CHECKING_TYPE
+- DEFBAL_FOR_BREAKDOWN
+- DIMENSION_NAME
+- UOM
+- UOM_CODE
+- BAL_GRP_UE_NAME
+- BAL_GRP_UE_SEQ
+
+## Query
+
+```sql
+SELECT pra.PAYROLL_REL_ACTION_ID, prel.LEGISLATIVE_DATA_GROUP_ID,ldg.legislation_code, balRes.bal_grp_ue_base_name, balRes.BALANCE_TYPE_ID, balRes.BALANCE_NAME, balRes.CTX_STRING, balRes.CTX_USER_STRING, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.total_value1,balRes.UOM_CODE,balRes.UOM),balRes.total_value1) total_value1, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.total_value2,balRes.UOM_CODE,balRes.UOM),balRes.total_value2) total_value2, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE1,balRes.UOM_CODE,balRes.UOM),balRes.VALUE1) VALUE1, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE2,balRes.UOM_CODE,balRes.UOM),balRes.VALUE2) VALUE2, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE3,balRes.UOM_CODE,balRes.UOM),balRes.VALUE3) VALUE3, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE4,balRes.UOM_CODE,balRes.UOM),balRes.VALUE4) VALUE4, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE5,balRes.UOM_CODE,balRes.UOM),balRes.VALUE5) VALUE5, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE6,balRes.UOM_CODE,balRes.UOM),balRes.VALUE6) VALUE6, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE7,balRes.UOM_CODE,balRes.UOM),balRes.VALUE7) VALUE7, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE8,balRes.UOM_CODE,balRes.UOM),balRes.VALUE8) VALUE8, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE9,balRes.UOM_CODE,balRes.UOM),balRes.VALUE9) VALUE9, DECODE(balRes.UOM_CODE,'M',PAY_CHECKFORMAT.CHANGEFORMAT(balRes.VALUE10,balRes.UOM_CODE,balRes.UOM),balRes.VALUE10) VALUE10, balRes.DEFBAL_ID1, balRes.DEFBAL_ID2, balRes.DEFBAL_ID3, balRes.DEFBAL_ID4, balRes.DEFBAL_ID5, balRes.DEFBAL_ID6, balRes.DEFBAL_ID7, balRes.DEFBAL_ID8, balRes.DEFBAL_ID9, balRes.DEFBAL_ID10, balRes.FEED_CHECKING_TYPE,balRes.DEFBAL_FOR_BREAKDOWN, balRes.DIMENSION_NAME, balRes.UOM, balRes.UOM_CODE UOM_CODE, balRes.bal_grp_ue_name, balRes.bal_grp_ue_seq FROM pay_payroll_rel_actions pra, pay_pay_relationships_dn prel ,per_legislative_data_groups_vl ldg, pay_payroll_actions ppa, TABLE( pay_balance_view_pkg.get_combined_soe( p_payroll_rel_action_id => pra.PAYROLL_REL_ACTION_ID, p_payroll_assignment_id => null, p_calc_breakdown_id => null, p_legislation_code => ldg.legislation_code, p_ldg => prel.legislative_data_group_id)) balRes where ppa.payroll_action_id=pra.payroll_action_id and prel.PAYROLL_RELATIONSHIP_ID= pra.PAYROLL_RELATIONSHIP_ID and prel.LEGISLATIVE_DATA_GROUP_ID= ldg.LEGISLATIVE_DATA_GROUP_ID
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

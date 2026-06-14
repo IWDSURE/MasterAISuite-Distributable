@@ -1,0 +1,80 @@
+# PAY_BANK_ACCOUNTS_OWNER_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paybankaccountsownerv-5994.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paybankaccountsownerv-5994.html)
+
+## Columns
+
+- ACCOUNT_SOURCE
+- BANK_ACCOUNT_ID
+- ACCOUNT_SUFFIX
+- BANK_ACCOUNT_NAME
+- BANK_ACCOUNT_NAME_ALT
+- BANK_ACCOUNT_NUM
+- MASKED_ACCOUNT_NUM
+- BANK_ACCOUNT_NUM_ELECTRONIC
+- CHECK_DIGITS
+- CURRENCY_CODE
+- DESCRIPTION
+- SECONDARY_ACCOUNT_REFERENCE
+- START_DATE
+- END_DATE
+- MASKED_IBAN
+- IBAN_NUMBER
+- EFT_USER_NUM
+- RECON_DIFFERENCE_CCID
+- RECON_RULESET_ID
+- RECON_START_DATE
+- GL_CUR_EXC_RATE_TYPE
+- BANK_ID
+- BANK_NAME
+- BANK_HOME_COUNTRY
+- BANK_START_DATE
+- BANK_END_DATE
+- BANK_NUMBER
+- BANK_CODE
+- BRANCH_START_DATE
+- BRANCH_END_DATE
+- BRANCH_ID
+- BANK_BRANCH_NAME
+- BANK_BRANCH_NAME_ALT
+- BRANCH_NUMBER
+- MISSION_STATEMENT
+- EFT_SWIFT_CODE
+- EFT_USER_NUMBER
+- EFT_CONTACT_START_DATE
+- EFT_CONTACT_END_DATE
+- EDI_ID_NUMBER
+- EDI_LOCATION
+- EDI_START_DATE
+- EDI_END_DATE
+- RFC
+- RFC_START_DATE
+- RFC_END_DATE
+- BANK_ACCOUNT_TYPE
+- CLEAR_BANK_ACCOUNT_NUMBER
+- CLEAR_IBAN
+- ACCOUNT_LAST_UPDATE_DATE
+- BANK_ACCOUNT_TYPE_NAME
+- ACCOUNT_OWNER_PARTY_ID
+- ACCOUNT_OWNER_PRIMARY_FLAG
+- ACCOUNT_OWNER_APPROVAL_STATUS
+- INACTIVE_BANK_ACCOUNT_START_DATE
+- INACTIVE_BANK_ACCOUNT_END_DATE
+
+## Query
+
+```sql
+SELECT 'IBA' account_source, IBA.BANK_ACCOUNT_ID BANK_ACCOUNT_ID, IBA.ACCOUNT_SUFFIX, IBA.BANK_ACCOUNT_NAME, IBA.BANK_ACCOUNT_NAME_ALT, IBA.BANK_ACCOUNT_NUM, IBA.MASKED_ACCOUNT_NUM, IBA.BANK_ACCOUNT_NUM_ELECTRONIC, IBA.CHECK_DIGITS, IBA.CURRENCY_CODE, IBA.DESCRIPTION , IBA.SECONDARY_ACCOUNT_REFERENCE, IBA.START_DATE, IBA.END_DATE, IBA.MASKED_IBAN, IBA.IBAN_NUMBER, IBA.EFT_USER_NUM, IBA.RECON_DIFFERENCE_CCID, IBA.RECON_RULESET_ID, IBA.RECON_START_DATE, IBA.GL_CUR_EXC_RATE_TYPE, bankparty.party_id bank_id, bankparty.party_name bank_name, bankorgprofile.home_country bank_home_country, bankorgprofile.effective_start_date bank_start_date, bankorgprofile.effective_end_date bank_end_date, bankorgprofile.bank_or_branch_number bank_number, branchorgprofile.bank_code bank_code, branchorgprofile.effective_start_date branch_start_date, branchorgprofile.effective_end_date branch_end_date, branchparty.party_id branch_id, branchparty.party_name bank_branch_name, BankAddNamePhonetic.party_name bank_branch_name_alt, branchorgprofile.bank_or_branch_number branch_number, branchparty.mission_statement mission_statement, branchcp.eft_swift_code eft_swift_code, branchcp.eft_user_number eft_user_number, branchcp.start_date eft_contact_start_date, branchcp.end_date eft_contact_end_date, edicp.edi_id_number edi_id_number, edicp.edi_ece_tp_location_code edi_location, edicp.start_date edi_start_date, edicp.end_date edi_end_date, rfcca.class_code rfc, rfcca.start_date_active rfc_start_date, rfcca.end_date_active rfc_end_date, IBA.bank_account_type bank_account_type, IBA.BANK_ACCOUNT_NUM CLEAR_BANK_ACCOUNT_NUMBER, IBA.IBAN_NUMBER CLEAR_IBAN, iba.last_update_date account_last_update_date, acc_type.meaning BANK_ACCOUNT_TYPE_NAME, NULL ACCOUNT_OWNER_PARTY_ID, NULL ACCOUNT_OWNER_PRIMARY_FLAG, NULL ACCOUNT_OWNER_APPROVAL_STATUS, NULL inactive_bank_account_start_date, NULL inactive_bank_account_end_date FROM CE_BANK_ACCOUNTS IBA, hz_parties bankparty, hz_organization_profiles bankorgprofile, hz_code_assignments BankCA, hz_parties branchparty, HZ_ADDTNL_PARTY_NAMES BankAddNamePhonetic, hz_organization_profiles branchorgprofile, hz_contact_points branchcp, hz_contact_points edicp, hz_code_assignments rfcca, FND_LOOKUP_VALUES_VL acc_type WHERE IBA.PAY_USE_ALLOWED_FLAG = 'Y' AND IBA.ACCOUNT_CLASSIFICATION = 'INTERNAL' AND IBA.BANK_ID =BankParty.PARTY_ID AND NVL(IBA.NETTING_ACCT_FLAG, 'N') = 'N' AND BankCA.CLASS_CATEGORY = 'BANK_INSTITUTION_TYPE' AND BankCA.CLASS_CODE IN ('BANK', 'CLEARINGHOUSE','EMPLOYEE_BANK') AND BankCA.OWNER_TABLE_NAME = 'HZ_PARTIES' AND BankCA.OWNER_TABLE_ID = BankParty.PARTY_ID AND bankorgprofile.party_id = BankParty.PARTY_ID AND bankparty.party_type = 'ORGANIZATION' AND IBA.BANK_BRANCH_ID =branchparty.party_id AND branchparty.party_type = 'ORGANIZATION' AND branchparty.status = 'A' AND branchorgprofile.party_id = branchparty.party_id AND branchcp.owner_table_name (+) = 'HZ_PARTIES' AND branchcp.owner_table_id (+) = branchparty.party_id AND branchcp.contact_point_type (+) = 'EFT' AND edicp.owner_table_name (+) = 'HZ_PARTIES' AND edicp.owner_table_id (+) = branchparty.party_id AND edicp.contact_point_type (+) = 'EDI' AND rfcca.owner_table_name (+) = 'HZ_PARTIES' AND rfcca.owner_table_id (+) = branchparty.party_id AND rfcca.class_category (+) = 'RFC_IDENTIFIER' AND branchparty.party_id = BankAddNamePhonetic.party_id (+) AND BankAddNamePhonetic.party_name_type (+) = 'PHONETIC' AND acc_type.lookup_type(+) = 'BANK_ACCOUNT_TYPE' AND acc_type.lookup_code(+) = IBA.bank_account_type AND trunc(SYSDATE) BETWEEN TRUNC(branchorgprofile.effective_start_date) AND NVL(TRUNC(branchorgprofile.effective_end_date), trunc(SYSDATE) + 1) AND trunc(SYSDATE) BETWEEN TRUNC(bankorgprofile.effective_start_date) AND NVL(TRUNC(bankorgprofile.effective_end_date),trunc(SYSDATE) + 1) UNION ALL SELECT 'EBA' account_source, EBA.EXT_BANK_ACCOUNT_ID BANK_ACCOUNT_ID, EBA.ACCOUNT_SUFFIX, EBA.BANK_ACCOUNT_NAME, EBA.BANK_ACCOUNT_NAME_ALT, EBA.BANK_ACCOUNT_NUM, EBA.MASKED_BANK_ACCOUNT_NUM, EBA.BANK_ACCOUNT_NUM_ELECTRONIC, EBA.CHECK_DIGITS, EBA.CURRENCY_CODE, EBA.DESCRIPTION , EBA.SECONDARY_ACCOUNT_REFERENCE, EBA.START_DATE, EBA.END_DATE, EBA.MASKED_IBAN, EBA.IBAN, NULL, NULL, NULL, NULL, NULL, bankparty.party_id bank_id, bankparty.party_name bank_name, bankorgprofile.home_country bank_home_country, bankorgprofile.effective_start_date bank_start_date, bankorgprofile.effective_end_date bank_end_date, bankorgprofile.bank_or_branch_number bank_number, branchorgprofile.bank_code bank_code, branchorgprofile.effective_start_date branch_start_date, branchorgprofile.effective_end_date branch_end_date, branchparty.party_id branch_id, branchparty.party_name bank_branch_name, BankAddNamePhonetic.party_name bank_branch_name_alt, branchorgprofile.bank_or_branch_number branch_number, branchparty.mission_statement mission_statement, branchcp.eft_swift_code eft_swift_code, branchcp.eft_user_number eft_user_number, branchcp.start_date eft_contact_start_date, branchcp.end_date eft_contact_end_date, edicp.edi_id_number edi_id_number, edicp.edi_ece_tp_location_code edi_location, edicp.start_date edi_start_date, edicp.end_date edi_end_date, rfcca.class_code rfc, rfcca.start_date_active rfc_start_date, rfcca.end_date_active rfc_end_date, EBA.bank_account_type bank_account_type, EBA_V.CLEAR_BANK_ACCOUNT_NUMBER, EBA_V.CLEAR_IBAN, EBA.last_update_date account_last_update_date, acc_type.meaning BANK_ACCOUNT_TYPE_NAME, acc_owner.ACCOUNT_OWNER_PARTY_ID ACCOUNT_OWNER_PARTY_ID, acc_owner.PRIMARY_FLAG ACCOUNT_OWNER_PRIMARY_FLAG, nvl(acc_owner.APPROVAL_STATUS, 'APPROVED') ACCOUNT_OWNER_APPROVAL_STATUS, to_date(ba.value_1) inactive_bank_account_start_date, to_date(ba.value_2) inactive_bank_account_end_date FROM IBY_EXT_BANK_ACCOUNTS EBA, IBY_EXT_BANK_ACCOUNTS_V EBA_V, hz_parties bankparty, hz_organization_profiles bankorgprofile, hz_code_assignments BankCA, hz_parties branchparty, HZ_ADDTNL_PARTY_NAMES BankAddNamePhonetic, hz_organization_profiles branchorgprofile, hz_contact_points branchcp, hz_contact_points edicp, hz_code_assignments rfcca, FND_LOOKUP_VALUES_VL acc_type, IBY_ACCOUNT_OWNERS acc_owner, table(pay_fin_integrations.get_bank_account_dates(acc_owner.EXT_BANK_ACCOUNT_ID,acc_owner.ACCOUNT_OWNER_PARTY_ID)) ba WHERE EBA.EXT_BANK_ACCOUNT_ID = EBA_V.EXT_BANK_ACCOUNT_ID AND EBA.bank_id =BankParty.PARTY_ID AND BankCA.CLASS_CATEGORY = 'BANK_INSTITUTION_TYPE' AND BankCA.CLASS_CODE IN ('BANK', 'CLEARINGHOUSE','EMPLOYEE_BANK') AND BankCA.OWNER_TABLE_NAME = 'HZ_PARTIES' AND BankCA.OWNER_TABLE_ID = BankParty.PARTY_ID AND bankorgprofile.party_id = BankParty.PARTY_ID AND bankparty.party_type = 'ORGANIZATION' AND EBA.BRANCH_ID =branchparty.party_id AND branchparty.party_type = 'ORGANIZATION' AND branchparty.status = 'A' AND branchorgprofile.party_id = branchparty.party_id AND branchcp.owner_table_name (+) = 'HZ_PARTIES' AND branchcp.owner_table_id (+) = branchparty.party_id AND branchcp.contact_point_type (+) = 'EFT' AND edicp.owner_table_name (+) = 'HZ_PARTIES' AND edicp.owner_table_id (+) = branchparty.party_id AND edicp.contact_point_type (+) = 'EDI' AND rfcca.owner_table_name (+) = 'HZ_PARTIES' AND rfcca.owner_table_id (+) = branchparty.party_id AND rfcca.class_category (+) = 'RFC_IDENTIFIER' AND branchparty.party_id = BankAddNamePhonetic.party_id (+) AND BankAddNamePhonetic.party_name_type (+) = 'PHONETIC' AND acc_type.lookup_type(+) = 'IBY_BANKACCT_TYPES' AND acc_type.lookup_code(+) = EBA.bank_account_type AND trunc(SYSDATE) BETWEEN TRUNC(branchorgprofile.effective_start_date) AND NVL(TRUNC(branchorgprofile.effective_end_date), trunc(SYSDATE) + 1) AND trunc(SYSDATE) BETWEEN TRUNC(bankorgprofile.effective_start_date) AND NVL(TRUNC(bankorgprofile.effective_end_date),trunc(SYSDATE) + 1) AND acc_owner.EXT_BANK_ACCOUNT_ID = EBA.EXT_BANK_ACCOUNT_ID
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

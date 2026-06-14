@@ -1,0 +1,134 @@
+{
+  "name": "IRC_RAC_ACT_ITEM_VIEWERS",
+  "object_type": "TABLE",
+  "description": "This table is used to store the mapping of the team members to an individual action item. This will also record the responses to each of the action items done by the team member.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircracactitemviewers-11980.html#ircracactitemviewers-11980",
+  "primary_keys": [
+    {
+      "name": "IRC_RAC_ACT_ITEM_VIEWERS_PK",
+      "columns": "ACTION_ITEM_VIEWER_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ACTION_ITEM_VIEWER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "This column will be used to store the primary key of this table. Auto Generated Key."
+    },
+    {
+      "Name": "ACTION_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_RAC_ACTION_ITEMS table."
+    },
+    {
+      "Name": "VIEWER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This column stores either the person_id or owner_id or agent_id based on who is supposed to view the activity."
+    },
+    {
+      "Name": "VIEWER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This column stores the type of the viewer_id,it will either be ORA_PERSON,ORA_AGENT etc.It is not based on a lookup."
+    },
+    {
+      "Name": "STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Response of the viewer to an action item. DISMISSED is one example. Lookup used - ORA_IRC_ACTION_ITEM_STATUS"
+    },
+    {
+      "Name": "STATUS_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date when the status was changed on this table."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_RAC_ACT_ITEM_VIEWERS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ACTION_ITEM_ID"
+    },
+    {
+      "Index": "IRC_RAC_ACT_ITEM_VIEWERS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "VIEWER_ID"
+    },
+    {
+      "Index": "IRC_RAC_ACT_ITEM_VIEWERS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ACTION_ITEM_VIEWER_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:59:15"
+}

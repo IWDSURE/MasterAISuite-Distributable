@@ -1,0 +1,35 @@
+# IRC_MEDIA_LINKS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmedialinksvl-7228.html#ircmedialinksvl-7228](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmedialinksvl-7228.html#ircmedialinksvl-7228)
+
+## Columns
+
+- MEDIA_LINK_ID
+- MEDIA_TYPE_CODE
+- TITLE
+- URL
+- THUMBNAIL_URL
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.MEDIA_LINK_ID MEDIA_LINK_ID, B.MEDIA_TYPE_CODE MEDIA_TYPE_CODE, TL.TITLE TITLE, B.URL URL, B.THUMBNAIL_URL THUMBNAIL_URL, B.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, B.CREATED_BY CREATED_BY, B.CREATION_DATE CREATION_DATE, B.LAST_UPDATED_BY LAST_UPDATED_BY, B.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN FROM IRC_MEDIA_LINKS_B B, IRC_MEDIA_LINKS_TL TL WHERE B.MEDIA_LINK_ID = TL.MEDIA_LINK_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

@@ -1,0 +1,236 @@
+# CMP_TCS_STOCK_HISTORY
+
+Table holds Cmp Tcs Stock History records.
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** TABLE
+
+**Tablespace:** FUSION_TS_TX_DATA
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmptcsstockhistory-29931.html#cmptcsstockhistory-29931](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmptcsstockhistory-29931.html#cmptcsstockhistory-29931)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| CMP_TCS_STOCK_HISTORY_PK | STOCK_HISTORY_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| STOCK_HISTORY_ID | NUMBER |  | 18 | Yes | STOCK_HISTORY_ID |
+| STMT_PAGE_DEF_ID | NUMBER |  | 18 | Yes | STMT_PAGE_DEF_ID |
+| PERD_RUN_ID | NUMBER |  | 18 | Yes | PERD_RUN_ID |
+| CAT_ID | NUMBER |  | 18 | Yes | CAT_ID |
+| GRANT_DATE_SEQ | NUMBER |  | 18 |  | GRANT_DATE_SEQ |
+| GRANT_DATE_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_DATE_AVAIL_DSP |
+| GRANT_DATE_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_DATE_DSPLAY |
+| STOCK_SYMBOL_SEQ | NUMBER |  | 18 |  | STOCK_SYMBOL_SEQ |
+| STOCK_SYMBOL_AVAIL_DSP | VARCHAR2 | 1 |  |  | STOCK_SYMBOL_AVAIL_DSP |
+| STOCK_SYMBOL_DSPLAY | VARCHAR2 | 1 |  |  | STOCK_SYMBOL_DSPLAY |
+| GRANT_NUMBER_SEQ | NUMBER |  | 18 |  | GRANT_NUMBER_SEQ |
+| GRANT_NUMBER_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_NUMBER_AVAIL_DSP |
+| GRANT_NUMBER_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_NUMBER_DSPLAY |
+| GRANT_NAME_SEQ | NUMBER |  |  |  | GRANT_NAME_SEQ |
+| GRANT_NAME_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_NAME_AVAIL_DSP |
+| GRANT_NAME_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_NAME_DSPLAY |
+| GRANT_TYPE_SEQ | NUMBER |  | 18 |  | GRANT_TYPE_SEQ |
+| GRANT_TYPE_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_TYPE_AVAIL_DSP |
+| GRANT_TYPE_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_TYPE_DSPLAY |
+| TOTAL_SHRS_SEQ | NUMBER |  |  |  | TOTAL_SHRS_SEQ |
+| TOTAL_SHRS_AVAIL_DSP | VARCHAR2 | 1 |  |  | TOTAL_SHRS_AVAIL_DSP |
+| TOTAL_SHRS_DSPLAY | VARCHAR2 | 1 |  |  | TOTAL_SHRS_DSPLAY |
+| TOTAL_SHRS_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | TOTAL_SHRS_IN_CHART1_FLAG |
+| TOTAL_SHRS_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | TOTAL_SHRS_IN_CHART2_FLAG |
+| SHRS_GRANTED_SEQ | NUMBER |  | 18 |  | SHRS_GRANTED_SEQ |
+| SHRS_GRANTED_AVAIL_DSP | VARCHAR2 | 1 |  |  | SHRS_GRANTED_AVAIL_DSP |
+| SHRS_GRANTED_DSPLAY | VARCHAR2 | 1 |  |  | SHRS_GRANTED_DSPLAY |
+| SHRS_GRNTD_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | SHRS_GRNTD_IN_CHART1_FLAG |
+| SHRS_GRNTD_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | SHRS_GRNTD_IN_CHART2_FLAG |
+| XRCISE_PRICE_SEQ | NUMBER |  | 18 |  | XRCISE_PRICE_SEQ |
+| XRCISE_PRICE_AVAIL_DSP | VARCHAR2 | 1 |  |  | XRCISE_PRICE_AVAIL_DSP |
+| XRCISE_PRICE_DSPLAY | VARCHAR2 | 1 |  |  | XRCISE_PRICE_DSPLAY |
+| GRANT_PRICE_SEQ | NUMBER |  | 18 |  | GRANT_PRICE_SEQ |
+| GRANT_PRICE_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_PRICE_AVAIL_DSP |
+| GRANT_PRICE_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_PRICE_DSPLAY |
+| GRANT_VALUE_SEQ | NUMBER |  | 18 |  | GRANT_VALUE_SEQ |
+| GRANT_VALUE_AVAIL_DSP | VARCHAR2 | 1 |  |  | GRANT_VALUE_AVAIL_DSP |
+| GRANT_VALUE_DSPLAY | VARCHAR2 | 1 |  |  | GRANT_VALUE_DSPLAY |
+| CANCELLED_SHRS_SEQ | NUMBER |  | 18 |  | CANCELLED_SHRS_SEQ |
+| CANCELLED_SHRS_AVAIL_DSP | VARCHAR2 | 1 |  |  | CANCELLED_SHRS_AVAIL_DSP |
+| CANCELLED_SHRS_DSPLAY | VARCHAR2 | 1 |  |  | CANCELLED_SHRS_DSPLAY |
+| REASON_CODE_SEQ | NUMBER |  | 18 |  | REASON_CODE_SEQ |
+| REASON_CODE_AVAIL_DSP | VARCHAR2 | 1 |  |  | REASON_CODE_AVAIL_DSP |
+| REASON_CODE_DSPLAY | VARCHAR2 | 1 |  |  | REASON_CODE_DSPLAY |
+| CLASS_TYPE_SEQ | NUMBER |  | 18 |  | CLASS_TYPE_SEQ |
+| CLASS_TYPE_AVAIL_DSP | VARCHAR2 | 1 |  |  | CLASS_TYPE_AVAIL_DSP |
+| CLASS_TYPE_DSPLAY | VARCHAR2 | 1 |  |  | CLASS_TYPE_DSPLAY |
+| MISC_SEQ | NUMBER |  | 18 |  | MISC_SEQ |
+| MISC_AVAIL_DSP | VARCHAR2 | 1 |  |  | MISC_AVAIL_DSP |
+| MISC_DSPLAY | VARCHAR2 | 1 |  |  | MISC_DSPLAY |
+| EST_VALUE_SEQ | NUMBER |  | 18 |  | EST_VALUE_SEQ |
+| EST_VALUE_AVAIL_DSP | VARCHAR2 | 1 |  |  | EST_VALUE_AVAIL_DSP |
+| EST_VALUE_DSPLAY | VARCHAR2 | 1 |  |  | EST_VALUE_DSPLAY |
+| EST_MKT_VAL_SEQ | NUMBER |  | 18 |  | EST_MKT_VAL_SEQ |
+| EST_MKT_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | EST_MKT_VAL_AVAIL_DSP |
+| EST_MKT_VAL_DSPLAY | VARCHAR2 | 1 |  |  | EST_MKT_VAL_DSPLAY |
+| VST_SHRS_SEQ | NUMBER |  | 18 |  | VST_SHRS_SEQ |
+| VST_SHRS_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_SHRS_AVAIL_DSP |
+| VST_SHRS_DSPLAY | VARCHAR2 | 1 |  |  | VST_SHRS_DSPLAY |
+| VST_SHRS_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_SHRS_IN_CHART1_FLAG |
+| VST_SHRS_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_SHRS_IN_CHART2_FLAG |
+| VST_EX_SEQ | NUMBER |  | 18 |  | VST_EX_SEQ |
+| VST_EX_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_EX_AVAIL_DSP |
+| VST_EX_DSPLAY | VARCHAR2 | 1 |  |  | VST_EX_DSPLAY |
+| VST_EX_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_EX_IN_CHART1_FLAG |
+| VST_EX_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_EX_IN_CHART2_FLAG |
+| VST_UNEX_SEQ | NUMBER |  | 18 |  | VST_UNEX_SEQ |
+| VST_UNEX_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_UNEX_AVAIL_DSP |
+| VST_UNEX_DSPLAY | VARCHAR2 | 1 |  |  | VST_UNEX_DSPLAY |
+| VST_UNEX_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_UNEX_IN_CHART1_FLAG |
+| VST_UNEX_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_UNEX_IN_CHART2_FLAG |
+| VST_EST_VAL_SEQ | NUMBER |  | 18 |  | VST_EST_VAL_SEQ |
+| VST_EST_VAL_AVAIL_DSP | VARCHAR2 | 20 |  |  | VST_EST_VAL_AVAIL_DSP |
+| VST_EST_VAL_DSPLAY | VARCHAR2 | 1 |  |  | VST_EST_VAL_DSPLAY |
+| VST_EST_MKT_VAL_SEQ | NUMBER |  | 18 |  | VST_EST_MKT_VAL_SEQ |
+| VST_EST_MKT_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_EST_MKT_VAL_AVAIL_DSP |
+| VST_EST_MKT_VAL_DSP | VARCHAR2 | 1 |  |  | VST_EST_MKT_VAL_DSP |
+| VST_EST_UNEX_VAL_SEQ | NUMBER |  | 18 |  | VST_EST_UNEX_VAL_SEQ |
+| VST_EST_UNEX_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_EST_UNEX_VAL_AVAIL_DSP |
+| VST_EST_UNEX_VAL_DSP | VARCHAR2 | 1 |  |  | VST_EST_UNEX_VAL_DSP |
+| VST_EST_UNEX_MKT_VAL_SEQ | NUMBER |  | 18 |  | VST_EST_UNEX_MKT_VAL_SEQ |
+| VST_EST_UNEX_MKT_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | VST_EST_UNEX_MKT_VAL_AVAIL_DSP |
+| VST_EST_UNEX_MKT_VAL_DSP | VARCHAR2 | 1 |  |  | VST_EST_UNEX_MKT_VAL_DSP |
+| UNVST_SHRS_SEQ | NUMBER |  | 18 |  | UNVST_SHRS_SEQ |
+| UNVST_SHRS_AVAIL_DSP | VARCHAR2 | 1 |  |  | UNVST_SHRS_AVAIL_DSP |
+| UNVST_SHRS_DSPLAY | VARCHAR2 | 1 |  |  | UNVST_SHRS_DSPLAY |
+| UNVST_SHRS_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | UNVST_SHRS_IN_CHART1_FLAG |
+| UNVST_SHRS_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | UNVST_SHRS_IN_CHART2_FLAG |
+| UNVST_EST_VAL_SEQ | NUMBER |  | 18 |  | UNVST_EST_VAL_SEQ |
+| UNVST_EST_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | UNVST_EST_VAL_AVAIL_DSP |
+| UNVST_EST_VAL_DSPLAY | VARCHAR2 | 1 |  |  | UNVST_EST_VAL_DSPLAY |
+| UNVST_EST_MKT_VAL_SEQ | NUMBER |  | 18 |  | UNVST_EST_MKT_VAL_SEQ |
+| UNVST_EST_MKT_VAL_AVAIL_DSP | VARCHAR2 | 1 |  |  | UNVST_EST_MKT_VAL_AVAIL_DSP |
+| UNVST_EST_MKT_VAL_DSP | VARCHAR2 | 1 |  |  | UNVST_EST_MKT_VAL_DSP |
+| EXPIRE_DATE_SEQ | NUMBER |  | 18 |  | EXPIRE_DATE_SEQ |
+| EXPIRE_DATE_AVAIL_DSP | VARCHAR2 | 1 |  |  | EXPIRE_DATE_AVAIL_DSP |
+| EXPIRE_DATE_DSPLAY | VARCHAR2 | 1 |  |  | EXPIRE_DATE_DSPLAY |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| EST_VALUE_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | EST_VALUE_IN_CHART1_FLAG |
+| EST_VALUE_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | EST_VALUE_IN_CHART2_FLAG |
+| EST_MKT_VAL_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | EST_MKT_VAL_IN_CHART1_FLAG |
+| EST_MKT_VAL_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | EST_MKT_VAL_IN_CHART2_FLAG |
+| VST_EST_VAL_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_EST_VAL_IN_CHART1_FLAG |
+| VST_EST_VAL_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_EST_VAL_IN_CHART2_FLAG |
+| VST_EST_MKT_VAL_N_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_EST_MKT_VAL_N_CHART1_FLAG |
+| VST_EST_MKT_VAL_N_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_EST_MKT_VAL_N_CHART2_FLAG |
+| VST_EST_UNEX_VAL_N_CHART1_FLAG | VARCHAR2 | 1 |  |  | VST_EST_UNEX_VAL_N_CHART1_FLAG |
+| VST_EST_UNEX_VAL_N_CHART2_FLAG | VARCHAR2 | 1 |  |  | VST_EST_UNEX_VAL_N_CHART2_FLAG |
+| VST_EST_UNX_MKT_VAL_N_CHT1_FLG | VARCHAR2 | 1 |  |  | VST_EST_UNX_MKT_VAL_N_CHT1_FLG |
+| VST_EST_UNX_MKT_VAL_N_CHT2_FLG | VARCHAR2 | 1 |  |  | VST_EST_UNX_MKT_VAL_N_CHT2_FLG |
+| UNVST_EST_VAL_IN_CHART1_FLAG | VARCHAR2 | 1 |  |  | UNVST_EST_VAL_IN_CHART1_FLAG |
+| UNVST_EST_VAL_IN_CHART2_FLAG | VARCHAR2 | 1 |  |  | UNVST_EST_VAL_IN_CHART2_FLAG |
+| UNVST_EST_MKT_VAL_IN_CHT1_FLAG | VARCHAR2 | 1 |  |  | UNVST_EST_MKT_VAL_IN_CHT1_FLAG |
+| UNVST_EST_MKT_VAL_IN_CHT2_FLAG | VARCHAR2 | 1 |  |  | UNVST_EST_MKT_VAL_IN_CHT2_FLAG |
+| BUSINESS_GROUP_ID | NUMBER |  | 18 | Yes | BUSINESS_GROUP_ID |
+| VEST_DATE_SEQ | NUMBER |  | 18 |  | Sequence Number for Vest Date column |
+| VEST_DATE_AVAIL_DSP | VARCHAR2 | 1 |  |  | Vest Date - Available for Display flag column |
+| VEST_DATE_DSPLAY | VARCHAR2 | 1 |  |  | Vest Date - Display flag column |
+| EXERCISE_DATE_SEQ | NUMBER |  | 18 |  | Sequence Number for Exercise Date column |
+| EXERCISE_DATE_AVAIL_DSP | VARCHAR2 | 1 |  |  | Exercise Date - Available for Display flag column |
+| EXERCISE_DATE_DSPLAY | VARCHAR2 | 1 |  |  | Exercise Date - Display flag column |
+| CANCEL_DATE_SEQ | NUMBER |  | 18 |  | Sequence Number for Cancellation Date column |
+| CANCEL_DATE_AVAIL_DSP | VARCHAR2 | 1 |  |  | Cancellation Date - Available for Display flag column |
+| CANCEL_DATE_DSPLAY | VARCHAR2 | 1 |  |  | Cancellation Date - Display flag column |
+| MISC1_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Text 1 column |
+| MISC1_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Text 1 - Available for Display flag column |
+| MISC1_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Text 1 - Display flag column |
+| MISC2_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Text 2 column |
+| MISC2_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Text 2 - Available for Display flag column |
+| MISC2_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Text 2 - Display flag column |
+| MISC3_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Text 3 column |
+| MISC3_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Text 3 - Available for Display flag column |
+| MISC3_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Text 3 - Display flag column |
+| MISC4_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Text 4 column |
+| MISC4_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Text 4 - Available for Display flag column |
+| MISC4_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Text 4 - Display flag column |
+| MISC5_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Text 5 column |
+| MISC5_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Text 5 - Available for Display flag column |
+| MISC5_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Text 5 - Display flag column |
+| MISC_NUM1_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Number 1 column |
+| MISC_NUM1_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Number 1 - Available for Display flag column |
+| MISC_NUM1_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Number 1 - Display flag column |
+| MISC_NUM2_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Number 2 column |
+| MISC_NUM2_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Number 2 - Available for Display flag column |
+| MISC_NUM2_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Number 2 - Display flag column |
+| MISC_NUM3_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Number 3 column |
+| MISC_NUM3_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Number 3 - Available for Display flag column |
+| MISC_NUM3_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Number 3 - Display flag column |
+| MISC_NUM4_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Number 4 column |
+| MISC_NUM4_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Number 4 - Available for Display flag column |
+| MISC_NUM4_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Number 4 - Display flag column |
+| MISC_NUM5_SEQ | NUMBER |  | 18 |  | Sequence Number for Miscellaneous Number 5 column |
+| MISC_NUM5_AVAIL_DSP | VARCHAR2 | 1 |  |  | Miscellaneous Number 5 - Available for Display flag column |
+| MISC_NUM5_DSPLAY | VARCHAR2 | 1 |  |  | Miscellaneous Number 5 - Display flag column |
+| GRANT_DATE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_DATE_DSPLAY_IN_PDF |
+| STOCK_SYMBOL_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | STOCK_SYMBOL_DSPLAY_IN_PDF |
+| GRANT_NUMBER_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_NUMBER_DSPLAY_IN_PDF |
+| GRANT_NAME_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_NAME_DSPLAY_IN_PDF |
+| GRANT_TYPE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_TYPE_DSPLAY_IN_PDF |
+| TOTAL_SHRS_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | TOTAL_SHRS_DSPLAY_IN_PDF |
+| SHRS_GRANTED_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | SHRS_GRANTED_DSPLAY_IN_PDF |
+| XRCISE_PRICE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | XRCISE_PRICE_DSPLAY_IN_PDF |
+| GRANT_PRICE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_PRICE_DSPLAY_IN_PDF |
+| GRANT_VALUE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | GRANT_VALUE_DSPLAY_IN_PDF |
+| CANCELLED_SHRS_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | CANCELLED_SHRS_DSPLAY_IN_PDF |
+| CANCEL_DATE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | CANCEL_DATE_DSPLAY_IN_PDF |
+| REASON_CODE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | REASON_CODE_DSPLAY_IN_PDF |
+| CLASS_TYPE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | CLASS_TYPE_DSPLAY_IN_PDF |
+| MISC_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_DSPLAY_IN_PDF |
+| EST_VALUE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | EST_VALUE_DSPLAY_IN_PDF |
+| EST_MKT_VAL_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | EST_MKT_VAL_DSPLAY_IN_PDF |
+| MISC1_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC1_DSPLAY_IN_PDF |
+| MISC2_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC2_DSPLAY_IN_PDF |
+| MISC3_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC3_DSPLAY_IN_PDF |
+| MISC4_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC4_DSPLAY_IN_PDF |
+| MISC5_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC5_DSPLAY_IN_PDF |
+| VST_SHRS_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | VST_SHRS_DSPLAY_IN_PDF |
+| VEST_DATE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | VEST_DATE_DSPLAY_IN_PDF |
+| VST_EX_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | VST_EX_DSPLAY_IN_PDF |
+| EXERCISE_DATE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | EXERCISE_DATE_DSPLAY_IN_PDF |
+| VST_UNEX_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | VST_UNEX_DSPLAY_IN_PDF |
+| VST_EST_VAL_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | VST_EST_VAL_DSPLAY_IN_PDF |
+| VST_EST_MKT_VAL_DSP_IN_PDF | VARCHAR2 | 1 |  |  | VST_EST_MKT_VAL_DSP_IN_PDF |
+| VST_EST_UNEX_VAL_DSP_IN_PDF | VARCHAR2 | 1 |  |  | VST_EST_UNEX_VAL_DSP_IN_PDF |
+| VST_EST_UNEX_MKT_VAL_DSP_PDF | VARCHAR2 | 1 |  |  | VST_EST_UNEX_MKT_VAL_DSP_IN_PDF |
+| UNVST_SHRS_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | UNVST_SHRS_DSPLAY_IN_PDF |
+| UNVST_EST_VAL_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | UNVST_EST_VAL_DSPLAY_IN_PDF |
+| UNVST_EST_MKT_VAL_DSP_IN_PDF | VARCHAR2 | 1 |  |  | UNVST_EST_MKT_VAL_DSP_IN_PDF |
+| EXPIRE_DATE_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | EXPIRE_DATE_DSPLAY_IN_PDF |
+| MISC_NUM1_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_NUM1_DSPLAY_IN_PDF |
+| MISC_NUM2_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_NUM2_DSPLAY_IN_PDF |
+| MISC_NUM3_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_NUM3_DSPLAY_IN_PDF |
+| MISC_NUM4_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_NUM4_DSPLAY_IN_PDF |
+| MISC_NUM5_DSPLAY_IN_PDF | VARCHAR2 | 1 |  |  | MISC_NUM5_DSPLAY_IN_PDF |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| CMP_TCS_STOCK_HISTORY_N1 | Non Unique | Default | PERD_RUN_ID, CAT_ID |
+| CMP_TCS_STOCK_HISTORY_N2 | Non Unique | Default | STMT_PAGE_DEF_ID |
+| CMP_TCS_STOCK_HISTORY_UK1 | Unique | Default | STOCK_HISTORY_ID |
+
+---
+
+[← Back to Index](../7_Compensation_Tables_Index.md)

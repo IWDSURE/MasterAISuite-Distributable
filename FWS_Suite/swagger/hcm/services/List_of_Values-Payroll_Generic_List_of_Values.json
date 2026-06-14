@@ -1,0 +1,2169 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Payroll Generic List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/payrollGenericLOV": {
+      "get": {
+        "tags": [
+          "List of Values/Payroll Generic List of Values"
+        ],
+        "summary": "Get all generic rows.",
+        "operationId": "getall_payrollGenericLOV",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Code; string; Unique identifying code for the value.</li><li>Meaning; string; Description for the value.</li><li>PayRestName; string; Name of the pay rest.</li><li>ResultKey1; string; Result Key 1.</li><li>ResultKey10; string; Result Key 10.</li><li>ResultKey11; string; Result Key 11.</li><li>ResultKey12; string; Result Key 12.</li><li>ResultKey13; string; Result Key 13.</li><li>ResultKey14; string; Result Key 14.</li><li>ResultKey15; string; Result Key 15.</li><li>ResultKey16; string; Result Key 16.</li><li>ResultKey17; string; Result Key 17.</li><li>ResultKey18; string; Result Key 18.</li><li>ResultKey19; string; Result Key 19.</li><li>ResultKey2; string; Result Key 2.</li><li>ResultKey20; string; Result Key 20.</li><li>ResultKey21; string; Result Key 21.</li><li>ResultKey22; string; Result Key 22.</li><li>ResultKey23; string; Result Key 23.</li><li>ResultKey24; string; Result Key 24.</li><li>ResultKey25; string; Result Key 25.</li><li>ResultKey26; string; Result Key 26.</li><li>ResultKey27; string; Result Key 27.</li><li>ResultKey28; string; Result Key 28.</li><li>ResultKey29; string; Result Key 29.</li><li>ResultKey3; string; Result Key 3.</li><li>ResultKey30; string; Result Key 30.</li><li>ResultKey31; string; Result Key 31.</li><li>ResultKey32; string; Result Key 32.</li><li>ResultKey33; string; Result Key 33.</li><li>ResultKey34; string; Result Key 34.</li><li>ResultKey35; string; Result Key 35.</li><li>ResultKey36; string; Result Key 36.</li><li>ResultKey37; string; Result Key 37.</li><li>ResultKey38; string; Result Key 38.</li><li>ResultKey39; string; Result Key 39.</li><li>ResultKey4; string; Result Key 4.</li><li>ResultKey40; string; Result Key 40.</li><li>ResultKey5; string; Result Key 5.</li><li>ResultKey6; string; Result Key 6.</li><li>ResultKey7; string; Result Key 7.</li><li>ResultKey8; string; Result Key 8.</li><li>ResultKey9; string; Result Key 9.</li><li>ResultValue1; string; Result Value 1.</li><li>ResultValue10; string; Result Value 10.</li><li>ResultValue11; string; Result Value 11.</li><li>ResultValue12; string; Result Value 12.</li><li>ResultValue13; string; Result Value 13.</li><li>ResultValue14; string; Result Value 14.</li><li>ResultValue15; string; Result Value 15.</li><li>ResultValue16; string; Result Value 16.</li><li>ResultValue17; string; Result Value 17.</li><li>ResultValue18; string; Result Value 18.</li><li>ResultValue19; string; Result Value 19.</li><li>ResultValue2; string; Result Value 2.</li><li>ResultValue20; string; Result Value 20.</li><li>ResultValue21; string; Result Value 21.</li><li>ResultValue22; string; Result Value 22.</li><li>ResultValue23; string; Result Value 23.</li><li>ResultValue24; string; Result Value 24.</li><li>ResultValue25; string; Result Value 25.</li><li>ResultValue26; string; Result Value 26.</li><li>ResultValue27; string; Result Value 27.</li><li>ResultValue28; string; Result Value 28.</li><li>ResultValue29; string; Result Value 29.</li><li>ResultValue3; string; Result Value 3.</li><li>ResultValue30; string; Result Value 30.</li><li>ResultValue31; string; Result Value 31.</li><li>ResultValue32; string; Result Value 32.</li><li>ResultValue33; string; Result Value 33.</li><li>ResultValue34; string; Result Value 34.</li><li>ResultValue35; string; Result Value 35.</li><li>ResultValue36; string; Result Value 36.</li><li>ResultValue37; string; Result Value 37.</li><li>ResultValue38; string; Result Value 38.</li><li>ResultValue39; string; Result Value 39.</li><li>ResultValue4; string; Result Value 4.</li><li>ResultValue40; string; Result Value 40.</li><li>ResultValue5; string; Result Value 5.</li><li>ResultValue6; string; Result Value 6.</li><li>ResultValue7; string; Result Value 7.</li><li>ResultValue8; string; Result Value 8.</li><li>ResultValue9; string; Result Value 9.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds generic rows based on the specified primary key criteria. <br>Finder Variables <ul><li>PayRestId; string;  Unique identifier for retrieving generic rows on the specified primary key. </li></ul></li><li>findByWord Finds all generic rows that match the search criteria. <br>Finder Variables <ul><li>AdditionalViewCriteria; string;  Additional view criteria to view generic rows. </li><li>BindVarMap; string;  Bind variable map used as additional parameter to view all generic rows. </li><li>DisplayAttributes; string;  Specific attributes to view all generic rows. </li><li>FilterAttributes; string;  Attributes for the generic search terms. </li><li>ParameterKeys; string;  Specific parameter keys to view all generic rows, such as legislative ID. </li><li>ParameterValues; string;  Specific values to view all generic rows, such as a balance name. </li><li>PayRestId; string;  Unique identifier for retrieving generic rows. </li><li>PayRestName; string;  Unique name for retrieving generic rows. </li><li>SearchTerms; string;  Search term criteria to retrieve generic data. </li><li>SortBy; string;  Option to sort all generic rows based on the SortBy; string;  column. </li><li>StartsWithFlag; string;  Indicates whether the generic search should start with the first character of filter attribute or not. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds generic rows based on the specified primary key criteria.",
+                "properties": {
+                  "PayRestId": {
+                    "x-queryable": false,
+                    "nullable": true,
+                    "description": "Unique identifier for retrieving generic rows on the specified primary key.",
+                    "readOnly": true,
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all generic rows that match the search criteria.",
+                "title": "findByPayRestName",
+                "properties": {
+                  "ParameterKeys": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Specific parameter keys to view all generic rows, such as legislative ID.",
+                    "type": "string"
+                  },
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Attributes for the generic search terms.",
+                    "type": "string"
+                  },
+                  "DisplayAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Specific attributes to view all generic rows.",
+                    "type": "string"
+                  },
+                  "SortBy": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Option to sort all generic rows based on the SortBy column.",
+                    "type": "string"
+                  },
+                  "StartsWithFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates whether the generic search should start with the first character of filter attribute or not.",
+                    "type": "string"
+                  },
+                  "AdditionalViewCriteria": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Additional view criteria to view generic rows.",
+                    "type": "string"
+                  },
+                  "PayRestName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique name for retrieving generic rows.",
+                    "type": "string"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search term criteria to retrieve generic data.",
+                    "type": "string"
+                  },
+                  "ParameterValues": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Specific values to view all generic rows, such as a balance name.",
+                    "type": "string"
+                  },
+                  "PayRestId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for retrieving generic rows.",
+                    "type": "string"
+                  },
+                  "BindVarMap": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Bind variable map used as additional parameter to view all generic rows.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/payrollGenericLOV"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "payrollGenericLOV-get",
+        "x-filename-id": "payrollgenericlov-get"
+      }
+    },
+    "/payrollGenericLOV/{PayRestId}": {
+      "get": {
+        "tags": [
+          "List of Values/Payroll Generic List of Values"
+        ],
+        "summary": "Get a generic row.",
+        "operationId": "get_payrollGenericLOV",
+        "parameters": [
+          {
+            "name": "PayRestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/payrollGenericLOV-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "payrollGenericLOV-{PayRestId}-get",
+        "x-filename-id": "payrollgenericlov-payrestid-get"
+      }
+    },
+    "/payrollActivityCenterStatistics/{PayrollId}": {
+      "get": {
+        "tags": [
+          "List of Values/Payroll Generic List of Values"
+        ],
+        "summary": "Payroll Generic List of Values",
+        "operationId": "get_payrollActivityCenterStatistics",
+        "parameters": [
+          {
+            "name": "PayrollId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Payroll Generic List of Values",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/payrollActivityCenterStatistics-item-response"
+                }
+              }
+            },
+            "links": {
+              "PayrollActivityCenterPayrollSummary": {
+                "operationRef": "#/paths/~1payrollActivityCenterStatistics~1{PayrollId}~1child~1PayrollActivityCenterPayrollSummary/get",
+                "parameters": {
+                  "PayrollId": "$request.path.PayrollId"
+                },
+                "description": "Payroll Generic List of Values"
+              }
+            }
+          }
+        },
+        "x-internal-id": "payrollActivityCenterStatistics-{PayrollId}-get",
+        "x-filename-id": "payrollactivitycenterstatistics-payrollid-get"
+      }
+    },
+    "/payrollActivityCenterStatistics": {
+      "get": {
+        "tags": [
+          "List of Values/Payroll Generic List of Values"
+        ],
+        "summary": "Payroll Generic List of Values",
+        "operationId": "getall_payrollActivityCenterStatistics",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CostingMissingSla; number; Payroll Generic List of Values</li><li>CostingPaymentEmployees; number; Payroll Generic List of Values</li><li>CostingPaymentIssues; number; Payroll Generic List of Values</li><li>CostingPaymentMissing; number; Payroll Generic List of Values</li><li>CostingSlaEmployees; number; Payroll Generic List of Values</li><li>CostingSlaIssues; number; Payroll Generic List of Values</li><li>EarningPeriodNumber; integer; Payroll Generic List of Values</li><li>LegislationCode; string; Payroll Generic List of Values</li><li>LegislativeDataGroupId; integer; Payroll Generic List of Values</li><li>LegislativeDataGroupName; string; Payroll Generic List of Values</li><li>MissingArchive; number; Payroll Generic List of Values</li><li>MissingPayment; number; Payroll Generic List of Values</li><li>MissingPayslip; number; Payroll Generic List of Values</li><li>MissingPrepayment; number; Payroll Generic List of Values</li><li>PayrollId; integer; Payroll Generic List of Values</li><li>PayrollName; string; Payroll Generic List of Values</li><li>PeriodEndDate; string; Payroll Generic List of Values</li><li>PeriodId; integer; Payroll Generic List of Values</li><li>PeriodStartDate; string; Payroll Generic List of Values</li><li>PeriodType; string; Payroll Generic List of Values</li><li>StatutoryPeriodNumber; integer; Payroll Generic List of Values</li><li>TotalArchiveEmployees; number; Payroll Generic List of Values</li><li>TotalArchiveIssues; number; Payroll Generic List of Values</li><li>TotalPaymentEmployees; number; Payroll Generic List of Values</li><li>TotalPaymentIssues; number; Payroll Generic List of Values</li><li>TotalPayslipEmployees; number; Payroll Generic List of Values</li><li>TotalPayslipIssues; number; Payroll Generic List of Values</li><li>TotalPrepaymentEmployees; number; Payroll Generic List of Values</li><li>TotalPrepaymentIssues; number; Payroll Generic List of Values</li><li>TotalRunEmployees; number; Payroll Generic List of Values</li><li>TotalRunIssues; number; Payroll Generic List of Values</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Payroll Generic List of Values <br>Finder Variables <ul><li>PayrollId; integer;  Payroll Generic List of Values </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Payroll Generic List of Values",
+                "properties": {
+                  "PayrollId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Payroll Generic List of Values",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/payrollActivityCenterStatistics"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "payrollActivityCenterStatistics-get",
+        "x-filename-id": "payrollactivitycenterstatistics-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "payrollGenericLOV": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/payrollGenericLOV-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      },
+      "payrollGenericLOV-item-response": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "string",
+            "description": "Unique identifying code for the value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Meaning": {
+            "type": "string",
+            "description": "Description for the value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayRestId": {
+            "type": "string",
+            "description": "Unique identifier for the pay rest.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PayRestName": {
+            "type": "string",
+            "description": "Name of the pay rest.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey1": {
+            "type": "string",
+            "description": "Result Key 1.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey10": {
+            "type": "string",
+            "description": "Result Key 10.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey11": {
+            "type": "string",
+            "description": "Result Key 11.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey12": {
+            "type": "string",
+            "description": "Result Key 12.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey13": {
+            "type": "string",
+            "description": "Result Key 13.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey14": {
+            "type": "string",
+            "description": "Result Key 14.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey15": {
+            "type": "string",
+            "description": "Result Key 15.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey16": {
+            "type": "string",
+            "description": "Result Key 16.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey17": {
+            "type": "string",
+            "description": "Result Key 17.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey18": {
+            "type": "string",
+            "description": "Result Key 18.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey19": {
+            "type": "string",
+            "description": "Result Key 19.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey2": {
+            "type": "string",
+            "description": "Result Key 2.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey20": {
+            "type": "string",
+            "description": "Result Key 20.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey21": {
+            "type": "string",
+            "description": "Result Key 21.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey22": {
+            "type": "string",
+            "description": "Result Key 22.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey23": {
+            "type": "string",
+            "description": "Result Key 23.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey24": {
+            "type": "string",
+            "description": "Result Key 24.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey25": {
+            "type": "string",
+            "description": "Result Key 25.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey26": {
+            "type": "string",
+            "description": "Result Key 26.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey27": {
+            "type": "string",
+            "description": "Result Key 27.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey28": {
+            "type": "string",
+            "description": "Result Key 28.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey29": {
+            "type": "string",
+            "description": "Result Key 29.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey3": {
+            "type": "string",
+            "description": "Result Key 3.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey30": {
+            "type": "string",
+            "description": "Result Key 30.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey31": {
+            "type": "string",
+            "description": "Result Key 31.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey32": {
+            "type": "string",
+            "description": "Result Key 32.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey33": {
+            "type": "string",
+            "description": "Result Key 33.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey34": {
+            "type": "string",
+            "description": "Result Key 34.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey35": {
+            "type": "string",
+            "description": "Result Key 35.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey36": {
+            "type": "string",
+            "description": "Result Key 36.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey37": {
+            "type": "string",
+            "description": "Result Key 37.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey38": {
+            "type": "string",
+            "description": "Result Key 38.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey39": {
+            "type": "string",
+            "description": "Result Key 39.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey4": {
+            "type": "string",
+            "description": "Result Key 4.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey40": {
+            "type": "string",
+            "description": "Result Key 40.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey5": {
+            "type": "string",
+            "description": "Result Key 5.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey6": {
+            "type": "string",
+            "description": "Result Key 6.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey7": {
+            "type": "string",
+            "description": "Result Key 7.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey8": {
+            "type": "string",
+            "description": "Result Key 8.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultKey9": {
+            "type": "string",
+            "description": "Result Key 9.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue1": {
+            "type": "string",
+            "description": "Result Value 1.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue10": {
+            "type": "string",
+            "description": "Result Value 10.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue11": {
+            "type": "string",
+            "description": "Result Value 11.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue12": {
+            "type": "string",
+            "description": "Result Value 12.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue13": {
+            "type": "string",
+            "description": "Result Value 13.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue14": {
+            "type": "string",
+            "description": "Result Value 14.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue15": {
+            "type": "string",
+            "description": "Result Value 15.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue16": {
+            "type": "string",
+            "description": "Result Value 16.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue17": {
+            "type": "string",
+            "description": "Result Value 17.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue18": {
+            "type": "string",
+            "description": "Result Value 18.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue19": {
+            "type": "string",
+            "description": "Result Value 19.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue2": {
+            "type": "string",
+            "description": "Result Value 2.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue20": {
+            "type": "string",
+            "description": "Result Value 20.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue21": {
+            "type": "string",
+            "description": "Result Value 21.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue22": {
+            "type": "string",
+            "description": "Result Value 22.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue23": {
+            "type": "string",
+            "description": "Result Value 23.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue24": {
+            "type": "string",
+            "description": "Result Value 24.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue25": {
+            "type": "string",
+            "description": "Result Value 25.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue26": {
+            "type": "string",
+            "description": "Result Value 26.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue27": {
+            "type": "string",
+            "description": "Result Value 27.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue28": {
+            "type": "string",
+            "description": "Result Value 28.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue29": {
+            "type": "string",
+            "description": "Result Value 29.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue3": {
+            "type": "string",
+            "description": "Result Value 3.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue30": {
+            "type": "string",
+            "description": "Result Value 30.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue31": {
+            "type": "string",
+            "description": "Result Value 31.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue32": {
+            "type": "string",
+            "description": "Result Value 32.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue33": {
+            "type": "string",
+            "description": "Result Value 33.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue34": {
+            "type": "string",
+            "description": "Result Value 34.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue35": {
+            "type": "string",
+            "description": "Result Value 35.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue36": {
+            "type": "string",
+            "description": "Result Value 36.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue37": {
+            "type": "string",
+            "description": "Result Value 37.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue38": {
+            "type": "string",
+            "description": "Result Value 38.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue39": {
+            "type": "string",
+            "description": "Result Value 39.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue4": {
+            "type": "string",
+            "description": "Result Value 4.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue40": {
+            "type": "string",
+            "description": "Result Value 40.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue5": {
+            "type": "string",
+            "description": "Result Value 5.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue6": {
+            "type": "string",
+            "description": "Result Value 6.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue7": {
+            "type": "string",
+            "description": "Result Value 7.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue8": {
+            "type": "string",
+            "description": "Result Value 8.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ResultValue9": {
+            "type": "string",
+            "description": "Result Value 9.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "payrollActivityCenterStatistics-item-response": {
+        "type": "object",
+        "properties": {
+          "CostingMissingSla": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingSlaEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingSlaIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EarningPeriodNumber": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LegislativeDataGroupName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MissingArchive": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MissingPayment": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MissingPayslip": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MissingPrepayment": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayrollActivityCenterPayrollSummary": {
+            "title": "Payroll Generic List of Values",
+            "type": "array",
+            "description": "Payroll Generic List of Values",
+            "items": {
+              "$ref": "#/components/schemas/payrollActivityCenterStatistics-PayrollActivityCenterPayrollSummary-item-response"
+            }
+          },
+          "PayrollId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodEndDate": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PeriodStartDate": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StatutoryPeriodNumber": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TotalArchiveEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalArchiveIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPaymentEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPaymentIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPayslipEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPayslipIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPrepaymentEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPrepaymentIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalRunEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalRunIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "payrollActivityCenterStatistics-PayrollActivityCenterPayrollSummary-item-response": {
+        "type": "object",
+        "properties": {
+          "LegislationCode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollActivityCenterPeriodDetail": {
+            "title": "Payroll Generic List of Values",
+            "type": "array",
+            "description": "Payroll Generic List of Values",
+            "items": {
+              "$ref": "#/components/schemas/payrollActivityCenterStatistics-PayrollActivityCenterPayrollSummary-PayrollActivityCenterPeriodDetail-item-response"
+            }
+          },
+          "PayrollId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodEndDate": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodId": {
+            "type": "integer",
+            "description": "Payroll Generic List of Values",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PeriodStartDate": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "payrollActivityCenterStatistics-PayrollActivityCenterPayrollSummary-PayrollActivityCenterPeriodDetail-item-response": {
+        "type": "object",
+        "properties": {
+          "ArchiveMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ArchiveTotalEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ArchiveTotalIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingPaymentMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingSlaEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingSlaIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CostingSlaMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PaymentMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayrollId": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayslipMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodBalanceValue": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodCostingException": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodCostingValue": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodCount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodId": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodPaymentData": {
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PeriodTransferSLAStatus": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrepaymentMissing": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrepaymentTotalEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrepaymentTotalIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPaymentEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPaymentIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPayslipEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalPayslipIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalRunEmployees": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalRunIssues": {
+            "type": "number",
+            "description": "Payroll Generic List of Values",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "payrollActivityCenterStatistics": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/payrollActivityCenterStatistics-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

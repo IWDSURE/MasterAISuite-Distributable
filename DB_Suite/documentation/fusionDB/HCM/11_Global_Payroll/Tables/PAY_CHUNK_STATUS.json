@@ -1,0 +1,104 @@
+{
+  "name": "PAY_CHUNK_STATUS",
+  "object_type": "TABLE",
+  "description": "This table contains the status of processing on specific units of work to be processed by a payroll action or process.",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "SYSTEM",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paychunkstatus-19898.html#paychunkstatus-19898",
+  "primary_keys": [
+    {
+      "name": "PAY_CHUNK_STATUS_PK",
+      "columns": "PAYROLL_ACTION_ID, CHUNK_NUMBER, ACTION_TYPE"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PAYROLL_ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PAY_PAYROLL_ACTIONS"
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "ACTION_TYPE"
+    },
+    {
+      "Name": "CHUNK_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Number used to group events into chunks for parallelization."
+    },
+    {
+      "Name": "RAND_CHUNK_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Number used to group events into chunks for parallelization."
+    },
+    {
+      "Name": "POPULATION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Valid population statuses for a Chunk."
+    },
+    {
+      "Name": "PROCESS_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Valid process statuses for a Chunk"
+    },
+    {
+      "Name": "PROC_THREAD_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Number of thread in Processing phase."
+    },
+    {
+      "Name": "POP_THREAD_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Number of thread in Population phase."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_ENTERPRISES."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_CHUNK_STATUS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PAYROLL_ACTION_ID, CHUNK_NUMBER, POPULATION_STATUS"
+    },
+    {
+      "Index": "PAY_CHUNK_STATUS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PAYROLL_ACTION_ID, CHUNK_NUMBER, ACTION_TYPE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:01:47"
+}

@@ -1,0 +1,37 @@
+# HRT_MT_ANA_GROW_SKILLS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtmtanagrowskillsv-5599.html#hrtmtanagrowskillsv-5599](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtmtanagrowskillsv-5599.html#hrtmtanagrowskillsv-5599)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- TEXT_TITLE
+- TEXT_METRIC
+- TEXT_META
+- BADGE_TEXT
+- BADGE_STATUS
+- PERIOD_CHN_IND_VAL
+- PERIOD_CHN_IND_CMP
+- CHART_TYPE
+- CHART_COLOR
+- CHART_DATA
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT sup.manager_id person_id, sup.manager_assignment_id assignment_id, '{"strKey":"HdrSDynamicskills"}' text_title, '{"strKey":"PgHISKILLSACHIEVEDofSKILLSTOTALcoreskillsach", "tokens":{"SKILLS_ACHIEVED":"' || SUM(nvl(skill.developed, 0)) || '","SKILLS_TOTAL":"' || (SUM(nvl(skill.developing, 0)) + SUM(nvl(skill.developed, 0))) || '"}}' text_metric, '{"strKey":"PgHIByyourdirects"}' text_meta, NULL badge_text, NULL badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, NULL link_text FROM hrt_profiles_vl pr, per_assignment_supervisors_f sup, ( SELECT profile_id, SUM(decode(skill.skill_group, 'ORA_DEVELOPED', 1, 0)) developed, SUM(decode(skill.skill_group, 'ORA_DEVELOPING', 1, 0)) developing FROM hrt_skills_items_v skill, hrt_content_source_rlats csrc WHERE csrc.source_id = 120 AND csrc.content_type_id = 134 AND skill.section_id = csrc.section_id AND skill.business_group_id = csrc.business_group_id GROUP BY profile_id ) skill WHERE sup.person_id = pr.person_id AND sup.manager_type = 'LINE_MANAGER' AND trunc(sysdate) BETWEEN sup.effective_start_date AND sup.effective_end_date AND skill.profile_id (+) = pr.profile_id GROUP BY sup.manager_id, sup.manager_assignment_id
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

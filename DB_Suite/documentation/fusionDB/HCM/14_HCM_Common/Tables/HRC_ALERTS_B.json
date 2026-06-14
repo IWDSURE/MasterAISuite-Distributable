@@ -1,0 +1,334 @@
+{
+  "name": "HRC_ALERTS_B",
+  "object_type": "TABLE",
+  "description": "Contains event and resource alert definition data.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcalertsb-24398.html#hrcalertsb-24398",
+  "primary_keys": [
+    {
+      "name": "HRC_ALERTS_B_PK",
+      "columns": "ALERT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ALERT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "ALERT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines the Alert Type. The valid values are based on the look type HRC_ALERT_TYPE."
+    },
+    {
+      "Name": "FILTER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determine the type of the filter expression"
+    },
+    {
+      "Name": "RESOURCE_APPLICATION",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The resource application (e.g. hcmCoreSetupApi)."
+    },
+    {
+      "Name": "RESOURCE_PATH",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The resource path (e.g. /resources/latest/employees)"
+    },
+    {
+      "Name": "RUN_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines what the alert repeat frequency. For an alert which is for a Document Resource only On demand is available. The valid values are based on the look type HRC_ALERT_RUN_TYPE. The default value is On demand."
+    },
+    {
+      "Name": "RUN_EXPRESSION",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the run expression for either a scheduled expression complying to rfc2445. For example: FREQ=YEARLY;INTERVAL=1;BYMONTH=5;BYDAY=2MO; or a feed name."
+    },
+    {
+      "Name": "SCHEDULED_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Specifies the ESS Request ID for a schedule. If a schedule recurrence has been defined, this is the Absolute Parent ID request (i.e. the top level ESS request)."
+    },
+    {
+      "Name": "SCHEDULED_START",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the ESS start for a schedule."
+    },
+    {
+      "Name": "SCHEDULED_END",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the ESS end for a schedule."
+    },
+    {
+      "Name": "KEEP",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines if the alert should be kept active and based on YES_NO.\nIf Y, the KEEP_FREQ_TYPE, KEEP_VALUE must be specified. If N, the KEEP_FREQ_TYPE, KEEP_VALUE should be null. Note: If the KEEP is updated from Y to N then any existing Keeps are deleted."
+    },
+    {
+      "Name": "KEEP_FREQ_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the alert keep frequency type. The valid values are based on the look type HRC_ALERT_KEEP_FREQ_TYPE. The value is mandatory if the KEEP is defined as Y."
+    },
+    {
+      "Name": "KEEP_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Determines the alert keep value. The value is mandatory is the KEEP is defined as Y."
+    },
+    {
+      "Name": "THRESHOLD",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Determines the maximum number of Alerts that can be raised per run. A null value indicates no threshold is applied and the number of alerts raised are unlimited."
+    },
+    {
+      "Name": "TEST_MODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines if the Alert when run is in a test mode. When in test mode, the alert will process normally but will not physically deliver payloads to consumers. Valid values are based on the lookup type YES_NO and the default value is N."
+    },
+    {
+      "Name": "ENABLED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines if the Alert is enabled or disabled. Valid values are based on the lookup type YES_NO and the default value is Y."
+    },
+    {
+      "Name": "FILTER_EXPRESSIONS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "XML structured document of filter expressions."
+    },
+    {
+      "Name": "OBJECT_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Speicifies the object GUID. Primarily used for seed data framework."
+    },
+    {
+      "Name": "ALERT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Specifies an alert code which can be used to identify an alert"
+    },
+    {
+      "Name": "ALERT_ACCESS_LEVEL",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ALERT_ACCESS_LEVEL"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATE_HISTORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Specifies if Activity History should be generated. Valid values are Y or N"
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "RUN_OPTIONS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Contains config run option values for the run."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "DELETED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Used to identify for soft delete."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_ALERTS_B_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HRC_ALERTS_B_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ALERT_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_ALERTS_B_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ALERT_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HRC_ALERTS_B_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_GUID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_ALERTS_B_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_GUID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HRC_ALERTS_B_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ALERT_CODE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_ALERTS_B_U21",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ALERT_CODE, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:33:58"
+}

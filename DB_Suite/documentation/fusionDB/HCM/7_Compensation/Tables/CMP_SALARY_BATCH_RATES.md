@@ -1,0 +1,75 @@
+# CMP_SALARY_BATCH_RATES
+
+This entity will contain all the rate values for a give salary basis as of the processing date when the salary rate batch process is running.
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** TABLE
+
+**Tablespace:** Default
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpsalarybatchrates-14728.html#cmpsalarybatchrates-14728](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpsalarybatchrates-14728.html#cmpsalarybatchrates-14728)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| CMP_SALARY_BATCH_RATES_PK | SALARY_BATCH_RATE_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| SALARY_BATCH_RATE_ID | NUMBER |  | 18 | Yes | SALARY_BATCH_RATE_ID |
+| RATE_CURRENCY_CODE | VARCHAR2 | 30 |  |  | RATE_CURRENCY_CODE |
+| RATE_PERIODICITY_CODE | VARCHAR2 | 30 |  |  | RATE_PERIODICITY_CODE |
+| SALARY_PAY_COMPONENT_ID | NUMBER |  | 18 |  | SALARY_PAY_COMPONENT_ID |
+| SALARY_BATCH_CHANGE_ID | NUMBER |  | 18 | Yes | SALARY_BATCH_CHANGE_ID |
+| SALARY_ID | NUMBER |  | 18 |  | SALARY_ID |
+| SALARY_ASG_INFO_ID | NUMBER |  | 18 | Yes | SALARY_ASG_INFO_ID |
+| PERSON_ID | NUMBER |  | 18 |  | PERSON_ID |
+| ASSIGNMENT_ID | NUMBER |  | 18 | Yes | ASSIGNMENT_ID |
+| ASSIGNMENT_TYPE | VARCHAR2 | 30 |  |  | ASSIGNMENT_TYPE |
+| LEGISLATIVE_DATA_GROUP_ID | NUMBER |  | 18 |  | LEGISLATIVE_DATA_GROUP_ID |
+| LEGISLATION_CODE | VARCHAR2 | 30 |  |  | LEGISLATION_CODE |
+| SALARY_BASIS_ID | NUMBER |  | 18 | Yes | SALARY_BASIS_ID |
+| PROPOSED_DATE_FROM | DATE |  |  | Yes | PROPOSED_DATE_FROM |
+| PROPOSED_DATE_TO | DATE |  |  | Yes | PROPOSED_DATE_TO |
+| RATE_DML_TYPE | VARCHAR2 | 30 |  | Yes | RATE_DML_TYPE |
+| PAY_RATE_DEFINITION_ID | NUMBER |  | 18 | Yes | PAY_RATE_DEFINITION_ID |
+| PREVIOUS_RATE_AMOUNT | NUMBER |  |  |  | PREVIOUS_RATE_AMOUNT |
+| PREVIOUS_RATE_FACTOR | NUMBER |  |  |  | PREVIOUS_RATE_FACTOR |
+| PROPOSED_RATE_AMOUNT | NUMBER |  |  |  | PROPOSED_RATE_AMOUNT |
+| PROPOSED_RATE_FACTOR | NUMBER |  |  |  | PROPOSED_RATE_FACTOR |
+| PROPOSED_RATE_ANNUAL_AMOUNT | NUMBER |  |  |  | PROPOSED_RATE_ANNUAL_AMOUNT |
+| PROPOSED_RATE_ANNUAL_FULLTIME | NUMBER |  |  |  | PROPOSED_RATE_ANNUAL_FULLTIME |
+| RATE_PREV_AMOUNT | NUMBER |  |  |  | RATE_PREV_AMOUNT |
+| RATE_TYPE | VARCHAR2 | 20 |  |  | RATE_TYPE |
+| RATE_SCALE | NUMBER |  | 9 |  | RATE_SCALE |
+| RATE_ENTERABLE | VARCHAR2 | 20 |  |  | RATE_ENTERABLE |
+| RATE_FACTOR_ENTERABLE | VARCHAR2 | 30 |  |  | RATE_FACTOR_ENTERABLE |
+| RATE_OVERALL_SALARY_FLAG | VARCHAR2 | 30 |  |  | RATE_OVERALL_SALARY_FLAG |
+| RATE_BASE_SALARY_FLAG | VARCHAR2 | 20 |  |  | RATE_BASE_SALARY_FLAG |
+| RATE_DISPLAY_SEQUENCE | NUMBER |  | 3 |  | RATE_DISPLAY_SEQUENCE |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| CMP_SALARY_BATCH_RATES_N1 | Non Unique | Default | SALARY_ASG_INFO_ID, SALARY_BATCH_CHANGE_ID |
+| CMP_SALARY_BATCH_RATES_N2 | Non Unique | Default | PERSON_ID, ASSIGNMENT_ID, PROPOSED_DATE_FROM |
+| CMP_SALARY_BATCH_RATES_U1 | Unique | Default | SALARY_BATCH_RATE_ID |
+
+---
+
+[← Back to Index](../7_Compensation_Tables_Index.md)

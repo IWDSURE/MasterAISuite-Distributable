@@ -1,0 +1,3133 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Person Notes",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/personNotes/action/getViewPubPersonNotePrivilege": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Find out if a user has the privilege to view a person's public notes",
+        "description": "Finds out if a user has the privilege to view a person's public notes. Valid values are true and false.",
+        "operationId": "doall_getViewPubPersonNotePrivilege_personNotes",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personID": {
+                    "type": "number",
+                    "description": "Specific person ID of the view public person notes privilege to be returned.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Returns either a true or false value of the view public person notes privilege. The default is false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Returns either a true or false value of the view public person notes privilege. The default is false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-action-getViewPubPersonNotePrivilege-post",
+        "x-filename-id": "personnotes-action-getviewpubpersonnoteprivilege-post"
+      }
+    },
+    "/personNotes/{personNotesUniqID}": {
+      "get": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Get a person note",
+        "operationId": "get_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personNotes-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1child~1attachments/get",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "getContextName": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1getContextName/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Returns the context name for a note based on context type."
+              },
+              "incrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1incrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to increment the reference count when another application creates a reference to a note."
+              },
+              "decrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1decrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to decrement the reference count when another application no longer references a note."
+              },
+              "sendThankYou": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1sendThankYou/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to send a thank you note to the author of a note."
+              }
+            }
+          }
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-get",
+        "x-filename-id": "personnotes-personnotesuniqid-get"
+      },
+      "delete": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Delete a person note",
+        "operationId": "delete_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-delete",
+        "x-filename-id": "personnotes-personnotesuniqid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Update a person note",
+        "operationId": "update_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/personNotes-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personNotes-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1child~1attachments/get",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "getContextName": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1getContextName/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Returns the context name for a note based on context type."
+              },
+              "incrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1incrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to increment the reference count when another application creates a reference to a note."
+              },
+              "decrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1decrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to decrement the reference count when another application no longer references a note."
+              },
+              "sendThankYou": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1sendThankYou/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to send a thank you note to the author of a note."
+              }
+            }
+          }
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-patch",
+        "x-filename-id": "personnotes-personnotesuniqid-patch"
+      }
+    },
+    "/personNotes/{personNotesUniqID}/action/decrementReferenceCount": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Decrement the reference count",
+        "description": "Allows users to decrement the reference count when another application no longer references a note.",
+        "operationId": "do_decrementReferenceCount_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates that the reference count was decremented successfully, if true, and not successfully, if false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates that the reference count was decremented successfully, if true, and not successfully, if false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-action-decrementReferenceCount-post",
+        "x-filename-id": "personnotes-personnotesuniqid-action-decrementreferencecount-post"
+      }
+    },
+    "/personNotes/{personNotesUniqID}/action/getContextName": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Returns the context name",
+        "description": "Returns the context name for a note based on context type.",
+        "operationId": "do_getContextName_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contextType": {
+                    "type": "string",
+                    "description": "Context type that looks up the context name.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns the context name if found. Returns the null value if no context name is found."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns the context name if found. Returns the null value if no context name is found."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-action-getContextName-post",
+        "x-filename-id": "personnotes-personnotesuniqid-action-getcontextname-post"
+      }
+    },
+    "/personNotes/action/getBipReportUrlPrintFeedback": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Generate a printable feedback document",
+        "description": "Allows users to generate a printable feedback document.",
+        "operationId": "doall_getBipReportUrlPrintFeedback_personNotes",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hostName": {
+                    "type": "string",
+                    "description": "Host server name for a printable feedback document.",
+                    "nullable": true
+                  },
+                  "noteId": {
+                    "type": "number",
+                    "description": "Identifier of a printable feedback document.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns the URL for a printable feedback document."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Returns the URL for a printable feedback document."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-action-getBipReportUrlPrintFeedback-post",
+        "x-filename-id": "personnotes-action-getbipreporturlprintfeedback-post"
+      }
+    },
+    "/personNotes": {
+      "get": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Get all person notes",
+        "operationId": "getall_personNotes",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AuthorId; integer; Person identifier of the author of the note.</li><li>AuthorKnownAs; string; Preferred name of the author of the note.</li><li>AuthorName; string; Name of the note author.</li><li>CardTitle; string; Card title of a celebration note.</li><li>ContextId; integer; Context identifier of the note.</li><li>ContextId2; integer; Additional context identifier of the note.</li><li>ContextType; string; Context type of the note. Supply value is ORA_NO_CONTEXT.</li><li>ContextType2; string; Additional context type of the note.</li><li>CreatedBy; string; User who created the note.</li><li>CreationDate; string; Date and time when the note was created.</li><li>DeleteNonAuthorFlag; boolean; Indicates whether a user who isn't the author of the note has the Delete privilege. The default value is false.</li><li>ForeignKeyReferenceFlag; boolean; Indicates whether another application has created a reference to a note. The default value is false.</li><li>HiddenFlag; boolean; Indicates whether the note is hidden or shown. The default value is Show.</li><li>HideShowFlag; boolean; Indicates whether a user has the Hide or Show privilege. The default value is false.</li><li>HideShowNonRecipientFlag; boolean; Indicates whether a user who isn't the recipient or the author of the note has the Hide or Show privilege. The default value is false.</li><li>ImageReferenceURL; string; Image reference URL of a celebration note.</li><li>LastUpdateDate; string; Date and time when the note was last updated.</li><li>LastUpdatedBy; string; User who last updated the note.</li><li>NoteId; integer; System-generated primary key of the note.</li><li>NoteVisibilityCode; string; Visibility of the note. Valid options are: ALL, MANAGERS, MANAGERS_AND_SUBJECT, PRIVATE, SUBJECT, MANAGERS_SUBJECT_PEERS. Administrators can remove any of the options via configuration for the specified context type.</li><li>NoteVisibilityMeaning; string; Meaning of the visibility code.</li><li>ThankYouFlag; boolean; Indicates whether the user can send a thank you note. The default value is false.</li><li>WorkerId; integer; Person identifier of the worker who's the subject of the note.</li><li>WorkerKnownAs; string; Preferred name of the worker who's the subject of the note.</li><li>WorkerName; string; Name of the worker who's the subject of the note.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the note that matches the primary key criteria specified. <br>Finder Variables <ul><li>NoteId; integer;  Identifier for a note. </li></ul></li><li>findByContextIdAndContextType Finds all notes that have the specified context type and context identifier. <br>Finder Variables <ul><li>ContextId; integer;  Identifier for a context identifier. </li><li>ContextTypeDB; string;  Identifier for a context type. </li><li>SysEffectiveDate; object;   </li></ul></li><li>findFeedbackForCheckinTopics Finds all the notes that have a visibility code of ALL or MANAGERS_AND_SUBJECT for the specified worker and aren't already associated with the specified check-in meeting. <br>Finder Variables <ul><li>CheckInMeetingId; integer;  Identifier for a check-in meeting. </li><li>SysEffectiveDate; object;   </li><li>WorkerId; integer;  Identifier for a worker. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the note that matches the primary key criteria specified.",
+                "properties": {
+                  "NoteId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Identifier for a note.",
+                    "type": "integer",
+                    "title": "Note ID"
+                  }
+                }
+              },
+              {
+                "name": "findByContextIdAndContextType",
+                "description": "Finds all notes that have the specified context type and context identifier.",
+                "title": "findByContextIdAndContextType",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "ContextTypeDB": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier for a context type.",
+                    "type": "string"
+                  },
+                  "ContextId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier for a context identifier.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findFeedbackForCheckinTopics",
+                "description": "Finds all the notes that have a visibility code of ALL or MANAGERS_AND_SUBJECT for the specified worker and aren't already associated with the specified check-in meeting.",
+                "title": "findFeedbackForCheckinTopics",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "CheckInMeetingId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier for a check-in meeting.",
+                    "type": "integer"
+                  },
+                  "WorkerId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Identifier for a worker.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personNotes"
+                }
+              }
+            },
+            "links": {
+              "getViewPubPersonNotePrivilege": {
+                "operationRef": "#/paths/~1personNotes~1action~1getViewPubPersonNotePrivilege/post",
+                "description": "Finds out if a user has the privilege to view a person's public notes. Valid values are true and false."
+              },
+              "getBipReportUrlPrintFeedback": {
+                "operationRef": "#/paths/~1personNotes~1action~1getBipReportUrlPrintFeedback/post",
+                "description": "Allows users to generate a printable feedback document."
+              }
+            }
+          }
+        },
+        "x-internal-id": "personNotes-get",
+        "x-filename-id": "personnotes-get"
+      },
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Create a person note",
+        "operationId": "create_personNotes",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/personNotes-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personNotes-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1child~1attachments/get",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "getContextName": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1getContextName/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Returns the context name for a note based on context type."
+              },
+              "incrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1incrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to increment the reference count when another application creates a reference to a note."
+              },
+              "decrementReferenceCount": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1decrementReferenceCount/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to decrement the reference count when another application no longer references a note."
+              },
+              "sendThankYou": {
+                "operationRef": "#/paths/~1personNotes~1{personNotesUniqID}~1action~1sendThankYou/post",
+                "parameters": {
+                  "personNotesUniqID": "$request.path.personNotesUniqID"
+                },
+                "description": "Allows users to send a thank you note to the author of a note."
+              }
+            }
+          }
+        },
+        "x-internal-id": "personNotes-post",
+        "x-filename-id": "personnotes-post"
+      }
+    },
+    "/personNotes/{personNotesUniqID}/action/sendThankYou": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Send thank you note",
+        "description": "Allows users to send a thank you note to the author of a note.",
+        "operationId": "do_sendThankYou_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ThankYouReceiverId": {
+                    "type": "number",
+                    "description": "Person identifier of the recipient of the thank you",
+                    "nullable": true
+                  },
+                  "NoteReceiverId": {
+                    "type": "number",
+                    "description": "Person identifier of the worker who's the subject of the note.",
+                    "nullable": true
+                  },
+                  "ThankYouText": {
+                    "type": "string",
+                    "description": "Text of the thank you note.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates whether the thank you note was sent successfully or not. The default value is true."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates whether the thank you note was sent successfully or not. The default value is true."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-action-sendThankYou-post",
+        "x-filename-id": "personnotes-personnotesuniqid-action-sendthankyou-post"
+      }
+    },
+    "/personNotes/{personNotesUniqID}/action/incrementReferenceCount": {
+      "post": {
+        "tags": [
+          "Person Notes"
+        ],
+        "summary": "Increment the reference count",
+        "description": "Allows users to increment the reference count when another application creates a reference to a note.",
+        "operationId": "do_incrementReferenceCount_personNotes",
+        "parameters": [
+          {
+            "name": "personNotesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Person Notes resource and used to uniquely identify an instance of Person Notes. The client should not generate the hash key value. Instead, the client should query on the Person Notes collection resource in order to navigate to a specific instance of Person Notes to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates that the reference count was incremented successfully, if true, and not successfully, if false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Indicates that the reference count was incremented successfully, if true, and not successfully, if false."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personNotes-{personNotesUniqID}-action-incrementReferenceCount-post",
+        "x-filename-id": "personnotes-personnotesuniqid-action-incrementreferencecount-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "personNotes-item-response": {
+        "type": "object",
+        "properties": {
+          "AuthorId": {
+            "title": "Author Person ID",
+            "type": "integer",
+            "description": "Person identifier of the author of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AuthorKnownAs": {
+            "title": "Author Preferred Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Preferred name of the author of the note.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AuthorName": {
+            "title": "Author Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the note author.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AuthorNumber": {
+            "title": "Author Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique person identifier of the author of the note.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "CardTitle": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Card title of a celebration note.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextId": {
+            "type": "integer",
+            "description": "Context identifier of the note.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ContextId2": {
+            "type": "integer",
+            "description": "Additional context identifier of the note.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ContextType": {
+            "title": "Context Type",
+            "type": "string",
+            "description": "Context type of the note. Supply value is ORA_NO_CONTEXT.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextType2": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Additional context type of the note.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the note.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the note was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DeleteNonAuthorFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the author of the note has the Delete privilege. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ForeignKeyReferenceFlag": {
+            "type": "boolean",
+            "description": "Indicates whether another application has created a reference to a note. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "HiddenFlag": {
+            "title": "Hide",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the note is hidden or shown. The default value is Show.",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "HideShowFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user has the Hide or Show privilege. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "HideShowNonRecipientFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the recipient or the author of the note has the Hide or Show privilege. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ImageReferenceURL": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Image reference URL of a celebration note.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date and time when the note was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the note.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NoteId": {
+            "title": "Note ID",
+            "type": "integer",
+            "description": "System-generated primary key of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "NoteText": {
+            "title": "Note Text",
+            "type": "string",
+            "description": "Text of the note.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NoteVisibilityCode": {
+            "title": "Note Visibility Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility of the note. Valid options are: ALL, MANAGERS, MANAGERS_AND_SUBJECT, PRIVATE, SUBJECT, MANAGERS_SUBJECT_PEERS. Administrators can remove any of the options via configuration for the specified context type.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "NoteVisibilityMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Meaning of the visibility code.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThankYouFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the user can send a thank you note. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkerId": {
+            "title": "Worker Person ID",
+            "type": "integer",
+            "description": "Person identifier of the worker who's the subject of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "WorkerKnownAs": {
+            "title": "Worker Preferred Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Preferred name of the worker who's the subject of the note.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WorkerName": {
+            "title": "Worker Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the worker who's the subject of the note.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WorkerNumber": {
+            "title": "Worker Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique person identifier of the worker who's the subject of the note.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "attachments": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/personNotes-attachments-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "personNotes-attachments-item-response": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who created the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedByUserName": {
+            "title": "Created By User Name",
+            "type": "string",
+            "description": "The user name who created the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "The date when the record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileWebImage": {
+            "title": "File Web Image",
+            "type": "string",
+            "description": "The base64 encoded image of the file displayed in .png format if the source is a convertible image.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "help": {
+                "instruction": "The base64 encoded image of the file displayed in .png format if the source is a convertible image."
+              },
+              "XML_ELEMENT": "#hide",
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "The date when the record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "FMT_FORMAT": "d-MMM-yyyy HH:mm:ss"
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedByUserName": {
+            "title": "Last Updated By User",
+            "type": "string",
+            "description": "The user name who last updated the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "UserName": {
+            "title": "User Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The login credentials of the user who created the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "personNotes-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CardTitle": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Card title of a celebration note.",
+            "nullable": true
+          },
+          "DeleteNonAuthorFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the author of the note has the Delete privilege. The default value is false.",
+            "nullable": true
+          },
+          "ForeignKeyReferenceFlag": {
+            "type": "boolean",
+            "description": "Indicates whether another application has created a reference to a note. The default value is false.",
+            "nullable": true
+          },
+          "HiddenFlag": {
+            "title": "Hide",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the note is hidden or shown. The default value is Show.",
+            "nullable": true,
+            "default": false
+          },
+          "HideShowFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user has the Hide or Show privilege. The default value is false.",
+            "nullable": true
+          },
+          "HideShowNonRecipientFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the recipient or the author of the note has the Hide or Show privilege. The default value is false.",
+            "nullable": true
+          },
+          "ImageReferenceURL": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Image reference URL of a celebration note.",
+            "nullable": true
+          },
+          "NoteText": {
+            "title": "Note Text",
+            "type": "string",
+            "description": "Text of the note.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NoteVisibilityCode": {
+            "title": "Note Visibility Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility of the note. Valid options are: ALL, MANAGERS, MANAGERS_AND_SUBJECT, PRIVATE, SUBJECT, MANAGERS_SUBJECT_PEERS. Administrators can remove any of the options via configuration for the specified context type.",
+            "nullable": true
+          },
+          "NoteVisibilityMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Meaning of the visibility code.",
+            "nullable": true
+          },
+          "ThankYouFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the user can send a thank you note. The default value is false.",
+            "nullable": true
+          },
+          "attachments": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/personNotes-attachments-item-patch-request"
+            }
+          }
+        }
+      },
+      "personNotes-attachments-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      },
+      "personNotes": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/personNotes-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "personNotes-item-post-request": {
+        "required": [
+          "WorkerId"
+        ],
+        "type": "object",
+        "properties": {
+          "AuthorId": {
+            "title": "Author Person ID",
+            "type": "integer",
+            "description": "Person identifier of the author of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AuthorNumber": {
+            "title": "Author Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique person identifier of the author of the note.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "CardTitle": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Card title of a celebration note.",
+            "nullable": true
+          },
+          "ContextId": {
+            "type": "integer",
+            "description": "Context identifier of the note.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ContextId2": {
+            "type": "integer",
+            "description": "Additional context identifier of the note.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ContextType": {
+            "title": "Context Type",
+            "type": "string",
+            "description": "Context type of the note. Supply value is ORA_NO_CONTEXT.",
+            "nullable": true
+          },
+          "ContextType2": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Additional context type of the note.",
+            "nullable": true
+          },
+          "DeleteNonAuthorFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the author of the note has the Delete privilege. The default value is false.",
+            "nullable": true
+          },
+          "ForeignKeyReferenceFlag": {
+            "type": "boolean",
+            "description": "Indicates whether another application has created a reference to a note. The default value is false.",
+            "nullable": true
+          },
+          "HiddenFlag": {
+            "title": "Hide",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the note is hidden or shown. The default value is Show.",
+            "nullable": true,
+            "default": false
+          },
+          "HideShowFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user has the Hide or Show privilege. The default value is false.",
+            "nullable": true
+          },
+          "HideShowNonRecipientFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a user who isn't the recipient or the author of the note has the Hide or Show privilege. The default value is false.",
+            "nullable": true
+          },
+          "ImageReferenceURL": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Image reference URL of a celebration note.",
+            "nullable": true
+          },
+          "NoteId": {
+            "title": "Note ID",
+            "type": "integer",
+            "description": "System-generated primary key of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "NoteText": {
+            "title": "Note Text",
+            "type": "string",
+            "description": "Text of the note.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NoteVisibilityCode": {
+            "title": "Note Visibility Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility of the note. Valid options are: ALL, MANAGERS, MANAGERS_AND_SUBJECT, PRIVATE, SUBJECT, MANAGERS_SUBJECT_PEERS. Administrators can remove any of the options via configuration for the specified context type.",
+            "nullable": true
+          },
+          "NoteVisibilityMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Meaning of the visibility code.",
+            "nullable": true
+          },
+          "ThankYouFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the user can send a thank you note. The default value is false.",
+            "nullable": true
+          },
+          "WorkerId": {
+            "title": "Worker Person ID",
+            "type": "integer",
+            "description": "Person identifier of the worker who's the subject of the note.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "WorkerNumber": {
+            "title": "Worker Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique person identifier of the worker who's the subject of the note.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "attachments": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/personNotes-attachments-item-post-request"
+            }
+          }
+        }
+      },
+      "personNotes-attachments-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "personNotes-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/personNotes-item-patch-request"
+            }
+          }
+        }
+      },
+      "personNotes-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/personNotes-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

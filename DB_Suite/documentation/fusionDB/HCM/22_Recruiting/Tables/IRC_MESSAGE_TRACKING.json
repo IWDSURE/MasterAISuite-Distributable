@@ -1,0 +1,238 @@
+{
+  "name": "IRC_MESSAGE_TRACKING",
+  "object_type": "TABLE",
+  "description": "This table tracks message metadata for all communication channels in HCM Communicate and Recruiting.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmessagetracking-3198.html#ircmessagetracking-3198",
+  "primary_keys": [
+    {
+      "name": "IRC_MESSAGE_TRACKING_PK",
+      "columns": "MESSAGE_TRACKING_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "MESSAGE_TRACKING_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table. System generated."
+    },
+    {
+      "Name": "ADDED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the person triggering the message."
+    },
+    {
+      "Name": "ADMIN_ALERT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to the table IRC_ADMIN_ALERT_HISTORY."
+    },
+    {
+      "Name": "CONTACT_INFORMATION",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The communication contact information such as email, phone number, etc., as per channel type code."
+    },
+    {
+      "Name": "CHANNEL_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The code for the channel such as SMS, email etc., that is used to send the message to the person. Lookup codes of type 'ORA_IRC_INTERACTION_TYPE'."
+    },
+    {
+      "Name": "CHANNEL_SUB_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores additional details about the channel type, such as whether the message was initiated by the user or the agent/system."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The ID of the person who is receiving the message. Foreign key to PER_PERSONS table."
+    },
+    {
+      "Name": "PRODUCT_CONTEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The product such as HCM_COMMUNICATE, HCM_RECRUITING etc., for which the message belongs to."
+    },
+    {
+      "Name": "PRODUCT_SUB_CONTEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The product's sub context such as  ORA_SUBMISSION, ORA_PROSPECT, ORA_EVENT, etc., in which this message was sent for a product."
+    },
+    {
+      "Name": "PRODUCT_SUB_CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Provides the link to the product's sub context through  SUBMISSION_ID, PROSPECT_ID, EVENT_ID, etc. of tables IRC_SUBMISSIONS, IRC_PROSPECTS, IRC_REC_EVENTS_B etc."
+    },
+    {
+      "Name": "CONTENT_LIBRARY_ITEM_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The Recruiting Content Library's DESCRIPTION_CODE that points to the table IRC_DESCRIPTIONS_B."
+    },
+    {
+      "Name": "MESSAGE_API_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message API availability at the instance of sending a message depending on throttling rules imposed by the admin and if available API's call status."
+    },
+    {
+      "Name": "MESSAGE_API_RESPONSE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message API status based on the unique API response code given by the message provider."
+    },
+    {
+      "Name": "MESSAGE_DIRECTION",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the message is inbound  or outbound based on the flow of communication"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "PHONE_COUNTRY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Country prefix for international phone numbers including area code, such as 33 for France"
+    },
+    {
+      "Name": "REQUEST_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "200",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the functional area or system component from which the API call to send a message is initiated"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_MESSAGE_TRACKING_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ADMIN_ALERT_ID"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PRODUCT_CONTEXT, CHANNEL_TYPE_CODE, PERSON_ID, CREATION_DATE, CHANNEL_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PRODUCT_CONTEXT, CHANNEL_TYPE_CODE, CREATION_DATE, MESSAGE_API_STATUS, CONTENT_LIBRARY_ITEM_CODE, CHANNEL_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PRODUCT_CONTEXT, CHANNEL_TYPE_CODE, CONTACT_INFORMATION, CREATION_DATE, CHANNEL_SUB_TYPE_CODE, ADDED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PRODUCT_CONTEXT, CHANNEL_TYPE_CODE, CREATION_DATE, PHONE_COUNTRY_CODE, MESSAGE_API_STATUS, MESSAGE_API_RESPONSE_CODE"
+    },
+    {
+      "Index": "IRC_MESSAGE_TRACKING_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "MESSAGE_TRACKING_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:57:35"
+}

@@ -1,0 +1,1897 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting Assessment Partner Candidate Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingPartnerCandidateDetails": {
+      "get": {
+        "tags": [
+          "Recruiting Assessment Partner Candidate Details"
+        ],
+        "summary": "Get all the recruiting partner candidate details",
+        "operationId": "getall_recruitingPartnerCandidateDetails",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Address; string; Address in the recruiting partner candidate details.</li><li>CandidateEmail; string; Candidate email in the recruiting partner candidate details.</li><li>CandidateNumber; string; Candidate number in the recruiting partner candidate details.</li><li>CandidatePIIInformationIncludedFlag; boolean; Indicates if the personally identifiable information data needs to be sent.</li><li>CandidateToken; string; Candidate token in the recruiting partner candidate details.</li><li>ConfirmedSubmissionFlag; boolean; Indicates if the candidate has been confirmed.</li><li>DateOfBirth; string; Candidate's date of birth in the recruiting partner candidate details.</li><li>EmailPreferredCommunicationFlag; boolean; Indicates that the candidate prefers to communicate by email.</li><li>FirstName; string; First name in the recruiting partner candidate details.</li><li>HiringManagerEmail; string; Hiring manager email in the recruiting partner candidate details.</li><li>HiringManagerFirstName; string; Hiring manager first name in the recruiting partner candidate details.</li><li>HiringManagerLastName; string; Hiring manager last name in the recruiting partner candidate details.</li><li>Language; string; Language in the recruiting partner candidate details.</li><li>LastName; string; Last name in the recruiting partner candidate details.</li><li>Legislation; string; Legislation in the recruiting partner candidate details.</li><li>MiddleNames; string; Middle names in the recruiting partner candidate details.</li><li>NamePrefix; string; Name prefix in the recruiting partner candidate details.</li><li>NameSuffix; string; Name suffix in the recruiting partner candidate details.</li><li>PhoneAreaCode; string; Phone area code in the recruiting partner candidate details.</li><li>PhoneCountryCode; string; Phone country code in the recruiting partner candidate details.</li><li>PhoneNumber; string; Phone number in the recruiting partner candidate details.</li><li>PhonePreferredCommunicationFlag; boolean; Indicates that the candidate prefers to communicate by phone.</li><li>RecruiterEmail; string; Recruiter email in the recruiting partner candidate details.</li><li>RecruiterFirstName; string; Recruiter first name in the recruiting partner candidate details.</li><li>RecruiterLastName; string; Recruiter last name in the recruiting partner candidate details.</li><li>RequisitionLocation; string; Requisition location in the recruiting partner candidate details.</li><li>RequisitionNumber; string; Requisition number in the recruiting partner candidate details.</li><li>RequisitionOrganization; string; Requisition organization in the recruiting partner candidate details.</li><li>RequisitionTitle; string; Requisition label in the recruiting partner candidate details.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds recruiting partner candidate details using a unique ID <br>Finder Variables <ul><li>CandidateToken; string;  Unique identifier and candidate token used to find the recruiting partner candidate details. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds recruiting partner candidate details using a unique ID",
+                "properties": {
+                  "CandidateToken": {
+                    "nullable": true,
+                    "description": "Unique identifier and candidate token used to find the recruiting partner candidate details.",
+                    "readOnly": true,
+                    "type": "string",
+                    "maxLength": 1024
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingPartnerCandidateDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingPartnerCandidateDetails-get",
+        "x-filename-id": "recruitingpartnercandidatedetails-get"
+      }
+    },
+    "/recruitingPartnerCandidateDetails/{CandidateToken}": {
+      "get": {
+        "tags": [
+          "Recruiting Assessment Partner Candidate Details"
+        ],
+        "summary": "Get a recruiting partner candidate details",
+        "operationId": "get_recruitingPartnerCandidateDetails",
+        "parameters": [
+          {
+            "name": "CandidateToken",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "previousEmployments": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1previousEmployments/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The previousEmployments resource is the child of the recruitingPartnerCandidateDetails resource and provides the previous employment details of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "addressFormat": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1addressFormat/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The addressFormat resource is the child of the recruitingPartnerCandidateDetails resource and provides the address format used for the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "requisitionAdditionalAttributes": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1requisitionAdditionalAttributes/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The requisitionAdditionalAttributes resource is the child of the recruitingPartnerCandidateDetails resource and provides the previous employment details of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "addressDetails": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1addressDetails/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The addressDetails resource is the child of the recruitingPartnerCandidateDetails resource and provides the individual address fields used for the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "educations": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1educations/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The educations resource is the child of the recruitingPartnerCandidateDetails resource and provides details about the education of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "certifications": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1certifications/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The certifications resource is the child of the recruitingPartnerCandidateDetails resource and provides the certifications of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "nationalIdentifiers": {
+                "operationRef": "#/paths/~1recruitingPartnerCandidateDetails~1{CandidateToken}~1child~1nationalIdentifiers/get",
+                "parameters": {
+                  "CandidateToken": "$request.path.CandidateToken"
+                },
+                "description": "The nationalIdentifiers resource is a child of the recruitingPartnerCandidateDetails resource and provides the national identifiers of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingPartnerCandidateDetails-{CandidateToken}-get",
+        "x-filename-id": "recruitingpartnercandidatedetails-candidatetoken-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingPartnerCandidateDetails": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingPartnerCandidateDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "Address": {
+            "type": "string",
+            "description": "Address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateEmail": {
+            "type": "string",
+            "description": "Candidate email in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "type": "string",
+            "description": "Candidate number in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidatePIIInformationIncludedFlag": {
+            "type": "boolean",
+            "description": "Indicates if the personally identifiable information data needs to be sent.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateToken": {
+            "maxLength": 1024,
+            "type": "string",
+            "description": "Candidate token in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ConfirmedSubmissionFlag": {
+            "type": "boolean",
+            "description": "Indicates if the candidate has been confirmed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "description": "Candidate's date of birth in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmailPreferredCommunicationFlag": {
+            "type": "boolean",
+            "description": "Indicates that the candidate prefers to communicate by email.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FirstName": {
+            "type": "string",
+            "description": "First name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManagerEmail": {
+            "type": "string",
+            "description": "Hiring manager email in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManagerFirstName": {
+            "type": "string",
+            "description": "Hiring manager first name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManagerLastName": {
+            "type": "string",
+            "description": "Hiring manager last name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Language": {
+            "type": "string",
+            "description": "Language in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastName": {
+            "type": "string",
+            "description": "Last name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Legislation": {
+            "type": "string",
+            "description": "Legislation in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MiddleNames": {
+            "type": "string",
+            "description": "Middle names in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NamePrefix": {
+            "type": "string",
+            "description": "Name prefix in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NameSuffix": {
+            "type": "string",
+            "description": "Name suffix in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneAreaCode": {
+            "type": "string",
+            "description": "Phone area code in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneCountryCode": {
+            "type": "string",
+            "description": "Phone country code in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneNumber": {
+            "type": "string",
+            "description": "Phone number in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhonePreferredCommunicationFlag": {
+            "type": "boolean",
+            "description": "Indicates that the candidate prefers to communicate by phone.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RecruiterEmail": {
+            "type": "string",
+            "description": "Recruiter email in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RecruiterFirstName": {
+            "type": "string",
+            "description": "Recruiter first name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RecruiterLastName": {
+            "type": "string",
+            "description": "Recruiter last name in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionLocation": {
+            "maxLength": 1024,
+            "type": "string",
+            "description": "Requisition location in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "description": "Requisition number in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionOrganization": {
+            "type": "string",
+            "description": "Requisition organization in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionTitle": {
+            "type": "string",
+            "description": "Requisition label in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "addressDetails": {
+            "title": "Address Details in the Recruiting Assessment Partner Candidate Details",
+            "type": "array",
+            "description": "The addressDetails resource is the child of the recruitingPartnerCandidateDetails resource and provides the individual address fields used for the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-addressDetails-item-response"
+            }
+          },
+          "addressFormat": {
+            "title": "Address Format in the Recruiting Assessment Partner Candidate Details",
+            "type": "array",
+            "description": "The addressFormat resource is the child of the recruitingPartnerCandidateDetails resource and provides the address format used for the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-addressFormat-item-response"
+            }
+          },
+          "certifications": {
+            "title": "Certification Related Information in the Recruiting Partner Candidate Details",
+            "type": "array",
+            "description": "The certifications resource is the child of the recruitingPartnerCandidateDetails resource and provides the certifications of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-certifications-item-response"
+            }
+          },
+          "educations": {
+            "title": "Educational Qualifications Mentioned in the Recruiting Partner Candidate Details",
+            "type": "array",
+            "description": "The educations resource is the child of the recruitingPartnerCandidateDetails resource and provides details about the education of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-educations-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "nationalIdentifiers": {
+            "title": "National Identifiers of the Candidate in the Recruiting Partner Candidate Details",
+            "type": "array",
+            "description": "The nationalIdentifiers resource is a child of the recruitingPartnerCandidateDetails resource and provides the national identifiers of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-nationalIdentifiers-item-response"
+            }
+          },
+          "previousEmployments": {
+            "title": "Previous Employments Recorded in the Recruiting Partner Candidate Details",
+            "type": "array",
+            "description": "The previousEmployments resource is the child of the recruitingPartnerCandidateDetails resource and provides the previous employment details of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-previousEmployments-item-response"
+            }
+          },
+          "requisitionAdditionalAttributes": {
+            "title": "Requisition Additional Attributes Recorded in the Recruiting Partner Candidate Details",
+            "type": "array",
+            "description": "The requisitionAdditionalAttributes resource is the child of the recruitingPartnerCandidateDetails resource and provides the previous employment details of the candidate. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingPartnerCandidateDetails-requisitionAdditionalAttributes-item-response"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-addressDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "AddlAddressAttribute1": {
+            "type": "string",
+            "description": "Additional address attribute 1 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute2": {
+            "type": "string",
+            "description": "Additional address attribute 2 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute3": {
+            "type": "string",
+            "description": "Additional address attribute 3 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute4": {
+            "type": "string",
+            "description": "Additional address attribute 4 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute5": {
+            "type": "string",
+            "description": "Additional address attribute 5 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddressLine1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 1 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddressLine2": {
+            "type": "string",
+            "description": "Address line 2 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddressLine3": {
+            "type": "string",
+            "description": "Address line 3 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 4 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Building": {
+            "type": "string",
+            "description": "Building in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FloorNumber": {
+            "type": "string",
+            "description": "Floor number in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LongPostalCode": {
+            "type": "string",
+            "description": "Long postal code in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PostalCode": {
+            "type": "string",
+            "description": "Postal code in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Region1": {
+            "type": "string",
+            "description": "Region 1 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Region2": {
+            "type": "string",
+            "description": "Region 2 in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Region3": {
+            "type": "string",
+            "description": "Region 3 in the address in the recruiting partner candidate address details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-addressFormat-item-response": {
+        "type": "object",
+        "properties": {
+          "Attribute": {
+            "type": "string",
+            "description": "Address format attribute in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Label": {
+            "type": "string",
+            "description": "Address format label in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Sequence": {
+            "type": "string",
+            "description": "Sequence in the address in the recruiting partner candidate details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-certifications-item-response": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "type": "string",
+            "description": "Actual completion date in certifications of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CertificationId": {
+            "type": "integer",
+            "description": "Certification ID in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CertificationName": {
+            "type": "string",
+            "description": "Certification name in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CertificationNumber": {
+            "type": "string",
+            "description": "Certification number in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CertificationURL": {
+            "type": "string",
+            "description": "Certification URL in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "type": "string",
+            "description": "Comments in certifications of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompletedAmount": {
+            "type": "integer",
+            "description": "Completed amount in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompletedTrainingUnits": {
+            "type": "string",
+            "description": "Completed training units in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationalEstablishment": {
+            "type": "string",
+            "description": "Education establishment in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "description": "Expiration date in certifications of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IssueDate": {
+            "type": "string",
+            "description": "Issue date in certifications of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IssueYear": {
+            "type": "integer",
+            "description": "Year of issue of the certificate for the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IssuedBy": {
+            "type": "string",
+            "description": "Issued by in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastRenewalDate": {
+            "type": "string",
+            "description": "Last renewal date in certifications of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RenewalDate": {
+            "type": "string",
+            "description": "Renewal date in certifications of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RenewalInprogressFlag": {
+            "type": "boolean",
+            "description": "Indicates that the renewal is in progress for the certifications of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RenewalRequiredFlag": {
+            "type": "boolean",
+            "description": "Indicates that renewal is required in the certifications of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Restrictions": {
+            "type": "string",
+            "description": "Restrictions in certifications of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID assigned for each section in the certification of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionName": {
+            "type": "string",
+            "description": "Section name assigned for each section in the certification of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "State": {
+            "type": "string",
+            "description": "State in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "type": "string",
+            "description": "Status in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "type": "string",
+            "description": "Label in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalAmount": {
+            "type": "integer",
+            "description": "Total Amount in certifications of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "VerifiedFlag": {
+            "type": "boolean",
+            "description": "Indicates that the certifications of recruiting partner candidate are verified.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-educations-item-response": {
+        "type": "object",
+        "properties": {
+          "AcademicStanding": {
+            "type": "string",
+            "description": "Academic standing in education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ActivitySummary": {
+            "type": "string",
+            "description": "Activity summary of education of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AreaOfStudy": {
+            "type": "string",
+            "description": "Area of study in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AverageGrade": {
+            "type": "string",
+            "description": "Average grade in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AwardingBody": {
+            "type": "string",
+            "description": "Awarding body in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "type": "string",
+            "description": "Comments in the education of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompletedAmount": {
+            "type": "integer",
+            "description": "Completed amount in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompletedTrainingUnits": {
+            "type": "string",
+            "description": "Completed training units in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DateAcquired": {
+            "type": "string",
+            "description": "Date acquired in educations of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DegreeName": {
+            "type": "string",
+            "description": "Degree name in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "type": "string",
+            "description": "Department in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description for education of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Duration": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Duration of education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DurationUnits": {
+            "type": "string",
+            "description": "Units of the duration of education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationId": {
+            "type": "integer",
+            "description": "Education ID in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationLevel": {
+            "type": "string",
+            "description": "Education level in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationLevelCompletedFlag": {
+            "type": "boolean",
+            "description": "Indicates if the education level is complete for recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationURL": {
+            "type": "string",
+            "description": "URL of the education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Educator": {
+            "type": "string",
+            "description": "Educator in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EndDate": {
+            "type": "string",
+            "description": "End date in educations of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Fee": {
+            "type": "integer",
+            "description": "Education fees of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FeeCurrency": {
+            "type": "string",
+            "description": "Currency of the education fees of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GPA": {
+            "type": "number",
+            "description": "GPA in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GraduatedFlag": {
+            "type": "boolean",
+            "description": "Indicates that the recruiting partner candidate is a graduate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HighestEducationLevel": {
+            "type": "string",
+            "description": "Highest education level of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Major": {
+            "type": "string",
+            "description": "Major in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Minor": {
+            "type": "string",
+            "description": "Minor in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PartTimeFlag": {
+            "type": "boolean",
+            "description": "Indicates if the education was pursued as a part time course by recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProjectedCompletionDate": {
+            "type": "string",
+            "description": "Projected completion date in educations of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Reimbursements": {
+            "type": "string",
+            "description": "Reimbursement arrangements of education of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SchoolName": {
+            "type": "string",
+            "description": "School name in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID assigned for each section in education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionName": {
+            "type": "string",
+            "description": "Section name assigned for each section in education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartDate": {
+            "type": "string",
+            "description": "Start date in educations of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "State": {
+            "type": "string",
+            "description": "State in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "type": "string",
+            "description": "Status in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "type": "string",
+            "description": "Label in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TotalAmount": {
+            "type": "integer",
+            "description": "Total amount in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TrmnlDegDiscpFlag": {
+            "type": "boolean",
+            "description": "Indicates that it's the terminal degree in the education of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TuitionMethod": {
+            "type": "string",
+            "description": "Tuition method of education of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "YearAcquired": {
+            "type": "string",
+            "description": "Year acquired in educations of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-nationalIdentifiers-item-response": {
+        "type": "object",
+        "properties": {
+          "ExpirationDate": {
+            "type": "string",
+            "description": "Expiration date of national identifiers of the recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IssueDate": {
+            "type": "string",
+            "description": "Issue date of national identifiers of the recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "type": "string",
+            "description": "Legislation code of national identifiers of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NationalIdentifierNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "National identifier number of national identifiers of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NationalIdentifierType": {
+            "type": "string",
+            "description": "National identifier type of national identifiers of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PlaceOfIssue": {
+            "type": "string",
+            "description": "Place of issue of national identifiers of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-previousEmployments-item-response": {
+        "type": "object",
+        "properties": {
+          "Achievements": {
+            "type": "string",
+            "description": "Achievements in the previous employments of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AdditionalInformation": {
+            "type": "string",
+            "description": "Additional information in the previous employments of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BusinessType": {
+            "type": "string",
+            "description": "Business type in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "City": {
+            "type": "string",
+            "description": "City in previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompanyURL": {
+            "type": "string",
+            "description": "Company URL in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContactSupervisorFlag": {
+            "type": "boolean",
+            "description": "Contact supervisor indicator in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Country": {
+            "type": "string",
+            "description": "Country in previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CurrentJobFlag": {
+            "type": "boolean",
+            "description": "Indicates the current job in the previous employments of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "type": "string",
+            "description": "Department in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DirectReports": {
+            "type": "integer",
+            "description": "Direct reports in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmployerName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employer name in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmployerPhone": {
+            "type": "string",
+            "description": "Employer phone in previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EndCompensation": {
+            "type": "number",
+            "description": "End compensation in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EndDate": {
+            "type": "string",
+            "description": "End date in the previous employments of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FullTimeCode": {
+            "type": "string",
+            "description": "Full time code in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InternalFlag": {
+            "type": "boolean",
+            "description": "Indicates an internal candidate in the previous employment of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobFamily": {
+            "type": "string",
+            "description": "Job family in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobFunction": {
+            "type": "string",
+            "description": "Job function in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobTitle": {
+            "type": "string",
+            "description": "Job label in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LeavingReason": {
+            "type": "string",
+            "description": "Leaving reason in the previous employments of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OtherCompensation": {
+            "type": "string",
+            "description": "Other compensation in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OtherJobFunction": {
+            "type": "string",
+            "description": "Other job function in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PreviousEmploymentId": {
+            "type": "integer",
+            "description": "Previous employment ID in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Responsibilities": {
+            "type": "string",
+            "description": "Responsibilities in previous employments of recruiting partner candidate.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID assigned for each section in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionName": {
+            "type": "string",
+            "description": "Section name assigned for each section in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartCompensation": {
+            "type": "number",
+            "description": "Start compensation in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartDate": {
+            "type": "string",
+            "description": "Start date in the previous employments of recruiting partner candidate.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartingPosition": {
+            "type": "string",
+            "description": "Starting position in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "State": {
+            "type": "string",
+            "description": "State in previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SupervisorEmail": {
+            "type": "string",
+            "description": "Supervisor email in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SupervisorName": {
+            "type": "string",
+            "description": "Supervisor name in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "SupervisorPhone": {
+            "type": "string",
+            "description": "Supervisor phone in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SupervisorTitle": {
+            "type": "string",
+            "description": "Supervisor label in the previous employments of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingPartnerCandidateDetails-requisitionAdditionalAttributes-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the attribute in the requisition additional attributes of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttributeType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type of the attribute in the requisition additional attributes of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FlexContextCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute flexfield context code in the requisitionAdditional additional attributes of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LOVFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Attribute list of value in the requisition additional attributes of the recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute type in the requisition additional attributes of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute value in the requisition additional attributes of recruiting partner candidate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

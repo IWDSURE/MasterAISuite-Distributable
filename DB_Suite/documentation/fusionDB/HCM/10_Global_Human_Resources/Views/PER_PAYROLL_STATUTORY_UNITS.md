@@ -1,0 +1,37 @@
+# PER_PAYROLL_STATUTORY_UNITS
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpayrollstatutoryunits-7104.html#perpayrollstatutoryunits-7104](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpayrollstatutoryunits-7104.html#perpayrollstatutoryunits-7104)
+
+## Columns
+
+- LEGAL_ENTITY_ID
+- ORGANIZATION_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- BUSINESS_GROUP_ID
+- NAME
+- STATUS
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT hao.LEGAL_ENTITY_ID, hao.ORGANIZATION_ID, hao.EFFECTIVE_START_DATE, hao.EFFECTIVE_END_DATE, hao.BUSINESS_GROUP_ID, haotl.NAME, hac.STATUS, hac.OBJECT_VERSION_NUMBER, hac.CREATED_BY, hac.CREATION_DATE, hac.LAST_UPDATED_BY, hac.LAST_UPDATE_DATE, hac.LAST_UPDATE_LOGIN FROM HR_ORG_UNIT_CLASSIFICATIONS_F hac, HR_ALL_ORGANIZATION_UNITS_F hao, HR_ORGANIZATION_UNITS_F_TL haotl WHERE hao.ORGANIZATION_ID = hac.ORGANIZATION_ID AND hao.ORGANIZATION_ID = haotl.ORGANIZATION_ID AND hao.EFFECTIVE_START_DATE BETWEEN hac.EFFECTIVE_START_DATE AND hac.EFFECTIVE_END_DATE AND haotl.LANGUAGE = USERENV('LANG') AND haotl.EFFECTIVE_START_DATE = hao.EFFECTIVE_START_DATE AND haotl.EFFECTIVE_END_DATE = hao.EFFECTIVE_END_DATE AND hac.CLASSIFICATION_CODE = 'HCM_PSU'
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

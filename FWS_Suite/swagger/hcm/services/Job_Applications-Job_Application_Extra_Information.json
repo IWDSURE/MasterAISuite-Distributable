@@ -1,0 +1,4509 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Job Applications/Job Application Extra Information",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUIJobApplications/{SubmissionId}/child/j_SubmissionExtraInfoCategory": {
+      "get": {
+        "tags": [
+          "Job Applications/Job Application Extra Information"
+        ],
+        "summary": "Get all job application extra info categories",
+        "operationId": "getall_recruitingUIJobApplications-j_SubmissionExtraInfoCategory",
+        "parameters": [
+          {
+            "name": "SubmissionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Job application identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AttachedDocumentId; integer; Unique identifier of the attachment. System generated primary key.</li><li>CategoryName; string; Category of the attachment.</li><li>CreatedBy; string; User who created the attachment.</li><li>CreatedByUserName; string; Name of the user who created the attachment.</li><li>CreationDate; string; Date and time when the attachment record was created.</li><li>DatatypeCode; string; Value that indicates data type code of attachment.</li><li>DmDocumentId; string; Unique identifier of the attachment.</li><li>DmFolderPath; string; Folder path of the attachment.</li><li>DmVersionNumber; string; Version number of the attachment.</li><li>DocumentPreviewURL; string; Attachment context.</li><li>ExpirationDate; string; Expiration date and time of the attachment content.</li><li>FileName; string; File name of the attachment.</li><li>LastUpdateDate; string; Date and time when the attachment was last updated.</li><li>LastUpdatedBy; string; User who last updated the attachment.</li><li>LastUpdatedByUserName; string; Name of the user who last updated the attachment.</li><li>Uri; string; URI of the attachment.</li><li>Url; string; URL of the attachment.</li><li>UserName; string; User name associated with the attachment.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>LocationId; integer; Location unique identifier.</li><li>LocationName; string; Location name.</li><li>LocationType; string; Type or category of the location. For example, a city, state, or country.</li><li>PreferredLocationId; integer; Preferred location unique identifier.</li><li>SubmissionId; integer; Job application unique identifier.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ApprovalRenderFlag; boolean; Attachment approval action render flag.</li><li>AttachedDocumentId; integer; Attachment document identifier.</li><li>AttachmentStatus; string; Attachment status.</li><li>CategoryName; string; Attachment category name.</li><li>ResubmitRenderFlag; boolean; Attachment resubmit action render flag.</li><li>SubmissionId; integer; Job application identifier.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey  <br>Finder Variables <ul><li>SubmissionId; integer;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "SubmissionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobApplications-{SubmissionId}-child-j_SubmissionExtraInfoCategory-get",
+        "x-filename-id": "recruitinguijobapplications-submissionid-child-j_submissionextrainfocategory-get"
+      },
+      "post": {
+        "tags": [
+          "Job Applications/Job Application Extra Information"
+        ],
+        "summary": "Create a job application extra info category",
+        "operationId": "create_recruitingUIJobApplications-j_SubmissionExtraInfoCategory",
+        "parameters": [
+          {
+            "name": "SubmissionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Job application identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobApplications-{SubmissionId}-child-j_SubmissionExtraInfoCategory-post",
+        "x-filename-id": "recruitinguijobapplications-submissionid-child-j_submissionextrainfocategory-post"
+      }
+    },
+    "/recruitingUIJobApplications/{SubmissionId}/child/j_SubmissionExtraInfoCategory/{j_SubmissionExtraInfoCategoryUniqID}": {
+      "get": {
+        "tags": [
+          "Job Applications/Job Application Extra Information"
+        ],
+        "summary": "Get a job application extra info category",
+        "operationId": "get_recruitingUIJobApplications-j_SubmissionExtraInfoCategory",
+        "parameters": [
+          {
+            "name": "SubmissionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Job application identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "j_SubmissionExtraInfoCategoryUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobApplications-{SubmissionId}-child-j_SubmissionExtraInfoCategory-{j_SubmissionExtraInfoCategoryUniqID}-get",
+        "x-filename-id": "recruitinguijobapplications-submissionid-child-j_submissionextrainfocategory-j_submissionextrainfocategoryuniqid-get"
+      },
+      "delete": {
+        "tags": [
+          "Job Applications/Job Application Extra Information"
+        ],
+        "summary": "Delete a job application extra info category",
+        "operationId": "delete_recruitingUIJobApplications-j_SubmissionExtraInfoCategory",
+        "parameters": [
+          {
+            "name": "SubmissionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Job application identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "j_SubmissionExtraInfoCategoryUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingUIJobApplications-{SubmissionId}-child-j_SubmissionExtraInfoCategory-{j_SubmissionExtraInfoCategoryUniqID}-delete",
+        "x-filename-id": "recruitinguijobapplications-submissionid-child-j_submissionextrainfocategory-j_submissionextrainfocategoryuniqid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Job Applications/Job Application Extra Information"
+        ],
+        "summary": "Update a job application extra info category",
+        "operationId": "update_recruitingUIJobApplications-j_SubmissionExtraInfoCategory",
+        "parameters": [
+          {
+            "name": "SubmissionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Job application identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "j_SubmissionExtraInfoCategoryUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobApplications-{SubmissionId}-child-j_SubmissionExtraInfoCategory-{j_SubmissionExtraInfoCategoryUniqID}-patch",
+        "x-filename-id": "recruitinguijobapplications-submissionid-child-j_submissionextrainfocategory-j_submissionextrainfocategoryuniqid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-response": {
+        "discriminator": {
+          "propertyName": "CategoryCode",
+          "mapping": {
+            "PER_EIT": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-response"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-response"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "default": "PER_EIT"
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-response"
+            }
+          },
+          "SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 9
+            }
+          },
+          "OraHrxGbPsSwcEyts": {
+            "title": "Early Years Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcEyts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcEyts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_EYTS",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_EYTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcEyts_Display": {
+            "title": "Early Years Teacher Status",
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcEyts",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta": {
+            "title": "Higher Level Teaching Assistant Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcHlta_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcHlta",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_HLTA",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION6",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_HLTA",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta_Display": {
+            "title": "Higher Level Teaching Assistant Status",
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcHlta",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQtls_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQtls",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTLS",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTLS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls_Display": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQtls",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts": {
+            "title": "Qualified Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTS",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts_Display": {
+            "title": "Qualified Teacher Status",
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQts",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute": {
+            "title": "QTS Route",
+            "maxLength": 150,
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualQtsRoute_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualQtsRoute",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QTSROUTE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute_Display": {
+            "title": "QTS Route",
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualQtsRoute",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt": {
+            "title": "Senior Leadership Team",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSlt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSlt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_SLT",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION8",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_SLT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt_Display": {
+            "title": "Senior Leadership Team",
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSlt",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt": {
+            "title": "Newly Qualified Teacher",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbSwcNqt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_DV": "ORA_HRX_GB_SWC_NOTNQT",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbSwcNqt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_SWC_NQT",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_NQT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION7",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_SWC_NQT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt_Display": {
+            "title": "Newly Qualified Teacher",
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbSwcNqt",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 9
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg": {
+            "title": "Class of Degree",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcClassOfDeg_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcClassOfDeg",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_CLASS_DEGREE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg_Display": {
+            "title": "Class of Degree",
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcClassOfDeg",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode": {
+            "title": "Qualification Code",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualCode_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualCode",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QUAL_CODE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode_Display": {
+            "title": "Qualification Code",
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualCode",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1": {
+            "title": "Qualification Subject 1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj1_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj1",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1_Display": {
+            "title": "Qualification Subject 1",
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2": {
+            "title": "Qualification Subject 2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj2_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj2",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2_Display": {
+            "title": "Qualification Subject 2",
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_QUAL_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 9
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_IRC_CONTINGENT_TALENT_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          },
+          "agencyprofileurl": {
+            "title": "Profile URL from Agency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Profile URL from Agency",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Profile URL from Agency"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "agencyprofileurl",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "AgencyProfileUrl",
+              "FND_ACFF_SegmentName": "AgencyProfileUrl",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcomment": {
+            "title": "Comment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Comment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Comment"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "bidcomment",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "Bidcomment",
+              "FND_ACFF_SegmentName": "Bidcomment",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcurrency": {
+            "title": "Currency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Currency",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "bidcurrency",
+              "FND_ACFF_SegmentName": "BidCurrency",
+              "help": {
+                "instruction": "Currency"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_BID_CURRENCY_VALUE_SET#TABLE",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidCurrency",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidrate": {
+            "title": "Hourly Rate",
+            "type": "number",
+            "description": "Hourly Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Hourly Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_RATE_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_MinimumValue": "0",
+              "FND_ACFF_OpenIdentifier": "bidrate",
+              "FND_ACFF_JavaType": "java.math.BigDecimal",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION_NUMBER1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidRate",
+              "FND_ACFF_SegmentName": "BidRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "displayrate": {
+            "title": "Display Rate",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Display Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Display Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "displayrate",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "DisplayRate",
+              "FND_ACFF_SegmentName": "DisplayRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "previoussubmissionid": {
+            "title": "Previous Submission",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Previous Submission",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Previous Submission"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "previoussubmissionid",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "PreviousSubmissionId",
+              "FND_ACFF_SegmentName": "PreviousSubmissionId",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-post-request": {
+        "discriminator": {
+          "propertyName": "CategoryCode",
+          "mapping": {
+            "PER_EIT": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-post-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-post-request"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "default": "PER_EIT"
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-post-request"
+            }
+          },
+          "SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "OraHrxGbPsSwcEyts": {
+            "title": "Early Years Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcEyts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcEyts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_EYTS",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_EYTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcEyts_Display": {
+            "title": "Early Years Teacher Status",
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcEyts",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta": {
+            "title": "Higher Level Teaching Assistant Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcHlta_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcHlta",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_HLTA",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION6",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_HLTA",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta_Display": {
+            "title": "Higher Level Teaching Assistant Status",
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcHlta",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQtls_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQtls",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTLS",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTLS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls_Display": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQtls",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts": {
+            "title": "Qualified Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTS",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts_Display": {
+            "title": "Qualified Teacher Status",
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQts",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute": {
+            "title": "QTS Route",
+            "maxLength": 150,
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualQtsRoute_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualQtsRoute",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QTSROUTE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute_Display": {
+            "title": "QTS Route",
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualQtsRoute",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt": {
+            "title": "Senior Leadership Team",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSlt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSlt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_SLT",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION8",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_SLT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt_Display": {
+            "title": "Senior Leadership Team",
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSlt",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt": {
+            "title": "Newly Qualified Teacher",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbSwcNqt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_DV": "ORA_HRX_GB_SWC_NOTNQT",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbSwcNqt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_SWC_NQT",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_NQT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION7",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_SWC_NQT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt_Display": {
+            "title": "Newly Qualified Teacher",
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbSwcNqt",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg": {
+            "title": "Class of Degree",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcClassOfDeg_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcClassOfDeg",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_CLASS_DEGREE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg_Display": {
+            "title": "Class of Degree",
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcClassOfDeg",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode": {
+            "title": "Qualification Code",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualCode_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualCode",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QUAL_CODE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode_Display": {
+            "title": "Qualification Code",
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualCode",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1": {
+            "title": "Qualification Subject 1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj1_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj1",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1_Display": {
+            "title": "Qualification Subject 1",
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2": {
+            "title": "Qualification Subject 2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj2_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj2",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2_Display": {
+            "title": "Qualification Subject 2",
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_QUAL_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffLineId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.flex.view.SubmissionExtraInfoVO\",\"SubmissionId;PeiInformationCategory;\");"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_IRC_CONTINGENT_TALENT_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          },
+          "agencyprofileurl": {
+            "title": "Profile URL from Agency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Profile URL from Agency",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Profile URL from Agency"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "agencyprofileurl",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "AgencyProfileUrl",
+              "FND_ACFF_SegmentName": "AgencyProfileUrl",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcomment": {
+            "title": "Comment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Comment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Comment"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "bidcomment",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "Bidcomment",
+              "FND_ACFF_SegmentName": "Bidcomment",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcurrency": {
+            "title": "Currency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Currency",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "bidcurrency",
+              "FND_ACFF_SegmentName": "BidCurrency",
+              "help": {
+                "instruction": "Currency"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_BID_CURRENCY_VALUE_SET#TABLE",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidCurrency",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidrate": {
+            "title": "Hourly Rate",
+            "type": "number",
+            "description": "Hourly Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Hourly Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_RATE_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_MinimumValue": "0",
+              "FND_ACFF_OpenIdentifier": "bidrate",
+              "FND_ACFF_JavaType": "java.math.BigDecimal",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION_NUMBER1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidRate",
+              "FND_ACFF_SegmentName": "BidRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "displayrate": {
+            "title": "Display Rate",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Display Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Display Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "displayrate",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "DisplayRate",
+              "FND_ACFF_SegmentName": "DisplayRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "previoussubmissionid": {
+            "title": "Previous Submission",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Previous Submission",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Previous Submission"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "previoussubmissionid",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "PreviousSubmissionId",
+              "FND_ACFF_SegmentName": "PreviousSubmissionId",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-patch-request": {
+        "discriminator": {
+          "propertyName": "CategoryCode",
+          "mapping": {
+            "PER_EIT": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-patch-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-patch-request"
+          }
+        ]
+      },
+      "oracle_apps_flex_hcm_recruiting_hiring_submissions_core_submissionExtraInfoEFF_categories_view_j__SubmissionExtraInfoCategoryPerEitprivateVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "default": "PER_EIT"
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-patch-request"
+            }
+          },
+          "SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-patch-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FINFOprivateVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "OraHrxGbPsSwcEyts": {
+            "title": "Early Years Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcEyts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcEyts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_EYTS",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_EYTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcEyts_Display": {
+            "title": "Early Years Teacher Status",
+            "type": "string",
+            "description": "Early Years Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcEyts",
+              "help": {
+                "instruction": "Early Years Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta": {
+            "title": "Higher Level Teaching Assistant Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcHlta_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcHlta",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_HLTA",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION6",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_HLTA",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcHlta_Display": {
+            "title": "Higher Level Teaching Assistant Status",
+            "type": "string",
+            "description": "Higher Level Teaching Assistant Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcHlta",
+              "help": {
+                "instruction": "Higher Level Teaching Assistant Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQtls_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQtls",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTLS",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTLS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQtls_Display": {
+            "title": "Qualified Teacher Learning and Skills Status",
+            "type": "string",
+            "description": "Qualified Teacher Learning and Skills Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQtls",
+              "help": {
+                "instruction": "Qualified Teacher Learning and Skills Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts": {
+            "title": "Qualified Teacher Status",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQts_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQts",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QTS",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QTS",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQts_Display": {
+            "title": "Qualified Teacher Status",
+            "type": "string",
+            "description": "Qualified Teacher Status",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQts",
+              "help": {
+                "instruction": "Qualified Teacher Status"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute": {
+            "title": "QTS Route",
+            "maxLength": 150,
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualQtsRoute_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualQtsRoute",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QTSROUTE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_QTS_RT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualQtsRoute_Display": {
+            "title": "QTS Route",
+            "type": "string",
+            "description": "QTS Route",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualQtsRoute",
+              "help": {
+                "instruction": "QTS Route"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt": {
+            "title": "Senior Leadership Team",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSlt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSlt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_SLT",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "FND_ACFF_ValueSetInfo": "HRX_GB_YES_NO#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION8",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_SLT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSlt_Display": {
+            "title": "Senior Leadership Team",
+            "type": "string",
+            "description": "Senior Leadership Team",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSlt",
+              "help": {
+                "instruction": "Senior Leadership Team"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt": {
+            "title": "Newly Qualified Teacher",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbSwcNqt_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_DV": "ORA_HRX_GB_SWC_NOTNQT",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbSwcNqt",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_SWC_NQT",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_NQT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION7",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_SWC_NQT",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbSwcNqt_Display": {
+            "title": "Newly Qualified Teacher",
+            "type": "string",
+            "description": "Newly Qualified Teacher",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbSwcNqt",
+              "help": {
+                "instruction": "Newly Qualified Teacher"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FHRX_5FGB_5FSWC_5FQUAL_5FINFOprivateVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg": {
+            "title": "Class of Degree",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcClassOfDeg_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcClassOfDeg",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_CLASS_DEGREE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_CLASS_DEGREE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcClassOfDeg_Display": {
+            "title": "Class of Degree",
+            "type": "string",
+            "description": "Class of Degree",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcClassOfDeg",
+              "help": {
+                "instruction": "Class of Degree"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode": {
+            "title": "Qualification Code",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcQualCode_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcQualCode",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_QUAL_CODE#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_CODE",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcQualCode_Display": {
+            "title": "Qualification Code",
+            "type": "string",
+            "description": "Qualification Code",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcQualCode",
+              "help": {
+                "instruction": "Qualification Code"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1": {
+            "title": "Qualification Subject 1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": false,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj1_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj1",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_1",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj1_Display": {
+            "title": "Qualification Subject 1",
+            "type": "string",
+            "description": "Qualification Subject 1",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj1",
+              "help": {
+                "instruction": "Qualification Subject 1"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_IsRequired": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2": {
+            "title": "Qualification Subject 2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "OraHrxGbPsSwcSubj2_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "OraHrxGbPsSwcSubj2",
+              "FND_ACFF_SegmentName": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_GB_SWC_DEGREE_SUBJECT#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_GB_PS_SWC_QUAL_SUBJ_2",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "OraHrxGbPsSwcSubj2_Display": {
+            "title": "Qualification Subject 2",
+            "type": "string",
+            "description": "Qualification Subject 2",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "OraHrxGbPsSwcSubj2",
+              "help": {
+                "instruction": "Qualification Subject 2"
+              },
+              "controlType": "combo_lov",
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_GB_SWC_QUAL_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-SubmissionExtraInfoContextORA_5FIRC_5FCONTINGENT_5FTALENT_5FINFOprivateVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "GUID": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PeiInformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_IRC_CONTINGENT_TALENT_INFO",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.sourcing.candidates.publicView.CandidatePVO\",\"CandidateNumber\");"
+            }
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadForeignIntegration": "Requisition;RequisitionId;IRC_REQUISITIONS_VL;REQUISITION_ID",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.requisitions.core.publicView.RequisitionPVO\",\"RequisitionNumber\");"
+            }
+          },
+          "RequisitionNumber": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemId": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SourceSystemOwner": {
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.recruiting.hiring.submissions.core.protectedModel.view.SubmissionVO\",\"RequisitionId;PersonId;\");"
+            }
+          },
+          "agencyprofileurl": {
+            "title": "Profile URL from Agency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Profile URL from Agency",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Profile URL from Agency"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "agencyprofileurl",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION5",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "AgencyProfileUrl",
+              "FND_ACFF_SegmentName": "AgencyProfileUrl",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcomment": {
+            "title": "Comment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Comment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Comment"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "bidcomment",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION2",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "Bidcomment",
+              "FND_ACFF_SegmentName": "Bidcomment",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidcurrency": {
+            "title": "Currency",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Currency",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "FND_ACFF_OpenIdentifier": "bidcurrency",
+              "FND_ACFF_SegmentName": "BidCurrency",
+              "help": {
+                "instruction": "Currency"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_BID_CURRENCY_VALUE_SET#TABLE",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidCurrency",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "bidrate": {
+            "title": "Hourly Rate",
+            "type": "number",
+            "description": "Hourly Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Hourly Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_RATE_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_MinimumValue": "0",
+              "FND_ACFF_OpenIdentifier": "bidrate",
+              "FND_ACFF_JavaType": "java.math.BigDecimal",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION_NUMBER1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "BidRate",
+              "FND_ACFF_SegmentName": "BidRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "displayrate": {
+            "title": "Display Rate",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Display Rate",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Display Rate"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "displayrate",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION4",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "DisplayRate",
+              "FND_ACFF_SegmentName": "DisplayRate",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "previoussubmissionid": {
+            "title": "Previous Submission",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Previous Submission",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Previous Submission"
+              },
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_ValueSetInfo": "ORA_IRC_BID_COMMENT_VALUESET#FORMAT_ONLY",
+              "FND_ACFF_EFF_INDEXED_FLAG": "N",
+              "includeInCompactView": true,
+              "FND_ACFF_OpenIdentifier": "previoussubmissionid",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "150",
+              "FND_ACFF_ColumnName": "PEI_INFORMATION3",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "PreviousSubmissionId",
+              "FND_ACFF_SegmentName": "PreviousSubmissionId",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUIJobApplications-j_SubmissionExtraInfoCategory-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

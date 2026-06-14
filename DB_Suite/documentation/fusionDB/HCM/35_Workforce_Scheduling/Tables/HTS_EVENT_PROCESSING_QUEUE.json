@@ -1,0 +1,168 @@
+{
+  "name": "HTS_EVENT_PROCESSING_QUEUE",
+  "object_type": "TABLE",
+  "description": "Table to store the polled events information to be processed.",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htseventprocessingqueue-11610.html#htseventprocessingqueue-11610",
+  "primary_keys": [
+    {
+      "name": "HTS_EVENT_PROCESSING_QUEUE_PK",
+      "columns": "EVENT_PROCESSING_QUEUE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "EVENT_PROCESSING_QUEUE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique system generated identifier for an event row that is to be processed"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Person ID for which event is generated."
+    },
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Assignment ID for which event is generated."
+    },
+    {
+      "Name": "EVENT_CHANGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier that maps to the ChangeID in hrc_evt_obj_changes."
+    },
+    {
+      "Name": "EVENT_EFFECTIVE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Effective date of the event."
+    },
+    {
+      "Name": "EVENT_DML_OPERATION",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Operation that generated the event."
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Processing status of this event record."
+    },
+    {
+      "Name": "POLLED_ESS_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ESS request ID which polled this event record."
+    },
+    {
+      "Name": "PROCESSED_ESS_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ESS request ID which last processed this event record."
+    },
+    {
+      "Name": "PROCESS_LOGS",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To capture information on processing of events like which work pattern was created, updated, deleted etc."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Enterprise"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_EVENT_PROCESSING_QUEUE_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, EVENT_EFFECTIVE_DATE, PROCESSING_STATUS"
+    },
+    {
+      "Index": "HTS_EVENT_PROCESSING_QUEUE_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "EVENT_PROCESSING_QUEUE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:21:46"
+}

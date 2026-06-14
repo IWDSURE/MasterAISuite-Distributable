@@ -1,0 +1,1456 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Positions",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/positions": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get all positions",
+        "operationId": "getall_positions",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActiveStatus; string; Status of the position such as active or inactive.</li><li>BudgetAmount; number; Budget amount of the position.</li><li>BudgetAmountCurrency; string; Currency of the position's budget amount currency.</li><li>BudgetedPositionFlag; boolean; Indicates whether the position is a budgeted position. The default value is true.</li><li>BusinessUnitId; integer; Unique identifier of the mandatory business unit for the position.</li><li>CalculateFTE; string; Indicates whether the FTE should be calculated. The default value is true.</li><li>CostCenter; string; Cost center of the position.</li><li>CreationDate; string; Date and time when the position record was created.</li><li>DelegatePositionId; integer; Unique identifier for the position's delegate position.</li><li>DepartmentId; integer; Unique identifier of the mandatory department for the position.</li><li>EffectiveEndDate; string; Effective end date of the position.</li><li>EffectiveStartDate; string; Effective start date of the position.</li><li>EntryGradeId; integer; Unique identifier for the position's entry grade.</li><li>EntryStepId; integer; Unique identifier for the position's entry step.</li><li>FTE; number; FTE of the position.</li><li>FullPartTime; string; Indicates whether a position is full-time or part-time.</li><li>FundedByExistingPositionFlag; boolean; Indicates whether a position is funded by existing positions. The default value is false.</li><li>GradeLadderId; integer; Unique identifier for the position's grade ladder.</li><li>HeadCount; integer; Head count of the position.</li><li>HiringStatus; string; Hiring status of the position such as proposed, frozen, or approved.</li><li>JobId; integer; Unique identifier for the position's job.</li><li>LastUpdateDate; string; Date and time the position was updated.</li><li>LocationId; integer; Unique identifier for the position's location.</li><li>Name; string; Name of the position.</li><li>OverlapAllowedFlag; boolean; Indicates whether overlap is allowed for the position. The default value is false.</li><li>PositionCode; string; Code that uniquely references the position within the business unit.</li><li>PositionId; integer; Surrogate identifier for the position.</li><li>PositionType; string; Type of the position such as pooled or single.</li><li>ProbationPeriod; number; Probation period of the position.</li><li>RegularTemporary; string; Indicates whether a position is regular or temporary.</li><li>SeasonalEndDate; string; Seasonal end date of the position.</li><li>SeasonalFlag; boolean; Indicates whether the position is seasonal. The default value is false.</li><li>SeasonalStartDate; string; Seasonal start date of the position.</li><li>SecurityClearance; string; Security clearance of the position.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveEndDate; string; Effective end date of the position's valid grades.</li><li>EffectiveStartDate; string; Effective start date of the position's valid grades.</li><li>GradeId; integer; Unique identifier for the position's valid grade.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>AltKey Finds all the positions that match the alternate key criteria specified. <br>Finder Variables <ul><li>BusinessUnitId; integer;  Identifier of the business unit of the position to be provided when using the alternate key finder on the position. </li><li>EffectiveStartDate; string;  Effective start date of the position to be provided when using the alternate key finder on the position. </li><li>PositionCode; string;  Code of the position to be provided when using the alternate key finder on the position. </li></ul></li><li>PrimaryKey Finds all the positions that match the specified primary key criteria. <br>Finder Variables <ul><li>EffectiveEndDate; string;  Effective end date of the position to be provided when using the primary key finder on the position. </li><li>EffectiveStartDate; string;  Effective start date of the position to be provided when using the primary key finder on the position. </li><li>PositionId; integer;  Surrogate identifier for the position in the primary key finder. </li></ul></li><li>findByPositionId Finds all positions that match the position identifier specified. <br>Finder Variables <ul><li>PositionId; integer;  Unique identifier for the position. </li><li>SysEffectiveDate; string;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "AltKey",
+                "description": "Finds all the positions that match the alternate key criteria specified.",
+                "properties": {
+                  "BusinessUnitId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Identifier of the business unit of the position to be provided when using the alternate key finder on the position.",
+                    "type": "integer",
+                    "title": "Business Unit"
+                  },
+                  "EffectiveStartDate": {
+                    "nullable": false,
+                    "format": "date",
+                    "description": "Effective start date of the position to be provided when using the alternate key finder on the position.",
+                    "type": "string",
+                    "title": "Effective Start Date"
+                  },
+                  "PositionCode": {
+                    "nullable": true,
+                    "description": "Code of the position to be provided when using the alternate key finder on the position.",
+                    "type": "string",
+                    "title": "Code",
+                    "maxLength": 30
+                  }
+                }
+              },
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the positions that match the specified primary key criteria.",
+                "properties": {
+                  "EffectiveEndDate": {
+                    "nullable": false,
+                    "format": "date",
+                    "description": "Effective end date of the position to be provided when using the primary key finder on the position.",
+                    "type": "string",
+                    "title": "Effective End Date"
+                  },
+                  "PositionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Surrogate identifier for the position in the primary key finder.",
+                    "type": "integer"
+                  },
+                  "EffectiveStartDate": {
+                    "nullable": false,
+                    "format": "date",
+                    "description": "Effective start date of the position to be provided when using the primary key finder on the position.",
+                    "type": "string",
+                    "title": "Effective Start Date"
+                  }
+                }
+              },
+              {
+                "name": "findByPositionId",
+                "description": "Finds all positions that match the position identifier specified.",
+                "title": "findByPositionId",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "type": "string"
+                  },
+                  "PositionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the position.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/positions"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "positions-get",
+        "x-filename-id": "positions-get"
+      }
+    },
+    "/positions/{positionsUniqID}": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get a position",
+        "operationId": "get_positions",
+        "parameters": [
+          {
+            "name": "positionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Positions resource and used to uniquely identify an instance of Positions. The client should not generate the hash key value. Instead, the client should query on the Positions collection resource in order to navigate to a specific instance of Positions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/positions-item-response"
+                }
+              }
+            },
+            "links": {
+              "extraInformation": {
+                "operationRef": "#/paths/~1positions~1{positionsUniqID}~1child~1extraInformation/get",
+                "parameters": {
+                  "positionsUniqID": "$request.path.positionsUniqID"
+                }
+              },
+              "PositionCustomerFlex": {
+                "operationRef": "#/paths/~1positions~1{positionsUniqID}~1child~1PositionCustomerFlex/get",
+                "parameters": {
+                  "positionsUniqID": "$request.path.positionsUniqID"
+                }
+              },
+              "legislativeExtraInformation": {
+                "operationRef": "#/paths/~1positions~1{positionsUniqID}~1child~1legislativeExtraInformation/get",
+                "parameters": {
+                  "positionsUniqID": "$request.path.positionsUniqID"
+                }
+              },
+              "validGrades": {
+                "operationRef": "#/paths/~1positions~1{positionsUniqID}~1child~1validGrades/get",
+                "parameters": {
+                  "positionsUniqID": "$request.path.positionsUniqID"
+                },
+                "description": "The validGrades resource is a child of the positions resource. It includes all valid grades for the position, as of the specified date."
+              }
+            }
+          }
+        },
+        "x-internal-id": "positions-{positionsUniqID}-get",
+        "x-filename-id": "positions-positionsuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "positions": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/positions-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "positions-item-response": {
+        "type": "object",
+        "properties": {
+          "ActiveStatus": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the position such as active or inactive.",
+            "nullable": false,
+            "default": "A",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "BudgetAmount": {
+            "title": "Budget Amount",
+            "type": "number",
+            "description": "Budget amount of the position.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "BudgetAmountCurrency": {
+            "title": "Currency",
+            "maxLength": 20,
+            "type": "string",
+            "description": "Currency of the position's budget amount currency.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "BudgetedPositionFlag": {
+            "title": "Budgeted Position",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the position is a budgeted position. The default value is true.",
+            "nullable": true,
+            "default": true,
+            "x-queryable": true
+          },
+          "BusinessUnitId": {
+            "title": "Business Unit",
+            "type": "integer",
+            "description": "Unique identifier of the mandatory business unit for the position.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalculateFTE": {
+            "title": "Calculate FTE",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the FTE should be calculated. The default value is true.",
+            "nullable": true,
+            "default": "N",
+            "x-queryable": true
+          },
+          "CostCenter": {
+            "title": "Cost Center",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Cost center of the position.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the position record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DelegatePositionId": {
+            "title": "Delegate Position",
+            "type": "integer",
+            "description": "Unique identifier for the position's delegate position.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DepartmentId": {
+            "type": "integer",
+            "description": "Unique identifier of the mandatory department for the position.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "description": "Effective end date of the position.",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "description": "Effective start date of the position.",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EntryGradeId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's entry grade.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EntryStepId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's entry step.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FTE": {
+            "title": "FTE",
+            "type": "number",
+            "description": "FTE of the position.",
+            "nullable": true,
+            "default": 1,
+            "x-hints": {
+              "precision": 30,
+              "scale": 10
+            },
+            "x-queryable": true
+          },
+          "FullPartTime": {
+            "title": "Full Time or Part Time",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether a position is full-time or part-time.",
+            "nullable": true,
+            "default": "FULL_TIME",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "FundedByExistingPositionFlag": {
+            "title": "Funded from Existing Position",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether a position is funded by existing positions. The default value is false.",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "GradeLadderId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's grade ladder.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "HeadCount": {
+            "title": "Head Count",
+            "type": "integer",
+            "description": "Head count of the position.",
+            "format": "int32",
+            "nullable": true,
+            "default": 1,
+            "x-hints": {
+              "precision": 4
+            },
+            "x-queryable": true
+          },
+          "HiringStatus": {
+            "title": "Hiring Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Hiring status of the position such as proposed, frozen, or approved.",
+            "nullable": false,
+            "default": "PROPOSED",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's job.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date and time the position was updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the position.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "OverlapAllowedFlag": {
+            "title": "Overlap Allowed",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether overlap is allowed for the position. The default value is false.",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "PositionCode": {
+            "title": "Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that uniquely references the position within the business unit.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PositionCustomerFlex": {
+            "type": "array",
+            "description": "Customer's flexfield for position.",
+            "items": {
+              "$ref": "#/components/schemas/positions-PositionCustomerFlex-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Surrogate identifier for the position.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionType": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of the position such as pooled or single.",
+            "nullable": true,
+            "default": "SINGLE",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "ProbationPeriod": {
+            "title": "Probation Period",
+            "type": "number",
+            "description": "Probation period of the position.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 22,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "RegularTemporary": {
+            "title": "Regular or Temporary",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether a position is regular or temporary.",
+            "nullable": true,
+            "default": "R",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "SeasonalEndDate": {
+            "title": "Seasonal End Date",
+            "type": "string",
+            "description": "Seasonal end date of the position.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SeasonalFlag": {
+            "title": "Seasonal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the position is seasonal. The default value is false.",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "SeasonalStartDate": {
+            "title": "Seasonal Start Date",
+            "type": "string",
+            "description": "Seasonal start date of the position.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SecurityClearance": {
+            "title": "Security Clearance",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Security clearance of the position.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "extraInformation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/positions-extraInformation-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "legislativeExtraInformation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/positions-legislativeExtraInformation-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "validGrades": {
+            "title": "Positions Valid Grade",
+            "type": "array",
+            "description": "The validGrades resource is a child of the positions resource. It includes all valid grades for the position, as of the specified date.",
+            "items": {
+              "$ref": "#/components/schemas/positions-validGrades-item-response"
+            }
+          }
+        }
+      },
+      "positions-PositionCustomerFlex-item-response": {
+        "type": "object",
+        "properties": {
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "PositionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "TEXT_BOX"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "positions-extraInformation-item-response": {
+        "discriminator": {
+          "propertyName": "CategoryCode",
+          "mapping": {
+            "POS_EIT": "#/components/schemas/oracle_apps_hcm_workStructures_positions_flex_positionExtraInfoDeveloperFlex_classification_view_j__PositionEitCategoryPosEitprivateVO-item-response"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_workStructures_positions_flex_positionExtraInfoDeveloperFlex_classification_view_j__PositionEitCategoryPosEitprivateVO-item-response"
+          }
+        ]
+      },
+      "oracle_apps_hcm_workStructures_positions_flex_positionExtraInfoDeveloperFlex_classification_view_j__PositionEitCategoryPosEitprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": false,
+            "default": "POS_EIT"
+          },
+          "PositionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "fnd:FND_AUDIT_USER_KEY": "true",
+              "fnd:FND_AUDIT_FK_VIEWOBJECT": "oracle.apps.hcm.workStructures.positions.publicView.PositionAllPVO",
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:FND_AUDIT_FK_DISPLAYATTR": "Name",
+              "KeyHelper": "keyContextHelper.resolve (\"oracle.apps.hcm.workStructures.positions.positionServiceV2.view.PositionAllVO\",\"BusinessUnitId;PositionCode\", \"PositionId\");",
+              "fnd:FND_AUDIT_FK_WHEREATTR": "PositionId"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "positions-legislativeExtraInformation-item-response": {
+        "discriminator": {
+          "propertyName": "CategoryCode",
+          "mapping": {
+            "POS_LEG": "#/components/schemas/oracle_apps_hcm_workStructures_positions_flex_positionLegDeveloperFlex_classification_view_j__PositionLegCategoryPosLegprivateVO-item-response"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_workStructures_positions_flex_positionLegDeveloperFlex_classification_view_j__PositionLegCategoryPosLegprivateVO-item-response"
+          }
+        ]
+      },
+      "oracle_apps_hcm_workStructures_positions_flex_positionLegDeveloperFlex_classification_view_j__PositionLegCategoryPosLegprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "CategoryCode": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true,
+            "default": "POS_LEG"
+          },
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false
+          },
+          "PositionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "fnd:FND_AUDIT_USER_KEY": "true",
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "KeyHelper": "keyContextHelper.resolve (\"oracle.apps.hcm.workStructures.positions.model.view.PositionUserKeyVO\",\"BusinessUnitId;PositionCode\", \"PositionId\");",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "PositionLegDeveloperFlexORA_5FHRX_5FBR_5FPOSITIONprivateVO": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/positions-legislativeExtraInformation-PositionLegDeveloperFlexORA_5FHRX_5FBR_5FPOSITIONprivateVO-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "positions-legislativeExtraInformation-PositionLegDeveloperFlexORA_5FHRX_5FBR_5FPOSITIONprivateVO-item-response": {
+        "type": "object",
+        "properties": {
+          "ActionOccurrenceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "default": 0,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "DLoadHidden": "true"
+            }
+          },
+          "AttributeCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "DLoadHidden": "true"
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EffectiveEndDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveStartDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "InformationCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "ORA_HRX_BR_POSITION",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "LegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "nullable": true,
+            "default": "US",
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 9
+            }
+          },
+          "PositionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "KeyHelper": "keyContextHelper.resolve (\"oracle.apps.hcm.workStructures.positions.model.view.PositionUserKeyVO\",\"BusinessUnitId;PositionCode\", \"PositionId\");"
+            }
+          },
+          "PositionLegId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "HCM_DBSEQUENCE": "PER_POSITION_LEG_S",
+              "KeyHelper": "keyContextHelper.resolve(\"oracle.apps.hcm.workStructures.positions.model.view.PositionLegislativeUserKeyVO\",\"PositionId;InformationCategory;SequenceNumber\", \"PositionLegId\");",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "SequenceNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 8
+            }
+          },
+          "_ORA_HRX_BR_POS_CBO": {
+            "title": "CBO Occupation",
+            "maxLength": 150,
+            "type": "string",
+            "description": "CBO Occupation",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_DisplayAttributeName": "_ORA_HRX_BR_POS_CBO_Display",
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_EFF_HAS_LOV": "true",
+              "FND_ACFF_EFF_SEGMENT_ATTRIBUTE": "true",
+              "FND_ACFF_SegmentName": "ORA_HRX_BR_POS_CBO",
+              "help": {
+                "instruction": "CBO Occupation"
+              },
+              "FND_ACFF_ValueSetInfo": "ORA_HRX_BR_CBO_OCCUPATION#TABLE",
+              "FND_ACFF_EFF_TVVS_ID_BASE_VALUE": "Y",
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Show",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ColumnName": "INFORMATION1",
+              "FND_ACFF_EFF_CONTEXT_SEGMENT_CODE": "ORA_HRX_BR_POS_CBO",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_ORA_HRX_BR_POS_CBO_Display": {
+            "title": "CBO Occupation",
+            "type": "string",
+            "description": "CBO Occupation",
+            "nullable": true,
+            "x-hints": {
+              "FND_ACFF_SegmentAttributeName": "_ORA_HRX_BR_POS_CBO",
+              "help": {
+                "instruction": "CBO Occupation"
+              },
+              "controlType": "combo_lov",
+              "includeInCompactView": true,
+              "FlexClientDisplayHint": "Hide",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Value",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "positions-validGrades-item-response": {
+        "type": "object",
+        "properties": {
+          "EffectiveEndDate": {
+            "type": "string",
+            "description": "Effective end date of the position's valid grades.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EffectiveStartDate": {
+            "type": "string",
+            "description": "Effective start date of the position's valid grades.",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "GradeId": {
+            "type": "integer",
+            "description": "Unique identifier for the position's valid grade.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

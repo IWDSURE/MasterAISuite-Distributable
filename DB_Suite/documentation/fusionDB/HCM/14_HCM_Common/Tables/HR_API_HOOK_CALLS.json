@@ -1,0 +1,220 @@
+{
+  "name": "HR_API_HOOK_CALLS",
+  "object_type": "TABLE",
+  "description": "Lists which extra logic, package procedures or formula, should be called from the API hook points. This table will contain rows created by legislation groups, legislation vertical market groups and customers.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrapihookcalls-24480.html#hrapihookcalls-24480",
+  "primary_keys": [
+    {
+      "name": "HR_API_HOOK_CALLS_PK",
+      "columns": "API_HOOK_CALL_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "API_HOOK_CALL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "API_HOOK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HR_API_HOOKS."
+    },
+    {
+      "Name": "API_HOOK_CALL_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Type of hook call."
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates if the extra logic should be called every time the hook point is reached or when the data corresponds to a particular legislation."
+    },
+    {
+      "Name": "SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "When more than one row exists for the same API_HOOK_ID, SEQUENCE affects the order of the hook calls."
+    },
+    {
+      "Name": "ENABLED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates if the hook call should be generated."
+    },
+    {
+      "Name": "CALL_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Name of the database package which the hook package should call to carry out the legislation, legislation vertical market or customer specific logic"
+    },
+    {
+      "Name": "CALL_PROCEDURE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Name of the procedure, within CALL_PACKAGE, which the hook package should call to carry out the legislation, legislation vertical market or customer specific logic."
+    },
+    {
+      "Name": "PRE_PROCESSOR_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The last time the API hook pre-processor program attempted (successfully or unsuccessfully) to create the package body code for this hook call."
+    },
+    {
+      "Name": "ENCODED_ERROR",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If the last time the API hook pre-processor program failed to make the source code for this hook call, the error details will be held in this column."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Status of hook call code at pre-processor time (as of PRE_PROCESSOR_DATE)."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "APPLICATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The APPLICATION_ID of Application as defined in the FND_APPLICATION table."
+    },
+    {
+      "Name": "APP_INSTALL_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates for which installation statuses the hook call should be included in the user hook package body."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HR_API_HOOK_CALLS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_HOOK_CALL_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_API_HOOK_CALLS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_HOOK_CALL_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HR_API_HOOK_CALLS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "APPLICATION_ID, API_HOOK_ID, LEGISLATION_CODE, CALL_PACKAGE, CALL_PROCEDURE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_API_HOOK_CALLS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "APPLICATION_ID, API_HOOK_ID, LEGISLATION_CODE, CALL_PACKAGE, CALL_PROCEDURE, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:48:19"
+}

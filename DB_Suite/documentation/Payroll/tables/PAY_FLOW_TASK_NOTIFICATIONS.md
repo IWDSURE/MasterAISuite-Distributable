@@ -1,0 +1,47 @@
+# PAY_FLOW_TASK_NOTIFICATIONS
+
+Table captures tasks associated with the flow module
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** TABLE
+
+**Tablespace:** PAY_FLOW_TASK_NOTIFICATIONS
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtasknotifications-7873.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtasknotifications-7873.html)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| PAY_FLOW_TASK_NOTIFICATION_PK | NOTIFICATION_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| NOTIFICATION_ID | NUMBER |  | 18 | Yes | NOTIFICATION_ID |
+| FLOW_TASK_INSTANCE_ID | NUMBER |  | 18 | Yes | FLOW_TASK_INSTANCE_ID |
+| FLOW_INSTANCE_ID | NUMBER |  | 18 | Yes | FLOW_INSTANCE_ID |
+| ALERT_TYPE | VARCHAR2 | 10 |  |  | ALERT_TYPE |
+| RUN_ID | NUMBER |  | 18 |  | RUN_ID |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| ENTERPRISE_ID | NUMBER |  | 18 | Yes | Foreign key to PER_ENTERPRISES. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|-------|------------|------------|----------|
+| PAY_FLOW_TASK_NOTIFICATION_PK | Unique | pay_flow_task_notifications_pk | NOTIFICATION_ID |
+
+---
+
+[← Back to HRMS Tables Index](../HRMS_Tables_Index.md)

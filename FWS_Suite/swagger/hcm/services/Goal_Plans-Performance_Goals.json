@@ -1,0 +1,4575 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Goal Plans/Performance Goals",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/getMultiplePerformanceGoalDetails": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get performance goal details for multiple goals",
+        "description": "Gets details of multiple performance goals.",
+        "operationId": "doall_getMultiplePerformanceGoalDetails_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "evaluationId": {
+                    "type": "number",
+                    "description": "Identifier of the performance evaluation whose details are retrieved",
+                    "nullable": true
+                  },
+                  "goalIds": {
+                    "type": "string",
+                    "description": "Identifier of the performance goal whose details are retrieved.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Return value from the custom action containing performance goal details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Return value from the custom action containing performance goal details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-getMultiplePerformanceGoalDetails-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-getmultipleperformancegoaldetails-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/deleteGoalsBatchAction": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Delete multiple performance goals",
+        "description": "Deletes multiple performance goals that are specified.",
+        "operationId": "doall_deleteGoalsBatchAction_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "goalIds": {
+                    "type": "array",
+                    "description": "List of unique identifiers for the performance goals that need to be deleted.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Map of parameters needed for deleting the performance goals.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "An indicator to indicate whether the specified performance goals were deleted or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "An indicator to indicate whether the specified performance goals were deleted or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-deleteGoalsBatchAction-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-deletegoalsbatchaction-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals": {
+      "get": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get all performance goals",
+        "operationId": "getall_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActualCompletionDate; string; Actual completion date of the performance goal.</li><li>AllowDelGoalCode; string; Indicates if managers or workers can delete the performance goal.</li><li>AllowDelGoalFlag; boolean; Indicates if managers or workers can delete the performance goal.</li><li>AllowKeyAttrUpdateFlag; boolean; Indicates if managers or workers can update the key attributes of a performance goal.</li><li>AssignedByPersonId; integer; Unique identifier for the HR specialist or manager who assigns the performance goal.</li><li>AssignmentId; integer; Unique identifier for the job assignment of a worker.</li><li>AssignmentNumber; string; Unique assignment number for a worker assignment.</li><li>CategoryCode; string; Category code of a performance goal.</li><li>CategoryMeaning; string; Description for the associated category code of a performance goal.</li><li>ChildObjectId; integer; Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.</li><li>ChildObjectName; string; Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.</li><li>Description; string; Description of the performance goal.</li><li>DisplaySequence; integer; Display sequence of goals in the goal plan.</li><li>GoalApprovalState; string; Approval state of the goal.</li><li>GoalId; integer; Unique identifier for a performance goal.</li><li>GoalName; string; Name of the performance goal.</li><li>GoalPlanEndDate; string; End date of the goal plan.</li><li>GoalPlanGoalId; integer; Unique identifier for the performance goal in the goal plan.</li><li>GoalPlanId; integer; Unique identifier of the goal plan.</li><li>GoalPlanName; string; Name of the goal plan.</li><li>GoalPlanStartDate; string; Start date of the goal plan.</li><li>GoalPlanWeightEnabled; string; Indicates whether weights are enabled for the goals in the goal plan.</li><li>GoalSourceCode; string; Source code that indicates who created the performance goal. A performance goal can be created by a worker, a manager, or an HR specialist.</li><li>GoalSubTypeCode; string; Code that indicates the goal's subtype.</li><li>GoalSubtypeMeaning; string; Code used in HCM_LOOKUPS for the goal's subtype.</li><li>GoalVersionTypeCode; string; Version type code of the performance goal.</li><li>LevelCode; string; Code that indicates the performance goal level.</li><li>LevelMeaning; string; Performance goal level, which can be Target or Stretch.</li><li>LoggedInPersonType; string; Unique person identifier for the logged in person.</li><li>LongDescription; string; Long description of the performance goal.</li><li>MassRequestId; integer; Unique identifier for the mass assignment or mass share request.</li><li>PercentCompletion; string; Completion percentage of the performance goal.</li><li>PersonId; integer; Unique identifier for the worker who's assigned the performance goal.</li><li>PersonNumber; string; Person number of the worker who's assigned the performance goal.</li><li>PriorityCode; string; Priority code of the performance goal.</li><li>PriorityMeaning; string; Priority of the performance goal, which can be High, Medium, or Low.</li><li>PrivateFlag; boolean; Indicates if the performance goal is private or not.</li><li>PublishDate; string; The date the performance goal was published as an organization goal.</li><li>PublishedFlag; boolean; Indicates whether the current goal has been published as an organization goal.</li><li>ReferenceGoalId; integer; Unique identifier for the performance goal in the goal plan.</li><li>RelatedLink; string; Related link of the performance goal.</li><li>RequestContext; string; Page from which the performance goal was created. Performance goals can be created on the employee's Goals page, the manager page, or the goal administrator page.</li><li>ReviewPeriodEndDate; string; End Date</li><li>ReviewPeriodId; integer; Unique Identifier for the review period that the goal plan of the performance goal is associated with.</li><li>ReviewPeriodName; string; Name of the review period.</li><li>ReviewPeriodStartDate; string; Start Date</li><li>StartDate; string; Start date of the performance goal.</li><li>StatusCode; string; Code that indicates the status of the performance goal.</li><li>StatusMeaning; string; Status of the performance goal.</li><li>TargetCompletionDate; string; Targeted completion date of the performance goal.</li><li>Weighting; number; Weight of the performance goal.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds a performance goal that matches the primary key criteria specified. <br>Finder Variables <ul><li>GoalId; integer;  Unique identifier for a performance goal. </li><li>GoalPlanGoalId; integer;  Unique identifier for the performance goal in the goal plan. </li></ul></li><li>findByGoalId Finds a performance goal that has a specified Goal ID. <br>Finder Variables <ul><li>GoalId; integer;  Unique identifier for a performance goal. </li></ul></li><li>findByObjectId Finds the performance goal that matches the specified performance goal identifier after loading the approval data from the transaction store. <br>Finder Variables <ul><li>AssignmentId; integer;  Unique identifier for the assignment of the person who's assigned the performance goal. </li><li>ChildObjectId; integer;  Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement. </li><li>ChildObjectName; string;  Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements. </li><li>GoalId; integer;  Unique identifier for the performance goal submitted for approval. </li><li>GoalPlanId; integer;  Unique identifier of the goal plan. </li><li>ObjectId; integer;  Unique identifier for the goal plan assigned to the employee. </li><li>PersonId; integer;  Unique identifier of the person who's assigned the performance goal. </li><li>ReviewPeriodId; integer;  Unique identifier for the review period. </li></ul></li><li>findGoalByEvaluationId Finds a performance goal that matches the specified performance document ID. <br>Finder Variables <ul><li>EvaluationId; integer;  Unique identifier for the performance document that includes the performance goals section. </li><li>GoalId; integer;  Unique identifier for the performance goal that's included in the performance document. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds a performance goal that matches the primary key criteria specified.",
+                "properties": {
+                  "GoalPlanGoalId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the performance goal in the goal plan.",
+                    "type": "integer"
+                  },
+                  "GoalId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for a performance goal.",
+                    "type": "integer",
+                    "title": "Goal ID"
+                  }
+                }
+              },
+              {
+                "name": "findByGoalId",
+                "description": "Finds a performance goal that has a specified Goal ID.",
+                "title": "findByGoalId",
+                "properties": {
+                  "GoalId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for a performance goal.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByObjectId",
+                "description": "Finds the performance goal that matches the specified performance goal identifier after loading the approval data from the transaction store.",
+                "title": "findByObjectId",
+                "properties": {
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the person who's assigned the performance goal.",
+                    "type": "integer"
+                  },
+                  "ObjectId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the goal plan assigned to the employee.",
+                    "type": "integer"
+                  },
+                  "ChildObjectName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+                    "type": "string"
+                  },
+                  "GoalPlanId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the goal plan.",
+                    "type": "integer"
+                  },
+                  "AssignmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the assignment of the person who's assigned the performance goal.",
+                    "type": "integer"
+                  },
+                  "ReviewPeriodId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the review period.",
+                    "type": "integer"
+                  },
+                  "ChildObjectId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+                    "type": "integer"
+                  },
+                  "GoalId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the performance goal submitted for approval.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findGoalByEvaluationId",
+                "description": "Finds a performance goal that matches the specified performance document ID.",
+                "title": "findGoalByEvaluationId",
+                "properties": {
+                  "EvaluationId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier for the performance document that includes the performance goals section.",
+                    "type": "integer"
+                  },
+                  "GoalId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier for the performance goal that's included in the performance document.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-performanceGoals"
+                }
+              }
+            },
+            "links": {
+              "getPerformanceGoalDetails": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1getPerformanceGoalDetails/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Gets details of a performance goal."
+              },
+              "submitEss": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1submitEss/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Submits mass assignment process for performance goals that matches the specified mass assignment request ID."
+              },
+              "prepareApprovalTxnForSubmission": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1prepareApprovalTxnForSubmission/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Performance Goals"
+              },
+              "cancelGoalsBatchAction": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1cancelGoalsBatchAction/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Cancels multiple performance goals that are specified."
+              },
+              "goalApprovalTransactionData": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1goalApprovalTransactionData/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Gets performance goal plan approval transaction status data and optionally loads the transaction data."
+              },
+              "copyAttachments": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1copyAttachments/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Copies attachments of a shared goal to the new goal that's created from the shared goal."
+              },
+              "shareActionBatch": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1shareActionBatch/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Shares the selected performance goals with specific workers."
+              },
+              "getPerformanceLibraryGoalDetails": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1getPerformanceLibraryGoalDetails/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Gets all details of the specified performance library goal."
+              },
+              "savePerfGoalApproval": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1savePerfGoalApproval/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Saves data of a performance goal and its associated tasks and measurements for processing approvals."
+              },
+              "getMultiplePerformanceGoalDetails": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1getMultiplePerformanceGoalDetails/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Gets details of multiple performance goals."
+              },
+              "goalAssignActionBatch": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1goalAssignActionBatch/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Assigns a performance goal to the selected employees."
+              },
+              "deleteGoalsBatchAction": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1deleteGoalsBatchAction/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Deletes multiple performance goals that are specified."
+              },
+              "buildBipReportUrlForGoals": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1action~1buildBipReportUrlForGoals/post",
+                "parameters": {
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Generates the report URL for performance or development goals."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-get",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-get"
+      },
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Create a performance goal",
+        "operationId": "create_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/goalPlans-performanceGoals-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-performanceGoals-item-response"
+                }
+              }
+            },
+            "links": {
+              "GoalStatusCommonLookupLOVVO": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DHRG_GOAL_STATUS"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: StatusCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/StatusCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "checkGoalInPDAndCheckInDoc": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1checkGoalInPDAndCheckInDoc/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Checks if the performance goal's evaluated in 1 or more performance documents and included in 1 or more check-in documents."
+              },
+              "copyGoal": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1copyGoal/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Copies a performance goal and creates a new performance goal that has the same attributes as the goal that's copied."
+              },
+              "goalAssignAction": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1goalAssignAction/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Assigns a performance goal to the selected employees."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/savePerfGoalApproval": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Save performance goal data for approval",
+        "description": "Saves data of a performance goal and its associated tasks and measurements for processing approvals.",
+        "operationId": "doall_savePerfGoalApproval_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "Resource on which the goal action is going to be done. For example performanceGoals, perfGoalsTasks.",
+                    "nullable": true
+                  },
+                  "payload": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Details of the performance goal that needs to be saved. It includes attributes such as the goal name, and goal description.",
+                    "nullable": true
+                  },
+                  "operation": {
+                    "type": "string",
+                    "description": "Goal action such as create, delete, or update.",
+                    "nullable": true
+                  },
+                  "inputParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Parameters that identify the performance goal that need to be saved, such as the goal ID, and Object ID.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Performance goal, measurement, or task after the create or update action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Performance goal, measurement, or task after the create or update action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-savePerfGoalApproval-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-saveperfgoalapproval-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/submitEss": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Submit mass assignment process for performance goals",
+        "description": "Submits mass assignment process for performance goals that matches the specified mass assignment request ID.",
+        "operationId": "doall_submitEss_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MassRequestId": {
+                    "type": "string",
+                    "description": "Unique identifier for the mass assignment request.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Unique identifier for the mass assignment process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Unique identifier for the mass assignment process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-submitEss-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-submitess-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/getPerformanceGoalDetails": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get performance goal details",
+        "description": "Gets details of a performance goal.",
+        "operationId": "doall_getPerformanceGoalDetails_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "goalId": {
+                    "type": "number",
+                    "description": "Identifier of the performance goal whose details are retrieved.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Return value from the custom action containing performance goal details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Return value from the custom action containing performance goal details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-getPerformanceGoalDetails-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-getperformancegoaldetails-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/{performanceGoalsUniqID}/action/checkGoalInPDAndCheckInDoc": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Check if goal's evaluated in performance documents and included in check-in documents",
+        "description": "Checks if the performance goal's evaluated in 1 or more performance documents and included in 1 or more check-in documents.",
+        "operationId": "do_checkGoalInPDAndCheckInDoc_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Indicates if the performance goal is evaluated in 1 or more performance documents and included in 1 or more check-in documents."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Indicates if the performance goal is evaluated in 1 or more performance documents and included in 1 or more check-in documents."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-action-checkGoalInPDAndCheckInDoc-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-action-checkgoalinpdandcheckindoc-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/getPerformanceLibraryGoalDetails": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get details of a performance library goal",
+        "description": "Gets all details of the specified performance library goal.",
+        "operationId": "doall_getPerformanceLibraryGoalDetails_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contentItemId": {
+                    "type": "number",
+                    "description": "Unique content item identifier for the performance library goal.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Details of the specified performance library goal."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Details of the specified performance library goal."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-getPerformanceLibraryGoalDetails-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-getperformancelibrarygoaldetails-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/prepareApprovalTxnForSubmission": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Performance Goals",
+        "description": "Performance Goals",
+        "operationId": "doall_prepareApprovalTxnForSubmission_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Performance Goals",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task."
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-prepareApprovalTxnForSubmission-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-prepareapprovaltxnforsubmission-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/cancelGoalsBatchAction": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Cancel multiple performance goals",
+        "description": "Cancels multiple performance goals that are specified.",
+        "operationId": "doall_cancelGoalsBatchAction_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "goalIds": {
+                    "type": "array",
+                    "description": "List of unique identifiers for the performance goals that need to be canceled.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Map of parameters needed for canceling the performance goals.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "An indicator to indicate whether the specified performance goals were canceled or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "An indicator to indicate whether the specified performance goals were canceled or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-cancelGoalsBatchAction-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-cancelgoalsbatchaction-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/shareActionBatch": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Share selected performance goals",
+        "description": "Shares the selected performance goals with specific workers.",
+        "operationId": "doall_shareActionBatch_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "inputPayload": {
+                    "type": "array",
+                    "description": "List of performance goals that need to be shared and the workers to share the goals with.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Indicates if the selected performance goals were successfully shared with the specified workers or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Indicates if the selected performance goals were successfully shared with the specified workers or not."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-shareActionBatch-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-shareactionbatch-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/goalApprovalTransactionData": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get goal plan approval transaction status",
+        "description": "Gets performance goal plan approval transaction status data and optionally loads the transaction data.",
+        "operationId": "doall_goalApprovalTransactionData_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reloadTransactionFlag": {
+                    "type": "boolean",
+                    "description": "Indicates if the goal plan approval data needs to be reloaded from the transaction data store.",
+                    "nullable": true
+                  },
+                  "fetchTransactionDataFlag": {
+                    "type": "boolean",
+                    "description": "Indicates if the goal plan approval transaction status data needs to be retrieved.",
+                    "nullable": true
+                  },
+                  "objectId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal plan assigned to the employee.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Performance goal plan approval transaction status data."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Performance goal plan approval transaction status data."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-goalApprovalTransactionData-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-goalapprovaltransactiondata-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/{performanceGoalsUniqID}/action/copyGoal": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Copy a goal",
+        "description": "Copies a performance goal and creates a new performance goal that has the same attributes as the goal that's copied.",
+        "operationId": "do_copyGoal_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "GoalPlanId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal plan that includes the copied goal.",
+                    "nullable": true
+                  },
+                  "ReviewPeriodId": {
+                    "type": "number",
+                    "description": "Unique identifier for the job assignment of a worker.",
+                    "nullable": true
+                  },
+                  "AssignmentId": {
+                    "type": "number",
+                    "description": "Performance Goals",
+                    "nullable": true
+                  },
+                  "GoalName": {
+                    "type": "string",
+                    "description": "Name of the goal that's copied.",
+                    "nullable": true
+                  },
+                  "GoalPlanGoalId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal that's copied in the goal plan.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "New goal that has the attributes of the copied goal."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "New goal that has the attributes of the copied goal."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-action-copyGoal-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-action-copygoal-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/buildBipReportUrlForGoals": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Generate report URL",
+        "description": "Generates the report URL for performance or development goals.",
+        "operationId": "doall_buildBipReportUrlForGoals_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "goalType": {
+                    "type": "string",
+                    "description": "Indicates whether the report needs to be generated for performance or development goals.",
+                    "nullable": true
+                  },
+                  "hostName": {
+                    "type": "string",
+                    "description": "Unique label for the device used to generate the report for performance or development goals.",
+                    "nullable": true
+                  },
+                  "bipReportParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Parameters for generating the goals report. For performance goals, it can include attributes such as the person ID, goal plan ID, list of goal IDs, assignment ID, and indicators for showing weight, goal alignment, tasks, and target outcomes. For development goals, it can include attributes such as the person ID, list of goal IDs, assignment ID, and indicators for showing tasks and target outcomes.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "The report URL for performance or development goals that can be printed as a PDF file."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "The report URL for performance or development goals that can be printed as a PDF file."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-buildBipReportUrlForGoals-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-buildbipreporturlforgoals-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/{performanceGoalsUniqID}": {
+      "get": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Get a performance goal",
+        "operationId": "get_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-performanceGoals-item-response"
+                }
+              }
+            },
+            "links": {
+              "GoalStatusCommonLookupLOVVO": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DHRG_GOAL_STATUS"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: StatusCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/StatusCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "checkGoalInPDAndCheckInDoc": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1checkGoalInPDAndCheckInDoc/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Checks if the performance goal's evaluated in 1 or more performance documents and included in 1 or more check-in documents."
+              },
+              "copyGoal": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1copyGoal/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Copies a performance goal and creates a new performance goal that has the same attributes as the goal that's copied."
+              },
+              "goalAssignAction": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1goalAssignAction/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Assigns a performance goal to the selected employees."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-get",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-get"
+      },
+      "delete": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Delete a performance goal",
+        "operationId": "delete_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-delete",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Update a performance goal",
+        "operationId": "update_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/goalPlans-performanceGoals-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/goalPlans-performanceGoals-item-response"
+                }
+              }
+            },
+            "links": {
+              "GoalStatusCommonLookupLOVVO": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DHRG_GOAL_STATUS"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: StatusCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/StatusCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "checkGoalInPDAndCheckInDoc": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1checkGoalInPDAndCheckInDoc/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Checks if the performance goal's evaluated in 1 or more performance documents and included in 1 or more check-in documents."
+              },
+              "copyGoal": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1copyGoal/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Copies a performance goal and creates a new performance goal that has the same attributes as the goal that's copied."
+              },
+              "goalAssignAction": {
+                "operationRef": "#/paths/~1goalPlans~1{GoalPlanId}~1child~1performanceGoals~1{performanceGoalsUniqID}~1action~1goalAssignAction/post",
+                "parameters": {
+                  "performanceGoalsUniqID": "$request.path.performanceGoalsUniqID",
+                  "GoalPlanId": "$request.path.GoalPlanId"
+                },
+                "description": "Assigns a performance goal to the selected employees."
+              }
+            }
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-patch",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-patch"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/goalAssignActionBatch": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Assign multiple performance goals",
+        "description": "Assigns a performance goal to the selected employees.",
+        "operationId": "doall_goalAssignActionBatch_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "IndirectReports": {
+                    "type": "string",
+                    "description": "Indicates if indirect reports need to be included when assigning goals for the primary goal plan.",
+                    "nullable": true
+                  },
+                  "InputPayloadRest": {
+                    "type": "array",
+                    "description": "List of employees who need to be assigned the performance goal.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "GoalPlanId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal plan to which the performance goal needs to be assigned.",
+                    "nullable": true
+                  },
+                  "ReviewPeriodId": {
+                    "type": "number",
+                    "description": "Unique identifier for the review period.",
+                    "nullable": true
+                  },
+                  "AllowKeyAttrFlag": {
+                    "type": "string",
+                    "description": "Indicates if goal assignees can update the key attributes of the assigned goal.",
+                    "nullable": true
+                  },
+                  "GoalWeights": {
+                    "type": "array",
+                    "description": "List of weights of goals that need to be assigned.",
+                    "nullable": true,
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "Goals": {
+                    "type": "array",
+                    "description": "Performance Goals",
+                    "nullable": true,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the request that was created for the goal assignment process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the request that was created for the goal assignment process."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-goalAssignActionBatch-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-goalassignactionbatch-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/{performanceGoalsUniqID}/action/goalAssignAction": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Assign a performance goal",
+        "description": "Assigns a performance goal to the selected employees.",
+        "operationId": "do_goalAssignAction_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "performanceGoalsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- GoalId and GoalPlanGoalId ---for the Performance Goals resource and used to uniquely identify an instance of Performance Goals. The client should not generate the hash key value.  Instead, the client should query on the Performance Goals collection resource with a filter on the primary key values in order to navigate to a specific instance of Performance Goals.<br><br>For example: performanceGoals?q=GoalId=&lt;value1&gt;;GoalPlanGoalId=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "InputPayloadRest": {
+                    "type": "array",
+                    "description": "List of employees who need to be assigned the performance goal.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "GoalPlanId": {
+                    "type": "number",
+                    "description": "Unique identifier for the goal plan to which the performance goal needs to be assigned.",
+                    "nullable": true
+                  },
+                  "ReviewPeriodId": {
+                    "type": "number",
+                    "description": "Unique identifier for the review period.",
+                    "nullable": true
+                  },
+                  "GoalWeight": {
+                    "type": "number",
+                    "description": "Weight of the goal to be assigned.",
+                    "nullable": true
+                  },
+                  "AllowKeyAttrFlag": {
+                    "type": "string",
+                    "description": "Indicates if goal assignees can update the key attributes of the assigned goal.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Check if goal's evaluated in performance documents and included in check-in documents"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Check if goal's evaluated in performance documents and included in check-in documents"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-{performanceGoalsUniqID}-action-goalAssignAction-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-performancegoalsuniqid-action-goalassignaction-post"
+      }
+    },
+    "/goalPlans/{GoalPlanId}/child/performanceGoals/action/copyAttachments": {
+      "post": {
+        "tags": [
+          "Goal Plans/Performance Goals"
+        ],
+        "summary": "Copy attachments of shared goal",
+        "description": "Copies attachments of a shared goal to the new goal that's created from the shared goal.",
+        "operationId": "doall_copyAttachments_goalPlans-performanceGoals",
+        "parameters": [
+          {
+            "name": "GoalPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Goal Plan Name",
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "copyFromGoalId": {
+                    "type": "string",
+                    "description": "Unique identifier for the goal from which the attachments are to be copied.",
+                    "nullable": true
+                  },
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Comma separated identifiers for the attachments that need to be copied from the shared goal.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task."
+          }
+        },
+        "x-internal-id": "goalPlans-{GoalPlanId}-child-performanceGoals-action-copyAttachments-post",
+        "x-filename-id": "goalplans-goalplanid-child-performancegoals-action-copyattachments-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "goalPlans-performanceGoals": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-response": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true,
+            "x-queryable": true
+          },
+          "AssignedByPersonId": {
+            "title": "Assigned by Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the HR specialist or manager who assigns the performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentNumber": {
+            "title": "Assignment Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique assignment number for a worker assignment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "CategoryMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description for the associated category code of a performance goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date the performance goal was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "GoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for a performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "GoalPlanEndDate": {
+            "title": "Goal Plan End Date",
+            "type": "string",
+            "description": "End date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanGoalId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan ID",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GoalPlanName": {
+            "title": "Goal Plan Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the goal plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanStartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the goal plan.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalPlanWeightEnabled": {
+            "type": "string",
+            "description": "Indicates whether weights are enabled for the goals in the goal plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalSourceCode": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Source code that indicates who created the performance goal. A performance goal can be created by a worker, a manager, or an HR specialist.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "GoalSubtypeMeaning": {
+            "title": "Subtype",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code used in HCM_LOOKUPS for the goal's subtype.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE",
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "description": "Date the performance goal was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "LevelMeaning": {
+            "title": "Level",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Performance goal level, which can be Target or Stretch.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoggedInPersonType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique person identifier for the logged in person.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the mass assignment or mass share request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "title": "Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the worker who's assigned the performance goal.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "title": "Person Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Person number of the worker who's assigned the performance goal.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "PriorityMeaning": {
+            "title": "Priority",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Priority of the performance goal, which can be High, Medium, or Low.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false,
+            "x-queryable": true
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequestContext": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Page from which the performance goal was created. Performance goals can be created on the employee's Goals page, the manager page, or the goal administrator page.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodEndDate": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "End Date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ReviewPeriodName": {
+            "title": "Review Period",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the review period.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReviewPeriodStartDate": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Start Date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "StatusMeaning": {
+            "title": "Status",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of the performance goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true
+          },
+          "AssignedByPersonId": {
+            "title": "Assigned by Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the HR specialist or manager who assigns the performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true
+          },
+          "GoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for a performance goal.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalPlanGoalId": {
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "GoalPlanId": {
+            "title": "Goal Plan ID",
+            "type": "integer",
+            "description": "Unique identifier of the goal plan.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "GoalSourceCode": {
+            "title": "Source",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Source code that indicates who created the performance goal. A performance goal can be created by a worker, a manager, or an HR specialist.",
+            "nullable": false
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE"
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MassRequestId": {
+            "type": "integer",
+            "description": "Unique identifier for the mass assignment or mass share request.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true
+          },
+          "PersonId": {
+            "title": "Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the worker who's assigned the performance goal.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true
+          },
+          "RequestContext": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Page from which the performance goal was created. Performance goals can be created on the employee's Goals page, the manager page, or the goal administrator page.",
+            "nullable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            }
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ActualCompletionDate": {
+            "title": "Actual Completion Date",
+            "type": "string",
+            "description": "Actual completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "AllowDelGoalCode": {
+            "title": "Who can delete this goal?",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowDelGoalFlag": {
+            "title": "Allow managers to delete this goal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can delete the performance goal.",
+            "nullable": true
+          },
+          "AllowKeyAttrUpdateFlag": {
+            "title": "Allow Workers to Update Key Attributes",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if managers or workers can update the key attributes of a performance goal.",
+            "nullable": true,
+            "default": true
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Unique identifier for the job assignment of a worker.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CategoryCode": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code of a performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ChildObjectId": {
+            "type": "integer",
+            "description": "Unique identifier for the child data associated with the performance goal. It can be either the identifier of the goal task or goal measurement.",
+            "nullable": true
+          },
+          "ChildObjectName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the child object that needs to be returned after loading data from the transaction data store. It can be either perfGoalTasks or perfGoalMeasurements.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments added to a performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisplaySequence": {
+            "type": "integer",
+            "description": "Display sequence of goals in the goal plan.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "GoalApprovalState": {
+            "title": "Goal Approval Action",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true
+          },
+          "GoalName": {
+            "title": "Goal Name",
+            "maxLength": 400,
+            "type": "string",
+            "description": "Name of the performance goal.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "GoalSubTypeCode": {
+            "title": "Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the goal's subtype.",
+            "nullable": true
+          },
+          "GoalVersionTypeCode": {
+            "title": "Goal Version Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Version type code of the performance goal.",
+            "nullable": false,
+            "default": "ACTIVE"
+          },
+          "LevelCode": {
+            "title": "Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the performance goal level.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LongDescription": {
+            "title": "Long Description",
+            "type": "string",
+            "description": "Long description of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PercentCompletion": {
+            "title": "Completion Percentage",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Completion percentage of the performance goal.",
+            "nullable": true
+          },
+          "PriorityCode": {
+            "title": "Priority",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Priority code of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PrivateFlag": {
+            "title": "Private",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the performance goal is private or not.",
+            "nullable": false,
+            "default": false
+          },
+          "PublishDate": {
+            "title": "Publication Date",
+            "type": "string",
+            "description": "The date the performance goal was published as an organization goal.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PublishedFlag": {
+            "title": "Publish this goal for your organization",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the current goal has been published as an organization goal.",
+            "nullable": true
+          },
+          "ReferenceGoalId": {
+            "title": "Goal ID",
+            "type": "integer",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RelatedLink": {
+            "title": "Related Link",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Related link of the performance goal.",
+            "nullable": true
+          },
+          "RequiredGPGId": {
+            "type": "string",
+            "description": "Unique identifier for the performance goal in the goal plan.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalState": {
+            "type": "string",
+            "description": "Approval state of the goal.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiresApprovalStatus": {
+            "type": "string",
+            "description": "Indicates whether the goal requires an approval status. Valid values are Y and N.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReviewPeriodId": {
+            "type": "integer",
+            "description": "Unique Identifier for the review period that the goal plan of the performance goal is associated with.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the performance goal.",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "StatusCode": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code that indicates the status of the performance goal.",
+            "nullable": false,
+            "default": "NOT_STARTED",
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "SuccessCriteria": {
+            "title": "Success Criteria",
+            "type": "string",
+            "description": "Success criteria of the performance goal.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetCompletionDate": {
+            "title": "Target Completion Date",
+            "type": "string",
+            "description": "Targeted completion date of the performance goal.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Weighting": {
+            "title": "Weight",
+            "type": "number",
+            "description": "Weight of the performance goal.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 5,
+              "scale": 2
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "goalPlans-performanceGoals-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-post-request"
+            }
+          }
+        }
+      },
+      "goalPlans-performanceGoals-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/goalPlans-performanceGoals-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

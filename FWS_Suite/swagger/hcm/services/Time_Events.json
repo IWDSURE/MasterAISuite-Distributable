@@ -1,0 +1,1581 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Time Events",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/timeEvents": {
+      "get": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Get all time events",
+        "operationId": "getall_timeEvents",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CreatedBy; string; User name for the person who created the time event.</li><li>CreationDate; string; Creation date and time for the time event.</li><li>DeviceId; string; Device that the time event was recorded on, such as Web Clock.</li><li>EventTime; string; Time of the event that was recorded.</li><li>EventType; string; Type for the time event, such as In or Out.</li><li>GeolocationExistFlag; boolean; Indicates whether a geolocation exists for the event. Valid values are Y or N. The default value is N.</li><li>PersonId; integer; Unique identifier for the person who recorded the time event.</li><li>PersonName; string; Person name for the time event.</li><li>PersonNumber; string; Person number for the time event.</li><li>SourceIdentifier; string; Identifier for the source of the reporter associated with the time event.</li><li>SourceIdentifierType; string; Type of identifier for the source of the reporter associated with the time event such as PERSONID, ASSIGNMENTID, or PERSON.</li><li>Status; string; Status for the time event, such as New, Completed, or Processing.</li><li>StatusCode; string; Status code for the time event, such as NEW, COMPLETED, or PROCESSING.</li><li>TimeEventId; integer; Unique identifier for the time event.</li><li>TimeEventVersion; integer; Version for the time event.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all time event details based on the specified primary key criteria. <br>Finder Variables <ul><li>TimeEventId; integer;  Unique identifier for the time event. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all time event details based on the specified primary key criteria.",
+                "properties": {
+                  "TimeEventId": {
+                    "nullable": false,
+                    "description": "Unique identifier for the time event.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/timeEvents"
+                }
+              }
+            },
+            "links": {
+              "generateGeolocationAddresses": {
+                "operationRef": "#/paths/~1timeEvents~1action~1generateGeolocationAddresses/post",
+                "description": "Generates time event geolocation addresses."
+              },
+              "resetFailedTimeEvents": {
+                "operationRef": "#/paths/~1timeEvents~1action~1resetFailedTimeEvents/post",
+                "description": "Resets the status of failed time events."
+              },
+              "getAggregations": {
+                "operationRef": "#/paths/~1timeEvents~1action~1getAggregations/post",
+                "description": "Calculates time event aggregations."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1timeEvents~1action~1findByAdvancedSearchQuery/post",
+                "description": "Finds the time events and related attribute values that match the advanced search query."
+              },
+              "deleteUnprocessedTimeEvents": {
+                "operationRef": "#/paths/~1timeEvents~1action~1deleteUnprocessedTimeEvents/post",
+                "description": "Deletes unprocessed time events."
+              }
+            }
+          }
+        },
+        "x-internal-id": "timeEvents-get",
+        "x-filename-id": "timeevents-get"
+      }
+    },
+    "/timeEvents/action/deleteUnprocessedTimeEvents": {
+      "post": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Delete unprocessed time events",
+        "description": "Deletes unprocessed time events.",
+        "operationId": "doall_deleteUnprocessedTimeEvents_timeEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timeEventIds": {
+                    "type": "array",
+                    "description": "Identifiers for the selected time events.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the deletion for the selected unprocessed time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the deletion for the selected unprocessed time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "timeEvents-action-deleteUnprocessedTimeEvents-post",
+        "x-filename-id": "timeevents-action-deleteunprocessedtimeevents-post"
+      }
+    },
+    "/timeEvents/{TimeEventId}": {
+      "get": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Get a time event",
+        "operationId": "get_timeEvents",
+        "parameters": [
+          {
+            "name": "TimeEventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the time event.",
+              "nullable": true,
+              "readOnly": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/timeEvents-item-response"
+                }
+              }
+            },
+            "links": {
+              "timeEventAttributeValues": {
+                "operationRef": "#/paths/~1timeEvents~1{TimeEventId}~1child~1timeEventAttributeValues/get",
+                "parameters": {
+                  "TimeEventId": "$request.path.TimeEventId"
+                },
+                "description": "The timeEventAttributeValues resource is a child of the timeEvents resource. It provides all time event attribute values."
+              }
+            }
+          }
+        },
+        "x-internal-id": "timeEvents-{TimeEventId}-get",
+        "x-filename-id": "timeevents-timeeventid-get"
+      },
+      "delete": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Delete a time event",
+        "operationId": "delete_timeEvents",
+        "parameters": [
+          {
+            "name": "TimeEventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the time event.",
+              "nullable": true,
+              "readOnly": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "timeEvents-{TimeEventId}-delete",
+        "x-filename-id": "timeevents-timeeventid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Update a time event",
+        "operationId": "update_timeEvents",
+        "parameters": [
+          {
+            "name": "TimeEventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the time event.",
+              "nullable": true,
+              "readOnly": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/timeEvents-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/timeEvents-item-response"
+                }
+              }
+            },
+            "links": {
+              "timeEventAttributeValues": {
+                "operationRef": "#/paths/~1timeEvents~1{TimeEventId}~1child~1timeEventAttributeValues/get",
+                "parameters": {
+                  "TimeEventId": "$request.path.TimeEventId"
+                },
+                "description": "The timeEventAttributeValues resource is a child of the timeEvents resource. It provides all time event attribute values."
+              }
+            }
+          }
+        },
+        "x-internal-id": "timeEvents-{TimeEventId}-patch",
+        "x-filename-id": "timeevents-timeeventid-patch"
+      }
+    },
+    "/timeEvents/action/getAggregations": {
+      "post": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Aggregation for time events",
+        "description": "Calculates time event aggregations.",
+        "operationId": "doall_getAggregations_timeEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "Keyword value, such as the time event aggregation start date or stop date.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search criteria from the keyword field, such as person name or number.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Criteria used to aggregate time events, such as group name, start date or end date.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "facets": {
+                    "type": "array",
+                    "description": "Facets used to aggregate time events such as relative range.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Results of the aggregation of the selected time events."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Results of the aggregation of the selected time events."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "timeEvents-action-getAggregations-post",
+        "x-filename-id": "timeevents-action-getaggregations-post"
+      }
+    },
+    "/timeEvents/action/generateGeolocationAddresses": {
+      "post": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Generate time event geolocation addresses",
+        "description": "Generates time event geolocation addresses.",
+        "operationId": "doall_generateGeolocationAddresses_timeEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timeEventIds": {
+                    "type": "array",
+                    "description": "Identifiers for the selected time events.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the generation of geolocation addresses for the selected time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the generation of geolocation addresses for the selected time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "timeEvents-action-generateGeolocationAddresses-post",
+        "x-filename-id": "timeevents-action-generategeolocationaddresses-post"
+      }
+    },
+    "/timeEvents/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Find the time events that match the search criteria",
+        "description": "Finds the time events and related attribute values that match the advanced search query.",
+        "operationId": "doall_findByAdvancedSearchQuery_timeEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Number of time event records retrieved using the search criteria.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Keyword value, such as the time event start date or stop date.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Limit applied to the number of time event records retrieved using the search criteria.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search criteria from the keyword field, such as time event status or time period.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Criteria used to filter time events, such as the time event start or end date, or the group name.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort order applied to the time event search results. The default sort is based on the time event start date, descending order.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Time event search result fields, such as time event details or time event status.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "The autocomplete query that applies to the time event data search.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Search results for the specified time event search criteria."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Search results for the specified time event search criteria."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "timeEvents-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "timeevents-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/timeEvents/action/resetFailedTimeEvents": {
+      "post": {
+        "tags": [
+          "Time Events"
+        ],
+        "summary": "Reset the status of failed time events",
+        "description": "Resets the status of failed time events.",
+        "operationId": "doall_resetFailedTimeEvents_timeEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "timeEventIds": {
+                    "type": "array",
+                    "description": "Identifiers for the selected time events.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the status reset for the selected failed time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results of the status reset for the selected failed time events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "timeEvents-action-resetFailedTimeEvents-post",
+        "x-filename-id": "timeevents-action-resetfailedtimeevents-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "timeEvents": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/timeEvents-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "timeEvents-item-response": {
+        "type": "object",
+        "properties": {
+          "CreatedBy": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User name for the person who created the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Creation date and time for the time event.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DeviceId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Device that the time event was recorded on, such as Web Clock.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventTime": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Time of the event that was recorded.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type for the time event, such as In or Out.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GeolocationExistFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a geolocation exists for the event. Valid values are Y or N. The default value is N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person who recorded the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Person name for the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Person number for the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SourceIdentifier": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Identifier for the source of the reporter associated with the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SourceIdentifierType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type of identifier for the source of the reporter associated with the time event such as PERSONID, ASSIGNMENTID, or PERSON.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status for the time event, such as New, Completed, or Processing.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status code for the time event, such as NEW, COMPLETED, or PROCESSING.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TimeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TimeEventVersion": {
+            "type": "integer",
+            "description": "Version for the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "timeEventAttributeValues": {
+            "title": "Time Event Attribute Values",
+            "type": "array",
+            "description": "The timeEventAttributeValues resource is a child of the timeEvents resource. It provides all time event attribute values.",
+            "items": {
+              "$ref": "#/components/schemas/timeEvents-timeEventAttributeValues-item-response"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "timeEvents-timeEventAttributeValues-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code for the time event attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttributeId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttributeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Display name for the time event attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TimeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "timeEvents-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "timeEventAttributeValues": {
+            "title": "Time Event Attribute Values",
+            "type": "array",
+            "description": "The timeEventAttributeValues resource is a child of the timeEvents resource. It provides all time event attribute values.",
+            "items": {
+              "$ref": "#/components/schemas/timeEvents-timeEventAttributeValues-item-patch-request"
+            }
+          }
+        }
+      },
+      "timeEvents-timeEventAttributeValues-item-patch-request": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "timeEvents-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/timeEvents-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "PER_PS_EVT_VOLN_TERM_DATE_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PER",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpsevtvolntermdatev-3046.html#perpsevtvolntermdatev-3046",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "EVENT_YEAR",
+    "EVENT_DATE",
+    "EVENT_DAYS",
+    "EVENT_TITLE",
+    "EVENT_DETAILS",
+    "LINK_TEXT"
+  ],
+  "query": "SELECT a.person_id person_id, a.assignment_id assignment_id, CASE when a.assignment_status_type = 'INACTIVE' then to_char(a.effective_start_date-1,'YYYY') else to_char(a.effective_start_date,'YYYY') end event_year, CASE when a.assignment_status_type = 'INACTIVE' then a.effective_start_date-1 else a.effective_start_date end event_date, 0 event_days, d.action_name event_title, c.action_reason event_details, '?pAssignmentId=' || a.assignment_id link_text FROM per_all_assignments_m a, per_action_occurrences b, per_action_reasons_vl c, per_actions_vl d WHERE a.action_occurrence_id = b.action_occurrence_id AND a.assignment_type IN ( 'E', 'C','N','P' ) AND b.action_id = d.action_id AND b.action_reason_id = c.action_reason_id (+) AND (d.act_information2 = 'VOLUNTARY' or d.act_information2 is null) and d.action_type_code = 'EMPL_TERMINATE' and ((a.assignment_status_type = 'INACTIVE' and (a.effective_start_date-1) <= trunc(SYSDATE)) or (a.assignment_status_type != 'INACTIVE' and a.effective_start_date <= trunc(SYSDATE)) )",
+  "_parsed_at": "2026-06-09T16:57:11"
+}

@@ -1,0 +1,31 @@
+# PAY_FLOW_INTERACTION_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowinteractionvl-5165.html#payflowinteractionvl-5165](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowinteractionvl-5165.html#payflowinteractionvl-5165)
+
+## Columns
+
+- FLOW_INSTANCE_ID
+- TARGET_TYPE
+- TARGET_FLOW_NAME
+- TARGET_TASK
+- SOURCE_TASK
+- USED_IN_CALC
+- TARGET_FLOW_INST_ID
+
+## Query
+
+```sql
+select flow_instance_id, 'Producer' target_type, 'Test Run' target_Flow_name, 'Start' target_task, 'Start' source_task, 'Yes' Used_in_calc, 1 target_flow_inst_id from PAY_FLOW_STATUS_VL
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

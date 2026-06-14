@@ -1,0 +1,775 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Set ID Assignments Set List of Values",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "http://servername/fscmRestApi/resources/11.13.18.05/setIdAssignmentsSetLOV": {
+      "get": {
+        "tags": [
+          "Set ID Assignments Set List of Values"
+        ],
+        "summary": "Get all set ID set assignments",
+        "description": "get",
+        "operationId": "getall_setIdAssignmentsSetLOV",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "required": false,
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>AssignmentFinder :Finds the set ID assignment set for the given assignment. <br>Finder Variables: <ul><li>DeterminantValue :The unique determinant value that identifies the set ID assignment set. </li><li>ReferenceGroupName :The unique identifier of the set ID reference group. </li></ul></li><li>DeterminantFinder :Finds all of the set ID assignments for the given set ID code. <br>Finder Variables: <ul><li>bindDeterminantSetCode :The unique identifier of the assignment set. </li></ul></li><li>PrimaryKey :Finds the set ID assignment for the given primary key. <br>Finder Variables: <ul><li>DeterminantType :The unique identifier of the determinant type. </li><li>DeterminantValue :The unique identifier of the determinant value. </li><li>ReferenceGroupName :The unique identifier of the set ID reference group. </li></ul></li><li>ReferenceGroupFinder :Finds all of the set ID assignments asset books for the given reference group name. <br>Finder Variables: <ul><li>bindReferenceGroupName :The unique identifier of the set ID reference group. </li></ul></li></ul>",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-adf-finder-formats": [
+                {
+                  "name": "AssignmentFinder",
+                  "title": "AssignmentCriteria",
+                  "properties": {
+                    "DeterminantValue": {
+                      "type": "integer",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    },
+                    "ReferenceGroupName": {
+                      "type": "string",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "DeterminantFinder",
+                  "title": "DeterminantCriteria",
+                  "properties": {
+                    "bindDeterminantSetCode": {
+                      "type": "string",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "PrimaryKey",
+                  "properties": {
+                    "DeterminantType": {
+                      "type": "string",
+                      "readOnly": false,
+                      "maxLength": 30,
+                      "x-queryable": true,
+                      "x-nullable": false,
+                      "x-hints": {
+                        "updatable": true
+                      }
+                    },
+                    "DeterminantValue": {
+                      "type": "integer",
+                      "format": "int64",
+                      "readOnly": false,
+                      "title": "Determinant Value",
+                      "x-queryable": true,
+                      "x-nullable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-precision": 15
+                      }
+                    },
+                    "ReferenceGroupName": {
+                      "type": "string",
+                      "readOnly": false,
+                      "title": "Reference Group Name",
+                      "maxLength": 30,
+                      "x-queryable": true,
+                      "x-nullable": false,
+                      "x-hints": {
+                        "updatable": true
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "ReferenceGroupFinder",
+                  "title": "ReferenceGroupCriteria",
+                  "properties": {
+                    "bindReferenceGroupName": {
+                      "type": "string",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "AssignmentFinder",
+                "title": "AssignmentCriteria",
+                "properties": {
+                  "DeterminantValue": {
+                    "type": "integer",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  },
+                  "ReferenceGroupName": {
+                    "type": "string",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "DeterminantFinder",
+                "title": "DeterminantCriteria",
+                "properties": {
+                  "bindDeterminantSetCode": {
+                    "type": "string",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "DeterminantType": {
+                    "type": "string",
+                    "readOnly": false,
+                    "maxLength": 30,
+                    "x-queryable": true,
+                    "x-nullable": false,
+                    "x-hints": {
+                      "updatable": true
+                    }
+                  },
+                  "DeterminantValue": {
+                    "type": "integer",
+                    "format": "int64",
+                    "readOnly": false,
+                    "title": "Determinant Value",
+                    "x-queryable": true,
+                    "x-nullable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-precision": 15
+                    }
+                  },
+                  "ReferenceGroupName": {
+                    "type": "string",
+                    "readOnly": false,
+                    "title": "Reference Group Name",
+                    "maxLength": 30,
+                    "x-queryable": true,
+                    "x-nullable": false,
+                    "x-hints": {
+                      "updatable": true
+                    }
+                  }
+                }
+              },
+              {
+                "name": "ReferenceGroupFinder",
+                "title": "ReferenceGroupCriteria",
+                "properties": {
+                  "bindReferenceGroupName": {
+                    "type": "string",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourcecollection+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdAssignmentsSetLOV"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdAssignmentsSetLOV"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdAssignmentsSetLOV-get",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidassignmentssetlov-get"
+      }
+    },
+    "http://servername/fscmRestApi/resources/11.13.18.05/setIdAssignmentsSetLOV/{setIdAssignmentsSetLOV_Id}": {
+      "get": {
+        "tags": [
+          "Set ID Assignments Set List of Values"
+        ],
+        "summary": "Get a set ID set assignment",
+        "description": "get",
+        "operationId": "get_setIdAssignmentsSetLOV",
+        "parameters": [
+          {
+            "name": "setIdAssignmentsSetLOV_Id",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourceitem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdAssignmentsSetLOV-item-response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdAssignmentsSetLOV-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdAssignmentsSetLOV-{setIdAssignmentsSetLOV_Id}-get",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidassignmentssetlov-setidassignmentssetlov_id-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "setIdAssignmentsSetLOV": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CollectionProperties"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "title": "Items",
+                "type": "array",
+                "description": "The items in the collection.",
+                "items": {
+                  "$ref": "#/components/schemas/setIdAssignmentsSetLOV-item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CollectionProperties": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "setIdAssignmentsSetLOV-item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemProperties"
+          },
+          {
+            "$ref": "#/components/schemas/setIdAssignmentsSetLOV-item"
+          }
+        ]
+      },
+      "ItemProperties": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "setIdAssignmentsSetLOV-item": {
+        "title": "Set ID Assignments Set LOV VO",
+        "type": "object",
+        "properties": {
+          "DeterminantType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique identifier of the determinant type.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ReferenceGroupName": {
+            "title": "Reference Group Name",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique identifier of the set ID reference group.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "DeterminantValue": {
+            "title": "Determinant Value",
+            "type": "integer",
+            "description": "The unique identifier of the determinant value.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 15
+            }
+          },
+          "SetId": {
+            "type": "integer",
+            "description": "The unique identifier of the set ID set.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 18
+            }
+          },
+          "DeterminantCode": {
+            "title": "Set Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique code that identifies the determinant.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "SetCode": {
+            "title": "Set Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique code that identifies the set ID set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          }
+        },
+        "x-hints": {
+          "titlePlural": "Set ID Assignments for Sets List of Values"
+        },
+        "x-links": [
+          {
+            "rel": "self",
+            "method": "get",
+            "title": "self",
+            "href": "/fscmRestApi/resources/11.13.18.05/setIdAssignmentsSetLOV/{setIdAssignmentsSetLOV_Id}"
+          },
+          {
+            "rel": "canonical",
+            "method": "get",
+            "title": "canonical",
+            "href": "/fscmRestApi/resources/11.13.18.05/setIdAssignmentsSetLOV/{setIdAssignmentsSetLOV_Id}"
+          }
+        ]
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

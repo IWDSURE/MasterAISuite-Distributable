@@ -1,0 +1,852 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Positions List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/positionsLov/{positionsLovUniqID}": {
+      "get": {
+        "tags": [
+          "List of Values/Positions List of Values"
+        ],
+        "summary": "Get a position",
+        "operationId": "get_positionsLov",
+        "parameters": [
+          {
+            "name": "positionsLovUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PositionId, EffectiveStartDate and EffectiveEndDate ---for the Positions List of Values resource and used to uniquely identify an instance of Positions List of Values. The client should not generate the hash key value.  Instead, the client should query on the Positions List of Values collection resource with a filter on the primary key values in order to navigate to a specific instance of Positions List of Values.<br><br>For example: positionsLov?q=PositionId=&lt;value1&gt;;EffectiveStartDate=&lt;value2&gt;;EffectiveEndDate=&lt;value3&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/positionsLov-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "positionsLov-{positionsLovUniqID}-get",
+        "x-filename-id": "positionslov-positionslovuniqid-get"
+      }
+    },
+    "/positionsLov": {
+      "get": {
+        "tags": [
+          "List of Values/Positions List of Values"
+        ],
+        "summary": "Get all positions",
+        "operationId": "getall_positionsLov",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActiveStatus; string; Status of the position such as active or inactive.</li><li>BusinessUnitId; integer; Unique identifier of the mandatory business unit for the position.</li><li>DepartmentId; integer; Unique identifier of the mandatory department for the position.</li><li>DepartmentName; string; Name of the department associated with the position.</li><li>HiringStatus; string; Hiring status of the position such as proposed, frozen, or approved.</li><li>JobCode; string; Code of the job associated with the position.</li><li>JobId; integer; Unique identifier of the mandatory job for the position.</li><li>JobName; string; Name of the job associated with the position.</li><li>LocationId; integer; Unique identifier of the location for the position.</li><li>PositionCode; string; Unique code for the position within the business unit.</li><li>PositionId; integer; Unique identifier attribute for the position.</li><li>PositionName; string; Name of the position.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all positions that match the primary key criteria specified. <br>Finder Variables <ul><li>EffectiveEndDate; string;  Date at the end of the period within which the position is effective. </li><li>EffectiveStartDate; string;  Date at the beginning of the period within which the position is effective. </li><li>PositionId; integer;  Surrogate identifier attribute for the position. </li></ul></li><li>findByPositionAttr Finds all positions that match the position attributes specified. <br>Finder Variables <ul><li>BusinessUnitId; integer;  Unique identifier of the mandatory business unit for the position. </li><li>DepartmentId; integer;  Unique identifier of the mandatory department for the position. </li><li>DepartmentName; string;  Name of the department associated with the position. </li><li>JobCode; string;  Code of the job associated with the position. </li><li>JobId; string;  Unique identifier of the mandatory job for the position. </li><li>JobName; string;  Name of the job associated with the position. </li><li>LocationId; integer;  Unique identifier of the location for the position. </li><li>SysEffectiveDate; object;   </li></ul></li><li>findByPositionId Finds all positions that match the position identifier specified. <br>Finder Variables <ul><li>PositionId; integer;  Surrogate identifier for the position record. </li><li>SysEffectiveDate; object;   </li></ul></li><li>findByWord Finds all positions that match the word specified. <br>Finder Variables <ul><li>BusinessUnitId; integer;  Surrogate identifier of the business unit. </li><li>FilterAttributes; string;  Attributes for the search terms. </li><li>HiringStatus; string;  Hiring status of the position such as proposed, frozen, or approved. </li><li>IsFundingPosition; boolean;  Position that qualifies as a funding position. </li><li>ParentOf; integer;  Position that serves as the parent of the current position. </li><li>SearchTerms; string;  Search term criteria to retrieve data. </li><li>SysEffectiveDate; object;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all positions that match the primary key criteria specified.",
+                "properties": {
+                  "EffectiveEndDate": {
+                    "x-queryable": false,
+                    "nullable": false,
+                    "format": "date",
+                    "description": "Date at the end of the period within which the position is effective.",
+                    "readOnly": true,
+                    "type": "string",
+                    "title": "Effective End Date"
+                  },
+                  "PositionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Surrogate identifier attribute for the position.",
+                    "readOnly": true,
+                    "type": "integer"
+                  },
+                  "EffectiveStartDate": {
+                    "x-queryable": false,
+                    "nullable": false,
+                    "format": "date",
+                    "description": "Date at the beginning of the period within which the position is effective.",
+                    "readOnly": true,
+                    "type": "string",
+                    "title": "Effective Start Date"
+                  }
+                }
+              },
+              {
+                "name": "findByPositionAttr",
+                "description": "Finds all positions that match the position attributes specified.",
+                "title": "findByPositionAttributes",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "JobCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Code of the job associated with the position.",
+                    "type": "string"
+                  },
+                  "BusinessUnitId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the mandatory business unit for the position.",
+                    "type": "integer"
+                  },
+                  "JobName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the job associated with the position.",
+                    "type": "string"
+                  },
+                  "LocationId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the location for the position.",
+                    "type": "integer"
+                  },
+                  "DepartmentName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the department associated with the position.",
+                    "type": "string"
+                  },
+                  "DepartmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the mandatory department for the position.",
+                    "type": "integer"
+                  },
+                  "JobId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the mandatory job for the position.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByPositionId",
+                "description": "Finds all positions that match the position identifier specified.",
+                "title": "findByPositionId",
+                "properties": {
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "PositionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Surrogate identifier for the position record.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all positions that match the word specified.",
+                "title": "findByWord",
+                "properties": {
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Attributes for the search terms.",
+                    "type": "string"
+                  },
+                  "ParentOf": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Position that serves as the parent of the current position.",
+                    "type": "integer"
+                  },
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "BusinessUnitId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Surrogate identifier of the business unit.",
+                    "type": "integer"
+                  },
+                  "IsFundingPosition": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Position that qualifies as a funding position.",
+                    "type": "boolean"
+                  },
+                  "HiringStatus": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Hiring status of the position such as proposed, frozen, or approved.",
+                    "type": "string"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search term criteria to retrieve data.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/positionsLov"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "positionsLov-get",
+        "x-filename-id": "positionslov-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "positionsLov-item-response": {
+        "type": "object",
+        "properties": {
+          "ActiveStatus": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the position such as active or inactive.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BusinessUnitId": {
+            "type": "integer",
+            "description": "Unique identifier of the mandatory business unit for the position.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DepartmentId": {
+            "type": "integer",
+            "description": "Unique identifier of the mandatory department for the position.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DepartmentName": {
+            "title": "Department",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the department associated with the position.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "description": "Date at the end of the period within which the position is effective.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "description": "Date at the beginning of the period within which the position is effective.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "HiringStatus": {
+            "title": "Hiring Status",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Hiring status of the position such as proposed, frozen, or approved.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobCode": {
+            "title": "Job Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of the job associated with the position.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier of the mandatory job for the position.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobName": {
+            "title": "Job",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the job associated with the position.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier of the location for the position.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionCode": {
+            "title": "Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code for the position within the business unit.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Unique identifier attribute for the position.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the position.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "positionsLov": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/positionsLov-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

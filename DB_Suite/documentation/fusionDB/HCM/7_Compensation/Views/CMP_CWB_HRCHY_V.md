@@ -1,0 +1,45 @@
+# CMP_CWB_HRCHY_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpcwbhrchyv-6715.html#cmpcwbhrchyv-6715](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpcwbhrchyv-6715.html#cmpcwbhrchyv-6715)
+
+## Columns
+
+- MGR_PERSON_EVENT_ID
+- PERSON_ID
+- BUSINESS_GROUP_ID
+- EMP_PERSON_EVENT_ID
+- LVL_NUM
+- NUMBER_VALUE1
+- NUMBER_VALUE2
+- TEXT_VALUE
+- MGR_PERSON_ID
+- MGR_ASSIGNMENT_ID
+- EMP_PERSON_ID
+- EMP_ASSIGNMENT_ID
+- HRCHY_PLAN_ID
+- HRCHY_PERIOD_ID
+- ASSIGNMENT_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+select MGR_PERSON_EVENT_ID, MGR_PERSON_ID PERSON_ID, BUSINESS_GROUP_ID, EMP_PERSON_EVENT_ID, LVL_NUM, NUMBER_VALUE1, NUMBER_VALUE2, TEXT_VALUE, MGR_PERSON_ID, MGR_ASSIGNMENT_ID, EMP_PERSON_ID, EMP_ASSIGNMENT_ID, HRCHY_PLAN_ID, HRCHY_PERIOD_ID, MGR_ASSIGNMENT_ID ASSIGNMENT_ID, OBJECT_VERSION_NUMBER, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPDATE_DATE, LAST_UPDATE_LOGIN from cmp_cwb_hrchy
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

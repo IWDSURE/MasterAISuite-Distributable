@@ -1,0 +1,198 @@
+{
+  "name": "ANC_WFM_INTERFACE_HEADER",
+  "object_type": "TABLE",
+  "description": "All ANC_PER_ABS_TYPE_ENTRIES rows created, changed, and deleted in a single transaction should be ‘grouped’ together under a single transaction ID in this staging table.  The staging acts as a processing queue for Absences not yet in the time repository.",
+  "schema": "FUSION",
+  "owner": "ANC",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancwfminterfaceheader-27490.html#ancwfminterfaceheader-27490",
+  "primary_keys": [
+    {
+      "name": "ANC_WFM_INTERFACE_HEADER_PK",
+      "columns": "WFM_IFACE_HDR_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "WFM_IFACE_HDR_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "WFM_IFACE_HDR_ID"
+    },
+    {
+      "Name": "HEADER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "HEADER_ID"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Person Id"
+    },
+    {
+      "Name": "PER_ABS_ENTRY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "PER_ABS_ENTRY_ID"
+    },
+    {
+      "Name": "PER_ABS_TYPE_ENTRY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "PER_ABS_TYPE_ENTRY_ID"
+    },
+    {
+      "Name": "START_DATETIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Absence type entry start date and time"
+    },
+    {
+      "Name": "END_DATETIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Absence type entry end date time"
+    },
+    {
+      "Name": "ABSENCE_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Absence type id"
+    },
+    {
+      "Name": "TRANSACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "TRANSACTION_ID"
+    },
+    {
+      "Name": "USER_OPERATION",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "USER_OPERATION"
+    },
+    {
+      "Name": "DML_OPERATION",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "DML_OPERATION"
+    },
+    {
+      "Name": "STATUS_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "STATUS_TIME"
+    },
+    {
+      "Name": "PROCESS_STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "PROCESS_STATUS"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "ANC_WFM_INTERFACE_HEADER_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ENTERPRISE_ID, TRANSACTION_ID, PROCESS_STATUS"
+    },
+    {
+      "Index": "ANC_WFM_INTERFACE_HEADER_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ENTERPRISE_ID, PROCESS_STATUS, STATUS_TIME"
+    },
+    {
+      "Index": "ANC_WFM_INTERFACE_HEADER_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "WFM_IFACE_HDR_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-10T07:03:34"
+}

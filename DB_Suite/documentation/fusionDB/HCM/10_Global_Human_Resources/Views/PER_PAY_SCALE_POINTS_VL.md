@@ -1,0 +1,65 @@
+# PER_PAY_SCALE_POINTS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpayscalepointsvl-5413.html#perpayscalepointsvl-5413](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpayscalepointsvl-5413.html#perpayscalepointsvl-5413)
+
+## Columns
+
+- PAY_SCALE_POINT_ID
+- PAY_SCALE_ID
+- SEQUENCE
+- NAME
+- ATTRIBUTE_CATEGORY
+- ATTRIBUTE1
+- ATTRIBUTE2
+- ATTRIBUTE3
+- ATTRIBUTE4
+- ATTRIBUTE5
+- ATTRIBUTE6
+- ATTRIBUTE7
+- ATTRIBUTE8
+- ATTRIBUTE9
+- ATTRIBUTE10
+- ATTRIBUTE11
+- ATTRIBUTE12
+- ATTRIBUTE13
+- ATTRIBUTE14
+- ATTRIBUTE15
+- ATTRIBUTE16
+- ATTRIBUTE17
+- ATTRIBUTE18
+- ATTRIBUTE19
+- ATTRIBUTE20
+- ATTRIBUTE21
+- ATTRIBUTE22
+- ATTRIBUTE23
+- ATTRIBUTE24
+- ATTRIBUTE25
+- ATTRIBUTE26
+- ATTRIBUTE27
+- ATTRIBUTE28
+- ATTRIBUTE29
+- ATTRIBUTE30
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+select psp.pay_scale_point_id, psp.pay_scale_id, psp.sequence, pst.name, psp.attribute_category, psp.attribute1 , psp.attribute2 , psp.attribute3 , psp.attribute4 , psp.attribute5 , psp.attribute6 , psp.attribute7 , psp.attribute8 , psp.attribute9 , psp.attribute10, psp.attribute11, psp.attribute12, psp.attribute13, psp.attribute14, psp.attribute15, psp.attribute16, psp.attribute17, psp.attribute18, psp.attribute19, psp.attribute20, psp.attribute21, psp.attribute22, psp.attribute23, psp.attribute24, psp.attribute25, psp.attribute26, psp.attribute27, psp.attribute28, psp.attribute29, psp.attribute30, psp.object_version_number, psp.created_by, psp.creation_date, psp.last_updated_by, psp.last_update_date, psp.last_update_login from per_pay_scale_points psp, per_pay_scale_points_tl pst where psp.pay_scale_point_id = pst.pay_scale_point_id and pst.language = SYS_CONTEXT('USERENV','LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

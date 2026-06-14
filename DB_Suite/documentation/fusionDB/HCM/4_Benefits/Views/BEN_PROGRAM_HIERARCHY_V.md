@@ -1,0 +1,34 @@
+# BEN_PROGRAM_HIERARCHY_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** BEN
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/benprogramhierarchyv-6541.html#benprogramhierarchyv-6541](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/benprogramhierarchyv-6541.html#benprogramhierarchyv-6541)
+
+## Columns
+
+- PGM_ID
+- PL_TYP_ID
+- PL_ID
+- OPT_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- PLIPEFFECTIVE_START_DATE
+- PLIPEFFECTIVE_END_DATE
+- OIPLEFFECTIVE_START_DATE
+- OIPLEFFECTIVE_END_DATE
+
+## Query
+
+```sql
+SELECT PLIP.PGM_ID, PL.PL_TYP_ID, PL.PL_ID, OIPL.OPT_ID, PL.EFFECTIVE_START_DATE EFFECTIVE_START_DATE, PL.EFFECTIVE_END_DATE EFFECTIVE_END_DATE, PLIP.EFFECTIVE_START_DATE PLIPEFFECTIVE_START_DATE, PLIP.EFFECTIVE_END_DATE PLIPEFFECTIVE_END_DATE, OIPL.EFFECTIVE_START_DATE OIPLEFFECTIVE_START_DATE, OIPL.EFFECTIVE_END_DATE OIPLEFFECTIVE_END_DATE FROM BEN_PL_F PL , BEN_PLIP_F PLIP , BEN_OIPL_F OIPL WHERE PL.PL_ID = PLIP.PL_ID(+) AND PL.PL_ID = OIPL.PL_ID(+)
+```
+
+---
+
+[← Back to Index](../4_Benefits_Views_Index.md)

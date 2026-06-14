@@ -1,0 +1,1215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Benefit Enrollments",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/benefitEnrollments/{EnrollmentResultId}": {
+      "get": {
+        "tags": [
+          "Benefit Enrollments"
+        ],
+        "summary": "Get an enrollment",
+        "operationId": "get_benefitEnrollments",
+        "parameters": [
+          {
+            "name": "EnrollmentResultId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Enrollment Result ID",
+              "type": "integer",
+              "description": "Unique identifier for the enrollment result. This is an application generated primary key of the enrollment result.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/benefitEnrollments-item-response"
+                }
+              }
+            },
+            "links": {
+              "costs": {
+                "operationRef": "#/paths/~1benefitEnrollments~1{EnrollmentResultId}~1child~1costs/get",
+                "parameters": {
+                  "EnrollmentResultId": "$request.path.EnrollmentResultId"
+                },
+                "description": "The costs resource is a child of the benefitEnrollments resource. It includes amounts, tax consequences and other information about standard rates, total flex credits, and imputed income calculated for a participant enrolled in a plan or option-in-plan."
+              },
+              "dependents": {
+                "operationRef": "#/paths/~1benefitEnrollments~1{EnrollmentResultId}~1child~1dependents/get",
+                "parameters": {
+                  "EnrollmentResultId": "$request.path.EnrollmentResultId"
+                },
+                "description": "The dependents resource is a child of the benefitEnrollments resource. It includes person records that a participant designated as dependents in the context of a program, plan type in program, or plan. The level at which dependent designations occur is defined at the program level for plans-in-program or at the plan level for plans-not-in-program."
+              },
+              "providers": {
+                "operationRef": "#/paths/~1benefitEnrollments~1{EnrollmentResultId}~1child~1providers/get",
+                "parameters": {
+                  "EnrollmentResultId": "$request.path.EnrollmentResultId"
+                },
+                "description": "The providers resource is a child of the benefitEnrollments resource. It includes the external or internal organizations responsible for providing goods or services to the participants of the enrolled plan, such as third party agents and self-insured companies."
+              }
+            }
+          }
+        },
+        "x-internal-id": "benefitEnrollments-{EnrollmentResultId}-get",
+        "x-filename-id": "benefitenrollments-enrollmentresultid-get"
+      }
+    },
+    "/benefitEnrollments": {
+      "get": {
+        "tags": [
+          "Benefit Enrollments"
+        ],
+        "summary": "Get all enrollments",
+        "operationId": "getall_benefitEnrollments",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EnrollmentResultId; integer; Unique identifier of the enrollment result. This is an application generated primary key of the enrollment result.</li><li>OptionId; integer; Unique identifier for the enrolled option. This is an application generated primary key.</li><li>OptionName; string; Name of the option in which the participant has enrolled.</li><li>PersonId; integer; Unique identifier for the participant.</li><li>PersonName; string; Display name of the participant.</li><li>PlanId; integer; Unique identifier for the enrolled plan. This is an application generated primary key.</li><li>PlanName; string; Name of the plan in which the participant has enrolled.</li><li>PlanTypeId; integer; Unique identifier for the enrolled plan type. This is an application generated primary key.</li><li>PlanTypeName; string; Name of the plan type in which the person enrolled.</li><li>ProgramId; integer; Unique identifier for the enrolled program. This is an application generated primary key.</li><li>ProgramName; string; Name of the benefits program in which the person enrolled.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all enrollments that match the specified primary key criteria. <br>Finder Variables <ul><li>EnrollmentResultId; integer;  Unique identifier for the enrollment result. </li></ul></li><li>findByEnrollmentResultId Finds enrollments based on the enrollment result identifier. <br>Finder Variables <ul><li>EffectiveDate; string;  Date on which enrollments are active. By default, the effective date is the current date. </li><li>EnrollmentResultId; integer;  Unique identifier for the enrollment result. </li></ul></li><li>findByPerson Finds enrollments based on unique person identifier, dependent name, effective as-of date, and relation. By default, the effective date is the current date. <br>Finder Variables <ul><li>DependentName; string;  Contact name for the designated dependent. </li><li>ParticipantPersonId; integer;  Unique identifier for the person. </li><li>Relation; string;  Relationship of the designated dependent with the participant. </li><li>effectiveDate; string;  Date on which enrollments are active. By default, the effective date is the current date. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all enrollments that match the specified primary key criteria.",
+                "properties": {
+                  "EnrollmentResultId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the enrollment result.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Enrollment Result ID"
+                  }
+                }
+              },
+              {
+                "name": "findByEnrollmentResultId",
+                "description": "Finds enrollments based on the enrollment result identifier.",
+                "title": "findByEnrollmentResultId",
+                "properties": {
+                  "EnrollmentResultId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the enrollment result.",
+                    "type": "integer"
+                  },
+                  "EffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date on which enrollments are active. By default, the effective date is the current date.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByPerson",
+                "description": "Finds enrollments based on unique person identifier, dependent name, effective as-of date, and relation. By default, the effective date is the current date.",
+                "title": "findByPersonAttr",
+                "properties": {
+                  "DependentName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Contact name for the designated dependent.",
+                    "type": "string"
+                  },
+                  "Relation": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Relationship of the designated dependent with the participant.",
+                    "type": "string"
+                  },
+                  "ParticipantPersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the person.",
+                    "type": "integer"
+                  },
+                  "effectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date on which enrollments are active. By default, the effective date is the current date.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/benefitEnrollments"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "benefitEnrollments-get",
+        "x-filename-id": "benefitenrollments-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "benefitEnrollments-item-response": {
+        "type": "object",
+        "properties": {
+          "CoverageAmount": {
+            "title": "Benefit Coverage Amount",
+            "type": "number",
+            "description": "Amount of coverage that a benefit offers.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the benefit record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date and time when the benefit record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CurrencyCode": {
+            "title": "Unit of Measure",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Currency of the coverage amount, such as USD.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EnrollmentCoverageEndDate": {
+            "title": "Enrollment Coverage End Date",
+            "type": "string",
+            "description": "Date when the continuous enrollment coverage ends.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EnrollmentCoverageStartDate": {
+            "title": "Enrollment Coverage Start Date",
+            "type": "string",
+            "description": "Date when the enrollment coverage starts.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EnrollmentResultId": {
+            "title": "Enrollment Result ID",
+            "type": "integer",
+            "description": "Unique identifier of the enrollment result. This is an application generated primary key of the enrollment result.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "InterimFlag": {
+            "title": "Interim",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the participant has interim coverage for the offering. Valid values are True and False.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "Date and time when the benefit record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the benefit record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "NonMonetaryUnit": {
+            "title": "Nonmonetary Units",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Nonmonetary unit of measure of the coverage amount, such as shares, hours, and units.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ObjectVersionNumber": {
+            "title": "Object Version Number",
+            "type": "integer",
+            "description": "Used to implement optimistic locking. This number is incremented every time the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was last queried.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "OptionId": {
+            "title": "Option ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrolled option. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "OptionName": {
+            "title": "Option Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the option in which the participant has enrolled.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/benefitOptionsLOV?onlyData=true&finder=PrimaryKey"
+            },
+            "x-queryable": true
+          },
+          "OriginalCoverageStartDate": {
+            "title": "Original Coverage Start Date",
+            "type": "string",
+            "description": "Date when the continuous enrollment coverage starts.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PersonId": {
+            "title": "Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the participant.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonName": {
+            "title": "Person Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the participant.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PlanId": {
+            "title": "Plan ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrolled plan. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PlanName": {
+            "title": "Plan Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the plan in which the participant has enrolled.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/benefitPlansLOV?onlyData=true&finder=PrimaryKey"
+            },
+            "x-queryable": true
+          },
+          "PlanTypeId": {
+            "title": "Plan Type ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrolled plan type. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PlanTypeName": {
+            "title": "Plan Type Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the plan type in which the person enrolled.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/benefitPlanTypesLOV?onlyData=true&finder=PrimaryKey"
+            },
+            "x-queryable": true
+          },
+          "ProgramId": {
+            "title": "Program ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrolled program. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProgramName": {
+            "title": "Program Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the benefits program in which the person enrolled.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/benefitProgramsLOV?onlyData=true&finder=PrimaryKey"
+            },
+            "x-queryable": true
+          },
+          "SuspendFlag": {
+            "title": "Suspended",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the enrollment is suspended. Valid values are True and False.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "costs": {
+            "title": "Costs",
+            "type": "array",
+            "description": "The costs resource is a child of the benefitEnrollments resource. It includes amounts, tax consequences and other information about standard rates, total flex credits, and imputed income calculated for a participant enrolled in a plan or option-in-plan.",
+            "items": {
+              "$ref": "#/components/schemas/benefitEnrollments-costs-item-response"
+            }
+          },
+          "dependents": {
+            "title": "Dependents",
+            "type": "array",
+            "description": "The dependents resource is a child of the benefitEnrollments resource. It includes person records that a participant designated as dependents in the context of a program, plan type in program, or plan. The level at which dependent designations occur is defined at the program level for plans-in-program or at the plan level for plans-not-in-program.",
+            "items": {
+              "$ref": "#/components/schemas/benefitEnrollments-dependents-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "providers": {
+            "title": "Providers",
+            "type": "array",
+            "description": "The providers resource is a child of the benefitEnrollments resource. It includes the external or internal organizations responsible for providing goods or services to the participants of the enrolled plan, such as third party agents and self-insured companies.",
+            "items": {
+              "$ref": "#/components/schemas/benefitEnrollments-providers-item-response"
+            }
+          }
+        }
+      },
+      "benefitEnrollments-costs-item-response": {
+        "type": "object",
+        "properties": {
+          "ActivityTypeCode": {
+            "title": "Activity Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Activity type for the rate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AnnualRateAmount": {
+            "title": "Annual Rate Amount",
+            "type": "number",
+            "description": "Annual rate value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "CommunicatedRateAmount": {
+            "title": "Communicated Amount",
+            "type": "number",
+            "description": "Communicated amount for the rate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "EnrollmentResultId": {
+            "title": "Enrollment Result ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrollment result. This is an application generated primary key of the enrollment result.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RateEndDate": {
+            "title": "Rate End Date",
+            "type": "string",
+            "description": "Date when the rate ends.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "RateStartDate": {
+            "title": "Rate Start Date",
+            "type": "string",
+            "description": "Date when the rate starts.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "RateValueId": {
+            "title": "Rate Value ID",
+            "type": "integer",
+            "description": "Unique identifier for the rate value. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TaxTypeCode": {
+            "title": "Tax Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tax type for the rate.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "benefitEnrollments-dependents-item-response": {
+        "type": "object",
+        "properties": {
+          "CoveredDependentId": {
+            "title": "Covered Dependent ID",
+            "type": "integer",
+            "description": "Unique identifier for the covered dependent. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DependentCoverageEndDate": {
+            "title": "Coverage End Date",
+            "maxLength": 18,
+            "type": "string",
+            "description": "Date when the benefit coverage ends.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "DependentCoverageStartDate": {
+            "title": "Coverage Start Date",
+            "type": "string",
+            "description": "Date when the benefit coverage starts.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "DependentName": {
+            "title": "Dependent Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the covered dependent .",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/contacts?onlyData=true&fields=names:DisplayName&finder=findByPersonId"
+            },
+            "x-queryable": true
+          },
+          "DependentPersonId": {
+            "title": "Dependent Person ID",
+            "type": "integer",
+            "description": "Unique identifier for the dependent. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EnrollmentResultId": {
+            "title": "Enrollment Result ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrollment result. This is an application generated primary key of the enrollment result.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RelationshipCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Relationship of the dependent with the participant.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "benefitEnrollments-providers-item-response": {
+        "type": "object",
+        "properties": {
+          "CustomerNumber": {
+            "title": "Customer Identifier Number",
+            "type": "number",
+            "description": "Customer number for the provider organization.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveEndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "Date when the provider organization ceases to be effective.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EffectiveStartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date when the provider organization is effective.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "OrganizationId": {
+            "title": "Organization ID",
+            "type": "integer",
+            "description": "Unique identifier for the organization. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "OrganizationName": {
+            "title": "Organization Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the plan provider organization.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "resourceURL": "/resources/latest/organizations?onlyData=true&finder=findByOrganizationId"
+            },
+            "x-queryable": true
+          },
+          "PlanId": {
+            "title": "Plan ID",
+            "type": "integer",
+            "description": "Unique identifier for the provider plan. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PolicyNumber": {
+            "title": "Policy or Group Identifier",
+            "maxLength": 90,
+            "type": "string",
+            "description": "Unique identifier for the policy or group. This is an application generated primary key.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProviderOrganizationId": {
+            "title": "Provider Organization ID",
+            "type": "integer",
+            "description": "Unique identifier for the plan provider organization. This is an application generated primary key.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "providerRoles": {
+            "title": "Provider Roles",
+            "type": "array",
+            "description": "The providerRoles resource is a child of the providers resource. It includes the services or functions performed by an organization to the participants of the enrolled plan.",
+            "items": {
+              "$ref": "#/components/schemas/benefitEnrollments-providers-providerRoles-item-response"
+            }
+          }
+        }
+      },
+      "benefitEnrollments-providers-providerRoles-item-response": {
+        "type": "object",
+        "properties": {
+          "DesigneeName": {
+            "title": "Organization Designee",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the organization role in the program or plan.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DesigneeRole": {
+            "title": "Organization Role",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Organization role type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ProviderOrganizationId": {
+            "title": "Provider Organization ID",
+            "type": "integer",
+            "description": "Unique identifier for the plan provider organization. This is an application generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProviderOrganizationRoleId": {
+            "title": "Provider Organization Role ID",
+            "type": "integer",
+            "description": "Unique identifier for the provider organization role. This is an application generated primary key.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "benefitEnrollments": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/benefitEnrollments-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

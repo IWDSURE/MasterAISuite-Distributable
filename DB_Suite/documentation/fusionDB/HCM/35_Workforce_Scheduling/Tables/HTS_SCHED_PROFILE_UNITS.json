@@ -1,0 +1,178 @@
+{
+  "name": "HTS_SCHED_PROFILE_UNITS",
+  "object_type": "TABLE",
+  "description": "Table containing list of departments and locations that defines the group to be staffed as part of the schedule generation.",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedprofileunits-11580.html#htsschedprofileunits-11580",
+  "primary_keys": [
+    {
+      "name": "HTS_SCHED_PROFILE_UNITS_PK",
+      "columns": "SCHED_PROFILE_UNIT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SCHED_PROFILE_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key. Unique system generated identifier for a schedule profile Units"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "SCHED_PROFILE_UNIT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Schedule Profile Units Code"
+    },
+    {
+      "Name": "SCHED_GEN_PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "foreign key to Schedule Generation Profile table"
+    },
+    {
+      "Name": "ACTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This field is also set to the same Active end date when a Schedule Generation Profile becomes inactive in order to eliminate duplicate key restrictions based on department or location for other Schedule Generation Profiles."
+    },
+    {
+      "Name": "SCHED_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "foreign key to Schedule Unit table"
+    },
+    {
+      "Name": "DEPARTMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Department defined as staffing department for the schedule generation profile."
+    },
+    {
+      "Name": "LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Location added to department to define a staffing department for the schedule generation profile."
+    },
+    {
+      "Name": "TIMEZONE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Time Zone Code"
+    },
+    {
+      "Name": "FLOAT_POOL_DEPARTMENT_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Float pool department flag"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_SCHED_PROFILE_UNITS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHED_GEN_PROFILE_ID"
+    },
+    {
+      "Index": "HTS_SCHED_PROFILE_UNITS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHED_UNIT_ID"
+    },
+    {
+      "Index": "HTS_SCHED_PROFILE_UNITS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHED_PROFILE_UNIT_ID"
+    },
+    {
+      "Index": "HTS_SCHED_PROFILE_UNITS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHED_PROFILE_UNIT_CODE"
+    },
+    {
+      "Index": "HTS_SCHED_PROFILE_UNITS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "DEPARTMENT_ID, LOCATION_ID, ACTIVE_END_DATE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:25:26"
+}

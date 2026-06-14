@@ -1,0 +1,38 @@
+# HWM_TM_REP_S_PJC_ATRBS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmrepspjcatrbsv-7703.html#hwmtmrepspjcatrbsv-7703](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmrepspjcatrbsv-7703.html#hwmtmrepspjcatrbsv-7703)
+
+## Columns
+
+- PJC_TIME_REPOS_ATRB_ID
+- PJC_ATTRIBUTE_CATEGORY
+- PJC_BILLABLE_FLAG
+- PJC_PROJECT_ID
+- PJC_TASK_ID
+- PJC_PROJECT_UNIT
+- PJC_PROJECT_ROLE_ID
+- PJC_WORK_TYPE
+- PJC_CAPITALIZABLE_FLAG
+- PJC_CONTRACT_ID
+- PJC_EXP_ORGANIZATION_ID
+- PJC_FUNDING_SOURCE_ID
+- USAGES_SOURCE_ID
+- USAGES_SOURCE_VERSION
+
+## Query
+
+```sql
+SELECT ProjectsAtrbs.tm_rep_atrb_id Pjc_Time_Repos_Atrb_Id, ProjectsAtrbs.attribute_category Pjc_Attribute_Category, ProjectsAtrbs.attribute_varchar1 Pjc_Billable_Flag, ProjectsAtrbs.attribute_number1 Pjc_Project_Id, ProjectsAtrbs.attribute_number2 Pjc_Task_Id, ProjectsAtrbs.attribute_number4 Pjc_Project_Unit, ProjectsAtrbs.attribute_number5 PJC_PROJECT_ROLE_ID, ProjectsAtrbs.attribute_number7 Pjc_Work_Type, ProjectsAtrbs.attribute_varchar5 PJC_CAPITALIZABLE_FLAG, ProjectsAtrbs.attribute_number8 PJC_CONTRACT_ID, ProjectsAtrbs.attribute_number9 PJC_EXP_ORGANIZATION_ID, ProjectsAtrbs.attribute_number10 PJC_FUNDING_SOURCE_ID, ProjectsAtrbUsg.usages_source_id, ProjectsAtrbUsg.usages_source_version FROM hwm_tm_rep_atrbs ProjectsAtrbs, hwm_tm_rep_atrb_usages ProjectsAtrbUsg WHERE ProjectsAtrbs.tm_rep_atrb_id = ProjectsAtrbUsg.tm_rep_atrb_id and ProjectsAtrbs.attribute_category = 'Projects'
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

@@ -1,0 +1,36 @@
+# IRC_HIST_EVENT_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irchisteventvl-3403.html#irchisteventvl-3403](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irchisteventvl-3403.html#irchisteventvl-3403)
+
+## Columns
+
+- EVENT_TYPE_ID
+- CODE
+- NAME
+- SHOW_IN_UI
+- IS_BACKWARD
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.EVENT_TYPE_ID EVENT_TYPE_ID, B.CODE CODE, TL.NAME NAME, B.SHOW_IN_UI SHOW_IN_UI, B.IS_BACKWARD IS_BACKWARD, B.MODULE_ID MODULE_ID, B.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, B.CREATED_BY CREATED_BY, B.CREATION_DATE CREATION_DATE, B.LAST_UPDATED_BY LAST_UPDATED_BY, B.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN FROM IRC_HIST_EVENT_B B, IRC_HIST_EVENT_TL TL WHERE B.EVENT_TYPE_ID = TL.EVENT_TYPE_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

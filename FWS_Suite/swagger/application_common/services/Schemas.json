@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Schemas",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/hcmRestApi/scim/Schemas": {
+      "get": {
+        "tags": [
+          "Schemas"
+        ],
+        "description": "Get all schemas",
+        "operationId": "search",
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schemas"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all schemas",
+        "x-internal-id": "hcmRestApi-scim-Schemas-get",
+        "x-filename-id": "hcmrestapi-scim-schemas-get"
+      }
+    },
+    "/hcmRestApi/scim/Schemas/{id}": {
+      "get": {
+        "tags": [
+          "Schemas"
+        ],
+        "description": "Get a schema",
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the schema.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schemas-item"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a schema",
+        "x-internal-id": "hcmRestApi-scim-Schemas-{id}-get",
+        "x-filename-id": "hcmrestapi-scim-schemas-id-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Schemas": {
+        "type": "object",
+        "properties": {
+          "itemsPerPage": {
+            "title": "ItemsPerPage",
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "startIndex": {
+            "title": "start index",
+            "type": "integer",
+            "description": "The starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20."
+          },
+          "Resources": {
+            "title": "Resources",
+            "type": "array",
+            "description": "The schemas in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/Schemas-item"
+            }
+          }
+        }
+      },
+      "Schemas-item": {
+        "type": "object",
+        "properties": {
+          "schemas": {
+            "title": "Schemas",
+            "type": "array",
+            "description": "The schema value of the schema resource.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meta": {
+            "title": "Meta",
+            "type": "object",
+            "description": "The metadata of the schema."
+          },
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "The unique identifier of the schema in Oracle Applications Cloud."
+          },
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "The name of the schema."
+          },
+          "description": {
+            "title": "Description",
+            "type": "string",
+            "description": "The description of the schema."
+          },
+          "attributes": {
+            "title": "Attributes",
+            "type": "array",
+            "description": "The attributes of the schema.",
+            "items": {
+              "$ref": "#/components/schemas/attributes-item"
+            }
+          }
+        }
+      },
+      "attributes-item": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "The attribute name."
+          },
+          "type": {
+            "title": "Type",
+            "type": "string",
+            "description": "The attribute data type."
+          },
+          "description": {
+            "title": "Description",
+            "type": "string",
+            "description": "The attribute description."
+          },
+          "mutability": {
+            "title": "Mutability",
+            "type": "string",
+            "description": "The mutability of the attribute. The default value is readWrite."
+          },
+          "multiValued": {
+            "title": "MultiValued",
+            "type": "boolean",
+            "description": "Indicates whether the attribute contains multiple values, for example multiple email ids. The default value is false."
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean",
+            "description": "Indicates whether the attribute is required. The default value is false."
+          },
+          "caseExact": {
+            "title": "CaseExact",
+            "type": "boolean",
+            "description": "Indicates whether the attribute name is case sensitive. The default value is false."
+          },
+          "subAttributes": {
+            "title": "subAttributes",
+            "type": "array",
+            "description": "The sub-attributes of the attribute.",
+            "items": {
+              "$ref": "#/components/schemas/subattributes-item"
+            }
+          },
+          "returned": {
+            "title": "Returned",
+            "type": "string",
+            "description": "Specifies whether the attribute value is returned in response to a query. The default value is default to indicate that the attribute value is returned."
+          },
+          "uniqueness": {
+            "title": "Uniqueness",
+            "type": "string",
+            "description": "Specifies the uniqueness of the attribute value. The default value is none to indicate that the values are not unique."
+          }
+        }
+      },
+      "subattributes-item": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "The sub-attribute name."
+          },
+          "type": {
+            "title": "Type",
+            "type": "string",
+            "description": "The sub-attribute data type."
+          },
+          "description": {
+            "title": "Description",
+            "type": "string",
+            "description": "The sub-attribute description."
+          },
+          "mutability": {
+            "title": "Mutability",
+            "type": "string",
+            "description": "The mutability of the sub-attribute. The default value is readWrite."
+          },
+          "multiValued": {
+            "title": "MultiValued",
+            "type": "boolean",
+            "description": "Indicates whether the sub-attribute contains multiple values. The default value is false."
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean",
+            "description": "Indicates whether the sub-attribute is required. The default value is false."
+          },
+          "caseExact": {
+            "title": "CaseExact",
+            "type": "boolean",
+            "description": "Indicates whether the sub-attribute name is case sensitive. The default value is false."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

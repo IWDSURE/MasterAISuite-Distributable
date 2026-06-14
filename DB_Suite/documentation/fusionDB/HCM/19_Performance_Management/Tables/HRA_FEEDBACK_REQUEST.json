@@ -1,0 +1,184 @@
+{
+  "name": "HRA_FEEDBACK_REQUEST",
+  "object_type": "TABLE",
+  "description": "Feedback requests created by users",
+  "schema": "FUSION",
+  "owner": "HRA",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrafeedbackrequest-24249.html#hrafeedbackrequest-24249",
+  "primary_keys": [
+    {
+      "name": "HRA_FEEDBACK_REQUEST_PK",
+      "columns": "FEEDBACK_REQ_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "FEEDBACK_REQ_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of the Feedback Request table"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HR_ALL_ORGANIZATION_UNITS"
+    },
+    {
+      "Name": "FEEDBACK_REQ_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Column stores common id for all requests generated for a user together in a single action"
+    },
+    {
+      "Name": "FEEDBACK_REQ_TMPL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to Feedback requests base table"
+    },
+    {
+      "Name": "REQUESTED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Person Requesting the Feedback"
+    },
+    {
+      "Name": "REQUESTED_FOR_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Person for whom Feedback is requested"
+    },
+    {
+      "Name": "REQUESTED_FOR_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Column stores assignment Id of the Requested For Person if available"
+    },
+    {
+      "Name": "PARTICIPANT_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Person who will provide the feedback"
+    },
+    {
+      "Name": "SHARE_WITH_MGR_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether to share the feedback with manager."
+    },
+    {
+      "Name": "SHARE_WITH_WKR_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether to share the feedback with worker."
+    },
+    {
+      "Name": "DUE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Due date for the feedback requested"
+    },
+    {
+      "Name": "MESSAGE_TEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message sent to the participant"
+    },
+    {
+      "Name": "DUE_DATE_ALERT_SENT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flag to check if notification was sent to feedback provider for completion before due date ends"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRA_FEEDBACK_REQUEST_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUESTED_FOR_PERSON_ID, PARTICIPANT_PERSON_ID"
+    },
+    {
+      "Index": "HRA_FEEDBACK_REQUEST_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "FEEDBACK_REQ_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:16:37"
+}

@@ -1,0 +1,1968 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Manage Tasks",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/bpm/api/4.0/tasks": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Task List",
+        "description": " Retrieves a task list for the current user.",
+        "operationId": "getTasks",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Task status\n(Task status COMPLETED is valid when used with following assignments - ADMIN, ALL, PREVIOUS)",
+            "style": "form",
+            "explode": true,
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "default": "ASSIGNED",
+                "enum": [
+                  "ASSIGNED",
+                  "COMPLETED",
+                  "SUSPENDED",
+                  "WITHDRAWN",
+                  "EXPIRED",
+                  "ERRORED",
+                  "ALERTED"
+                ]
+              }
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Task priority from 1 (highest) to 5 (lowest) or Any (default)",
+            "style": "form",
+            "explode": true,
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "dueDateFrom",
+            "in": "query",
+            "description": "Start of due date range in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dueDateTo",
+            "in": "query",
+            "description": "End of due date range in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assignment",
+            "in": "query",
+            "description": "Task assignees - MY, GROUP, MY_AND_GROUP (default), MY_AND_GROUP_ALL, REPORTEES, OWNER, REVIEWER, PREVIOUS, ALL, ADMIN.\n\nMY - Displays tasks that are assigned exclusively to you. \nGROUP - Displays tasks that are assigned to a group of which you are a member. \nMY_AND_GROUP -Displays tasks that are assigned to anyone, including you, in the groups you belongs to.This will not fetch tasks that are acquired by some other user in the groups you belong to.\nMY_AND_GROUP_ALL -Displays tasks that are assigned to anyone, including you, in the groups you belongs to.This will even fetch tasks that are acquired by some other user in the groups you belong to.\nREPORTEES - Displays tasks that are assigned to reportees of you\nOWNER - Displays tasks in which you are task owner.\nREVIEWER -Displays tasks for which you are a reviewer\nPREVIOUS - Displays tasks that were previously updated by you\nALL - No filtering; Displays all tasks regardless of assignment or creator. \nADMIN -  No filtering; Displays all tasks regardless of assignment or creator.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "MY_AND_GROUP"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Keyword in task title",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromuser",
+            "in": "query",
+            "description": "Previous task assignee",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items per page, preferably between 1 and 100, default 25. Zero or negative value will render the parameter inapplicable and all results will be returned in single page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Index for the first item on a page of list items. Negative value will render the parameter inapplicable",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Field with which results are to be ordered.  Given as orderBy=fieldname:asc/desc, default is asc for ascending.Field Names supported are createdDate, creator, updatedDate, fromUser, tasknumber,  priority,ownerUser, state, approvalDuration,taskDefinitionName, taskNameSpace, taskId, category,assignedDate, dueDate,outcome,ecid, identificationKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Displays only the selected task attributes, which can include createdDate, creator, updatedDate, fromUser, tasknumber,  priority,ownerUser, state, approvalDuration,taskDefinitionName, taskNameSpace, taskId, category,assignedDate, dueDate,outcome,ecid, identificationKey",
+            "style": "form",
+            "explode": true,
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "pattern",
+            "in": "query",
+            "description": "If pattern value is set to 'ToDo' then only ToDo tasks are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "showActionFlag",
+            "in": "query",
+            "description": "Show Action - true or false",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "showPermissionFlag",
+            "in": "query",
+            "description": "Show Permission - true or false",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "metadataFlag",
+            "in": "query",
+            "description": "metadataFlag - true or false. if metadataFlag is true, then task details URL is populated.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "Total Result - true or false",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Returned items must be created later than the specified time, in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Returned items must be created before the specified time, in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "identificationKey",
+            "in": "query",
+            "description": "if provided, only tasks with the given task identification key are returned",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "outcome",
+            "in": "query",
+            "description": "if provided, only tasks with the given task outcome value are returned",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "description": "if provided, only tasks created by the given user are returned",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionTask"
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task list not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-get",
+        "x-filename-id": "bpm-api-4.0-tasks-get"
+      },
+      "put": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Perform Bulk Action on Tasks",
+        "description": "Performs the action on multiple tasks based on the payload. The following actions are available and the actions depend on the application: APPROVE, REJECT, REASSIGN, DELEGATE, WITHDRAW, SUSPEND, RESUME, DELETE, PURGE and ESCALATE. Custom Actions depend on the task definition.",
+        "operationId": "performBulkActions",
+        "requestBody": {
+          "description": "Action Data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payloads"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task list not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "bpm-api-4.0-tasks-put",
+        "x-filename-id": "bpm-api-4.0-tasks-put"
+      }
+    },
+    "/bpm/api/4.0/tasks/views": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve Custom Task Lists",
+        "description": " Retrieves a list of custom task lists (views) that the current user has defined.",
+        "operationId": "getViews",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Views"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "No view available.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-views-get",
+        "x-filename-id": "bpm-api-4.0-tasks-views-get"
+      }
+    },
+    "/bpm/api/4.0/tasks/views/{viewname}": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Custom Task List",
+        "description": " Retrieves a custom task list by name.",
+        "operationId": "getViewBasedTasks",
+        "parameters": [
+          {
+            "name": "viewname",
+            "in": "path",
+            "description": "View Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Task status - ASSIGNED (default), SUSPENDED, WITHDRAWN, EXPIRED, ERROR, ALERTED",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "default": "ASSIGNED"
+              }
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "Task priority from 1 (highest) to 5 (lowest) or Any (default)",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "default": "Any"
+              }
+            }
+          },
+          {
+            "name": "fromuser",
+            "in": "query",
+            "description": "Previous task assignee",
+            "style": "form",
+            "explode": true,
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "dueDateFrom",
+            "in": "query",
+            "description": "Start of due date range in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dueDateTo",
+            "in": "query",
+            "description": "End of due date range in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assignment",
+            "in": "query",
+            "description": "Task assignees - MY, GROUP,  MY&#95;AND&#95;GROUP (default), MY&#95;AND&#95;GROUP_ALL, REPORTEES, OWNER, REVIEWER, PREVIOUS, ALL, ADMIN",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "MY_AND_GROUP"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Keyword in task title",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items per page, between 1 and 100, default 25",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Index for the first item on a page of list items, default 1",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "Groups tasks by the selected task attribute",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pattern",
+            "in": "query",
+            "description": "Includes only to-do tasks if set to ToDo",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "description": "Action",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "showPermission",
+            "in": "query",
+            "description": "Permission - true or false",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "metadataFlag",
+            "in": "query",
+            "description": "Metadata - true or false(default)",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "Total Result - true (default) or false",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Returned items must be created later than the specified time, in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "until",
+            "in": "query",
+            "description": "Returned items must be created before the specified time, in ISO-8601 format YYYY-MM-DDTHH:MM:SS[.sss]Z",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task List not found for view",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-views-{viewname}-get",
+        "x-filename-id": "bpm-api-4.0-tasks-views-viewname-get"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Task",
+        "description": " Retrieves a task by task ID (The task number). ",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID (Internally known as the task number)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Value of all fields that are to be expanded (detailed) - All, comments, attachments, history, payload. If not specified Links to each of the fields is returned. ",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": " "
+            }
+          },
+          {
+            "name": "metadataFlag",
+            "in": "query",
+            "description": "Metadata - true or false",
+            "required": true,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task not found for given ID.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-get"
+      },
+      "put": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Perform Action on Task",
+        "description": "Performs the action on a specific task identifier, based on the payload. The following actions are available and the actions depend on the application: APPROVE, REJECT, REASSIGN, DELEGATE, WITHDRAW, SUSPEND, RESUME, DELETE, PURGE, ACQUIRE, RELEASE, PUSHBACK, ERROR, ADHOC_ROUTE, INFO_REQUEST, INFO_SUBMIT, SKIP_CURRENT_ASSIGNMENT, SAVE and ESCALATE. Custom Actions depend on the task definition.",
+        "operationId": "performTaskAction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success . In case of PURGE, a title specifying task id successfully purged will be returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The tasknumber is invalid.No action will be performed.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task not found.",
+            "content": {}
+          },
+          "409": {
+            "description": "Conflict.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-put",
+        "x-filename-id": "bpm-api-4.0-tasks-id-put"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/attachments": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve Task Attachments",
+        "description": " Retrieves task attachments.\nIf Oracle Content and Experience (documents) is enabled for this task, attachments do not apply.",
+        "operationId": "getTaskAttachments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The tasknumber is invalid.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Attachments not found for task",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-attachments-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-attachments-get"
+      },
+      "post": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Add a Task Attachment",
+        "description": " Adds an attachment to a task.\nIf Oracle Content and Experience (documents) is enabled for this task, attachments do not apply.",
+        "operationId": "addTaskAttachments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachment successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {}
+          },
+          "409": {
+            "description": "Stale task object found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-attachments-post",
+        "x-filename-id": "bpm-api-4.0-tasks-id-attachments-post"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/attachments/{attachmentName}": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Task Attachment by Name",
+        "description": " Retrieves an attachment by name.\nIf Oracle Content and Experience (documents) is enabled for this task, attachments do not apply.",
+        "operationId": "getTaskAttachment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentName",
+            "in": "path",
+            "description": "Attachment name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attachment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Attachment with given name not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-attachments-{attachmentName}-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-attachments-attachmentname-get"
+      },
+      "delete": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Delete a Task Attachment",
+        "description": " Deletes an attachment by name.\nIf Oracle Content and Experience (documents) is enabled for this task, attachments do not apply.",
+        "operationId": "deleteTaskAttachment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentName",
+            "in": "path",
+            "description": "Name of attachment to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachment Removed Successfully.",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Conflict",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-attachments-{attachmentName}-delete",
+        "x-filename-id": "bpm-api-4.0-tasks-id-attachments-attachmentname-delete"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/attachments/{attachmentName}/stream": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Task Attachment as a Stream",
+        "description": " Retrieves an attachment by name as a stream.\nIf Oracle Content and Experience (documents) is enabled for this task, attachments do not apply.",
+        "operationId": "getTaskAttachmentStream",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Displays the file contents. Response type will be based on the mime type of the attachment.",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "No inputstream exists for attachment with given name",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-attachments-{attachmentName}-stream-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-attachments-attachmentname-stream-get"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/comments": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve Task Comments",
+        "description": "Retrieves task comments.",
+        "operationId": "getTaskComments",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-comments-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-comments-get"
+      },
+      "post": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Add a Task Comment",
+        "description": " Adds a comment to a task.",
+        "operationId": "addTaskComment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "CommentRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Comment successfully added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comments"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {}
+          },
+          "409": {
+            "description": "Stale task object found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-comments-post",
+        "x-filename-id": "bpm-api-4.0-tasks-id-comments-post"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/form": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve a Task Form URI",
+        "description": "Retrieves the task form URI.",
+        "operationId": "getTaskForm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "description": "User-agent",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "readOnly",
+            "in": "query",
+            "description": "To retrieve a read only form uri - True; else false",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "false"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Form URL not found for given task",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-form-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-form-get"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/history": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve Task History",
+        "description": " Retrieves the history of a task.",
+        "operationId": "getTaskHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "displayStyle",
+            "in": "query",
+            "description": "Style in which to display the history of given task ID - flatList (default)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "flatList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskHistories"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task History not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-history-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-history-get"
+      }
+    },
+    "/bpm/api/4.0/tasks/{id}/payload": {
+      "get": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Retrieve Task Payload",
+        "description": " Retrieves the payload of a task.",
+        "operationId": "getTaskPayload",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task Payload not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-payload-get",
+        "x-filename-id": "bpm-api-4.0-tasks-id-payload-get"
+      },
+      "put": {
+        "tags": [
+          "Manage Tasks"
+        ],
+        "summary": "Update a Task Payload",
+        "description": " Updates the payload of a task.",
+        "operationId": "updateTaskPayload",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload successfully updated",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {}
+          },
+          "409": {
+            "description": "Stale task object found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          }
+        },
+        "x-internal-id": "bpm-api-4.0-tasks-{id}-payload-put",
+        "x-filename-id": "bpm-api-4.0-tasks-id-payload-put"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CollectionTask": {
+        "type": "object",
+        "properties": {
+          "totalResult": {
+            "type": "boolean",
+            "default": false
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "default": false
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "xml": {
+          "name": "Collection",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/v3/common/"
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "contextId": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Artifact"
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "kind": {
+            "type": "string",
+            "default": "task"
+          },
+          "final": {
+            "type": "boolean",
+            "description": "Indicates whether the task update is the final update."
+          }
+        }
+      },
+      "TaskStatus": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/TaskState"
+          },
+          "message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "UTC timestamp string."
+          }
+        }
+      },
+      "TaskState": {
+        "type": "string",
+        "enum": [
+          "submitted",
+          "working",
+          "input-required",
+          "completed",
+          "canceled",
+          "failed",
+          "unknown"
+        ]
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "agent"
+            ]
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPart"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "contextId": {
+            "type": "string",
+            "description": "Conversation identifier. For `message/stream`, this must be nested under `params.message`."
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Optional task identifier used for resumed or task-associated message flows."
+          },
+          "kind": {
+            "type": "string",
+            "default": "message"
+          }
+        }
+      },
+      "TextPart": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Part type.",
+            "example": "text"
+          },
+          "text": {
+            "type": "string",
+            "description": "Text content."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "kind": {
+            "type": "string",
+            "default": "text"
+          }
+        }
+      },
+      "Artifact": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPart"
+            }
+          },
+          "append": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "lastChunk": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Link": {
+        "required": [
+          "href",
+          "rel"
+        ],
+        "type": "object",
+        "properties": {
+          "rel": {
+            "type": "string",
+            "enum": [
+              "self",
+              "cancel",
+              "forceCancel",
+              "hold",
+              "release",
+              "subscribe",
+              "permissions",
+              "executionStatus"
+            ]
+          },
+          "href": {
+            "type": "string"
+          }
+        }
+      },
+      "Payloads": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/Action"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/Comment"
+          },
+          "comments": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "routingAction": {
+            "type": "string",
+            "description": "Only applicable for ADHOC_ROUTE. Accepts the custom action to be performed before routing the task."
+          },
+          "routingType": {
+            "type": "string",
+            "description": "allowed values are Simple,Sequential and Parallel"
+          },
+          "voterPercentage": {
+            "type": "integer",
+            "description": "applicable only when routingType is Parallel"
+          },
+          "defaultActionForGroupVote": {
+            "type": "string",
+            "description": "applicable only when routingType is Parallel"
+          },
+          "tasks": {
+            "type": "array",
+            "description": "list of task numbers",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "xml": {
+          "name": "actions",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/payloads"
+        }
+      },
+      "Action": {
+        "type": "object",
+        "properties": {
+          "assignees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Identity"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "action",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/processdef"
+        }
+      },
+      "Identity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "workPhone": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "identity",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/identities"
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "commentStr": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "comment",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "Collection": {
+        "type": "object",
+        "properties": {
+          "totalResult": {
+            "type": "boolean",
+            "default": false
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userLink": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "default": false
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        },
+        "xml": {
+          "name": "Collection",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/v3/common/"
+        }
+      },
+      "Views": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "userLink": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "link": {
+            "type": "array",
+            "xml": {
+              "name": "views"
+            },
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        },
+        "xml": {
+          "name": "tasks",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "Payload": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/Action"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/Comment"
+          },
+          "comments": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "routingAction": {
+            "type": "string",
+            "description": "Only applicable for ADHOC_ROUTE. Accepts the custom action to be performed before routing the task."
+          },
+          "routingType": {
+            "type": "string",
+            "description": "Only applicable for ADHOC_ROUTE.Accepts the type of routing to be performed. Allowed values are Simple,Sequential and Parallel"
+          },
+          "votersPercentage": {
+            "type": "integer",
+            "description": "applicable only when routingType is Parallel.Default value is 0"
+          },
+          "defaultActionForGroupVote": {
+            "type": "string",
+            "description": "applicable only when routingType is Parallel"
+          }
+        },
+        "xml": {
+          "name": "payload",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "Attachment": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "rel": {
+            "type": "string"
+          },
+          "attachmentName": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "attachmentScope": {
+            "type": "string"
+          },
+          "docAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericMap"
+            }
+          },
+          "input": {
+            "type": "string"
+          },
+          "uri": {
+            "$ref": "#/components/schemas/Link"
+          }
+        },
+        "xml": {
+          "name": "attachment",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "GenericMap": {
+        "type": "object",
+        "properties": {
+          "dataType": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "readOnly": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "genericMap",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "CommentRequest": {
+        "required": [
+          "commentStr"
+        ],
+        "type": "object",
+        "properties": {
+          "commentStr": {
+            "type": "string",
+            "description": "comment string",
+            "example": "comment test"
+          },
+          "displayNameLanguage": {
+            "type": "string",
+            "description": "displayName language ",
+            "example": "US"
+          }
+        },
+        "description": "The representation of a CommentRequest",
+        "xml": {
+          "name": "commentRequest",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "Comments": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        },
+        "xml": {
+          "name": "comments",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "TaskHistories": {
+        "type": "object",
+        "properties": {
+          "taskHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskHistory"
+            }
+          }
+        },
+        "xml": {
+          "name": "taskHistories",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      },
+      "TaskHistory": {
+        "type": "object",
+        "properties": {
+          "actionName": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "taskHistory",
+          "namespace": "http://xmlns.oracle.com/bpm/rest/tasks"
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

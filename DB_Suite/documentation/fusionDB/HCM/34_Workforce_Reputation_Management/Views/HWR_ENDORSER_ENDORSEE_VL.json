@@ -1,0 +1,16 @@
+{
+  "name": "HWR_ENDORSER_ENDORSEE_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HWR",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrendorserendorseevl-3953.html#hwrendorserendorseevl-3953",
+  "columns": [
+    "DISPLAY_TEXT",
+    "ENDORSER_PRFL_ID",
+    "ENDORSEE_PRFL_ID",
+    "LAST_UPDATE_DATE"
+  ],
+  "query": "SELECT NVL(TL.DISPLAY_TEXT, (SELECT DISPLAY_TEXT FROM HWR_CAT_TOPIC_TL TL1 WHERE TL1.TOPIC_ID = T.TOPIC_ID AND ROWNUM =1 )) AS DISPLAY_TEXT, B.RECOMMENDER_FUS_PRFL_ID ENDORSER_PRFL_ID, B.ENDORSEE_FUS_PRFL_ID ENDORSEE_PRFL_ID, B.LAST_UPDATE_DATE FROM HWR_CAT_TOPIC_TL TL, HWR_ENDORSEMENT_B B, HWR_CAT_TOPIC_B T WHERE TL.LANGUAGE(+) = 'US' AND TL.TOPIC_ID(+) = T.TOPIC_ID AND T.TOPIC_ID = B.TOPIC_ID",
+  "_parsed_at": "2026-06-09T20:18:51"
+}

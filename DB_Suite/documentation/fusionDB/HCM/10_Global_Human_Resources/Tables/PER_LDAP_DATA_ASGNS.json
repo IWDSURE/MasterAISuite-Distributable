@@ -1,0 +1,166 @@
+{
+  "name": "PER_LDAP_DATA_ASGNS",
+  "object_type": "TABLE",
+  "description": "Table for storing one record for each data access assignment to be processed",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perldapdataasgns-21351.html#perldapdataasgns-21351",
+  "primary_keys": [
+    {
+      "name": "PER_LDAP_DATA_ASGNS_PK",
+      "columns": "LDAP_DATA_ASGNS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "LDAP_DATA_ASGNS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Mandatory primary key. Updatable while new key generation."
+    },
+    {
+      "Name": "LDAP_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to LDAP request. Mandatory. Updatable while new mandatory foreign key generation."
+    },
+    {
+      "Name": "REQUEST_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The type of request to perform: ADD, REMOVE"
+    },
+    {
+      "Name": "REQUEST_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The current status of role membership portion request: REQUEST, IN PROGRESS, COMPLETE, REJECTED"
+    },
+    {
+      "Name": "ROLE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The role code of the role to be added/removed from the user"
+    },
+    {
+      "Name": "METHOD_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Whether the role membership request is automatic or manual"
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "SECURITY_CONTEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Data asscess assignment security context"
+    },
+    {
+      "Name": "SECURITY_CONTEXT_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Data access assignment security context value"
+    },
+    {
+      "Name": "REQUESTOR_USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The user Guid of the user who is making the LDAP request (if available)"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_LDAP_DATA_ASGNS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_DATA_ASGNS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_DATA_ASGNS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_DATA_ASGNS_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:36:37"
+}

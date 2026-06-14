@@ -1,0 +1,952 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Time Layout Sets/Web Clock Layouts/Buttons",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/timeLayoutSets/{layoutSetId}/child/webClockLayouts/{webClockLayoutId}/child/buttons/{buttonId}": {
+      "get": {
+        "tags": [
+          "Time Layout Sets/Web Clock Layouts/Buttons"
+        ],
+        "summary": "Get a web clock button",
+        "operationId": "get_timeLayoutSets-webClockLayouts-buttons",
+        "parameters": [
+          {
+            "name": "layoutSetId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the layout set.",
+              "format": "int64",
+              "nullable": false,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "webClockLayoutId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the web clock layout.",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "buttonId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the web clock button.",
+              "nullable": false,
+              "readOnly": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/timeLayoutSets-webClockLayouts-buttons-item-response"
+                }
+              }
+            },
+            "links": {
+              "timeCardFields": {
+                "operationRef": "#/paths/~1timeLayoutSets~1{layoutSetId}~1child~1webClockLayouts~1{webClockLayoutId}~1child~1buttons~1{buttonId}~1child~1timeCardFields/get",
+                "parameters": {
+                  "buttonId": "$request.path.buttonId",
+                  "layoutSetId": "$request.path.layoutSetId",
+                  "webClockLayoutId": "$request.path.webClockLayoutId"
+                },
+                "description": "The timeCardFields resource provides the time card fields using the web clock button identifier."
+              },
+              "timeAttributes": {
+                "operationRef": "#/paths/~1timeLayoutSets~1{layoutSetId}~1child~1webClockLayouts~1{webClockLayoutId}~1child~1buttons~1{buttonId}~1child~1timeAttributes/get",
+                "parameters": {
+                  "buttonId": "$request.path.buttonId",
+                  "layoutSetId": "$request.path.layoutSetId",
+                  "webClockLayoutId": "$request.path.webClockLayoutId"
+                },
+                "description": "The timeAttributes resource provides the time attributes using the web clock button identifier."
+              }
+            }
+          }
+        },
+        "x-internal-id": "timeLayoutSets-{layoutSetId}-child-webClockLayouts-{webClockLayoutId}-child-buttons-{buttonId}-get",
+        "x-filename-id": "timelayoutsets-layoutsetid-child-webclocklayouts-webclocklayoutid-child-buttons-buttonid-get"
+      }
+    },
+    "/timeLayoutSets/{layoutSetId}/child/webClockLayouts/{webClockLayoutId}/child/buttons": {
+      "get": {
+        "tags": [
+          "Time Layout Sets/Web Clock Layouts/Buttons"
+        ],
+        "summary": "Get all buttons for a web clock layout",
+        "operationId": "getall_timeLayoutSets-webClockLayouts-buttons",
+        "parameters": [
+          {
+            "name": "layoutSetId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the layout set.",
+              "format": "int64",
+              "nullable": false,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "webClockLayoutId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the web clock layout.",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>buttonId; integer; Unique identifier for the web clock button.</li><li>buttonLabel; string; Label to show on the web clock button.</li><li>iconName; string; Icon to show on the web clock button.</li><li>sequence; string; Unique identifier for the sequence of the web clock button.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds the web clock button using the specified primary key criteria. <br>Finder Variables <ul><li>buttonId; integer;  Unique identifier for the web clock button. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds the web clock button using the specified primary key criteria.",
+                "properties": {
+                  "buttonId": {
+                    "nullable": false,
+                    "description": "Unique identifier for the web clock button.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/timeLayoutSets-webClockLayouts-buttons"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "timeLayoutSets-{layoutSetId}-child-webClockLayouts-{webClockLayoutId}-child-buttons-get",
+        "x-filename-id": "timelayoutsets-layoutsetid-child-webclocklayouts-webclocklayoutid-child-buttons-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "timeLayoutSets-webClockLayouts-buttons-item-response": {
+        "type": "object",
+        "properties": {
+          "buttonId": {
+            "type": "integer",
+            "description": "Unique identifier for the web clock button.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "buttonLabel": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Label to show on the web clock button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "iconName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Icon to show on the web clock button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "sequence": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Unique identifier for the sequence of the web clock button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "timeAttributes": {
+            "title": "Time Attributes",
+            "type": "array",
+            "description": "The timeAttributes resource provides the time attributes using the web clock button identifier.",
+            "items": {
+              "$ref": "#/components/schemas/timeLayoutSets-webClockLayouts-buttons-timeAttributes-item-response"
+            }
+          },
+          "timeCardFields": {
+            "title": "Time Card Fields",
+            "type": "array",
+            "description": "The timeCardFields resource provides the time card fields using the web clock button identifier.",
+            "items": {
+              "$ref": "#/components/schemas/timeLayoutSets-webClockLayouts-buttons-timeCardFields-item-response"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "timeLayoutSets-webClockLayouts-buttons-timeAttributes-item-response": {
+        "type": "object",
+        "properties": {
+          "attributeId": {
+            "type": "integer",
+            "description": "Unique identifier for the time attribute.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "attributeName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the time attribute, such as PayrollTimeType.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "attributeValue": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Value of the time attribute, such as Regular for PayrollTimeType.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "attributeValueId": {
+            "type": "integer",
+            "description": "Unique identifier for the value of the time attribute.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 255
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "timeLayoutSets-webClockLayouts-buttons-timeCardFields-item-response": {
+        "type": "object",
+        "properties": {
+          "administratorDataSourceId": {
+            "type": "integer",
+            "description": "Unique identifier for the administrator data source.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "allowChangeRequestFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a change can be requested for a time card field value. Valid values are true and false. The default value is false.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "alternateNameId": {
+            "type": "integer",
+            "description": "Unique identifier for the alternate name in the multiattribute time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "attributeDataType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Data type for the attribute from the time card field, such as VARCHAR and NUMBER.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "attributeFieldId": {
+            "type": "integer",
+            "description": "Unique identifier for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bindTcfId1": {
+            "type": "integer",
+            "description": "Bind variable for the identifier of the time card field 1.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bindTcfId2": {
+            "type": "integer",
+            "description": "Bind variable for the identifier of the time card field 2.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bindTcfId3": {
+            "type": "integer",
+            "description": "Bind variable for the identifier of the time card field 3.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bindTcfId4": {
+            "type": "integer",
+            "description": "Bind variable for the identifier of the time card field 4.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bindTcfId5": {
+            "type": "integer",
+            "description": "Bind variable for the identifier of the time card field 5.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "defaultValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Default value for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "defaultValueDisplay": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Default display value for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "defaultValueUOM": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unit of measure for the time card field default value, such as hours or units.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "displaySequence": {
+            "type": "integer",
+            "description": "Unique identifier for the sequence of the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "displayType": {
+            "type": "string",
+            "description": "Display type for the time card field, such as Hidden or SmartChoiceList.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formatBasedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the time card field is format based. Valid values are true and false. The default value is false.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formatSubType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Subtype for the time card field format, such as Text, Numeric digits only, or Time.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "function": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Function used to populate a time card field for a new time entry, such as based on data source first value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "functionBasedOnAnother": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Function used to populate the time card field based on another time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "maximumLength": {
+            "type": "integer",
+            "description": "Maximum length for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "maximumValue": {
+            "type": "integer",
+            "description": "Maximum value for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "minimumValue": {
+            "type": "integer",
+            "description": "Minimum value for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "requiredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the time card field is required. Valid values are true and false. The default value is false.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "restURI": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "REST URI for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "scale": {
+            "type": "integer",
+            "description": "Scale for the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "specificValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Specific value applied to the time card field for a new time entry.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "timeAttributeName": {
+            "type": "string",
+            "description": "Name of the time attribute associated with the time card field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "timeCardFieldId": {
+            "type": "number",
+            "description": "Unique identifier for the time card field.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "timeCardFieldType": {
+            "type": "string",
+            "description": "Type for the time card field, such as single or multiple attribute field.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "unitOfMeasure": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unit of measure for the time card field, such as HOURS or UNITS.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "userDataSourceId": {
+            "type": "integer",
+            "description": "Unique identifier for the user data source.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "timeLayoutSets-webClockLayouts-buttons": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/timeLayoutSets-webClockLayouts-buttons-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "name": "IRC_CX_JOBS_QUEUE",
+  "object_type": "TABLE",
+  "description": "Stores posting changes to requisitions in Hcm Recruiting",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccxjobsqueue-14752.html#irccxjobsqueue-14752",
+  "primary_keys": [
+    {
+      "name": "IRC_CX_JOBS_QUEUE_PK",
+      "columns": "QUEUE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "QUEUE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_REQUISITIONS_B."
+    },
+    {
+      "Name": "JOB_PUBLISH_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the status indicating if the job posting has been changed or removed. Corresponding lookup is ORA_IRC_CX_JOB_PUBLISH_TYPE"
+    },
+    {
+      "Name": "REFERENCE_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "1",
+      "Not-null": "",
+      "Comments": "Value of this column shows that row is already being picked up by a job for publishing, so that no other job pick up the row again for publishing."
+    },
+    {
+      "Name": "RETRY_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "1",
+      "Not-null": "",
+      "Comments": "Value of this column indicates the number of times the publish job has tried to process this row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CX_JOBS_QUEUE_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_CX_JOBS_QUEUE_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "QUEUE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:48:40"
+}

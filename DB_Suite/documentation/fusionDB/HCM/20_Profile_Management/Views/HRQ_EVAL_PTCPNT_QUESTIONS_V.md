@@ -1,0 +1,36 @@
+# HRQ_EVAL_PTCPNT_QUESTIONS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqevalptcpntquestionsv-7412.html#hrqevalptcpntquestionsv-7412](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqevalptcpntquestionsv-7412.html#hrqevalptcpntquestionsv-7412)
+
+## Columns
+
+- BUSINESS_GROUP_ID
+- QUESTIONNAIRE_ID
+- QSTNR_SECTION_ID
+- QSTNR_QUESTION_ID
+- SUBSCRIBER_ID
+- PARTICIPANT_TYPE
+- PARTICIPANT_ID
+- SUBJECT_CODE
+- SUBJECT_ID
+- EVAL_ROLE_ID
+- EVAL_SECTION_ID
+- PTCPNT_PERSON_ID
+
+## Query
+
+```sql
+SELECT qq.business_group_id , qs.questionnaire_id , qq.qstnr_section_id , qq.qstnr_question_id , 1 AS subscriber_id , NULL AS participant_type , TO_CHAR(eval_ptcpnts.eval_participant_id) AS participant_id , NULL AS subject_code , TO_CHAR(eval_sections.evaluation_id) AS subject_id , eval_role_actions.eval_role_id , eval_role_actions.eval_section_id , eval_ptcpnts.person_id AS ptcpnt_person_id FROM HRQ_QSTNR_QUESTIONS qq, HRQ_QSTNR_SECTIONS_B qs, HRA_EVAL_ROLE_ACTIONS eval_role_actions, HRA_EVAL_SECTIONS eval_sections, HRA_EVAL_PARTICIPANTS eval_ptcpnts WHERE qq.adhoc_qstn = 'N' AND qs.qstnr_section_id = qq.qstnr_section_id AND qs.questionnaire_id = eval_ptcpnts.QUESTIONNAIRE_ID AND eval_role_actions.EVAL_SECTION_ID = eval_sections.EVAL_SECTION_ID AND eval_sections.SECTION_TYPE_CODE LIKE 'QUESTIONNAIRE' AND eval_role_actions.EVALUATION_ID = eval_ptcpnts.EVALUATION_ID AND eval_role_actions.EVAL_ROLE_ID = eval_ptcpnts.EVAL_ROLE_ID UNION SELECT qs.business_group_id , qs.questionnaire_id , qq.qstnr_section_id , qp.qstnr_question_id , qp.subscriber_id , qp.participant_type , qp.participant_id , qp.subject_code , qp.subject_id , null as eval_role_id , null as eval_section_id , null AS ptcpnt_person_id FROM HRQ_QSTN_PARTICIPANTS qp, HRQ_QSTNR_QUESTIONS qq, HRQ_QSTNR_SECTIONS_B qs WHERE qs.qstnr_section_id = qq.qstnr_section_id AND qq.qstnr_question_id = qp.qstnr_question_id
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

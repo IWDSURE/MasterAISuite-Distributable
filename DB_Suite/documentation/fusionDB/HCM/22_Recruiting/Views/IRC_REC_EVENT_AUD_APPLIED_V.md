@@ -1,0 +1,39 @@
+# IRC_REC_EVENT_AUD_APPLIED_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircreceventaudappliedv-4877.html#ircreceventaudappliedv-4877](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircreceventaudappliedv-4877.html#ircreceventaudappliedv-4877)
+
+## Columns
+
+- EVENT_POOL_MEMBER_ID
+- PERSON_ID
+- REQUISITION_ID
+- SUBMISSION_ID
+- CANDIDATE_NUMBER
+- EVENT_ID
+- EVENT_START_DATE
+- EVENT_POOL_CREATED_BY
+- EVENT_POOL_CREATION_DATE
+- EVENT_POOL_LAST_UPDATED_BY
+- EVENT_POOL_LAST_UPDATE_LOGIN
+- SUBMISSIONS_CREATED_BY
+- SUBMISSIONS_CREATED_DATE
+- SUBMISSIONS_LAST_UPDATED_BY
+- SUBMISSIONS_LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+WITH tab_ne AS ( SELECT /*+materialize*/ subject_id, event_date FROM irc_lc_history h WHERE h.source_object_id = 4 AND h.state_id IN ( 1004, 1005 ) ) SELECT e.event_pool_member_id, e.person_id, c.requisition_id, c.submission_id, cand.candidate_number, e.event_id, b.event_start_date, e.created_by event_pool_created_by, e.creation_date event_pool_creation_date, e.last_updated_by event_pool_last_updated_by, e.last_update_login event_pool_last_update_login, c.created_by submissions_created_by, c.creation_date submissions_created_date, c.last_updated_by submissions_last_updated_by, c.last_update_login submissions_last_update_login FROM irc_rec_events_b b, irc_rec_event_pool_members e, irc_submissions c, irc_candidates cand WHERE b.event_id = e.event_id AND c.person_id = cand.person_id AND e.person_id = c.person_id AND e.object_status = 'ORA_ACTIVE' AND c.object_status = 'ORA_ACTIVE' AND NOT EXISTS ( SELECT 1 FROM tab_ne h WHERE c.submission_id = h.subject_id AND h.event_date BETWEEN b.event_start_date AND b.event_end_date + coalesce(b.applied_metrics_days, 30) ) AND CAST(c.submission_confirmed_date AS TIMESTAMP) BETWEEN b.event_start_date AND b.event_end_date + coalesce(b.applied_metrics_days , 30)
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

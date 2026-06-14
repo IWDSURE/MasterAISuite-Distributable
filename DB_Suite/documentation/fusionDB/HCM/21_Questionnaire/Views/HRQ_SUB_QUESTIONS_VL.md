@@ -1,0 +1,38 @@
+# HRQ_SUB_QUESTIONS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRQ
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqsubquestionsvl-3856.html#hrqsubquestionsvl-3856](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqsubquestionsvl-3856.html#hrqsubquestionsvl-3856)
+
+## Columns
+
+- BUSINESS_GROUP_ID
+- SUB_QUESTION_ID
+- QSTN_VERSION_NUM
+- QUESTION_ID
+- TEXT
+- CORRECT_ANSWER_ID
+- CORRECT_RTG_LVL_ID
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.BUSINESS_GROUP_ID, B.SUB_QUESTION_ID, B.QSTN_VERSION_NUM, B.QUESTION_ID, L.TEXT, B.CORRECT_ANSWER_ID, B.CORRECT_RTG_LVL_ID, B.MODULE_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HRQ_SUB_QUESTIONS_B B, HRQ_SUB_QUESTIONS_TL L WHERE B.BUSINESS_GROUP_ID = L.BUSINESS_GROUP_ID AND B.SUB_QUESTION_ID = L.SUB_QUESTION_ID AND L.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../21_Questionnaire_Views_Index.md)

@@ -1,0 +1,17 @@
+{
+  "name": "HWP_PRED_PERF_RESULTS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HWP",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwppredperfresultsv-4509.html#hwppredperfresultsv-4509",
+  "columns": [
+    "ENTERPRISE_ID",
+    "PROCESS_ID",
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "WORKER_PRED_PERF"
+  ],
+  "query": "SELECT hdmr.enterprise_id, hdmr.process_id, hdmr.person_id, hdmr.assignment_id, least(hdmr.pred_value * nvl(hmb.correction_value,1),1) worker_pred_perf FROM hwp_data_mining_process hdmp, hwp_data_mining_results hdmr, hwp_models_b hmb WHERE hdmp.model_code = 'HWP_PERF_MODEL' AND hdmr.process_id = hdmp.process_id AND hdmp.model_code = hmb.model_code",
+  "_parsed_at": "2026-06-09T19:56:27"
+}

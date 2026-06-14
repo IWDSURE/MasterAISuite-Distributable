@@ -1,0 +1,156 @@
+{
+  "name": "IRC_JA_NOTIF_OCCUR",
+  "object_type": "TABLE",
+  "description": "This table is used to store the occurrences when a Job Application is moved to a given Phase/State for the review notification action configured in Candidate Selection Process.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjanotifoccur-22613.html#ircjanotifoccur-22613",
+  "primary_keys": [
+    {
+      "name": "IRC_JA_NOTIF_OCCUR_PK",
+      "columns": "JA_NOTIF_OCCUR_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "JA_NOTIF_OCCUR_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key for the Table. System generated."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_SUBMISSIONS table."
+    },
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_REQUISITIONS_B table."
+    },
+    {
+      "Name": "CURRENT_PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Current Phase of Job Application for which this review notification action is invoked. Foreign Key to IRC_PHASES_B table."
+    },
+    {
+      "Name": "CURRENT_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Current State of Job Application for which this review notification action is invoked. Foreign Key to IRC_STATES_B table."
+    },
+    {
+      "Name": "PUBLIC_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This refers to public job application status that can be shared with candidate. Foreign Key to IRC_STATES_B table."
+    },
+    {
+      "Name": "STEP_ACTION_USAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key IRC_STEP_ACTION_USAGES_B table. (Life cycle action context)"
+    },
+    {
+      "Name": "OCCURANCE_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Occurance time stamp when the action is invoked in Canddiate Selection process."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_JA_NOTIF_OCCUR_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_OCCUR_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OCCURANCE_TIME"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_OCCUR_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID, CURRENT_PHASE_ID, CURRENT_STATE_ID, STEP_ACTION_USAGE_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_OCCUR_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "JA_NOTIF_OCCUR_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:55:16"
+}

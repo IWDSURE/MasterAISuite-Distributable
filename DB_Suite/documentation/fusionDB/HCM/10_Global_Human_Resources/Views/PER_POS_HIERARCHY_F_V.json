@@ -1,0 +1,28 @@
+{
+  "name": "PER_POS_HIERARCHY_F_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PER",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perposhierarchyfv-5631.html#perposhierarchyfv-5631",
+  "columns": [
+    "POS_CODE",
+    "PARENT_POS_CODE",
+    "ESD",
+    "EED",
+    "POSITION_ID",
+    "PARENT_POSITION_ID",
+    "BUSINESS_GROUP_ID",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATED_BY",
+    "LAST_UPDATE_DATE",
+    "POS_CODE_UPPER",
+    "PARENT_POS_CODE_UPPER",
+    "POSITION_HIERARCHY_ID",
+    "OBJECT_VERSION_NUMBER",
+    "ACTION_OCCURRENCE_ID"
+  ],
+  "query": "select /*+ FIRST_ROWS(20) USE_NL(h p pp)*/p.position_code pos_code, pp.position_code parent_pos_code, to_char(h.effective_start_date,'DD-MON-YYYY') ESD,to_char(h.effective_end_date,'DD-MON-YYYY') EED, h.position_id,h.parent_position_id,h.business_group_id,h.created_by,h.creation_date, h.last_updated_by,h.last_update_date,upper(p.position_code) pos_code_upper, upper(pp.position_code) parent_pos_code_upper,h.position_hierarchy_id,h.object_version_number,h.action_occurrence_id from PER_POSITION_HIERARCHY_F h, hr_all_positions_f p, hr_all_positions_f pp where h.position_id=p.position_id(+) and h.business_group_id=p.business_group_id(+) and h.parent_position_id=pp.position_id(+) and h.business_group_id=pp.business_group_id(+) and h.effective_start_date between p.effective_start_date(+) and p.effective_end_date(+) and h.effective_start_date between pp.effective_start_date(+) and pp.effective_end_date(+) order by p.position_code desc,h.position_id desc,h.effective_start_date,h.last_update_date",
+  "_parsed_at": "2026-06-09T16:56:12"
+}

@@ -1,0 +1,65 @@
+# HWM_EXT_TIMECARD_HDR_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmexttimecardhdrv-5085.html#hwmexttimecardhdrv-5085](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmexttimecardhdrv-5085.html#hwmexttimecardhdrv-5085)
+
+## Columns
+
+- TM_REC_GRP_ID
+- ORIG_TM_REC_GRP_ID
+- ORIG_TM_REC_GRP_VERSION
+- TM_REC_GRP_VERSION
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- GRP_TYPE_ID
+- COMMIT_TIMESTAMP
+- MEASURE
+- LAYER_TM_REC_GRP_ID
+- LAYER_TM_REC_GRP_VERSION
+- UNIT_OF_MEASURE
+- START_TIME
+- STOP_TIME
+- PARENT_TM_REC_GRP_ID
+- PARENT_TM_REC_GRP_VERSION
+- USER_STATUS
+- DELETE_FLAG
+- LAYER_CODE
+- COMMENT_TEXT
+- RESOURCE_ID
+- RESOURCE_TYPE
+- SUBRESOURCE_ID
+- TIME_REPORTER_ID
+- DATE_FROM
+- DATE_TO
+- START_TIME_TRUNC
+- STOP_TIME_TRUNC
+- DATE_FROM_TRUNC
+- DATE_TO_TRUNC
+- ORDER_ENTERED
+- TCSMR_SET_ID
+- TCSMR_CONFIG_SET_ID
+- DATA_SET_ID
+- LATEST_VERSION
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- GRP_TYPE_NAME
+
+## Query
+
+```sql
+SELECT grp. TM_REC_GRP_ID ,grp. ORIG_TM_REC_GRP_ID ,grp. ORIG_TM_REC_GRP_VERSION ,grp. TM_REC_GRP_VERSION ,grp. OBJECT_VERSION_NUMBER ,grp. ENTERPRISE_ID ,grp. GRP_TYPE_ID ,grp. COMMIT_TIMESTAMP ,grp. MEASURE ,grp. LAYER_TM_REC_GRP_ID ,grp. LAYER_TM_REC_GRP_VERSION ,grp. UNIT_OF_MEASURE ,grp. START_TIME ,grp. STOP_TIME ,grp. PARENT_TM_REC_GRP_ID ,grp. PARENT_TM_REC_GRP_VERSION ,grp. USER_STATUS ,grp. DELETE_FLAG ,grp. LAYER_CODE ,grp. COMMENT_TEXT ,grp. RESOURCE_ID ,grp. RESOURCE_TYPE ,grp. SUBRESOURCE_ID ,grp. TIME_REPORTER_ID ,grp. DATE_FROM ,grp. DATE_TO ,trunc(grp.START_TIME) START_TIME_TRUNC ,trunc(grp.STOP_TIME) STOP_TIME_TRUNC ,trunc(grp.DATE_FROM) DATE_FROM_TRUNC ,trunc(grp.DATE_TO) DATE_TO_TRUNC ,grp. ORDER_ENTERED ,grp. TCSMR_SET_ID ,grp. TCSMR_CONFIG_SET_ID ,grp. DATA_SET_ID ,grp. LATEST_VERSION ,grp. CREATED_BY ,grp. CREATION_DATE ,grp. LAST_UPDATED_BY ,grp. LAST_UPDATE_DATE ,grp. LAST_UPDATE_LOGIN ,hgt. NAME AS GRP_TYPE_NAME FROM HWM_TM_REC_GRP grp ,hwm_grp_type hgt where grp.grp_type_id = hgt.grp_type_id and layer_code = 'TIME_RPTD' AND nvl(grp.DELETE_FLAG, 'N') <> 'Y' AND (grp.LATEST_VERSION = 'Y') and PARENT_TM_REC_GRP_ID is null
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

@@ -1,0 +1,194 @@
+{
+  "name": "PER_SECURING_OBJECTS",
+  "object_type": "TABLE",
+  "description": "This table stores the mapping between Fnd Objects and Hr Securing Objects. This information will be used to generate Instance Sets for the Secured Objects when a security profile is created for a securing object.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/persecuringobjects-21052.html#persecuringobjects-21052",
+  "primary_keys": [
+    {
+      "name": "PER_SECURING_OBJECTS_PK",
+      "columns": "SECURING_OBJECT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SECURING_OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "FND_OBJECT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This attribute lists the name of the secured FND object.  It is not available for customers to modify."
+    },
+    {
+      "Name": "SECURED_OBJECT_COLUMN_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the secured object.  This is not available for customers to modify."
+    },
+    {
+      "Name": "SECURED_OBJECT_COLUMN_NAME2",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Name of the secured object assignment id column value."
+    },
+    {
+      "Name": "HR_SECURING_OBJECT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This attribute lists the name of the secured HCM object.  It is not available for customers to modify."
+    },
+    {
+      "Name": "SECURITY_PROFILE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This attribute lists the type of the security profile.  It is not available for customers to modify."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_SECURING_OBJECTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "HR_SECURING_OBJECT, FND_OBJECT_NAME"
+    },
+    {
+      "Index": "PER_SECURING_OBJECTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "FND_OBJECT_NAME"
+    },
+    {
+      "Index": "PER_SECURING_OBJECTS_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "PER_SECURING_OBJECTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "SECURING_OBJECT_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "PER_SECURING_OBJECTS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "SECURING_OBJECT_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:45:37"
+}

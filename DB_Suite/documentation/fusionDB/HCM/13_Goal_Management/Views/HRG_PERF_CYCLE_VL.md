@@ -1,0 +1,37 @@
+# HRG_PERF_CYCLE_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRG
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgperfcyclevl-6963.html#hrgperfcyclevl-6963](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrgperfcyclevl-6963.html#hrgperfcyclevl-6963)
+
+## Columns
+
+- PERF_CYCLE_ID
+- BUSINESS_GROUP_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- STATUS
+- REVIEW_PERIOD_ID
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- LANGUAGE
+- SOURCE_LANG
+- PERF_CYCLE_NAME
+
+## Query
+
+```sql
+SELECT PCB.PERF_CYCLE_ID, PCB.BUSINESS_GROUP_ID, PCB.OBJECT_VERSION_NUMBER, PCB.CREATED_BY, PCB.STATUS, PCB.REVIEW_PERIOD_ID, PCB.CREATION_DATE, PCB.LAST_UPDATED_BY, PCB.LAST_UPDATE_DATE, PCB.LAST_UPDATE_LOGIN, PCTL.LANGUAGE, PCTL.SOURCE_LANG, PCTL.PERF_CYCLE_NAME FROM HRG_PERF_CYCLES_B PCB, HRG_PERF_CYCLES_TL PCTL WHERE PCB.PERF_CYCLE_ID=PCTL.PERF_CYCLE_ID AND PCTL.LANGUAGE=USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../13_Goal_Management_Views_Index.md)

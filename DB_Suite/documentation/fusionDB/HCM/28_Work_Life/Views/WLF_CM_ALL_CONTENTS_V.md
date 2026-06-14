@@ -1,0 +1,50 @@
+# WLF_CM_ALL_CONTENTS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfcmallcontentsv-8351.html#wlfcmallcontentsv-8351](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfcmallcontentsv-8351.html#wlfcmallcontentsv-8351)
+
+## Columns
+
+- CONTENT_ID
+- CONTENT_TYPE
+- STATUS
+- VISIBILITY
+- THUMBNAIL_ID
+- PUBLISHED_BY_ID
+- PUBLISHED_DATE
+- NAME
+- DESCRIPTION
+- CONTENT_ONLY_FLAG
+- DUE_DATE
+- COMPLETION_DATE
+- SHARE_PROFILE_ID
+- SHARE_TYPE
+- LATEST_SHARE_PROFILE_ID_FLAG
+- SP_EFFECTIVE_START_DATE
+- SP_EFFECTIVE_END_DATE
+- SP_CREATION_DATE
+- SHARES_EFFECTIVE_START_DATE
+- SHARES_EFFECTIVE_END_DATE
+- SHARES_STATUS
+- PRESCRIBED_BY_ID
+- PRESCRIBED_TO_ID
+- SHARED_BY_ID
+- SHARED_TO_ID
+- COMMENTS
+
+## Query
+
+```sql
+WITH SHARED_OR_PRESCRIBED_CONTENT AS ( SELECT ShareProfiles.SHARE_PROFILE_ID, ShareProfiles.CONTENT_ID, ShareProfiles.EFFECTIVE_START_DATE AS SP_EFFECTIVE_START_DATE, ShareProfiles.EFFECTIVE_END_DATE AS SP_EFFECTIVE_END_DATE, Shares.EFFECTIVE_START_DATE AS SHARES_EFFECTIVE_START_DATE, Shares.EFFECTIVE_END_DATE AS SHARES_EFFECTIVE_END_DATE, ShareProfiles.SHARE_TYPE, ShareProfiles.CREATED_BY_ID, ShareProfiles.DUE_DATE, ShareProfiles.DUE_DAYS, ShareProfiles.CREATION_DATE AS SP_CREATION_DATE, Shares.SHARED_TO_ID, Shares.COMPLETION_DATE, Shares.STATUS AS SHARES_STATUS, CASE WHEN ShareProfiles.SHARE_PROFILE_ID = (MAX(ShareProfiles.SHARE_PROFILE_ID) OVER (PARTITION BY ShareProfiles.CREATED_BY_ID, ShareProfiles.CONTENT_ID, ShareProfiles.SHARE_TYPE)) THEN 'Y' ELSE 'N' END AS LATEST_SHARE_PROFILE_ID_FLAG, ShareProfiles.COMMENTS FROM WLF_CM_SHARE_PROFILES_F ShareProfiles, WLF_CM_SHARES_F Shares WHERE ShareProfiles.SHARE_PROFILE_ID = Shares.SHARE_PROFILE_ID AND ShareProfiles.SHARE_TYPE IN ('SHARE', 'PRESCRIPTION') AND ShareProfiles.STATUS = 'ACTIVE' /*AND TRUNC(SYSDATE) BETWEEN ShareProfiles.EFFECTIVE_START_DATE AND ShareProfiles.EFFECTIVE_END_DATE AND TRUNC(SYSDATE) BETWEEN Shares.EFFECTIVE_START_DATE AND Shares.EFFECTIVE_END_DATE*/) SELECT ContentInformation.CONTENT_ID, ContentInformation.CONTENT_TYPE, ContentInformation.STATUS, ContentInformation.VISIBILITY, ContentInformation.THUMBNAIL_ID, ContentInformation.CREATED_BY_ID AS PUBLISHED_BY_ID, ContentInformation.CREATION_DATE AS PUBLISHED_DATE, ContentTranslation.NAME, ContentTranslation.DESCRIPTION, CASE WHEN (ROW_NUMBER() OVER (PARTITION BY ContentInformation.CREATED_BY_ID, ContentInformation.CONTENT_ID ORDER BY ContentInformation.CREATED_BY_ID, ContentInformation.CONTENT_ID )) = 1 THEN 'Y' ELSE 'N' END AS CONTENT_ONLY_FLAG, SharedOrPrescribedContent.DUE_DATE, SharedOrPrescribedContent.COMPLETION_DATE, SharedOrPrescribedContent.SHARE_PROFILE_ID, SharedOrPrescribedContent.SHARE_TYPE, SharedOrPrescribedContent.LATEST_SHARE_PROFILE_ID_FLAG, SharedOrPrescribedContent.SP_EFFECTIVE_START_DATE, SharedOrPrescribedContent.SP_EFFECTIVE_END_DATE, SharedOrPrescribedContent.SP_CREATION_DATE, SharedOrPrescribedContent.SHARES_EFFECTIVE_START_DATE, SharedOrPrescribedContent.SHARES_EFFECTIVE_END_DATE, SharedOrPrescribedContent.SHARES_STATUS, CASE WHEN SharedOrPrescribedContent.SHARE_TYPE = 'PRESCRIPTION' THEN SharedOrPrescribedContent.CREATED_BY_ID END AS PRESCRIBED_BY_ID, CASE WHEN SharedOrPrescribedContent.SHARE_TYPE = 'PRESCRIPTION' THEN SharedOrPrescribedContent.SHARED_TO_ID END AS PRESCRIBED_TO_ID, CASE WHEN SharedOrPrescribedContent.SHARE_TYPE = 'SHARE' THEN SharedOrPrescribedContent.CREATED_BY_ID END AS SHARED_BY_ID, CASE WHEN SharedOrPrescribedContent.SHARE_TYPE = 'SHARE' THEN SharedOrPrescribedContent.SHARED_TO_ID END AS SHARED_TO_ID, SharedOrPrescribedContent.COMMENTS AS COMMENTS FROM WLF_CM_CONTENTS_B ContentInformation, WLF_CM_CONTENTS_TL ContentTranslation, SHARED_OR_PRESCRIBED_CONTENT SharedOrPrescribedContent WHERE /*ContentInformation.STATUS = 'ACTIVE' AND ContentInformation.CONTENT_TYPE IN ('VIDEO','COLLECTION')*/ ContentInformation.CONTENT_ID = ContentTranslation.CONTENT_ID AND ContentTranslation.LANGUAGE = USERENV('lang') AND ContentInformation.CONTENT_ID = SharedOrPrescribedContent.CONTENT_ID (+)
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

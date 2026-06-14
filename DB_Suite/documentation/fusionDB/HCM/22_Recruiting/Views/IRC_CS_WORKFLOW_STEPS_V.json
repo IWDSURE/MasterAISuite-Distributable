@@ -1,0 +1,18 @@
+{
+  "name": "IRC_CS_WORKFLOW_STEPS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccsworkflowstepsv-4588.html#irccsworkflowstepsv-4588",
+  "columns": [
+    "STEP_STATUS_CODE",
+    "MEANING",
+    "DESCRIPTION",
+    "DISPLAY_SEQUENCE",
+    "ENABLED_FLAG",
+    "TERMINAL_FLAG"
+  ],
+  "query": "select l.lookup_code as step_status_code, l.meaning, l.description, l.display_sequence, (CASE WHEN STEP_STATUSES_DISABLED.STEP_STATUS_CODE IS NOT NULL THEN 'N' ELSE 'Y' END ) ENABLED_FLAG, (CASE WHEN l.lookup_code IN ('ORA_HR_FAILED', 'ORA_REJECTED', 'ORA_WITHDRAWN') THEN 'Y' ELSE 'N' END) TERMINAL_FLAG from hcm_lookups l, (select TRIM(REGEXP_SUBSTR(PO.STEP_STATUSES_DISABLED_VALUE, '[^;]+', 1, LEVEL)) as STEP_STATUS_CODE from (select TRIM(pov.profile_option_value) as STEP_STATUSES_DISABLED_VALUE from fnd_profile_options_b po, fnd_profile_option_values pov where 1=1 and po.profile_option_id = pov.profile_option_id and pov.LEVEL_VALUE='SITE' and po.profile_option_name = ('IRC_TN_FA_CS_STEP_STATUSES_DISABLED')) PO CONNECT BY REGEXP_SUBSTR(PO.STEP_STATUSES_DISABLED_VALUE, '[^;]+', 1, LEVEL) IS NOT NULL) STEP_STATUSES_DISABLED where 1=1 and l.lookup_type = 'ORA_IRC_CS_STEP_STATUS_TYPE' and l.lookup_code = STEP_STATUSES_DISABLED.STEP_STATUS_CODE (+) order by display_sequence asc",
+  "_parsed_at": "2026-06-09T19:05:38"
+}

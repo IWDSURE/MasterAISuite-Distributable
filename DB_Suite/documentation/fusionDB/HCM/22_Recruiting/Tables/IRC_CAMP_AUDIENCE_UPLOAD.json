@@ -1,0 +1,172 @@
+{
+  "name": "IRC_CAMP_AUDIENCE_UPLOAD",
+  "object_type": "TABLE",
+  "description": "Table to store campaign audience upload list.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccampaudienceupload-17713.html#irccampaudienceupload-17713",
+  "primary_keys": [
+    {
+      "name": "IRC_CAMP_AUDIENCE_UPLOAD_PK",
+      "columns": "AUDIENCE_UPLOAD_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "AUDIENCE_UPLOAD_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated"
+    },
+    {
+      "Name": "CAMPAIGN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_CAMPAIGNS_B table."
+    },
+    {
+      "Name": "AUDIENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_CAMP_AUDIENCE_SOURCE table."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the PERSON_ID of the audience.One of the Foreign keys to per_persons table."
+    },
+    {
+      "Name": "EMAIL",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores work email of the audience. For now its Employee Email"
+    },
+    {
+      "Name": "PHONE",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores work phone of the audience. For now its Employee work phone"
+    },
+    {
+      "Name": "DATA_JSON",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores all the additional columns in a JSON format"
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether record is active/inactive. Will be used to differentiate valid vs invalid records."
+    },
+    {
+      "Name": "ERROR_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the error messages after validating the row against person record. Typical errors could be Empty Email/Work Phone or invalid Email etc"
+    },
+    {
+      "Name": "OBJECT_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the status of the object."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAMP_AUDIENCE_UPLOAD_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CAMPAIGN_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_UPLOAD_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "AUDIENCE_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_UPLOAD_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_UPLOAD_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "AUDIENCE_UPLOAD_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:43:17"
+}

@@ -1,0 +1,146 @@
+{
+  "name": "IRC_CAMP_AUDIENCE_STATUS",
+  "object_type": "TABLE",
+  "description": "Table to store the current status of audience associated to different source IDs in different contexts.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccampaudiencestatus-4142.html#irccampaudiencestatus-4142",
+  "primary_keys": [
+    {
+      "name": "IRC_CAMP_AUDIENCE_STATUS_PK",
+      "columns": "CAMP_AUDIENCE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAMP_AUDIENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "CAMPAIGN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_CAMPAIGNS_B table"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_PERSONS table"
+    },
+    {
+      "Name": "AUDIENCE_SOURCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores specific source id assigned to audience e.g LearningItemId,JourneyId etc"
+    },
+    {
+      "Name": "AUDIENCE_SOURCE_CONTEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores Audience Source Context e.g. ORA_LEARN_AUDIENCE or ORA_JOURNEY_AUDIENCE etc"
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores current status of the audience, who is ssociated to the particular audience source Id of learn or journcey e.g Not Started, Started etc"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAMP_AUDIENCE_STATUS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CAMPAIGN_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_STATUS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_STATUS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "AUDIENCE_SOURCE_CONTEXT, AUDIENCE_SOURCE_ID, CAMPAIGN_ID, STATUS"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_STATUS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAMP_AUDIENCE_ID"
+    },
+    {
+      "Index": "IRC_CAMP_AUDIENCE_STATUS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "AUDIENCE_SOURCE_CONTEXT, AUDIENCE_SOURCE_ID, CAMPAIGN_ID, PERSON_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:43:14"
+}

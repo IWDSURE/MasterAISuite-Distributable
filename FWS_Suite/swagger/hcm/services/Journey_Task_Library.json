@@ -1,0 +1,5117 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Journey Task Library",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/journeyTaskLibrary": {
+      "get": {
+        "tags": [
+          "Journey Task Library"
+        ],
+        "summary": "Get all library tasks",
+        "operationId": "getall_journeyTaskLibrary",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>LearningContentTypeMeaning; string; Meaning of the learning content type.</li><li>LibraryJourneyTaskId; integer; Unique identifier of the journey task.</li><li>Name; string; Name of journey task.</li><li>ReminderContentType; string; Content type of the task reminder notification.</li><li>RequiredFlag; boolean; Indicates whether the task is mandatory or optional. Valid values are Yes and No. Default is No.</li><li>Status; string; Status code of the task.</li><li>TaskLevel; string; Indicates whether the task is at the global or person level.</li><li>TaskLevelMeaning; string; Meaning of the task level.</li><li>TaskLevelValue; integer; Identifies whether the task is at the global or person level based on the value.</li><li>VideoTypeMeaning; string; Meaning of video type.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all library journey tasks that match the primary key specified. <br>Finder Variables <ul><li>LibraryJourneyTaskId; integer;  Unique identifier of the library journey task. </li></ul></li><li>findByWord Finds all library journey tasks by the specified word. <br>Finder Variables <ul><li>SearchTerms; string;  Search criteria for assignable library tasks. </li></ul></li><li>findMyTasks Finds all library journey tasks which are active and available for the signed in employee. <br>Finder Variables <ul><li>mPersonId; integer;  Unique identifier of the library journey task for a person. </li><li>pStatus; string;  Status of library journey tasks. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all library journey tasks that match the primary key specified.",
+                "properties": {
+                  "LibraryJourneyTaskId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of the library journey task.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all library journey tasks by the specified word.",
+                "title": "findByWord",
+                "properties": {
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search criteria for assignable library tasks.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findMyTasks",
+                "description": "Finds all library journey tasks which are active and available for the signed in employee.",
+                "title": "findMyTasks",
+                "properties": {
+                  "mPersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the library journey task for a person.",
+                    "type": "integer"
+                  },
+                  "pStatus": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Status of library journey tasks.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/journeyTaskLibrary"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "journeyTaskLibrary-get",
+        "x-filename-id": "journeytasklibrary-get"
+      },
+      "post": {
+        "tags": [
+          "Journey Task Library"
+        ],
+        "summary": "Create a personal library task",
+        "operationId": "create_journeyTaskLibrary",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/journeyTaskLibrary-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/journeyTaskLibrary-item-response"
+                }
+              }
+            },
+            "links": {
+              "documents": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1documents/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "attachmentDocumentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: AttachmentDocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/AttachmentDocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "reminderRelativeToLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_PER_CHK_TASK_REMINDER_TIME"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: ReminderRelativeTo; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/ReminderRelativeTo",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "documentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: DocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/DocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "notifications": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1notifications/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner."
+              },
+              "properties": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1properties/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner."
+              }
+            }
+          }
+        },
+        "x-internal-id": "journeyTaskLibrary-post",
+        "x-filename-id": "journeytasklibrary-post"
+      }
+    },
+    "/journeyTaskLibrary/{LibraryJourneyTaskId}": {
+      "get": {
+        "tags": [
+          "Journey Task Library"
+        ],
+        "summary": "Get a library task",
+        "operationId": "get_journeyTaskLibrary",
+        "parameters": [
+          {
+            "name": "LibraryJourneyTaskId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the journey task.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/journeyTaskLibrary-item-response"
+                }
+              }
+            },
+            "links": {
+              "documents": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1documents/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "attachmentDocumentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: AttachmentDocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/AttachmentDocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "reminderRelativeToLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_PER_CHK_TASK_REMINDER_TIME"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: ReminderRelativeTo; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/ReminderRelativeTo",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "documentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: DocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/DocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "notifications": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1notifications/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner."
+              },
+              "properties": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1properties/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner."
+              }
+            }
+          }
+        },
+        "x-internal-id": "journeyTaskLibrary-{LibraryJourneyTaskId}-get",
+        "x-filename-id": "journeytasklibrary-libraryjourneytaskid-get"
+      },
+      "delete": {
+        "tags": [
+          "Journey Task Library"
+        ],
+        "summary": "Delete a personal library task",
+        "operationId": "delete_journeyTaskLibrary",
+        "parameters": [
+          {
+            "name": "LibraryJourneyTaskId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the journey task.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "journeyTaskLibrary-{LibraryJourneyTaskId}-delete",
+        "x-filename-id": "journeytasklibrary-libraryjourneytaskid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Journey Task Library"
+        ],
+        "summary": "Update a personal library task",
+        "operationId": "update_journeyTaskLibrary",
+        "parameters": [
+          {
+            "name": "LibraryJourneyTaskId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the journey task.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/journeyTaskLibrary-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/journeyTaskLibrary-item-response"
+                }
+              }
+            },
+            "links": {
+              "documents": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1documents/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The attachments resource is used to view, create, and update attachments."
+              },
+              "attachmentDocumentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: AttachmentDocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/AttachmentDocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "reminderRelativeToLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_PER_CHK_TASK_REMINDER_TIME"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: ReminderRelativeTo; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/ReminderRelativeTo",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "documentTypesLOV": {
+                "operationRef": "#/paths/~1hrDocumentTypesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: DocumentTypeId; Target Attribute: DocumentTypeId</li><li>Display Attribute: DocumentType, LegislationCode, Category</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/DocumentTypeId",
+                  "displayValues": [
+                    "DocumentType"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "DocumentTypeId",
+                  "displayFields": [
+                    "DocumentType",
+                    "LegislationCode",
+                    "Category"
+                  ]
+                }
+              },
+              "notifications": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1notifications/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner."
+              },
+              "properties": {
+                "operationRef": "#/paths/~1journeyTaskLibrary~1{LibraryJourneyTaskId}~1child~1properties/get",
+                "parameters": {
+                  "LibraryJourneyTaskId": "$request.path.LibraryJourneyTaskId"
+                },
+                "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner."
+              }
+            }
+          }
+        },
+        "x-internal-id": "journeyTaskLibrary-{LibraryJourneyTaskId}-patch",
+        "x-filename-id": "journeytasklibrary-libraryjourneytaskid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "journeyTaskLibrary": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "journeyTaskLibrary-item-response": {
+        "type": "object",
+        "properties": {
+          "ActionAddToCalendarLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the add to calendar action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionCompleteLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the complete action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionRejectLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the not applicable action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionSaveLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the save as draft action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionURL": {
+            "title": "URL",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The URL associated with the task that's entered on the setup screen. To retrieve a navigable URL, use the getNavigationURL custom method of the resource.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivationEligibilityProfileId": {
+            "type": "integer",
+            "description": "Identifier of the eligibility profile used for the activation criteria in a journey task.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ActivationEligibilityProfileName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the eligibility profile used for the activation criteria in a journey task.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ActivityAction1Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 1.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction2Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 2.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction3Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 3.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction4Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 4.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction5Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 5.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AllowAttachmentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether attachments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowCommentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether comments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowNoteTitleFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the Notes title is hidden or not. Valid values are Yes and No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowNotesContentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether rich content can be added for notes. Valid values are Yes or No. The default is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AnalysisParameters": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Parameters associated with an analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AnalysisPath": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "OTBI analysis path for an analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AnalyticsSubType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Subtype of analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ApplicationTask": {
+            "title": "Application Task",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Application task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ApplicationTaskName": {
+            "title": "Application Task",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the application task.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "AttachmentDocumentTypeId": {
+            "type": "integer",
+            "description": "Attachments to add to document records for the given document type.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "AttachmentDocumentTypeName": {
+            "title": "Document Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Attachments to add to document records for the given document type name.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CompletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is completed.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ConfigurableFormContext": {
+            "title": "Configurable Form",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context for the configurable form task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentProviderCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the user-defined content task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the task.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date on which the task was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "DelayDuration": {
+            "type": "integer",
+            "description": "Delay duration for the task.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "DelayDurationUOM": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unit of measure used in specifying delaying the duration.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DelayDurationUOMMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of unit of measure used in delay duration.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "DeletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is deleted.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "Description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DigitalSignatureTemplateId": {
+            "type": "string",
+            "description": "Identifier for the electronic signature template.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "DisplayFeatures": {
+            "type": "string",
+            "description": "Display features for the electronic signature task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DisplayOptions": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Type of OTBI analysis.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DocumentTypeId": {
+            "title": "Document Type",
+            "type": "integer",
+            "description": "Identifier for the document type.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "DocumentTypeName": {
+            "title": "Document Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the document type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EligibilityProfileId": {
+            "type": "integer",
+            "description": "Identifier of the eligibility profile.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EligibilityProfileName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the eligibility profile.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EmbeddedApplicationTaskCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the embedded application task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmbeddedApplicationTaskTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the embedded application task.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EnableExpiryFlag": {
+            "maxLength": 4,
+            "type": "boolean",
+            "description": "Indicates whether the task should expire. Valid values are Yes and No. The default value is No.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EvaluationOffset": {
+            "type": "integer",
+            "description": "Number of days to consider for eligibility evaluation.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ExpiryDuration": {
+            "title": "Expiry Days",
+            "type": "integer",
+            "description": "Duration after which the task expires.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 5
+            }
+          },
+          "ExpiryRelativeTo": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Criteria based on which the task expires.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ExpiryRelativeToMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the criteria based on which the task expires.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "FeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled for a journey task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "GuidedJourneyCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the guided journey.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GuidedJourneyTaskCodes": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Code of the guided journey task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "InitiatedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is initiated.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "User who last updated the task.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Date on which the task was updated.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LearnCommunityId": {
+            "type": "integer",
+            "description": "Identifier of the learning community.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LearnEnrollmentId": {
+            "type": "integer",
+            "description": "Identifier of the learning enrollment.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LearnEnrollmentType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of learning enrollment.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LearningContentType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of learning content.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LearningContentTypeMeaning": {
+            "type": "string",
+            "description": "Meaning of the learning content type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "LearningContentType"
+              ]
+            },
+            "x-queryable": true
+          },
+          "LearningItemId": {
+            "type": "integer",
+            "description": "Unique identifier of the learning item.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LibraryJourneyTaskId": {
+            "type": "integer",
+            "description": "Unique identifier of the journey task.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of journey task.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "NoteTitle": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Title of the Notes section in the task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Notes": {
+            "type": "string",
+            "description": "Notes for a task. The notes text is stored as a CLOB object. To use in the payload, the text should be converted to a base64 encoded string using either a conversion tool or a prerequisite script.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OpenInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the external URL should open in the existing page or a new page. Valid values are Yes and No. The default value is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OpenReportInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the report should open in the existing page or a new page. Valid values are Yes and No. The default value is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerResponsibilityTypeMeaning": {
+            "type": "string",
+            "description": "Responsibility type meaning of the journey task owner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "OwnerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task owner type.",
+            "nullable": true,
+            "default": "ORA_CHK_INITIATOR",
+            "x-queryable": false
+          },
+          "OwnerTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of task owner type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "OwnerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the owner user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerResponsibilityTypeMeaning": {
+            "type": "string",
+            "description": "Responsibility type meaning of the journey task performer.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PerformerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task performer type.",
+            "nullable": true,
+            "default": "ORA_WORKER",
+            "x-queryable": false
+          },
+          "PerformerTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of task performer type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PerformerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the performer user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ProcessCloudConfiguration": {
+            "type": "string",
+            "description": "Configuration of the process automation.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "QuestionnaireId": {
+            "title": "Questionnaire",
+            "type": "integer",
+            "description": "Internal identifier of the questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "QuestionnaireName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the questionnaire.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ReassignedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is reassigned.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ReminderContentDescription": {
+            "type": "string",
+            "description": "Content description of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentTitle": {
+            "type": "string",
+            "description": "Content title of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task reminder notification.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE",
+            "x-queryable": true
+          },
+          "ReminderDuration": {
+            "type": "integer",
+            "description": "Duration of the task reminder.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 3
+            }
+          },
+          "ReminderRecurrence": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Recurrence of the task reminder.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderRelativeTo": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Reminder relative to task duration.",
+            "nullable": true,
+            "default": "ORA_CHK_BFR_DUE_DT",
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ReminderRelativeToMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of reminder relative to task duration.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ReminderTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the reminder notification template.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReportPath": {
+            "title": "Report Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Path to the report in BI Catalog.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiredFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the task is mandatory or optional. Valid values are Yes and No. Default is No.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SaveAttachmentsToDORFor": {
+            "type": "string",
+            "description": "Identifies whether the attachments should be saved for the journey assignee or the task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SaveAttachmentsToDORForMeaning": {
+            "type": "string",
+            "description": "Identifies whether the attachments should be saved for the journey assignee or the task performer in Document Records.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "dependencies": [
+                "SaveAttachmentsToDORFor"
+              ]
+            }
+          },
+          "SaveDocumentsToDORFor": {
+            "type": "string",
+            "description": "Attachments to add to document records for a document type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SaveDocumentsToDORForMeaning": {
+            "type": "string",
+            "description": "Meaning of add attachments document records.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "dependencies": [
+                "SaveDocumentsToDORFor"
+              ]
+            }
+          },
+          "SignatureValidationConfiguration": {
+            "type": "string",
+            "description": "Validation type for electronic signature.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code of the task.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "ORA_CHK_TASK_ACTIVE",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "StatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Status of the task.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "SubType": {
+            "title": "Signature Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task action subtype code. Available only for action types I 9 and Electronic Signature.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SubTypeMeaning": {
+            "type": "string",
+            "description": "Task action subtype. Available only for task action types I9 and Electronic Signature.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "dependencies": [
+                "EsignTypeMeaning",
+                "I9TypeMeaning",
+                "ProcessAutomationTypeMeaning",
+                "VideoTypeLookupMeaning",
+                "LearnTypeMeaning"
+              ]
+            }
+          },
+          "TargetDuration": {
+            "type": "integer",
+            "description": "Duration of the task.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "TargetDurationUOM": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unit of measure for target duration.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TargetDurationUOMMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the unit of measure for task duration.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "TaskLevel": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the task is at the global or person level.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "ORA_GLOBAL",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "TaskLevelMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the task level.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TaskLevelValue": {
+            "type": "integer",
+            "description": "Identifies whether the task is at the global or person level based on the value.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "default": 0,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Type": {
+            "title": "Task Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of task action type.",
+            "nullable": false,
+            "default": "ORA_CHK_MANUAL",
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Task action type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "VideoType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of video.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "VideoTypeMeaning": {
+            "type": "string",
+            "description": "Meaning of video type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "VideoType"
+              ]
+            },
+            "x-queryable": true
+          },
+          "VideoURL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL of the video.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "WorkAuthorizationConfiguration": {
+            "type": "string",
+            "description": "Work authorization for I 9 task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "documents": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-documents-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "notifications": {
+            "title": "Journey Task Library Notifications",
+            "type": "array",
+            "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-notifications-item-response"
+            }
+          },
+          "properties": {
+            "title": "Journey Task Library Properties",
+            "type": "array",
+            "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-properties-item-response"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-documents-item-response": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who created the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedByUserName": {
+            "title": "Created By User Name",
+            "type": "string",
+            "description": "The user name who created the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "The date when the record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileWebImage": {
+            "title": "File Web Image",
+            "type": "string",
+            "description": "The base64 encoded image of the file displayed in .png format if the source is a convertible image.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "help": {
+                "instruction": "The base64 encoded image of the file displayed in .png format if the source is a convertible image."
+              },
+              "XML_ELEMENT": "#hide",
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "The date when the record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "FMT_FORMAT": "d-MMM-yyyy HH:mm:ss"
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedByUserName": {
+            "title": "Last Updated By User",
+            "type": "string",
+            "description": "The user name who last updated the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "UserName": {
+            "title": "User Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The login credentials of the user who created the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-notifications-item-response": {
+        "type": "object",
+        "properties": {
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the notification.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date on which the notification was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date on which notification was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated notification.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LibraryJourneyTaskNotificationId": {
+            "type": "integer",
+            "description": "Unique identifier of the journey task notification.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "NotifyOwnerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task owner needs to be notified when the event occurs. Valid values are Yes and No. Default is No.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "NotifyPerformerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task performer needs to be notified when the event occurs. Valid values are Yes and No. Default is Yes.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for owner.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE",
+            "x-queryable": true
+          },
+          "OwnerExpiryTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the expiry notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerForceCompleteTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the force completion notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerNotApplicableTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template when a task is marked as not applicable for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for performer.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE",
+            "x-queryable": true
+          },
+          "PerformerExpiryTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the expiry notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerForceCompleteTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the force completion notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerNotApplicableTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template when a task is marked as not applicable for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TaskEvent": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of the task event. For example, task initiated, task updated, task deleted, task completed.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "TaskEventMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the task event.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-properties-item-response": {
+        "type": "object",
+        "properties": {
+          "Category": {
+            "type": "string",
+            "description": "Category of the for journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CategoryMeaning": {
+            "type": "string",
+            "description": "Meaning of category of journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Code": {
+            "type": "string",
+            "description": "Code of the journey template task property.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DisabledForLineManagerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for line manager. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOthersFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for other users. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOwnerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for owner. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForPerformerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for performer. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Level": {
+            "type": "string",
+            "description": "Property level for the journey template task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OverriddenFlag": {
+            "maxLength": 80,
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is overridden. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerLookupType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Journey template task type property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Sequence": {
+            "type": "integer",
+            "description": "Sequence of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-item-post-request": {
+        "required": [
+          "Name"
+        ],
+        "type": "object",
+        "properties": {
+          "ActionAddToCalendarLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the add to calendar action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionCompleteLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the complete action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionRejectLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the not applicable action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionSaveLabel": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of the save as draft action.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActionURL": {
+            "title": "URL",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The URL associated with the task that's entered on the setup screen. To retrieve a navigable URL, use the getNavigationURL custom method of the resource.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivationEligibilityProfileId": {
+            "type": "integer",
+            "description": "Identifier of the eligibility profile used for the activation criteria in a journey task.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ActivityAction1Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 1.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction2Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 2.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction3Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 3.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction4Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 4.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivityAction5Label": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Setting that enables to change the label of action 5.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AllowAttachmentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether attachments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowCommentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether comments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowNoteTitleFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the Notes title is hidden or not. Valid values are Yes and No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowNotesContentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether rich content can be added for notes. Valid values are Yes or No. The default is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AnalysisParameters": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Parameters associated with an analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AnalysisPath": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "OTBI analysis path for an analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AnalyticsSubType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Subtype of analytics task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ApplicationTask": {
+            "title": "Application Task",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Application task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AttachmentDocumentTypeId": {
+            "type": "integer",
+            "description": "Attachments to add to document records for the given document type.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "CompletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is completed.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ConfigurableFormContext": {
+            "title": "Configurable Form",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context for the configurable form task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentProviderCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the user-defined content task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DelayDuration": {
+            "type": "integer",
+            "description": "Delay duration for the task.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "DelayDurationUOM": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unit of measure used in specifying delaying the duration.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DeletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is deleted.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "Description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DigitalSignatureTemplateId": {
+            "type": "string",
+            "description": "Identifier for the electronic signature template.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "DisplayFeatures": {
+            "type": "string",
+            "description": "Display features for the electronic signature task type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DisplayOptions": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Type of OTBI analysis.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DocumentTypeId": {
+            "title": "Document Type",
+            "type": "integer",
+            "description": "Identifier for the document type.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "EligibilityProfileId": {
+            "type": "integer",
+            "description": "Identifier of the eligibility profile.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmbeddedApplicationTaskCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the embedded application task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmbeddedApplicationTaskTypeId": {
+            "type": "integer",
+            "description": "Unique identifier of the embedded application task.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EnableExpiryFlag": {
+            "maxLength": 4,
+            "type": "boolean",
+            "description": "Indicates whether the task should expire. Valid values are Yes and No. The default value is No.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EvaluationOffset": {
+            "type": "integer",
+            "description": "Number of days to consider for eligibility evaluation.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ExpiryDuration": {
+            "title": "Expiry Days",
+            "type": "integer",
+            "description": "Duration after which the task expires.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 5
+            }
+          },
+          "ExpiryRelativeTo": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Criteria based on which the task expires.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled for a journey task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "GuidedJourneyCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the guided journey.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GuidedJourneyTaskCodes": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Code of the guided journey task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "InitiatedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is initiated.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "LearnCommunityId": {
+            "type": "integer",
+            "description": "Identifier of the learning community.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LearnEnrollmentId": {
+            "type": "integer",
+            "description": "Identifier of the learning enrollment.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LearnEnrollmentType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of learning enrollment.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LearningItemId": {
+            "type": "integer",
+            "description": "Unique identifier of the learning item.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LibraryJourneyTaskId": {
+            "type": "integer",
+            "description": "Unique identifier of the journey task.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of journey task.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "NoteTitle": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Title of the Notes section in the task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Notes": {
+            "type": "string",
+            "description": "Notes for a task. The notes text is stored as a CLOB object. To use in the payload, the text should be converted to a base64 encoded string using either a conversion tool or a prerequisite script.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OpenInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the external URL should open in the existing page or a new page. Valid values are Yes and No. The default value is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OpenReportInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the report should open in the existing page or a new page. Valid values are Yes and No. The default value is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task owner type.",
+            "nullable": true,
+            "default": "ORA_CHK_INITIATOR",
+            "x-queryable": false
+          },
+          "OwnerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the owner user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task performer type.",
+            "nullable": true,
+            "default": "ORA_WORKER",
+            "x-queryable": false
+          },
+          "PerformerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the performer user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ProcessCloudConfiguration": {
+            "type": "string",
+            "description": "Configuration of the process automation.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "QuestionnaireId": {
+            "title": "Questionnaire",
+            "type": "integer",
+            "description": "Internal identifier of the questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReassignedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is reassigned.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ReminderContentDescription": {
+            "type": "string",
+            "description": "Content description of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentTitle": {
+            "type": "string",
+            "description": "Content title of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task reminder notification.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          },
+          "ReminderDuration": {
+            "type": "integer",
+            "description": "Duration of the task reminder.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 3
+            }
+          },
+          "ReminderRecurrence": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Recurrence of the task reminder.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderRelativeTo": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Reminder relative to task duration.",
+            "nullable": true,
+            "default": "ORA_CHK_BFR_DUE_DT",
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "ReminderTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the reminder notification template.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReportPath": {
+            "title": "Report Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Path to the report in BI Catalog.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiredFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the task is mandatory or optional. Valid values are Yes and No. Default is No.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SaveAttachmentsToDORFor": {
+            "type": "string",
+            "description": "Identifies whether the attachments should be saved for the journey assignee or the task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SaveDocumentsToDORFor": {
+            "type": "string",
+            "description": "Attachments to add to document records for a document type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SignatureValidationConfiguration": {
+            "type": "string",
+            "description": "Validation type for electronic signature.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SubType": {
+            "title": "Signature Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task action subtype code. Available only for action types I 9 and Electronic Signature.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TargetDuration": {
+            "type": "integer",
+            "description": "Duration of the task.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "TargetDurationUOM": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unit of measure for target duration.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Type": {
+            "title": "Task Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of task action type.",
+            "nullable": false,
+            "default": "ORA_CHK_MANUAL",
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "WorkAuthorizationConfiguration": {
+            "type": "string",
+            "description": "Work authorization for I 9 task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "documents": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-documents-item-post-request"
+            }
+          },
+          "notifications": {
+            "title": "Journey Task Library Notifications",
+            "type": "array",
+            "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-notifications-item-post-request"
+            }
+          },
+          "properties": {
+            "title": "Journey Task Library Properties",
+            "type": "array",
+            "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-properties-item-post-request"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-documents-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-notifications-item-post-request": {
+        "type": "object",
+        "properties": {
+          "LibraryJourneyTaskNotificationId": {
+            "type": "integer",
+            "description": "Unique identifier of the journey task notification.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "NotifyOwnerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task owner needs to be notified when the event occurs. Valid values are Yes and No. Default is No.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "NotifyPerformerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task performer needs to be notified when the event occurs. Valid values are Yes and No. Default is Yes.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for owner.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          },
+          "OwnerExpiryTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the expiry notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerForceCompleteTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the force completion notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerNotApplicableTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template when a task is marked as not applicable for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template for task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for performer.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          },
+          "PerformerExpiryTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the expiry notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerForceCompleteTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the force completion notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerNotApplicableTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template when a task is marked as not applicable for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerTemplateId": {
+            "type": "integer",
+            "description": "Primary key or unique identifier of the notification template for task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TaskEvent": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of the task event. For example, task initiated, task updated, task deleted, task completed.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "includeInCompactView": true
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-properties-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Category": {
+            "type": "string",
+            "description": "Category of the for journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CategoryMeaning": {
+            "type": "string",
+            "description": "Meaning of category of journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Code": {
+            "type": "string",
+            "description": "Code of the journey template task property.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForLineManagerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for line manager. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOthersFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for other users. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOwnerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for owner. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForPerformerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for performer. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Level": {
+            "type": "string",
+            "description": "Property level for the journey template task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OverriddenFlag": {
+            "maxLength": 80,
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is overridden. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerLookupType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Journey template task type property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Sequence": {
+            "type": "integer",
+            "description": "Sequence of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ActionURL": {
+            "title": "URL",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The URL associated with the task that's entered on the setup screen. To retrieve a navigable URL, use the getNavigationURL custom method of the resource.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AllowAttachmentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether attachments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowCommentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether comments are enabled for a task. Valid values are Yes or No. Default is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AllowNotesContentFlag": {
+            "type": "boolean",
+            "description": "Indicates whether rich content can be added for notes. Valid values are Yes or No. The default is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "AttachmentDocumentTypeId": {
+            "type": "integer",
+            "description": "Attachments to add to document records for the given document type.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "CompletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is completed.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "DeletedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is deleted.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "Description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled for a journey task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "GuidedJourneyCode": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Code of the guided journey.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GuidedJourneyTaskCodes": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Code of the guided journey task.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "InitiatedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is initiated.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of journey task.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Notes": {
+            "type": "string",
+            "description": "Notes for a task. The notes text is stored as a CLOB object. To use in the payload, the text should be converted to a base64 encoded string using either a conversion tool or a prerequisite script.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OpenInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the external URL should open in the existing page or a new page. Valid values are Yes and No. The default value is No.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OpenReportInSamePageFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the report should open in the existing page or a new page. Valid values are Yes and No. The default value is Yes.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task owner.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "OwnerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task owner type.",
+            "nullable": true,
+            "default": "ORA_CHK_INITIATOR",
+            "x-queryable": false
+          },
+          "OwnerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the owner user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerPersonId": {
+            "type": "integer",
+            "description": "Internal identifier of the journey task performer.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PerformerResponsibilityType": {
+            "type": "string",
+            "description": "Responsibility type of the journey task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "PerformerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task performer type.",
+            "nullable": true,
+            "default": "ORA_WORKER",
+            "x-queryable": false
+          },
+          "PerformerUserGroupCode": {
+            "type": "string",
+            "description": "Code of the performer user group.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ProcessCloudConfiguration": {
+            "type": "string",
+            "description": "Configuration of the process automation.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ReassignedFeedFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the atom feed is enabled when a journey task is reassigned.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "ReminderContentDescription": {
+            "type": "string",
+            "description": "Content description of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentTitle": {
+            "type": "string",
+            "description": "Content title of the task reminder notification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ReminderContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task reminder notification.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          },
+          "RequiredFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the task is mandatory or optional. Valid values are Yes and No. Default is No.",
+            "nullable": true,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SaveAttachmentsToDORFor": {
+            "type": "string",
+            "description": "Identifies whether the attachments should be saved for the journey assignee or the task performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "sortable": false
+            }
+          },
+          "SubType": {
+            "title": "Signature Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Task action subtype code. Available only for action types I 9 and Electronic Signature.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TargetDuration": {
+            "type": "integer",
+            "description": "Duration of the task.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "TargetDurationUOM": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unit of measure for target duration.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Type": {
+            "title": "Task Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of task action type.",
+            "nullable": false,
+            "default": "ORA_CHK_MANUAL",
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "documents": {
+            "title": "Attachments",
+            "type": "array",
+            "description": "The attachments resource is used to view, create, and update attachments.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-documents-item-patch-request"
+            }
+          },
+          "notifications": {
+            "title": "Journey Task Library Notifications",
+            "type": "array",
+            "description": "The notifications resource is a child of the tasks resource. It includes a list of notification settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-notifications-item-patch-request"
+            }
+          },
+          "properties": {
+            "title": "Journey Task Library Properties",
+            "type": "array",
+            "description": "The properties resource is a child of the tasks resource. It provides a list of properties settings for the task performer and owner.",
+            "items": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-properties-item-patch-request"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-documents-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-notifications-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "NotifyOwnerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task owner needs to be notified when the event occurs. Valid values are Yes and No. Default is No.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "NotifyPerformerFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the task performer needs to be notified when the event occurs. Valid values are Yes and No. Default is Yes.",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for owner.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OwnerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for owner.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          },
+          "PerformerContentDescription": {
+            "type": "string",
+            "description": "Content description of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentTitle": {
+            "type": "string",
+            "description": "Content title of the task notification for performer.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PerformerContentType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Content type of the task notification for performer.",
+            "nullable": true,
+            "default": "20_ALERT_TEMPLATE"
+          }
+        }
+      },
+      "journeyTaskLibrary-properties-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Category": {
+            "type": "string",
+            "description": "Category of the for journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CategoryMeaning": {
+            "type": "string",
+            "description": "Meaning of category of journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Code": {
+            "type": "string",
+            "description": "Code of the journey template task property.",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForLineManagerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for line manager. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOthersFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for other users. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForOwnerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for owner. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DisabledForPerformerFlag": {
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is disabled for performer. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Level": {
+            "type": "string",
+            "description": "Property level for the journey template task.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LineManagerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for line manager.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OthersValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for other user.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OverriddenFlag": {
+            "maxLength": 80,
+            "type": "boolean",
+            "description": "Indicates if the journey template task property is overridden. Default value depends on the task type.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerLookupType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Journey template task type property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OwnerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for owner.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerDefaultValue": {
+            "type": "string",
+            "description": "Default value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerLookupType": {
+            "type": "string",
+            "description": "Journey template task type property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "PerformerValue": {
+            "type": "string",
+            "description": "Value of the journey template task property for performer.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Sequence": {
+            "type": "integer",
+            "description": "Sequence of the journey template task property.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "journeyTaskLibrary-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-item-post-request"
+            }
+          }
+        }
+      },
+      "journeyTaskLibrary-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/journeyTaskLibrary-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

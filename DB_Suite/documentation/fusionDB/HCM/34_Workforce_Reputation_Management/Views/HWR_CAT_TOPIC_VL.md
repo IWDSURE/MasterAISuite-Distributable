@@ -1,0 +1,43 @@
+# HWR_CAT_TOPIC_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrcattopicvl-6016.html#hwrcattopicvl-6016](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrcattopicvl-6016.html#hwrcattopicvl-6016)
+
+## Columns
+
+- TOPIC_ID
+- TOPIC_KEY
+- CATEGORY_ID
+- CATEGORY_KEY
+- IS_SEEDED_DATA
+- ACCURACY_VALUE
+- IMPORTANCE_VALUE
+- PRECISION_VALUE
+- RELEVANCE_VALUE
+- IS_ACTIVE
+- AVERAGE_SCORE
+- URL_LINK
+- DISPLAY_TEXT
+- DESCRIPTION
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.TOPIC_ID, B.TOPIC_KEY, B.CATEGORY_ID, B.CATEGORY_KEY, B.IS_SEEDED_DATA, B.ACCURACY_VALUE, B.IMPORTANCE_VALUE, B.PRECISION_VALUE, B.RELEVANCE_VALUE, B.IS_ACTIVE, B.AVERAGE_SCORE, B.URL_LINK, T.DISPLAY_TEXT, T.DESCRIPTION, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HWR_CAT_TOPIC_B B, HWR_CAT_TOPIC_TL T WHERE B.TOPIC_ID = T.TOPIC_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

@@ -1,0 +1,149 @@
+{
+  "name": "HRC_LOADER_PARAMETERS",
+  "object_type": "TABLE",
+  "description": "The table is used for defining configuration parameters for the ESS processing of HR2HR ESS Jobs.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcloaderparameters-6465.html#hrcloaderparameters-6465",
+  "primary_keys": [
+    {
+      "name": "HRC_LOADER_PARAMETERS_PK",
+      "columns": "PARAMETER_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PARAMETER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Surrogate Primary key populated by sequence",
+      "Status": ""
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS.",
+      "Status": ""
+    },
+    {
+      "Name": "PARAM_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The internal Parameter Name (e.g. ODI_CONTEXT). The parameter display name is derived from the corresponding LOOKUP where LOOKUP_TYPE='HRC_LOADER_PARAMETERS'",
+      "Status": ""
+    },
+    {
+      "Name": "PARAM_VALUE",
+      "Datatype": "VARCHAR2",
+      "Length": "400",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The parameter value. This value is validated by taking into account the PARAM_REQUIRED and PARAM_DATATYPE columns.",
+      "Status": ""
+    },
+    {
+      "Name": "PARAM_REQUIRED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Defines if the parameter is required (i.e can not be null ) and has value of Y or N. Default value is Y",
+      "Status": ""
+    },
+    {
+      "Name": "PARAM_DATATYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Defines the data type for the parameter. The only values supported are; S(String and I(Integer)",
+      "Status": ""
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file.",
+      "Status": "Obsolete"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_LOADER_PARAMETERS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PARAMETER_ID"
+    },
+    {
+      "Index": "HRC_LOADER_PARAMETERS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ENTERPRISE_ID, PARAM_NAME"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:43:53"
+}

@@ -1,0 +1,27 @@
+# PAY_XLA_ESTIMATE_ACT_SRCS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payxlaestimateactsrcsv-3165.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payxlaestimateactsrcsv-3165.html)
+
+## Columns
+
+- PAY_XLA_EVENT_ID
+- COST_PROCESS_FLOW_NAME
+- COST_PROCESS_NAME
+
+## Query
+
+```sql
+SELECT PXE.EVENT_ID PAY_XLA_EVENT_ID, PAY_SLA_PKG.GET_FLOW_NAME(COST_PA.PAYROLL_ACTION_ID) COST_PROCESS_FLOW_NAME, PAY_SLA_PKG.GET_PROCESS_NAME(COST_PA.ACTION_TYPE) COST_PROCESS_NAME FROM PAY_XLA_EVENTS PXE, PAY_PAYROLL_REL_ACTIONS COST_RA, PAY_PAYROLL_ACTIONS COST_PA WHERE COST_RA.PAYROLL_REL_ACTION_ID = PXE.COST_ACTION_ID AND COST_PA.PAYROLL_ACTION_ID = COST_RA.PAYROLL_ACTION_ID AND PXE.COST_TYPE in ('EC', 'ECR')
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

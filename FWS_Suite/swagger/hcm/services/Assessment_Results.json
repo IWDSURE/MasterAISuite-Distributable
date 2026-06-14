@@ -1,0 +1,1121 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Assessment Results",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUIAssessmentResults": {
+      "get": {
+        "tags": [
+          "Assessment Results"
+        ],
+        "summary": "Get all assessment results",
+        "operationId": "getall_recruitingUIAssessmentResults",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccountActiveFlag; boolean; Assessment partner account active indicator.</li><li>AccountDescription; string; Assessment partner account description indicator.</li><li>AccountName; string; Assessment partner account name.</li><li>AssessmentConfigId; integer; Assessment partner configuration identifier.</li><li>AssessmentPercentile; number; Assessment percentile value provided by the partner.</li><li>Band; string; Band value provided by the partner.</li><li>OverallComments; string; Comments provided by the partner.</li><li>PackageCode; string; Assessment package code.</li><li>PackageName; string; Assessment package name.</li><li>PackageResultId; integer; Assessment package result identifier.</li><li>PackageStatus; string; Assessment package status.</li><li>PackageStatusDescription; string; Assessment package status description.</li><li>PartnerActiveFlag; boolean; Assessment partner active indicator.</li><li>PartnerName; string; Partner name.</li><li>ProvisioningId; integer; Assessment partner provisioning identifier.</li><li>RequestedBy; string; User that requested assessment package.</li><li>RequestedOn; string; Assessment requested date.</li><li>RequisitionPackageId; integer; Requisition package identifier.</li><li>Score; number; Score value provided by the partner.</li><li>TriggerActiveFlag; boolean; Trigger active indicator.</li><li>TriggerName; string; Trigger name.</li><li>TriggerSequence; string; Trigger sequence.</li><li>TriggerType; string; Trigger type.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all assessment results using a primary key. <br>Finder Variables <ul><li>PackageCode; string;  Package code used with primary key to find assessment results. </li><li>PackageResultId; integer;  Package result identifier used with primary key to find assessment results. </li><li>ProvisioningId; integer;  Partner provisioning identifier used with primary key to find assessment results. </li></ul></li><li>findByContextId Finds all assessment results by context identifier. <br>Finder Variables <ul><li>pAssessmentConfigId; integer;  Assessment configuration identifier used to find assessment results. </li><li>pContextCode; string;  Context code used to find assessment results. </li><li>pContextId; integer;  Context identifier used to find assessment results. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all assessment results using a primary key.",
+                "properties": {
+                  "PackageCode": {
+                    "nullable": true,
+                    "description": "Package code used with primary key to find assessment results.",
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "ProvisioningId": {
+                    "nullable": true,
+                    "description": "Partner provisioning identifier used with primary key to find assessment results.",
+                    "type": "integer"
+                  },
+                  "PackageResultId": {
+                    "nullable": true,
+                    "description": "Package result identifier used with primary key to find assessment results.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByContextId",
+                "description": "Finds all assessment results by context identifier.",
+                "title": "findByContextId",
+                "properties": {
+                  "pAssessmentConfigId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Assessment configuration identifier used to find assessment results.",
+                    "type": "integer"
+                  },
+                  "pContextCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Context code used to find assessment results.",
+                    "type": "string"
+                  },
+                  "pContextId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Context identifier used to find assessment results.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIAssessmentResults"
+                }
+              }
+            },
+            "links": {
+              "viewResults": {
+                "operationRef": "#/paths/~1recruitingUIAssessmentResults~1action~1viewResults/post",
+                "description": "View assessment package results from a partner."
+              },
+              "cancelRequest": {
+                "operationRef": "#/paths/~1recruitingUIAssessmentResults~1action~1cancelRequest/post",
+                "description": "Cancels the assessment package request to the partner."
+              },
+              "initiateRequest": {
+                "operationRef": "#/paths/~1recruitingUIAssessmentResults~1action~1initiateRequest/post",
+                "description": "Initiates the assessment package request to the partner."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIAssessmentResults-get",
+        "x-filename-id": "recruitinguiassessmentresults-get"
+      }
+    },
+    "/recruitingUIAssessmentResults/action/viewResults": {
+      "post": {
+        "tags": [
+          "Assessment Results"
+        ],
+        "summary": "View assessment results",
+        "description": "View assessment package results from a partner.",
+        "operationId": "doall_viewResults_recruitingUIAssessmentResults",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "submissionId": {
+                    "type": "number",
+                    "description": "Submission identifier.",
+                    "nullable": true
+                  },
+                  "provisioningId": {
+                    "type": "number",
+                    "description": "Partner provisioning identifier.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Action returning a message indicating the assessment results can be viewed or can't be viewed."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Action returning a message indicating the assessment results can be viewed or can't be viewed."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIAssessmentResults-action-viewResults-post",
+        "x-filename-id": "recruitinguiassessmentresults-action-viewresults-post"
+      }
+    },
+    "/recruitingUIAssessmentResults/action/initiateRequest": {
+      "post": {
+        "tags": [
+          "Assessment Results"
+        ],
+        "summary": "Initiate an assessment request",
+        "description": "Initiates the assessment package request to the partner.",
+        "operationId": "doall_initiateRequest_recruitingUIAssessmentResults",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assessmentConfigId": {
+                    "type": "number",
+                    "description": "Assessment partner configuration identifier.",
+                    "nullable": true
+                  },
+                  "submissionId": {
+                    "type": "number",
+                    "description": "Submission identifier.",
+                    "nullable": true
+                  },
+                  "packageIds": {
+                    "type": "array",
+                    "description": "Package identifiers.",
+                    "nullable": true,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Action returning a message indicating that the assessment request was initiated or couldn't be initiated."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Action returning a message indicating that the assessment request was initiated or couldn't be initiated."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIAssessmentResults-action-initiateRequest-post",
+        "x-filename-id": "recruitinguiassessmentresults-action-initiaterequest-post"
+      }
+    },
+    "/recruitingUIAssessmentResults/action/cancelRequest": {
+      "post": {
+        "tags": [
+          "Assessment Results"
+        ],
+        "summary": "Cancel an assessment request",
+        "description": "Cancels the assessment package request to the partner.",
+        "operationId": "doall_cancelRequest_recruitingUIAssessmentResults",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assessmentConfigId": {
+                    "type": "number",
+                    "description": "Assessment partner configuration identifier.",
+                    "nullable": true
+                  },
+                  "submissionId": {
+                    "type": "number",
+                    "description": "Submission identifier.",
+                    "nullable": true
+                  },
+                  "packageIds": {
+                    "type": "array",
+                    "description": "Package identifiers.",
+                    "nullable": true,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Action returning a message indicating that the assessment request was canceled or couldn't be canceled."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "Action returning a message indicating that the assessment request was canceled or couldn't be canceled."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIAssessmentResults-action-cancelRequest-post",
+        "x-filename-id": "recruitinguiassessmentresults-action-cancelrequest-post"
+      }
+    },
+    "/recruitingUIAssessmentResults/{recruitingUIAssessmentResultsUniqID}": {
+      "get": {
+        "tags": [
+          "Assessment Results"
+        ],
+        "summary": "Get an assessment result",
+        "operationId": "get_recruitingUIAssessmentResults",
+        "parameters": [
+          {
+            "name": "recruitingUIAssessmentResultsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Assessment Results resource and used to uniquely identify an instance of Assessment Results. The client should not generate the hash key value. Instead, the client should query on the Assessment Results collection resource in order to navigate to a specific instance of Assessment Results to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIAssessmentResults-item-response"
+                }
+              }
+            },
+            "links": {
+              "AdditionalResultAttributes": {
+                "operationRef": "#/paths/~1recruitingUIAssessmentResults~1{recruitingUIAssessmentResultsUniqID}~1child~1AdditionalResultAttributes/get",
+                "parameters": {
+                  "recruitingUIAssessmentResultsUniqID": "$request.path.recruitingUIAssessmentResultsUniqID"
+                },
+                "description": "The additionalResultAttributes resource provides additional assessment results."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIAssessmentResults-{recruitingUIAssessmentResultsUniqID}-get",
+        "x-filename-id": "recruitinguiassessmentresults-recruitinguiassessmentresultsuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUIAssessmentResults": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIAssessmentResults-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingUIAssessmentResults-item-response": {
+        "type": "object",
+        "properties": {
+          "AccountActiveFlag": {
+            "type": "boolean",
+            "description": "Assessment partner account active indicator.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AccountDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment partner account description indicator.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AccountName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment partner account name.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AdditionalResultAttributes": {
+            "title": "Assessment Results Additional Attributes",
+            "type": "array",
+            "description": "The additionalResultAttributes resource provides additional assessment results.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIAssessmentResults-AdditionalResultAttributes-item-response"
+            }
+          },
+          "AssessmentConfigId": {
+            "type": "integer",
+            "description": "Assessment partner configuration identifier.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AssessmentPercentile": {
+            "title": "Percentile",
+            "type": "number",
+            "description": "Assessment percentile value provided by the partner.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Band": {
+            "title": "Band",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Band value provided by the partner.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OverallComments": {
+            "type": "string",
+            "description": "Comments provided by the partner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PackageCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment package code.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PackageName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment package name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PackageResultId": {
+            "type": "integer",
+            "description": "Assessment package result identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PackageStatus": {
+            "title": "Assessment Package Status Badge",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment package status.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PackageStatusDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Assessment package status description.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PartnerActiveFlag": {
+            "type": "boolean",
+            "description": "Assessment partner active indicator.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PartnerName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Partner name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProvisioningId": {
+            "type": "integer",
+            "description": "Assessment partner provisioning identifier.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequestedBy": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "User that requested assessment package.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequestedOn": {
+            "title": "Requested On",
+            "type": "string",
+            "description": "Assessment requested date.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequisitionPackageId": {
+            "type": "integer",
+            "description": "Requisition package identifier.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Score": {
+            "title": "Score",
+            "type": "number",
+            "description": "Score value provided by the partner.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TriggerActiveFlag": {
+            "type": "boolean",
+            "description": "Trigger active indicator.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TriggerName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Trigger name.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TriggerSequence": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Trigger sequence.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TriggerType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Trigger type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingUIAssessmentResults-AdditionalResultAttributes-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional result attribute name.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AttributeValue": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional result attribute value.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

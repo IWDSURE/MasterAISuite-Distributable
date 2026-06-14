@@ -1,0 +1,144 @@
+{
+  "name": "PAY_TEMP_OBJECT_ACTIONS",
+  "object_type": "TABLE",
+  "description": "This table contains temporary actions that are only required while a process is in progress.",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "APPS_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paytempobjectactions-14490.html#paytempobjectactions-14490",
+  "primary_keys": [
+    {
+      "name": "PAY_TEMP_OBJECT_ACTIONS_PK",
+      "columns": "TEMP_OBJECT_ACTION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TEMP_OBJECT_ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "TEMP_OBJECT_ACTION_ID"
+    },
+    {
+      "Name": "PAYROLL_RELATIONSHIP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to the Payroll Relationships table"
+    },
+    {
+      "Name": "OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to a database object defined by the Object Type"
+    },
+    {
+      "Name": "OBJECT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the type of object that the object id is pointing to"
+    },
+    {
+      "Name": "PAYROLL_ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to the PAY_PAYROLL_ACTION Table"
+    },
+    {
+      "Name": "ACTION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Valid statuses for an object action."
+    },
+    {
+      "Name": "CHUNK_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Number used to group events into chunks for parallelization."
+    },
+    {
+      "Name": "ACTION_SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Absolute sequence number to determine physical order of events."
+    },
+    {
+      "Name": "PARENT_OBJECT_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "PARENT_OBJECT_ID"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_ENTERPRISES."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_ID"
+    },
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PAYROLL_ACTION_ID, CHUNK_NUMBER"
+    },
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PARENT_OBJECT_ID, PAYROLL_ACTION_ID"
+    },
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "TEMP_OBJECT_ACTION_ID"
+    },
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PAYROLL_ACTION_ID, ACTION_STATUS"
+    },
+    {
+      "Index": "PAY_TEMP_OBJECT_ACTIONS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PAYROLL_RELATIONSHIP_ID, PAYROLL_ACTION_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:15:52"
+}

@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Configuration Set Migration/Import",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/fscmUI/applcoreApi/v2/csm/import/{csId}": {
+      "post": {
+        "tags": [
+          "Configuration Set Migration/Import"
+        ],
+        "summary": "Start import",
+        "description": "Start a CSM archive import process.",
+        "operationId": "startImport",
+        "parameters": [
+          {
+            "name": "csId",
+            "in": "path",
+            "description": "Configuration Set ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Options",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation already in progress.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Operation started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not start operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration Set not found.",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "options",
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-import-{csId}-post",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-import-csid-post"
+      }
+    },
+    "<servername>/fscmUI/applcoreApi/v2/csm/import/status{csId}": {
+      "get": {
+        "tags": [
+          "Configuration Set Migration/Import"
+        ],
+        "summary": "Check status",
+        "description": "Check status of a CSM archive import process.",
+        "operationId": "checkImport",
+        "parameters": [
+          {
+            "name": "csId",
+            "in": "path",
+            "description": "Configuration Set ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configuration Set status retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Configuration Set status retrieved (in progress states).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration Set not found.",
+            "content": {}
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-import-status{csId}-get",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-import-statuscsid-get"
+      }
+    },
+    "<servername>/fscmUI/applcoreApi/v2/csm/apply/{csId}": {
+      "post": {
+        "tags": [
+          "Configuration Set Migration/Import"
+        ],
+        "summary": "Apply imported migration set",
+        "description": "Apply a migration set that has been successfully imported.",
+        "operationId": "startApply",
+        "parameters": [
+          {
+            "name": "csId",
+            "in": "path",
+            "description": "Configuration Set ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation already in progress.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Operation started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not start the operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration Set not found.",
+            "content": {}
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-apply-{csId}-post",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-apply-csid-post"
+      }
+    },
+    "<servername>/fscmUI/applcoreApi/v2/csm/restore/{csId}": {
+      "post": {
+        "tags": [
+          "Configuration Set Migration/Import"
+        ],
+        "summary": "Restore configuration",
+        "description": "Rollback a migration set that has been applied successfully.",
+        "operationId": "restore",
+        "parameters": [
+          {
+            "name": "csId",
+            "in": "path",
+            "description": "Configuration Set ID.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation already in progress.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Operation started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not start operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration Set not found.",
+            "content": {}
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-restore-{csId}-post",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-restore-csid-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ImportRequest": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "$ref": "#/components/schemas/ImportOption"
+          }
+        }
+      },
+      "ImportOption": {
+        "type": "object",
+        "properties": {
+          "SKIP_ACTIVE_SANDBOXES_CHECK": {
+            "type": "boolean",
+            "description": "Setting the flag to `true` will allow the configuration set to be imported even when active sandboxes exist on target environment."
+          }
+        },
+        "description": "A (string, boolean) map of options. `SKIP_ACTIVE_SANDBOXES_CHECK` is an example key."
+      },
+      "StandardResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the current operational status."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the current operational state."
+          },
+          "csId": {
+            "type": "string",
+            "description": "The identifier of created Configuration Set."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          },
+          "detailedLog": {
+            "type": "string",
+            "description": "Detailed log of current operation."
+          },
+          "targetPushStatus": {
+            "type": "string",
+            "description": "Status of the configuration set archive being uploaded to target environment."
+          },
+          "csmSandboxId": {
+            "type": "string",
+            "description": "The identifier of the CSM Sandbox created on target environment as part of `Import` operation."
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

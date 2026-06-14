@@ -1,0 +1,43 @@
+# PER_POS_HRCHY_BOTUP_DATE_CF_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perposhrchybotupdatecfv-4595.html#perposhrchybotupdatecfv-4595](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perposhrchybotupdatecfv-4595.html#perposhrchybotupdatecfv-4595)
+
+## Columns
+
+- POSITION_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- ANCESTOR_LEVEL
+- ANCESTOR_POS_ID1
+- ANCESTOR_POS_ID2
+- ANCESTOR_POS_ID3
+- ANCESTOR_POS_ID4
+- ANCESTOR_POS_ID5
+- ANCESTOR_POS_ID6
+- ANCESTOR_POS_ID7
+- ANCESTOR_POS_ID8
+- ANCESTOR_POS_ID9
+- ANCESTOR_POS_ID10
+- ANCESTOR_POS_ID11
+- ANCESTOR_POS_ID12
+- ANCESTOR_POS_ID13
+- ANCESTOR_POS_ID14
+- ANCESTOR_POS_ID15
+
+## Query
+
+```sql
+SELECT position_id, d.report_date effective_start_date, d.report_date effective_end_date, max(node_level) ancestor_level, max(case node_level when 1 then ancestor_position_id end) ancestor_pos_id1 , max(case node_level when 2 then ancestor_position_id end) ancestor_pos_id2 , max(case node_level when 3 then ancestor_position_id end) ancestor_pos_id3 , max(case node_level when 4 then ancestor_position_id end) ancestor_pos_id4 , max(case node_level when 5 then ancestor_position_id end) ancestor_pos_id5 , max(case node_level when 6 then ancestor_position_id end) ancestor_pos_id6 , max(case node_level when 7 then ancestor_position_id end) ancestor_pos_id7 , max(case node_level when 8 then ancestor_position_id end) ancestor_pos_id8 , max(case node_level when 9 then ancestor_position_id end) ancestor_pos_id9 , max(case node_level when 10 then ancestor_position_id end) ancestor_pos_id10, max(case node_level when 11 then ancestor_position_id end) ancestor_pos_id11, max(case node_level when 12 then ancestor_position_id end) ancestor_pos_id12, max(case node_level when 13 then ancestor_position_id end) ancestor_pos_id13, max(case node_level when 14 then ancestor_position_id end) ancestor_pos_id14, max(case node_level when 15 then ancestor_position_id end) ancestor_pos_id15 FROM PER_POSITION_HRCHY_RF f, FND_CAL_DAY d where d.report_date between effective_start_date and effective_end_date group by position_id,d.report_date
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

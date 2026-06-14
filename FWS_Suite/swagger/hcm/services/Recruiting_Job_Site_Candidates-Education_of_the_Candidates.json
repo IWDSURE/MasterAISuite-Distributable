@@ -1,0 +1,1981 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting Job Site Candidates/Education of the Candidates",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingJobSiteCandidates/{CandidateNumber}/child/educations": {
+      "get": {
+        "tags": [
+          "Recruiting Job Site Candidates/Education of the Candidates"
+        ],
+        "summary": "Get all candidate educations",
+        "operationId": "getall_recruitingJobSiteCandidates-educations",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CountryCode; string; Country code of the candidate education.</li><li>DegreeName; string; Degree name of the candidate education.</li><li>EducationalEstablishment; string; Educational establishment of the candidate education.</li><li>Major; string; Major of the candidate education.</li><li>StateProvinceCode; string; State province code of the candidate education.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all candidate education using a unique ID. <br>Finder Variables <ul><li>EducationId; integer;  Education ID used to find an education of a candidate. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all candidate education using a unique ID.",
+                "properties": {
+                  "EducationId": {
+                    "x-queryable": false,
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Education ID used to find an education of a candidate.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSiteCandidates-{CandidateNumber}-child-educations-get",
+        "x-filename-id": "recruitingjobsitecandidates-candidatenumber-child-educations-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting Job Site Candidates/Education of the Candidates"
+        ],
+        "summary": "Create a candidate education",
+        "operationId": "create_recruitingJobSiteCandidates-educations",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingJobSiteCandidates-educations-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSiteCandidates-{CandidateNumber}-child-educations-post",
+        "x-filename-id": "recruitingjobsitecandidates-candidatenumber-child-educations-post"
+      }
+    },
+    "/recruitingJobSiteCandidates/{CandidateNumber}/child/educations/{EducationId}": {
+      "get": {
+        "tags": [
+          "Recruiting Job Site Candidates/Education of the Candidates"
+        ],
+        "summary": "Get candidate education",
+        "operationId": "get_recruitingJobSiteCandidates-educations",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EducationId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Education identifier of the candidate education.",
+              "format": "int64",
+              "nullable": false,
+              "x-queryable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSiteCandidates-{CandidateNumber}-child-educations-{EducationId}-get",
+        "x-filename-id": "recruitingjobsitecandidates-candidatenumber-child-educations-educationid-get"
+      },
+      "delete": {
+        "tags": [
+          "Recruiting Job Site Candidates/Education of the Candidates"
+        ],
+        "summary": "Delete a candidate education",
+        "operationId": "delete_recruitingJobSiteCandidates-educations",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EducationId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Education identifier of the candidate education.",
+              "format": "int64",
+              "nullable": false,
+              "x-queryable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingJobSiteCandidates-{CandidateNumber}-child-educations-{EducationId}-delete",
+        "x-filename-id": "recruitingjobsitecandidates-candidatenumber-child-educations-educationid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Recruiting Job Site Candidates/Education of the Candidates"
+        ],
+        "summary": "Update a candidate education",
+        "operationId": "update_recruitingJobSiteCandidates-educations",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EducationId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Education identifier of the candidate education.",
+              "format": "int64",
+              "nullable": false,
+              "x-queryable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingJobSiteCandidates-educations-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSiteCandidates-{CandidateNumber}-child-educations-{EducationId}-patch",
+        "x-filename-id": "recruitingjobsitecandidates-candidatenumber-child-educations-educationid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingJobSiteCandidates-educations": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "recruitingJobSiteCandidates-educations-item-response": {
+        "type": "object",
+        "properties": {
+          "AcademicStanding": {
+            "title": "Academic Standing",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Academic standing of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivitySummary": {
+            "title": "Summary of Activities",
+            "type": "string",
+            "description": "Activity summary of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AreaOfStudy": {
+            "title": "Area of Study",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Area of study of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "City": {
+            "title": "City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "CIty of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompletedAmount": {
+            "title": "Completed Amount",
+            "type": "integer",
+            "description": "Completed amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CompletedTraningUnits": {
+            "title": "Training Completed Units",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Completed training units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentItemId": {
+            "title": "Degree",
+            "type": "integer",
+            "description": "Content item identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code of the candidate education.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DateAcquired": {
+            "title": "Date Acquired",
+            "type": "string",
+            "description": "Date acquired of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DegreeName": {
+            "title": "Degree",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Degree name of the candidate education.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "title": "Faculty or Department",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Duration": {
+            "title": "Duration",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Duration of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DurationUnits": {
+            "title": "Duration Units",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Duration units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EduLevelCompletedFlag": {
+            "title": "Education Level Completed",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Education level completed indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationId": {
+            "type": "integer",
+            "description": "Education identifier of the candidate education.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationURL": {
+            "title": "Education URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Education URL of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationalEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Educational establishment of the candidate education.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Educational establishment identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Educator": {
+            "title": "Educator",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Educator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Fee": {
+            "title": "Fee",
+            "type": "integer",
+            "description": "Fee of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "FeeCurrency": {
+            "title": "Fee Currency",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Fee currency of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GPA": {
+            "title": "GPA",
+            "type": "number",
+            "description": "GPA of the candidate education.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "GraduatedFlag": {
+            "title": "Graduated",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Graduated indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "HighestEduLevel": {
+            "title": "Highest Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Highest education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Major": {
+            "title": "Major",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Major of the candidate education.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Minor": {
+            "title": "Minor",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Minor of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PartTimeFlag": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Part time indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Projected completion date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Reimbursements": {
+            "title": "Reimbursement Arrangements",
+            "type": "string",
+            "description": "Reimbursements of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the education is required in the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "StateProvinceCode": {
+            "title": "State",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code of the candidate education.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TotalAmount": {
+            "title": "Total Amount",
+            "type": "integer",
+            "description": "Total amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TrmnlDegDiscpFlag": {
+            "title": "Terminal Degree for Discipline",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Terminal degree discipline indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TuitionMethod": {
+            "title": "Tuition Method",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tuition method of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "YearAcquired": {
+            "title": "Year Acquired",
+            "type": "integer",
+            "description": "Year acquired of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingJobSiteCandidates-educations-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AcademicStanding": {
+            "title": "Academic Standing",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Academic standing of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivitySummary": {
+            "title": "Summary of Activities",
+            "type": "string",
+            "description": "Activity summary of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AreaOfStudy": {
+            "title": "Area of Study",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Area of study of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "City": {
+            "title": "City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "CIty of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompletedAmount": {
+            "title": "Completed Amount",
+            "type": "integer",
+            "description": "Completed amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CompletedTraningUnits": {
+            "title": "Training Completed Units",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Completed training units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentItemId": {
+            "title": "Degree",
+            "type": "integer",
+            "description": "Content item identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code of the candidate education.",
+            "nullable": true
+          },
+          "DateAcquired": {
+            "title": "Date Acquired",
+            "type": "string",
+            "description": "Date acquired of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DegreeName": {
+            "title": "Degree",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Degree name of the candidate education.",
+            "nullable": true
+          },
+          "Department": {
+            "title": "Faculty or Department",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Duration": {
+            "title": "Duration",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Duration of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DurationUnits": {
+            "title": "Duration Units",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Duration units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EduLevelCompletedFlag": {
+            "title": "Education Level Completed",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Education level completed indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationId": {
+            "type": "integer",
+            "description": "Education identifier of the candidate education.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationURL": {
+            "title": "Education URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Education URL of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationalEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Educational establishment of the candidate education.",
+            "nullable": true
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Educational establishment identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Educator": {
+            "title": "Educator",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Educator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Fee": {
+            "title": "Fee",
+            "type": "integer",
+            "description": "Fee of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "FeeCurrency": {
+            "title": "Fee Currency",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Fee currency of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GPA": {
+            "title": "GPA",
+            "type": "number",
+            "description": "GPA of the candidate education.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "GraduatedFlag": {
+            "title": "Graduated",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Graduated indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "HighestEduLevel": {
+            "title": "Highest Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Highest education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Major": {
+            "title": "Major",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Major of the candidate education.",
+            "nullable": true
+          },
+          "Minor": {
+            "title": "Minor",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Minor of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PartTimeFlag": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Part time indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Projected completion date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Reimbursements": {
+            "title": "Reimbursement Arrangements",
+            "type": "string",
+            "description": "Reimbursements of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the education is required in the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "StateProvinceCode": {
+            "title": "State",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code of the candidate education.",
+            "nullable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TotalAmount": {
+            "title": "Total Amount",
+            "type": "integer",
+            "description": "Total amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TrmnlDegDiscpFlag": {
+            "title": "Terminal Degree for Discipline",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Terminal degree discipline indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TuitionMethod": {
+            "title": "Tuition Method",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tuition method of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "YearAcquired": {
+            "title": "Year Acquired",
+            "type": "integer",
+            "description": "Year acquired of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingJobSiteCandidates-educations-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AcademicStanding": {
+            "title": "Academic Standing",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Academic standing of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ActivitySummary": {
+            "title": "Summary of Activities",
+            "type": "string",
+            "description": "Activity summary of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AreaOfStudy": {
+            "title": "Area of Study",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Area of study of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "City": {
+            "title": "City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "CIty of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompletedAmount": {
+            "title": "Completed Amount",
+            "type": "integer",
+            "description": "Completed amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CompletedTraningUnits": {
+            "title": "Training Completed Units",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Completed training units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentItemId": {
+            "title": "Degree",
+            "type": "integer",
+            "description": "Content item identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code of the candidate education.",
+            "nullable": true
+          },
+          "DateAcquired": {
+            "title": "Date Acquired",
+            "type": "string",
+            "description": "Date acquired of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DegreeName": {
+            "title": "Degree",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Degree name of the candidate education.",
+            "nullable": true
+          },
+          "Department": {
+            "title": "Faculty or Department",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Duration": {
+            "title": "Duration",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Duration of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DurationUnits": {
+            "title": "Duration Units",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Duration units of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EduLevelCompletedFlag": {
+            "title": "Education Level Completed",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Education level completed indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationURL": {
+            "title": "Education URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Education URL of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EducationalEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Educational establishment of the candidate education.",
+            "nullable": true
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Educational establishment identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Educator": {
+            "title": "Educator",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Educator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Fee": {
+            "title": "Fee",
+            "type": "integer",
+            "description": "Fee of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "FeeCurrency": {
+            "title": "Fee Currency",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Fee currency of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "GPA": {
+            "title": "GPA",
+            "type": "number",
+            "description": "GPA of the candidate education.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "GraduatedFlag": {
+            "title": "Graduated",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Graduated indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "HighestEduLevel": {
+            "title": "Highest Education Level",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Highest education level of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Major": {
+            "title": "Major",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Major of the candidate education.",
+            "nullable": true
+          },
+          "Minor": {
+            "title": "Minor",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Minor of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PartTimeFlag": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Part time indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Projected completion date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Reimbursements": {
+            "title": "Reimbursement Arrangements",
+            "type": "string",
+            "description": "Reimbursements of the candidate education.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "RequiredFlag": {
+            "title": "Required",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the education is required in the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section identifier of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the candidate education.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "StateProvinceCode": {
+            "title": "State",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code of the candidate education.",
+            "nullable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TotalAmount": {
+            "title": "Total Amount",
+            "type": "integer",
+            "description": "Total amount of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TrmnlDegDiscpFlag": {
+            "title": "Terminal Degree for Discipline",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Terminal degree discipline indicator of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "TuitionMethod": {
+            "title": "Tuition Method",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tuition method of the candidate education.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "YearAcquired": {
+            "title": "Year Acquired",
+            "type": "integer",
+            "description": "Year acquired of the candidate education.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingJobSiteCandidates-educations-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingJobSiteCandidates-educations-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingJobSiteCandidates-educations-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

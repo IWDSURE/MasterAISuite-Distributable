@@ -1,0 +1,126 @@
+{
+  "name": "IRC_TRACK_USER_VIEWS",
+  "object_type": "TABLE",
+  "description": "This table is used to track which recruiting objects (Job Applications, Prospects etc) user has viewed.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irctrackuserviews-12012.html#irctrackuserviews-12012",
+  "primary_keys": [
+    {
+      "name": "IRC_TRACK_USER_VIEWS_PK",
+      "columns": "TRACK_USER_VIEW_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TRACK_USER_VIEW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the table. System generated."
+    },
+    {
+      "Name": "USER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_USERS table."
+    },
+    {
+      "Name": "OBJECT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Type of Recruiting object user has accessed."
+    },
+    {
+      "Name": "OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Froeign key of the Object which user has accessed."
+    },
+    {
+      "Name": "LAST_VIEWED_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the time when the object was last accessed."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_TRACK_USER_VIEWS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "USER_ID"
+    },
+    {
+      "Index": "IRC_TRACK_USER_VIEWS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_TYPE, OBJECT_ID, USER_ID"
+    },
+    {
+      "Index": "IRC_TRACK_USER_VIEWS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "TRACK_USER_VIEW_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:04:13"
+}

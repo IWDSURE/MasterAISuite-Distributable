@@ -1,0 +1,142 @@
+{
+  "name": "IRC_SEARCHES",
+  "object_type": "TABLE",
+  "description": "This table stores all the search related details.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircsearches-10700.html#ircsearches-10700",
+  "primary_keys": [
+    {
+      "name": "IRC_SEARCHES_PK",
+      "columns": "SEARCH_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SEARCH_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table. System generated."
+    },
+    {
+      "Name": "SEARCH_QUERY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This fiels is to determine what kind of data is stored in SEARCH_QUERY column."
+    },
+    {
+      "Name": "DENORMALIZATION_COMPLETED",
+      "Datatype": "VARCHAR2",
+      "Length": "2",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A flag to indicate whether the search and its corresponding action data have been denormalized for reporting."
+    },
+    {
+      "Name": "OWNER_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "CandidateId of the person who ran the search."
+    },
+    {
+      "Name": "SEARCH_QUERY",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the details of filters null of the search done."
+    },
+    {
+      "Name": "SEARCH_RESULT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the list of CandidateIds in search result"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "CANDIDATE_TRACKING_UPDATED",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether this row has processed to update the candidate last retrieved date in IRC_CANDIDATE_SEARCH_TRACKING table"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_SEARCHES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "CANDIDATE_TRACKING_UPDATED"
+    },
+    {
+      "Index": "IRC_SEARCHES_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "DENORMALIZATION_COMPLETED"
+    },
+    {
+      "Index": "IRC_SEARCHES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "SEARCH_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:01:03"
+}

@@ -1,0 +1,248 @@
+{
+  "name": "IRC_CAND_EMAIL_MESSAGES",
+  "object_type": "TABLE",
+  "description": "This table stores the emails that are sent and received in the context of an interaction on the Submission, Candidate Pool and Candidate General Profile.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandemailmessages-13839.html#irccandemailmessages-13839",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_EMAIL_MESSAGES_PK",
+      "columns": "CAND_EMAIL_MESSAGE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_EMAIL_MESSAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the IRC_CAND_EMAIL_MESSAGES table."
+    },
+    {
+      "Name": "AGENT_REVIEWED_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Status of the email following the review by the AI Agent."
+    },
+    {
+      "Name": "INTERACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key into the IRC_INTERACTIONS table. Each message is associated to an interaction in this manner. There can be multiple messages associated to an interaction. All the messages in the interaction in turn represents the conversation."
+    },
+    {
+      "Name": "SENDER_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key into PER_PERSONS. PersonId for the candidate or recruiter/ hiring manager who is sending this message."
+    },
+    {
+      "Name": "SUBJECT",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Subject content of message that will be sent."
+    },
+    {
+      "Name": "BODY_SNIPPET",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message body snippet for preview on the email summary UI."
+    },
+    {
+      "Name": "MESSAGE_IDENTIFIER",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Denotes a unique Id that is sent along with the message. This is the SMTP Message-Id header for the message sent/received."
+    },
+    {
+      "Name": "IN_REPLY_TO_HEADER",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The In-Reply-To column denotes the unique message Id that the message in reference is a response to."
+    },
+    {
+      "Name": "MESSAGE_DIRECTION",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "To distinguish which way the messages are going-- to or from the candidate-- without having to derive the information from SENDER_PERSON_ID and IRC_CAN_MESSAGE_RECIPIENTS. Possible values for this column are ORA_INBOUND or ORA_OUTBOUND."
+    },
+    {
+      "Name": "SEND_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The time when a message is sent."
+    },
+    {
+      "Name": "ESS_JOB_READ_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The time taken for the ESS job to be read"
+    },
+    {
+      "Name": "DELIVERY_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Delivery status of a message that has been sent or received. Different statuses include ORA_UNKOWN, ORA_DELIVERED, ORA_NOT_DELIVERED (at the least these few)."
+    },
+    {
+      "Name": "READ_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Whether the email has been read by the candidate."
+    },
+    {
+      "Name": "BODY_PLAIN_TEXT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Message body in plain text."
+    },
+    {
+      "Name": "MASKED_BODY_TEXT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Store the body text without PII data"
+    },
+    {
+      "Name": "BODY_HTML",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the message body in HTML."
+    },
+    {
+      "Name": "REFERENCES_HEADER",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The References is a store of all the message_ids that are part of the conversation thread for the message sent/received. This is empty for the first message that is sent but should have a value for every subsequent message/interaction in the conversation.  This is important for maintaining the Email Message Headers when replying to  messages from the Messaging UI (this is important for us mimic the behavior of a mail client in order to display a conversation thread in external mailboxes)."
+    },
+    {
+      "Name": "DELIVERY_ERROR_MESSAGE",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error message if the delivery of the message fails."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INTERACTION_ID"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SENDER_PERSON_ID, TRUNC(\"CREATION_DATE\")"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "DELIVERY_STATUS, SEND_TIME, CAND_EMAIL_MESSAGE_ID"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MESSAGE_IDENTIFIER"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TRUNC(\"CREATION_DATE\"), AGENT_REVIEWED_STATUS"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_MESSAGES_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_EMAIL_MESSAGE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:45:57"
+}

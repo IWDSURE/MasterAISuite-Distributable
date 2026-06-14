@@ -1,0 +1,158 @@
+{
+  "name": "PAY_PURGE_OBJECTS",
+  "object_type": "TABLE",
+  "description": "This table is used to identify the objects that are to be purged from the syste,",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paypurgeobjects-20979.html#paypurgeobjects-20979",
+  "primary_keys": [
+    {
+      "name": "PAY_PURGE_OBJECTS_PK",
+      "columns": "PURGE_OBJECT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PURGE_OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key Id"
+    },
+    {
+      "Name": "PURGE_SET_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "This identifies all the Objects belonging to a purge set."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "OBJECT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Object Type to be purged"
+    },
+    {
+      "Name": "OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The Object Id to be purged"
+    },
+    {
+      "Name": "SUB_OBJECT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This further qualifys the Object Type, for example if the Qualifier is for Processing Actions then this will identify the Action Type."
+    },
+    {
+      "Name": "DEFINITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This is used to identify a Definition that can be used to qualify the purge. For example, if we are purging HCM Extracts this could be the extract ID"
+    },
+    {
+      "Name": "QUALIFIER1",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Additional Qualifier 1"
+    },
+    {
+      "Name": "QUALIFIER2",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Additional Qualifier 2"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_PURGE_OBJECTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_TYPE, OBJECT_ID"
+    },
+    {
+      "Index": "PAY_PURGE_OBJECTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_TYPE, SUB_OBJECT_TYPE, DEFINITION_ID, QUALIFIER1, QUALIFIER2"
+    },
+    {
+      "Index": "PAY_PURGE_OBJECTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PURGE_OBJECT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:11:07"
+}

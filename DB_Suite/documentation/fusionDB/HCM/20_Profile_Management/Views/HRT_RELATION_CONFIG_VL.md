@@ -1,0 +1,39 @@
+# HRT_RELATION_CONFIG_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtrelationconfigvl-7728.html#hrtrelationconfigvl-7728](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtrelationconfigvl-7728.html#hrtrelationconfigvl-7728)
+
+## Columns
+
+- RELATION_ID
+- BUSINESS_GROUP_ID
+- DESCRIPTION
+- RELATION_CODE
+- RELATION_TYPE_CODE
+- RELATION_SEQ_NUMBER
+- KEY_TABLE_NAME
+- MODULE_ID
+- ENABLED_FLAG
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT RC.RELATION_ID, RC.BUSINESS_GROUP_ID, RCT.DESCRIPTION, RC.RELATION_CODE, RC.RELATION_TYPE_CODE, RC.RELATION_SEQ_NUMBER, RC.KEY_TABLE_NAME, RC.MODULE_ID, RC.ENABLED_FLAG, RC.OBJECT_VERSION_NUMBER, RC.CREATED_BY, RC.CREATION_DATE, RC.LAST_UPDATED_BY, RC.LAST_UPDATE_DATE, RC.LAST_UPDATE_LOGIN FROM HRT_RELATION_CONFIG_B RC, HRT_RELATION_CONFIG_TL RCT WHERE RC.RELATION_ID = RCT.RELATION_ID AND RCT.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

@@ -1,0 +1,25 @@
+{
+  "name": "PER_PS_ANA_PASSPORT_EXPIRY_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PER",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpsanapassportexpiryv-4542.html#perpsanapassportexpiryv-4542",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TEXT_TITLE",
+    "TEXT_METRIC",
+    "TEXT_META",
+    "BADGE_TEXT",
+    "BADGE_STATUS",
+    "PERIOD_CHN_IND_VAL",
+    "PERIOD_CHN_IND_CMP",
+    "CHART_TYPE",
+    "CHART_COLOR",
+    "CHART_DATA",
+    "LINK_TEXT"
+  ],
+  "query": "SELECT p.person_id, NULL assignment_id, '{\"strKey\":\"HdrSPassportCOUNTRY\", \"tokens\":{\"COUNTRY\":\"' || t.territory_short_name || '\"}}' text_title, ( CASE WHEN p.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - p.expiration_date) - 14), - 1, '{\"strKey\":\"PgHIExpiredonDATE\", \"tokens\":{\"DATE\":\"' || hrl_df_util.date_to_char(p.expiration_date) || '\"}}') ELSE decode(trunc(p.expiration_date - trunc(sysdate)), 0, '{\"strKey\":\"PgHIExpiringtoday\"}', 1, '{\"strKey\":\"PgHIExpiringtomorrow\"}', '{\"strKey\":\"PgHIExpiringinDAYSNUMdays\", \"tokens\":{\"DAYS_NUM\":\"' ||(trunc(p.expiration_date - trunc(sysdate))) || '\"}}') END ) text_metric, p.passport_number text_meta, ( CASE WHEN p.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - p.expiration_date) - 14), - 1, '{\"strKey\":\"BdgExpired1\"}') ELSE decode(sign((p.expiration_date - trunc(sysdate)) - 30), - 1, '{\"strKey\":\"BdgExpiring\"}') END ) badge_text, ( CASE WHEN p.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - p.expiration_date) - 14), - 1, 'danger') ELSE decode(sign((p.expiration_date - trunc(sysdate)) - 30), - 1, 'warning') END ) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, '' link_text FROM per_passports p, fnd_territories_vl t WHERE t.territory_code = p.legislation_code AND p.expiration_date IS NOT NULL AND ( ( p.expiration_date < trunc(sysdate) AND ( sign((trunc(sysdate) - p.expiration_date) - 14) = - 1 ) ) OR ( p.expiration_date >= trunc(sysdate) AND ( sign((p.expiration_date - trunc(sysdate)) - 30) = - 1 ) ) )",
+  "_parsed_at": "2026-06-09T16:56:50"
+}

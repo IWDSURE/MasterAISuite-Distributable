@@ -1,0 +1,43 @@
+# PAY_CARD_PAYSLIPS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycardpayslipsv-5029.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycardpayslipsv-5029.html)
+
+## Columns
+
+- DOCUMENTS_OF_RECORD_ID
+- PERSON_ID
+- PERIOD_START_DATE
+- PERIOD_END_DATE
+- PAYMENT_DATE
+- PAYSLIP_VIEW_DATE
+- PAYROLL_ID
+- PERIOD_NUMBER
+- AMOUNT
+- TAX_UNIT_ID
+- PREPAY_REL_ACTION_ID
+- CALC_BREAKDOWN_ID
+- ARCHIVE_REL_ACTION_ID
+- EMAIL_ADDRESS
+- PAYROLL_RELATIONSHIP_ID
+- PAYROLL_RELATIONSHIP_NUMBER
+- PAYROLL
+- PAYSLIPID
+- TAX_REFERENCE
+
+## Query
+
+```sql
+select hdr.documents_of_record_id DOCUMENTS_OF_RECORD_ID , hdr.person_id PERSON_ID , hdr.date_from PERIOD_START_DATE , hdr.date_to PERIOD_END_DATE , hdr.issued_date PAYMENT_DATE , hdr.dei_information_date1 PAYSLIP_VIEW_DATE , hdr.dei_information_number1 PAYROLL_ID , hdr.dei_information_number2 PERIOD_NUMBER , hdr.dei_information_number3 AMOUNT , hdr.dei_information_number4 TAX_UNIT_ID , hdr.dei_information_number5 PREPAY_REL_ACTION_ID , hdr.dei_information_number6 CALC_BREAKDOWN_ID , hdr.dei_information_number7 ARCHIVE_REL_ACTION_ID , hdr.dei_information1 EMAIL_ADDRESS , pra.payroll_relationship_id PAYROLL_RELATIONSHIP_ID , prd.payroll_relationship_number PAYROLL_RELATIONSHIP_NUMBER , ppf.payroll_name PAYROLL , hdr.documents_of_record_id PAYSLIPID , 'TAX_REF' TAX_REFERENCE from hr_document_types_vl hdt , hr_documents_of_record hdr , pay_payroll_rel_actions pra , pay_pay_relationships_dn prd , pay_all_payrolls_f ppf where hdt.system_document_type = 'GLB_PAYSLIP' and hdt.category_code = 'PAYROLL' and hdt.sub_category_code = 'PAYROLL_PAYMENT' and hdr.document_type_id = hdt.document_type_id and hdr.DEI_INFORMATION_CATEGORY like '%PAYSLIP%' and pra.payroll_rel_action_id = hdr.related_object_id and prd.payroll_relationship_id = pra.payroll_relationship_id and ppf.payroll_id = hdr.dei_information_number1 and hdr.dei_information_date1 BETWEEN ppf.effective_start_date and ppf.effective_end_date and hdr.person_id=prd.person_id
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

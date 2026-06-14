@@ -1,0 +1,278 @@
+{
+  "name": "HRC_EVT_HANDLERS",
+  "object_type": "TABLE",
+  "description": "An Event Handler identifies how a particular event will be managed once it is determined that its criteria has been satisfied.\n\nDetection of an event can result in\na) an event being published to the SOA server (payload is dependent on the type of event)\nb) a standard event (i.e. the payload is a fixed shape) is published to the SOA server; this can represent either a data change, in which case the standard event will contain the Source Object Change ID, or a transaction framework based event, in which case the payload will contain the Transaction ID\nc) an internal call to a synchronous process, allowing invocation of processing in the same transaction\nd) storage of data in the Source Object Change tables without publishing an event to SOA.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcevthandlers-22451.html#hrcevthandlers-22451",
+  "primary_keys": [
+    {
+      "name": "HRC_EVT_HANDLERS_PK",
+      "columns": "EVENT_HANDLER_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "EVENT_HANDLER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique Identifier"
+    },
+    {
+      "Name": "EVENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Event Type"
+    },
+    {
+      "Name": "CONSTRUCTION_METHOD_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier of a Construction Method"
+    },
+    {
+      "Name": "HANDLER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicator of whether the event handler is \"Internal\" or \"External\""
+    },
+    {
+      "Name": "PRODUCT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Product Code used for filtering of events"
+    },
+    {
+      "Name": "PRODUCT_LABEL",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Free text label to allow multiple event handlers within a product for the same event"
+    },
+    {
+      "Name": "CLASS_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The name of an internal Java class used to invoke synchronous event processing"
+    },
+    {
+      "Name": "PROPAGATE_FUSION_CONTEXT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Propagate Fusion Context to External Service."
+    },
+    {
+      "Name": "SERVICE_URL",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The External Service URL to be called."
+    },
+    {
+      "Name": "CSF_KEY",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Credential Store Factory Key."
+    },
+    {
+      "Name": "MESSAGE_ENCRYPTION_KEY",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message Encryption Key."
+    },
+    {
+      "Name": "OWSM_POLICY",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Oracle Web Service Client Policy."
+    },
+    {
+      "Name": "NOTIFY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines whether an event is published to the SOA server to notify the product that the event has occurred"
+    },
+    {
+      "Name": "ENABLED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines whether the event handler is currently enabled"
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJ_CONDITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier of Event Object Condition"
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_EVT_HANDLERS_F2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "CONSTRUCTION_METHOD_ID"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"PRODUCT_CODE\"), UPPER(\"PRODUCT_LABEL\")"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_HANDLER_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_HANDLER_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_TYPE_ID, CONSTRUCTION_METHOD_ID, PRODUCT_CODE, PRODUCT_LABEL, ENTERPRISE_ID, SERVICE_URL, OBJ_CONDITION_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_EVT_HANDLERS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_TYPE_ID, CONSTRUCTION_METHOD_ID, PRODUCT_CODE, PRODUCT_LABEL, ENTERPRISE_ID, SERVICE_URL, OBJ_CONDITION_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:42:43"
+}

@@ -1,0 +1,1890 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Job Offer Lists",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUIJobOffers/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Create a list of job offers",
+        "description": "Creates the list of job offers based on the keyword search and provided filters.",
+        "operationId": "doall_findByAdvancedSearchQuery_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Payload attribute to set the offset for the fetched records.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Payload attribute to query the keyword search.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Payload attribute to set the limit.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Payload attribute to apply keyword search.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Payload attribute to determine filters.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Payload attribute for sorting the results rows.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Payload attribute to determine the display fields in the response.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "Payload attribute to determine the autocomplete query.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returns from the service."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returns from the service."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "recruitinguijoboffers-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/recruitingUIJobOffers/action/getCancelOfferPhasesStatesReasons": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Get the phase, state, and reason for canceling a job offer",
+        "description": "Gets the phase, state, and reason for canceling a job offer.",
+        "operationId": "doall_getCancelOfferPhasesStatesReasons_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "submissionId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the candidate application ID when getting the phase, state, and reason for canceling a job offer.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned when getting the phase, state, and reason for canceling a job offer."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned when getting the phase, state, and reason for canceling a job offer."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-getCancelOfferPhasesStatesReasons-post",
+        "x-filename-id": "recruitinguijoboffers-action-getcancelofferphasesstatesreasons-post"
+      }
+    },
+    "/recruitingUIJobOffers/{recruitingUIJobOffersUniqID}": {
+      "get": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Get a job offer",
+        "operationId": "get_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "recruitingUIJobOffersUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- OfferId, RequisitionId and State ---for the Job Offer Lists resource and used to uniquely identify an instance of Job Offer Lists. The client should not generate the hash key value.  Instead, the client should query on the Job Offer Lists collection resource with a filter on the primary key values in order to navigate to a specific instance of Job Offer Lists.<br><br>For example: recruitingUIJobOffers?q=OfferId=&lt;value1&gt;;RequisitionId=&lt;value2&gt;;State=&lt;value3&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobOffers-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobOffers-{recruitingUIJobOffersUniqID}-get",
+        "x-filename-id": "recruitinguijoboffers-recruitinguijoboffersuniqid-get"
+      }
+    },
+    "/recruitingUIJobOffers/action/offerAction": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Create a method to perform job offer actions",
+        "description": "Creates a method to perform actions on job offers like Redraft, Withdraw.",
+        "operationId": "doall_offerAction_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offerId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job offer ID to perform the action.",
+                    "nullable": true
+                  },
+                  "action": {
+                    "type": "string",
+                    "description": "Payload parameter to send the action to be performed on the job offer.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response from the job offer action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response from the job offer action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-offerAction-post",
+        "x-filename-id": "recruitinguijoboffers-action-offeraction-post"
+      }
+    },
+    "/recruitingUIJobOffers": {
+      "get": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Get all job offers",
+        "operationId": "getall_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AcceptFlag; boolean; Indicates whether the action to accept a job offer is enabled or not.</li><li>Action; string; Action performed on the selected job offer.</li><li>AssignmentId; integer; Assignment ID in the job offer being previewed.</li><li>BusinessUnit; string; Business unit in the job offer being previewed.</li><li>BusinessUnitId; integer; Business unit ID in the job offer being previewed.</li><li>CancelFlag; boolean; Indicates whether the cancel action on the job offer is enabled or not.</li><li>CandidateName; string; Candidate name in the job offer being previewed.</li><li>CandidateNumber; string; Candidate number in the job offer being previewed.</li><li>CandidateType; string; Candidate type in the job offer being previewed.</li><li>Code; string; Code in the job offer being previewed.</li><li>CreationDate; string; Job offer creation date.</li><li>CsdFlag; boolean; Indicates whether the action to change the start date is enabled or not.</li><li>Department; string; Department name in the job offer being previewed.</li><li>EditFlag; boolean; Indicates whether the action to edit the job offer is enabled or not.</li><li>EffectiveEndDate; string; Effective end date of the CandidatePEO.</li><li>EffectiveEndDateAsmt; string; Effective end date of the assignment.</li><li>EffectiveLatestChange; string; Effective last change for the assignment.</li><li>EffectiveSequence; integer; Effective sequence of the assignment.</li><li>EffectiveStartDate; string; Effective start date of the CandidatePEO.</li><li>EffectiveStartDateAsmt; string; Effective start date of the assignment.</li><li>ExtendFlag; boolean; Indicates whether the action to extend a job offer is enabled or not.</li><li>HireDate; string; Hire date in the job offer being previewed.</li><li>HiringManager; string; Hiring manager name in the job offer being previewed.</li><li>HiringManagerAssignmentId; integer; Hiring Manager Assignment identifier in the job offer being previewed.</li><li>HiringManagerId; integer; Hiring manager ID in the job offer being previewed.</li><li>JobCode; string; Job code in the job offer being previewed.</li><li>JobId; integer; Job ID in the job offer being previewed.</li><li>JobName; string; Job name in the job offer being previewed.</li><li>LegalEmployer; string; Legal employer name in the job offer being previewed.</li><li>LegalEntityId; integer; Legal entity ID in the job offer being previewed.</li><li>LocationId; integer; Location ID in the job offer being previewed.</li><li>MoveFlag; boolean; Indicates whether the action to move the job offer is enabled or not.</li><li>MoveToHRFlag; boolean; Indicates whether the action to move the job offer to HR is enabled or not.</li><li>Name; string; State name in the job offer being previewed.</li><li>ObjectStatus; string; Object status in the job offer being previewed.</li><li>ObjectVersionNumber; integer; Object version number in the job offer being previewed.</li><li>ObjectVersionNumberAsmt; integer; Object version number for the assignment.</li><li>ObjectVersionNumberCand; integer; Object version number for the candidate.</li><li>OfferId; integer; Offer ID in the job offer being previewed.</li><li>OfferTitle; string; Offer title in the job offer being previewed.</li><li>OrganizationId; integer; Organization ID in the job offer being previewed.</li><li>PersonId; integer; Person ID in the job offer being previewed.</li><li>PersonNameId; integer; Person name ID in the job offer being previewed.</li><li>PositionCode; string; Position code in the job offer being previewed.</li><li>PositionId; integer; Position ID in the job offer being previewed.</li><li>PositionName; string; Position name in the job offer being previewed.</li><li>Recruiter; string; Recruiter name in the job offer being previewed.</li><li>RecruiterAssignmentId; integer; Recruiter Assignment identifier in the job offer being previewed.</li><li>RecruiterId; integer; Recruiter ID in the job offer being previewed.</li><li>RedraftFlag; boolean; Indicates whether the action to redraft the job offer is enabled or not.</li><li>RejectFlag; boolean; Indicates whether the action to reject the job offer is enabled or not.</li><li>RequisitionId; integer; Requisition ID in the job offer being previewed.</li><li>RequisitionNumber; string; Requisition number in the job offer being previewed.</li><li>State; integer; State code in the job offer being previewed.</li><li>StateSort; string; Sorting the status of the job offer in the list.</li><li>SubmissionId; integer; Submission ID in the job offer being previewed.</li><li>WithdrawFlag; boolean; Indicates whether the action to withdraw the job offer is enabled or not.</li><li>WorkLocationCity; string; Work location city in the job offer being previewed.</li><li>WorkLocationCountry; string; Work location country in the job offer being previewed.</li><li>WorkLocationName; string; Work location name in the job offer being previewed.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all job offers using a primary key like OfferId; integer; , RequisitionId; integer; , and State; integer; . <br>Finder Variables <ul><li>OfferId; integer;  Primary key of the job offer. </li><li>RequisitionId; integer;  Primary key of the job requisition. </li><li>State; integer;  Primary key of the state. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all job offers using a primary key like OfferId, RequisitionId, and State.",
+                "properties": {
+                  "OfferId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Primary key of the job offer.",
+                    "type": "integer"
+                  },
+                  "RequisitionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Primary key of the job requisition.",
+                    "readOnly": true,
+                    "type": "integer"
+                  },
+                  "State": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Primary key of the state.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Offer State"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIJobOffers"
+                }
+              }
+            },
+            "links": {
+              "offerAction": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1offerAction/post",
+                "description": "Creates a method to perform actions on job offers like Redraft, Withdraw."
+              },
+              "getOfferBanners": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1getOfferBanners/post",
+                "description": "Gets a list of offer banners."
+              },
+              "getCancelOfferPhasesStatesReasons": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1getCancelOfferPhasesStatesReasons/post",
+                "description": "Gets the phase, state, and reason for canceling a job offer."
+              },
+              "offerExtendResendAction": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1offerExtendResendAction/post",
+                "description": "Creates a method to perform actions on job offers like Extend, Resend."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1findByAdvancedSearchQuery/post",
+                "description": "Creates the list of job offers based on the keyword search and provided filters."
+              },
+              "offerCancelAction": {
+                "operationRef": "#/paths/~1recruitingUIJobOffers~1action~1offerCancelAction/post",
+                "description": "Cancels a job offer."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIJobOffers-get",
+        "x-filename-id": "recruitinguijoboffers-get"
+      }
+    },
+    "/recruitingUIJobOffers/action/offerCancelAction": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Cancel a job offer",
+        "description": "Cancels a job offer.",
+        "operationId": "doall_offerCancelAction_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "submissionId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the candidate application ID when canceling a job offer.",
+                    "nullable": true
+                  },
+                  "comments": {
+                    "type": "string",
+                    "description": "Payload parameter to send the job comments when canceling a job offer.",
+                    "nullable": true
+                  },
+                  "reasonId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job reason ID when canceling a job offer.",
+                    "nullable": true
+                  },
+                  "stateId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job state ID when canceling a job offer.",
+                    "nullable": true
+                  },
+                  "phaseId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job phase ID when canceling a job offer.",
+                    "nullable": true
+                  },
+                  "offerId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job offer ID when canceling a job offer.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when canceling a job offer."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when canceling a job offer."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-offerCancelAction-post",
+        "x-filename-id": "recruitinguijoboffers-action-offercancelaction-post"
+      }
+    },
+    "/recruitingUIJobOffers/action/getOfferBanners": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Get a list of offer banners",
+        "description": "Gets a list of offer banners.",
+        "operationId": "doall_getOfferBanners_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offerId": {
+                    "type": "number",
+                    "description": "Job offer identifier to get offer banners.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for the get offer banner action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for the get offer banner action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-getOfferBanners-post",
+        "x-filename-id": "recruitinguijoboffers-action-getofferbanners-post"
+      }
+    },
+    "/recruitingUIJobOffers/action/offerExtendResendAction": {
+      "post": {
+        "tags": [
+          "Job Offer Lists"
+        ],
+        "summary": "Create a method to perform job offer actions",
+        "description": "Creates a method to perform actions on job offers like Extend, Resend.",
+        "operationId": "doall_offerExtendResendAction_recruitingUIJobOffers",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offerId": {
+                    "type": "number",
+                    "description": "Payload parameter to send the job offer ID to perform the action.",
+                    "nullable": true
+                  },
+                  "action": {
+                    "type": "string",
+                    "description": "Payload parameter to send the action to be performed on the job offer.",
+                    "nullable": true
+                  },
+                  "expirationDate": {
+                    "type": "string",
+                    "description": "Payload parameter to send the expiration date to perform the action.",
+                    "format": "date",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response from the job offer Extend and Resend action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response from the job offer Extend and Resend action."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIJobOffers-action-offerExtendResendAction-post",
+        "x-filename-id": "recruitinguijoboffers-action-offerextendresendaction-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUIJobOffers-item-response": {
+        "type": "object",
+        "properties": {
+          "AcceptFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to accept a job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Action": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action performed on the selected job offer.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AssignmentId": {
+            "title": "Assignment ID",
+            "type": "integer",
+            "description": "Assignment ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "BusinessUnit": {
+            "title": "Business Unit",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "BusinessUnitId": {
+            "type": "integer",
+            "description": "Business unit ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CancelFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the cancel action on the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateName": {
+            "title": "Candidate Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate name in the job offer being previewed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "title": "Candidate Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate number in the job offer being previewed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate type in the job offer being previewed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Code": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code in the job offer being previewed.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Offer Creation Date",
+            "type": "string",
+            "description": "Job offer creation date.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CsdFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to change the start date is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "title": "Department",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Department name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EditFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to edit the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveEndDate": {
+            "type": "string",
+            "description": "Effective end date of the CandidatePEO.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveEndDateAsmt": {
+            "type": "string",
+            "description": "Effective end date of the assignment.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveLatestChange": {
+            "title": "Effective Latest Change",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Effective last change for the assignment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveSequence": {
+            "title": "Effective Sequence",
+            "type": "integer",
+            "description": "Effective sequence of the assignment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveStartDate": {
+            "type": "string",
+            "description": "Effective start date of the CandidatePEO.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EffectiveStartDateAsmt": {
+            "type": "string",
+            "description": "Effective start date of the assignment.",
+            "format": "date",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExtendFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to extend a job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HireDate": {
+            "title": "Projected Start Date",
+            "type": "string",
+            "description": "Hire date in the job offer being previewed.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManager": {
+            "title": "Hiring Manager",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Hiring manager name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "HiringManagerAssignmentId": {
+            "type": "integer",
+            "description": "Hiring Manager Assignment identifier in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "HiringManagerId": {
+            "type": "integer",
+            "description": "Hiring manager ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobCode": {
+            "title": "Job Code",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Job code in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Job ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobName": {
+            "title": "Job Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Job name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LegalEmployer": {
+            "title": "Legal Employer",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Legal employer name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LegalEntityId": {
+            "type": "integer",
+            "description": "Legal entity ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Location ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MoveFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to move the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MoveToHRFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to move the job offer to HR is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "State",
+            "maxLength": 240,
+            "type": "string",
+            "description": "State name in the job offer being previewed.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ObjectStatus": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Object status in the job offer being previewed.",
+            "nullable": true,
+            "default": "ORA_ACTIVE",
+            "x-queryable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Object version number in the job offer being previewed.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "ObjectVersionNumberAsmt": {
+            "type": "integer",
+            "description": "Object version number for the assignment.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "ObjectVersionNumberCand": {
+            "type": "integer",
+            "description": "Object version number for the candidate.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "OfferId": {
+            "type": "integer",
+            "description": "Offer ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "OfferTitle": {
+            "title": "Offer Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Offer title in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OrganizationId": {
+            "type": "integer",
+            "description": "Organization ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonId": {
+            "title": "Candidate Name",
+            "type": "integer",
+            "description": "Person ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNameId": {
+            "type": "integer",
+            "description": "Person name ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionCode": {
+            "title": "Position Code",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Position code in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Position ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionName": {
+            "title": "Position Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Position name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Recruiter": {
+            "title": "Recruiter",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Recruiter name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RecruiterAssignmentId": {
+            "type": "integer",
+            "description": "Recruiter Assignment identifier in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RecruiterId": {
+            "type": "integer",
+            "description": "Recruiter ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RedraftFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to redraft the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RejectFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to reject the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "title": "Requisition Number",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition number in the job offer being previewed.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "State": {
+            "title": "Offer State",
+            "type": "integer",
+            "description": "State code in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StateSort": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Sorting the status of the job offer in the list.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID in the job offer being previewed.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "WithdrawFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the action to withdraw the job offer is enabled or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WorkLocationCity": {
+            "title": "Work Location City",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Work location city in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkLocationCountry": {
+            "title": "Work Location Country",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Work location country in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkLocationName": {
+            "title": "Work Location",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Work location name in the job offer being previewed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingUIJobOffers": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIJobOffers-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

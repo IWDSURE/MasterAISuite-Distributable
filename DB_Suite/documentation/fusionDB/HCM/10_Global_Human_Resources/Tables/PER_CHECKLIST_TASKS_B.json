@@ -1,0 +1,732 @@
+{
+  "name": "PER_CHECKLIST_TASKS_B",
+  "object_type": "TABLE",
+  "description": "PER_CHECKLIST_TASKS_B : This table is base table for checklist tasks",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perchecklisttasksb-26124.html#perchecklisttasksb-26124",
+  "primary_keys": [
+    {
+      "name": "PER_CHECKLIST_TASKS_B_PK",
+      "columns": "CHECKLIST_TASK_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CHECKLIST_TASK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key"
+    },
+    {
+      "Name": "REMINDER_TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Alert template for reminder."
+    },
+    {
+      "Name": "TASK_LEVEL_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "TASK_LEVEL_CODE"
+    },
+    {
+      "Name": "TASK_LEVEL_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "TASK_LEVEL_VALUE"
+    },
+    {
+      "Name": "ATTACHMENT_DOCUMENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores document type for attachment"
+    },
+    {
+      "Name": "CHECKLIST_TASK_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Unique Checklist Task Code"
+    },
+    {
+      "Name": "TASK_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Task Category.\nExtensible Lookup: ORA_CHK_TASK_CATEGORY"
+    },
+    {
+      "Name": "ELIGIBILITY_PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to BEN_ELIGY_PRFL.ELIGY_PRFL_ID (Eligibility Profile for Checklist)"
+    },
+    {
+      "Name": "MANDATORY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System Lookup: YES_NO\nValues: Y - Yes\nN - No\nIdentifies if the task is a mandatory task."
+    },
+    {
+      "Name": "TARGET_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Task expiration duration"
+    },
+    {
+      "Name": "TARGET_DURATION_UOM",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System Lookup: CHECKLIST_QUALIFYING_UNITS\nValues: D - Days\nW - Weeks\nM - Months\nTask expiration duration unit of measure."
+    },
+    {
+      "Name": "RESPONSIBILITY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "User Defined Lookup: PER_RESPONSIBILITY_TYPES\nArea of Responsibility Performer Type\nSystem Lookup: ORA_PER_CHECKLIST_PERFORMERS\nValues: ORA_INITIATOR - Initiator\nORA_LN_MGR - Line Manager\nORA_WORKER - Worker\nORA_ADHOC_USER - Adhoc User"
+    },
+    {
+      "Name": "ACTIVE_INACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System Lookup: ORA_CHK_CHECKLIST_TASK_STATUS\nValues: ORA_ACTIVE - Active\nORA_INACTIVE - In active"
+    },
+    {
+      "Name": "TASK_DELAY_DURATION_UOM",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System Lookup: CHECKLIST_QUALIFYING_UNITS\nValues: D - Days\nW - Weeks\nM - Months\nTask extension duration unit of measure."
+    },
+    {
+      "Name": "TASK_DELAY_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Task extension duration"
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System Lookup: ORA_CHK_TASK_ACTION_TYPES\nValues: ORA_NONE - None\nORA_EXTERNAL_URL - External URL (Default)\nORA_APP_TASK - Application Task\nORA_DOC_RECORD - Document of Record\nORA_CUSTOM_FORM - Custom Form\nORA_EVENT - Meeting / Event\nORA_CHECKLIST - Checklist"
+    },
+    {
+      "Name": "ADHOC_USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specific User - Foreign Key to PER_USERS.USER_GUID"
+    },
+    {
+      "Name": "TASK_ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_TASK_ACTIONS_B.TASK_ACTION_ID\nTask Definition to use when Action Type = Application Task"
+    },
+    {
+      "Name": "FLEX_CONTEXT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flexfield Context Code when the Action Type = Custom Form"
+    },
+    {
+      "Name": "DOCUMENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Document Type associated with this task when Action Type = Document of Record"
+    },
+    {
+      "Name": "TASK_CONFIGURATION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Task Configuration"
+    },
+    {
+      "Name": "ACTIVATION_ELIGY_PRFL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ACTIVATION_ELIGY_PRFL_ID"
+    },
+    {
+      "Name": "REMINDER_RECURRENCE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "When reminder needs to be sent for the task\nSystem Lookup: ORA_CHK_REM_RECURRENCE\nValues: ORA_NEVER - Never\nORA_EVERY - Every\nORA_1 - Once\nORA_2 - Twice\nORA_3 - Thrice\nORA_4 - Four times\nORA_5 - Five times\nORA_6 - Six times\nORA_7 - Seven times\nORA_8 - Eight times\nORA_9 - Nine times\nORA_10 - Ten times"
+    },
+    {
+      "Name": "REMINDER_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "Reminder Duration (in days)"
+    },
+    {
+      "Name": "REMINDER_RELATIVE_TO",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Reminders need to be sent relative to\nSystem Lookup: ORA_CHK_REM_RELATIVE_TO\nValue: ORA_ASSIGNED - After Assigned Date\nORA_DUE - Before Due Date"
+    },
+    {
+      "Name": "GENERATE_ATOM_FEED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies if ATOM feed needs to be generated"
+    },
+    {
+      "Name": "OWNER_RESP_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "User Defined Lookup: PER_RESPONSIBILITY_TYPES\nArea of Responsibility Performer Type\nSystem Lookup: ORA_PER_CHECKLIST_PERFORMERS\nValues: ORA_INITIATOR - Initiator\nORA_LN_MGR - Line Manager\nORA_WORKER - Worker\nORA_ADHOC_USER - Adhoc User"
+    },
+    {
+      "Name": "OWNER_USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specific Owner User - Foreign Key to PER_USERS.USER_GUID"
+    },
+    {
+      "Name": "MEETING_OFFSET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Meeting Offset from Action Date"
+    },
+    {
+      "Name": "MEETING_TIME",
+      "Datatype": "VARCHAR2",
+      "Length": "10",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Meeting Time"
+    },
+    {
+      "Name": "ENABLE_TASK_EXPIRY",
+      "Datatype": "VARCHAR2",
+      "Length": "4",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Whether task expiry is supported or not.\nSystem Lookup: YES_NO\nY - Yes\nN - No"
+    },
+    {
+      "Name": "EXPIRY_AFTER_DAYS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Expiry Days"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Enterprise"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SDF: Unique Seed Data GUID"
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Foreign Key to FND_TERRITORIES.TERRITORY_CODE"
+    },
+    {
+      "Name": "LEGAL_EMPLOYER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to HR_ALL_ORGANIZATION_UNITS.ORGANIZATION_ID"
+    },
+    {
+      "Name": "BUSINESS_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to HR_ALL_ORGANIZATION_UNITS.ORGANIZATION_ID"
+    },
+    {
+      "Name": "TASK_ACTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Contains the action code associated with the task."
+    },
+    {
+      "Name": "SIGN_TEMPLATE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the e-signature template for action type = ORA_CHK_ESIGN"
+    },
+    {
+      "Name": "ESIGN_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies ESignature Type"
+    },
+    {
+      "Name": "REPORT_PATH",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "It contains the BI Publisher report folder path followed by the report name concatenated with a / symbol with optionally a list of parameters in the format of  parameter_name is equals to parameter value . The first parameter is prefixed with ? and & to denote each additional parameter"
+    },
+    {
+      "Name": "QUESTIONNAIRE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the Questionnaire Identifier for the Questionnaire associated with this task"
+    },
+    {
+      "Name": "LEARNING_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "LEARNING_ITEM_ID"
+    },
+    {
+      "Name": "LEARN_CONTENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "LEARN_CONTENT_TYPE"
+    },
+    {
+      "Name": "REPORT_PARAMETERS",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "REPORT_PARAMETERS"
+    },
+    {
+      "Name": "ANALYTICS_PATH",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Report path for analytics task type"
+    },
+    {
+      "Name": "EXPIRY_RELATIVE_TO",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EXPIRY_RELATIVE_TO"
+    },
+    {
+      "Name": "TASK_FEATURE1",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature"
+    },
+    {
+      "Name": "TASK_FEATURE2",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature"
+    },
+    {
+      "Name": "TASK_FEATURE3",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature"
+    },
+    {
+      "Name": "TASK_FEATURE4",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature"
+    },
+    {
+      "Name": "TASK_FEATURE5",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature"
+    },
+    {
+      "Name": "TASK_FEATURE_DETAILS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the Task feature details"
+    },
+    {
+      "Name": "VIDEO_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "VIDEO_TYPE"
+    },
+    {
+      "Name": "DISPLAY_OPTIONS",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DISPLAY_OPTIONS"
+    },
+    {
+      "Name": "VIDEO_URL",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "VIDEO_URL"
+    },
+    {
+      "Name": "LEARN_ENROLLMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier to the learn enrollment"
+    },
+    {
+      "Name": "LEARN_COMMUNITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier to the learn community"
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    },
+    {
+      "Name": "LEARN_ENROLLMENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "LEARN_ENROLLMENT_TYPE"
+    },
+    {
+      "Name": "ATOM_FEED_CONFIGURATION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ATOM_FEED_CONFIGURATION"
+    },
+    {
+      "Name": "EMBED_TASK_ACTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EMBED_TASK_ACTION_CODE"
+    },
+    {
+      "Name": "CONTENT_PROVIDER_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "CONTENT_PROVIDER_CODE"
+    },
+    {
+      "Name": "EMBED_APP_TASK_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "EMBED_APP_TASK_TYPE_ID"
+    },
+    {
+      "Name": "CHECKLIST_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "CHECKLIST_CATEGORY"
+    },
+    {
+      "Name": "CHECKLIST_SUB_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "CHECKLIST_SUB_CATEGORY"
+    },
+    {
+      "Name": "ANALYTICS_SUB_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ANALYTICS_SUB_TYPE"
+    },
+    {
+      "Name": "REMINDER_CONTENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "REMINDER_CONTENT_TYPE"
+    },
+    {
+      "Name": "REMINDER_CONTENT_DEFN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "REMINDER_CONTENT_DEFN_ID"
+    },
+    {
+      "Name": "GUIDED_JOURNEY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "GUIDED_JOURNEY_CODE"
+    },
+    {
+      "Name": "GUIDED_JOURNEY_TASK_CODES",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "GUIDED_JOURNEY_TASK_CODES"
+    },
+    {
+      "Name": "DOCUMENT_TYPE_TAGS",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DOCUMENT_TYPE_TAGS"
+    },
+    {
+      "Name": "ATTACHMENT_TYPE_TAGS",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ATTACHMENT_TYPE_TAGS"
+    },
+    {
+      "Name": "NOTES_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "NOTES_TYPE"
+    },
+    {
+      "Name": "NOTES_REPORT_PATH",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "NOTES_REPORT_PATH"
+    },
+    {
+      "Name": "COMPLETE_WORKFLOW_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "200",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "COMPLETE_WORKFLOW_CODE"
+    },
+    {
+      "Name": "SAVE_WORKFLOW_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "200",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SAVE_WORKFLOW_CODE"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_CHECKLIST_TASKS_B_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TASK_LEVEL_CODE, TASK_LEVEL_VALUE"
+    },
+    {
+      "Index": "PER_CHECKLIST_TASKS_B_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "PER_CHECKLIST_TASKS_B_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "CHECKLIST_TASK_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "PER_CHECKLIST_TASKS_B_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "CHECKLIST_TASK_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:27:15"
+}

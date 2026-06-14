@@ -1,0 +1,25 @@
+{
+  "name": "CMP_SALARY_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "CMP",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpsalaryv-7820.html#cmpsalaryv-7820",
+  "columns": [
+    "SALARY_ID",
+    "ASSIGNMENT_ID",
+    "BUSINESS_GROUP_ID",
+    "SALARY_AMOUNT",
+    "DATE_FROM",
+    "DATE_TO",
+    "SALARY_BASIS_ID",
+    "LOCAL_CURRENCY",
+    "PREFERRED_CURRENCY",
+    "DISPLAY_SALARY",
+    "PREFERRED_SALARY",
+    "CHANGE_PCT",
+    "CHANGE_MONTHS"
+  ],
+  "query": "SELECT salary_id, assignment_id, business_group_id, salary_amount, date_from, date_to, salary_basis_id, local_currency, cmp_comp_card.get_preferred_currency(local_currency) preferred_currency, TO_CHAR(salary_amount,fnd_currency.get_format_mask(NVL(local_currency,'USD'), 15)) ||' ' ||local_currency ||' ' ||SALARY_FREQUENCY display_salary , cmp_comp_card.get_preferred_salary(salary_amount, local_currency) preferred_salary, cmp_comp_card.calculate_change_pct(assignment_id,date_from) change_pct, DECODE(last_change_months,0,last_change_days ||' ' ||DECODE(last_change_days,0,cmp_comp_card.get_lookup_meaning('TODAY'),1, cmp_comp_card.get_lookup_meaning('DAY'),cmp_comp_card.get_lookup_meaning( 'DAYS')),1,last_change_months ||' ' ||cmp_comp_card.get_lookup_meaning('MONTH'),last_change_months ||' ' ||cmp_comp_card.get_lookup_meaning('MONTHS')) change_months FROM ( SELECT CmpSalary.SALARY_ID, CmpSalary.ASSIGNMENT_ID, CmpSalary.BUSINESS_GROUP_ID , CmpSalary.DATE_FROM, CmpSalary.DATE_TO, CmpSalary.SALARY_APPROVED, CmpSalary.SALARY_AMOUNT, CmpSalary.SALARY_BASIS_ID, TRUNC(months_between(sysdate,CmpSalary.DATE_FROM)) last_change_months, TRUNC(sysdate - CmpSalary.DATE_FROM) last_change_days, SalaryBasis.BUSINESS_GROUP_ID AS BUSINESS_GROUP_ID2, SalaryBasis.SALARY_BASIS_CODE, SalaryBasis.SALARY_ANNUALIZATION_FACTOR, lookup.meaning salary_frequency, rate.currency_code, NVL(cmp_comp_card.get_input_currency_code(SalaryBasis.element_type_id), rate.currency_code) local_currency FROM CMP_SALARY CmpSalary, CMP_SALARY_BASES SalaryBasis, per_rates_f rate, fnd_lookup_values_tl lookup WHERE CmpSalary.SALARY_BASIS_ID = SalaryBasis.SALARY_BASIS_ID AND lookup.lookup_type = 'CMP_SALARY_BASIS' AND SalaryBasis.SALARY_BASIS_CODE = lookup.lookup_code AND lookup.language = userenv('LANG') AND SalaryBasis.grade_rate_id = rate.rate_id(+) AND sysdate BETWEEN rate.effective_start_date (+) AND rate.effective_end_date (+) )",
+  "_parsed_at": "2026-06-10T07:38:30"
+}

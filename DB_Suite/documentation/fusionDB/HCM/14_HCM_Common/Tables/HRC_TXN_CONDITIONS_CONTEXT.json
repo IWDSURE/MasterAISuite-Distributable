@@ -1,0 +1,136 @@
+{
+  "name": "HRC_TXN_CONDITIONS_CONTEXT",
+  "object_type": "TABLE",
+  "description": "This table contains information to identify a particular usage of Condition Builder. When product teams uptake Condition Builder feature, they create entries in this table to denote that they have up-taken Condition Builder and have metadata associated with that particular uptake. This table has two main columns, CONDITIONS_CONTEXT_MODULE and CONTEXT_PROCESS_NAME which identifies the usage of the Condition Builder component. CONDITIONS_CONTEXT_MODULE contains information about the UI (like Approvals UI) and CONDITIONS_PROCESS_NAME further contains a sub-process in that UI, if applicable, which provides more information about where the Condition Builder is used. As an eg, for Approvals UI, CONDITIONS_CONTEXT_MODULE would contain the code for Approvals UI and the CONDITIONS_PROCESS_NAME would contain the Human task name. These two fields together would provide the exact context information to the Condition Builder Task Flow.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrctxnconditionscontext-22165.html#hrctxnconditionscontext-22165",
+  "primary_keys": [
+    {
+      "name": "HRC_TXN_CON_CONTEX_PK",
+      "columns": "CONDITIONS_CONTEXT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CONDITIONS_CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key and unique identifier required by Seed data framework."
+    },
+    {
+      "Name": "CONDITIONS_CONTEXT_MODULE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "CONDITIONS_CONTEXT_MODULE: Denotes the UI context in which condition builder is being used. This is not based on any other referential data but entries into this column are tightly controlled though seed data. Product teams who wish to uptake Condition Builder feature use this column to populate the string that identifies the context of their UI. For eg. For Approvals UI it would be APP_UI. The uptaking team needs to pass this information to Condition Builder TF, so that it can retrieve metadata relevant to that UI."
+    },
+    {
+      "Name": "CONTEXT_PROCESS_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "CONTEXT_PROCESS_NAME: Denotes the UI process in which condition builder is being used. This is not based on any other referential data but entries into this column are tightly controlled though seed data. Product teams who wish to uptake Condition Builder feature use this column to populate the string that identifies a process in context of their UI. For eg. For Approvals UI it would be the Human task name that can be edited in the UI, like TransfersApprovalTask. The uptaking team needs to pass this information to Condition Builder TF, so that it can retrieve metadata relevant to that UI. This field applies only to those uptaking teams who have multiple sub-processes under their UI, like Approvals UI. In case of teams with no sub-process, this can be populated with the same data of CONDITIONS_CONTEXT_MODULE."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identify the ENTERPRISE  to which the composite belongs.Foreign key to PER_ENTERPRISES."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_TXN_CONDITIONS_CONTEXT_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CONDITIONS_CONTEXT_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_TXN_CONDITIONS_CONTEXT_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CONDITIONS_CONTEXT_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:46:53"
+}

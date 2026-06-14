@@ -1,0 +1,184 @@
+{
+  "name": "HTS_SCHED_PROCESSES",
+  "object_type": "TABLE",
+  "description": "Schedules processes submitted as asynchronous batch requests",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedprocesses-14276.html#htsschedprocesses-14276",
+  "primary_keys": [
+    {
+      "name": "HTS_SCHED_PROCESSES_PK",
+      "columns": "SCHED_PROCESS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SCHED_PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key identifiying the process record"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "PROCESS_TYPE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "Yes",
+      "Comments": "Type of process to be executed (for instance Publish, or Reset to Last Published)"
+    },
+    {
+      "Name": "SCHEDULER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "User ID of the scheduler submitting the job"
+    },
+    {
+      "Name": "SCHED_PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Scheduler Pofile ID of the user submitting the job; null value corresponds to the default scheduler pofile (scheduling a manager's directs)"
+    },
+    {
+      "Name": "PEOPLE_LIST_TYPE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "PEOPLE_LIST_TYPE"
+    },
+    {
+      "Name": "START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Start date for the range of the schedule data being processed"
+    },
+    {
+      "Name": "END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "End date for the range of the schedule data being processed"
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "REQUEST_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the request submission time  of the batch job submitted to execute the process"
+    },
+    {
+      "Name": "PROCESS_STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "Status of the job execution"
+    },
+    {
+      "Name": "EXEC_START_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the start time of execution of the main batch job that executes the process"
+    },
+    {
+      "Name": "EXEC_END_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the end time of execution of the main batch job that executed the process"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_SCHED_PROCESSES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "SCHEDULER_ID, START_DATE, END_DATE, PEOPLE_LIST_TYPE, SCHED_PROFILE_ID"
+    },
+    {
+      "Index": "HTS_SCHED_PROCESSES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "SCHED_PROCESS_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:23:58"
+}

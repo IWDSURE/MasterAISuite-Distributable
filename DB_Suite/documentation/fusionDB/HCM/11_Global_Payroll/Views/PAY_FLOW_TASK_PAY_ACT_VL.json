@@ -1,0 +1,16 @@
+{
+  "name": "PAY_FLOW_TASK_PAY_ACT_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtaskpayactvl-8215.html#payflowtaskpayactvl-8215",
+  "columns": [
+    "FLOW_TASK_PAYROLL_LABEL",
+    "PAYROLL_ACTION_ID",
+    "ACTION_TYPE",
+    "LEGISLATIVE_DATA_GROUP_ID"
+  ],
+  "query": "select PFI.Instance_Name || ' | ' || CL.Checklist_Name || ' | ' || PAP.effective_date || ' | ' || PDP.PAYROLL_NAME || ' | ' || LUP.MEANING Flow_Task_Payroll_Label,PAP.PAYROLL_ACTION_ID,PAP.Action_Type,PFI.Legislative_data_Group_Id from pay_payroll_actions PAP,pay_all_payrolls_f PDP,pay_time_periods TPP,Hcm_lookups LUP ,Hcm_lookups LUP1,pay_requests PR,pay_flow_instances PFI,pay_checklist_instances CLI,pay_checklists_vl CL,Per_Legislative_Data_Groups_Vl Ldg where PAP.PAYROLL_ID = PDP.PAYROLL_ID (+) AND PAP.EFFECTIVE_DATE BETWEEN PDP.EFFECTIVE_START_DATE (+) AND PDP.EFFECTIVE_END_DATE (+) AND LUP1.LOOKUP_TYPE = 'ACTION_TYPE' AND LUP1.LOOKUP_CODE = PAP.ACTION_TYPE AND LUP.LOOKUP_TYPE = 'PAY_ACTION_STATUS' AND LUP.LOOKUP_CODE = PAP.ACTION_STATUS AND PAP.dedn_time_period_id = TPP.TIME_PERIOD_ID (+) AND PAP.Pay_Request_Id = PR.Pay_Request_Id AND PR.Flow_Instance_Id = PFI.Flow_Instance_Id AND PR.Flow_task_Instance_Id = CLI.Flow_task_Instance_Id AND CLI.Base_Checklist_Id = CL.Base_Checklist_Id AND PFI.Legislative_Data_Group_Id = Ldg.Legislative_Data_Group_Id(+) AND ( (CL.legislative_data_group_id IS NOT NULL AND CL.legislation_code IS NULL AND CL.legislative_data_group_id = Ldg.Legislative_Data_Group_Id) OR (CL.legislation_code IS NOT NULL AND CL.legislative_data_group_id IS NULL AND CL.legislation_code =Ldg.Legislation_Code AND ( NOT EXISTS (SELECT CHECKLIST_ID FROM fusion.PAY_CHECKLISTS_VL c1 WHERE CL.BASE_CHECKLIST_ID = c1.BASE_CHECKLIST_ID AND (c1.legislative_data_group_id IS NOT NULL AND c1.legislation_code IS NULL AND c1.legislative_data_group_id = Ldg.Legislative_Data_Group_Id ) ) ) ) OR ( CL.legislative_data_group_id IS NULL AND CL.legislation_code IS NULL AND ( NOT EXISTS (SELECT CHECKLIST_ID FROM fusion.PAY_CHECKLISTS_VL c2 WHERE CL.BASE_CHECKLIST_ID = c2.BASE_CHECKLIST_ID AND ( ( c2.legislative_data_group_id IS NOT NULL AND c2.legislation_code IS NULL AND c2.legislative_data_group_id = Ldg.Legislative_Data_Group_Id ) OR ( c2.legislation_code IS NOT NULL AND c2.legislative_data_group_id IS NULL AND c2.legislation_code = Ldg.Legislation_Code ) ) ) ) ) ) order by PAP.effective_date, PAP.PAYROLL_ACTION_ID DESC",
+  "_parsed_at": "2026-06-09T17:23:01"
+}

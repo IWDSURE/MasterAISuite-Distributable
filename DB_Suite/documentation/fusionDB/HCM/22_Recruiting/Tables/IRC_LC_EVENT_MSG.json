@@ -1,0 +1,146 @@
+{
+  "name": "IRC_LC_EVENT_MSG",
+  "object_type": "TABLE",
+  "description": "Table for storing event messages the ESS Job will be processing.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irclceventmsg-5082.html#irclceventmsg-5082",
+  "primary_keys": [
+    {
+      "name": "IRC_LC_EVENT_MSG_PK",
+      "columns": "MSG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "MSG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table"
+    },
+    {
+      "Name": "EVENT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Predefined event code following the source of the event\n\nEx : Code identifying Assessment request updates, Background check result update etc."
+    },
+    {
+      "Name": "CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "References a lifecycle context object for which the event is applicable.\n\nRelation component 1/2\n\nEx: SubmissionId, Requisition ID, pool member Id"
+    },
+    {
+      "Name": "CONTEXT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Lifecycle context type.\n\nRelation component 2/2\n\nEx : 'CSW', 'POOL', 'REQUISITION'"
+    },
+    {
+      "Name": "TARGET_PROCESSING_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date at which we want event to be processed\n\n(For timer events typically)"
+    },
+    {
+      "Name": "ERROR_MESSAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error message in case message handling is failing."
+    },
+    {
+      "Name": "ERROR_STACK",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Full error stack."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "EVENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Defining the type of event. Possible values are EVENT or ASYNC_ACTION."
+    },
+    {
+      "Name": "ACTION_PARAMS",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Column storing the action parameters Map."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_LC_EVENT_MSG_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "MSG_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:56:04"
+}

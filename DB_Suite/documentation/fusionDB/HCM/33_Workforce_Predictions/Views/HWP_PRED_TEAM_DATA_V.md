@@ -1,0 +1,37 @@
+# HWP_PRED_TEAM_DATA_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwppredteamdatav-3528.html#hwppredteamdatav-3528](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwppredteamdatav-3528.html#hwppredteamdatav-3528)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- ASSIGNMENT_NAME
+- PRIMARY_FLAG
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- EFFECTIVE_SEQUENCE
+- EFFECTIVE_LATEST_CHANGE
+- GROUP_PREDICTED_PERFORMANCE
+- GROUP_POTENTIAL
+- GROUP_PREDICTED_RISK
+- TOTAL_HEADCOUNT
+- DIRECTS_HEADCOUNT
+
+## Query
+
+```sql
+SELECT pmhd.manager_id person_id, pmhd.manager_assignment_id assignment_id, paam.assignment_name, paam.primary_flag, paam.effective_start_date, paam.effective_end_date, paam.Effective_Sequence, paam.Effective_Latest_change, AVG(pred.worker_pred_perf ) group_predicted_performance, AVG(pred.worker_pred_perf * 0.80) group_potential, AVG(risk.is_emp_prob) group_predicted_risk, COUNT(pmhd.assignment_id) total_headcount, COUNT(CASE WHEN pmhd.manager_level = 1 THEN pmhd.assignment_id END) directs_headcount FROM per_manager_hrchy_dn pmhd, per_all_assignments_m paam, hwp_pred_perf_results_v pred, hwp_pred_attr_results_v risk WHERE pmhd.person_id = pred.person_id(+) and pmhd.assignment_id = pred.assignment_id(+) AND pmhd.person_id = risk.person_id(+) and pmhd.assignment_id = risk.assignment_id(+) AND trunc(SYSDATE )BETWEEN pmhd.effective_start_date and pmhd.effective_end_date AND paam.assignment_id = pmhd.manager_assignment_id AND paam.person_id = pmhd.manager_id AND trunc(SYSDATE) BETWEEN paam.effective_start_date AND paam.effective_end_date AND paam.assignment_type in ('E' , 'C' ,'N') AND paam.Effective_Latest_change = 'Y' GROUP BY pmhd.manager_id, pmhd.manager_assignment_id,paam.assignment_name,paam.primary_flag,paam.effective_start_date, paam.effective_end_date,paam.Effective_Sequence,paam.Effective_Latest_change
+```
+
+---
+
+[← Back to Index](../33_Workforce_Predictions_Views_Index.md)

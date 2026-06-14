@@ -1,0 +1,30 @@
+# HWM_QSNR_USAGE_TE_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmqsnrusagetev-5187.html#hwmqsnrusagetev-5187](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmqsnrusagetev-5187.html#hwmqsnrusagetev-5187)
+
+## Columns
+
+- TM_REC_ID
+- TM_REC_VERSION
+- BLDG_BLK_TYPE
+- ITR_QSR_USG_ID
+- QUEST_DURATION_IN
+- QUEST_DURATION_OUT
+
+## Query
+
+```sql
+SELECT TimeEntryTimeRecordPEO.TM_REC_ID, TimeEntryTimeRecordPEO.TM_REC_VERSION, InteractQsnrUsagePEO.BLDG_BLK_TYPE, InteractQsnrUsagePEO.ITR_QSR_USG_ID, NULL QUEST_DURATION_IN, NULL QUEST_DURATION_OUT FROM HWM_INTERACT_QSNR_USAGES InteractQsnrUsagePEO, HWM_TM_REC_GRP TimeCardTimeRecordGroupPEO, HWM_TM_REC_GRP DayTimeRecordGroupPEO, HWM_TM_REC_GRP_USAGES TimeRecordGroupUsagePEO, HWM_TM_REC TimeEntryTimeRecordPEO WHERE InteractQsnrUsagePEO.TM_BLDG_BLK_ID = TimeCardTimeRecordGroupPEO.TM_REC_GRP_ID AND InteractQsnrUsagePEO.TM_BLDG_BLK_VERSION = TimeCardTimeRecordGroupPEO.TM_REC_GRP_VERSION AND TimeCardTimeRecordGroupPEO.GRP_TYPE_ID = 100 AND TimeCardTimeRecordGroupPEO.TM_REC_GRP_ID = DayTimeRecordGroupPEO.PARENT_TM_REC_GRP_ID AND TimeCardTimeRecordGroupPEO.TM_REC_GRP_VERSION = DayTimeRecordGroupPEO.PARENT_TM_REC_GRP_VERSION AND DayTimeRecordGroupPEO.TM_REC_GRP_ID = TimeRecordGroupUsagePEO.TM_REC_GRP_ID AND DayTimeRecordGroupPEO.TM_REC_GRP_VERSION = TimeRecordGroupUsagePEO.TM_REC_GRP_VERSION AND TimeRecordGroupUsagePEO.TM_REC_ID = TimeEntryTimeRecordPEO.TM_REC_ID AND TimeRecordGroupUsagePEO.TM_REC_VERSION = TimeEntryTimeRecordPEO.TM_REC_VERSION AND InteractQsnrUsagePEO.BLDG_BLK_TYPE = 'TIMECARD' AND InteractQsnrUsagePEO.RESPONSE_STATUS IN ('IN_PROCESS', 'SUBMITTED') UNION SELECT TimeEntryTimeRecordPEO.TM_REC_ID, TimeEntryTimeRecordPEO.TM_REC_VERSION, InteractQsnrUsagePEO.BLDG_BLK_TYPE, InteractQsnrUsagePEO.ITR_QSR_USG_ID, NULL QUEST_DURATION_IN, NULL QUEST_DURATION_OUT FROM HWM_INTERACT_QSNR_USAGES InteractQsnrUsagePEO, HWM_TM_REC_GRP DayTimeRecordGroupPEO, HWM_TM_REC_GRP_USAGES TimeRecordGroupUsagePEO, HWM_TM_REC TimeEntryTimeRecordPEO WHERE InteractQsnrUsagePEO.TM_BLDG_BLK_ID = DayTimeRecordGroupPEO.TM_REC_GRP_ID AND InteractQsnrUsagePEO.TM_BLDG_BLK_VERSION = DayTimeRecordGroupPEO.TM_REC_GRP_VERSION AND DayTimeRecordGroupPEO.GRP_TYPE_ID = 101 AND DayTimeRecordGroupPEO.TM_REC_GRP_ID = TimeRecordGroupUsagePEO.TM_REC_GRP_ID AND DayTimeRecordGroupPEO.TM_REC_GRP_VERSION = TimeRecordGroupUsagePEO.TM_REC_GRP_VERSION AND TimeRecordGroupUsagePEO.TM_REC_ID = TimeEntryTimeRecordPEO.TM_REC_ID AND TimeRecordGroupUsagePEO.TM_REC_VERSION = TimeEntryTimeRecordPEO.TM_REC_VERSION AND InteractQsnrUsagePEO.BLDG_BLK_TYPE = 'DAY' AND InteractQsnrUsagePEO.RESPONSE_STATUS IN ('IN_PROCESS', 'SUBMITTED') UNION SELECT TimeEntryTimeRecordPEO.TM_REC_ID, TimeEntryTimeRecordPEO.TM_REC_VERSION, InteractQsnrUsagePEO.BLDG_BLK_TYPE, InteractQsnrUsagePEO.ITR_QSR_USG_ID, DurationAttrPEO.ATTRIBUTE_NUMBER5 QUEST_DURATION_IN, DurationAttrPEO.ATTRIBUTE_NUMBER6 QUEST_DURATION_OUT FROM HWM_INTERACT_QSNR_USAGES InteractQsnrUsagePEO, HWM_TM_REC TimeEntryTimeRecordPEO, (SELECT atrb.tm_rep_atrb_id, atrb.attribute_number4, atrb.attribute_number5, atrb.attribute_number6, atrbusg.usages_source_id, atrbusg.usages_source_version FROM hwm_tm_rep_atrbs atrb, hwm_tm_rep_atrb_usages atrbusg WHERE atrb.tm_rep_atrb_id = atrbusg.tm_rep_atrb_id AND atrb.attribute_category = 'TimeEvent') DurationAttrPEO WHERE InteractQsnrUsagePEO.TM_BLDG_BLK_ID = TimeEntryTimeRecordPEO.TM_REC_ID AND InteractQsnrUsagePEO.TM_BLDG_BLK_VERSION = TimeEntryTimeRecordPEO.TM_REC_VERSION AND TimeEntryTimeRecordPEO.GRP_TYPE_ID = 102 AND InteractQsnrUsagePEO.TM_BLDG_BLK_ID = DurationAttrPEO.USAGES_SOURCE_ID (+) AND InteractQsnrUsagePEO.TM_BLDG_BLK_VERSION = DurationAttrPEO.USAGES_SOURCE_VERSION (+) AND InteractQsnrUsagePEO.BLDG_BLK_TYPE = 'DETAIL' AND InteractQsnrUsagePEO.RESPONSE_STATUS IN ('IN_PROCESS', 'SUBMITTED')
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

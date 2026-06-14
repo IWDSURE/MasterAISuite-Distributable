@@ -1,0 +1,198 @@
+{
+  "name": "PER_INTG_INBOUND_DATA",
+  "object_type": "TABLE",
+  "description": "Table to store  inbound xml data received from partners and track the progress of the data in.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perintginbounddata-24915.html#perintginbounddata-24915",
+  "primary_keys": [
+    {
+      "name": "PER_INTG_INBOUND_DATA_PK",
+      "columns": "INBOUND_DATA_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "INBOUND_DATA_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "PARTNER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This stores Partner id and is referenced to Topology manger application id from ASK tables"
+    },
+    {
+      "Name": "INBOUND_DATA_CACHE",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Inbound XML coming from partners"
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "status of the xml file to store various stages of the inbound data ."
+    },
+    {
+      "Name": "STATE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This is the stae of the entire composite"
+    },
+    {
+      "Name": "PARTNER_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Name of the application in ASK topology table correspond to PARTNER ID stored in this table"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "INTEGRATION_MESSAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Integration Message Identifier one"
+    },
+    {
+      "Name": "PAYLOAD_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "300",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Payload Type"
+    },
+    {
+      "Name": "ESS_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Ess Request Id"
+    },
+    {
+      "Name": "COMPOSITE_INSTANCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "30",
+      "Not-null": "",
+      "Comments": "BPEL Composite instance id from the Enterprise Manager SOA server."
+    },
+    {
+      "Name": "ERROR_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "System generated error code , this is not the data validation but mostly stores infrastructure errors"
+    },
+    {
+      "Name": "ERROR_DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "300",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Description of the errors"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "INTEGRATION_MESSAGE_ID2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Integration Message Identifier Two"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_INTG_INBOUND_DATA_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "COMPOSITE_INSTANCE_ID"
+    },
+    {
+      "Index": "PER_INTG_INBOUND_DATA_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "ESS_REQUEST_ID"
+    },
+    {
+      "Index": "PER_INTG_INBOUND_DATA_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "INBOUND_DATA_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:35:00"
+}

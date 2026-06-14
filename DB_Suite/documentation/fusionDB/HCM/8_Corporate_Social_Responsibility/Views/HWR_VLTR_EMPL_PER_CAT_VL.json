@@ -1,0 +1,15 @@
+{
+  "name": "HWR_VLTR_EMPL_PER_CAT_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HHR",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrvltremplpercatvl-4259.html#hwrvltremplpercatvl-4259",
+  "columns": [
+    "PROJ_ID",
+    "SUBSCRIBED_VOLUNTEERS",
+    "AREAS_OF_INTEREST"
+  ],
+  "query": "SELECT A.PROJECT_ID PROJ_ID, COUNT(A.HCM_PERSON_ID) SUBSCRIBED_VOLUNTEERS, B.AREAS_OF_INTEREST AREAS_OF_INTEREST FROM HWR_VLTR_VOL_PROJ_REL_B A, HWR_VLTR_PROJECT_B B, HWR_VLTR_VOL_PROJ_REL_TL C WHERE A.PROJECT_ID = B.PROJECT_ID AND B.STATUS = 'ACTIVE' AND A.ID = C.ID AND C.STATUS = 'SUBSCRIBED' AND C.LANGUAGE = USERENV('LANG') GROUP BY A.PROJECT_ID, B.AREAS_OF_INTEREST ORDER BY PROJ_ID",
+  "_parsed_at": "2026-06-10T07:44:03"
+}

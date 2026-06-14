@@ -1,0 +1,39 @@
+# WLF_TASK_STATUS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlftaskstatusv-3699.html#wlftaskstatusv-3699](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlftaskstatusv-3699.html#wlftaskstatusv-3699)
+
+## Columns
+
+- CLASS_LEARNING_ITEM_ID
+- ACTIVITY_LEARNING_ITEM_ID
+- ASSIGNMENT_RECORD_ID
+- LEARNER_ID
+- ACTIVITY_TYPE
+- ASSIGNMENT_TASK_ID
+- ASSIGNMENT_STATUS
+- COMPLETION_DATE
+- RELATED_CONTENT_ID
+- TASK_STATUS
+- FIRST_ROOT_ATTEMPT
+- PRE_ASSIGNMENT_RECORD_ID
+- ASSIGNED_ON_DATE
+- SELECTED_CONTENT_EVENT_DATE
+- VILT_URL
+
+## Query
+
+```sql
+SELECT activities.parent_learning_item_id class_learning_item_id, activities.learning_item_id activity_learning_item_id, assignment_records.assignment_record_id, assignment_records.learner_id learner_id, activities.activity_type, assignment_tasks.assignment_task_id, assignment_records.status assignment_status, assignment_tasks.completion_date, activities.related_content_id , DECODE(assignment_tasks.task_status, NULL ,'ORA_ASSN_TASK_NOT_STARTED', assignment_tasks.task_sub_status) task_status, NULL AS FIRST_ROOT_ATTEMPT, assignment_records.pre_assignment_record_id, assignment_records.assigned_on_date, NULL AS selected_content_event_date, assignment_tasks.vilt_url FROM WLF_LI_ACTIVITIES_F activities INNER JOIN WLF_ASSIGNMENT_RECORDS_F assignment_records ON activities.parent_learning_item_id = assignment_records.learning_item_id AND TRUNC(SYSDATE) BETWEEN assignment_records.EFFECTIVE_START_DATE AND assignment_records.EFFECTIVE_END_DATE LEFT OUTER JOIN WLF_ASSIGNMENT_TASKS_F assignment_tasks ON activities.learning_item_id = assignment_tasks.learning_item_id AND TRUNC(SYSDATE) BETWEEN assignment_tasks.EFFECTIVE_START_DATE AND assignment_tasks.EFFECTIVE_END_DATE AND assignment_records.assignment_record_id = assignment_tasks.assignment_record_id AND assignment_tasks.task_owner_id = assignment_records.learner_id INNER JOIN WLF_LEARNING_ITEMS_F_VL activity_li_item ON (TRUNC(NVL(assignment_records.LI_EFFECTIVE_DATE,SYSDATE)) BETWEEN activity_li_item.EFFECTIVE_START_DATE AND activity_li_item.EFFECTIVE_END_DATE) AND activities.learning_item_id = activity_li_item.learning_item_id WHERE TRUNC(NVL(assignment_records.LI_EFFECTIVE_DATE,SYSDATE)) BETWEEN activities.EFFECTIVE_START_DATE AND activities.EFFECTIVE_END_DATE AND assignment_records.status NOT IN ('ORA_ASSN_REC_DELETED' , 'ORA_ASSN_REC_WITHDRAWN') AND assignment_records.EVENT_TYPE IN ('ORA_JOIN_ASSIGNMENT','ORA_REQUIRE_ASSIGNMENT')
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

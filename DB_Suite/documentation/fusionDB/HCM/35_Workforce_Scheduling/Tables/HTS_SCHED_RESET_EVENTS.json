@@ -1,0 +1,158 @@
+{
+  "name": "HTS_SCHED_RESET_EVENTS",
+  "object_type": "TABLE",
+  "description": "Schedule events indicating schedule data that needs to be reset.",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedresetevents-15822.html#htsschedresetevents-15822",
+  "primary_keys": [
+    {
+      "name": "HTS_SCHED_RESET_EVENTS_PK",
+      "columns": "SCHED_RESET_EVENT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SCHED_RESET_EVENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key identifiying a schedule reset event record by a system generated ID"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifies the person whose schedule needs to be reset."
+    },
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The employee assignment ID on which schedule needs to be reset."
+    },
+    {
+      "Name": "EVENT_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The first date of the date range for which the schedule needs to be reset."
+    },
+    {
+      "Name": "EVENT_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The last date of the date range for which the schedule needs to be reset."
+    },
+    {
+      "Name": "EVENT_STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "EVENT_STATUS"
+    },
+    {
+      "Name": "PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ESS process ID for current Reset process"
+    },
+    {
+      "Name": "RESET_TYPE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "Yes",
+      "Comments": "Identifies the target layer to which the schedule needs to be reset"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HTS_SCHED_RESET_EVENTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "PERSON_ID, EVENT_START_DATE, EVENT_END_DATE, RESET_TYPE, ASSIGNMENT_ID"
+    },
+    {
+      "Index": "HTS_SCHED_RESET_EVENTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "PROCESS_ID, PERSON_ID"
+    },
+    {
+      "Index": "HTS_SCHED_RESET_EVENTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "SCHED_RESET_EVENT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T20:25:50"
+}

@@ -1,0 +1,262 @@
+{
+  "name": "PER_USERS",
+  "object_type": "TABLE",
+  "description": "Table for storing one record per fusion system user. Maps to a single LDAP user unless the user is deleted in LDAP.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perusers-19050.html#perusers-19050",
+  "primary_keys": [
+    {
+      "name": "PER_USERS_PK",
+      "columns": "USER_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "USER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Mandatory Primary Key Updatable While New Key Generation"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "ACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag to mark when a user record that has been deleted in LDAP. This is not set to 'N' when a user is just suspended."
+    },
+    {
+      "Name": "START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The date that the user is active from."
+    },
+    {
+      "Name": "END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The date that the user ceases to be active in fusion."
+    },
+    {
+      "Name": "USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The latest user Guid of the user."
+    },
+    {
+      "Name": "USERNAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The latest principal username of the user"
+    },
+    {
+      "Name": "MULTITENANCY_USERNAME",
+      "Datatype": "VARCHAR2",
+      "Length": "255",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Display Username of the user"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Person ID in HCM for this user (if available)"
+    },
+    {
+      "Name": "PARTY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Party ID in TCA for this user (if available)"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "HR_TERMINATED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Implies the user is terminated in HR by HR."
+    },
+    {
+      "Name": "SUSPENDED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "When the user, as part of termination, is suspended. If suspended, the user can be reactivated."
+    },
+    {
+      "Name": "USER_DISTINGUISHED_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The latest distinguished name of the user"
+    },
+    {
+      "Name": "USER_DATA_CHECKSUM",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "User Data Checksum."
+    },
+    {
+      "Name": "CREDENTIALS_EMAIL_SENT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag to show whether credentials (username/password) has been sent out.\n\nY=Sent\nN=Not Sent"
+    },
+    {
+      "Name": "EXTERNAL_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EXTERNAL_ID"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_USERS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "UPPER(\"USERNAME\")"
+    },
+    {
+      "Index": "PER_USERS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "USERNAME"
+    },
+    {
+      "Index": "PER_USERS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "UPPER(\"MULTITENANCY_USERNAME\")"
+    },
+    {
+      "Index": "PER_USERS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "MULTITENANCY_USERNAME"
+    },
+    {
+      "Index": "PER_USERS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "UPPER(\"USER_GUID\")"
+    },
+    {
+      "Index": "PER_USERS_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EXTERNAL_ID"
+    },
+    {
+      "Index": "PER_USERS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "USER_ID"
+    },
+    {
+      "Index": "PER_USERS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "PER_USERS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "USER_GUID"
+    },
+    {
+      "Index": "PER_USERS_U3",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "PARTY_ID"
+    },
+    {
+      "Index": "PER_USERS_U4",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "USER_DISTINGUISHED_NAME"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:47:02"
+}

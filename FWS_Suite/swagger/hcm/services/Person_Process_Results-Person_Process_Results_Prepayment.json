@@ -1,0 +1,3649 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Person Process Results/Person Process Results Prepayment",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/personProcessResults/{ObjectActionId}/child/Payments/{PaymentsUniqID}": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "get_personProcessResults-Payments",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "PaymentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PrePaymentId, Status, PayrollRelActionId and PaymentRelActionId ---for the Person Process Results Prepayment resource and used to uniquely identify an instance of Person Process Results Prepayment. The client should not generate the hash key value.  Instead, the client should query on the Person Process Results Prepayment collection resource with a filter on the primary key values in order to navigate to a specific instance of Person Process Results Prepayment.<br><br>For example: VoidPayment?q=PrePaymentId=&lt;value1&gt;;Status=&lt;value2&gt;;PayrollRelActionId=&lt;value3&gt;;PaymentRelActionId=&lt;value4&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-Payments-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-Payments-{PaymentsUniqID}-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-payments-paymentsuniqid-get"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/Prepayments/{PaymentsUniqID}": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "get_personProcessResults-Prepayments",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "PaymentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PrePaymentId, Status, PayrollRelActionId and PaymentRelActionId ---for the Person Process Results Prepayment resource and used to uniquely identify an instance of Person Process Results Prepayment. The client should not generate the hash key value.  Instead, the client should query on the Person Process Results Prepayment collection resource with a filter on the primary key values in order to navigate to a specific instance of Person Process Results Prepayment.<br><br>For example: VoidPayment?q=PrePaymentId=&lt;value1&gt;;Status=&lt;value2&gt;;PayrollRelActionId=&lt;value3&gt;;PaymentRelActionId=&lt;value4&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-Prepayments-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-Prepayments-{PaymentsUniqID}-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-prepayments-paymentsuniqid-get"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/VoidPayment": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "getall_personProcessResults-VoidPayment",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccountNumber; string; Unique identifier for the payroll</li><li>AccountNumberVisibleFlag; boolean; Unique identifier for the payroll</li><li>Amount; number; Unique identifier for the payroll</li><li>BankAccountId; integer; Unique identifier for the payroll</li><li>BankAccountNumberLabel; string; Unique identifier for the payroll</li><li>BankAccountType; string; Unique identifier for the payroll</li><li>BankAccountTypeLabel; string; Unique identifier for the payroll</li><li>BankName; string; Unique identifier for the payroll</li><li>BankNameLabel; string; Unique identifier for the payroll</li><li>BankNumber; string; Unique identifier for the payroll</li><li>BankNumberLabel; string; Unique identifier for the payroll</li><li>BasePaymentTypeName; string; Unique identifier for the payroll</li><li>BicCode; string; Unique identifier for the payroll</li><li>BicCodeLabel; string; Unique identifier for the payroll</li><li>BranchName; string; Unique identifier for the payroll</li><li>BranchNameLabel; string; Unique identifier for the payroll</li><li>BranchNumber; string; Unique identifier for the payroll</li><li>BranchNumberLabel; string; Unique identifier for the payroll</li><li>BranchPartyId; integer; Unique identifier for the payroll</li><li>CalcBreakdownId; integer; Unique identifier for the payroll</li><li>CalcBreakdownRef; string; Unique identifier for the payroll</li><li>CalculationBreakdownValue; string; Unique identifier for the payroll</li><li>CancelRelActionId; integer; Unique identifier for the payroll</li><li>CheckDigits; string; Unique identifier for the payroll</li><li>CurrencyCode; string; Unique identifier for the payroll</li><li>EmpRelActionId; integer; Unique identifier for the payroll</li><li>ExpPmtDtVisibleFlag; boolean; Unique identifier for the payroll</li><li>ExtBankAccountId; integer; Unique identifier for the payroll</li><li>FlowInstanceName; string; Unique identifier for the payroll</li><li>Iban; string; Unique identifier for the payroll</li><li>IbanLabel; string; Unique identifier for the payroll</li><li>IsBankTransfer; string; Unique identifier for the payroll</li><li>LegislationCode; string; Unique identifier for the payroll</li><li>LegislativeDataGroupId; integer; Unique identifier for the payroll</li><li>MakeExternalPaymentFlag; boolean; Unique identifier for the payroll</li><li>Opm; string; Unique identifier for the payroll</li><li>PayLockingAction; string; Unique identifier for the payroll</li><li>PayLockingFlag; boolean; Unique identifier for the payroll</li><li>Payee; string; Unique identifier for the payroll</li><li>PayeeId; integer; Unique identifier for the payroll</li><li>PayeeType; string; Unique identifier for the payroll</li><li>PayeeVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentDate; string; Unique identifier for the payroll</li><li>PaymentProcSubmitDate; string; Unique identifier for the payroll</li><li>PaymentRefVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentReference; string; Unique identifier for the payroll</li><li>PaymentRelActionId; integer; Unique identifier for the payroll</li><li>PaymentTypeId; integer; Unique identifier for the payroll</li><li>PaymentTypeName; string; Unique identifier for the payroll</li><li>PayrollActionId; integer; Unique identifier for the payroll</li><li>PayrollId; integer; Unique identifier for the payroll</li><li>PayrollName; string; Unique identifier for the payroll</li><li>PayrollRelActionId; integer; Unique identifier for the payroll</li><li>PayrollRelationshipNumber; string; Unique identifier for the payroll</li><li>PersonId; integer; Unique identifier for the payroll</li><li>PersonNumber; string; Unique identifier for the payroll</li><li>PpmName; string; Unique identifier for the payroll</li><li>PpmNameVisibleFlag; boolean; Unique identifier for the payroll</li><li>PrePaymentId; integer; Unique identifier for the payroll</li><li>PrepayCumRelActionId; integer; Unique identifier for the payroll</li><li>PrepayPaymentDate; string; Unique identifier for the payroll</li><li>PrepayProcSubmitDate; string; Unique identifier for the payroll</li><li>PrepayProcessDate; string; Unique identifier for the payroll</li><li>PrepayRelActionId; integer; Unique identifier for the payroll</li><li>PreventPaymentFlag; boolean; Unique identifier for the payroll</li><li>Priority; integer; Unique identifier for the payroll</li><li>ProcessDate; string; Unique identifier for the payroll</li><li>ProcessEndDate; string; Unique identifier for the payroll</li><li>ProcessName; string; Unique identifier for the payroll</li><li>ProcessNameCode; string; Unique identifier for the payroll</li><li>ProcessStartDate; string; Unique identifier for the payroll</li><li>Reason; string; Unique identifier for the payroll</li><li>ReasonVisibleFlag; boolean; Unique identifier for the payroll</li><li>RelationshipId; integer; Unique identifier for the payroll</li><li>RollUpPaymentActionId; number; Unique identifier for the payroll</li><li>RollbackFlag; boolean; Unique identifier for the payroll</li><li>SecondaryAccountReference; string; Unique identifier for the payroll</li><li>ShowVoidedPayment; string; Unique identifier for the payroll</li><li>Source; string; Unique identifier for the payroll</li><li>Status; string; Unique identifier for the payroll</li><li>StatusCode; string; Unique identifier for the payroll</li><li>VoidPaymentActionId; integer; Unique identifier for the payroll</li><li>VoidPaymentFlag; boolean; Unique identifier for the payroll</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Unique identifier for the payroll <br>Finder Variables <ul><li>PaymentRelActionId; integer;  Unique identifier for the payroll </li><li>PayrollRelActionId; integer;  Unique identifier for the payroll </li><li>PrePaymentId; integer;  Unique identifier for the payroll </li><li>Status; string;  Unique identifier for the payroll </li></ul></li><li>findByPayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByPrepayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPrepayRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByRollupPay Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Unique identifier for the payroll",
+                "properties": {
+                  "PrePaymentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "Status": {
+                    "nullable": true,
+                    "description": "Unique identifier for the payroll",
+                    "type": "string",
+                    "title": "Payment Status",
+                    "maxLength": 4000
+                  },
+                  "PaymentRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "PayrollRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPrepayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPrepayRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByRollupPay",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-VoidPayment"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-VoidPayment-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-voidpayment-get"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/Prepayments": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "getall_personProcessResults-Prepayments",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccountNumber; string; Unique identifier for the payroll</li><li>AccountNumberVisibleFlag; boolean; Unique identifier for the payroll</li><li>Amount; number; Unique identifier for the payroll</li><li>BankAccountId; integer; Unique identifier for the payroll</li><li>BankAccountNumberLabel; string; Unique identifier for the payroll</li><li>BankAccountType; string; Unique identifier for the payroll</li><li>BankAccountTypeLabel; string; Unique identifier for the payroll</li><li>BankName; string; Unique identifier for the payroll</li><li>BankNameLabel; string; Unique identifier for the payroll</li><li>BankNumber; string; Unique identifier for the payroll</li><li>BankNumberLabel; string; Unique identifier for the payroll</li><li>BasePaymentTypeName; string; Unique identifier for the payroll</li><li>BicCode; string; Unique identifier for the payroll</li><li>BicCodeLabel; string; Unique identifier for the payroll</li><li>BranchName; string; Unique identifier for the payroll</li><li>BranchNameLabel; string; Unique identifier for the payroll</li><li>BranchNumber; string; Unique identifier for the payroll</li><li>BranchNumberLabel; string; Unique identifier for the payroll</li><li>BranchPartyId; integer; Unique identifier for the payroll</li><li>CalcBreakdownId; integer; Unique identifier for the payroll</li><li>CalcBreakdownRef; string; Unique identifier for the payroll</li><li>CalculationBreakdownValue; string; Unique identifier for the payroll</li><li>CancelRelActionId; integer; Unique identifier for the payroll</li><li>CheckDigits; string; Unique identifier for the payroll</li><li>CurrencyCode; string; Unique identifier for the payroll</li><li>EmpRelActionId; integer; Unique identifier for the payroll</li><li>ExpPmtDtVisibleFlag; boolean; Unique identifier for the payroll</li><li>ExtBankAccountId; integer; Unique identifier for the payroll</li><li>FlowInstanceName; string; Unique identifier for the payroll</li><li>Iban; string; Unique identifier for the payroll</li><li>IbanLabel; string; Unique identifier for the payroll</li><li>IsBankTransfer; string; Unique identifier for the payroll</li><li>LegislationCode; string; Unique identifier for the payroll</li><li>LegislativeDataGroupId; integer; Unique identifier for the payroll</li><li>MakeExternalPaymentFlag; boolean; Unique identifier for the payroll</li><li>Opm; string; Unique identifier for the payroll</li><li>PayLockingAction; string; Unique identifier for the payroll</li><li>PayLockingFlag; boolean; Unique identifier for the payroll</li><li>Payee; string; Unique identifier for the payroll</li><li>PayeeId; integer; Unique identifier for the payroll</li><li>PayeeType; string; Unique identifier for the payroll</li><li>PayeeVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentDate; string; Unique identifier for the payroll</li><li>PaymentProcSubmitDate; string; Unique identifier for the payroll</li><li>PaymentRefVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentReference; string; Unique identifier for the payroll</li><li>PaymentRelActionId; integer; Unique identifier for the payroll</li><li>PaymentTypeId; integer; Unique identifier for the payroll</li><li>PaymentTypeName; string; Unique identifier for the payroll</li><li>PayrollActionId; integer; Unique identifier for the payroll</li><li>PayrollId; integer; Unique identifier for the payroll</li><li>PayrollName; string; Unique identifier for the payroll</li><li>PayrollRelActionId; integer; Unique identifier for the payroll</li><li>PayrollRelationshipNumber; string; Unique identifier for the payroll</li><li>PersonId; integer; Unique identifier for the payroll</li><li>PersonNumber; string; Unique identifier for the payroll</li><li>PpmName; string; Unique identifier for the payroll</li><li>PpmNameVisibleFlag; boolean; Unique identifier for the payroll</li><li>PrePaymentId; integer; Unique identifier for the payroll</li><li>PrepayCumRelActionId; integer; Unique identifier for the payroll</li><li>PrepayPaymentDate; string; Unique identifier for the payroll</li><li>PrepayProcSubmitDate; string; Unique identifier for the payroll</li><li>PrepayProcessDate; string; Unique identifier for the payroll</li><li>PrepayRelActionId; integer; Unique identifier for the payroll</li><li>PreventPaymentFlag; boolean; Unique identifier for the payroll</li><li>Priority; integer; Unique identifier for the payroll</li><li>ProcessDate; string; Unique identifier for the payroll</li><li>ProcessEndDate; string; Unique identifier for the payroll</li><li>ProcessName; string; Unique identifier for the payroll</li><li>ProcessNameCode; string; Unique identifier for the payroll</li><li>ProcessStartDate; string; Unique identifier for the payroll</li><li>Reason; string; Unique identifier for the payroll</li><li>ReasonVisibleFlag; boolean; Unique identifier for the payroll</li><li>RelationshipId; integer; Unique identifier for the payroll</li><li>RollUpPaymentActionId; number; Unique identifier for the payroll</li><li>RollbackFlag; boolean; Unique identifier for the payroll</li><li>SecondaryAccountReference; string; Unique identifier for the payroll</li><li>ShowVoidedPayment; string; Unique identifier for the payroll</li><li>Source; string; Unique identifier for the payroll</li><li>Status; string; Unique identifier for the payroll</li><li>StatusCode; string; Unique identifier for the payroll</li><li>VoidPaymentActionId; integer; Unique identifier for the payroll</li><li>VoidPaymentFlag; boolean; Unique identifier for the payroll</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Unique identifier for the payroll <br>Finder Variables <ul><li>PaymentRelActionId; integer;  Unique identifier for the payroll </li><li>PayrollRelActionId; integer;  Unique identifier for the payroll </li><li>PrePaymentId; integer;  Unique identifier for the payroll </li><li>Status; string;  Unique identifier for the payroll </li></ul></li><li>findByPayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByPrepayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPrepayRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByRollupPay Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Unique identifier for the payroll",
+                "properties": {
+                  "PrePaymentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "Status": {
+                    "nullable": true,
+                    "description": "Unique identifier for the payroll",
+                    "type": "string",
+                    "title": "Payment Status",
+                    "maxLength": 4000
+                  },
+                  "PaymentRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "PayrollRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPrepayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPrepayRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByRollupPay",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-Prepayments"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-Prepayments-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-prepayments-get"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/VoidPayment/{PaymentsUniqID}": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "get_personProcessResults-VoidPayment",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "PaymentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PrePaymentId, Status, PayrollRelActionId and PaymentRelActionId ---for the Person Process Results Prepayment resource and used to uniquely identify an instance of Person Process Results Prepayment. The client should not generate the hash key value.  Instead, the client should query on the Person Process Results Prepayment collection resource with a filter on the primary key values in order to navigate to a specific instance of Person Process Results Prepayment.<br><br>For example: VoidPayment?q=PrePaymentId=&lt;value1&gt;;Status=&lt;value2&gt;;PayrollRelActionId=&lt;value3&gt;;PaymentRelActionId=&lt;value4&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-VoidPayment-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-VoidPayment-{PaymentsUniqID}-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-voidpayment-paymentsuniqid-get"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/Payments": {
+      "get": {
+        "tags": [
+          "Person Process Results/Person Process Results Prepayment"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "getall_personProcessResults-Payments",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccountNumber; string; Unique identifier for the payroll</li><li>AccountNumberVisibleFlag; boolean; Unique identifier for the payroll</li><li>Amount; number; Unique identifier for the payroll</li><li>BankAccountId; integer; Unique identifier for the payroll</li><li>BankAccountNumberLabel; string; Unique identifier for the payroll</li><li>BankAccountType; string; Unique identifier for the payroll</li><li>BankAccountTypeLabel; string; Unique identifier for the payroll</li><li>BankName; string; Unique identifier for the payroll</li><li>BankNameLabel; string; Unique identifier for the payroll</li><li>BankNumber; string; Unique identifier for the payroll</li><li>BankNumberLabel; string; Unique identifier for the payroll</li><li>BasePaymentTypeName; string; Unique identifier for the payroll</li><li>BicCode; string; Unique identifier for the payroll</li><li>BicCodeLabel; string; Unique identifier for the payroll</li><li>BranchName; string; Unique identifier for the payroll</li><li>BranchNameLabel; string; Unique identifier for the payroll</li><li>BranchNumber; string; Unique identifier for the payroll</li><li>BranchNumberLabel; string; Unique identifier for the payroll</li><li>BranchPartyId; integer; Unique identifier for the payroll</li><li>CalcBreakdownId; integer; Unique identifier for the payroll</li><li>CalcBreakdownRef; string; Unique identifier for the payroll</li><li>CalculationBreakdownValue; string; Unique identifier for the payroll</li><li>CancelRelActionId; integer; Unique identifier for the payroll</li><li>CheckDigits; string; Unique identifier for the payroll</li><li>CurrencyCode; string; Unique identifier for the payroll</li><li>EmpRelActionId; integer; Unique identifier for the payroll</li><li>ExpPmtDtVisibleFlag; boolean; Unique identifier for the payroll</li><li>ExtBankAccountId; integer; Unique identifier for the payroll</li><li>FlowInstanceName; string; Unique identifier for the payroll</li><li>Iban; string; Unique identifier for the payroll</li><li>IbanLabel; string; Unique identifier for the payroll</li><li>IsBankTransfer; string; Unique identifier for the payroll</li><li>LegislationCode; string; Unique identifier for the payroll</li><li>LegislativeDataGroupId; integer; Unique identifier for the payroll</li><li>MakeExternalPaymentFlag; boolean; Unique identifier for the payroll</li><li>Opm; string; Unique identifier for the payroll</li><li>PayLockingAction; string; Unique identifier for the payroll</li><li>PayLockingFlag; boolean; Unique identifier for the payroll</li><li>Payee; string; Unique identifier for the payroll</li><li>PayeeId; integer; Unique identifier for the payroll</li><li>PayeeType; string; Unique identifier for the payroll</li><li>PayeeVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentDate; string; Unique identifier for the payroll</li><li>PaymentProcSubmitDate; string; Unique identifier for the payroll</li><li>PaymentRefVisibleFlag; boolean; Unique identifier for the payroll</li><li>PaymentReference; string; Unique identifier for the payroll</li><li>PaymentRelActionId; integer; Unique identifier for the payroll</li><li>PaymentTypeId; integer; Unique identifier for the payroll</li><li>PaymentTypeName; string; Unique identifier for the payroll</li><li>PayrollActionId; integer; Unique identifier for the payroll</li><li>PayrollId; integer; Unique identifier for the payroll</li><li>PayrollName; string; Unique identifier for the payroll</li><li>PayrollRelActionId; integer; Unique identifier for the payroll</li><li>PayrollRelationshipNumber; string; Unique identifier for the payroll</li><li>PersonId; integer; Unique identifier for the payroll</li><li>PersonNumber; string; Unique identifier for the payroll</li><li>PpmName; string; Unique identifier for the payroll</li><li>PpmNameVisibleFlag; boolean; Unique identifier for the payroll</li><li>PrePaymentId; integer; Unique identifier for the payroll</li><li>PrepayCumRelActionId; integer; Unique identifier for the payroll</li><li>PrepayPaymentDate; string; Unique identifier for the payroll</li><li>PrepayProcSubmitDate; string; Unique identifier for the payroll</li><li>PrepayProcessDate; string; Unique identifier for the payroll</li><li>PrepayRelActionId; integer; Unique identifier for the payroll</li><li>PreventPaymentFlag; boolean; Unique identifier for the payroll</li><li>Priority; integer; Unique identifier for the payroll</li><li>ProcessDate; string; Unique identifier for the payroll</li><li>ProcessEndDate; string; Unique identifier for the payroll</li><li>ProcessName; string; Unique identifier for the payroll</li><li>ProcessNameCode; string; Unique identifier for the payroll</li><li>ProcessStartDate; string; Unique identifier for the payroll</li><li>Reason; string; Unique identifier for the payroll</li><li>ReasonVisibleFlag; boolean; Unique identifier for the payroll</li><li>RelationshipId; integer; Unique identifier for the payroll</li><li>RollUpPaymentActionId; number; Unique identifier for the payroll</li><li>RollbackFlag; boolean; Unique identifier for the payroll</li><li>SecondaryAccountReference; string; Unique identifier for the payroll</li><li>ShowVoidedPayment; string; Unique identifier for the payroll</li><li>Source; string; Unique identifier for the payroll</li><li>Status; string; Unique identifier for the payroll</li><li>StatusCode; string; Unique identifier for the payroll</li><li>VoidPaymentActionId; integer; Unique identifier for the payroll</li><li>VoidPaymentFlag; boolean; Unique identifier for the payroll</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Unique identifier for the payroll <br>Finder Variables <ul><li>PaymentRelActionId; integer;  Unique identifier for the payroll </li><li>PayrollRelActionId; integer;  Unique identifier for the payroll </li><li>PrePaymentId; integer;  Unique identifier for the payroll </li><li>Status; string;  Unique identifier for the payroll </li></ul></li><li>findByPayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByPrepayment Unique identifier for the payroll <br>Finder Variables <ul><li>pPrepayRelActionId; integer;  Unique identifier for the payroll </li></ul></li><li>findByRollupPay Unique identifier for the payroll <br>Finder Variables <ul><li>pPaymentRelActionId; integer;  Unique identifier for the payroll </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Unique identifier for the payroll",
+                "properties": {
+                  "PrePaymentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "Status": {
+                    "nullable": true,
+                    "description": "Unique identifier for the payroll",
+                    "type": "string",
+                    "title": "Payment Status",
+                    "maxLength": 4000
+                  },
+                  "PaymentRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  },
+                  "PayrollRelActionId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPrepayment",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPrepayRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByRollupPay",
+                "description": "Unique identifier for the payroll",
+                "title": "Status",
+                "properties": {
+                  "pPaymentRelActionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-Payments"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-Payments-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-payments-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "personProcessResults-Payments-item-response": {
+        "type": "object",
+        "properties": {
+          "AccountNumber": {
+            "title": "Bank Account Number",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "AccountNumberVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Amount": {
+            "title": "Amount",
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "BankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "BankAccountNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountType": {
+            "maxLength": 25,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountTypeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BasePaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCodeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchPartyId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownRef": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CalculationBreakdownValue": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CancelRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CheckDigits": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CurrencyCode": {
+            "maxLength": 15,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmpRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExpPmtDtVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ExtBankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FlowInstanceName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Iban": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IbanLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsBankTransfer": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MakeExternalPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Opm": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayLockingAction": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayLockingFlag": {
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Payee": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayeeType": {
+            "maxLength": 12,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentDate": {
+            "title": "Payment Date",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRefVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentReference": {
+            "title": "Payment Reference",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollRelationshipNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PpmName": {
+            "title": "Personal Payment Method",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PpmNameVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrePaymentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayCumRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayPaymentDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PreventPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessNameCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Reason": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ReasonVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RelationshipId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RollUpPaymentActionId": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RollbackFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SecondaryAccountReference": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShowVoidedPayment": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Payment Status",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "dependencies": [
+                "Status"
+              ]
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "personProcessResults-Prepayments-item-response": {
+        "type": "object",
+        "properties": {
+          "AccountNumber": {
+            "title": "Bank Account Number",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "AccountNumberVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Amount": {
+            "title": "Amount",
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "BankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "BankAccountNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountType": {
+            "maxLength": 25,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountTypeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BasePaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCodeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchPartyId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownRef": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CalculationBreakdownValue": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CancelRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CheckDigits": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CurrencyCode": {
+            "maxLength": 15,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmpRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExpPmtDtVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ExtBankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FlowInstanceName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Iban": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IbanLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsBankTransfer": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MakeExternalPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Opm": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayLockingAction": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayLockingFlag": {
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Payee": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayeeType": {
+            "maxLength": 12,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentDate": {
+            "title": "Payment Date",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRefVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentReference": {
+            "title": "Payment Reference",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollRelationshipNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PpmName": {
+            "title": "Personal Payment Method",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PpmNameVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrePaymentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayCumRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayPaymentDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PreventPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessNameCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Reason": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ReasonVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RelationshipId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RollUpPaymentActionId": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RollbackFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SecondaryAccountReference": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShowVoidedPayment": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Payment Status",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "dependencies": [
+                "Status"
+              ]
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "personProcessResults-VoidPayment": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-VoidPayment-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "personProcessResults-VoidPayment-item-response": {
+        "type": "object",
+        "properties": {
+          "AccountNumber": {
+            "title": "Bank Account Number",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "AccountNumberVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Amount": {
+            "title": "Amount",
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "BankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "BankAccountNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountType": {
+            "maxLength": 25,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankAccountTypeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BankNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BasePaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BicCodeLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchName": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNameLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchNumberLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BranchPartyId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CalcBreakdownRef": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CalculationBreakdownValue": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CancelRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CheckDigits": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CurrencyCode": {
+            "maxLength": 15,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmpRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExpPmtDtVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ExtBankAccountId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FlowInstanceName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Iban": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IbanLabel": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsBankTransfer": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegislativeDataGroupId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MakeExternalPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Opm": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayLockingAction": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PayLockingFlag": {
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Payee": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayeeType": {
+            "maxLength": 12,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PayeeVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentDate": {
+            "title": "Payment Date",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRefVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentReference": {
+            "title": "Payment Reference",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PaymentRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PaymentTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PayrollRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PayrollRelationshipNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PpmName": {
+            "title": "Personal Payment Method",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "PpmNameVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrePaymentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayCumRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrepayPaymentDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcSubmitDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrepayRelActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PreventPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProcessName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessNameCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ProcessStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Reason": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ReasonVisibleFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RelationshipId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RollUpPaymentActionId": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RollbackFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SecondaryAccountReference": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShowVoidedPayment": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Payment Status",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "dependencies": [
+                "Status"
+              ]
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentActionId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "VoidPaymentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "personProcessResults-Prepayments": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-Prepayments-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "personProcessResults-Payments": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-Payments-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

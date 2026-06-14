@@ -1,0 +1,228 @@
+{
+  "name": "HWM_TM_AUDITS",
+  "object_type": "TABLE",
+  "description": "The Time change audit (TA) table stores one row for each time entry.",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmaudits-7503.html#hwmtmaudits-7503",
+  "primary_keys": [
+    {
+      "name": "HWM_TM_AUDITS_PK",
+      "columns": "TM_AUDIT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TM_AUDIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key column containing a random generated number.  This column is not updateable"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "TM_RECORD_GRP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "reference to the time record group (time card)"
+    },
+    {
+      "Name": "USAGES_TYPE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "1 = RECORD, can take other value in the future"
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Action performed on the referenced item"
+    },
+    {
+      "Name": "REF_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The date to which this Time Record is assigned"
+    },
+    {
+      "Name": "TM_BLK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Id of the time record (created, deleted or before)"
+    },
+    {
+      "Name": "TM_BLK_VERSION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Version of the time record  (created, deleted or before)"
+    },
+    {
+      "Name": "TM_NEW_BLK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "in case of update action, Id of the time record after update"
+    },
+    {
+      "Name": "TM_NEW_BLK_VERSION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Version of the time record after update or create"
+    },
+    {
+      "Name": "REASON_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Code referencing a Lookup value."
+    },
+    {
+      "Name": "ORIG_AUDIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Reference the initial audit rows when updating the reason attribute"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "PART_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "partition key"
+    },
+    {
+      "Name": "PART_GRP_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "partition key"
+    },
+    {
+      "Name": "CHANGE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the date and time of the corresponding change made on the time entry."
+    },
+    {
+      "Name": "CHANGED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the user who made the corresponding change on the time entry."
+    },
+    {
+      "Name": "REASON_CHANGE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the date and time of when the Change Reason of this audit row is updated."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HWM_TM_AUDITS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TM_RECORD_GRP_ID"
+    },
+    {
+      "Index": "HWM_TM_AUDITS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_BLK_ID"
+    },
+    {
+      "Index": "HWM_TM_AUDITS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_NEW_BLK_ID"
+    },
+    {
+      "Index": "HWM_TM_AUDITS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TM_AUDIT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:46:48"
+}

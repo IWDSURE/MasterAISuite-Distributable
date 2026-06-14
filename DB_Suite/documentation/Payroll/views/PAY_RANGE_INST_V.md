@@ -1,0 +1,50 @@
+# PAY_RANGE_INST_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payrangeinstv-7600.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payrangeinstv-7600.html)
+
+## Columns
+
+- RANGE_ITEM_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- VALUE_DEFN_ID
+- LOW_VALUE
+- LOW_VALUE_TEXT
+- HIGH_VALUE
+- HIGH_VALUE_TEXT
+- CALC_TYPE_ID
+- VALUE1
+- VALUE2
+- VALUE3
+- SOURCE_TYPE
+- SOURCE_ID
+- ENTERPRISE_ID
+- LEGISLATION_CODE
+- LEGISLATIVE_DATA_GROUP_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- LAST_UPDATED_BY
+- MODULE_ID
+- SEED_STATUS
+- SGUID
+
+## Query
+
+```sql
+SELECT pay_range_items_f.RANGE_ITEM_ID, pay_range_items_f.EFFECTIVE_START_DATE, pay_range_items_f.EFFECTIVE_END_DATE, pay_range_items_f.VALUE_DEFN_ID, pay_range_items_f.LOW_VALUE, pay_range_items_f.LOW_VALUE_TEXT, pay_range_items_f.HIGH_VALUE, pay_range_items_f.HIGH_VALUE_TEXT, pay_range_items_f.CALC_TYPE_ID, pay_range_items_f.VALUE1, pay_range_items_f.VALUE2, pay_range_items_f.VALUE3, pay_range_items_f.SOURCE_TYPE, pay_range_items_f.SOURCE_ID, pay_range_items_f.ENTERPRISE_ID, pay_range_items_f.LEGISLATION_CODE, pay_range_items_f.LEGISLATIVE_DATA_GROUP_ID, pay_range_items_f.OBJECT_VERSION_NUMBER, pay_range_items_f.CREATED_BY, pay_range_items_f.CREATION_DATE, pay_range_items_f.LAST_UPDATE_DATE, pay_range_items_f.LAST_UPDATE_LOGIN, pay_range_items_f.LAST_UPDATED_BY, pay_range_items_f.MODULE_ID, pay_range_items_f.SEED_STATUS, pay_range_items_f.SGUID FROM pay_old_range_items_f pay_range_items_f where exists (select 1 from pay_value_instances_v where pay_value_instances_v.value_defn_id = pay_range_items_f.value_defn_id) /* and not exists (select '' from pay_range_insts_f inst where inst.range_inst_id = pay_range_items_f.range_item_id) union all SELECT pay_range_items_f.RANGE_INST_ID, pay_range_items_f.EFFECTIVE_START_DATE, pay_range_items_f.EFFECTIVE_END_DATE, pay_range_items_f.VALUE_INST_ID, pay_range_items_f.LOW_VALUE, null, pay_range_items_f.HIGH_VALUE, null, pay_range_items_f.CALC_TYPE_ID, pay_range_items_f.VALUE1, pay_range_items_f.VALUE2, pay_range_items_f.VALUE3, null, null, pay_range_items_f.ENTERPRISE_ID, pay_range_items_f.LEGISLATION_CODE, pay_range_items_f.LEGISLATIVE_DATA_GROUP_ID, pay_range_items_f.OBJECT_VERSION_NUMBER, pay_range_items_f.CREATED_BY, pay_range_items_f.CREATION_DATE, pay_range_items_f.LAST_UPDATE_DATE, pay_range_items_f.LAST_UPDATE_LOGIN, pay_range_items_f.LAST_UPDATED_BY, null, null, null FROM pay_range_insts_f pay_range_items_f where exists (select 1 from pay_value_instances_v where pay_value_instances_v.value_defn_id = pay_range_items_f.value_inst_id) */
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

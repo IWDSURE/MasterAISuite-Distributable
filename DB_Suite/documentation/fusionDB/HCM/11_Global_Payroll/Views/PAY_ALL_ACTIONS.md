@@ -1,0 +1,37 @@
+# PAY_ALL_ACTIONS
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payallactions-4025.html#payallactions-4025](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payallactions-4025.html#payallactions-4025)
+
+## Columns
+
+- OBJECT_ACTION_ID
+- OBJECT_ID
+- ACTION_STATUS
+- OBJECT_TYPE
+- ACTION_TYPE
+- CHUNK_NUMBER
+- ACTION_SEQUENCE
+- PAYROLL_ACTION_ID
+- SOURCE_ACTION_ID
+- PAYROLL_RELATIONSHIP_ID
+- RETRO_COMPONENT_ID
+- SOURCE_ID
+- RUN_TYPE_ID
+
+## Query
+
+```sql
+SELECT OBJECT_ACTION_ID, OBJECT_ID, ACTION_STATUS, OBJECT_TYPE, 'O' ACTION_TYPE, CHUNK_NUMBER, ACTION_SEQUENCE, PAYROLL_ACTION_ID, null source_action_id, payroll_relationship_id, null RETRO_COMPONENT_ID, null source_id, null run_type_id FROM PAY_OBJECT_ACTIONS UNION ALL SELECT TEMP_OBJECT_ACTION_ID, OBJECT_ID, ACTION_STATUS, OBJECT_TYPE, 'T', CHUNK_NUMBER, ACTION_SEQUENCE, PAYROLL_ACTION_ID, null, payroll_relationship_id, null, null source_id, null run_type_id FROM PAY_TEMP_OBJECT_ACTIONS UNION ALL SELECT PAYROLL_REL_ACTION_ID, PAYROLL_RELATIONSHIP_ID, ACTION_STATUS, 'PRE', 'P', CHUNK_NUMBER, ACTION_SEQUENCE, PAYROLL_ACTION_ID, source_action_id, payroll_relationship_id, RETRO_COMPONENT_ID, source_id, run_type_id FROM PAY_PAYROLL_REL_ACTIONS
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

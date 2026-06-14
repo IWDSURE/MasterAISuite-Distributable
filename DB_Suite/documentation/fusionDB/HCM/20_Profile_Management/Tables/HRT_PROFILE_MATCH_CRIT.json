@@ -1,0 +1,838 @@
+{
+  "name": "HRT_PROFILE_MATCH_CRIT",
+  "object_type": "TABLE",
+  "description": "This table stores the Profile Items of the Source Profile that form the Match Criteria in the Profile Best Fit.\n\nThis table will act as a kind of temporary table storing the Matching Criteria so that the final query to match the Source Profile with the Target profiles is efficient and simpler. This table will have a structure similar to the HRT_PROFILE_ITEMS table with certain additional columns needed for Match.",
+  "schema": "FUSION",
+  "owner": "HRT",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtprofilematchcrit-14595.html#hrtprofilematchcrit-14595",
+  "primary_keys": [
+    {
+      "name": "HRT_PROFILE_MATCH_CRIT_PK",
+      "columns": "PROFILE_MATCH_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PROFILE_MATCH_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key"
+    },
+    {
+      "Name": "SEARCH_INSTANCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique ID to identify the Source criteria Profile items for a particular instance of Match"
+    },
+    {
+      "Name": "SEARCH_ATTRIBUTE_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Column to identify the number of not-null columns that are to be matched between the Source Profile and the Target profiles"
+    },
+    {
+      "Name": "SEARCH_IMPORTANCE_PERCENT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Column to store the particular Profile Item Row Importance Percent value, derived by dividing the Item Importance Value with the Total Importance for the Profile"
+    },
+    {
+      "Name": "SEARCH_RATING_USAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Column to store if the particular Profile Item Row uses any Rating Model"
+    },
+    {
+      "Name": "SEARCH_NUMERIC_RATING1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Numeric Tating Level value for the corresponding Rating Level"
+    },
+    {
+      "Name": "SEARCH_NUMERIC_RATING2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Numeric Tating Level value for the corresponding Rating Level"
+    },
+    {
+      "Name": "SEARCH_NUMERIC_RATING3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Numeric Tating Level value for the corresponding Rating Level"
+    },
+    {
+      "Name": "PROFILE_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to HRT_PROFILE_ITEMS"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "PERSON_ID"
+    },
+    {
+      "Name": "MANAGER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "MANAGER_ID"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_BUSINESS_GROUPS"
+    },
+    {
+      "Name": "PARENT_PROFILE_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Parent Profile Item Id"
+    },
+    {
+      "Name": "PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to HRT_PROFILES_B"
+    },
+    {
+      "Name": "CONTENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to HRT_CONTENT_TYPES_B"
+    },
+    {
+      "Name": "CONTENT_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foriegn Key to HRT_CONTENT_ITEMS_B"
+    },
+    {
+      "Name": "SOURCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Syndication source profile ID. Use this property to display the source profile of a syndicated item"
+    },
+    {
+      "Name": "SOURCE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source Type. For example, IRC, OTA"
+    },
+    {
+      "Name": "SOURCE_KEY1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Alternative Source Key"
+    },
+    {
+      "Name": "SOURCE_KEY2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Alternative Source Key"
+    },
+    {
+      "Name": "SOURCE_KEY3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Alternative Source Key"
+    },
+    {
+      "Name": "DATE_FROM",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date From"
+    },
+    {
+      "Name": "DATE_TO",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date To"
+    },
+    {
+      "Name": "QUALIFIER_ID1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The instance qualifier to use for the item"
+    },
+    {
+      "Name": "QUALIFIER_ID2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The instance qualifier to use for the item"
+    },
+    {
+      "Name": "RATING_MODEL_ID1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating model"
+    },
+    {
+      "Name": "RATING_MODEL_ID2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating model"
+    },
+    {
+      "Name": "RATING_MODEL_ID3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating model"
+    },
+    {
+      "Name": "RATING_LEVEL_ID1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating value. The values depend on the rating model selected."
+    },
+    {
+      "Name": "RATING_LEVEL_ID2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating value. The values depend on the rating model selected."
+    },
+    {
+      "Name": "RATING_LEVEL_ID3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The rating value. The values depend on the rating model selected."
+    },
+    {
+      "Name": "INTEREST_LEVEL",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Interest level"
+    },
+    {
+      "Name": "MANDATORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic mandatory check box"
+    },
+    {
+      "Name": "IMPORTANCE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Relative importance. This field is used in Search and Compare Profiles"
+    },
+    {
+      "Name": "ITEM_TEXT240_1",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_2",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_3",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_4",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_5",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_6",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_7",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_8",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_9",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_10",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_11",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_12",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_13",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_14",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT240_15",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 240 characters"
+    },
+    {
+      "Name": "ITEM_TEXT2000_1",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 2000 characters"
+    },
+    {
+      "Name": "ITEM_TEXT2000_2",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 2000 characters"
+    },
+    {
+      "Name": "ITEM_TEXT2000_3",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 2000 characters"
+    },
+    {
+      "Name": "ITEM_TEXT2000_4",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 2000 characters"
+    },
+    {
+      "Name": "ITEM_TEXT2000_5",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 2000 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_1",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_2",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_3",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_4",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_5",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_6",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_7",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_8",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_9",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_10",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_11",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_12",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_13",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_14",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_TEXT30_15",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A comments field of up to 30 characters"
+    },
+    {
+      "Name": "ITEM_DATE_1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_DATE_10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "A generic date field"
+    },
+    {
+      "Name": "ITEM_NUMBER_1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_NUMBER_10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "A generic number field"
+    },
+    {
+      "Name": "ITEM_DECIMAL_1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "15",
+      "Not-null": "",
+      "Comments": "A generic decimal field"
+    },
+    {
+      "Name": "ITEM_DECIMAL_2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "15",
+      "Not-null": "",
+      "Comments": "A generic decimal field"
+    },
+    {
+      "Name": "ITEM_DECIMAL_3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "15",
+      "Not-null": "",
+      "Comments": "A generic decimal field"
+    },
+    {
+      "Name": "ITEM_DECIMAL_4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "15",
+      "Not-null": "",
+      "Comments": "A generic decimal field"
+    },
+    {
+      "Name": "ITEM_DECIMAL_5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "15",
+      "Not-null": "",
+      "Comments": "A generic decimal field"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRT_PROFILE_MATCH_CRIT_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SEARCH_INSTANCE_ID"
+    },
+    {
+      "Index": "HRT_PROFILE_MATCH_CRIT_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTENT_TYPE_ID, BUSINESS_GROUP_ID"
+    },
+    {
+      "Index": "HRT_PROFILE_MATCH_CRIT_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PROFILE_MATCH_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:26:33"
+}

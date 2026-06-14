@@ -1,0 +1,21 @@
+{
+  "name": "HRQ_QSTNR_LATEST_RESPS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HRT",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqqstnrlatestrespsv-6217.html#hrqqstnrlatestrespsv-6217",
+  "columns": [
+    "QSTNR_RESPONSE_ID",
+    "QSTNR_PARTICIPANT_ID",
+    "QUESTIONNAIRE_ID",
+    "QSTNR_VERSION_NUM",
+    "PARTICIPANT_ID",
+    "PARTICIPANT_TYPE",
+    "SUBJECT_CODE",
+    "SUBJECT_ID",
+    "SUBSCRIBER_CODE"
+  ],
+  "query": "Select R.qstnr_response_id, P.qstnr_participant_id, P.questionnaire_id, R.qstnr_version_num, P.participant_id, p.participant_type, P.subject_code, P.subject_id, S.subscriber_code From HRQ_QSTNR_PARTICIPANTS P, HRQ_QSTNR_RESPONSES R, HRQ_SUBSCRIBERS_B S Where R.qstnr_participant_id = P.qstnr_participant_id and R.attempt_num = (Select max(R1.attempt_num) From HRQ_QSTNR_RESPONSES R1 where R1.qstnr_participant_id = P.qstnr_participant_id and R1.status = 'S') and S.subscriber_id = P.subscriber_id and S.business_group_id = P.business_group_id",
+  "_parsed_at": "2026-06-09T18:30:10"
+}

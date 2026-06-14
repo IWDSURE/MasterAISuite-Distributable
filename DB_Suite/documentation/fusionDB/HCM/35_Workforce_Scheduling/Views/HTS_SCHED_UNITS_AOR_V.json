@@ -1,0 +1,24 @@
+{
+  "name": "HTS_SCHED_UNITS_AOR_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedunitsaorv-6325.html#htsschedunitsaorv-6325",
+  "columns": [
+    "SCHED_UNIT_ID",
+    "SCHED_UNIT_CODE",
+    "MEMBER_TYPE",
+    "MEMBER_ID",
+    "LOCATION_ID",
+    "ENTERPRISE_ID",
+    "OBJECT_VERSION_NUMBER",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATED_BY",
+    "LAST_UPDATE_DATE",
+    "LAST_UPDATE_LOGIN"
+  ],
+  "query": "SELECT su.sched_unit_id, su.sched_unit_code, su.member_type, su.member_id, su.location_id, su.enterprise_id, su.object_version_number, su.created_by, su.creation_date, su.last_updated_by, su.last_update_date, su.last_update_login FROM hts_sched_units su WHERE su.member_type = 'ORA_HTS_MBR_TYPE_DEPARTMENT' AND EXISTS (SELECT 1 FROM hts_schedule_gen_profiles_b sgp, hts_sched_profile_managers mgr, (SELECT sched_profile_unit_id, sched_gen_profile_id, sched_unit_id,department_id FROM hts_sched_profile_units UNION SELECT sched_profile_float_id, sched_gen_profile_id, sched_unit_id, department_id FROM hts_sched_profile_floats ) spu WHERE sgp.sched_gen_profile_id = mgr.sched_gen_profile_id AND mgr.sched_gen_profile_id = spu.sched_gen_profile_id AND spu.sched_unit_id = su.sched_unit_id AND trunc(sysdate) BETWEEN nvl(mgr.start_date, TO_DATE('1901-01-01', 'yyyy-mm-dd')) AND nvl(mgr.end_date, TO_DATE('4712-12-31', 'yyyy-mm-dd')) AND mgr.person_id = nvl(hrc_session_util.get_user_personid, -1)) AND EXISTS (SELECT 1 FROM per_asg_responsibilities res WHERE status = 'Active' AND trunc(sysdate) BETWEEN res.start_date AND nvl(res.end_date, trunc(sysdate)) AND res.person_id = nvl(hrc_session_util.get_user_personid, - 1) AND res.responsibility_type = (SELECT nvl(value_text, 'ORA_PER_SCHEDULE_MANAGER') FROM hts_global_setups_b WHERE parameter_code = 'RESPONSIBILITY_TYPE' ) AND res.enterprise_id = su.enterprise_id AND res.organization_id = su.member_id AND ( (nvl(res.location_id, - 1) < 0) OR (nvl(su.location_id, - 1) < 0) OR (nvl(res.location_id, - 1) = nvl(su.location_id, - 1)) ) )",
+  "_parsed_at": "2026-06-09T20:29:32"
+}

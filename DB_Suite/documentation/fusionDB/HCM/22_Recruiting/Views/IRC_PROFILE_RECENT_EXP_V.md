@@ -1,0 +1,42 @@
+# IRC_PROFILE_RECENT_EXP_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircprofilerecentexpv-4741.html#ircprofilerecentexpv-4741](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircprofilerecentexpv-4741.html#ircprofilerecentexpv-4741)
+
+## Columns
+
+- PROFILE_ID
+- PROFILE_ITEM_ID
+- EMPLOYER_NAME
+- START_DATE
+- END_DATE
+- STARTING_POSITION
+- ENDING_POSITION
+- CURRENT_JOB
+- JOB_FAMILY
+- JOB_FUNCTION
+- OTHER_JOB_FUNCTION
+- SUPERVISOR_PHONE
+- SUPERVISOR_EMAIL
+- SUPERVISOR_NAME
+- SUPERVISOR_TITLE
+- OK_TO_CONTACT_SUPERVISOR
+- TYPE_OF_BUSINESS
+- ACHIEVEMENTS
+
+## Query
+
+```sql
+SELECT PROFILE_ID, PREV_EMPLOYMENT_ID AS PROFILE_ITEM_ID, Employer_Name, Start_Date, End_Date, Starting_Position, Ending_Position, Current_job, Job_Family, Job_Function, Other_Job_Function, Supervisor_Phone, Supervisor_Email, Supervisor_Name, Supervisor_Title, OK_TO_CONTACT_Supervisor, Type_of_Business, Achievements from ( select PROFILE_ID, PREV_EMPLOYMENT_ID, EMPLOYER_NAME AS Employer_Name, START_DATE AS Start_Date, END_DATE AS End_Date, STARTING_POSITION AS Starting_Position, JOB_TITLE AS Ending_Position, CURRENT_JOB_FLAG AS Current_job, JOB_FAMILY_ID AS Job_Family, JOB_FUNCTION AS Job_Function, OTHER_JOB_FUNCTION AS Other_Job_Function, SUPERVISOR_PHONE AS Supervisor_Phone, SUPERVISOR_EMAIL AS Supervisor_Email, SUPERVISOR_NAME AS Supervisor_Name, SUPERVISOR_TITLE AS Supervisor_Title, CONTACT_SUPERVISOR_FLAG AS OK_TO_CONTACT_Supervisor, BUSINESS_TYPE AS Type_of_Business, ACHIEVEMENTS AS Achievements, (RANK() over (partition by RecentExp.Profile_Id order by (CASE RecentExp.CURRENT_JOB_FLAG WHEN 'Y' THEN 100 else 0 END) desc, NVL(RecentExp.END_DATE, sysdate) desc, NVL(RecentExp.START_DATE, to_date('01/01/1900', 'DD/MM/YYYY')) desc, RecentExp.PREV_EMPLOYMENT_ID desc)) AS EXPERIENCE_RANK from IRC_PROFILE_EXPERIENCE_ITEMS_V RecentExp where RecentExp.Content_Type_Id = 129 and trunc(sysdate) BETWEEN (RecentExp.DATE_FROM-1) AND NVL(RecentExp.DATE_TO, sysdate) ) where EXPERIENCE_RANK = 1
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

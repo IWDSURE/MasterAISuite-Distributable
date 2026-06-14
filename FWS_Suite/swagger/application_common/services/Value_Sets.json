@@ -1,0 +1,1540 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Value Sets",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/fscmRestApi/resources/11.13.18.05/valueSets": {
+      "get": {
+        "tags": [
+          "Value Sets"
+        ],
+        "summary": "Get all value sets",
+        "operationId": "getall_valueSets",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "required": false,
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>PrimaryKey  <br>Finder Variables: <ul><li>ValueSetId  </li></ul></li><li>ValueSetCodeFinder  <br>Finder Variables: <ul><li>ValueSetCode  </li></ul></li></ul>",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-adf-finder-formats": [
+                {
+                  "name": "PrimaryKey",
+                  "properties": {
+                    "ValueSetId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "readOnly": true,
+                      "x-queryable": true,
+                      "x-nullable": false,
+                      "x-hints": {
+                        "updatable": false,
+                        "adf-precision": 18,
+                        "adf-hasDefaultValueExpression": true
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "ValueSetCodeFinder",
+                  "title": "ValueSetCodeCriteria",
+                  "properties": {
+                    "ValueSetCode": {
+                      "type": "string",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "ValueSetId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "readOnly": true,
+                    "x-queryable": true,
+                    "x-nullable": false,
+                    "x-hints": {
+                      "updatable": false,
+                      "adf-precision": 18,
+                      "adf-hasDefaultValueExpression": true
+                    }
+                  }
+                }
+              },
+              {
+                "name": "ValueSetCodeFinder",
+                "title": "ValueSetCodeCriteria",
+                "properties": {
+                  "ValueSetCode": {
+                    "type": "string",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourcecollection+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/valueSets"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/valueSets"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "<servername>-fscmRestApi-resources-11.13.18.05-valueSets-get",
+        "x-filename-id": "servername-fscmrestapi-resources-11.13.18.05-valuesets-get"
+      }
+    },
+    "<servername>/fscmRestApi/resources/11.13.18.05/valueSets/{valueSets_Id}": {
+      "get": {
+        "tags": [
+          "Value Sets"
+        ],
+        "summary": "Get a value set",
+        "operationId": "get_valueSets",
+        "parameters": [
+          {
+            "name": "valueSets_Id",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourceitem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/valueSets-item-response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/valueSets-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "<servername>-fscmRestApi-resources-11.13.18.05-valueSets-{valueSets_Id}-get",
+        "x-filename-id": "servername-fscmrestapi-resources-11.13.18.05-valuesets-valuesets_id-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "valueSets": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CollectionProperties"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "title": "Items",
+                "type": "array",
+                "description": "The items in the collection.",
+                "items": {
+                  "$ref": "#/components/schemas/valueSets-item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CollectionProperties": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "valueSets-item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemProperties"
+          },
+          {
+            "$ref": "#/components/schemas/valueSets-item"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "validationTable": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/valueSets-validationTable-item-response"
+                }
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/valueSets-values-item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ItemProperties": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "valueSets-item": {
+        "type": "object",
+        "properties": {
+          "ValueSetId": {
+            "type": "integer",
+            "description": "The identifier of the value set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 18,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "ModuleId": {
+            "title": "Module",
+            "maxLength": 32,
+            "type": "string",
+            "description": "The identifier of the module, which is a node at product line, product family, application, or logical business area level.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ValueSetCode": {
+            "title": "Value Set Code",
+            "maxLength": 60,
+            "type": "string",
+            "description": "The value set code of the value set. For each value set, you can define a context whose code is the value set code, and whose context-sensitive segments are shown for the values of that value set.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The description of the value set.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ValidationType": {
+            "title": "Validation Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The validatuin type describes the way the value set values are validated. For example Dependent, Independent, and Format validation types.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ValueDataType": {
+            "title": "Value Data Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The value data type such as Character, Number, Date, and Date Time.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ValueSubtype": {
+            "title": "Value Subtype",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The value subtype such as Text, Translated text, Numeric digits only, Time (20:08), and Time (20:08:08).",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ProtectedFlag": {
+            "title": "Protected",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the value set is protected aganist updates. The value sets marked as protected can't be edited or deleted.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "MaximumLength": {
+            "title": "Maximum Length",
+            "type": "integer",
+            "description": "The maximum number of characters allowed in a value set value.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 4
+            }
+          },
+          "Precision": {
+            "title": "Precision",
+            "type": "integer",
+            "description": "The maximum number of significant digits allowed for a value set value.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 2
+            }
+          },
+          "Scale": {
+            "title": "Scale",
+            "type": "integer",
+            "description": "The maximum number of digits that can follow the decimal point for a value set value.",
+            "format": "int32",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 3
+            }
+          },
+          "UppercaseOnlyFlag": {
+            "title": "Uppercase only",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether only uppercase letters are allowed in a value set value. The default value is false.",
+            "nullable": true,
+            "default": "N",
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ZeroFillFlag": {
+            "title": "Zero fill",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the value set value is padded on the left with zeroes. The default value is false.",
+            "nullable": true,
+            "default": "N",
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "SecurityEnabledFlag": {
+            "title": "Security enabled",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether data security is enabled for the value set value. The default value is false.",
+            "nullable": true,
+            "default": "N",
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "DataSecurityObjectName": {
+            "title": "Data Security Resource Name",
+            "maxLength": 60,
+            "type": "string",
+            "description": "The name of the corresponding data security object for this value set. When you enable security on a value set, the data security object name is an existing value set or one that you want to create.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MinimumValue": {
+            "title": "Minimum Value",
+            "maxLength": 150,
+            "type": "string",
+            "description": "The minimum character value allowed for the value set.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MinimumValueNumber": {
+            "title": "Minimum Value",
+            "type": "number",
+            "description": "The minimum number value allowed for the value set.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MinimumValueDate": {
+            "title": "Minimum Value",
+            "type": "string",
+            "description": "The minimum date value allowed for the value set.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MinimumValueTimestamp": {
+            "title": "Minimum Value",
+            "type": "string",
+            "description": "The minimum timestamp value allowed for the value set.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MaximumValue": {
+            "title": "Maximum Value",
+            "maxLength": 150,
+            "type": "string",
+            "description": "The maximum character value allowed for the value set.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MaximumValueNumber": {
+            "title": "Maximum Value",
+            "type": "number",
+            "description": "The maximum number value allowed for the value set.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MaximumValueDate": {
+            "title": "Maximum Value",
+            "type": "string",
+            "description": "The maximum date value allowed for the value set.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "MaximumValueTimestamp": {
+            "title": "Maximum Value",
+            "type": "string",
+            "description": "The maximum timestamp value allowed for the value set.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "IndependentValueSetId": {
+            "title": "Independent Value Set",
+            "type": "integer",
+            "description": "The identifier of the independent value set. You can use an independent value set to specify a user-defined set of valid values.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 18
+            }
+          },
+          "IndependentValueSetCode": {
+            "title": "Value Set Code",
+            "maxLength": 60,
+            "type": "string",
+            "description": "The value set code of the independent value set.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "The date when the value set was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who created the value set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "The date when the value set was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who last updated the value set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          }
+        },
+        "x-links": [
+          {
+            "rel": "lov",
+            "method": "get",
+            "title": "IndependentValueSetCodeLOV",
+            "href": "/fndSetupApi/resources/11.13.18.05/valueSets/{valueSets_Id}/lov/IndependentValueSetCodeLOV",
+            "mediaType": "application/vnd.oracle.adf.resourcecollection+json",
+            "encType": "application/x-www-form-urlencoded",
+            "targetSchema": {
+              "$ref": "#/components/schemas/valueSets-IndependentValueSetCodeLOV"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "expand": {
+                  "type": "string",
+                  "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers)."
+                },
+                "fields": {
+                  "type": "string",
+                  "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2"
+                },
+                "onlyData": {
+                  "type": "boolean",
+                  "description": "The resource item payload will be filtered in order to contain only data (no links section, for example)."
+                },
+                "dependency": {
+                  "type": "string",
+                  "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;"
+                },
+                "links": {
+                  "type": "string",
+                  "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>"
+                },
+                "limit": {
+                  "type": "integer",
+                  "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources."
+                },
+                "offset": {
+                  "type": "integer",
+                  "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0."
+                },
+                "totalResults": {
+                  "type": "boolean",
+                  "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\"."
+                },
+                "q": {
+                  "type": "string",
+                  "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2"
+                },
+                "orderBy": {
+                  "type": "string",
+                  "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc"
+                },
+                "finder": {
+                  "type": "string",
+                  "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br>"
+                }
+              }
+            },
+            "adf-attributeMap": [
+              {
+                "source": "ValueSetCode",
+                "target": "IndependentValueSetCode"
+              },
+              {
+                "source": "ValueSetId",
+                "target": "IndependentValueSetId",
+                "derived": true
+              }
+            ],
+            "adf-displayAttributes": [
+              "ValueSetCode"
+            ]
+          }
+        ]
+      },
+      "valueSets-validationTable-item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemProperties"
+          },
+          {
+            "$ref": "#/components/schemas/valueSets-validationTable-item"
+          }
+        ]
+      },
+      "valueSets-validationTable-item": {
+        "type": "object",
+        "properties": {
+          "ValueSetId": {
+            "type": "integer",
+            "description": "The identifier for the parent value set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 18
+            }
+          },
+          "FromClause": {
+            "title": "FROM Clause",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The SQL FROM clause that identifies the database tables or views on which the value set is based.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "WhereClause": {
+            "title": "WHERE Clause",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The SQL WHERE clause that filters the rows of the tables or views in the FROM clause.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-controlType": "edit"
+            }
+          },
+          "OrderByClause": {
+            "title": "ORDER BY Clause",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The SQL ORDER BY clause that dertermines the order of the value set values in the list of values.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ValueColumnName": {
+            "title": "Value Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the value set value.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ValueColumnLength": {
+            "title": "Value Column Length",
+            "type": "integer",
+            "description": "The length of the value column.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 4
+            }
+          },
+          "ValueColumnType": {
+            "title": "Value Column Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The data type of the value column.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "IdColumnName": {
+            "title": "ID Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the identifier of the value set value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "IdColumnLength": {
+            "title": "ID Column Length",
+            "type": "integer",
+            "description": "The length of the identifier column.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 4
+            }
+          },
+          "IdColumnType": {
+            "title": "ID Column Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The data type of the identifier column.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "DescriptionColumnName": {
+            "title": "Description Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the description of the value set value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "DescriptionColumnLength": {
+            "title": "Description Column Length",
+            "type": "integer",
+            "description": "The length of the description column.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 4
+            }
+          },
+          "DescriptionColumnType": {
+            "title": "Description Column Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The data type of the description column.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "EnabledFlagColumnName": {
+            "title": "Enabled Flag Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the enabled flag of the value set value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "StartDateColumnName": {
+            "title": "Start Date Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the start date of the value set value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "EndDateColumnName": {
+            "title": "End Date Column Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The column name that holds the end date of the value set value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ValueAttributesTableAlias": {
+            "title": "Value Attributes Table Alias",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The SQL alias of the table or view that holds the key flexfield value attribute values.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "The date when the value set validation table was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who created the value set validation table.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "The date when the value set validation table was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who last updated the value set validation table.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          }
+        }
+      },
+      "valueSets-values-item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemProperties"
+          },
+          {
+            "$ref": "#/components/schemas/valueSets-values-item"
+          }
+        ]
+      },
+      "valueSets-values-item": {
+        "type": "object",
+        "properties": {
+          "ValueId": {
+            "title": "Value ID",
+            "type": "integer",
+            "description": "The identifier for the value set value.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false,
+              "adf-precision": 18,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "IndependentValue": {
+            "title": "Independent Value",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Independent character value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "IndependentValueNumber": {
+            "title": "Independent Value",
+            "type": "number",
+            "description": "Independent number value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "IndependentValueDate": {
+            "title": "Independent Value",
+            "type": "string",
+            "description": "Independent date value.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "IndependentValueTimestamp": {
+            "title": "Independent Value",
+            "type": "string",
+            "description": "Independent timestamp value.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "Value": {
+            "title": "Value",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Character value.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ValueNumber": {
+            "title": "Value",
+            "type": "number",
+            "description": "Number value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ValueDate": {
+            "title": "Value",
+            "type": "string",
+            "description": "Date value.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ValueTimestamp": {
+            "title": "Value",
+            "type": "string",
+            "description": "Timestamp value.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "TranslatedValue": {
+            "title": "Translated Value",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Translated value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 240,
+            "type": "string",
+            "description": "The description of the value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "EnabledFlag": {
+            "title": "Enabled",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the value is currently enabled for use. The default value is true.",
+            "nullable": false,
+            "default": "Y",
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "StartDateActive": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "The date from when the value is available for use.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "EndDateActive": {
+            "title": "End Date",
+            "type": "string",
+            "description": "The date till which the value is available for use.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "SortOrder": {
+            "title": "Sort Order",
+            "type": "integer",
+            "description": "The number that indicated the order in which the values appear in the list of values.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 18
+            }
+          },
+          "SummaryFlag": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Denotes summarization.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "DetailPostingAllowed": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Specifies whether posting is allowed for a given segment value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "DetailBudgetingAllowed": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Specifies whether budget entry is allowed for a given segment value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "AccountType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Identifies the account type of account segment values.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "ControlAccount": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Identifies the third party control account.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "ReconciliationFlag": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether reconciliation is enabled.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "FinancialCategory": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The financial category of the value.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-hasDefaultValueExpression": true
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "The date when the value was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who created the value.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "The date when the value was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who last updated the value.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

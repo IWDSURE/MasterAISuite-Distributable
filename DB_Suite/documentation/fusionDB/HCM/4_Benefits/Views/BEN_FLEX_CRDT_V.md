@@ -1,0 +1,70 @@
+# BEN_FLEX_CRDT_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** BEN
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/benflexcrdtv-6718.html#benflexcrdtv-6718](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/benflexcrdtv-6718.html#benflexcrdtv-6718)
+
+## Columns
+
+- FLEX_SHELL_PLAN_NAME
+- PROGRAM_NAME
+- PGM_ID
+- LEGAL_ENTITY_NAME
+- PLCHLDR_RATE_NAME
+- FLEX_PLC_HLDR_RATE_CD
+- PLCHLDR_RATE_STATUS
+- CREDIT_POOL_NAME
+- CREDIT_POOL_LEVEL
+- CREDIT_POOL_STATUS
+- CREDIT_PROVIDER_PLAN
+- CREDIT_PROVIDER_OPTION
+- CP_CALC_METHOD
+- CP_ADD_TO_PGM_POOL_FLAG
+- CP_EXCS_TRTMT_CD
+- CP_ALWS_NGTV_USG_FLAG
+- CP_PCT_NGTV_USG_BY_TOTAL_POOL
+- SPENDING_OR_ROLLOVER_OPTION
+- SEQUENCE
+- RATE_NAME
+- RATE_PLAN
+- RATE_OPTION
+- RATE_LDG_NAME
+- RATE_LE_NAME
+- PLAN_EFF_START_DATE
+- PLAN_EFF_END_DATE
+- PGM_EFF_START_DATE
+- PGM_EFF_END_DATE
+- PLIP_EFF_START_DATE
+- PLIP_EFF_END_DATE
+- RATE_EFF_START_DATE
+- RATE_EFF_END_DATE
+- LEG_EFF_START_DATE
+- LEG_EFF_END_DATE
+- SPNDRLVR_EFF_START_DATE
+- SPNDRLVR_EFF_END_DATE
+- RATE2_EFF_START_DATE
+- RATE2_EFF_END_DATE
+- PLN2_EFF_START_DATE
+- PLN2_EFF_END_DATE
+- OPT2_EFF_START_DATE
+- OPT2_EFF_END_DATE
+- PLN3_EFF_START_DATE
+- PLN3_EFF_END_DATE
+- OPT3_EFF_START_DATE
+- OPT3_EFF_END_DATE
+
+## Query
+
+```sql
+SELECT X.Flex_Shell_Plan_Name , X.Program_Name , X.Pgm_id , X.Legal_Entity_Name , X.Plchldr_Rate_Name , X.flex_plc_hldr_rate_cd , X.Plchldr_Rate_Status , X.Credit_Pool_Name , X.Credit_Pool_Level , X.Credit_Pool_Status , X.Credit_Provider_Plan , X.Credit_Provider_Option , X.CP_Calc_Method , X.CP_add_to_pgm_pool_flag , X.CP_excs_trtmt_cd , X.CP_alws_ngtv_usg_flag , X.CP_pct_ngtv_usg_by_total_pool , X.Spending_or_Rollover_Option , X.Sequence , X.Rate_Name , X.Rate_Plan , x.rate_option , x.Rate_LDG_Name, X.Rate_LE_Name, X.Plan_Eff_Start_Date , X.Plan_Eff_End_Date , X.Pgm_Eff_Start_Date , X.Pgm_Eff_End_Date , X.Plip_Eff_Start_Date , X.Plip_Eff_End_Date , X.Rate_Eff_Start_Date , X.Rate_Eff_End_Date , X.Leg_Eff_Start_Date , X.Leg_Eff_End_Date , X.Spndrlvr_Eff_Start_Date , X.Spndrlvr_Eff_End_Date , X.Rate2_Eff_Start_Date , X.Rate2_Eff_End_Date , X.Pln2_Eff_Start_Date , X.Pln2_Eff_End_Date , X.Opt2_Eff_Start_Date , X.Opt2_Eff_End_Date , X.Pln3_Eff_Start_Date , X.Pln3_Eff_End_Date , X.Opt3_Eff_Start_Date , X.Opt3_Eff_End_Date FROM (SELECT DECODE(rate.flex_plc_hldr_rate_cd, 'FLXCR_PRVDD_RATE', 1, 'FLXCR_CASH_RATE', 2, 3) ordrByPlcHolderRat , -1 orderByPoolLevel , -1 orderByOption , -1 ordrBySequence , pln.name Flex_Shell_Plan_Name , pln.pl_id , plip.plip_id , pgm.pgm_id Pgm_id , pgm.name Program_Name , leg.name Legal_Entity_Name , rate.name Plchldr_Rate_Name , hr_general.decode_lookup('BEN_STAT',rate.acty_base_rt_stat_cd) Plchldr_Rate_Status , hr_general.decode_lookup('BEN_FLEX_PLC_HLDR_RATE_TYP',rate.FLEX_PLC_HLDR_RATE_CD) flex_plc_hldr_rate_cd , rate.rt_usg_cd , NULL Credit_Pool_Name , NULL Credit_Pool_Level , NULL Credit_Pool_Status , NULL Credit_Provider_Plan , NULL Credit_Provider_Option , NULL CP_Calc_Method , NULL CP_add_to_pgm_pool_flag , NULL CP_excs_trtmt_cd , NULL CP_alws_ngtv_usg_flag , NULL CP_pct_ngtv_usg_by_total_pool , NULL Spending_or_Rollover_Option , NULL sequence , NULL Rate_Name , NULL Rate_Plan , null rate_option , ldg.name Rate_LDG_Name, leg.name Rate_LE_Name, pln.effective_start_date Plan_Eff_Start_Date , pln.effective_end_date Plan_Eff_End_Date , plip.effective_start_date Plip_Eff_Start_Date , plip.effective_end_date Plip_Eff_End_Date , pgm.effective_start_date Pgm_Eff_Start_Date , pgm.effective_end_date Pgm_Eff_End_Date , rate.effective_start_date Rate_Eff_Start_Date , rate.effective_end_date Rate_Eff_End_Date , leg.effective_start_date Leg_Eff_Start_Date , leg.effective_end_date Leg_Eff_End_Date , NULL Spndrlvr_Eff_Start_Date , NULL Spndrlvr_Eff_End_Date , NULL Rate2_Eff_Start_Date , NULL Rate2_Eff_End_Date , NULL Pln2_Eff_Start_Date , NULL Pln2_Eff_End_Date , NULL Opt2_Eff_Start_Date , NULL Opt2_Eff_End_Date , NULL Pln3_Eff_Start_Date , NULL Pln3_Eff_End_Date , NULL Opt3_Eff_Start_Date , NULL Opt3_Eff_End_Date FROM ben_pl_f pln , ben_plip_f plip , ben_pgm_f pgm , ben_acty_base_rt_f rate , hr_legal_entities leg, per_legislative_data_groups_vl ldg WHERE pln.pl_id = plip.pl_id AND pln.invk_flx_cr_pl_flag = 'Y' AND plip.pgm_id = pgm.pgm_id AND rate.plip_id(+) = plip.plip_id AND rate.legal_entity_id = leg.organization_id(+) and leg.classification_code(+) = 'HCM_LEMP' and rate.CONFIG_ID_1=ldg.legislative_data_group_id(+) UNION SELECT 3 ordrByPlcHolderRat , DECODE(rate2.comp_obj_type, 'PGM',1, 'PLIP',2, 'OIPLIP', 3, 4) orderByPoolLevel , DECODE(spndrlvr.spnd_or_rlvr_opt ,'SPENDING_OPTION', 1, 'ROLLOVER_OPTION', 2, 0) orderByOption , DECODE(spndrlvr.ordr_num, NULL, -1, spndrlvr.ordr_num) ordrBySequence , pln.name Flex_Shell_Plan_Name , pln.pl_id , plip.plip_id , pgm.pgm_id Pgm_id , pgm.name Program_Name , leg.name Legal_Entity_Name , NULL Plchldr_Rate_Name , NULL Plchldr_Rate_Status , NULL flex_plc_hldr_rate_cd , rate.rt_usg_cd , rate2.name Credit_Pool_Name , hr_general.decode_lookup('BEN_COMP_OBJ', rate2.comp_obj_type) Credit_Pool_Level , hr_general.decode_lookup('BEN_STAT',rate2.acty_base_rt_stat_cd) Credit_Pool_Status , pln2.name Credit_Provider_Plan , opt2.name Credit_Provider_Option , hr_general.decode_lookup('BEN_FLX_CRDT_POOL_MLT', rate2.rt_mlt_cd) CP_Calc_Method , hr_general.decode_lookup('YES_NO', rate2.add_to_pgm_pool_flag) CP_add_to_pgm_pool_flag , hr_general.decode_lookup('BEN_EXCS_TRTMT', rate2.excs_trtmt_cd) CP_excs_trtmt_cd , hr_general.decode_lookup('YES_NO', rate2.alws_ngtv_usg_flag) CP_alws_ngtv_usg_flag , rate2.pct_ngtv_usg_by_total_pool CP_pct_ngtv_usg_by_total_pool , hr_general.decode_lookup('BEN_SPND_RLVR_OPT',spndrlvr.spnd_or_rlvr_opt) Spending_or_Rollover_Option , spndrlvr.ordr_num sequence , rate.name Rate_Name , pln3.name Rate_Plan , opt3.name rate_option , ldg.name Rate_LDG_Name, leg_rate.name Rate_LE_Name, pln.effective_start_date Plan_Eff_Start_Date , pln.effective_end_date Plan_Eff_End_Date , plip.effective_start_date Plip_Eff_Start_Date , plip.effective_end_date Plip_Eff_End_Date , pgm.effective_start_date Pgm_Eff_Start_Date , pgm.effective_end_date Pgm_Eff_End_Date , rate2.effective_start_date Rate2_Eff_Start_Date , rate2.effective_end_date Rate2_Eff_End_Date , leg.effective_start_date Leg_Eff_Start_Date , leg.effective_end_date Leg_Eff_End_Date , spndrlvr.effective_start_date Spndrlvr_Eff_Start_Date , spndrlvr.effective_end_date Spndrlvr_Eff_End_Date , rate.effective_start_date Rate_Eff_Start_Date , rate.effective_end_date Rate_Eff_End_Date , pln2.effective_start_date Pln2_Eff_Start_Date , pln2.effective_end_date Pln2_Eff_End_Date , opt2.effective_start_date Opt2_Eff_Start_Date , opt2.effective_end_date Opt2_Eff_End_Date , pln3.effective_start_date Pln3_Eff_Start_Date , pln3.effective_end_date Pln3_Eff_End_Date , opt3.effective_start_date Opt3_Eff_Start_Date , opt3.effective_end_date Opt3_Eff_End_Date FROM ben_pl_f pln , ben_plip_f plip , ben_pgm_f pgm , ben_acty_base_rt_f rate , ben_crdt_pool_spnd_rlvr_opt_f spndrlvr , ben_acty_base_rt_f rate2 , hr_legal_entities leg , hr_legal_entities leg_rate, ben_pl_f pln2 , ben_opt_f opt2 , ben_pl_f pln3 , ben_opt_f opt3, per_legislative_data_groups_vl ldg WHERE pln.pl_id = plip.pl_id AND pln.invk_flx_cr_pl_flag = 'Y' AND plip.pgm_id = pgm.pgm_id AND pgm.pgm_id = rate2.context_pgm_id AND rate2.rt_usg_cd = 'FLXCR' AND rate2.acty_base_rt_id = spndrlvr.crdt_pool_acty_base_rt_id (+) and spndrlvr.acty_base_rt_id = rate.acty_base_rt_id (+) and rate2.legal_entity_id = leg.organization_id(+) and leg.classification_code(+) = 'HCM_LEMP' and rate.legal_entity_id = leg_rate.organization_id(+) and leg_rate.classification_code(+) = 'HCM_LEMP' and rate.CONFIG_ID_1=ldg.legislative_data_group_id(+) AND rate2.context_pl_id = pln2.pl_id (+) AND rate2.context_opt_id = opt2.opt_id (+) AND rate.context_pl_id = pln3.pl_id (+) and rate.context_opt_id = opt3.opt_id (+) ) X
+```
+
+---
+
+[← Back to Index](../4_Benefits_Views_Index.md)

@@ -1,0 +1,37 @@
+# HTS_PS_ANA_NEXT_HOLIDAY_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htspsananextholidayv-8302.html#htspsananextholidayv-8302](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htspsananextholidayv-8302.html#htspsananextholidayv-8302)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- TEXT_TITLE
+- TEXT_METRIC
+- TEXT_META
+- BADGE_TEXT
+- BADGE_STATUS
+- PERIOD_CHN_IND_VAL
+- PERIOD_CHN_IND_CMP
+- CHART_TYPE
+- CHART_COLOR
+- CHART_DATA
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT paaf.person_id person_id, paaf.assignment_id assignment_id, cal_evt_lookup.meaning || ' - '|| avail.object_name text_title, decode(trunc(CAST(avail.start_date_time AS DATE) - trunc(sysdate)), 0, '{"strKey":"HdrSToday"}', 1, '{"strKey":"PgHITomorrow"}', '{"strKey":"PgHIComingupinDAYSNUMdays", "tokens":{"DAYS_NUM":"' ||(trunc((CAST(avail.start_date_time AS DATE) - trunc(sysdate)) + 1) || '"}}')) text_metric, hrl_df_util.date_to_char(trunc(avail.start_date_time)) text_meta, decode(sign((CAST(avail.start_date_time AS DATE) - trunc(sysdate)) - 7), - 1, '{"strKey":"BdgInfo"}', NULL) badge_text, decode(sign((CAST(avail.start_date_time AS DATE) - trunc(sysdate)) - 7), - 1, 'info', NULL) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, '?pPersonId=' || paaf.person_id link_text FROM per_all_assignments_f paaf, TABLE ( per_availability_details.get_schedule_details(p_resource_id => paaf.assignment_id, p_period_start => trunc(sysdate), p_period_end =>(trunc(sysdate) + 90)) ) avail, fnd_lookup_values_tl cal_evt_lookup WHERE avail.object_type = 'CAL' AND cal_evt_lookup.lookup_type = 'PER_CAL_EVENT_CATEGORY' AND cal_evt_lookup.LANGUAGE = USERENV('LANG') AND cal_evt_lookup.lookup_code = avail.object_category AND avail.resource_id = paaf.assignment_id AND trunc(sysdate) BETWEEN paaf.effective_start_date AND paaf.effective_end_date AND trunc(avail.start_date_time) = ( SELECT MIN(trunc(avl.start_date_time)) FROM TABLE ( per_availability_details.get_schedule_details(p_resource_id => paaf.assignment_id, p_period_start => trunc( sysdate), p_period_end =>(trunc(sysdate) + 90)) ) avl WHERE avl.object_type = 'CAL' AND avl.resource_id = paaf.assignment_id )
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

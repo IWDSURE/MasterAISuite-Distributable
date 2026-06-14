@@ -1,0 +1,37 @@
+# ANC_AVAIL_TYPE_BREAKS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** ANC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancavailtypebreaksvl-7523.html#ancavailtypebreaksvl-7523](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancavailtypebreaksvl-7523.html#ancavailtypebreaksvl-7523)
+
+## Columns
+
+- AVAILABILITY_TYPE_BREAK_ID
+- ENTERPRISE_ID
+- AVAILABILITY_TYPE_ID
+- NAME
+- BREAK_TYPE_CODE
+- BREAK_DURATION
+- BREAK_PAID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.AVAILABILITY_TYPE_BREAK_ID, B.ENTERPRISE_ID, B.AVAILABILITY_TYPE_ID, T.NAME, B.BREAK_TYPE_CODE, B.BREAK_DURATION, B.BREAK_PAID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM ANC_AVAIL_TYPE_BREAKS_B B, ANC_AVAIL_TYPE_BREAKS_TL T WHERE B.AVAILABILITY_TYPE_BREAK_ID = T.AVAILABILITY_TYPE_BREAK_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../3_Absence_Management_Views_Index.md)

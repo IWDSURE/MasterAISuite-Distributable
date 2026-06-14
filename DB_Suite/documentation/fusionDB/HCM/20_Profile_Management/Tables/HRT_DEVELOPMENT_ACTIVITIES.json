@@ -1,0 +1,200 @@
+{
+  "name": "HRT_DEVELOPMENT_ACTIVITIES",
+  "object_type": "TABLE",
+  "description": "This table stores skill development activities information.",
+  "schema": "FUSION",
+  "owner": "HRT",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtdevelopmentactivities-19826.html#hrtdevelopmentactivities-19826",
+  "primary_keys": [
+    {
+      "name": "HRT_DEVELOPMENT_ACTIVITIES_PK",
+      "columns": "DEVELOPMENT_ACTIVITY_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "DEVELOPMENT_ACTIVITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table. System generated."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "PROFILE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HRT_PROFILES_B table."
+    },
+    {
+      "Name": "OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Stores the primary key of the object involved in the development activity."
+    },
+    {
+      "Name": "OBJECT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the object type involved in the development activity. Lookup type - ORA_HRT_DEV_ACTIVITY_OBJECT_TYPE"
+    },
+    {
+      "Name": "CONTENT_ITEM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HRT_CONTENT_ITEMS_B table"
+    },
+    {
+      "Name": "SKILL",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This column stores the name of the skill"
+    },
+    {
+      "Name": "SKILL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HRT_PROFILE_ITEMS table."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the status of development activity. Lookup type - ORA_HRT_DEVELOPMENT_ACTIVITY"
+    },
+    {
+      "Name": "RATING_LEVEL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the rating level associated to development activity"
+    },
+    {
+      "Name": "RATING_MODEL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the rating model used in the development activity rating."
+    },
+    {
+      "Name": "COMPLETION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the date on which development activity is completed"
+    },
+    {
+      "Name": "SKILL_SCORE_CONFIG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HRT_SKILLS_SCORE_CONFIG table."
+    },
+    {
+      "Name": "CUSTOM_SCORE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores custom score value if any development activity overrides the default score from score configuration."
+    },
+    {
+      "Name": "EXPIRY_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores expiry date"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRT_DEVELOPMENT_ACTIVITIES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROFILE_ID, OBJECT_TYPE, UPPER(\"SKILL\")"
+    },
+    {
+      "Index": "HRT_DEVELOPMENT_ACTIVITIES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "DEVELOPMENT_ACTIVITY_ID, BUSINESS_GROUP_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:23:24"
+}

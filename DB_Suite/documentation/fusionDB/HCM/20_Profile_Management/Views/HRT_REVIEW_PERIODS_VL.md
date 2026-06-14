@@ -1,0 +1,37 @@
+# HRT_REVIEW_PERIODS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtreviewperiodsvl-5846.html#hrtreviewperiodsvl-5846](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtreviewperiodsvl-5846.html#hrtreviewperiodsvl-5846)
+
+## Columns
+
+- REVIEW_PERIOD_ID
+- BUSINESS_GROUP_ID
+- REVIEW_PERIOD_NAME
+- DESCRIPTION
+- START_DATE
+- END_DATE
+- STATUS_CODE
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT RPB.REVIEW_PERIOD_ID, RPB.BUSINESS_GROUP_ID, RPTL.REVIEW_PERIOD_NAME, RPTL.DESCRIPTION, RPB.START_DATE, RPB.END_DATE, RPB.STATUS_CODE, RPB.OBJECT_VERSION_NUMBER, RPB.CREATED_BY, RPB.CREATION_DATE, RPB.LAST_UPDATE_DATE, RPB.LAST_UPDATED_BY, RPB.LAST_UPDATE_LOGIN FROM HRT_REVIEW_PERIODS_B RPB, HRT_REVIEW_PERIODS_TL RPTL WHERE RPB.REVIEW_PERIOD_ID = RPTL.REVIEW_PERIOD_ID AND RPTL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

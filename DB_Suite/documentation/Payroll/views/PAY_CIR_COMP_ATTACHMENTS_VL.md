@@ -1,0 +1,21 @@
+# PAY_CIR_COMP_ATTACHMENTS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycircompattachmentsvl-3909.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycircompattachmentsvl-3909.html)
+
+## Query
+
+```sql
+SELECT FndAttachedDocumentsEO.ATTACHED_DOCUMENT_ID, FndAttachedDocumentsEO.DOCUMENT_ID, FndAttachedDocumentsEO.ENTITY_NAME, FndAttachedDocumentsEO.PK1_VALUE, FndDocumentsEO.DATATYPE_CODE, FndDocumentsEO.DESCRIPTION, FndDocumentsEO.FILE_NAME, FndDocumentsEO.USAGE_TYPE, FndDocumentsEO.DM_NODE, FndDocumentsEO.DM_FOLDER_PATH, FndDocumentsEO.DM_TYPE, FndDocumentsEO.DM_DOCUMENT_ID, FndDocumentsEO.DM_VERSION_NUMBER, FndDocumentsEO.URL, FndDocumentsEO.TITLE, decode(datatype_code, 'SHORT_TEXT', nvl(FndDocumentsEO.title, 'Undefined'), 'FILE', nvl(FndDocumentsEO.title, FndDocumentsEO.file_name), 'WEB_PAGE', nvl(FndDocumentsEO.title, FndDocumentsEO.url)) attachment, FndAttachedDocumentsEO.ENTITY_ATTRIBUTES, FndDocumentsEO.DM_REPOSITORY, FndDocumentsEO.DOCUMENT_ATTRIBUTES, FndDocumentEntitiesEO.DOCUMENT_ENTITY_ID, FndAttachedDocumentsEO.CATEGORY_NAME, FndDocumentsEO.STATUS, FndDocumentsEO.DOWNLOAD_STATUS, FndDocumentCategoriesEO.CATEGORY_ID, FndDocumentCategoriesEO.USER_NAME, FndDocumentCategoriesEO.MODULE_ID, FndDocumentsEO.URI, FndDocumentsEO.ENT_APP_SHORT_NAME, FndAttachedDocumentsEO.SEQ_NUM, FndAttachedDocumentsEO.PRIMARY_CATEGORY_FLAG, FndDocumentEntitiesEO.CATEGORY_SECURITY_ENABLED, FndDocumentsEO.TRUSTED_FLAG, FndDocumentsEO.BASE_DOCUMENT_ID, FndDocumentEntitiesEO.EXPIRATION_ENABLED, FndAttachedDocumentsEO.EXPIRATION_DATE, CIRCardComponentEO.EFFECTIVE_START_DATE COMP_LOGICAL_START_DATE, CIRCardComponentEO.EFFECTIVE_END_DATE COMP_LOGICAL_END_DATE, CIRCardComponentEO.DIR_CARD_COMP_ID, CIRCardComponentEO.COMPONENT_EFFECTIVE_START_DATE, CIRCardComponentEO.COMPONENT_EFFECTIVE_END_DATE, CIRCardComponentEO.DIR_CARD_ID, CIRCardComponentEO.CARD_EFFECTIVE_START_DATE, CIRCardComponentEO.CARD_EFFECTIVE_END_DATE, CIRCardComponentEO.LEGISLATIVE_DATA_GROUP_NAME, CIRCardComponentEO.LEGISLATIVE_DATA_GROUP_ID, CIRCardComponentEO.DIR_CARD_DEFINITION_NAME, CIRCardComponentEO.DIR_CARD_DEFINITION_ID, CIRCardComponentEO.SOURCE_ID, CIRCardComponentEO.SOURCE_TYPE, CIRCardComponentEO.CARD_SEQUENCE, CIRCardComponentEO.LEVEL_CODE, CIRCardComponentEO.CARD_LEVEL, CIRCardComponentEO.DIR_CARD_DEFINITION_BASE_NAME, CIRCardComponentEO.BASE_DEDUCTION_GROUP_NAME, CIRCardComponentEO.DEDUCTION_GROUP_NAME, CIRCardComponentEO.GROUP_DIR_CARD_COMP_DEF_ID, CIRCardComponentEO.PARENT_DIR_CARD_COMP_DEF_ID, CIRCardComponentEO.PARENT_DIR_CARD_COMP_ID, CIRCardComponentEO.DIR_CARD_COMP_DEF_ID, CIRCardComponentEO.DEDUCTION_GROUP_ID, CIRCardComponentEO.DIR_CARD_COMP_DEF_NAME, CIRCardComponentEO.BASE_COMPONENT_NAME, CIRCardComponentEO.CONTEXT1, CIRCardComponentEO.CONTEXT2, CIRCardComponentEO.CONTEXT3, CIRCardComponentEO.CONTEXT4, CIRCardComponentEO.CONTEXT5, CIRCardComponentEO.CONTEXT6, CIRCardComponentEO.COMPONENT_SEQUENCE, CIRCardComponentEO.COMPONENT_DISCRIMINATOR, CIRCardComponentEO.ASSOCIABLE_TERM, CIRCardComponentEO.ASSOCIABLE_TRU, CIRCardComponentEO.ATTACHMENT_ENTITY_NAME FROM FND_ATTACHED_DOCUMENTS FndAttachedDocumentsEO, FND_DOCUMENTS_VL FndDocumentsEO, FND_DOCUMENT_ENTITIES_VL FndDocumentEntitiesEO, FND_DOCUMENT_CATEGORIES_VL FndDocumentCategoriesEO , PAY_CIR_CARD_COMPONENTS_VL CIRCardComponentEO where FndAttachedDocumentsEO.document_id = FndDocumentsEO.document_id and FndDocumentEntitiesEO.entity_name = FndAttachedDocumentsEO.entity_name and FndAttachedDocumentsEO.entity_name = CIRCardComponentEO.attachment_entity_name and FndAttachedDocumentsEO.pk1_value = CIRCardComponentEO.dir_card_comp_id and FndAttachedDocumentsEO.category_name = FndDocumentCategoriesEO.category_name and (FndAttachedDocumentsEO.expiration_date IS NULL or FndAttachedDocumentsEO.expiration_date > CIRCardComponentEO.EFFECTIVE_START_DATE)
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

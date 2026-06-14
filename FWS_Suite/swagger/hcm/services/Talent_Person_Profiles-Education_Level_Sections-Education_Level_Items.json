@@ -1,0 +1,1956 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Talent Person Profiles/Education Level Sections/Education Level Items",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/talentPersonProfiles/{talentPersonProfilesUniqID}/child/educationLvlSections/{ProfileSectionId}/child/educationLvlItems": {
+      "get": {
+        "tags": [
+          "Talent Person Profiles/Education Level Sections/Education Level Items"
+        ],
+        "summary": "Get all education level items",
+        "operationId": "getall_talentPersonProfiles-educationLvlSections-educationLvlItems",
+        "parameters": [
+          {
+            "name": "talentPersonProfilesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Person Profiles resource and used to uniquely identify an instance of Talent Person Profiles. The client should not generate the hash key value. Instead, the client should query on the Talent Person Profiles collection resource in order to navigate to a specific instance of Talent Person Profiles to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileSectionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Profile Section ID",
+              "type": "integer",
+              "description": "Unique identifier for the technical post detail section associated with the profile.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AverageGrade; string; Average grade achieved for the education level item.</li><li>AwardingBody; string; Awarding body for the education level.</li><li>ContentItemId; integer; Unique identifier for the content item.</li><li>Country; string; Country where education level is received. Valid values are defined in the HcmCountriesLOV.</li><li>CountryMeaning; string; Country of the education level items.</li><li>CreatedBy; string; User who created the content item.</li><li>CreationDate; string; Date and time when the content item was created.</li><li>EducationLevel; string; Education level of a person.</li><li>EducationLevelId; integer; Surrogate identifier for the person education level.</li><li>EducationalEstablishmentId; integer; Name of the educational establishment. Valid values are defined in the contentItemsLOV.</li><li>LastUpdateDate; string; Date and time when the content item was last updated.</li><li>LastUpdatedBy; string; User who last updated the content item.</li><li>ProfileId; integer; Unique identifier of the person profile.</li><li>ProjectedCompletionDate; string; Date on which the education level item is projected to be complete.</li><li>SectionId; integer; Unique identifier of the profile content section.</li><li>Source; string; Source of the educationLevel item.</li><li>State; string; State of the education level item.</li><li>Title; string; Title of the education level.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all education level items that match the primary key criteria specified. <br>Finder Variables <ul><li>EducationLevelId; integer;  Surrogate identifier for the education level item. </li></ul></li><li>RowFinder Finds all the education level items for the specified unique key. <br>Finder Variables <ul><li>EducationLevelId; integer;  Surrogate identifier for the education level item. </li><li>ProfileId; integer;  Unique identifier of the profile. </li></ul></li><li>findByProfileIdAndSectionId Finds all the education level items that match the specified profile and section identifier. <br>Finder Variables <ul><li>ProfileId; integer;  Unique identifier of the profile. </li><li>SectionId; integer;  Unique identifier of the content section. </li></ul></li><li>findLinkedInProfileItems Finds all the person education level items for education level sections that are enabled for LinkedIn import. <br>Finder Variables <ul><li>ProfileId; integer;  Unique identifier of the profile. </li></ul></li><li>findPendingItemsByProfileId Finds all the education level items that are pending for approvals for the specified profile. <br>Finder Variables <ul><li>ProfileId; integer;  Unique identifier of the profile. </li><li>SectionId; integer;  Unique identifier of the content section. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all education level items that match the primary key criteria specified.",
+                "properties": {
+                  "EducationLevelId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Surrogate identifier for the education level item.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "RowFinder",
+                "description": "Finds all the education level items for the specified unique key.",
+                "title": "rowFinder",
+                "properties": {
+                  "ProfileId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the profile.",
+                    "type": "integer"
+                  },
+                  "EducationLevelId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Surrogate identifier for the education level item.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByProfileIdAndSectionId",
+                "description": "Finds all the education level items that match the specified profile and section identifier.",
+                "title": "findByProfileIdAndSectionId",
+                "properties": {
+                  "ProfileId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier of the profile.",
+                    "type": "integer"
+                  },
+                  "SectionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the content section.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findLinkedInProfileItems",
+                "description": "Finds all the person education level items for education level sections that are enabled for LinkedIn import.",
+                "title": "findLinkedInProfileItem",
+                "properties": {
+                  "ProfileId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the profile.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findPendingItemsByProfileId",
+                "description": "Finds all the education level items that are pending for approvals for the specified profile.",
+                "title": "findPendingItemsByProfileId",
+                "properties": {
+                  "ProfileId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier of the profile.",
+                    "type": "integer"
+                  },
+                  "SectionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the content section.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentPersonProfiles-{talentPersonProfilesUniqID}-child-educationLvlSections-{ProfileSectionId}-child-educationLvlItems-get",
+        "x-filename-id": "talentpersonprofiles-talentpersonprofilesuniqid-child-educationlvlsections-profilesectionid-child-educationlvlitems-get"
+      },
+      "post": {
+        "tags": [
+          "Talent Person Profiles/Education Level Sections/Education Level Items"
+        ],
+        "summary": "Create an education level item",
+        "operationId": "create_talentPersonProfiles-educationLvlSections-educationLvlItems",
+        "parameters": [
+          {
+            "name": "talentPersonProfilesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Person Profiles resource and used to uniquely identify an instance of Talent Person Profiles. The client should not generate the hash key value. Instead, the client should query on the Talent Person Profiles collection resource in order to navigate to a specific instance of Talent Person Profiles to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileSectionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Profile Section ID",
+              "type": "integer",
+              "description": "Unique identifier for the technical post detail section associated with the profile.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/talentPersonProfiles-educationLvlSections-educationLvlItems-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "establishmentsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Establishment; Target Attribute: Name</li><li>Display Attribute: Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Establishment",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "EducationalEstablishmentId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "educationLevelCompletedLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevelCompleted; Target Attribute: LookupCode</li><li>Display Attribute: LookupCode, Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevelCompleted",
+                  "displayValues": [
+                    "LookupCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "LookupCode",
+                    "Meaning"
+                  ]
+                }
+              },
+              "educationLvlItemsDFF": {
+                "operationRef": "#/paths/~1talentPersonProfiles~1{talentPersonProfilesUniqID}~1child~1educationLvlSections~1{ProfileSectionId}~1child~1educationLvlItems~1{EducationLevelId}~1child~1educationLvlItemsDFF/get",
+                "parameters": {
+                  "ProfileSectionId6": "$request.path.ProfileSectionId6",
+                  "EducationLevelId": "$request.path.EducationLevelId",
+                  "talentPersonProfilesUniqID": "$request.path.talentPersonProfilesUniqID"
+                }
+              },
+              "eduLevelsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "parameters": {
+                  "finder": "findByWord%3BContentValueSetId%3D{ContentValueSetId}%2CContentTypeId%3D107"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevel; Target Attribute: Name</li><li>Display Attribute: ContentValueSetCode, Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevel",
+                  "displayValues": [
+                    "ContentValueSetCode"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "ContentItemId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "ContentValueSetCode",
+                    "Name"
+                  ]
+                }
+              },
+              "countriesLOV": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Country; Target Attribute: TerritoryCode</li><li>Display Attribute: CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Country",
+                  "displayValues": [
+                    "CountryName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "CountryName"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentPersonProfiles-{talentPersonProfilesUniqID}-child-educationLvlSections-{ProfileSectionId}-child-educationLvlItems-post",
+        "x-filename-id": "talentpersonprofiles-talentpersonprofilesuniqid-child-educationlvlsections-profilesectionid-child-educationlvlitems-post"
+      }
+    },
+    "/talentPersonProfiles/{talentPersonProfilesUniqID}/child/educationLvlSections/{ProfileSectionId}/child/educationLvlItems/{EducationLevelId}": {
+      "get": {
+        "tags": [
+          "Talent Person Profiles/Education Level Sections/Education Level Items"
+        ],
+        "summary": "Get an education level item",
+        "operationId": "get_talentPersonProfiles-educationLvlSections-educationLvlItems",
+        "parameters": [
+          {
+            "name": "talentPersonProfilesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Person Profiles resource and used to uniquely identify an instance of Talent Person Profiles. The client should not generate the hash key value. Instead, the client should query on the Talent Person Profiles collection resource in order to navigate to a specific instance of Talent Person Profiles to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileSectionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Profile Section ID",
+              "type": "integer",
+              "description": "Unique identifier for the technical post detail section associated with the profile.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "EducationLevelId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Surrogate identifier for the person education level.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "establishmentsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Establishment; Target Attribute: Name</li><li>Display Attribute: Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Establishment",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "EducationalEstablishmentId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "educationLevelCompletedLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevelCompleted; Target Attribute: LookupCode</li><li>Display Attribute: LookupCode, Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevelCompleted",
+                  "displayValues": [
+                    "LookupCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "LookupCode",
+                    "Meaning"
+                  ]
+                }
+              },
+              "educationLvlItemsDFF": {
+                "operationRef": "#/paths/~1talentPersonProfiles~1{talentPersonProfilesUniqID}~1child~1educationLvlSections~1{ProfileSectionId}~1child~1educationLvlItems~1{EducationLevelId}~1child~1educationLvlItemsDFF/get",
+                "parameters": {
+                  "ProfileSectionId6": "$request.path.ProfileSectionId6",
+                  "EducationLevelId": "$request.path.EducationLevelId",
+                  "talentPersonProfilesUniqID": "$request.path.talentPersonProfilesUniqID"
+                }
+              },
+              "eduLevelsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "parameters": {
+                  "finder": "findByWord%3BContentValueSetId%3D{ContentValueSetId}%2CContentTypeId%3D107"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevel; Target Attribute: Name</li><li>Display Attribute: ContentValueSetCode, Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevel",
+                  "displayValues": [
+                    "ContentValueSetCode"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "ContentItemId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "ContentValueSetCode",
+                    "Name"
+                  ]
+                }
+              },
+              "countriesLOV": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Country; Target Attribute: TerritoryCode</li><li>Display Attribute: CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Country",
+                  "displayValues": [
+                    "CountryName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "CountryName"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentPersonProfiles-{talentPersonProfilesUniqID}-child-educationLvlSections-{ProfileSectionId}-child-educationLvlItems-{EducationLevelId}-get",
+        "x-filename-id": "talentpersonprofiles-talentpersonprofilesuniqid-child-educationlvlsections-profilesectionid-child-educationlvlitems-educationlevelid-get"
+      },
+      "delete": {
+        "tags": [
+          "Talent Person Profiles/Education Level Sections/Education Level Items"
+        ],
+        "summary": "Delete an education level item",
+        "operationId": "delete_talentPersonProfiles-educationLvlSections-educationLvlItems",
+        "parameters": [
+          {
+            "name": "talentPersonProfilesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Person Profiles resource and used to uniquely identify an instance of Talent Person Profiles. The client should not generate the hash key value. Instead, the client should query on the Talent Person Profiles collection resource in order to navigate to a specific instance of Talent Person Profiles to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileSectionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Profile Section ID",
+              "type": "integer",
+              "description": "Unique identifier for the technical post detail section associated with the profile.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "EducationLevelId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Surrogate identifier for the person education level.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "talentPersonProfiles-{talentPersonProfilesUniqID}-child-educationLvlSections-{ProfileSectionId}-child-educationLvlItems-{EducationLevelId}-delete",
+        "x-filename-id": "talentpersonprofiles-talentpersonprofilesuniqid-child-educationlvlsections-profilesectionid-child-educationlvlitems-educationlevelid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Talent Person Profiles/Education Level Sections/Education Level Items"
+        ],
+        "summary": "Update an education level item",
+        "operationId": "update_talentPersonProfiles-educationLvlSections-educationLvlItems",
+        "parameters": [
+          {
+            "name": "talentPersonProfilesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Talent Person Profiles resource and used to uniquely identify an instance of Talent Person Profiles. The client should not generate the hash key value. Instead, the client should query on the Talent Person Profiles collection resource in order to navigate to a specific instance of Talent Person Profiles to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ProfileSectionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Profile Section ID",
+              "type": "integer",
+              "description": "Unique identifier for the technical post detail section associated with the profile.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "EducationLevelId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Surrogate identifier for the person education level.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/talentPersonProfiles-educationLvlSections-educationLvlItems-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "establishmentsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Establishment; Target Attribute: Name</li><li>Display Attribute: Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Establishment",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "EducationalEstablishmentId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "educationLevelCompletedLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevelCompleted; Target Attribute: LookupCode</li><li>Display Attribute: LookupCode, Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevelCompleted",
+                  "displayValues": [
+                    "LookupCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "LookupCode",
+                    "Meaning"
+                  ]
+                }
+              },
+              "educationLvlItemsDFF": {
+                "operationRef": "#/paths/~1talentPersonProfiles~1{talentPersonProfilesUniqID}~1child~1educationLvlSections~1{ProfileSectionId}~1child~1educationLvlItems~1{EducationLevelId}~1child~1educationLvlItemsDFF/get",
+                "parameters": {
+                  "ProfileSectionId6": "$request.path.ProfileSectionId6",
+                  "EducationLevelId": "$request.path.EducationLevelId",
+                  "talentPersonProfilesUniqID": "$request.path.talentPersonProfilesUniqID"
+                }
+              },
+              "eduLevelsLOV": {
+                "operationRef": "#/paths/~1contentItemsLov/get",
+                "parameters": {
+                  "finder": "findByWord%3BContentValueSetId%3D{ContentValueSetId}%2CContentTypeId%3D107"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EducationLevel; Target Attribute: Name</li><li>Display Attribute: ContentValueSetCode, Name</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EducationLevel",
+                  "displayValues": [
+                    "ContentValueSetCode"
+                  ],
+                  "derivedFieldsMapping": {
+                    "contentItemsLov.ContentItemId": [
+                      "ContentItemId"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "ContentValueSetCode",
+                    "Name"
+                  ]
+                }
+              },
+              "countriesLOV": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: Country; Target Attribute: TerritoryCode</li><li>Display Attribute: CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/Country",
+                  "displayValues": [
+                    "CountryName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "CountryName"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "talentPersonProfiles-{talentPersonProfilesUniqID}-child-educationLvlSections-{ProfileSectionId}-child-educationLvlItems-{EducationLevelId}-patch",
+        "x-filename-id": "talentpersonprofiles-talentpersonprofilesuniqid-child-educationlvlsections-profilesectionid-child-educationlvlitems-educationlevelid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "talentPersonProfiles-educationLvlSections-educationLvlItems": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-item-response": {
+        "type": "object",
+        "properties": {
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade achieved for the education level item.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body for the education level.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the education level.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentItemId": {
+            "title": "Education Level",
+            "type": "integer",
+            "description": "Unique identifier for the content item.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Country": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country where education level is received. Valid values are defined in the HcmCountriesLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "CountryMeaning": {
+            "title": "Territory Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Country of the education level items.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the content item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the content item was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "type": "string",
+            "description": "Education level of a person.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "EducationLevelCompleted": {
+            "title": "Completed",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the education level is completed. Valid values are Y and N. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevelId": {
+            "type": "integer",
+            "description": "Surrogate identifier for the person education level.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Name of the educational establishment. Valid values are defined in the contentItemsLOV.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Establishment": {
+            "title": "School",
+            "type": "string",
+            "description": "Name of the educational establishment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "Date and time when the content item was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the content item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OtherEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the other educational establishment.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Unique identifier of the person profile.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Date on which the education level item is projected to be complete.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Unique identifier of the profile content section.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Source": {
+            "title": "Source",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Source of the educationLevel item.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "Talent Profile",
+            "x-queryable": true
+          },
+          "State": {
+            "title": "State Code",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State of the education level item.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the education level.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "educationLvlItemsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-response": {
+        "type": "object",
+        "properties": {
+          "EducationLevelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-item-post-request": {
+        "required": [
+          "ProfileId"
+        ],
+        "type": "object",
+        "properties": {
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade achieved for the education level item.",
+            "nullable": true
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body for the education level.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the education level.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentItemId": {
+            "title": "Education Level",
+            "type": "integer",
+            "description": "Unique identifier for the content item.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Country": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country where education level is received. Valid values are defined in the HcmCountriesLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "type": "string",
+            "description": "Education level of a person.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevelCompleted": {
+            "title": "Completed",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the education level is completed. Valid values are Y and N. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevelId": {
+            "type": "integer",
+            "description": "Surrogate identifier for the person education level.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Name of the educational establishment. Valid values are defined in the contentItemsLOV.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Establishment": {
+            "title": "School",
+            "type": "string",
+            "description": "Name of the educational establishment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "OtherEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the other educational establishment.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Unique identifier of the person profile.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Date on which the education level item is projected to be complete.",
+            "format": "date",
+            "nullable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Unique identifier of the profile content section.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "State": {
+            "title": "State Code",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State of the education level item.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the education level.",
+            "nullable": true
+          },
+          "educationLvlItemsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EducationLevelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AverageGrade": {
+            "title": "Average Grade",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Average grade achieved for the education level item.",
+            "nullable": true
+          },
+          "AwardingBody": {
+            "title": "Awarding Body",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Awarding body for the education level.",
+            "nullable": true
+          },
+          "Comments": {
+            "title": "Comments",
+            "type": "string",
+            "description": "Comments on the education level.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Country": {
+            "title": "Country Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country where education level is received. Valid values are defined in the HcmCountriesLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevel": {
+            "title": "Education Level",
+            "type": "string",
+            "description": "Education level of a person.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationLevelCompleted": {
+            "title": "Completed",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the education level is completed. Valid values are Y and N. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EducationalEstablishmentId": {
+            "title": "School",
+            "type": "integer",
+            "description": "Name of the educational establishment. Valid values are defined in the contentItemsLOV.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Establishment": {
+            "title": "School",
+            "type": "string",
+            "description": "Name of the educational establishment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "OtherEstablishment": {
+            "title": "School Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the other educational establishment.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ProjectedCompletionDate": {
+            "title": "Projected Completion Date",
+            "type": "string",
+            "description": "Date on which the education level item is projected to be complete.",
+            "format": "date",
+            "nullable": true
+          },
+          "State": {
+            "title": "State Code",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State of the education level item.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the education level.",
+            "nullable": true
+          },
+          "educationLvlItemsDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-educationLvlItemsDFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-post-request"
+            }
+          }
+        }
+      },
+      "talentPersonProfiles-educationLvlSections-educationLvlItems-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/talentPersonProfiles-educationLvlSections-educationLvlItems-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "name": "IRC_IS_INTERVIEW_PART",
+  "object_type": "TABLE",
+  "description": "IRC_IS_INTERVIEW_PART will contain all the interview participants.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircisinterviewpart-25045.html#ircisinterviewpart-25045",
+  "primary_keys": [
+    {
+      "name": "IRC_IS_INTERVIEW_PART_PK",
+      "columns": "PARTICIPANT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PARTICIPANT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The primary key representing the participant for this table."
+    },
+    {
+      "Name": "SCHEDULE_INTERVIEW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to the schedule interview entry. (IRC_IS_INTERVIEWS)"
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key for the person_id representing this participants. (PER_PERSONS)"
+    },
+    {
+      "Name": "PARTICIPANT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The type of participant that will take part of the interview. Lookup defined by ORA_IRC_IS_INTERVIEWS_PART_TYPE which can be INTERVIEWER or ORGANIZER."
+    },
+    {
+      "Name": "RESPONSE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Lookup value associated with ORA_IRC_IS_PARTICIPANT_RESPONSE lookup type."
+    },
+    {
+      "Name": "RESPONSE_PROPOSED_START_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The participant proposed a new start date."
+    },
+    {
+      "Name": "RESPONSE_PROPOSED_END_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The participant proposed a new end date."
+    },
+    {
+      "Name": "RESPONSE_MESSAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The participant responded message that he entered manually."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The submission id of the candidate that participates in an interview. Foreign key to the associated submission(IRC_SUBMISSIONS)."
+    },
+    {
+      "Name": "COORDNTR_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_IS_COORDNTR_REQUESTS table."
+    },
+    {
+      "Name": "INTRVW_REQUESTS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to the interview request entry. (IRC_IS_INTRVW_REQUESTS)"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHEDULE_INTERVIEW_ID"
+    },
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "COORDNTR_REQUEST_ID"
+    },
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INTRVW_REQUESTS_ID"
+    },
+    {
+      "Index": "IRC_IS_INTERVIEW_PART_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PARTICIPANT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:54:24"
+}

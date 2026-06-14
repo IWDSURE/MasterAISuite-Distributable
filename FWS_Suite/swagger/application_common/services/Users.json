@@ -1,0 +1,552 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Users",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/hcmRestApi/scim/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "This parameter specifies the query expression to retrieve a subset of user resource instances. Format: ?filter=<scim-filter>  Example: filter=firstName pr and userType eq Employee.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "description": "This parameter specifies use of 1-based index for the first result included in the response. Specify this query parameter to use pagination.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "This parameter specifies the number of resource instances to be returned in the current range.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "This parameter specifies the attributes based on which the resource collection is sorted.Format:  ?sortBy=<scim-attribute> where the attribute name must be of the format <attribute> for simple attributes and <attribute.subattribute> for complex attributes. Example: sortBy=active",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "This parameter specifies the attributes based on which the resource collection is ordered. Example: sortOrder=ascending",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "description": "This parameter specifies a comma-separated list of attribute values to be included in the response.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all users",
+        "x-internal-id": "hcmRestApi-scim-Users-get",
+        "x-filename-id": "hcmrestapi-scim-users-get"
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a user",
+        "operationId": "create",
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Users-item"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-item"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "summary": "Create a user",
+        "x-internal-id": "hcmRestApi-scim-Users-post",
+        "x-filename-id": "hcmrestapi-scim-users-post"
+      }
+    },
+    "/hcmRestApi/scim/Users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get a user",
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-item"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a user",
+        "x-internal-id": "hcmRestApi-scim-Users-{id}-get",
+        "x-filename-id": "hcmrestapi-scim-users-id-get"
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Replace a user",
+        "operationId": "replace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Users-item"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-item"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "summary": "Replace a user",
+        "x-internal-id": "hcmRestApi-scim-Users-{id}-put",
+        "x-filename-id": "hcmrestapi-scim-users-id-put"
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete a user",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content. This task does not return elements in the response body.",
+            "content": {}
+          }
+        },
+        "summary": "Delete a user",
+        "x-internal-id": "hcmRestApi-scim-Users-{id}-delete",
+        "x-filename-id": "hcmrestapi-scim-users-id-delete"
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Update a user",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Users-item"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-item"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "summary": "Update a user",
+        "x-internal-id": "hcmRestApi-scim-Users-{id}-patch",
+        "x-filename-id": "hcmrestapi-scim-users-id-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "itemsPerPage": {
+            "title": "Count",
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "startIndex": {
+            "title": "start index",
+            "type": "integer",
+            "description": "This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20."
+          },
+          "Resources": {
+            "title": "Resources",
+            "type": "array",
+            "description": "The user resources in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/Users-item"
+            }
+          }
+        }
+      },
+      "Users-item": {
+        "required": [
+          "schemas",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "A unique identifier for the user resource in Oracle Fusion Cloud Applications.",
+            "readOnly": true
+          },
+          "meta": {
+            "title": "Meta",
+            "type": "object",
+            "description": "The metadata of the user resource."
+          },
+          "schemas": {
+            "title": "Schemas",
+            "type": "array",
+            "description": "The schema of the user resource.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userName": {
+            "title": "UserName",
+            "type": "string",
+            "description": "A unique identifier for the user to authenticate with the service provider directly. This attribute is required."
+          },
+          "name": {
+            "title": "Name",
+            "type": "object",
+            "description": "The components of the user's name. This attribute may return:Full name as a single string Individual component attributes Both variants. The  formatted version indicates how the component attributes are combined so that both variants describe the same name."
+          },
+          "displayName": {
+            "title": "DisplayName",
+            "type": "string",
+            "description": "The display name of the user, usually the full name."
+          },
+          "emails": {
+            "title": "Emails",
+            "type": "array",
+            "description": "The e-mail addresses of the user. The service provider uses canonical form of these addresses, for example, bjensen@example.com instead of bjensen@EXAMPLE.COM. Canonical type values are work, home, and other.",
+            "items": {
+              "$ref": "#/components/schemas/email-item"
+            }
+          },
+          "urn:scim:schemas:extension:fa:2.0:faUser": {
+            "$ref": "#/components/schemas/faUser-item"
+          },
+          "roles": {
+            "title": "Roles",
+            "type": "array",
+            "description": "The list of roles for users in Oracle Fusion Cloud Applications.",
+            "items": {
+              "$ref": "#/components/schemas/role-item"
+            }
+          },
+          "active": {
+            "title": "Active",
+            "type": "boolean",
+            "description": "Indicates the administrative status of the user. The service provider determines the definitive value for this attribute. For example, true indicates that the user is able to login, and false indicates that the user account is suspended."
+          },
+          "password": {
+            "title": "Password",
+            "type": "string",
+            "description": "The clear text password of the user. This attribute is used to specify an initial password for new users and to reset password for existing users. The password attribute is never returned in response to a query."
+          }
+        }
+      },
+      "email-item": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "Value",
+            "type": "string",
+            "description": "The e-mail addresses of the user. The service provider uses canonical form of these addresses, for example, bjensen@example.com instead of bjensen@EXAMPLE.COM. Canonical type values are work, home, and other."
+          },
+          "type": {
+            "title": "Type",
+            "type": "string",
+            "description": "The type of e-mail id, which is hard coded to work."
+          },
+          "primary": {
+            "title": "Primary",
+            "type": "boolean",
+            "description": "Indicates that this e-mail id is the primary address. This value is hard coded to true."
+          }
+        }
+      },
+      "faUser-item": {
+        "type": "object",
+        "properties": {
+          "userCategory": {
+            "title": "UserCategory",
+            "type": "string",
+            "description": "A user is associated with only one category, at any given time. The default user category value is DEFAULT."
+          },
+          "accountType": {
+            "title": "AccountType",
+            "type": "string",
+            "description": "The account type of a user to indicate person or party association.",
+            "readOnly": true
+          },
+          "partyInformation": {
+            "title": "PartyInformation",
+            "type": "array",
+            "description": "The party information associated with the user.",
+            "items": {
+              "$ref": "#/components/schemas/partyInformation-item"
+            }
+          },
+          "workerInformation": {
+            "title": "WorkerInformation",
+            "type": "array",
+            "description": "The worker information associated with the user.",
+            "items": {
+              "$ref": "#/components/schemas/workerInformation-item"
+            }
+          },
+          "assignServiceAdminRoles": {
+            "title": "AssignServiceAdminRoles",
+            "type": "boolean",
+            "description": "Indicates if the service admin roles are assigned to the user. You can use this attribute to assign ORA_FND_DIAG_ADMINISTRATOR_JOB, ORA_ASM_APPLICATION_IMPLEMENTATION_CONSULTANT_JOB, and ORA_FND_IT_SECURITY_MANAGER_JOB admin roles when you create or update a user."
+          }
+        }
+      },
+      "partyInformation-item": {
+        "type": "object",
+        "properties": {
+          "partyNumber": {
+            "title": "PartyNumber",
+            "type": "string",
+            "description": "The party number associated with the user.",
+            "readOnly": true
+          },
+          "PartyUsage": {
+            "title": "Party Usage",
+            "type": "string",
+            "description": "The party usage associated with the user, for example, Supplier Contact,Partner Contact, and Customer Contact.",
+            "readOnly": true
+          }
+        }
+      },
+      "workerInformation-item": {
+        "type": "object",
+        "properties": {
+          "personNumber": {
+            "title": "PersonNumber",
+            "type": "string",
+            "description": "The person number associated with the user.",
+            "readOnly": true
+          },
+          "manager": {
+            "title": "Manager",
+            "type": "string",
+            "description": "The manager name of the user.",
+            "readOnly": true
+          },
+          "job": {
+            "title": "Job",
+            "type": "string",
+            "description": "The job title of the user.",
+            "readOnly": true
+          },
+          "businessUnit": {
+            "title": "BusinessUnit",
+            "type": "string",
+            "description": "The business unit to which the user belongs.",
+            "readOnly": true
+          },
+          "department": {
+            "title": "Department",
+            "type": "string",
+            "description": "The department to which the user belongs.",
+            "readOnly": true
+          }
+        }
+      },
+      "role-item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "A list of ids for the roles that a user can belong to, through direct membership.",
+            "readOnly": true
+          },
+          "value": {
+            "title": "Value",
+            "type": "string",
+            "description": "A list of values for the roles.",
+            "readOnly": true
+          },
+          "displayName": {
+            "title": "DisplayName",
+            "type": "string",
+            "description": "The display name of the role.",
+            "readOnly": true
+          },
+          "description": {
+            "title": "Description",
+            "type": "string",
+            "description": "The description of the role.",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

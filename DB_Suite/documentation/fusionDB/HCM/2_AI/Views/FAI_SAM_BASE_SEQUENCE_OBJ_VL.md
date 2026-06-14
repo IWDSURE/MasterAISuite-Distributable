@@ -1,0 +1,41 @@
+# FAI_SAM_BASE_SEQUENCE_OBJ_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** FAI
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faisambasesequenceobjvl-3205.html#faisambasesequenceobjvl-3205](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faisambasesequenceobjvl-3205.html#faisambasesequenceobjvl-3205)
+
+## Columns
+
+- BASE_SEQUENCE_OBJ_ID
+- OBJECT_KEY
+- PROCESS_KEY
+- OBJECT_TYPE
+- OBJECT_NAME
+- PRODUCT
+- DESCRIPTION
+- SEQUENCER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- ENTERPRISE_ID
+- SGUID
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+
+## Query
+
+```sql
+Select B.BASE_SEQUENCE_OBJ_ID ,B.OBJECT_KEY ,B.PROCESS_KEY ,B.OBJECT_TYPE ,TL.OBJECT_NAME ,TL.PRODUCT ,TL.DESCRIPTION ,B.SEQUENCER ,B.CREATED_BY ,B.CREATION_DATE ,B.LAST_UPDATED_BY ,B.LAST_UPDATE_DATE ,B.LAST_UPDATE_LOGIN ,B.ENTERPRISE_ID ,B.SGUID ,B.MODULE_ID ,B.OBJECT_VERSION_NUMBER FROM FAI_SAM_BASE_SEQUENCE_OBJ_B B, FAI_SAM_BASE_SEQUENCE_OBJ_TL TL WHERE B.BASE_SEQUENCE_OBJ_ID = TL.BASE_SEQUENCE_OBJ_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../2_AI_Views_Index.md)

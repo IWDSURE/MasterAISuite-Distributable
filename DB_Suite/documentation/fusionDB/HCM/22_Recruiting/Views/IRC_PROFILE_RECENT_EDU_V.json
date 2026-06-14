@@ -1,0 +1,32 @@
+{
+  "name": "IRC_PROFILE_RECENT_EDU_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircprofilerecenteduv-3909.html#ircprofilerecenteduv-3909",
+  "columns": [
+    "START_DATE",
+    "END_DATE",
+    "EDUCATION_ID",
+    "CONTENT_ITEM_ID",
+    "CONTENT_TYPE_ID",
+    "YEAR_ACQUIRED",
+    "EDUCATIONAL_ESTABLISHMENT_ID",
+    "MAJOR",
+    "GPA",
+    "COMMENTS",
+    "SCHOOL_NAME",
+    "ESTABLISHMENT_ID",
+    "LOCATION",
+    "COUNTRY_ID",
+    "STATE_PROVINCE_ID",
+    "DEGREE_NAME",
+    "CONTENT_ITEM_ID1",
+    "BUSINESS_GROUP_ID",
+    "PROFILE_ID",
+    "CREATION_DATE"
+  ],
+  "query": "SELECT START_DATE, END_DATE, EDUCATION_ID, CONTENT_ITEM_ID, CONTENT_TYPE_ID, YEAR_ACQUIRED, EDUCATIONAL_ESTABLISHMENT_ID, MAJOR, GPA, COMMENTS, SCHOOL_NAME, ESTABLISHMENT_ID, LOCATION, COUNTRY_ID, STATE_PROVINCE_ID, DEGREE_NAME, CONTENT_ITEM_ID1, BUSINESS_GROUP_ID, PROFILE_ID, CREATION_DATE from ( SELECT ProfileEducationItemPEO.START_DATE, ProfileEducationItemPEO.END_DATE, ProfileEducationItemPEO.EDUCATION_ID, ProfileEducationItemPEO.CONTENT_ITEM_ID, ProfileEducationItemPEO.CONTENT_TYPE_ID, ProfileEducationItemPEO.YEAR_ACQUIRED, ProfileEducationItemPEO.EDUCATIONAL_ESTABLISHMENT_ID, ProfileEducationItemPEO.MAJOR, ProfileEducationItemPEO.GPA, ProfileEducationItemPEO.COMMENTS, NVL(ProfileEstablishmentsPEO.NAME,ProfileEducationItemPEO.EDUCATIONAL_ESTABLISHMENT) AS SCHOOL_NAME, ProfileEstablishmentsPEO.ESTABLISHMENT_ID, ProfileEstablishmentsPEO.LOCATION, ProfileEstablishmentsPEO.COUNTRY_ID, ProfileEstablishmentsPEO.STATE_PROVINCE_ID, NVL(Degree.NAME, ProfileEducationItemPEO.DEGREE_NAME) AS DEGREE_NAME, Degree.CONTENT_ITEM_ID AS CONTENT_ITEM_ID1, Degree.BUSINESS_GROUP_ID, ProfileEducationItemPEO.PROFILE_ID, ProfileEducationItemPEO.CREATION_DATE, (RANK() over (partition by ProfileEducationItemPEO.PROFILE_ID order by (NVL(ProfileEducationItemPEO.END_DATE, sysdate)) desc, NVL(ProfileEducationItemPEO.START_DATE, to_date('01/01/1900', 'DD/MM/YYYY')) desc, ProfileEducationItemPEO.EDUCATION_ID desc)) AS EDUCATION_RANK FROM IRC_PROFILE_EDUCATION_ITEMS_V ProfileEducationItemPEO, HRT_CONTENT_ITEMS_VL Degree, HRT_ESTABLISHMENTS_CI_V ProfileEstablishmentsPEO WHERE Degree.CONTENT_ITEM_ID (+) = ProfileEducationItemPEO.CONTENT_ITEM_ID AND ProfileEducationItemPEO.CONTENT_TYPE_ID = 106 AND ProfileEstablishmentsPEO.Establishment_ID(+) = ProfileEducationItemPEO.EDUCATIONAL_ESTABLISHMENT_ID AND (TRUNC(SYSDATE) BETWEEN (ProfileEducationItemPEO.DATE_FROM - 1) AND NVL(ProfileEducationItemPEO.DATE_TO, SYSDATE)) )where EDUCATION_RANK = 1",
+  "_parsed_at": "2026-06-09T19:08:38"
+}

@@ -1,0 +1,1532 @@
+{
+  "name": "CMP_SALARY",
+  "object_type": "TABLE",
+  "description": "Salary holds details of salary proposals for Employee or Contingent worker assignments. A salary proposal may have one or more components, held in Salary Components. There can be  one/multiple unapproved salary proposal(s) at any time. When a salary proposal is approved, an element entry of type 'SP' (Salary Proposal) is created or updated to reflect the approval. The effective start date of the change to the salary element entry is the same as that of Salary Change date.\n\nThe details of Salary Components cannot be updated or inserted if the overall proposal has already been approved. A Salary may have one or multiple components associated with it. Approval of all components are handled in one transaction and cannot be addressed separately.",
+  "schema": "FUSION",
+  "owner": "CMP",
+  "tablespace": "APPS_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpsalary-23074.html#cmpsalary-23074",
+  "primary_keys": [
+    {
+      "name": "CMP_SALARY_PK",
+      "columns": "SALARY_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Enterprise id FK to HR_ALL_ORGANIZATION_UNITS",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTED_FTE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If Adjusted FTE is used for salary record",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJ_ANNUAL_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Adjusted Annual Salary based in Adjusted FTE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_TRANSACTION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Salary transaction status.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIG_GRADE_LADDER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ASSIG_GRADE_LADDER_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIG_GRADE_STEP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ASSIG_GRADE_STEP_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIG_LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ASSIG_LOCATION_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_JUSTIFICATION",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SALARY_JUSTIFICATION",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MISC_COMMENT1",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MISC_COMMENT1",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MISC_COMMENT2",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MISC_COMMENT2",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MISC_COMMENT3",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MISC_COMMENT3",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MISC_COMMENT4",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MISC_COMMENT4",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ACTION_OCCURRENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "FK to PER_ACTION_OCCURRENCES",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ACTION_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ACTION_REASON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ACTION_REASON_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "FK to Person's Work term assignment or Deployment Assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key sequence for Salary.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_BASIS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "FK to Salary Basis",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ELEMENT_ENTRY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "FK to payroll's PAY_ELEMENT_ENTRIES_F",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DATE_FROM",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Salary Start Date.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DATE_TO",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Salary End Date",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_REASON_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Salary change reason lookup code.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Salary Amount entered based on the Salary Basis salary frequency.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_APPROVED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Yes or No flag if the Salary is approved or not.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MULTIPLE_COMPONENTS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Yes or No flag to indicate if Salary Components are used or not.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERFORMANCE_REVIEW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "FK to Person performance.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REVIEW_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Performance review date.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERFORMANCE_RATING",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Performance rating code.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NEXT_PERF_REVIEW_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Next performance review date derived based on the frequency and period defined on the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NEXT_SAL_REVIEW_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Next salary review date derived based on the frequency and period defined on the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FORCED_RANKING",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "FORCED_RANKING",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LEGISLATIVE_DATA_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "LEGISLATIVE_DATA_GROUP_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LEGAL_ENTITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "LEGAL_ENTITY_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "PERSON_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ASSIGNMENT_TYPE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_BASIS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SALARY_BASIS_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_BASIS_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SALARY_BASIS_TYPE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_FACTOR",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "SALARY_FACTOR",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "COMPONENT_USAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "COMPONENT_USAGE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PAYROLL_FREQUENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "PAYROLL_FREQUENCY_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PAYROLL_FACTOR",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "PAYROLL_FACTOR",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CURRENCY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "CURRENCY_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ELEMENT_USAGE_LEVEL",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ELEMENT_USAGE_LEVEL",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ELEMENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "ELEMENT_TYPE_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INPUT_VALUE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "INPUT_VALUE_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_AMOUNT_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "SALARY_AMOUNT_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "AMOUNT_ROUNDING_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "AMOUNT_ROUNDING_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTMENT_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ADJUSTMENT_AMOUNT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTMENT_AMOUNT_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "ADJUSTMENT_AMOUNT_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTMENT_PERCENT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ADJUSTMENT_PERCENT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTMENT_PERCENT_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "ADJUSTMENT_PERCENT_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ANNUAL_SALARY",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_ROUNDING_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ANNUAL_ROUNDING_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_FT_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ANNUAL_FT_SALARY",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "QUARTILE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "QUARTILE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "QUINTILE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "QUINTILE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "COMPA_RATIO",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "COMPA_RATIO",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_POSITION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RANGE_POSITION",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FTE_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "FTE_VALUE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTED_FTE_VALUE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Adjusted FTE value",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GRADE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "GRADE_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "RATE_ID",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_FACTOR",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RATE_FACTOR",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_MIN_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RATE_MIN_AMOUNT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_MID_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RATE_MID_AMOUNT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_MAX_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RATE_MAX_AMOUNT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RATE_DEFAULT_AMOUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RATE_DEFAULT_AMOUNT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SALARY_RANGE_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "SALARY_RANGE_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_ROUNDING_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RANGE_ROUNDING_CODE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "COMPA_RATIO_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "COMPA_RATIO_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_POSITION_SCALE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "3",
+      "Not-null": "",
+      "Comments": "RANGE_POSITION_SCALE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_ERROR_WARNING",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RANGE_ERROR_WARNING",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_ANALYTICS_FOR_EMP",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RANGE_ANALYTICS_FOR_EMP",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RANGE_ANALYTICS_FOR_MGR",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "RANGE_ANALYTICS_FOR_MGR",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DISABLE_QUARTILE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DISABLE_QUARTILE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DISABLE_QUINTILE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DISABLE_QUINTILE",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DISABLE_COMPA_RATIO",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DISABLE_COMPA_RATIO",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DISABLE_RANGE_POSITION",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "DISABLE_RANGE_POSITION",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TOTAL_BASE_PAY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "TOTAL_BASE_PAY",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TOTAL_COMPONENT_ADJ_AMT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "TOTAL_COMPONENT_ADJ_AMT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TOTAL_COMPONENT_ADJ_PERCENT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "TOTAL_COMPONENT_ADJ_PERCENT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GEOGRAPHY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Geography Id.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GEOGRAPHY_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Geography Type Id.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "BUSINESS_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Business Unit Id.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "JOB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Job Id.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "WORK_AT_HOME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Work at home.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GRADE_RATE_MINIMUM_LIMIT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Grade rate minimum limit.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ZONE_GRADE_RATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Zone grade rate id",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FTE_IMPACT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "FTE_IMPACT",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ATTRIBUTE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: structure definition of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE1",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE2",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE3",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE4",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE5",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE6",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE7",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE8",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE9",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE10",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE11",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE12",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE13",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE14",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE15",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE16",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE17",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE18",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE19",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE20",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE21",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE22",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE23",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE24",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE25",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE26",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE27",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE28",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE29",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE30",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER11",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER12",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER13",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER14",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER15",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER16",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER17",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER18",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER19",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_NUMBER20",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE11",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE12",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE13",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE14",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "ATTRIBUTE_DATE15",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Salary Information (CMP_SALARY)"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJ_ANNUAL_FT_SALARY",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Adjusted Annual Fulltime Salary based on adjusted FTE vale",
+      "Flexfield-mapping": ""
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "CMP_SALARY_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, DATE_FROM, DATE_TO"
+    },
+    {
+      "Index": "CMP_SALARY_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, REVIEW_DATE"
+    },
+    {
+      "Index": "CMP_SALARY_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, ASSIGNMENT_ID, DATE_FROM, DATE_TO"
+    },
+    {
+      "Index": "CMP_SALARY_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERFORMANCE_REVIEW_ID"
+    },
+    {
+      "Index": "CMP_SALARY_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SALARY_BASIS_ID"
+    },
+    {
+      "Index": "CMP_SALARY_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LAST_UPDATE_DATE"
+    },
+    {
+      "Index": "CMP_SALARY_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ELEMENT_ENTRY_ID"
+    },
+    {
+      "Index": "CMP_SALARY_N8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, DATE_FROM"
+    },
+    {
+      "Index": "CMP_SALARY_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SALARY_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-10T07:31:59"
+}

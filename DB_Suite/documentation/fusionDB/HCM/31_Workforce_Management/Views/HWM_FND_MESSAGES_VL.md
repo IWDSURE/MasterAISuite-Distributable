@@ -1,0 +1,46 @@
+# HWM_FND_MESSAGES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmfndmessagesvl-6307.html#hwmfndmessagesvl-6307](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmfndmessagesvl-6307.html#hwmfndmessagesvl-6307)
+
+## Columns
+
+- APPLICATION_SHORT_NAME
+- MODULE_ID
+- APPLICATION_ID
+- MESSAGE_NUMBER
+- MESSAGE_NAME
+- MESSAGE_TEXT
+- MESSAGE_USER_DETAILS
+- MESSAGE_ADMIN_DETAILS
+- MESSAGE_CAUSE
+- MESSAGE_USER_ACTION
+- MESSAGE_ADMIN_ACTION
+- CONTEXT
+- CHANGE_SINCE_LAST_REFRESH
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- CREATION_DATE
+- CREATED_BY
+- LAST_UPDATE_LOGIN
+- TYPE
+- MESSAGE_CATEGORY
+- MESSAGE_SEVERITY
+- LOGGABLE_ALERTABLE
+
+## Query
+
+```sql
+select appl.APPLICATION_SHORT_NAME, msg.MODULE_ID, msg.APPLICATION_ID, msg.MESSAGE_NUMBER, msg.MESSAGE_NAME, msg.MESSAGE_TEXT, msg.MESSAGE_USER_DETAILS, msg.MESSAGE_ADMIN_DETAILS, msg.MESSAGE_CAUSE, msg.MESSAGE_USER_ACTION, msg.MESSAGE_ADMIN_ACTION, msg.CONTEXT, msg.CHANGE_SINCE_LAST_REFRESH, msg.LAST_UPDATE_DATE, msg.LAST_UPDATED_BY, msg.CREATION_DATE, msg.CREATED_BY, msg.LAST_UPDATE_LOGIN, msg.TYPE, msg.MESSAGE_CATEGORY, msg.MESSAGE_SEVERITY, msg.LOGGABLE_ALERTABLE from fusion.FND_MESSAGES_VL msg, fusion.FND_APPLICATION appl where appl.APPLICATION_ID = msg.APPLICATION_ID
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

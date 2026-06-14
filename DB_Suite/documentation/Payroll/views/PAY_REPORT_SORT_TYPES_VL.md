@@ -1,0 +1,41 @@
+# PAY_REPORT_SORT_TYPES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payreportsorttypesvl-5927.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payreportsorttypesvl-5927.html)
+
+## Columns
+
+- REPORT_SORT_TYPE_ID
+- BASE_SORT_NAME
+- SORT_NAME
+- DESCRIPTION
+- ENTERPRISE_ID
+- LEGISLATION_CODE
+- LEGISLATIVE_DATA_GROUP_ID
+- MODULE_ID
+- SORT_METHOD
+- SORT_LEVEL
+- SORT_ORDER
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- CREATED_BY
+- CREATION_DATE
+- OBJECT_VERSION_NUMBER
+
+## Query
+
+```sql
+SELECT prst.REPORT_SORT_TYPE_ID REPORT_SORT_TYPE_ID, prst.BASE_SORT_NAME BASE_SORT_NAME, prsttl.SORT_NAME SORT_NAME, prsttl.DESCRIPTION DESCRIPTION, prst.ENTERPRISE_ID ENTERPRISE_ID, prst.LEGISLATION_CODE LEGISLATION_CODE, prst.LEGISLATIVE_DATA_GROUP_ID LEGISLATIVE_DATA_GROUP_ID, prst.MODULE_ID MODULE_ID, prst.SORT_METHOD SORT_METHOD, prst.SORT_LEVEL SORT_LEVEL, prst.SORT_ORDER SORT_ORDER, prst.LAST_UPDATE_DATE LAST_UPDATE_DATE, prst.LAST_UPDATED_BY LAST_UPDATED_BY, prst.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN, prst.CREATED_BY CREATED_BY, prst.CREATION_DATE CREATION_DATE, prst.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER FROM PAY_REPORT_SORT_TYPES prst, PAY_REPORT_SORT_TYPES_TL prsttl WHERE prsttl.report_sort_type_id = prst.report_sort_type_id and prsttl.language = userenv('LANG')
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

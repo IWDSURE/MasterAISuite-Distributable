@@ -1,0 +1,15 @@
+{
+  "name": "CMP_PLAN_RESTACCESS_RESTRICT_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "CMP",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpplanrestaccessrestrictv-5231.html#cmpplanrestaccessrestrictv-5231",
+  "columns": [
+    "PLAN_ID",
+    "ACCESS_CODE",
+    "ROLE_TYPE"
+  ],
+  "query": "select plan_access.plan_id plan_id, min(plan_access.access_code) access_code, plan_access.role_type role_type from cmp_plan_access plan_access, per_roles_dn per_roles, fnd_session_role_sets fnd_role_sets, cmp_plans_b aplans where plan_access.comp_type = 'CWB' and plan_access.role_guid = per_roles.role_guid and per_roles.role_common_name = fnd_role_sets.role_name and fnd_role_sets.session_role_set_key = fnd_global.session_role_set_key and plan_access.custom_id is null and plan_access.plan_id = aplans.plan_id and NVL(aplans.plan_security_enabled_flag, 'N') = 'Y' group by plan_access.plan_id, plan_access.role_type UNION select plans.plan_id plan_id, 'FULL_ACCESS' access_code, plan_access.role_type role_type from cmp_plans_b plans, (select 'M' role_type from dual union select 'A' role_type from dual union select 'I' role_type from dual) plan_access where plans.comp_type = 'CWB' and nvl(plans.plan_security_enabled_flag, 'N') = 'N'",
+  "_parsed_at": "2026-06-10T07:38:00"
+}

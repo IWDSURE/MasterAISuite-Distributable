@@ -1,0 +1,36 @@
+# HWM_DS_API_CLASSES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmdsapiclassesvl-3499.html#hwmdsapiclassesvl-3499](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmdsapiclassesvl-3499.html#hwmdsapiclassesvl-3499)
+
+## Columns
+
+- DS_CLASS_ID
+- OBJECT_VERSION_NUMBER
+- CLASS_NAME
+- CLASS_PATH
+- DESCRIPTION
+- ENTERPRISE_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT B.DS_CLASS_ID DS_CLASS_ID, B.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, B.CLASS_NAME CLASS_NAME, B.CLASS_PATH CLASS_PATH, TL.DESCRIPTION DESCRIPTION, B.ENTERPRISE_ID ENTERPRISE_ID, B.CREATED_BY CREATED_BY, B.CREATION_DATE CREATION_DATE, B.LAST_UPDATED_BY LAST_UPDATED_BY, B.LAST_UPDATE_DATE LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN , B.MODULE_ID MODULE_ID FROM HWM_DS_API_CLASSES_B B, HWM_DS_API_CLASSES_TL TL WHERE B.DS_CLASS_ID = TL.DS_CLASS_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

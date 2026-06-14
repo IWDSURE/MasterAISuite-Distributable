@@ -1,0 +1,31 @@
+# WLF_PERSON_GROUPS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfpersongroupsv-5454.html#wlfpersongroupsv-5454](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfpersongroupsv-5454.html#wlfpersongroupsv-5454)
+
+## Columns
+
+- DESTINATION_ID
+- JOB_RUN_DATE
+- ASSIGNED_TO_ID
+- ASSIGNED_TO_TYPE
+- DESTINATION_STATUS
+- PERSON_ID
+- PERSON_STATUS
+
+## Query
+
+```sql
+SELECT DISTINCT DESTINATIONS.DESTINATION_ID, DESTINATIONS.JOB_RUN_DATE, DESTINATIONS.ASSIGNED_TO_ID, DESTINATIONS.ASSIGNED_TO_TYPE, DESTINATIONS.STATUS DESTINATION_STATUS, PERSONS.PERSON_ID, PERSONS.STATUS PERSON_STATUS FROM WLF_DESTINATIONS DESTINATIONS, WLF_DEST_PERSONS PERSONS WHERE DESTINATIONS.DESTINATION_ID = PERSONS.DESTINATION_ID AND DESTINATIONS.JOB_RUN_DATE = PERSONS.JOB_RUN_DATE
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

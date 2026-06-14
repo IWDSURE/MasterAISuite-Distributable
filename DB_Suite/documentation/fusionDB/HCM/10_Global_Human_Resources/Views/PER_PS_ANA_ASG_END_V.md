@@ -1,0 +1,37 @@
+# PER_PS_ANA_ASG_END_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpsanaasgendv-8852.html#perpsanaasgendv-8852](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpsanaasgendv-8852.html#perpsanaasgendv-8852)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- TEXT_TITLE
+- TEXT_METRIC
+- TEXT_META
+- BADGE_TEXT
+- BADGE_STATUS
+- PERIOD_CHN_IND_VAL
+- PERIOD_CHN_IND_CMP
+- CHART_TYPE
+- CHART_COLOR
+- CHART_DATA
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT asg.person_id person_id, asg.assignment_id assignment_id, '{"strKey":"HdrSAssignmentend"}' text_title, hrl_df_util.date_to_char(asg.effective_start_date - 1) text_metric, decode(trunc((asg.effective_start_date - 1) - trunc(sysdate)), 0, '{"strKey":"PgHIEndstoday"}', 1, '{"strKey":"PgHIEndstomorrow"}', '{"strKey":"PgHIEndinginDAYSNUMdays","tokens":{"DAYS_NUM":"' ||(trunc((asg.effective_start_date - 1) - trunc(sysdate))) || '"}}') text_meta, decode(sign(((asg.effective_start_date - 1) - trunc(sysdate)) - 8), - 1, '{"strKey":"BdgInfo"}', NULL) badge_text, decode(sign(((asg.effective_start_date - 1) - trunc(sysdate)) - 8), - 1, 'info', NULL) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, '?pAssignmentId=' || asg.assignment_id link_text FROM per_all_assignments_m asg, per_action_occurrences b, per_action_reasons_vl c, per_actions_vl d WHERE asg.assignment_type IN ( 'E', 'C', 'N', 'P' ) AND asg.effective_latest_change = 'Y' AND asg.effective_start_date >= trunc(sysdate) AND trunc((asg.effective_start_date - 1) - trunc(sysdate)) BETWEEN 0 AND 30 AND asg.action_occurrence_id = b.action_occurrence_id AND b.action_id = d.action_id AND b.action_reason_id = c.action_reason_id (+) AND ( d.act_information2 = 'VOLUNTARY' OR d.act_information2 is null) AND (d.action_type_code != 'EMPL_TERMINATE' OR ( d.action_type_code = 'EMPL_TERMINATE' AND asg.effective_end_date = ( SELECT MIN(effective_end_date) FROM per_all_assignments_m WHERE assignment_id = asg.assignment_id AND assignment_status_type = 'INACTIVE') ))
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

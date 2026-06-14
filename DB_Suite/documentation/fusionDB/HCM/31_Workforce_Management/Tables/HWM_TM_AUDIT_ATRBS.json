@@ -1,0 +1,280 @@
+{
+  "name": "HWM_TM_AUDIT_ATRBS",
+  "object_type": "TABLE",
+  "description": "The Time change audit attributes(TAA) table stores one row for each change of an attribute for a time entry.",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmauditatrbs-17390.html#hwmtmauditatrbs-17390",
+  "primary_keys": [
+    {
+      "name": "HWM_TM_AUDIT_ATRBS_PK",
+      "columns": "TM_AUDIT_ATRB_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TM_AUDIT_ATRB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key column containing a random generated number"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "TM_AUDIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Reference to a row of the Time audit table"
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Action performed on the attribute"
+    },
+    {
+      "Name": "REASON_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Code referencing a Lookup value"
+    },
+    {
+      "Name": "TM_ATRB_FLD_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Id of the Time attribute updated if ACTION_TYPE = Update"
+    },
+    {
+      "Name": "TM_ATTRIBUTE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Type of the attribute : Number, Varchar, Timestamp, Date"
+    },
+    {
+      "Name": "OLD_TIMESTAMP",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp,Timestamp value of the attribute before change"
+    },
+    {
+      "Name": "OLD_ZONE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the type of time zone for the value of the attribute before change. Possible values : OFFSET, ZONE, NULL"
+    },
+    {
+      "Name": "OLD_GMT_OFFSET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "22",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the time zone offset in milliseconds for the value of the attribute before change"
+    },
+    {
+      "Name": "OLD_TIMEZONE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the time zone code for the value of the attribute before change"
+    },
+    {
+      "Name": "NEW_TIMESTAMP",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp,Timestamp value of the attribute after change"
+    },
+    {
+      "Name": "NEW_ZONE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the type of time zone for the value of the attribute after change. Possible values : OFFSET, ZONE, NULL"
+    },
+    {
+      "Name": "NEW_GMT_OFFSET",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "22",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the time zone offset in milliseconds for the value of the attribute after change."
+    },
+    {
+      "Name": "NEW_TIMEZONE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Timestamp, contain the time zone code for the value of the attribute after change."
+    },
+    {
+      "Name": "OLD_VARCHAR",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Varchar, value of the attribute before change"
+    },
+    {
+      "Name": "NEW_VARCHAR",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Varchar, value of the attribute after change"
+    },
+    {
+      "Name": "OLD_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Date, value of the attribute before change"
+    },
+    {
+      "Name": "NEW_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Date, value of the attribute after change"
+    },
+    {
+      "Name": "OLD_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Number, value of the attribute before change"
+    },
+    {
+      "Name": "NEW_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if ACTION_TYPE = Update and ATTRIBUTE_TYPE = Number, value of the attribute after change"
+    },
+    {
+      "Name": "ORIG_AUDIT_ATRB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Reference the initial audit rows when updating the reason attribute"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "PART_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "partition key"
+    },
+    {
+      "Name": "PART_GRP_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "partition key"
+    },
+    {
+      "Name": "REASON_CHANGE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the date and time of when the Change Reason of this audit row is updated."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HWM_TM_AUDIT_ATRBS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TM_AUDIT_ID"
+    },
+    {
+      "Index": "HWM_TM_AUDIT_ATRBS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TM_AUDIT_ATRB_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:46:51"
+}

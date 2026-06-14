@@ -1,0 +1,1036 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Questions List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/questionsLOV/{questionsLOVUniqID}": {
+      "get": {
+        "tags": [
+          "List of Values/Questions List of Values"
+        ],
+        "summary": "Get a question",
+        "operationId": "get_questionsLOV",
+        "parameters": [
+          {
+            "name": "questionsLOVUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Questions List of Values resource and used to uniquely identify an instance of Questions List of Values. The client should not generate the hash key value. Instead, the client should query on the Questions List of Values collection resource in order to navigate to a specific instance of Questions List of Values to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/questionsLOV-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "questionsLOV-{questionsLOVUniqID}-get",
+        "x-filename-id": "questionslov-questionslovuniqid-get"
+      }
+    },
+    "/questionsLOV": {
+      "get": {
+        "tags": [
+          "List of Values/Questions List of Values"
+        ],
+        "summary": "Get all questions",
+        "operationId": "getall_questionsLOV",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AdhocFlag; boolean; Indicates whether an additional question is added by a person who requested a response to the questionnaire. Value Y indicates that the question is an additional question displayed for the request. Value N indicates that the question is defined in the questionnaire and is displayed for all requests.</li><li>AllJobFamiliesFlag; boolean; Indicates whether the contextual question is displayed for all the job families.</li><li>AllJobFunctionsFlag; boolean; Indicates whether the contextual question is displayed for all the job functions.</li><li>AllLocationsFlag; boolean; Indicates whether the contextual question is displayed for all the locations.</li><li>AllOrganizationsFlag; boolean; Indicates whether the contextual question is displayed for all the organizations.</li><li>AttachmentAllowed; string; Indicates whether an attachment is requested in the question. Valid values are Y and N.</li><li>CandidateCode; string; Used to determine if the contextual question is displayed in the questionnaire.</li><li>CategoryId; integer; Unique identifier of the folder where the question is stored.</li><li>CategoryName; string; Name of the folder where the question is stored.</li><li>ClassificationCode; string; Used to determine if the question is displayed in the questionnaire. For example, Disqualification or Preliminary.</li><li>ClassificationMeaning; string; Meaning of the question classification code.</li><li>ConditionalDisplayFlag; boolean; Indicates whether a question is conditionally displayed.</li><li>ControllingQuestionCode; string; Question code for the controlling question, response to which determines if the question is displayed or not.</li><li>ControllingQuestionId; integer; Surrogate identifier of the controlling question.</li><li>ControllingQuestionVersionNumber; integer; Question version number of the controlling question.</li><li>LatestVersion; string; Indicates whether the version of the questionnaire is the latest. The default value is Y. The latest version is used in new questionnaire responses.</li><li>MaximumDate; string; Latest date to be support the response when a participant responds to a question.</li><li>MaximumLength; string; Maximum number of characters the respondent can provide when answering a text type of question.</li><li>MaximumPossibleScore; integer; Maximum score that the response can result in for the question.</li><li>MaximumSelections; integer; Maximum number of choices that the respondent can select when answering a multiple choice type of question.</li><li>MaximumThresholdScore; integer; Score of the question if the actual score is above the threshold. It's used to normalize question scores when the score methodology requires high response scores.</li><li>MinimumDate; string; Earliest date to support the response when a participant responds to a question.</li><li>MinimumLength; integer; Minimum number of characters that the respondent can provide when answering a text type of question.</li><li>MinimumSelections; integer; Minimum number of choices that the respondent can select when answering a multiple choice type of question.</li><li>MinimumThresholdScore; integer; Score of the question if the actual score is below the threshold. It's used to normalize question scores when the score methodology requires low response scores.</li><li>Owner; string; Owner of the question. Indicates the person ID of the person who can edit the question, when private.</li><li>PrivacyFlag; boolean; Indicates whether the question is private. Y indicates that the question is private and only the owner can edit. N indicates that the question is public and anyone can edit with the required privileges</li><li>QstnVersionNumber; integer; Version of the question. When the definition of a question changes, then that change can be versioned.</li><li>QuestionCode; string; User-defined identifier of the question.</li><li>QuestionId; integer; Application generated primary key for the question.</li><li>QuestionText; string; Text displayed as the question in the questionnaire.</li><li>QuestionType; string; Type of question such as Single Choice, Multiple Choice, Text, or No Response.</li><li>QuestionTypeCode; string; Code for the question type such as 1CHOICE, MULTCHOICE, TEXT, NONE.</li><li>RatingModelId; integer; Identifier of the rating model. You can use it in single or multiple choice type of questions</li><li>ResponseTypeId; integer; Identifier for the response type. It controls the display of the response such as rich text editor, list, radio buttons and checkboxes.</li><li>ScoredFlag; boolean; Indicates whether the question contributes to the calculation of the score in a scored questionnaire.</li><li>Status; string; Status of the question such as Active, Draft, or Inactive.</li><li>SubscriberCode; string; Unique code of the subscribing application where the question is used.</li><li>SubscriberId; integer; Identifier of the subscribing application where the question is used.</li><li>VersionDescription; string; Description of the version of the question.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the questions that match the specified primary key criteria. <br>Finder Variables <ul><li>QstnVersionNumber; integer;  Version of the question. </li><li>QuestionId; integer;  Application generated primary key of the question. </li></ul></li><li>findByWord Finds all the questions that match the specified criteria. <br>Finder Variables <ul><li>ExcludeQuestionId; string;  A list of questions to exclude. </li><li>FilterAttributes; string;  Attributes for the search parameters of questions. </li><li>ListOfCandidateCodes; string;  List of candidate codes associated with a contextual question. </li><li>ListOfJobFamilyIds; string;  List of job family identifiers associated to a contextual questions. </li><li>ListOfJobFunctionCodes; string;  List of job function codes associated with a contextual question. </li><li>ListOfLocationIds; string;  List of location identifiers associated with a contextual question. </li><li>ListOfOrganizationIds; string;  List of organization identifiers associated with a contextual question. </li><li>ListOfQstnClassificationCodes; string;  List of question classification codes associated to contextual questions. </li><li>QuestionnaireId; integer;  Application generated primary key of the questionnaire, which includes the questions. </li><li>QuestionnaireVersionNumber; integer;  Version number of the questionnaire. </li><li>SearchTerms; string;  Search terms used to retrieve question data. </li><li>StartsWithFlag; boolean;  Option to start with the specified criteria for searching the questions. </li><li>SubscriberCode; string;  Unique code of the subscribing application where the question is used. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the questions that match the specified primary key criteria.",
+                "properties": {
+                  "QuestionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Application generated primary key of the question.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Question Code"
+                  },
+                  "QstnVersionNumber": {
+                    "default": 1,
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Version of the question.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Question Version Number"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all the questions that match the specified criteria.",
+                "title": "findByWord",
+                "properties": {
+                  "ListOfCandidateCodes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of candidate codes associated with a contextual question.",
+                    "type": "string"
+                  },
+                  "ListOfQstnClassificationCodes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of question classification codes associated to contextual questions.",
+                    "type": "string"
+                  },
+                  "QuestionnaireVersionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Version number of the questionnaire.",
+                    "type": "integer"
+                  },
+                  "ListOfOrganizationIds": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of organization identifiers associated with a contextual question.",
+                    "type": "string"
+                  },
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Attributes for the search parameters of questions.",
+                    "type": "string"
+                  },
+                  "ExcludeQuestionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "A list of questions to exclude.",
+                    "type": "string"
+                  },
+                  "ListOfLocationIds": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of location identifiers associated with a contextual question.",
+                    "type": "string"
+                  },
+                  "SubscriberCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique code of the subscribing application where the question is used.",
+                    "type": "string"
+                  },
+                  "ListOfJobFamilyIds": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of job family identifiers associated to a contextual questions.",
+                    "type": "string"
+                  },
+                  "StartsWithFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Option to start with the specified criteria for searching the questions.",
+                    "type": "boolean"
+                  },
+                  "QuestionnaireId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Application generated primary key of the questionnaire, which includes the questions.",
+                    "type": "integer"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search terms used to retrieve question data.",
+                    "type": "string"
+                  },
+                  "ListOfJobFunctionCodes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of job function codes associated with a contextual question.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/questionsLOV"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "questionsLOV-get",
+        "x-filename-id": "questionslov-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "questionsLOV-item-response": {
+        "type": "object",
+        "properties": {
+          "AdhocFlag": {
+            "title": "Additional Question",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether an additional question is added by a person who requested a response to the questionnaire. Value Y indicates that the question is an additional question displayed for the request. Value N indicates that the question is defined in the questionnaire and is displayed for all requests.",
+            "nullable": true,
+            "readOnly": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "AllJobFamiliesFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contextual question is displayed for all the job families.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AllJobFunctionsFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contextual question is displayed for all the job functions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AllLocationsFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contextual question is displayed for all the locations.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AllOrganizationsFlag": {
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contextual question is displayed for all the organizations.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttachmentAllowed": {
+            "title": "Allow attachments",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether an attachment is requested in the question. Valid values are Y and N.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "N",
+            "x-queryable": true
+          },
+          "CandidateCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Used to determine if the contextual question is displayed in the questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CategoryId": {
+            "title": "Folder",
+            "type": "integer",
+            "description": "Unique identifier of the folder where the question is stored.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CategoryName": {
+            "title": "Folder",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the folder where the question is stored.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ClassificationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Used to determine if the question is displayed in the questionnaire. For example, Disqualification or Preliminary.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ClassificationMeaning": {
+            "title": "Question Classification",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the question classification code.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ConditionalDisplayFlag": {
+            "title": "Conditional Display",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether a question is conditionally displayed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ControllingQuestionCode": {
+            "title": "Controlling Question Code",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Question code for the controlling question, response to which determines if the question is displayed or not.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ControllingQuestionId": {
+            "title": "Controlling Question Id",
+            "type": "integer",
+            "description": "Surrogate identifier of the controlling question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ControllingQuestionVersionNumber": {
+            "type": "integer",
+            "description": "Question version number of the controlling question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LatestVersion": {
+            "title": "Latest Version",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether the version of the questionnaire is the latest. The default value is Y. The latest version is used in new questionnaire responses.",
+            "nullable": true,
+            "readOnly": true,
+            "default": "N",
+            "x-queryable": true
+          },
+          "MaximumDate": {
+            "type": "string",
+            "description": "Latest date to be support the response when a participant responds to a question.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumLength": {
+            "title": "Maximum Characters",
+            "maxLength": 20,
+            "type": "string",
+            "description": "Maximum number of characters the respondent can provide when answering a text type of question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumPossibleScore": {
+            "title": "Maximum Possible Score",
+            "type": "integer",
+            "description": "Maximum score that the response can result in for the question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MaximumSelections": {
+            "title": "Maximum Number of Selections",
+            "type": "integer",
+            "description": "Maximum number of choices that the respondent can select when answering a multiple choice type of question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MaximumThresholdScore": {
+            "title": "Maximum Calculated Score",
+            "type": "integer",
+            "description": "Score of the question if the actual score is above the threshold. It's used to normalize question scores when the score methodology requires high response scores.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumDate": {
+            "type": "string",
+            "description": "Earliest date to support the response when a participant responds to a question.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MinimumLength": {
+            "title": "Minimum Length",
+            "type": "integer",
+            "description": "Minimum number of characters that the respondent can provide when answering a text type of question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumSelections": {
+            "title": "Minimum Number of Selections",
+            "type": "integer",
+            "description": "Minimum number of choices that the respondent can select when answering a multiple choice type of question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumThresholdScore": {
+            "title": "Minimum Calculated Score",
+            "type": "integer",
+            "description": "Score of the question if the actual score is below the threshold. It's used to normalize question scores when the score methodology requires low response scores.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Owner": {
+            "title": "Owner",
+            "maxLength": 64,
+            "type": "string",
+            "description": "Owner of the question. Indicates the person ID of the person who can edit the question, when private.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrivacyFlag": {
+            "title": "Privacy",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the question is private. Y indicates that the question is private and only the owner can edit. N indicates that the question is public and anyone can edit with the required privileges",
+            "nullable": false,
+            "readOnly": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "QstnVersionNumber": {
+            "title": "Question Version Number",
+            "type": "integer",
+            "description": "Version of the question. When the definition of a question changes, then that change can be versioned.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "default": 1,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QuestionCode": {
+            "title": "Question Code",
+            "maxLength": 240,
+            "type": "string",
+            "description": "User-defined identifier of the question.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QuestionId": {
+            "title": "Question Code",
+            "type": "integer",
+            "description": "Application generated primary key for the question.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QuestionText": {
+            "title": "Question Text",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Text displayed as the question in the questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QuestionType": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Type of question such as Single Choice, Multiple Choice, Text, or No Response.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QuestionTypeCode": {
+            "title": "Question Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the question type such as 1CHOICE, MULTCHOICE, TEXT, NONE.",
+            "nullable": false,
+            "readOnly": true,
+            "default": "TEXT",
+            "x-queryable": true
+          },
+          "RatingModelId": {
+            "title": "Rating Model",
+            "type": "integer",
+            "description": "Identifier of the rating model. You can use it in single or multiple choice type of questions",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ResponseTypeId": {
+            "title": "Response Type",
+            "type": "integer",
+            "description": "Identifier for the response type. It controls the display of the response such as rich text editor, list, radio buttons and checkboxes.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "default": 1,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ScoredFlag": {
+            "title": "Score Question",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the question contributes to the calculation of the score in a scored questionnaire.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the question such as Active, Draft, or Inactive.",
+            "nullable": false,
+            "readOnly": true,
+            "default": "D",
+            "x-queryable": true
+          },
+          "SubscriberCode": {
+            "title": "Subscriber",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code of the subscribing application where the question is used.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberId": {
+            "title": "Subscriber",
+            "type": "integer",
+            "description": "Identifier of the subscribing application where the question is used.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "VersionDescription": {
+            "title": "Version Description",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Description of the version of the question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "questionsLOV": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/questionsLOV-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "name": "IRC_JA_SECONDARY_FLOWS",
+  "object_type": "TABLE",
+  "description": "Transactional table that stores information regarding the trigger and then submission of a secondary flow.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjasecondaryflows-8402.html#ircjasecondaryflows-8402",
+  "primary_keys": [
+    {
+      "name": "IRC_JA_SECONDARY_FLOWS_PK",
+      "columns": "SECONDARY_FLOW_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "SECONDARY_FLOW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_SUBMISSIONS table. Column provides an association with original job application."
+    },
+    {
+      "Name": "AF_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_AF_VERSIONS table. The apply flow version used to submit the secondary flow."
+    },
+    {
+      "Name": "ESIGN_DESC_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_DESC_VERSIONS_B table. The esign version used to submit secondary apply flow."
+    },
+    {
+      "Name": "STEP_ACTION_USAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to IRC_LC_ACTION_USAGES_B table. Associate a secondary flow trigger/submission with an action in the candidate selection process."
+    },
+    {
+      "Name": "STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "ORA_TRIGGERED' for secondary flows triggered but not yet submitted or 'ORA_SUBMITTED' for secondary flows that have been both triggered and submitted."
+    },
+    {
+      "Name": "SEC_FLOW_TRIGGER_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the timestamp when the secondary flow was triggered. This is one of three columns to track the progress made on the secondary flow."
+    },
+    {
+      "Name": "SEC_FLOW_TRIGGERED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the name of the recruiter or hiring manager, who triggered the secondary flow. This is one of three columns to track the progress made on the secondary flow."
+    },
+    {
+      "Name": "SEC_FLOW_SUBM_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the timestamp when the secondary flow was submitted by the candidate. This is one of three columns to track the progress made on the secondary flow."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_JA_SECONDARY_FLOWS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_JA_SECONDARY_FLOWS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "AF_VERSION_ID"
+    },
+    {
+      "Index": "IRC_JA_SECONDARY_FLOWS_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ESIGN_DESC_VERSION_ID"
+    },
+    {
+      "Index": "IRC_JA_SECONDARY_FLOWS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "SECONDARY_FLOW_ID"
+    },
+    {
+      "Index": "IRC_JA_SECONDARY_FLOWS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "STEP_ACTION_USAGE_ID, SUBMISSION_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:55:30"
+}

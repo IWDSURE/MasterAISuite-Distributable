@@ -1,0 +1,38 @@
+# CEL_ILLUSTRATIONS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CEL
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/celillustrationsvl-5121.html#celillustrationsvl-5121](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/celillustrationsvl-5121.html#celillustrationsvl-5121)
+
+## Columns
+
+- ILLUSTRATION_ID
+- ILLUSTRATION_NAME
+- ENABLED_FLAG
+- ILLUSTRATION
+- CONTENT_ID
+- ILLUSTRATION_URL
+- ILLUSTRATION_CODE
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- DESCRIPTION
+
+## Query
+
+```sql
+SELECT B.ILLUSTRATION_ID, T.ILLUSTRATION_NAME, B.ENABLED_FLAG, B.ILLUSTRATION, B.CONTENT_ID, B.ILLUSTRATION_URL, B.ILLUSTRATION_CODE, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN, T.DESCRIPTION FROM CEL_ILLUSTRATIONS_B B, CEL_ILLUSTRATIONS_TL T WHERE B.ILLUSTRATION_ID = T.ILLUSTRATION_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../6_Celebrate_Views_Index.md)

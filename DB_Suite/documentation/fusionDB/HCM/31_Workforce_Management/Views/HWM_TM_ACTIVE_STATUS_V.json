@@ -1,0 +1,32 @@
+{
+  "name": "HWM_TM_ACTIVE_STATUS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmactivestatusv-6483.html#hwmtmactivestatusv-6483",
+  "columns": [
+    "STATUS_ID",
+    "RESOURCE_ID",
+    "TM_BLDG_BLK_ID",
+    "TM_BLDG_BLK_VERSION",
+    "TM_STATUS_DEF_ID",
+    "STATUS_DEF_CD",
+    "DATE_FROM",
+    "DATE_TO",
+    "STATUS_VALUE",
+    "LDG_OR_BU_ID",
+    "OBJECT_VERSION_NUMBER",
+    "ENTERPRISE_ID",
+    "MODULE_ID",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATED_BY",
+    "LAST_UPDATE_DATE",
+    "LAST_UPDATE_LOGIN",
+    "PART_DATE",
+    "PART_GRP_TYPE_ID"
+  ],
+  "query": "SELECT sta.status_id, sta.resource_id, sta.tm_bldg_blk_id, sta.tm_bldg_blk_version, sta.tm_status_def_id, def.status_def_cd, sta.date_from, sta.date_to, sta.status_value, sta.LDG_OR_BU_ID, sta.OBJECT_VERSION_NUMBER, sta.ENTERPRISE_ID, sta.MODULE_ID, sta.CREATED_BY, sta.CREATION_DATE, sta.LAST_UPDATED_BY, sta.LAST_UPDATE_DATE, sta.LAST_UPDATE_LOGIN, sta.PART_DATE, sta.PART_GRP_TYPE_ID FROM hwm_tm_statuses sta, hwm_tm_status_def_b def WHERE sta.tm_status_def_id = def.tm_status_def_id AND sta.date_from <= SYSTIMESTAMP AND sta.date_to = to_timestamp('4712-12-31 23:59:59.999','yyyy-mm-dd hh24:mi:ssxff') AND NOT EXISTS (SELECT 1 FROM hwm_tm_statuses s2 WHERE s2.tm_bldg_blk_id = sta.tm_bldg_blk_id AND s2.tm_bldg_blk_version = sta.tm_bldg_blk_version AND s2.tm_status_def_id = sta.tm_status_def_id AND s2.date_from <= SYSTIMESTAMP AND s2.date_to = to_timestamp('4712-12-31 23:59:59.999','yyyy-mm-dd hh24:mi:ssxff') AND (s2.date_from > sta.date_from OR (s2.date_from = sta.date_from AND s2.last_update_date > sta.last_update_date) ) )",
+  "_parsed_at": "2026-06-09T19:52:27"
+}

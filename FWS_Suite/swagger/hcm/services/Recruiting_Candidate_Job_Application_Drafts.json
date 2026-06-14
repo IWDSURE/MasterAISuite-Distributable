@@ -1,0 +1,1682 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting Candidate Job Application Drafts",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingCEJobApplicationDrafts": {
+      "get": {
+        "tags": [
+          "Recruiting Candidate Job Application Drafts"
+        ],
+        "summary": "Get all application drafts",
+        "operationId": "getall_recruitingCEJobApplicationDrafts",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>APPDraftId; integer; Unique identifier for each job application draft.</li><li>ApplyMode; string; Apply flow mode for the job application.</li><li>AreaCode; string; Area code for the candidate phone number of the job application draft.</li><li>CandLastModifiedDate; string; Candidate last modification date of the job application draft.</li><li>CandidateNumber; string; Candidate number of the job application draft.</li><li>ContentLanguage; string; Language for the job application draft.</li><li>CountryCode; string; Country code for candidate phone number of the job application draft.</li><li>CreatedBy; string; Login of user who created the job application draft.</li><li>CreationDate; string; Date and time when the job application draft was created.</li><li>CustomAction; string; Custom action used to update the job application draft.</li><li>DraftId; integer; Unique identifier for each job application draft.</li><li>DraftSource; string; Source of the draft data that indicates whether the profile has been imported or manually fed.</li><li>Email; string; Email address of the candidate who created the job application draft.</li><li>EmailAddress; string; Email address of the candidate who created the job application draft.</li><li>FlowId; integer; Identifier of the request information flow.</li><li>LastAccessedOn; string; Last agent used to access the draft application.</li><li>LastJobExecutionDate; string; Date and time when notification for job was sent for the job application draft.</li><li>LastUpdateDate; string; Date and time when the job application draft was updated.</li><li>LastUpdateLogin; string; User login who updated the job application draft.</li><li>LastUpdatedBy; string; Name of user who updated the job application draft.</li><li>LegalDescriptionVersionId; integer; Description version ID of the job application draft.</li><li>ModificationDate; string; Last modification date of the draft job application submitted by the candidate.</li><li>ObjectStatus; string; Status of the job application draft.</li><li>ObjectVersionNumber; integer; Version number of the job application draft.</li><li>PhoneNumber; string; Phone number of candidate related to the job application draft.</li><li>PreferredChannel; string; Preferred channel of communication with the candidate.</li><li>ProposedCandidateNumber; string; Proposed candidate number for a new candidate.</li><li>RequisitionNumber; string; Job requisition number of the job application draft.</li><li>SiteNumber; string; Site Number of the job application draft.</li><li>StepActionUsageId; integer; Identifier of the step of the draft job application.</li><li>SubmissionId; integer; Identifier of the job application of the draft job application.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the drafts that match the specified primary key criteria <br>Finder Variables <ul><li>APPDraftId; integer;  Internal identifier for each draft </li></ul></li><li>findByRequisitionNumberFinder Finds all the drafts that match the specified primary key criteria. <br>Finder Variables <ul><li>RequisitionNumber; string;  Internal identifier for the requisition number. </li></ul></li><li>findBySubmissionStepAndFlowId Finds all draft job applications based on the request information flow. <br>Finder Variables <ul><li>FlowId; string;  Identifier of the flow in the request information flow. </li><li>StepActionUsageId; string;  Identifier of the step in the job application flow. </li><li>SubmissionId; string;  Identifier of the job application in the job application flow. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the drafts that match the specified primary key criteria",
+                "properties": {
+                  "APPDraftId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Internal identifier for each draft",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByRequisitionNumberFinder",
+                "description": "Finds all the drafts that match the specified primary key criteria.",
+                "title": "findByRequisitionNumber",
+                "properties": {
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Internal identifier for the requisition number.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findBySubmissionStepAndFlowId",
+                "description": "Finds all draft job applications based on the request information flow.",
+                "title": "findBySubmissionIdFlowIdAndStepActionUsageId",
+                "properties": {
+                  "FlowId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier of the flow in the request information flow.",
+                    "type": "string"
+                  },
+                  "SubmissionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier of the job application in the job application flow.",
+                    "type": "string"
+                  },
+                  "StepActionUsageId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Identifier of the step in the job application flow.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEJobApplicationDrafts-get",
+        "x-filename-id": "recruitingcejobapplicationdrafts-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting Candidate Job Application Drafts"
+        ],
+        "summary": "Create an application draft",
+        "operationId": "create_recruitingCEJobApplicationDrafts",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCEJobApplicationDrafts-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCEJobApplicationDrafts~1{APPDraftId}~1child~1attachments/get",
+                "parameters": {
+                  "APPDraftId": "$request.path.APPDraftId"
+                },
+                "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEJobApplicationDrafts-post",
+        "x-filename-id": "recruitingcejobapplicationdrafts-post"
+      }
+    },
+    "/recruitingCEJobApplicationDrafts/{APPDraftId}": {
+      "get": {
+        "tags": [
+          "Recruiting Candidate Job Application Drafts"
+        ],
+        "summary": "Get a draft",
+        "operationId": "get_recruitingCEJobApplicationDrafts",
+        "parameters": [
+          {
+            "name": "APPDraftId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for each job application draft.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCEJobApplicationDrafts~1{APPDraftId}~1child~1attachments/get",
+                "parameters": {
+                  "APPDraftId": "$request.path.APPDraftId"
+                },
+                "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEJobApplicationDrafts-{APPDraftId}-get",
+        "x-filename-id": "recruitingcejobapplicationdrafts-appdraftid-get"
+      },
+      "delete": {
+        "tags": [
+          "Recruiting Candidate Job Application Drafts"
+        ],
+        "summary": "Delete an application draft",
+        "operationId": "delete_recruitingCEJobApplicationDrafts",
+        "parameters": [
+          {
+            "name": "APPDraftId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for each job application draft.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingCEJobApplicationDrafts-{APPDraftId}-delete",
+        "x-filename-id": "recruitingcejobapplicationdrafts-appdraftid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Recruiting Candidate Job Application Drafts"
+        ],
+        "summary": "Update an application draft",
+        "operationId": "update_recruitingCEJobApplicationDrafts",
+        "parameters": [
+          {
+            "name": "APPDraftId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for each job application draft.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCEJobApplicationDrafts-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-response"
+                }
+              }
+            },
+            "links": {
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCEJobApplicationDrafts~1{APPDraftId}~1child~1attachments/get",
+                "parameters": {
+                  "APPDraftId": "$request.path.APPDraftId"
+                },
+                "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEJobApplicationDrafts-{APPDraftId}-patch",
+        "x-filename-id": "recruitingcejobapplicationdrafts-appdraftid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingCEJobApplicationDrafts": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingCEJobApplicationDrafts-item-response": {
+        "type": "object",
+        "properties": {
+          "APPDraftId": {
+            "type": "integer",
+            "description": "Unique identifier for each job application draft.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ApplyMode": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Apply flow mode for the job application.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Area code for the candidate phone number of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CandLastModifiedDate": {
+            "type": "string",
+            "description": "Candidate last modification date of the job application draft.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate number of the job application draft.",
+            "nullable": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "Content": {
+            "type": "string",
+            "description": "Content of the job application draft.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentLanguage": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Language for the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for candidate phone number of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Login of user who created the job application draft.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the job application draft was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CustomAction": {
+            "type": "string",
+            "description": "Custom action used to update the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DraftId": {
+            "type": "integer",
+            "description": "Unique identifier for each job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DraftSource": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Source of the draft data that indicates whether the profile has been imported or manually fed.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Email": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmailAddress": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FlowId": {
+            "type": "integer",
+            "description": "Identifier of the request information flow.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastAccessedOn": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Last agent used to access the draft application.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LastJobExecutionDate": {
+            "type": "string",
+            "description": "Date and time when notification for job was sent for the job application draft.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date and time when the job application draft was updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "description": "User login who updated the job application draft.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Name of user who updated the job application draft.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LegalDescriptionVersionId": {
+            "type": "integer",
+            "description": "Description version ID of the job application draft.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ModificationDate": {
+            "type": "string",
+            "description": "Last modification date of the draft job application submitted by the candidate.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ObjectStatus": {
+            "maxLength": 40,
+            "type": "string",
+            "description": "Status of the job application draft.",
+            "nullable": true,
+            "default": "ORA_ACTIVE",
+            "x-queryable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version number of the job application draft.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number of candidate related to the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PreferredChannel": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Preferred channel of communication with the candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ProposedCandidateNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Proposed candidate number for a new candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Job requisition number of the job application draft.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "SiteNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Site Number of the job application draft.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "StepActionUsageId": {
+            "type": "integer",
+            "description": "Identifier of the step of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Identifier of the job application of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "attachments": {
+            "title": "Attachments of the Job Application Drafts",
+            "type": "array",
+            "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-attachments-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-attachments-item-response": {
+        "type": "object",
+        "properties": {
+          "APPDraftId": {
+            "type": "integer",
+            "description": "Identifier of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Action": {
+            "type": "string",
+            "description": "Action for attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Candidate number associated with the attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Category": {
+            "type": "string",
+            "description": "Category of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File content of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "Unique identifier for the attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceAttachmentId": {
+            "type": "string",
+            "description": "Source attachment ID of the attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "type": "string",
+            "description": "Title of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of attachment of the job application draft.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-item-post-request": {
+        "required": [
+          "RequisitionNumber",
+          "SiteNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "APPDraftId": {
+            "type": "integer",
+            "description": "Unique identifier for each job application draft.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ApplyMode": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Apply flow mode for the job application.",
+            "nullable": true
+          },
+          "AreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Area code for the candidate phone number of the job application draft.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate number of the job application draft.",
+            "nullable": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "Content": {
+            "type": "string",
+            "description": "Content of the job application draft.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentLanguage": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Language for the job application draft.",
+            "nullable": true
+          },
+          "CountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for candidate phone number of the job application draft.",
+            "nullable": true
+          },
+          "CustomAction": {
+            "type": "string",
+            "description": "Custom action used to update the job application draft.",
+            "nullable": true
+          },
+          "DraftId": {
+            "type": "integer",
+            "description": "Unique identifier for each job application draft.",
+            "nullable": true
+          },
+          "DraftSource": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Source of the draft data that indicates whether the profile has been imported or manually fed.",
+            "nullable": true
+          },
+          "Email": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true
+          },
+          "EmailAddress": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true
+          },
+          "FlowId": {
+            "type": "integer",
+            "description": "Identifier of the request information flow.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LastAccessedOn": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Last agent used to access the draft application.",
+            "nullable": true
+          },
+          "LegalDescriptionVersionId": {
+            "type": "integer",
+            "description": "Description version ID of the job application draft.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ModificationDate": {
+            "type": "string",
+            "description": "Last modification date of the draft job application submitted by the candidate.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ObjectStatus": {
+            "maxLength": 40,
+            "type": "string",
+            "description": "Status of the job application draft.",
+            "nullable": true,
+            "default": "ORA_ACTIVE"
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version number of the job application draft.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number of candidate related to the job application draft.",
+            "nullable": true
+          },
+          "PreferredChannel": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Preferred channel of communication with the candidate.",
+            "nullable": true
+          },
+          "ProposedCandidateNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Proposed candidate number for a new candidate.",
+            "nullable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Job requisition number of the job application draft.",
+            "nullable": false
+          },
+          "SiteNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Site Number of the job application draft.",
+            "nullable": false
+          },
+          "StepActionUsageId": {
+            "type": "integer",
+            "description": "Identifier of the step of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Identifier of the job application of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "attachments": {
+            "title": "Attachments of the Job Application Drafts",
+            "type": "array",
+            "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-attachments-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-attachments-item-post-request": {
+        "type": "object",
+        "properties": {
+          "APPDraftId": {
+            "type": "integer",
+            "description": "Identifier of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Action": {
+            "type": "string",
+            "description": "Action for attachment of the job application draft.",
+            "nullable": true
+          },
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment of the job application draft.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Candidate number associated with the attachment of the job application draft.",
+            "nullable": true
+          },
+          "Category": {
+            "type": "string",
+            "description": "Category of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of attachment of the job application draft.",
+            "nullable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File content of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "Unique identifier for the attachment of the job application draft.",
+            "nullable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type of attachment of the job application draft.",
+            "nullable": true
+          },
+          "SourceAttachmentId": {
+            "type": "string",
+            "description": "Source attachment ID of the attachment of the job application draft.",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "description": "Title of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of attachment of the job application draft.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ApplyMode": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Apply flow mode for the job application.",
+            "nullable": true
+          },
+          "AreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Area code for the candidate phone number of the job application draft.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate number of the job application draft.",
+            "nullable": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "Content": {
+            "type": "string",
+            "description": "Content of the job application draft.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ContentLanguage": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Language for the job application draft.",
+            "nullable": true
+          },
+          "CountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for candidate phone number of the job application draft.",
+            "nullable": true
+          },
+          "CustomAction": {
+            "type": "string",
+            "description": "Custom action used to update the job application draft.",
+            "nullable": true
+          },
+          "DraftId": {
+            "type": "integer",
+            "description": "Unique identifier for each job application draft.",
+            "nullable": true
+          },
+          "DraftSource": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Source of the draft data that indicates whether the profile has been imported or manually fed.",
+            "nullable": true
+          },
+          "Email": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true
+          },
+          "EmailAddress": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email address of the candidate who created the job application draft.",
+            "nullable": true
+          },
+          "FlowId": {
+            "type": "integer",
+            "description": "Identifier of the request information flow.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LastAccessedOn": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Last agent used to access the draft application.",
+            "nullable": true
+          },
+          "LegalDescriptionVersionId": {
+            "type": "integer",
+            "description": "Description version ID of the job application draft.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ModificationDate": {
+            "type": "string",
+            "description": "Last modification date of the draft job application submitted by the candidate.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ObjectStatus": {
+            "maxLength": 40,
+            "type": "string",
+            "description": "Status of the job application draft.",
+            "nullable": true,
+            "default": "ORA_ACTIVE"
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version number of the job application draft.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number of candidate related to the job application draft.",
+            "nullable": true
+          },
+          "PreferredChannel": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Preferred channel of communication with the candidate.",
+            "nullable": true
+          },
+          "ProposedCandidateNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Proposed candidate number for a new candidate.",
+            "nullable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Job requisition number of the job application draft.",
+            "nullable": false
+          },
+          "SiteNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Site Number of the job application draft.",
+            "nullable": false
+          },
+          "StepActionUsageId": {
+            "type": "integer",
+            "description": "Identifier of the step of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Identifier of the job application of the draft job application.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "attachments": {
+            "title": "Attachments of the Job Application Drafts",
+            "type": "array",
+            "description": "The attachments resource is the child of the recruitingCEJobApplicationDrafts resource and includes all the attachments of a draft job application. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-attachments-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-attachments-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "APPDraftId": {
+            "type": "integer",
+            "description": "Identifier of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Action": {
+            "type": "string",
+            "description": "Action for attachment of the job application draft.",
+            "nullable": true
+          },
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment of the job application draft.",
+            "nullable": true
+          },
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Candidate number associated with the attachment of the job application draft.",
+            "nullable": true
+          },
+          "Category": {
+            "type": "string",
+            "description": "Category of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of attachment of the job application draft.",
+            "nullable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File content of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "Unique identifier for the attachment of the job application draft.",
+            "nullable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type of attachment of the job application draft.",
+            "nullable": true
+          },
+          "SourceAttachmentId": {
+            "type": "string",
+            "description": "Source attachment ID of the attachment of the job application draft.",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "description": "Title of attachment of the job application draft.",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of attachment of the job application draft.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingCEJobApplicationDrafts-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCEJobApplicationDrafts-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCEJobApplicationDrafts-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

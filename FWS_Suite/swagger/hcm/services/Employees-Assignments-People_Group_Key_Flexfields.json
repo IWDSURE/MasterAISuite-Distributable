@@ -1,0 +1,730 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Employees/Assignments/People Group Key Flexfields",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/emps/{empsUniqID}/child/assignments/{assignmentsUniqID}/child/peopleGroupKeyFlexfield": {
+      "get": {
+        "tags": [
+          "Employees/Assignments/People Group Key Flexfields"
+        ],
+        "summary": "Get all employee key flexfields",
+        "operationId": "getall_emps-assignments-peopleGroupKeyFlexfield",
+        "parameters": [
+          {
+            "name": "empsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Employees resource and used to uniquely identify an instance of Employees. The client should not generate the hash key value. Instead, the client should query on the Employees collection resource in order to navigate to a specific instance of Employees to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assignmentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Assignments resource and used to uniquely identify an instance of Assignments. The client should not generate the hash key value. Instead, the client should query on the Assignments collection resource in order to navigate to a specific instance of Assignments to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AsgResponsibilityId; integer; Primary key autogenerated by the application.</li><li>AssignmentId; integer; Internal identifier for the assignment.</li><li>PersonId; integer; Internal unique identifier for the person.</li><li>ResponsibilityName; string; Name of an area of responsibility.</li><li>ResponsibilityTypeCode; string; Identifier of the responsibility type for which this record holds the criteria. The value is validated against HCM_LOOKUPS with the lookup type PER_RESPONSIBILITY_TYPES.</li><li>ResponsibilityTypeName; string; Name of the responsibility type for which this record holds the criteria. For example, Benefits Representative.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CreationDate; string; Date and time of creation of the employee role record.</li><li>EndDate; string; End date of the role.</li><li>LastUpdateDate; string; Date and time of update of the employee role record.</li><li>RoleCommonName; string; Short name of the role.</li><li>RoleGUID; string; Globally unique identifier for the role record in Oracle Cloud. Valid values are defined in the list RoleGUIDLOV.</li><li>RoleName; string; Name of the role.</li><li>StartDate; string; Start date of the role.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>PersonId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EnabledFlag; string</li><li>EndDateActive; string</li><li>StartDateActive; string</li><li>_ID_FLEX_NUM; integer</li><li>_PEOPLE_GROUP_ID; integer</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AddressLine1; string; First line of the primary mailing address.</li><li>AddressLine2; string; Second line of the primary mailing address.</li><li>AddressLine3; string; Third line of the primary mailing address.</li><li>CitizenshipId; integer; Primary key autogenerated by the application.</li><li>CitizenshipLegislationCode; string; Legislation code derived from the legal entity. Valid values are defined in the list CitizenshipLegislationCodeLOV.</li><li>CitizenshipStatus; string; Status of the person's citizenship. Valid values are defined in the list CitizenshipStatusLOV.</li><li>CitizenshipToDate; string; End date of citizenship.</li><li>City; string; Town or city in which the address is located.</li><li>CorrespondenceLanguage; string; Preferred language for communication. Valid values are defined in the list CorrespondenceLanguageLOV.</li><li>Country; string; Country in which the address is located.</li><li>CreationDate; string; Date and time of creation of the employee record.</li><li>DateOfBirth; string; Date of birth of the person.</li><li>DisplayName; string; Person's display name.</li><li>DriversLicenseExpirationDate; string; Expiration date of the driver's license.</li><li>DriversLicenseId; integer; System-generated primary key. Surrogate key.</li><li>DriversLicenseIssuingCountry; string; Country that issued the driver's license.</li><li>EffectiveStartDate; string; Date at the beginning of the period within which the employee is effective.</li><li>Ethnicity; string; Person's ethnicity for the legislation code. Valid values are defined in the list EthnicityLOV.</li><li>FirstName; string; Person's first name.</li><li>Gender; string; Person's gender. Valid values are defined in the list GenderLOV.</li><li>HireDate; string; Hire date of the employee.</li><li>HomeFaxAreaCode; string; Area code of the phone number for the home fax machine.</li><li>HomeFaxCountryCode; string; Country code of the phone number for the home fax machine.</li><li>HomeFaxExtension; string; Extension of the phone number for the home fax machine.</li><li>HomeFaxLegislationCode; string; Legislation code of the home fax number.</li><li>HomeFaxNumber; string; Phone number for the home fax machine.</li><li>HomePhoneAreaCode; string; Area code of the home phone number.</li><li>HomePhoneCountryCode; string; Country code of the home phone number.</li><li>HomePhoneExtension; string; Extension of the home phone number.</li><li>HomePhoneLegislationCode; string; Legislation code of the home phone number.</li><li>HomePhoneNumber; string; Home phone number.</li><li>Honors; string; Higher qualification appended to a person's name. For example, PhD.</li><li>LastName; string; Person's last name.</li><li>LastUpdateDate; string; Date and time of update of the employee record.</li><li>LicenseNumber; string; Person's driving license number.</li><li>MaritalStatus; string; Person's marital status. Valid values are defined in the list MaritalStatusLOV.</li><li>MiddleName; string; Person's middle name.</li><li>MilitaryVetStatus; string; Indicates whether the person is on military service. Valid values are defined in the list MilitaryVetStatusLOV.</li><li>NameSuffix; string; Part of the name appended to a person's last name.</li><li>NationalId; string; Primary key autogenerated by the application.</li><li>NationalIdCountry; string; Country of nationality.</li><li>NationalIdExpirationDate; string; Expiration date of the national identifier.</li><li>NationalIdPlaceOfIssue; string; Place where the national identifier was issued.</li><li>NationalIdType; string; Type of national identifier. Valid values are defined in the list NationalIdTypeLOV.</li><li>PassportExpirationDate; string; Expiration date of the passport.</li><li>PassportId; integer; Primary key autogenerated by the application.</li><li>PassportIssueDate; string; Date of issue of passport.</li><li>PassportIssuingCountry; string; Country that issued the passport.</li><li>PassportNumber; string; Person's passport number.</li><li>PersonId; integer; Internal unique identifier for the person.</li><li>PersonNumber; string; Number assigned to a person to identify the person uniquely. Doesn't depend on the person type (employee, contingent worker, and so on). Search on this attribute isn't case sensitive.</li><li>PostalCode; string; Postal code of the address.</li><li>PreferredName; string; Person's preferred first name.</li><li>PreviousLastName; string; Previous last name of the person, if any.</li><li>ProjectedTerminationDate; string; Projected termination date for the worker.</li><li>Region; string; Primary region in which the address is located.</li><li>Region2; string; Secondary region within the primary region.</li><li>Religion; string; Person's religion. Valid values are defined in the list ReligionLOV.</li><li>ReligionId; integer; Primary key autogenerated by the application.</li><li>Salutation; string; Person salutation such as Mr., Ms., and so on. Valid values are defined in the list SalutationLOV.</li><li>TerminationDate; string; Termination date of the employee.</li><li>UserName; string; User name for the record. This value is optional and is automatically generated if not specified. Also works with UsernameMatching attribute. Search on this attribute isn't case sensitive.</li><li>WorkEmail; string; Person's work email address. Search on this attribute isn't case sensitive.</li><li>WorkFaxAreaCode; string; Area code of the phone number for the work fax machine.</li><li>WorkFaxCountryCode; string; Country code of the phone number for the work fax machine.</li><li>WorkFaxExtension; string; Extension of the phone number for the work fax machine.</li><li>WorkFaxLegislationCode; string; Legislation code of the work fax number.</li><li>WorkFaxNumber; string; Phone number for the home fax machine.</li><li>WorkMobilePhoneAreaCode; string; Area code of the work mobile phone number.</li><li>WorkMobilePhoneCountryCode; string; Country code of the work mobile phone number.</li><li>WorkMobilePhoneExtension; string; Extension of the work mobile phone number.</li><li>WorkMobilePhoneLegislationCode; string; Legislation code of the work mobile phone number.</li><li>WorkMobilePhoneNumber; string; Work mobile phone number.</li><li>WorkPhoneAreaCode; string; Area code of the work phone number.</li><li>WorkPhoneCountryCode; string; Country code of the work phone number, such as 39 for Italy.</li><li>WorkPhoneExtension; string; Extension of the work phone number.</li><li>WorkPhoneLegislationCode; string; Legislation code of the work phone number.</li><li>WorkPhoneNumber; string; Work phone number.</li><li>WorkerType; string; Primary type of a worker such as employee (E), contingent worker (C), pending worker (P), or nonworker (N). This is a read-only attribute as indicated in the describe metadata.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveStartDate; string; Date at the beginning of the period within which the employee direct report is effective.</li><li>FullName; string; Full name of the manager.</li><li>ManagerId; integer; Internal identifier for the manager.</li><li>PersonId; integer; Internal unique identifier for the person.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignmentId; integer</li><li>AssignmentType; string</li><li>EffectiveEndDate; string</li><li>EffectiveLatestChange; string</li><li>EffectiveSequence; integer</li><li>EffectiveStartDate; string</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActionCode; string; Action performed on a particular record, such as Hire, Add Pending Worker, Manager Change, and so on. Valid values are defined in the list ActionCodeLOV.</li><li>ActionReasonCode; string; User-defined code for the action reason. Specifies the reason for the action performed on the record. Valid values are defined in the list ActionReasonCodeLOV.</li><li>ActualTerminationDate; string; Actual date of termination of employment. This is required during termination, when the TerminateWorkRelationshipFlag is set to Y.</li><li>AssignmentCategory; string; User-defined category such as Full-Time Permanent or Part-Time Permanent. Valid values are defined in the list AssignmentCategoryLOV.</li><li>AssignmentId; integer; Unique identifier for the assignment. This is a primary key generated by the application.</li><li>AssignmentName; string; Name of the assignment.</li><li>AssignmentNumber; string; Unique identifier for the assignment or terms. Valid for workers and nonworkers.</li><li>AssignmentProjectedEndDate; string; Date on which the assignment is expected to end.</li><li>AssignmentStatus; string; HR status of the assignment, such as Active or Inactive. Valid values are defined in the list AssignmentStatusLOV.</li><li>AssignmentStatusTypeId; integer; Unique identifier for the user-defined assignment status. Valid values are defined in the list AssignmentStatusTypeIdLOV.</li><li>BusinessUnitId; integer; Unique identifier for the business unit. Valid values are defined in the list BusinessUnitIdLOV.</li><li>CreationDate; string; Date and time of creation of the employee assignment record.</li><li>DepartmentId; integer; Unique identifier for the department. Valid values are defined in the list DepartmentIdLOV.</li><li>EffectiveEndDate; string; Date at the end of the period within which the employee assignment is effective.</li><li>EffectiveStartDate; string; Date at the beginning of the period within which the employee assignment is effective.</li><li>EndTime; string; Workday normal end time.</li><li>Frequency; string; Frequency of normal working hours such as week, month, year. Valid values are defined in the list FrequencyLOV.</li><li>FullPartTime; string; Indicates whether the position the employee is hired for is full-time or part-time. Valid values are defined in the list FullPartTimeLOV.</li><li>GradeId; integer; Unique identifier for the grade. Valid values are defined in the list GradeIdLOV.</li><li>GradeLadderId; integer; Unique identifier for the grade ladder.</li><li>JobId; integer; Unique identifier for the job. Valid values are defined in the list JobIdLOV.</li><li>LastUpdateDate; string; Date and time of update of the employee assignment record.</li><li>LegalEntityId; integer; Unique identifier for the legal entity.</li><li>LocationId; integer; Unique identifier for the location. Valid values are defined in the list LocationIdLOV.</li><li>ManagerAssignmentId; integer; Identifier for the manager's assignment.</li><li>ManagerId; integer; Unique identifier for a manager. Valid values are defined in the list ManagerIdLOV.</li><li>ManagerType; string; Role of the manager with regards to the overall organization structure. For example, functional, project leader, and so on.</li><li>OriginalHireDate; string; Original date of hire for employment.</li><li>PeopleGroup; string; People group represented as a concatenated value of all the related key flexfield segments.</li><li>PeriodOfServiceId; integer; Primary key autogenerated by the application.</li><li>PersonTypeId; integer; Unique identifier for the person type. Valid values are defined in the list PersonTypeIdLOV.</li><li>PositionId; integer; Unique identifier for a position. Valid values are defined in the list PositionIdLOV.</li><li>PrimaryAssignmentFlag; boolean; Indicates whether the current assignment is the primary assignment. Valid values are Yes and No.</li><li>PrimaryWorkRelationFlag; boolean; Indicates whether the current work relationship is primary. Valid values are Yes and No.</li><li>PrimaryWorkTermsFlag; boolean; Indicates whether the current employment terms are primary. Valid values are Yes and No.</li><li>ProbationPeriodEndDate; string; End date of the probation period.</li><li>ProbationPeriodLength; number; Duration of the probation period.</li><li>ProbationPeriodUnitOfMeasure; string; Units for the probation period duration. Valid values are defined in the list QUALIFYING_UNITS.</li><li>ProjectedStartDate; string; Proposed start date for the pending worker.</li><li>ProposedPersonTypeId; string; Unique identifier for the worker class. This value is valid only if the PersonTypeId is Pending Worker. It can be any of the employee or contingent worker types. Valid values are defined in the list ProposedPersonTypeIdLOV.</li><li>RegularTemporary; string; Indicates whether the position the employee is hired for is regular or temporary. Valid values are defined in the list RegularTemporaryLOV.</li><li>SalaryAmount; number; Salary amount entered based on the salary frequency.</li><li>SalaryBasisId; integer; Identifier for the set of details linked to a worker's base pay. It identifies the payroll characteristics used to pay base earnings, the duration for which base pay is quoted, the factor used to annualize base pay, any components used to attribute base pay adjustments to different reasons, and any associated grade rate for salary validation. Valid values are defined in the list SalaryBasisIdLOV.</li><li>SalaryCode; string; Identifies whether the assignment is paid by the hour or by a salary. Either maintained at the assignment level or employment or placement terms but not both. Valid values are defined in the list SalaryCodeLOV.</li><li>StartTime; string; Workday normal start time.</li><li>TermsEffectiveStartDate; string; Date at the beginning of the period within which the employee term is effective.</li><li>WorkTaxAddressId; integer; Unique identifier for the address that's used for taxation purposes. This can be different from a mailing address. Valid values are defined in the list WorkTaxAddressIdLOV.</li><li>WorkerCategory; string; Category of the worker such as Blue Collar, Civil Servant, and so on. Valid values are defined in the list WorkerCategoryLOV.</li><li>WorkingAsManager; string; Indicates whether the person is a manager. Valid values are Yes and No.</li><li>WorkingAtHome; string; Indicates whether the person is working at home. Valid values are Yes and No.</li><li>WorkingHours; number; Normal working hours.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CreationDate; string; Date and time of creation of the employee visa record.</li><li>LastUpdateDate; string; Date and time of update of the employee visa record.</li><li>VisaPermitCountry; string; Country for which visa or permit is valid. Valid values are defined in the list IssuingCountryLOV.</li><li>VisaPermitExpiration; string; Expiration date of visa or permit.</li><li>VisaPermitId; integer; Primary key autogenerated by the application.</li><li>VisaPermitNumber; string; Visa or permit number.</li><li>VisaPermitType; string; Visa or permit type. Valid values are defined in the list VisaPermitTypeLOV.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Image; string; Unique location of the image. Encrypted version of the file.</li><li>ImageId; integer; Primary key autogenerated by the application.</li><li>ImageName; string; Name of the image.</li><li>ObjectVersionNumber; integer; Used to implement optimistic locking. This number is incremented every time a row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.</li><li>PersonId; integer; Person associated with the image. Foreign key to PER_ALL_PEOPLE_F.</li><li>PrimaryFlag; boolean; Indicates whether the image is primary.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>CF  <br>Finder Variables <ul><li>Bind_ValidationDate; string;   </li><li>Var0; string;   </li><li>Var1; string;   </li><li>Var2; string;   </li><li>Var3; string;   </li><li>Var4; string;   </li><li>Var5; string;   </li><li>Var6; string;   </li><li>Var7; string;   </li><li>Var8; string;   </li><li>Var9; string;   </li><li>VarCsr; string;   </li><li>VarSin; string;   </li></ul></li><li>PrimaryKey  <br>Finder Variables <ul><li>_PEOPLE_GROUP_ID; integer;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "CF",
+                "title": "ConsumerCriteria",
+                "properties": {
+                  "Var0": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var1": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var2": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var3": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var4": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var5": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var6": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Bind_ValidationDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "type": "string"
+                  },
+                  "VarCsr": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var7": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var8": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "Var9": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  },
+                  "VarSin": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "_PEOPLE_GROUP_ID": {
+                    "nullable": false,
+                    "x-hints": {
+                      "DISPLAYHINT": "Hide",
+                      "precision": 18,
+                      "FND_ACFF_JavaType": "java.lang.Long",
+                      "FND_ACFF_IsCCID": "true"
+                    },
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/emps-assignments-peopleGroupKeyFlexfield"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "emps-{empsUniqID}-child-assignments-{assignmentsUniqID}-child-peopleGroupKeyFlexfield-get",
+        "x-filename-id": "emps-empsuniqid-child-assignments-assignmentsuniqid-child-peoplegroupkeyflexfield-get"
+      }
+    },
+    "/emps/{empsUniqID}/child/assignments/{assignmentsUniqID}/child/peopleGroupKeyFlexfield/{_PEOPLE_GROUP_ID}": {
+      "get": {
+        "tags": [
+          "Employees/Assignments/People Group Key Flexfields"
+        ],
+        "summary": "Get an employee key flexfield",
+        "operationId": "get_emps-assignments-peopleGroupKeyFlexfield",
+        "parameters": [
+          {
+            "name": "empsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Employees resource and used to uniquely identify an instance of Employees. The client should not generate the hash key value. Instead, the client should query on the Employees collection resource in order to navigate to a specific instance of Employees to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assignmentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Assignments resource and used to uniquely identify an instance of Assignments. The client should not generate the hash key value. Instead, the client should query on the Assignments collection resource in order to navigate to a specific instance of Assignments to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_PEOPLE_GROUP_ID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": false,
+              "readOnly": true,
+              "x-hints": {
+                "DISPLAYHINT": "Hide",
+                "precision": 18,
+                "FND_ACFF_JavaType": "java.lang.Long",
+                "FND_ACFF_IsCCID": "true"
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/emps-assignments-peopleGroupKeyFlexfield-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "emps-{empsUniqID}-child-assignments-{assignmentsUniqID}-child-peopleGroupKeyFlexfield-{_PEOPLE_GROUP_ID}-get",
+        "x-filename-id": "emps-empsuniqid-child-assignments-assignmentsuniqid-child-peoplegroupkeyflexfield-_people_group_id-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "emps-assignments-peopleGroupKeyFlexfield": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/emps-assignments-peopleGroupKeyFlexfield-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "emps-assignments-peopleGroupKeyFlexfield-item-response": {
+        "type": "object",
+        "properties": {
+          "EnabledFlag": {
+            "maxLength": 1,
+            "type": "string",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "EndDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "StartDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "_ID_FLEX_NUM": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_IsStructureID": "true",
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_StructureLookupRequired": "false"
+            },
+            "x-queryable": true
+          },
+          "_PEOPLE_GROUP_ID": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_IsCCID": "true"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

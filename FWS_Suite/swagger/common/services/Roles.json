@@ -1,0 +1,307 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Roles",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/hcmRestApi/scim/Roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "Get all roles",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "This parameter specifies the query expression to retrieve a subset of resource instances. Format: ?filter=<scim-filter>Example: filter=firstName pr and userType eq Employee",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "description": "This parameter specifies use of 1-based index for the first result included in the response. Specify this query parameter to use pagination.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "This parameter specifies the number of resource instances to be returned in the current range.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": " This parameter specifies the attributes based on which the resource collection is sorted.Format:  ?sortBy=<scim-attribute> where the attribute name must be of the format <attribute> for simple attributes and <attribute.subattribute> for complex attributes.Example: sortBy=category",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "This parameter specifies the attributes based on which the resource collection is ordered.Example: sortOrder=ascending",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "description": "This parameter specifies a comma-separated list of attribute values to be included in the response.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roles"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all roles",
+        "x-internal-id": "hcmRestApi-scim-Roles-get",
+        "x-filename-id": "hcmrestapi-scim-roles-get"
+      }
+    },
+    "/hcmRestApi/scim/Roles/{id}": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "Get a role",
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the role in Oracle Applications Cloud.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roles-item"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a role",
+        "x-internal-id": "hcmRestApi-scim-Roles-{id}-get",
+        "x-filename-id": "hcmrestapi-scim-roles-id-get"
+      },
+      "patch": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "Update a role",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the role in Oracle Applications Cloud.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Roles-update-item"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "The server has fulfilled the request. This task does not return elements in the response body.",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "summary": "Update a role",
+        "x-internal-id": "hcmRestApi-scim-Roles-{id}-patch",
+        "x-filename-id": "hcmrestapi-scim-roles-id-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Roles": {
+        "type": "object",
+        "properties": {
+          "itemsPerPage": {
+            "title": "Count",
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "startIndex": {
+            "title": "start index",
+            "type": "integer",
+            "description": "The starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20."
+          },
+          "Resources": {
+            "title": "Resources",
+            "type": "array",
+            "description": "The roles in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/Roles-item"
+            }
+          }
+        }
+      },
+      "Roles-item": {
+        "type": "object",
+        "properties": {
+          "schemas": {
+            "title": "Schemas",
+            "type": "array",
+            "description": "The schema of the roles resource.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meta": {
+            "title": "meta",
+            "type": "object",
+            "description": "The metadata of the roles resource."
+          },
+          "id": {
+            "title": "Id",
+            "type": "string",
+            "description": "A unique identifier for the role in Oracle Applications Cloud."
+          },
+          "name": {
+            "title": "Name",
+            "type": "string",
+            "description": "The name of the role."
+          },
+          "displayName": {
+            "title": "DisplayName",
+            "type": "string",
+            "description": "The display name for the role."
+          },
+          "description": {
+            "title": "Description",
+            "type": "string",
+            "description": "The description of the role, which includes informations such as the functions that a user with this role can perform."
+          },
+          "category": {
+            "title": "Category",
+            "type": "string",
+            "description": "The category of the role, for example Manager."
+          },
+          "members": {
+            "title": "Members",
+            "type": "array",
+            "description": "A list of users assigned to the role.",
+            "items": {
+              "$ref": "#/components/schemas/members-item"
+            }
+          }
+        }
+      },
+      "members-item": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "title": "Operation",
+            "type": "string",
+            "description": "The operation to be performed in the PATCH request."
+          },
+          "value": {
+            "title": "Value",
+            "type": "string",
+            "description": "The unique identifier of the user assigned to the role."
+          }
+        }
+      },
+      "Roles-update-item": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "title": "Members",
+            "type": "array",
+            "description": "A list of users assigned to the role.",
+            "items": {
+              "$ref": "#/components/schemas/members-item"
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

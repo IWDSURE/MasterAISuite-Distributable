@@ -1,0 +1,208 @@
+{
+  "name": "HRC_SUBSCRIPTION_QUEUE",
+  "object_type": "TABLE",
+  "description": "Represents subscription run message details and holds the queueing, processing statuses.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcsubscriptionqueue-22726.html#hrcsubscriptionqueue-22726",
+  "primary_keys": [
+    {
+      "name": "HRC_SUBSCRIPTION_QUEUE_PK",
+      "columns": "RUN_MSG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "RUN_MSG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Uniquely identifies a subscription message row."
+    },
+    {
+      "Name": "RUN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to \"hrc_subscription_runs\".RUN_ID."
+    },
+    {
+      "Name": "ENTRY_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Collection GUID ATOM Identifier value."
+    },
+    {
+      "Name": "PARENT_MSG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Entry Identifier. Foreign Key to HRC_SUBSCRIPTION_QUEUE.RUN_MSG_ID"
+    },
+    {
+      "Name": "MSG_REF_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message Reference Type , eg: ORA_FP"
+    },
+    {
+      "Name": "MSG_REF_KEY",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Message Reference Key, eg: HRC_ATOMPUB_COLLECTIONS.FEED_PATH"
+    },
+    {
+      "Name": "UPDATED",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Updated entry timestamp. Can be set to a future time."
+    },
+    {
+      "Name": "PUBLISHED",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the date and time of the creation of the entry."
+    },
+    {
+      "Name": "QUEUEING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the queueing status of the activity run. Valid values are NEW, READY, QUEUED DELIVERED"
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the queueing status of the activity run. Valid values are NEW, CHECKING, RETRY, SUCCESS, ERROR"
+    },
+    {
+      "Name": "STATUS_DETAILS",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the status details of the processing. Valid values are QUEUEING_STATUS, PROCESSING_STATUS"
+    },
+    {
+      "Name": "NO_OF_RETRIES",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "Determines for number times the message is verified for a successful status."
+    },
+    {
+      "Name": "NEXT_RETRY_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the time when a retry can occur."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "RUN_ID, QUEUEING_STATUS"
+    },
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "RUN_ID, PROCESSING_STATUS"
+    },
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "RUN_ID, ENTRY_ID"
+    },
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "RUN_ID, PARENT_MSG_ID"
+    },
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PARENT_MSG_ID, MSG_REF_TYPE, MSG_REF_KEY"
+    },
+    {
+      "Index": "HRC_SUBSCRIPTION_QUEUE_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_IDX",
+      "Columns": "RUN_MSG_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:46:30"
+}

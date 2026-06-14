@@ -1,0 +1,923 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - ATK Themes",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/atkThemes/{SkinId}": {
+      "get": {
+        "tags": [
+          "ATK Themes"
+        ],
+        "summary": "Get a theme",
+        "operationId": "get_atkThemes",
+        "parameters": [
+          {
+            "name": "SkinId",
+            "in": "path",
+            "description": "The Unique id of the theme.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkThemes-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkThemes-{SkinId}-get",
+        "x-filename-id": "atkthemes-skinid-get"
+      }
+    },
+    "/atkThemes": {
+      "get": {
+        "tags": [
+          "ATK Themes"
+        ],
+        "summary": "Get all themes",
+        "operationId": "getall_atkThemes",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>BannerImage; string; The cover image of the home page banner as well as the background image of OSN.</li><li>BannerImageType; string; Type of the banner image whether it???s a link, or an uploaded image, or an image that Oracle predefined.</li><li>BaseSeededTheme; string; The basic theme from Oracle. The user-defined theme is created on top of it.</li><li>ButtonBGColor; string; The button background color if gradient isn't supported.</li><li>ButtonBGEndColor; string; The end color of the gradient for the background of the button.</li><li>ButtonBGStartColor; string; The start color of the gradient for the background of the button.</li><li>ButtonBorderColor; string; The color of the border around the button.</li><li>ButtonLabelColor; string; The hex color code for the text on the buttons.</li><li>CardTheme; string; A style of the HCM card. The value can be dark or light.</li><li>CornerRadius; string; The value of the radius that defines the round corners of the buttons.</li><li>GlobalBGColor; string; The hex color code for the background color of the page.</li><li>GlobalBgColorGradient; string; Indicates if the background color of the page supports gradient or not.</li><li>GlobalBgColorGradientType; string; Determines the type of the gradient support that the user wants to choose for the global background color.</li><li>GlobalBgEndColor; string; The end color of the gradient for the global background color.</li><li>GlobalBgStartColor; string; The start color of the gradient for the global background color.</li><li>GlobalRegionBGColor; string; The hex color code for the background of global region on the pages.</li><li>GlobalRegionLabelColor; string; The hex color code for the global region labels on the pages.</li><li>GridCardSize; string; The size of the cards displayed on the grid or banner.</li><li>GridIconBackgroundColor; string; The color of the grid icon background.</li><li>GridIconBackgroundColorType; string; Determines if the icon background color is monochrome or multicolor.</li><li>GridIconColor; string; The color of the icons displayed in the grid, or on filmstrip, or the newsfeed page.</li><li>GridIconColorType; string; Indicates if the grid icon color is monochrome or multicolor.</li><li>GridIconIndicatorColor; string; This is the color of the dot in cluster icons that are usually displayed in the grid or banner of homepage.</li><li>GridIconShape; string; Determines the shape of the filmstrip or the grid icons.</li><li>HeaderLabelColor; string; The color of the page header label.</li><li>HighLightColor; string; The color used to highlight any important text or image, such as the notification count and help icon.</li><li>HomeLayoutType; string; The type of the home layout, such as grid, banner, or newsfeed.</li><li>HomePanelStyle; string; Indicates whether the background of the OSN panel is dark or light.</li><li>IconLabelColor; string; The label color of the navigation icons shown on the homepage or on the film strip.</li><li>IconStyle; string; The style of the icon that existed before Rel13. It's no longer used in Rel13.</li><li>IsButtonGradientSupported; string; Indicates if gradient is supported for the background color of the button.</li><li>IsEditedByAdvEditor; string; Indicates whether the theme was edited by the Advanced Theme Editor.</li><li>IsSeededTheme; string; Indicates if the theme was predefined by Oracle or if the user created it.</li><li>LastModified; string; The date and time when the them was last modified.</li><li>LoginAccentColor; string; The Accent color.</li><li>LoginBackgroundColor; string; The background color of the login page.</li><li>LoginBannerImage; string; The banner image of the proposed login page.</li><li>LoginBannerImageType; string; The banner image type of the proposed login page.</li><li>LoginHeadingColor; string; The color of the login page header.</li><li>LoginLinkColor; string; The color of the URL that opens the login page.</li><li>LoginLogo; string; The logo of the proposed login page.</li><li>LoginLogoType; string; The type of the proposed login logo.</li><li>LoginRepeatBannerImage; string; Indicates if the banner image is reapeated on login page or not.</li><li>LoginReuseGeneral; string; Indicates whether the login page CSS parameters are the same as that of the Fusion theme.</li><li>LogoHeight; string; Height of the logo.</li><li>LogoName; string; Name of the logo used for the theme.</li><li>LogoType; string; The type of the image whether it???s a link, or an uploaded file, or an image that Oracle predefined.</li><li>LogoWidth; string; Width of the logo.</li><li>OraHeroAnimationEnabled; string; The option to enable or disable the welcome animation on the Ask Oracle UI.</li><li>PageLinkColor; string; The color of the page links.</li><li>RepeatWatermark; string; Indicates if the image is repeated throughout the background or not.</li><li>SelectionColor; string; The color to indicate selection of the vertical tab associated with a page.</li><li>SkinId; string; The Unique id of the theme.</li><li>Status; string; Indicates the status of a theme. The value can be either Inactive or Active.</li><li>SvgIconType; string; Indicates if the icon type is solid or outlined.</li><li>ThemeName; string; The display name of the theme.</li><li>WaterMarkName; string; Name of the background image.</li><li>WaterMarkType; string; Type of the background image  whether it???s a link, or an uploaded file, or an image that Oracle predefined.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>PrimaryKey: Finds a theme with the specified theme identifier.<br>Finder Variables: <ul><li>SkinId; string; The unique identifier of the theme.</li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "SkinId": {
+                    "nullable": true,
+                    "readOnly": true,
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkThemes"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkThemes-get",
+        "x-filename-id": "atkthemes-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "atkThemes-item-response": {
+        "type": "object",
+        "properties": {
+          "BannerImage": {
+            "type": "string",
+            "description": "The cover image of the home page banner as well as the background image of OSN.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BannerImageType": {
+            "type": "string",
+            "description": "Type of the banner image whether it???s a link, or an uploaded image, or an image that Oracle predefined.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "BaseSeededTheme": {
+            "type": "string",
+            "description": "The basic theme from Oracle. The user-defined theme is created on top of it.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ButtonBGColor": {
+            "type": "string",
+            "description": "The button background color if gradient isn't supported.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ButtonBGEndColor": {
+            "type": "string",
+            "description": "The end color of the gradient for the background of the button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ButtonBGStartColor": {
+            "type": "string",
+            "description": "The start color of the gradient for the background of the button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ButtonBorderColor": {
+            "type": "string",
+            "description": "The color of the border around the button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ButtonLabelColor": {
+            "type": "string",
+            "description": "The hex color code for the text on the buttons.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CardTheme": {
+            "type": "string",
+            "description": "A style of the HCM card. The value can be dark or light.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CornerRadius": {
+            "type": "string",
+            "description": "The value of the radius that defines the round corners of the buttons.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalBGColor": {
+            "type": "string",
+            "description": "The hex color code for the background color of the page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalBgColorGradient": {
+            "type": "string",
+            "description": "Indicates if the background color of the page supports gradient or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalBgColorGradientType": {
+            "type": "string",
+            "description": "Determines the type of the gradient support that the user wants to choose for the global background color.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalBgEndColor": {
+            "type": "string",
+            "description": "The end color of the gradient for the global background color.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalBgStartColor": {
+            "type": "string",
+            "description": "The start color of the gradient for the global background color.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalRegionBGColor": {
+            "type": "string",
+            "description": "The hex color code for the background of global region on the pages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GlobalRegionLabelColor": {
+            "type": "string",
+            "description": "The hex color code for the global region labels on the pages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridCardSize": {
+            "type": "string",
+            "description": "The size of the cards displayed on the grid or banner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconBackgroundColor": {
+            "type": "string",
+            "description": "The color of the grid icon background.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconBackgroundColorType": {
+            "type": "string",
+            "description": "Determines if the icon background color is monochrome or multicolor.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconColor": {
+            "type": "string",
+            "description": "The color of the icons displayed in the grid, or on filmstrip, or the newsfeed page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconColorType": {
+            "type": "string",
+            "description": "Indicates if the grid icon color is monochrome or multicolor.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconIndicatorColor": {
+            "type": "string",
+            "description": "This is the color of the dot in cluster icons that are usually displayed in the grid or banner of homepage.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GridIconShape": {
+            "type": "string",
+            "description": "Determines the shape of the filmstrip or the grid icons.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HeaderLabelColor": {
+            "type": "string",
+            "description": "The color of the page header label.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HighLightColor": {
+            "type": "string",
+            "description": "The color used to highlight any important text or image, such as the notification count and help icon.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HomeLayoutType": {
+            "type": "string",
+            "description": "The type of the home layout, such as grid, banner, or newsfeed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HomePanelStyle": {
+            "type": "string",
+            "description": "Indicates whether the background of the OSN panel is dark or light.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IconLabelColor": {
+            "type": "string",
+            "description": "The label color of the navigation icons shown on the homepage or on the film strip.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IconStyle": {
+            "type": "string",
+            "description": "The style of the icon that existed before Rel13. It's no longer used in Rel13.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsButtonGradientSupported": {
+            "type": "string",
+            "description": "Indicates if gradient is supported for the background color of the button.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsEditedByAdvEditor": {
+            "type": "string",
+            "description": "Indicates whether the theme was edited by the Advanced Theme Editor.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsSeededTheme": {
+            "type": "string",
+            "description": "Indicates if the theme was predefined by Oracle or if the user created it.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastModified": {
+            "type": "string",
+            "description": "The date and time when the them was last modified.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginAccentColor": {
+            "type": "string",
+            "description": "The Accent color.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginBackgroundColor": {
+            "type": "string",
+            "description": "The background color of the login page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginBannerImage": {
+            "type": "string",
+            "description": "The banner image of the proposed login page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginBannerImageType": {
+            "type": "string",
+            "description": "The banner image type of the proposed login page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginHeadingColor": {
+            "type": "string",
+            "description": "The color of the login page header.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginLinkColor": {
+            "type": "string",
+            "description": "The color of the URL that opens the login page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginLogo": {
+            "type": "string",
+            "description": "The logo of the proposed login page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginLogoType": {
+            "type": "string",
+            "description": "The type of the proposed login logo.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginRepeatBannerImage": {
+            "type": "string",
+            "description": "Indicates if the banner image is reapeated on login page or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LoginReuseGeneral": {
+            "type": "string",
+            "description": "Indicates whether the login page CSS parameters are the same as that of the Fusion theme.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LogoHeight": {
+            "type": "string",
+            "description": "Height of the logo.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LogoName": {
+            "type": "string",
+            "description": "Name of the logo used for the theme.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LogoType": {
+            "type": "string",
+            "description": "The type of the image whether it???s a link, or an uploaded file, or an image that Oracle predefined.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LogoWidth": {
+            "type": "string",
+            "description": "Width of the logo.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OraHeroAnimationEnabled": {
+            "type": "string",
+            "description": "The option to enable or disable the welcome animation on the Ask Oracle UI.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PageLinkColor": {
+            "type": "string",
+            "description": "The color of the page links.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RepeatWatermark": {
+            "type": "string",
+            "description": "Indicates if the image is repeated throughout the background or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SelectionColor": {
+            "type": "string",
+            "description": "The color to indicate selection of the vertical tab associated with a page.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SkinId": {
+            "type": "string",
+            "description": "The Unique id of the theme.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "type": "string",
+            "description": "Indicates the status of a theme. The value can be either Inactive or Active.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SvgIconType": {
+            "type": "string",
+            "description": "Indicates if the icon type is solid or outlined.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ThemeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The display name of the theme.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WaterMarkName": {
+            "type": "string",
+            "description": "Name of the background image.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WaterMarkType": {
+            "type": "string",
+            "description": "Type of the background image  whether it???s a link, or an uploaded file, or an image that Oracle predefined.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "atkThemes": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/atkThemes-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject",
+          "group": "Common"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

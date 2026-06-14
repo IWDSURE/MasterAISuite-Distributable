@@ -1,0 +1,229 @@
+{
+  "name": "PER_MANAGER_HRCHY_DN",
+  "object_type": "TABLE",
+  "description": "This table stores the flattened manager hierarchy details. The denormalized details are derived from the supervisors tables and stored in this table.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/permanagerhrchydn-5738.html#permanagerhrchydn-5738",
+  "primary_keys": [],
+  "columns": [
+    {
+      "Name": "EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "IMMEDIATE_REPORTEE_ASG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "IMMEDIATE_REPORTEE_ASG_ID column is for internal use in PL/SQL procedure calls. It will not be exposed in the view or entity objects."
+    },
+    {
+      "Name": "EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_PERSONS table."
+    },
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_ALL_ASSIGNMENTS_M table."
+    },
+    {
+      "Name": "PRIMARY_ASSIGNMENT_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies whether the assignment is the primary"
+    },
+    {
+      "Name": "MANAGER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to Per Persons. Identifies the Person record"
+    },
+    {
+      "Name": "MANAGER_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foregin Key to Per Assignments. Identifies the manager's assignment"
+    },
+    {
+      "Name": "MANAGER_LEVEL",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "5",
+      "Not-null": "",
+      "Comments": "Not supported"
+    },
+    {
+      "Name": "PRIMARY_MANAGER_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Set to Y if manager type = LINE_MANAGER. Automatically generated"
+    },
+    {
+      "Name": "MANAGER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the type of manager: line manager, project manager, etc"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the name of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "900",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the package name of the job that created or last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, ASSIGNMENT_ID, EFFECTIVE_END_DATE, MANAGER_TYPE, MANAGER_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ID, MANAGER_ASSIGNMENT_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ASSIGNMENT_ID, EFFECTIVE_END_DATE, EFFECTIVE_START_DATE, MANAGER_TYPE, MANAGER_LEVEL"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ID, MANAGER_LEVEL, EFFECTIVE_END_DATE, EFFECTIVE_START_DATE, MANAGER_TYPE, ASSIGNMENT_ID, BUSINESS_GROUP_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, MANAGER_ASSIGNMENT_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ASSIGNMENT_ID, MANAGER_ID, MANAGER_LEVEL, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, MANAGER_TYPE, BUSINESS_GROUP_ID, ASSIGNMENT_ID, PERSON_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_N8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, PERSON_ID, MANAGER_LEVEL, EFFECTIVE_END_DATE, EFFECTIVE_START_DATE, MANAGER_TYPE, BUSINESS_GROUP_ID, MANAGER_ID, MANAGER_ASSIGNMENT_ID"
+    },
+    {
+      "Index": "PER_MANAGER_HRCHY_DN_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "MANAGER_ASSIGNMENT_ID, ASSIGNMENT_ID, PERSON_ID, MANAGER_ID, MANAGER_LEVEL, EFFECTIVE_END_DATE, EFFECTIVE_START_DATE, MANAGER_TYPE, BUSINESS_GROUP_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:38:05"
+}

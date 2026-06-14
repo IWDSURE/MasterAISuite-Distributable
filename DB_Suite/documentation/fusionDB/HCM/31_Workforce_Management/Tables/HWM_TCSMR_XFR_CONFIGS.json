@@ -1,0 +1,182 @@
+{
+  "name": "HWM_TCSMR_XFR_CONFIGS",
+  "object_type": "TABLE",
+  "description": "For each Time Consumer in the Time Consumer Configuration Set there is typically a transfer process that needs to be configured. The data model allows for more than a single transfer process for each Time Consumer. This table contains a set of rows (where a set contains a row for each Time Consumer in the Time Consumer Configuration Set) for each transfer process linked to a given time consumer configuration",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtcsmrxfrconfigs-22729.html#hwmtcsmrxfrconfigs-22729",
+  "primary_keys": [
+    {
+      "name": "HWM_TCSMR_XFR_CONFIGS_PK",
+      "columns": "TCMSR_XFR_CONFIG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TCMSR_XFR_CONFIG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "TCSMR_CONFIG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "key to HWM_TCSMR_CONFIGS.TCSMR_CONFIG_ID. Identifies the Time Consumer Configuration to which this configuration of the transfer process belongs"
+    },
+    {
+      "Name": "TCSMR_XFR_PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "key to HWM_TCSMR_XFR_PROCESSES.TCSMR_XFR_PROCESS_ID. The transfer process this row is configuring"
+    },
+    {
+      "Name": "XFR_ON_SAVE",
+      "Datatype": "VARCHAR2",
+      "Length": "12",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Whether you can transfer as soon as a timecard is saved"
+    },
+    {
+      "Name": "XFR_ON_SUBMIT",
+      "Datatype": "VARCHAR2",
+      "Length": "12",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Whether the timecard needs to be submitted for transfer"
+    },
+    {
+      "Name": "APPROVAL_REQD",
+      "Datatype": "VARCHAR2",
+      "Length": "12",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "if XFR_ON_SUBMIT is Y then this column is used to indicate if approval is required for each of the Time Consumers being Configured"
+    },
+    {
+      "Name": "APPROVAL_REQD_TCSMR_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "key to HWM_TCSMS.TCSMR_ID. Indicates which Time Consumer the APPROVAL_REQD pertains to"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HWM_TCSMR_XFR_CONFIGS_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HWM_TCSMR_XFR_CONFIGS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TCMSR_XFR_CONFIG_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HWM_TCSMR_XFR_CONFIGS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "TCMSR_XFR_CONFIG_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:45:14"
+}

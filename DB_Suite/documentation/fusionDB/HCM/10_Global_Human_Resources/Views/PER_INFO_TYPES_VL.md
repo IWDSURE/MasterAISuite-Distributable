@@ -1,0 +1,38 @@
+# PER_INFO_TYPES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perinfotypesvl-5900.html#perinfotypesvl-5900](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perinfotypesvl-5900.html#perinfotypesvl-5900)
+
+## Columns
+
+- ROW_ID
+- CATEGORY
+- INFORMATION_TYPE
+- ACTIVE_INACTIVE_FLAG
+- MULTIPLE_OCCURRENCES_FLAG
+- DESCRIPTION
+- LEGISLATION_CODE
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- LAST_UPDATE_DATE
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT B.ROWID ROW_ID, B.CATEGORY, B.INFORMATION_TYPE, B.ACTIVE_INACTIVE_FLAG, B.MULTIPLE_OCCURRENCES_FLAG, T.DESCRIPTION, B.LEGISLATION_CODE, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_LOGIN, B.LAST_UPDATE_DATE, B.MODULE_ID FROM PER_INFO_TYPES_B B, PER_INFO_TYPES_TL T WHERE B.INFORMATION_TYPE = T.INFORMATION_TYPE AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

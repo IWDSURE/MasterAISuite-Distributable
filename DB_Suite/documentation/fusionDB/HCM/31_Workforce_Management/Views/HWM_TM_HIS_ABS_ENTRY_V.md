@@ -1,0 +1,38 @@
+# HWM_TM_HIS_ABS_ENTRY_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmhisabsentryv-4571.html#hwmtmhisabsentryv-4571](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmhisabsentryv-4571.html#hwmtmhisabsentryv-4571)
+
+## Columns
+
+- TIME_CARD_TM_REC_GRP_ID
+- TIME_CARD_TM_REC_GRP_VERSION
+- DAY_TM_REC_GRP_ID
+- DAY_TM_REC_GRP_VERSION
+- TIME_RECORD_ID
+- TIME_RECORD_VERSION
+- GROUP_TYPE_ID
+- HISTORIC_CHANGE_TIME
+- HISTORIC_CHANGE_DATE_FROM
+- HISTORIC_CHANGE_DATE_TO
+- TC_USER_STATUS_VALUE
+- TC_UI_STATUS_VALUE
+- TC_SUBMITTED_TS
+- TC_APPROVED_TS
+
+## Query
+
+```sql
+SELECT his.TIME_CARD_TM_REC_GRP_ID, his.TIME_CARD_TM_REC_GRP_VERSION, his.DAY_TM_REC_GRP_ID, his.DAY_TM_REC_GRP_VERSION, his.TIME_RECORD_ID, his.TIME_RECORD_VERSION, his.GROUP_TYPE_ID, his.HISTORIC_CHANGE_TIME, his.HISTORIC_CHANGE_DATE_FROM, his.HISTORIC_CHANGE_DATE_TO, auser.status_value tc_user_status_value, dtmui.status_value tc_ui_status_value, tcsubts.submitted_timestamp tc_submitted_ts, tcappts.approved_timestamp tc_approved_ts FROM (SELECT TimeCard.TM_REC_GRP_ID TIME_CARD_TM_REC_GRP_ID, TimeCard.TM_REC_GRP_VERSION TIME_CARD_TM_REC_GRP_VERSION, TimeCardDay.TM_REC_GRP_ID DAY_TM_REC_GRP_ID, TimeCardDay.TM_REC_GRP_VERSION DAY_TM_REC_GRP_VERSION, TimeEntry.TM_REC_ID TIME_RECORD_ID, TimeEntry.TM_REC_VERSION TIME_RECORD_VERSION, TimeEntry.DATE_FROM TIME_RECORD_DATE_FROM, TimeEntry.DATE_TO TIME_RECORD_DATE_TO, TimeCard.GRP_TYPE_ID GROUP_TYPE_ID, CASE WHEN ht.AS_OF_TIME > TimeEntry.date_from THEN ht.AS_OF_TIME ELSE TimeEntry.date_from END Historic_Change_Time, CASE WHEN TimeEntry.Date_From > ht.STATUS_DATE_FROM THEN TimeEntry.Date_From ELSE ht.STATUS_DATE_FROM END Historic_Change_Date_From, CASE WHEN TimeEntry.Date_To < (ht.STATUS_DATE_TO+1/24/3600) THEN TimeEntry.Date_To ELSE ht.STATUS_DATE_TO END Historic_Change_Date_To FROM HWM_TM_REC TimeEntry, HWM_TM_REC_GRP TimeCard, HWM_TM_REC_GRP TimeCardDay, (SELECT G.TM_REC_GRP_ID, G.TM_REC_GRP_VERSION, S.DATE_FROM STATUS_DATE_FROM, S.DATE_TO STATUS_DATE_TO, CASE WHEN S.CREATION_DATE > G.DATE_FROM THEN S.CREATION_DATE ELSE G.DATE_FROM END AS_OF_TIME FROM HWM_TM_STATUSES S LEFT JOIN HWM_TM_REC_GRP G ON G.TM_REC_GRP_ID = S.TM_BLDG_BLK_ID AND G.TM_REC_GRP_VERSION = S.TM_BLDG_BLK_VERSION INNER JOIN hwm_tm_status_def_b d ON S.tm_status_def_id = d.tm_status_def_id WHERE d.status_def_cd = 'D_TM_UI_STATUS' and (S.object_version_number > 1 or S.date_to >= to_date('4712-12-31', 'yyyy-MM-dd')) ) ht WHERE TimeCard.TM_REC_GRP_ID = TimeCardDay.PARENT_TM_REC_GRP_ID AND TimeCard.TM_REC_GRP_VERSION = TimeCardDay.PARENT_TM_REC_GRP_VERSION AND TimeEntry.START_TIME BETWEEN TimeCardDay.START_TIME AND TimeCardDay.STOP_TIME AND TimeEntry.RESOURCE_ID = TimeCardDay.RESOURCE_ID AND upper(TimeEntry.LAYER_CODE) = 'ABSENCES' AND TimeCard.GRP_TYPE_ID = 100 AND ht.TM_REC_GRP_ID = TimeCard.TM_REC_GRP_ID AND ht.TM_REC_GRP_VERSION = TimeCard.TM_REC_GRP_VERSION AND ht.AS_OF_TIME BETWEEN TimeCard.date_from AND TimeCard.date_to AND ht.AS_OF_TIME BETWEEN TimeCardDay.date_from AND TimeCardDay.date_to AND (ht.AS_OF_TIME <= TimeEntry.date_from OR ht.AS_OF_TIME BETWEEN TimeEntry.date_from AND TimeEntry.date_to) AND (TimeEntry.date_from <= ht.STATUS_DATE_TO AND TimeEntry.date_to >= (ht.STATUS_DATE_FROM+1/24/3600)) AND NVL(TimeEntry.DELETE_FLAG,'N') = 'N' AND NVL(TimeCardDay.DELETE_FLAG,'N') = 'N' AND NVL(TimeCard.DELETE_FLAG,'N') = 'N' ) his LEFT JOIN (SELECT statuses.status_id, statuses.tm_bldg_blk_id, statuses.tm_bldg_blk_version, statuses.status_value, statuses.date_from, statuses.date_to FROM hwm_tm_statuses statuses WHERE EXISTS (SELECT 1 FROM hwm_tm_status_def_b WHERE statuses.tm_status_def_id = tm_status_def_id AND upper(status_def_cd) = 'A_USR_STATUS' ) ) auser ON auser.tm_bldg_blk_id = his.TIME_CARD_TM_REC_GRP_ID AND auser.tm_bldg_blk_version = his.TIME_CARD_TM_REC_GRP_VERSION AND his.Historic_Change_Time BETWEEN auser.date_from AND auser.date_to LEFT JOIN (SELECT statuses.status_id, statuses.tm_bldg_blk_id, statuses.tm_bldg_blk_version, statuses.status_value, statuses.date_from, statuses.date_to FROM hwm_tm_statuses statuses WHERE EXISTS (SELECT 1 FROM hwm_tm_status_def_b WHERE statuses.tm_status_def_id = tm_status_def_id AND upper(status_def_cd) = 'D_TM_UI_STATUS' ) ) dtmui ON dtmui.tm_bldg_blk_id = his.TIME_CARD_TM_REC_GRP_ID AND dtmui.tm_bldg_blk_version = his.TIME_CARD_TM_REC_GRP_VERSION AND his.Historic_Change_Time BETWEEN dtmui.date_from AND dtmui.date_to LEFT JOIN (SELECT statuses.date_from submitted_timestamp, statuses.tm_bldg_blk_id, statuses.tm_bldg_blk_version, statuses.status_id, statuses.date_from, statuses.date_to FROM hwm_tm_statuses statuses WHERE upper(statuses.status_value) = 'SUBMITTED' AND EXISTS (SELECT 1 FROM hwm_tm_status_def_b WHERE statuses.tm_status_def_id = tm_status_def_id AND upper(status_def_cd) = 'A_USR_STATUS' ) ) tcsubts ON tcsubts.tm_bldg_blk_id = his.TIME_CARD_TM_REC_GRP_ID AND tcsubts.tm_bldg_blk_version = his.TIME_CARD_TM_REC_GRP_VERSION AND his.Historic_Change_Time BETWEEN tcsubts.date_from AND tcsubts.date_to LEFT JOIN (SELECT statuses.date_from approved_timestamp, statuses.tm_bldg_blk_id, statuses.tm_bldg_blk_version, statuses.status_id, statuses.date_from, statuses.date_to FROM hwm_tm_statuses statuses WHERE upper(statuses.status_value) = 'APPROVED' AND EXISTS (SELECT 1 FROM hwm_tm_status_def_b WHERE statuses.tm_status_def_id = tm_status_def_id AND upper(status_def_cd) = 'D_TM_UI_STATUS' ) ) tcappts ON tcappts.tm_bldg_blk_id = his.TIME_CARD_TM_REC_GRP_ID AND tcappts.tm_bldg_blk_version = his.TIME_CARD_TM_REC_GRP_VERSION AND his.Historic_Change_Time BETWEEN tcappts.date_from AND tcappts.date_to
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

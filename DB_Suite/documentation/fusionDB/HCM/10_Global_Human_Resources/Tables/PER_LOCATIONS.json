@@ -1,0 +1,170 @@
+{
+  "name": "PER_LOCATIONS",
+  "object_type": "TABLE",
+  "description": "PER_LOCATIONS is the parent table.It stores generic location attributes.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perlocations-6039.html#perlocations-6039",
+  "primary_keys": [
+    {
+      "name": "PER_LOCATIONS_PK",
+      "columns": "LOCATION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "SET_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifies a set of reference data shared across business units and other entities. Also known as Reference Data Sets, they are used to filter reference data in transactional UIs."
+    },
+    {
+      "Name": "INTERNAL_LOCATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Code of the Location"
+    },
+    {
+      "Name": "LOCATION_IMAGE_URL",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Represents the web address for the location image."
+    },
+    {
+      "Name": "ACTION_OCCURRENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_ACTION_OCCURRENCES."
+    },
+    {
+      "Name": "CATEGORY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "CATEGORY_CODE"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "COUNTRY",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Country of the address"
+    },
+    {
+      "Name": "EMPLOYEE_LOCATION_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the location is an employee location."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_LOCATIONS_F1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "SET_ID"
+    },
+    {
+      "Index": "PER_LOCATIONS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "UPPER(\"INTERNAL_LOCATION_CODE\")"
+    },
+    {
+      "Index": "PER_LOCATIONS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LOCATION_ID"
+    },
+    {
+      "Index": "PER_LOCATIONS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, SET_ID, INTERNAL_LOCATION_CODE"
+    },
+    {
+      "Index": "PER_LOCATIONS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LAST_UPDATE_DATE, LOCATION_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:37:13"
+}

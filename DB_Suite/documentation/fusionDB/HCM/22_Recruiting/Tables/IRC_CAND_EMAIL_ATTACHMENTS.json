@@ -1,0 +1,166 @@
+{
+  "name": "IRC_CAND_EMAIL_ATTACHMENTS",
+  "object_type": "TABLE",
+  "description": "This table stores the information about email attachements that are sent and received in the context of an interaction on the Submission, Candidate Pool and Candidate General Profile.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandemailattachments-16874.html#irccandemailattachments-16874",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_EMAIL_ATTACHMENTS_PK",
+      "columns": "CAND_EMAIL_ATTACHMENT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_EMAIL_ATTACHMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the IRC_CAND_EMAIL_ATTACHMENTS table."
+    },
+    {
+      "Name": "CAND_EMAIL_MESSAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key into the IRC_CAND_EMAIL_MESSAGES table. There can be multiple attachments associated to an email message. Each attachment could be either inline or file attachment."
+    },
+    {
+      "Name": "ATTACHED_DOCUMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Reference to FND_ATTACHED_DOCUMENTS."
+    },
+    {
+      "Name": "FILE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Attachment file name part of email"
+    },
+    {
+      "Name": "CONTENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Attachment file content type using MIME type"
+    },
+    {
+      "Name": "FILE_SIZE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Attachment file size in bytes in the email"
+    },
+    {
+      "Name": "INLINE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag to indicate whether the attachment is inline."
+    },
+    {
+      "Name": "CONTENT_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Attachment content identification."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Status of the attachment whether its uploaded successfully in UCM or errored out"
+    },
+    {
+      "Name": "ERROR_MESSAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error message when uploading the attachment."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_EMAIL_ATTACHMENTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_EMAIL_MESSAGE_ID"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_ATTACHMENTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_EMAIL_ATTACHMENT_ID"
+    },
+    {
+      "Index": "IRC_CAND_EMAIL_ATTACHMENTS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ATTACHED_DOCUMENT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:45:54"
+}

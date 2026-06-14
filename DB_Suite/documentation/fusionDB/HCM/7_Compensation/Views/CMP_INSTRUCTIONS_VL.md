@@ -1,0 +1,37 @@
+# CMP_INSTRUCTIONS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpinstructionsvl-8170.html#cmpinstructionsvl-8170](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpinstructionsvl-8170.html#cmpinstructionsvl-8170)
+
+## Columns
+
+- INSTRUCTION_ID
+- KEY_TYPE
+- INSTRUCTION_KEY
+- INSTRUCTION_TYPE
+- INSTRUCTION_TEXT
+- COMP_TYPE
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- BUSINESS_GROUP_ID
+
+## Query
+
+```sql
+SELECT B.INSTRUCTION_ID, B.KEY_TYPE, B.INSTRUCTION_KEY, B.INSTRUCTION_TYPE, T.INSTRUCTION_TEXT, B.COMP_TYPE, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN, B.BUSINESS_GROUP_ID FROM CMP_INSTRUCTIONS_B B, CMP_INSTRUCTIONS_TL T WHERE B.INSTRUCTION_ID = T.INSTRUCTION_ID AND T.LANGUAGE = USERENV('LANG') AND B.BUSINESS_GROUP_ID = T.BUSINESS_GROUP_ID
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

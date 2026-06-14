@@ -1,0 +1,36 @@
+# HWR_EHW_SOURCES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrehwsourcesvl-3171.html#hwrehwsourcesvl-3171](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrehwsourcesvl-3171.html#hwrehwsourcesvl-3171)
+
+## Columns
+
+- SOURCE_ID
+- TYPE
+- STATUS
+- DEVICE
+- VENDOR
+- DESCRIPTION
+- DATA_SRC_CONFIG
+- DEVICE_NAME
+- VENDOR_NAME
+- AUTHORIZATION_URL
+- ADMINISTRATION_URL
+- LOCAL_SOURCE_ID
+
+## Query
+
+```sql
+SELECT SB.SOURCE_ID ,LPVL_TYPE.LOOKUP_CODE AS TYPE ,LPVL_STATUS.LOOKUP_CODE AS STATUS ,SB.DEVICE ,SB.VENDOR ,SB.DESCRIPTION ,SB.DATA_SRC_CONFIG ,STL.DEVICE_NAME ,STL.VENDOR_NAME ,SB.AUTHORIZATION_URL ,SB.ADMINISTRATION_URL ,SB.LOCAL_SOURCE_ID FROM HWR_EHW_SOURCES_B SB, HWR_EHW_SOURCES_TL STL, HWR_LOOKUP_VL LPVL_TYPE, HWR_LOOKUP_VL LPVL_STATUS WHERE SB.SOURCE_ID = STL.SOURCE_ID (+) AND SB.TYPE_ID = LPVL_TYPE.LOOKUP_ID AND SB.STATUS_ID = LPVL_STATUS.LOOKUP_ID AND STL.LANGUAGE (+) = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

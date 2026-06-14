@@ -1,0 +1,37 @@
+# FAI_DEEP_LINK_TOOLS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** FAI
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faideeplinktoolsvl-7226.html#faideeplinktoolsvl-7226](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faideeplinktoolsvl-7226.html#faideeplinktoolsvl-7226)
+
+## Columns
+
+- DEEP_LINK_TOOL_ID
+- TOOL_CODE
+- TOOL_ID
+- DEEP_LINK_ID
+- SEEDED_FLAG
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- MODULE_ID
+- MESSAGE
+
+## Query
+
+```sql
+SELECT b.DEEP_LINK_TOOL_ID DEEP_LINK_TOOL_ID, b.TOOL_CODE TOOL_CODE, b.TOOL_ID TOOL_ID, b.DEEP_LINK_ID DEEP_LINK_ID, b.SEEDED_FLAG SEEDED_FLAG, b.CREATED_BY CREATED_BY, b.CREATION_DATE CREATION_DATE, b.LAST_UPDATED_BY LAST_UPDATED_BY, b.LAST_UPDATE_DATE LAST_UPDATE_DATE, b.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN, b.OBJECT_VERSION_NUMBER OBJECT_VERSION_NUMBER, b.MODULE_ID MODULE_ID, tl.MESSAGE MESSAGE FROM FAI_DEEP_LINK_TOOLS_B b, FAI_DEEP_LINK_TOOLS_TL tl WHERE b.DEEP_LINK_TOOL_ID = tl.DEEP_LINK_TOOL_ID AND tl.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../2_AI_Views_Index.md)

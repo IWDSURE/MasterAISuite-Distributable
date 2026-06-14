@@ -1,0 +1,190 @@
+{
+  "name": "HRQ_QSTNR_PARTICIPANTS",
+  "object_type": "TABLE",
+  "description": "A list of Participants who have responded to a questionnaire.",
+  "schema": "FUSION",
+  "owner": "HRT",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqqstnrparticipants-30157.html#hrqqstnrparticipants-30157",
+  "primary_keys": [
+    {
+      "name": "HRQ_QSTNR_PARTICIPANTS_PK",
+      "columns": "QSTNR_PARTICIPANT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "QSTNR_PARTICIPANT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique identifier for a questionnaire participant.  System generated primary key."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "QUESTIONNAIRE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies the questionnaire id."
+    },
+    {
+      "Name": "PARTICIPANT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the participant type."
+    },
+    {
+      "Name": "PARTICIPANT_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the participant id."
+    },
+    {
+      "Name": "SUBSCRIBER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies the subscriber id."
+    },
+    {
+      "Name": "SUBJECT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the subject code."
+    },
+    {
+      "Name": "SUBJECT_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the subject id."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the status of the questionnaire participant."
+    },
+    {
+      "Name": "SUBMITTED_DATE_TIME",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies the date and time the participant has submitted the response."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PARTICIPANT_ID"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBJECT_ID, PARTICIPANT_ID"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "QUESTIONNAIRE_ID"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, SUBJECT_ID"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"SUBJECT_ID\")"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "QSTNR_PARTICIPANT_ID"
+    },
+    {
+      "Index": "HRQ_QSTNR_PARTICIPANTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID, SUBSCRIBER_ID, SUBJECT_CODE, SUBJECT_ID, QUESTIONNAIRE_ID, PARTICIPANT_TYPE, PARTICIPANT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:20:02"
+}

@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Bulk",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/hcmRestApi/scim/Bulk": {
+      "post": {
+        "tags": [
+          "Bulk"
+        ],
+        "description": "Bulk operation",
+        "operationId": "post",
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/bulkParam-item"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bulk"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "bulk",
+        "summary": "Bulk operation",
+        "x-internal-id": "hcmRestApi-scim-Bulk-post",
+        "x-filename-id": "hcmrestapi-scim-bulk-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "bulkParam-item": {
+        "type": "object",
+        "properties": {
+          "bulkId": {
+            "title": "bulkId",
+            "type": "string",
+            "description": "The transient identifier of a newly created resource, which is unique within a bulk request and created by the client."
+          },
+          "method": {
+            "title": "method",
+            "type": "string",
+            "description": "The HTTP method of the current operation."
+          },
+          "data": {
+            "title": "data",
+            "type": "string",
+            "description": "The resource data as it would appear for a single POST or PATCH resource operation."
+          },
+          "path": {
+            "title": "path",
+            "type": "string",
+            "description": "The relative path of the resource. If the method is POST, the value must specify a resource type endpoint, for example, /Users. For all the other methods, the value must specify the path to a specific resource, for example, /Users/2819c223-7f76-453a-919d-413861904646."
+          }
+        }
+      },
+      "Bulk": {
+        "type": "object",
+        "properties": {
+          "Operations": {
+            "title": "Operations",
+            "type": "array",
+            "description": "The operations defined within a bulk job. Each operation corresponds to a single HTTP request against a resource endpoint.",
+            "items": {
+              "$ref": "#/components/schemas/Operation-item"
+            }
+          }
+        }
+      },
+      "Operation-item": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "title": "location",
+            "type": "string",
+            "description": "The resource endpoint URL."
+          },
+          "method": {
+            "title": "method",
+            "type": "string",
+            "description": "The HTTP method of the current operation."
+          },
+          "bulkId": {
+            "title": "bulkId",
+            "type": "string",
+            "description": "The transient identifier of a newly created resource, which is unique within a bulk request and created by the client."
+          },
+          "status": {
+            "title": "status",
+            "type": "object",
+            "properties": {},
+            "description": "A complex type that contains information about the success or failure of one operation within the bulk job."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "name": "IRC_JA_NOTIF_PROCESS",
+  "object_type": "TABLE",
+  "description": "This table is used by ESS job to send the relevant job sharing review notifications per each requisition.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjanotifprocess-26383.html#ircjanotifprocess-26383",
+  "primary_keys": [
+    {
+      "name": "IRC_JA_NOTIF_PROCESS_PK",
+      "columns": "JA_NOTIF_PROCESS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "JA_NOTIF_PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key for the Table. System generated."
+    },
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_REQUISITIONS_B table."
+    },
+    {
+      "Name": "PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Phase for which this review notification needs to be processed. Foreign Key to IRC_PHASES_B table."
+    },
+    {
+      "Name": "STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "State for which this review notification needs to be processed. Foreign Key to IRC_STATES_B table."
+    },
+    {
+      "Name": "STEP_ACTION_USAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key IRC_STEP_ACTION_USAGES_B table. (Life cycle action context)"
+    },
+    {
+      "Name": "NOTIFICATION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To Identify the type of notification that will be proceed."
+    },
+    {
+      "Name": "PUBLIC_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to IRC_STATES_B table. This refers to public job application status that can be shared with candidate."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Job Application for which configured action is invoked in candidate selection process. Foreign Key to IRC_SUBMISSIONS table."
+    },
+    {
+      "Name": "SCHEDULED_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Schedule Time after which candidate notification can be processed."
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Processing Status of this review notification."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the name of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "900",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the package name of the job that created or last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PHASE_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STATE_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STEP_ACTION_USAGE_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PUBLIC_STATE_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_FK6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "NOTIFICATION_TYPE, PROCESSING_STATUS"
+    },
+    {
+      "Index": "IRC_JA_NOTIF_PROCESS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "JA_NOTIF_PROCESS_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:55:19"
+}

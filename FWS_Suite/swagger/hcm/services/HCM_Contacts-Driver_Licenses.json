@@ -1,0 +1,3855 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - HCM Contacts/Driver Licenses",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/hcmContacts/{hcmContactsUniqID}/child/driverLicenses/{driverLicensesUniqID}": {
+      "get": {
+        "tags": [
+          "HCM Contacts/Driver Licenses"
+        ],
+        "summary": "Get a drivers license",
+        "operationId": "get_hcmContacts-driverLicenses",
+        "parameters": [
+          {
+            "name": "hcmContactsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the HCM Contacts resource and used to uniquely identify an instance of HCM Contacts. The client should not generate the hash key value. Instead, the client should query on the HCM Contacts collection resource in order to navigate to a specific instance of HCM Contacts to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "driverLicensesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Driver Licenses resource and used to uniquely identify an instance of Driver Licenses. The client should not generate the hash key value. Instead, the client should query on the Driver Licenses collection resource in order to navigate to a specific instance of Driver Licenses to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-response"
+                }
+              }
+            },
+            "links": {
+              "issuingCountriesLov": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: IssuingCountry; Target Attribute: TerritoryCode</li><li>Display Attribute: TerritoryCode, CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/IssuingCountry",
+                  "displayValues": [
+                    "TerritoryCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "TerritoryCode",
+                    "CountryName"
+                  ]
+                }
+              },
+              "driverLicensesDDF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDDF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "driverLicensesDFF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDFF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "licenseTypesLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LegislationCodeFinder%3BLookupType%3DPER_DRIVERS_LICENSE_TYPE%2CLookupCode%3D{LicenseType}%2CLegislationCode%3D{IssuingCountry}"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: LicenseType; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/LicenseType",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "hcmContacts-{hcmContactsUniqID}-child-driverLicenses-{driverLicensesUniqID}-get",
+        "x-filename-id": "hcmcontacts-hcmcontactsuniqid-child-driverlicenses-driverlicensesuniqid-get"
+      },
+      "delete": {
+        "tags": [
+          "HCM Contacts/Driver Licenses"
+        ],
+        "summary": "Delete a drivers license",
+        "operationId": "delete_hcmContacts-driverLicenses",
+        "parameters": [
+          {
+            "name": "hcmContactsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the HCM Contacts resource and used to uniquely identify an instance of HCM Contacts. The client should not generate the hash key value. Instead, the client should query on the HCM Contacts collection resource in order to navigate to a specific instance of HCM Contacts to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "driverLicensesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Driver Licenses resource and used to uniquely identify an instance of Driver Licenses. The client should not generate the hash key value. Instead, the client should query on the Driver Licenses collection resource in order to navigate to a specific instance of Driver Licenses to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "hcmContacts-{hcmContactsUniqID}-child-driverLicenses-{driverLicensesUniqID}-delete",
+        "x-filename-id": "hcmcontacts-hcmcontactsuniqid-child-driverlicenses-driverlicensesuniqid-delete"
+      },
+      "patch": {
+        "tags": [
+          "HCM Contacts/Driver Licenses"
+        ],
+        "summary": "Update a drivers license",
+        "operationId": "update_hcmContacts-driverLicenses",
+        "parameters": [
+          {
+            "name": "hcmContactsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the HCM Contacts resource and used to uniquely identify an instance of HCM Contacts. The client should not generate the hash key value. Instead, the client should query on the HCM Contacts collection resource in order to navigate to a specific instance of HCM Contacts to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "driverLicensesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Driver Licenses resource and used to uniquely identify an instance of Driver Licenses. The client should not generate the hash key value. Instead, the client should query on the Driver Licenses collection resource in order to navigate to a specific instance of Driver Licenses to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/hcmContacts-driverLicenses-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-response"
+                }
+              }
+            },
+            "links": {
+              "issuingCountriesLov": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: IssuingCountry; Target Attribute: TerritoryCode</li><li>Display Attribute: TerritoryCode, CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/IssuingCountry",
+                  "displayValues": [
+                    "TerritoryCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "TerritoryCode",
+                    "CountryName"
+                  ]
+                }
+              },
+              "driverLicensesDDF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDDF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "driverLicensesDFF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDFF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "licenseTypesLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LegislationCodeFinder%3BLookupType%3DPER_DRIVERS_LICENSE_TYPE%2CLookupCode%3D{LicenseType}%2CLegislationCode%3D{IssuingCountry}"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: LicenseType; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/LicenseType",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "hcmContacts-{hcmContactsUniqID}-child-driverLicenses-{driverLicensesUniqID}-patch",
+        "x-filename-id": "hcmcontacts-hcmcontactsuniqid-child-driverlicenses-driverlicensesuniqid-patch"
+      }
+    },
+    "/hcmContacts/{hcmContactsUniqID}/child/driverLicenses": {
+      "get": {
+        "tags": [
+          "HCM Contacts/Driver Licenses"
+        ],
+        "summary": "Get all drivers licenses",
+        "operationId": "getall_hcmContacts-driverLicenses",
+        "parameters": [
+          {
+            "name": "hcmContactsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the HCM Contacts resource and used to uniquely identify an instance of HCM Contacts. The client should not generate the hash key value. Instead, the client should query on the HCM Contacts collection resource in order to navigate to a specific instance of HCM Contacts to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DriversLicenseId; integer; Surrogate identifier for the driver's license of a contact.</li><li>IssuingCountry; string; Country in which the contact's driver's license was issued. Valid values are defined in the hcmCountriesLov.</li><li>IssuingCountryName; string; Name of the country issuing the contact's license.</li><li>LicenseNumber; string; Driver's license number of the contact.</li><li>LicenseSuspendedFlag; boolean; Indicates whether the contact's driver's license is suspended.</li><li>LicenseType; string; Type of driver's license. Valid values are defined in the commonLookupsLOV.</li><li>LicenseTypeMeaning; string; Meaning of the contact's license type.</li><li>SuspendedFromDate; string; Start date of suspension period, if any.</li><li>SuspendedToDate; string; End date of suspension period, if any.</li><li>ToDate; string; End date of the contact's driver's license.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the contact drivers licenses that match the specified primary key criteria. <br>Finder Variables <ul><li>DriversLicenseId; integer;  Surrogate identifier for the contact's driver license. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the contact drivers licenses that match the specified primary key criteria.",
+                "properties": {
+                  "DriversLicenseId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Surrogate identifier for the contact's driver license.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Drivers License ID"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hcmContacts-driverLicenses"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "hcmContacts-{hcmContactsUniqID}-child-driverLicenses-get",
+        "x-filename-id": "hcmcontacts-hcmcontactsuniqid-child-driverlicenses-get"
+      },
+      "post": {
+        "tags": [
+          "HCM Contacts/Driver Licenses"
+        ],
+        "summary": "Create a drivers license",
+        "operationId": "create_hcmContacts-driverLicenses",
+        "parameters": [
+          {
+            "name": "hcmContactsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the HCM Contacts resource and used to uniquely identify an instance of HCM Contacts. The client should not generate the hash key value. Instead, the client should query on the HCM Contacts collection resource in order to navigate to a specific instance of HCM Contacts to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/hcmContacts-driverLicenses-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-response"
+                }
+              }
+            },
+            "links": {
+              "issuingCountriesLov": {
+                "operationRef": "#/paths/~1hcmCountriesLov/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: IssuingCountry; Target Attribute: TerritoryCode</li><li>Display Attribute: TerritoryCode, CountryName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/IssuingCountry",
+                  "displayValues": [
+                    "TerritoryCode"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TerritoryCode",
+                  "displayFields": [
+                    "TerritoryCode",
+                    "CountryName"
+                  ]
+                }
+              },
+              "driverLicensesDDF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDDF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "driverLicensesDFF": {
+                "operationRef": "#/paths/~1hcmContacts~1{hcmContactsUniqID}~1child~1driverLicenses~1{driverLicensesUniqID}~1child~1driverLicensesDFF/get",
+                "parameters": {
+                  "driverLicensesUniqID": "$request.path.driverLicensesUniqID",
+                  "hcmContactsUniqID": "$request.path.hcmContactsUniqID"
+                }
+              },
+              "licenseTypesLov": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LegislationCodeFinder%3BLookupType%3DPER_DRIVERS_LICENSE_TYPE%2CLookupCode%3D{LicenseType}%2CLegislationCode%3D{IssuingCountry}"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: LicenseType; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/LicenseType",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "hcmContacts-{hcmContactsUniqID}-child-driverLicenses-post",
+        "x-filename-id": "hcmcontacts-hcmcontactsuniqid-child-driverlicenses-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "hcmContacts-driverLicenses-item-response": {
+        "type": "object",
+        "properties": {
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who created the contact's driver's license record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date and time when the contact's driver's license record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DriversLicenseId": {
+            "title": "Drivers License ID",
+            "type": "integer",
+            "description": "Surrogate identifier for the driver's license of a contact.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FromDate": {
+            "title": "From Date",
+            "type": "string",
+            "description": "Start date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingAuthority": {
+            "title": "Issuing Authority",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Issuing authority of the contact's driver's license.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingCountry": {
+            "title": "Issuing Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country in which the contact's driver's license was issued. Valid values are defined in the hcmCountriesLov.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "combo_lov",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "IssuingCountryName": {
+            "title": "Issuing Country",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the country issuing the contact's license.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IssuingLocation": {
+            "title": "Place of Issue",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Location where the driver's license was issued.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdateDate": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "description": "Date and time when the contact's driver's license record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 64,
+            "type": "string",
+            "description": "User who last updated the contact's driver's license record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseNumber": {
+            "title": "License Number",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Driver's license number of the contact.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LicenseSuspendedFlag": {
+            "title": "License Suspended",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contact's driver's license is suspended.",
+            "nullable": false,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LicenseType": {
+            "title": "License Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of driver's license. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "includeInCompactView": true,
+              "dependencies": [
+                "IssuingCountry"
+              ]
+            },
+            "x-queryable": true
+          },
+          "LicenseTypeMeaning": {
+            "title": "License Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning of the contact's license type.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NumberOfPoints": {
+            "title": "Number of Points",
+            "type": "integer",
+            "description": "Number of penalty points on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SuspendedFromDate": {
+            "title": "Suspended-from Date",
+            "type": "string",
+            "description": "Start date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SuspendedToDate": {
+            "title": "Suspension-to Date",
+            "type": "string",
+            "description": "End date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ToDate": {
+            "title": "To Date",
+            "type": "string",
+            "description": "End date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "Violations": {
+            "title": "Violations",
+            "type": "integer",
+            "description": "Number of violations on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "driverLicensesDDF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDDF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "driverLicensesDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDDF-item-response": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "BR": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-response",
+            "DE": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-response"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-response"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-response"
+          }
+        ]
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-response": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseId": {
+            "title": "Drivers License ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "_ORA_HRX_BR_FIRST_ISSUE_DATE": {
+            "title": "First Issue Date",
+            "type": "string",
+            "description": "First Issue Date",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "First Issue Date"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "ORA_HRX_BR_FIRST_ISSUE_DATE",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "BR",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-response": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseId": {
+            "title": "Drivers License ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "_HRX_DE_A": {
+            "title": "A",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION2",
+              "FND_ACFF_SegmentName": "HRX_DE_A",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A1": {
+            "title": "A1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION1",
+              "FND_ACFF_SegmentName": "HRX_DE_A1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A2": {
+            "title": "A2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A2",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A2"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION17",
+              "FND_ACFF_SegmentName": "HRX_DE_A2",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_AM": {
+            "title": "AM",
+            "maxLength": 150,
+            "type": "string",
+            "description": "AM",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "AM"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION16",
+              "FND_ACFF_SegmentName": "HRX_DE_AM",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_B": {
+            "title": "B",
+            "maxLength": 150,
+            "type": "string",
+            "description": "B",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "B"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION3",
+              "FND_ACFF_SegmentName": "HRX_DE_B",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_BE": {
+            "title": "BE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "BE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "BE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION8",
+              "FND_ACFF_SegmentName": "HRX_DE_BE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C": {
+            "title": "C",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION5",
+              "FND_ACFF_SegmentName": "HRX_DE_C",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1": {
+            "title": "C1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION4",
+              "FND_ACFF_SegmentName": "HRX_DE_C1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1E": {
+            "title": "C1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION9",
+              "FND_ACFF_SegmentName": "HRX_DE_C1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_CE": {
+            "title": "CE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "CE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "CE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION10",
+              "FND_ACFF_SegmentName": "HRX_DE_CE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D": {
+            "title": "D",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION7",
+              "FND_ACFF_SegmentName": "HRX_DE_D",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1": {
+            "title": "D1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION6",
+              "FND_ACFF_SegmentName": "HRX_DE_D1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1E": {
+            "title": "D1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION11",
+              "FND_ACFF_SegmentName": "HRX_DE_D1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_DE": {
+            "title": "DE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "DE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "DE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION12",
+              "FND_ACFF_SegmentName": "HRX_DE_DE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_L": {
+            "title": "L",
+            "maxLength": 150,
+            "type": "string",
+            "description": "L",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "L"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION14",
+              "FND_ACFF_SegmentName": "HRX_DE_L",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_LIC_LAST_VALID_DT": {
+            "title": "Last Validated",
+            "type": "string",
+            "description": "Last Validated",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Last Validated"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "HRX_DE_LIC_LAST_VALID_DT",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_M": {
+            "title": "M",
+            "maxLength": 150,
+            "type": "string",
+            "description": "M",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "M"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION13",
+              "FND_ACFF_SegmentName": "HRX_DE_M",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_TS": {
+            "title": "T/S",
+            "maxLength": 150,
+            "type": "string",
+            "description": "T/S",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "T/S"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION15",
+              "FND_ACFF_SegmentName": "HRX_DE_TS",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "DE",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDFF-item-response": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseTypeId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "FromDate": {
+            "title": "From Date",
+            "type": "string",
+            "description": "Start date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingAuthority": {
+            "title": "Issuing Authority",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Issuing authority of the contact's driver's license.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingLocation": {
+            "title": "Place of Issue",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Location where the driver's license was issued.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseNumber": {
+            "title": "License Number",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Driver's license number of the contact.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseSuspendedFlag": {
+            "title": "License Suspended",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contact's driver's license is suspended.",
+            "nullable": false,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseType": {
+            "title": "License Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of driver's license. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "includeInCompactView": true,
+              "dependencies": [
+                "IssuingCountry"
+              ]
+            }
+          },
+          "NumberOfPoints": {
+            "title": "Number of Points",
+            "type": "integer",
+            "description": "Number of penalty points on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SuspendedFromDate": {
+            "title": "Suspended-from Date",
+            "type": "string",
+            "description": "Start date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SuspendedToDate": {
+            "title": "Suspension-to Date",
+            "type": "string",
+            "description": "End date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ToDate": {
+            "title": "To Date",
+            "type": "string",
+            "description": "End date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Violations": {
+            "title": "Violations",
+            "type": "integer",
+            "description": "Number of violations on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "driverLicensesDDF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDDF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "driverLicensesDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDDF-item-patch-request": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "BR": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-patch-request",
+            "DE": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-patch-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-patch-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-patch-request"
+          }
+        ]
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "_ORA_HRX_BR_FIRST_ISSUE_DATE": {
+            "title": "First Issue Date",
+            "type": "string",
+            "description": "First Issue Date",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "First Issue Date"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "ORA_HRX_BR_FIRST_ISSUE_DATE",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "BR",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "_HRX_DE_A": {
+            "title": "A",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION2",
+              "FND_ACFF_SegmentName": "HRX_DE_A",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A1": {
+            "title": "A1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION1",
+              "FND_ACFF_SegmentName": "HRX_DE_A1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A2": {
+            "title": "A2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A2",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A2"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION17",
+              "FND_ACFF_SegmentName": "HRX_DE_A2",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_AM": {
+            "title": "AM",
+            "maxLength": 150,
+            "type": "string",
+            "description": "AM",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "AM"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION16",
+              "FND_ACFF_SegmentName": "HRX_DE_AM",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_B": {
+            "title": "B",
+            "maxLength": 150,
+            "type": "string",
+            "description": "B",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "B"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION3",
+              "FND_ACFF_SegmentName": "HRX_DE_B",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_BE": {
+            "title": "BE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "BE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "BE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION8",
+              "FND_ACFF_SegmentName": "HRX_DE_BE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C": {
+            "title": "C",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION5",
+              "FND_ACFF_SegmentName": "HRX_DE_C",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1": {
+            "title": "C1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION4",
+              "FND_ACFF_SegmentName": "HRX_DE_C1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1E": {
+            "title": "C1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION9",
+              "FND_ACFF_SegmentName": "HRX_DE_C1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_CE": {
+            "title": "CE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "CE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "CE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION10",
+              "FND_ACFF_SegmentName": "HRX_DE_CE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D": {
+            "title": "D",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION7",
+              "FND_ACFF_SegmentName": "HRX_DE_D",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1": {
+            "title": "D1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION6",
+              "FND_ACFF_SegmentName": "HRX_DE_D1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1E": {
+            "title": "D1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION11",
+              "FND_ACFF_SegmentName": "HRX_DE_D1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_DE": {
+            "title": "DE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "DE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "DE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION12",
+              "FND_ACFF_SegmentName": "HRX_DE_DE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_L": {
+            "title": "L",
+            "maxLength": 150,
+            "type": "string",
+            "description": "L",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "L"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION14",
+              "FND_ACFF_SegmentName": "HRX_DE_L",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_LIC_LAST_VALID_DT": {
+            "title": "Last Validated",
+            "type": "string",
+            "description": "Last Validated",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Last Validated"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "HRX_DE_LIC_LAST_VALID_DT",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_M": {
+            "title": "M",
+            "maxLength": 150,
+            "type": "string",
+            "description": "M",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "M"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION13",
+              "FND_ACFF_SegmentName": "HRX_DE_M",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_TS": {
+            "title": "T/S",
+            "maxLength": 150,
+            "type": "string",
+            "description": "T/S",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "T/S"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION15",
+              "FND_ACFF_SegmentName": "HRX_DE_TS",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "DE",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-item-post-request": {
+        "required": [
+          "IssuingCountry"
+        ],
+        "type": "object",
+        "properties": {
+          "FromDate": {
+            "title": "From Date",
+            "type": "string",
+            "description": "Start date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingAuthority": {
+            "title": "Issuing Authority",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Issuing authority of the contact's driver's license.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "IssuingCountry": {
+            "title": "Issuing Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country in which the contact's driver's license was issued. Valid values are defined in the hcmCountriesLov.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "combo_lov",
+              "includeInCompactView": true
+            }
+          },
+          "IssuingLocation": {
+            "title": "Place of Issue",
+            "maxLength": 100,
+            "type": "string",
+            "description": "Location where the driver's license was issued.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseNumber": {
+            "title": "License Number",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Driver's license number of the contact.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseSuspendedFlag": {
+            "title": "License Suspended",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates whether the contact's driver's license is suspended.",
+            "nullable": false,
+            "default": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LicenseType": {
+            "title": "License Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type of driver's license. Valid values are defined in the commonLookupsLOV.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "includeInCompactView": true,
+              "dependencies": [
+                "IssuingCountry"
+              ]
+            }
+          },
+          "NumberOfPoints": {
+            "title": "Number of Points",
+            "type": "integer",
+            "description": "Number of penalty points on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "SuspendedFromDate": {
+            "title": "Suspended-from Date",
+            "type": "string",
+            "description": "Start date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SuspendedToDate": {
+            "title": "Suspension-to Date",
+            "type": "string",
+            "description": "End date of suspension period, if any.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ToDate": {
+            "title": "To Date",
+            "type": "string",
+            "description": "End date of the contact's driver's license.",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "Violations": {
+            "title": "Violations",
+            "type": "integer",
+            "description": "Number of violations on the license.",
+            "format": "int64",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "driverLicensesDDF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDDF-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "driverLicensesDFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-driverLicensesDFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDDF-item-post-request": {
+        "discriminator": {
+          "propertyName": "__FLEX_Context",
+          "mapping": {
+            "BR": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-post-request",
+            "DE": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-post-request"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-post-request"
+          },
+          {
+            "$ref": "#/components/schemas/oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-post-request"
+          }
+        ]
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFBRVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseId": {
+            "title": "Drivers License ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "_ORA_HRX_BR_FIRST_ISSUE_DATE": {
+            "title": "First Issue Date",
+            "type": "string",
+            "description": "First Issue Date",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "First Issue Date"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "ORA_HRX_BR_FIRST_ISSUE_DATE",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "BR",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "oracle_apps_hcm_people_core_flex_personDriversLicenseLegDDF_view_PersonDriversLicenseLegDDFDEVO-item-post-request": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseId": {
+            "title": "Drivers License ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "_HRX_DE_A": {
+            "title": "A",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION2",
+              "FND_ACFF_SegmentName": "HRX_DE_A",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A1": {
+            "title": "A1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION1",
+              "FND_ACFF_SegmentName": "HRX_DE_A1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_A2": {
+            "title": "A2",
+            "maxLength": 150,
+            "type": "string",
+            "description": "A2",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "A2"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION17",
+              "FND_ACFF_SegmentName": "HRX_DE_A2",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_AM": {
+            "title": "AM",
+            "maxLength": 150,
+            "type": "string",
+            "description": "AM",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "AM"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION16",
+              "FND_ACFF_SegmentName": "HRX_DE_AM",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_B": {
+            "title": "B",
+            "maxLength": 150,
+            "type": "string",
+            "description": "B",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "B"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION3",
+              "FND_ACFF_SegmentName": "HRX_DE_B",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_BE": {
+            "title": "BE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "BE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "BE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION8",
+              "FND_ACFF_SegmentName": "HRX_DE_BE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C": {
+            "title": "C",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION5",
+              "FND_ACFF_SegmentName": "HRX_DE_C",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1": {
+            "title": "C1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION4",
+              "FND_ACFF_SegmentName": "HRX_DE_C1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_C1E": {
+            "title": "C1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "C1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "C1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION9",
+              "FND_ACFF_SegmentName": "HRX_DE_C1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_CE": {
+            "title": "CE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "CE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "CE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION10",
+              "FND_ACFF_SegmentName": "HRX_DE_CE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D": {
+            "title": "D",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION7",
+              "FND_ACFF_SegmentName": "HRX_DE_D",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1": {
+            "title": "D1",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION6",
+              "FND_ACFF_SegmentName": "HRX_DE_D1",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_D1E": {
+            "title": "D1E",
+            "maxLength": 150,
+            "type": "string",
+            "description": "D1E",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "D1E"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION11",
+              "FND_ACFF_SegmentName": "HRX_DE_D1E",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_DE": {
+            "title": "DE",
+            "maxLength": 150,
+            "type": "string",
+            "description": "DE",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "DE"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION12",
+              "FND_ACFF_SegmentName": "HRX_DE_DE",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_L": {
+            "title": "L",
+            "maxLength": 150,
+            "type": "string",
+            "description": "L",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "L"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION14",
+              "FND_ACFF_SegmentName": "HRX_DE_L",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_LIC_LAST_VALID_DT": {
+            "title": "Last Validated",
+            "type": "string",
+            "description": "Last Validated",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Last Validated"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_STANDARD_DATE#FORMAT_ONLY",
+              "controlType": "date",
+              "includeInCompactView": true,
+              "FND_ACFF_JavaType": "java.sql.Date",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION_DATE1",
+              "FND_ACFF_SegmentName": "HRX_DE_LIC_LAST_VALID_DT",
+              "FND_ACFF_PreferredDisplayType": "DATE_TIME"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_M": {
+            "title": "M",
+            "maxLength": 150,
+            "type": "string",
+            "description": "M",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "M"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION13",
+              "FND_ACFF_SegmentName": "HRX_DE_M",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "_HRX_DE_TS": {
+            "title": "T/S",
+            "maxLength": 150,
+            "type": "string",
+            "description": "T/S",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "T/S"
+              },
+              "FND_ACFF_ValueSetInfo": "HRC_YES_NO#TABLE",
+              "controlType": "check_box",
+              "includeInCompactView": true,
+              "FND_ACFF_CheckboxUncheckedValue": "N",
+              "FND_ACFF_DV": "N",
+              "FND_ACFF_DVT": "C",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_CheckboxCheckedValue": "Y",
+              "FND_ACFF_ColumnName": "LIC_INFORMATION15",
+              "FND_ACFF_SegmentName": "HRX_DE_TS",
+              "FND_ACFF_PreferredDisplayType": "CHECKBOX"
+            },
+            "x-oj": {
+              "componentType": "oj-sp-flex-checkbox",
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Drivers License Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "default": "DE",
+            "x-hints": {
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "FND_ACFF_DerivedFromParameter": "ISSUING_COUNTRY",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_DV": "ISSUING_COUNTRY",
+              "FND_ACFF_DVT": "P",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Drivers License Category",
+            "type": "string",
+            "description": "Drivers License Category",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Drivers License Category"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-driverLicensesDFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "DriversLicenseTypeId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "hcmContacts-driverLicenses-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-patch-request"
+            }
+          }
+        }
+      },
+      "hcmContacts-driverLicenses-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/hcmContacts-driverLicenses-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

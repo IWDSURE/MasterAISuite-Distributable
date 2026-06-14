@@ -1,0 +1,39 @@
+# PER_COMPARISON_SETS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/percomparisonsetsvl-4853.html#percomparisonsetsvl-4853](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/percomparisonsetsvl-4853.html#percomparisonsetsvl-4853)
+
+## Columns
+
+- COMPARISON_SET_ID
+- BUSINESS_GROUP_ID
+- COMPARISON_SET_CODE
+- USER_ID
+- WORKER_FLAG
+- LINE_MANAGER_FLAG
+- COMPARISON_SET_NAME
+- DESCRIPTION
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT B.COMPARISON_SET_ID, B.BUSINESS_GROUP_ID, B.COMPARISON_SET_CODE, B.USER_ID, B.WORKER_FLAG, B.LINE_MANAGER_FLAG, T.COMPARISON_SET_NAME, T.DESCRIPTION, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATE_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_LOGIN, B.MODULE_ID FROM PER_COMPARISON_SETS_B B, PER_COMPARISON_SETS_TL T WHERE B.COMPARISON_SET_ID = T.COMPARISON_SET_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

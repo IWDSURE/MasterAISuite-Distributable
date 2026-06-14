@@ -1,0 +1,1123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Workforce Schedule Shifts",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/workforceScheduleShifts/{ScheduleShiftId}": {
+      "get": {
+        "tags": [
+          "Workforce Schedule Shifts"
+        ],
+        "summary": "Get a workforce schedule shift",
+        "operationId": "get_workforceScheduleShifts",
+        "parameters": [
+          {
+            "name": "ScheduleShiftId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the workforce schedule shift.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workforceScheduleShifts-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workforceScheduleShifts-{ScheduleShiftId}-get",
+        "x-filename-id": "workforcescheduleshifts-scheduleshiftid-get"
+      }
+    },
+    "/workforceScheduleShifts": {
+      "get": {
+        "tags": [
+          "Workforce Schedule Shifts"
+        ],
+        "summary": "Get all workforce schedule shifts",
+        "operationId": "getall_workforceScheduleShifts",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AllowClaimPartialShiftFlag; boolean; Indicates whether the open shift can be partially claimed.</li><li>AllowOvertimeFlag; boolean; Specify if the shift assignee can go over their weekly assignment hours.</li><li>ApprovalRequiredToClaimFlag; boolean; Indicates whether approval is required for the worker to request the shift.</li><li>AssignmentId; integer; Unique identifier for the assignment of the worker assigned to the shift.</li><li>AssignmentMode; string; Method used to assign the shift to the worker, such as Automatic, Manual, or Self-Scheduled.</li><li>AssignmentNumber; string; Person number for the shift assignee.</li><li>CalendarDate; string; Date for the shift.</li><li>Comments; string; Notes for the shift.</li><li>ContentItemCode; string; Code for the content item needed for the shift assignee.</li><li>ContentTypeId; integer; Unique identifier for the content type needed for the shift assignee.</li><li>CreationDate; string; Date when the shift detail was created for the workforce schedule.</li><li>DepartmentId; integer; Unique identifier for the workforce schedule department.</li><li>DepartmentName; string; Name of the workforce schedule department.</li><li>DisplayName; string; Display name of the shift.</li><li>EndDateTime; string; End time for the shift.</li><li>JobCode; string; Code for the job needed by the shift assignee.</li><li>JobFamilyName; string; Name of the job family needed by the shift assignee.</li><li>JobId; integer; Unique identifier for the job needed by the shift assignee.</li><li>JobName; string; Name of the job needed by the shift assignee.</li><li>LastUpdateDate; string; Date when the shift was most recently updated.</li><li>LocationCode; string; Code for the workforce schedule location.</li><li>LocationId; integer; Unique identifier for the workforce schedule location.</li><li>LocationName; string; Name of the workforce schedule location.</li><li>OpportunityGroupOrderFlag; boolean; Indicates whether to use group order for open shifts.</li><li>OtherDepartmentFlag; boolean; Indicates whether to include the shift in float workers self-scheduling.</li><li>PaidBreakDuration; integer; Paid break duration in minutes.</li><li>PersonId; integer; Unique identifier for the shift assignee.</li><li>PersonNumber; string; Person number for the shift assignee.</li><li>PositionCode; string; Code for the position needed by the shift assignee.</li><li>PositionId; integer; Unique identifier for the position needed by the shift assignee.</li><li>PositionName; string; Name of the position needed by shift assignee.</li><li>PremiumShiftCode; string; Premium code for the shift.</li><li>PremiumShiftCodeMeaning; string; Premium name of the shift.</li><li>Productivity; number; Productivity percentage for the shift type selected for the shift.</li><li>QualificationId; integer; Unique identifier for the other qualification needed by the shift assignee.</li><li>QualificationName; string; Name of the other qualification needed by the shift assignee.</li><li>QualificationType; string; Type for the other qualification needed by the shift assignee, such as competency, license or certification, or language.</li><li>ReferenceDate; string; Reference date for the shift.</li><li>ScheduleGroupCode; string; Code for the schedule group needed by the shift assignee.</li><li>ScheduleGroupCodeMeaning; string; Name of the schedule group needed by the shift assignee.</li><li>ScheduleId; integer; Unique identifier for the workforce schedule.</li><li>ScheduleShiftId; integer; Unique identifier for the workforce schedule shift.</li><li>ScheduleUnitId; integer; Unique identifier for the schedule unit of the workforce schedule.</li><li>ShiftCategory; string; Category name for the shift.</li><li>ShiftCategoryCode; string; Category code for the shift.</li><li>ShiftIncentive; number; Monetary amount a worker will get when assigned to the shift.</li><li>ShiftName; string; Name of the shift.</li><li>ShiftType; string; Shift type selected for the shift.</li><li>ShiftTypeId; integer; Unique identifier for the shift type selected for the shift.</li><li>ShiftTypeLookupCode; string; Code for the shift type</li><li>ShiftTypeName; string; Meaning for the shift type.</li><li>Source; string; Method used to create the shift, such as Manual or Automatic.</li><li>StartDateTime; string; Start time for the shift.</li><li>StatusCode; string; Code for the workforce schedule status, such as ORA_HTS_PUBLISHED, ORA_HTS_UNPUBLISHED, ORA_HTS_IN_PROGRESS, ORA_HTS_NOT_STARTED, or ORA_HTS_GEN_ERROR.</li><li>UnpaidBreakDuration; integer; Unpaid break duration in minutes.</li><li>WorkDuration; integer; Work duration in minutes.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds a workforce schedule shift with the specified unique identifier. <br>Finder Variables <ul><li>ScheduleShiftId; integer;  Unique identifier for the workforce shift. </li></ul></li><li>findByPersonNumberAndDateRange Finds the workforce schedule shift based on the specified person number and date range. <br>Finder Variables <ul><li>EndDate; string;  End date for the date range used to find workforce schedule shifts. </li><li>PersonNumber; string;  Person number used to find assigned workforce schedule shifts. </li><li>StartDate; string;  Start date for the date range used to find workforce schedule shifts. </li></ul></li><li>findByScheduleId Finds the workforce schedule shift based on the specified workforce schedule unique identifier. <br>Finder Variables <ul><li>ScheduleId; integer;  Unique identifier for the workforce schedule. </li></ul></li><li>findByScheduleUnitAndDateRange Finds the workforce schedule shifts based on the specified schedule unit, date range, and schedule status. A schedule unit is a department plus optionally a location, as defined in schedule generation profile. <br>Finder Variables <ul><li>DepartmentId; integer;  Unique identifier for the department. </li><li>DepartmentName; string;  Name of the department </li><li>EndDate; string;  End date for the date range used to find workforce schedule shifts. </li><li>LocationCode; string;  Code for the location. </li><li>LocationId; integer;  Unique identifier for the location. </li><li>StartDate; string;  Start date for the date range used to find workforce schedule shifts. </li><li>StatusCode; string;  Code for the schedule status, such as ORA_HTS_PUBLISHED, ORA_HTS_UNPUBLISHED, ORA_HTS_IN_PROGRESS, ORA_HTS_NOT_STARTED, or ORA_HTS_GEN_ERROR. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds a workforce schedule shift with the specified unique identifier.",
+                "properties": {
+                  "ScheduleShiftId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the workforce shift.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByPersonNumberAndDateRange",
+                "description": "Finds the workforce schedule shift based on the specified person number and date range.",
+                "title": "findByPersonNumberAndDateRange",
+                "properties": {
+                  "PersonNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Person number used to find assigned workforce schedule shifts.",
+                    "type": "string"
+                  },
+                  "StartDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Start date for the date range used to find workforce schedule shifts.",
+                    "type": "string"
+                  },
+                  "EndDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "End date for the date range used to find workforce schedule shifts.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByScheduleId",
+                "description": "Finds the workforce schedule shift based on the specified workforce schedule unique identifier.",
+                "title": "findByScheduleId",
+                "properties": {
+                  "ScheduleId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the workforce schedule.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByScheduleUnitAndDateRange",
+                "description": "Finds the workforce schedule shifts based on the specified schedule unit, date range, and schedule status. A schedule unit is a department plus optionally a location, as defined in schedule generation profile.",
+                "title": "findByScheduleUnitAndDateRange",
+                "properties": {
+                  "StartDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Start date for the date range used to find workforce schedule shifts.",
+                    "type": "string"
+                  },
+                  "LocationCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Code for the location.",
+                    "type": "string"
+                  },
+                  "LocationId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the location.",
+                    "type": "integer"
+                  },
+                  "DepartmentName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the department",
+                    "type": "string"
+                  },
+                  "DepartmentId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the department.",
+                    "type": "integer"
+                  },
+                  "EndDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "End date for the date range used to find workforce schedule shifts.",
+                    "type": "string"
+                  },
+                  "StatusCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Code for the schedule status, such as ORA_HTS_PUBLISHED, ORA_HTS_UNPUBLISHED, ORA_HTS_IN_PROGRESS, ORA_HTS_NOT_STARTED, or ORA_HTS_GEN_ERROR.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workforceScheduleShifts"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workforceScheduleShifts-get",
+        "x-filename-id": "workforcescheduleshifts-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "workforceScheduleShifts-item-response": {
+        "type": "object",
+        "properties": {
+          "AllowClaimPartialShiftFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the open shift can be partially claimed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AllowOvertimeFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Specify if the shift assignee can go over their weekly assignment hours.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ApprovalRequiredToClaimFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether approval is required for the worker to request the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the assignment of the worker assigned to the shift.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentMode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Method used to assign the shift to the worker, such as Automatic, Manual, or Self-Scheduled.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AssignmentNumber": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Person number for the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CalendarDate": {
+            "type": "string",
+            "description": "Date for the shift.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Comments": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Notes for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContentItemCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the content item needed for the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContentTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the content type needed for the shift assignee.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date when the shift detail was created for the workforce schedule.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DepartmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the workforce schedule department.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DepartmentName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the workforce schedule department.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DisplayName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EndDateTime": {
+            "type": "string",
+            "description": "End time for the shift.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the job needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobFamilyName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the job family needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier for the job needed by the shift assignee.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the job needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date when the shift was most recently updated.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationCode": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Code for the workforce schedule location.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier for the workforce schedule location.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LocationName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the workforce schedule location.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OpportunityGroupOrderFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether to use group order for open shifts.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OtherDepartmentFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether to include the shift in float workers self-scheduling.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PaidBreakDuration": {
+            "type": "integer",
+            "description": "Paid break duration in minutes.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift assignee.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Person number for the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PositionCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the position needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Unique identifier for the position needed by the shift assignee.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PositionName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the position needed by shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PremiumShiftCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Premium code for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PremiumShiftCodeMeaning": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Premium name of the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Productivity": {
+            "type": "number",
+            "description": "Productivity percentage for the shift type selected for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QualificationId": {
+            "type": "integer",
+            "description": "Unique identifier for the other qualification needed by the shift assignee.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QualificationName": {
+            "maxLength": 700,
+            "type": "string",
+            "description": "Name of the other qualification needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QualificationType": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Type for the other qualification needed by the shift assignee, such as competency, license or certification, or language.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReferenceDate": {
+            "type": "string",
+            "description": "Reference date for the shift.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ScheduleGroupCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the schedule group needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ScheduleGroupCodeMeaning": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the schedule group needed by the shift assignee.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ScheduleId": {
+            "type": "integer",
+            "description": "Unique identifier for the workforce schedule.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ScheduleShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the workforce schedule shift.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ScheduleUnitId": {
+            "type": "integer",
+            "description": "Unique identifier for the schedule unit of the workforce schedule.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ShiftCategory": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Category name for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftCategoryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftIncentive": {
+            "type": "number",
+            "description": "Monetary amount a worker will get when assigned to the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9,
+              "scale": 3
+            },
+            "x-queryable": true
+          },
+          "ShiftName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Shift type selected for the shift.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift type selected for the shift.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ShiftTypeLookupCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the shift type",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftTypeName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Meaning for the shift type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Method used to create the shift, such as Manual or Automatic.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StartDateTime": {
+            "type": "string",
+            "description": "Start time for the shift.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the workforce schedule status, such as ORA_HTS_PUBLISHED, ORA_HTS_UNPUBLISHED, ORA_HTS_IN_PROGRESS, ORA_HTS_NOT_STARTED, or ORA_HTS_GEN_ERROR.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "UnpaidBreakDuration": {
+            "type": "integer",
+            "description": "Unpaid break duration in minutes.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "WorkDuration": {
+            "type": "integer",
+            "description": "Work duration in minutes.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "workforceScheduleShifts": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/workforceScheduleShifts-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject",
+          "isCompactViewByDefault": true
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

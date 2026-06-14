@@ -1,0 +1,150 @@
+{
+  "name": "HRC_DL_REM_ATTRIBUTES",
+  "object_type": "TABLE",
+  "description": "Table for storing supported Attributes for each Business Objects. Only UPDATABLE Entities will have data in this table.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcdlremattributes-22620.html#hrcdlremattributes-22620",
+  "primary_keys": [
+    {
+      "name": "HRC_DL_REM_ATTRIBUTES_PK",
+      "columns": "ATTRIBUTE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ATTRIBUTE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Primary Key"
+    },
+    {
+      "Name": "BUSINESS_OBJECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "BUSINESS_OBJECT_ID"
+    },
+    {
+      "Name": "ENTITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "FK to HRC_DL_REM_ENTITIES"
+    },
+    {
+      "Name": "ATTRIBUTE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Attribute Name from the HDL supported View Object"
+    },
+    {
+      "Name": "ATTR_LOOKUPTYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Allowed Attribute Types. \n\nUPDATE  - Only be UPDATED\nUPDATE_DELETE - Can be NULLIFIED (or) Updated with standard values.\n\nValues for few attributes can be UPDATED (or) REMOVED completely. \n\n\nHowever, few can only be UPDATED. For example, SalaryAmount in Salary Business Object. We cannot nullify the field. Hence, default value has to be provided always.\n\n\n\nFollowing can be configured by customer.\n\nUPDATE      - can be updated by the customer. Will have a DEFAULT Value\nDELETE       - #NULL\n\nNon-configurable by customer and hidden from the UI.\n\nCONSTANT -  Takes the fixed DEFAULT Value and populates the same in the dat file. Example : ACTION_CODE :  TERMINATION\n\nKEY -  Populates the field based on the value from the DB. Few BO's need some additional KEY Attributes for the object to load.\n\nDERIVED - Combination of string and derived dependent attribute value. For example, \"AssignmentNumber\" can be updated as  \"MASKED-{ AssignmentId}  Example :  MASKED-100, where 100 is AssignmentId"
+    },
+    {
+      "Name": "CUSTOM_EDITABLE",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "N- Will not be available for customers for modification.\nY- Available"
+    },
+    {
+      "Name": "DEFAULT_VALUE",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For Mandatory Attributes, Default value will be seeded"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_DL_REM_ATTRIBUTES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ENTITY_ID"
+    },
+    {
+      "Index": "HRC_DL_REM_ATTRIBUTES_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CUSTOM_EDITABLE"
+    },
+    {
+      "Index": "HRC_DL_REM_ATTRIBUTES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ATTRIBUTE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:40:17"
+}

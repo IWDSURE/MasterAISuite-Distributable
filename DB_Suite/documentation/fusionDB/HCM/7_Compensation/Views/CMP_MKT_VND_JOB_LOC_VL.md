@@ -1,0 +1,42 @@
+# CMP_MKT_VND_JOB_LOC_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndjoblocvl-8877.html#cmpmktvndjoblocvl-8877](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndjoblocvl-8877.html#cmpmktvndjoblocvl-8877)
+
+## Columns
+
+- JOB_LIST_ID
+- VENDOR_ID
+- VENDOR_JOB_CODE
+- JOB_FUNCTION_ID
+- JOB_FAMILY_ID
+- JOB_ID
+- CAREER_STREAM_ID
+- CAREER_LEVEL_ID
+- JOB_STATUS
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- SURVEY_LOCATION_ID
+- SURVEY_LOCATION_CODE
+- LOC_STATUS
+
+## Query
+
+```sql
+SELECT J.JOB_LIST_ID, J.VENDOR_ID, J.VENDOR_JOB_CODE, J.JOB_FUNCTION_ID, J.JOB_FAMILY_ID, J.JOB_ID, J.CAREER_STREAM_ID, J.CAREER_LEVEL_ID, J.STATUS JOB_STATUS, J.CREATED_BY, J.CREATION_DATE, J.LAST_UPDATE_DATE, J.LAST_UPDATED_BY, J.LAST_UPDATE_LOGIN, J.OBJECT_VERSION_NUMBER, L.SURVEY_LOCATION_ID, L.SURVEY_LOCATION_CODE, L.STATUS LOC_STATUS FROM CMP_MKT_VND_JOBS_B J , CMP_MKT_VND_LOC_B L WHERE J.BUSINESS_GROUP_ID=L.BUSINESS_GROUP_ID AND J.VENDOR_ID =L.VENDOR_ID
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

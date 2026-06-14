@@ -1,0 +1,26 @@
+{
+  "name": "HXT_TCLAY_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HXT",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hxttclayv-8577.html#hxttclayv-8577",
+  "columns": [
+    "TCLAY_ID",
+    "TCLAY_CD",
+    "TCLAYST_ID",
+    "TCLAY_TYPE",
+    "TCLAY_TASK_SHORT_NAME",
+    "TL_TASK_RESULTS_ID",
+    "TL_TASK_FEATURES_ID",
+    "TASK_SHORT_NAME",
+    "TASK_NAME",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATED_BY",
+    "LAST_UPDATE_DATE",
+    "LAST_UPDATE_LOGIN"
+  ],
+  "query": "SELECT layout.TCLAY_ID, layout.TCLAY_CD, layout.TCLAYST_ID, layout.TCLAY_TYPE , CASE WHEN layout.TCLAY_TYPE LIKE 'Fuse Calendar%' THEN 'FCL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Shift Layout%' THEN 'SL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Approva%' THEN 'TANL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Entry%' THEN 'TEL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Review%' THEN 'TRL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time View%' THEN 'TVL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Web Clock%' THEN 'WCL' END END END END END END END TCLAY_TASK_SHORT_NAME , taskR.TL_TASK_RESULTS_ID, taskF.TL_TASK_FEATURES_ID, taskF.TASK_SHORT_NAME, taskF.TASK_NAME , layout.CREATED_BY, layout.CREATION_DATE, layout.LAST_UPDATED_BY , layout.LAST_UPDATE_DATE, layout.LAST_UPDATE_LOGIN FROM HXT_TCLAY_B layout, HWM_TL_TASK_RESULTS taskR, HWM_TL_TASK_FEATURES_vl taskF WHERE layout.TCLAYST_ID = taskR.TL_ANSWER_SET_ID AND taskR.TL_TASK_FEATURES_ID = taskF.TL_TASK_FEATURES_ID AND CASE WHEN layout.TCLAY_TYPE LIKE 'Fuse Calendar%' THEN 'FCL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Shift Layout%' THEN 'SL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Approval%' THEN 'TANL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Entry%' THEN 'TEL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time Review%' THEN 'TRL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Time View%' THEN 'TVL' ELSE CASE WHEN layout.TCLAY_TYPE LIKE 'Web Clock%' THEN 'WCL' END END END END END END END = taskF.TASK_SHORT_NAME AND layout.TCLAY_TYPE IN ('Fuse Calendar Indiv', 'Fuse Calendar Mgr', 'Shift Layout Indiv', 'Shift Layout Mgr', 'Web Clock Indiv', 'Time Approval Notification Indiv', 'Time Approval Notification Mgr', 'Time Entry Indiv', 'Time Entry Mgr', 'Time Review Indiv', 'Time Review Mgr', 'Time View Indiv', 'Time View Mgr')",
+  "_parsed_at": "2026-06-09T19:14:42"
+}

@@ -1,0 +1,1124 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Learner Learning Records/Selected Course Offerings/User Action Hints",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/learnerLearningRecords/{learnerLearningRecordsUniqID}/child/selectedCourseOfferings/{otherSelectedCourseOfferingsUniqID}/child/userActionHints": {
+      "get": {
+        "tags": [
+          "Learner Learning Records/Selected Course Offerings/User Action Hints"
+        ],
+        "summary": "Get all user action hints",
+        "operationId": "getall_learnerLearningRecords-selectedCourseOfferings-userActionHints",
+        "parameters": [
+          {
+            "name": "learnerLearningRecordsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Learner Learning Records resource and used to uniquely identify an instance of Learner Learning Records. The client should not generate the hash key value. Instead, the client should query on the Learner Learning Records collection resource in order to navigate to a specific instance of Learner Learning Records to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otherSelectedCourseOfferingsUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>activityLearnerMarkCompl; string; Indicates whether the learner can mark the activity as complete. Valid values are Y and N. Default value is N.</li><li>allowRetry; string; Hint to identify whether a learner can retry the content or not. Y indicates that the learner is allowed to retry. N indicates that the learner isn't allowed to retry. Null indicates that this hint isn't applicable.</li><li>canEditAssignmentHint; string; Hint to identify whether a user can edit the assignment. Examples include Can delete, Can withdraw, and No edit. Valid values are defined in the CanEditAssignmentHintLOV.</li><li>canManageLearningItem; string; Hint to identify whether a user can manage the learning item.</li><li>canRetakeLearningItem; string; Indicates whether the learner can retake the learning item.Valid values are Y and N.</li><li>dataSecurityPrivilege; string; Data security privilege, such as Learner or Learner Manager. It's the intent and permissions for the user accessing the learning assignment. Valid values are defined in the DataSecurityPrivilegeLOV list.</li><li>enrollmentQuestionnaireIdESS; integer; Unique identifier for the enrollment questionnaire for learner self-service assignments.</li><li>enrollmentQuestionnaireIdMSS; integer; Unique identifier for the enrollment questionnaire for manager self-service assignments.</li><li>enrollmentQuestionnaireNumberESS; string; Friendly number for identifying the enrollment questionnaire for learner self-service assignments.</li><li>enrollmentQuestionnaireNumberMSS; string; Friendly number for identifying the enrollment questionnaire for manager self-service assignments.</li><li>initialLearningRecordStatusHintESS; string; Hint for the initial learning record status for learner self-service assignments.</li><li>initialLearningRecordStatusHintESSMeaning; string; Description of the value of the initialLearningRecordStatusHintESS attribute.</li><li>initialLearningRecordStatusHintMSS; string; Hint for the initial learning record status for manager self-service assignments.</li><li>initialLearningRecordStatusHintMSSMeaning; string; Description of the value of the initialLearningRecordStatusHintMSS attribute.</li><li>initialLearningRecordSubStatusHintESS; string; Hint for the initial learning record substatus for manager self-service assignments.</li><li>initialLearningRecordSubStatusHintESSMeaning; string; Description of the value of the initialLearningRecordSubStatusHintESS attribute.</li><li>isEnrolleeForumEnabled; string; Hint to identify whether the enrollee forum is enabled for the learning item.</li><li>isManagerUserForumEnabled; string; Hint to identify whether the manager user forum is enabled for the learning item.</li><li>isSelfServiceUserForumEnabled; string; Hint to identify whether the self-service user forum is enabled for the learning item.</li><li>isWithdrawApprovalEnabled; string; Indicates whether the approval is required to withdraw from the learning item. Valid values are Y and N. Default value is N.</li><li>nextRetryDate; string; Date when the learner can next attempt the learning content.</li><li>paymentTypesAccepted; string; Payment types accepted for the learning record, such as manual payment, online payment, or no payment. Valid values are defined in the PaymentTypesAcceptedLOV.</li><li>paymentTypesAcceptedMeaning; string; Description of the value of the paymentTypesAccepted attribute.</li><li>pendingPrereqTimeoutInDaysESS; number; Hint for the number of days a learner has to complete prerequisites before they're withdrawn for learner self-service.</li><li>pendingPrereqTimeoutInDaysMSS; number; Hint for the number of days a learner has to complete prerequisites before they're withdrawn for manager self-service.</li><li>refundRuleForILTActivity; string; Hint for a refund rule for the instructor-led activity.</li><li>refundRuleForSPActivity; string; Hint for a refund rule for the self-paced activity.</li><li>showEnrollmentFormESS; string; Hint to show the learning record request form for learner self-service assignments.</li><li>showEnrollmentFormESSMeaning; string; Description of the value of the showEnrollmentFormESS attribute.</li><li>showEnrollmentFormMSS; string; Hint to show learning record request form for manager self-service assignments.</li><li>showEnrollmentFormMSSMeaning; string; Description of the value of the showEnrollmentFormMSS attribute.</li><li>viewModeESS; string; Hint for the view mode for learner self-service. Valid values are defined in the ViewModeESSLOV.</li><li>viewModeESSMeaning; string; Description of the value of the viewModeESS attribute.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>PrimaryKey :Finds all user action hints for assignments that match the specified primary key criteria. <br>Finder Variables: <ul></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all user action hints for assignments that match the specified primary key criteria.",
+                "properties": {}
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/learnerLearningRecords-selectedCourseOfferings-userActionHints"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "learnerLearningRecords-{learnerLearningRecordsUniqID}-child-selectedCourseOfferings-{otherSelectedCourseOfferingsUniqID}-child-userActionHints-get",
+        "x-filename-id": "learnerlearningrecords-learnerlearningrecordsuniqid-child-selectedcourseofferings-otherselectedcourseofferingsuniqid-child-useractionhints-get"
+      }
+    },
+    "/learnerLearningRecords/{learnerLearningRecordsUniqID}/child/selectedCourseOfferings/{otherSelectedCourseOfferingsUniqID2}/child/userActionHints/{userActionHintsUniqID}": {
+      "get": {
+        "tags": [
+          "Learner Learning Records/Selected Course Offerings/User Action Hints"
+        ],
+        "summary": "Get a user action hint",
+        "operationId": "get_learnerLearningRecords-selectedCourseOfferings-userActionHints",
+        "parameters": [
+          {
+            "name": "learnerLearningRecordsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Learner Learning Records resource and used to uniquely identify an instance of Learner Learning Records. The client should not generate the hash key value. Instead, the client should query on the Learner Learning Records collection resource in order to navigate to a specific instance of Learner Learning Records to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otherSelectedCourseOfferingsUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userActionHintsUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/learnerLearningRecords-selectedCourseOfferings-userActionHints-item-response"
+                }
+              }
+            },
+            "links": {
+              "PaymentTypesAcceptedLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_PAYMENT_PROCESSING"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: paymentTypesAccepted; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/paymentTypesAccepted",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "InitialLearningRecordSubStatusHintESSLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_INIT_ASGN_SUBSTATE_ESS"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: initialLearningRecordSubStatusHintESS; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/initialLearningRecordSubStatusHintESS",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "CanEditAssignmentHintLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_CAN_EDIT_ASSIGNMENT_HINT"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: canEditAssignmentHint; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/canEditAssignmentHint",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "DataSecurityPrivilegeLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_ASSIGNMENT_SEC_CONTEXT"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: dataSecurityPrivilege; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/dataSecurityPrivilege",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "InitialLearningRecordStatusHintMSSLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_INIT_ASSGN_STATE_MGR"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: initialLearningRecordStatusHintMSS; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/initialLearningRecordStatusHintMSS",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "InitialLearningRecordStatusHintESSLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_INIT_ASSGN_STATE_ESS"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: initialLearningRecordStatusHintESS; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/initialLearningRecordStatusHintESS",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "ViewModeESSLOV": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_WLF_VIEW_MODE"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: viewModeESS; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/viewModeESS",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "{learnerLearningRecordsUniqID}-child-selectedCourseOfferings-{otherSelectedCourseOfferingsUniqID2}-child-userActionHints-{userActionHintsUniqID}-get",
+        "x-filename-id": "learnerlearningrecordsuniqid-child-selectedcourseofferings-otherselectedcourseofferingsuniqid2-child-useractionhints-useractionhintsuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "learnerLearningRecords-selectedCourseOfferings-userActionHints": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/learnerLearningRecords-selectedCourseOfferings-userActionHints-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "learnerLearningRecords-selectedCourseOfferings-userActionHints-item-response": {
+        "type": "object",
+        "properties": {
+          "activityLearnerMarkCompl": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the learner can mark the activity as complete. Valid values are Y and N. Default value is N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "allowRetry": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Hint to identify whether a learner can retry the content or not. Y indicates that the learner is allowed to retry. N indicates that the learner isn't allowed to retry. Null indicates that this hint isn't applicable.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "canEditAssignmentHint": {
+            "title": "Can Edit Assignment Hint",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Hint to identify whether a user can edit the assignment. Examples include Can delete, Can withdraw, and No edit. Valid values are defined in the CanEditAssignmentHintLOV.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Can Edit Assignment Hint"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "canManageLearningItem": {
+            "title": "Can Manage Learning Item",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Hint to identify whether a user can manage the learning item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Can Manage Learning Item"
+              }
+            },
+            "x-queryable": true
+          },
+          "canRetakeLearningItem": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates whether the learner can retake the learning item.Valid values are Y and N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "dataSecurityPrivilege": {
+            "title": "Data Security Privilege",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Data security privilege, such as Learner or Learner Manager. It's the intent and permissions for the user accessing the learning assignment. Valid values are defined in the DataSecurityPrivilegeLOV list.",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Data Security Privilege"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "enrollmentQuestionnaireIdESS": {
+            "title": "Learner Enrollment Questionnaire ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrollment questionnaire for learner self-service assignments.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Learner Enrollment Questionnaire ID"
+              },
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "enrollmentQuestionnaireIdMSS": {
+            "title": "Manager Enrollment Questionnaire ID",
+            "type": "integer",
+            "description": "Unique identifier for the enrollment questionnaire for manager self-service assignments.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Manager Enrollment Questionnaire ID"
+              },
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "enrollmentQuestionnaireNumberESS": {
+            "title": "Learner Enrollment Questionnaire Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Friendly number for identifying the enrollment questionnaire for learner self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Learner Enrollment Questionnaire Number"
+              }
+            },
+            "x-queryable": true
+          },
+          "enrollmentQuestionnaireNumberMSS": {
+            "title": "Manager Enrollment Questionnaire Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Friendly number for identifying the enrollment questionnaire for manager self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Manager Enrollment Questionnaire Number"
+              }
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordStatusHintESS": {
+            "title": "Self-Assignment",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Hint for the initial learning record status for learner self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment"
+              },
+              "controlType": "choice",
+              "dependencies": [
+                "allowEnrollmentWhenPreqsNotAchievedESS"
+              ]
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordStatusHintESSMeaning": {
+            "title": "Self-Assignment Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the initialLearningRecordStatusHintESS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordStatusHintMSS": {
+            "title": "Manager Assignment",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Hint for the initial learning record status for manager self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Manager Assignment"
+              },
+              "controlType": "choice",
+              "dependencies": [
+                "allowEnrollmentWhenPreqsNotAchievedMSS"
+              ]
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordStatusHintMSSMeaning": {
+            "title": "Manager Assignment Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the initialLearningRecordStatusHintMSS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Manager Assignment Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordSubStatusHintESS": {
+            "title": "Self-Assignment",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Hint for the initial learning record substatus for manager self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment"
+              },
+              "controlType": "choice",
+              "dependencies": [
+                "allowEnrollmentWhenPreqsNotAchievedESS"
+              ]
+            },
+            "x-queryable": true
+          },
+          "initialLearningRecordSubStatusHintESSMeaning": {
+            "title": "Self-Assignment Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the initialLearningRecordSubStatusHintESS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "isEnrolleeForumEnabled": {
+            "title": "Enrollee Forum Enabled",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Hint to identify whether the enrollee forum is enabled for the learning item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Enrollee Forum Enabled"
+              }
+            },
+            "x-queryable": true
+          },
+          "isManagerUserForumEnabled": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Hint to identify whether the manager user forum is enabled for the learning item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "isSelfServiceUserForumEnabled": {
+            "title": "Self Service User Forum Enabled",
+            "maxLength": 1,
+            "type": "string",
+            "description": "Hint to identify whether the self-service user forum is enabled for the learning item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self Service User Forum Enabled"
+              }
+            },
+            "x-queryable": true
+          },
+          "isWithdrawApprovalEnabled": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates whether the approval is required to withdraw from the learning item. Valid values are Y and N. Default value is N.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "nextRetryDate": {
+            "type": "string",
+            "description": "Date when the learner can next attempt the learning content.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "paymentTypesAccepted": {
+            "title": "Payment Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Payment types accepted for the learning record, such as manual payment, online payment, or no payment. Valid values are defined in the PaymentTypesAcceptedLOV.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Payment Type"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "paymentTypesAcceptedMeaning": {
+            "title": "Payment Type Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the paymentTypesAccepted attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Payment Type Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "pendingPrereqTimeoutInDaysESS": {
+            "title": "Self-Assignment Pending Prerequisite Timeout in Days",
+            "type": "number",
+            "description": "Hint for the number of days a learner has to complete prerequisites before they're withdrawn for learner self-service.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment Pending Prerequisite Timeout in Days"
+              }
+            },
+            "x-queryable": true
+          },
+          "pendingPrereqTimeoutInDaysMSS": {
+            "title": "Manager Assignment Pending Prerequisite Timeout in Days",
+            "type": "number",
+            "description": "Hint for the number of days a learner has to complete prerequisites before they're withdrawn for manager self-service.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Self-Assignment Pending Prerequisite Timeout in Days"
+              }
+            },
+            "x-queryable": true
+          },
+          "refundRuleForILTActivity": {
+            "title": "Refund Rule for Instructor-Led Activity",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Hint for a refund rule for the instructor-led activity.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Refund Rule for Instructor-Led Activity"
+              }
+            },
+            "x-queryable": true
+          },
+          "refundRuleForSPActivity": {
+            "title": "Refund Rule for Self-Paced Activity",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Hint for a refund rule for the self-paced activity.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Refund Rule for Self-Paced Activity"
+              }
+            },
+            "x-queryable": true
+          },
+          "showEnrollmentFormESS": {
+            "title": "Show Learner Request Form",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Hint to show the learning record request form for learner self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Show Learner Request Form"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "showEnrollmentFormESSMeaning": {
+            "title": "Show Learner Request Form Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the showEnrollmentFormESS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Show Learner Request Form Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "showEnrollmentFormMSS": {
+            "title": "Show Manager Request Form",
+            "maxLength": 32,
+            "type": "string",
+            "description": "Hint to show learning record request form for manager self-service assignments.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Show Manager Request Form"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "showEnrollmentFormMSSMeaning": {
+            "title": "Show Manager Request Form Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the showEnrollmentFormMSS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Show Manager Request Form Description"
+              }
+            },
+            "x-queryable": true
+          },
+          "viewModeESS": {
+            "title": "View Mode",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Hint for the view mode for learner self-service. Valid values are defined in the ViewModeESSLOV.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "View Mode"
+              },
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "viewModeESSMeaning": {
+            "title": "View Mode Description",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Description of the value of the viewModeESS attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "help": {
+                "instruction": "View Mode Description"
+              }
+            },
+            "x-queryable": true
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

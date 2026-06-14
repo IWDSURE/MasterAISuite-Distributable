@@ -1,0 +1,37 @@
+# HRT_PS_ANA_PERF_RATING_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtpsanaperfratingv-3257.html#hrtpsanaperfratingv-3257](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtpsanaperfratingv-3257.html#hrtpsanaperfratingv-3257)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- TEXT_TITLE
+- TEXT_METRIC
+- TEXT_META
+- BADGE_TEXT
+- BADGE_STATUS
+- PERIOD_CHN_IND_VAL
+- PERIOD_CHN_IND_CMP
+- CHART_TYPE
+- CHART_COLOR
+- CHART_DATA
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT asg.person_id, asg.assignment_id, '{"strKey":"HdrSPerformancerating"}' text_title, ( lvl.numeric_rating || ' - ' || lvl.rating_short_descr ) text_metric, '{"strKey":"PgHILastreviewedinYEAR", "tokens":{"YEAR":"' || to_char(perf.last_update_date, 'YYYY') || '"}}' text_meta, decode(sign((trunc(sysdate) - CAST(perf.last_update_date AS DATE)) - 8), - 1, '{"strKey":"BdgNew3"}', NULL) badge_text, decode(sign((trunc(sysdate) - CAST(perf.last_update_date AS DATE)) - 8), - 1, 'info', NULL) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, NULL link_text FROM hrt_perf_rating_items_v perf, hrt_profile_typ_sections pts, hrt_profiles_vl pr, per_all_assignments_f asg, hrt_rating_levels_vl lvl WHERE perf.profile_id = pr.profile_id AND perf.date_from <= trunc(sysdate) AND perf.date_to IS NULL AND asg.person_id = pr.person_id AND trunc(sysdate) BETWEEN asg.effective_start_date AND asg.effective_end_date AND asg.primary_assignment_flag = 'Y' AND lvl.rating_level_id = perf.perf_rating_level_id AND lvl.rating_model_id = perf.perf_rating_model_id AND lvl.business_group_id = perf.business_group_id AND perf.section_id = pts.section_id AND perf.content_type_id = pts.content_type_id AND perf.business_group_id = pts.business_group_id AND pts.content_type_id = 125 AND pts.profile_type_id = 1 AND pts.active_flag = 'Y' AND perf.last_update_date = ( SELECT MAX(last_update_date) FROM hrt_perf_rating_items_v WHERE profile_id = pr.profile_id AND date_to IS NULL AND date_from <= trunc(sysdate) )
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

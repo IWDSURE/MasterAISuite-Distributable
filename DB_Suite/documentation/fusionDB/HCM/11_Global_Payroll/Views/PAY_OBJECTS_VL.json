@@ -1,0 +1,25 @@
+{
+  "name": "PAY_OBJECTS_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payobjectsvl-8866.html#payobjectsvl-8866",
+  "columns": [
+    "MODULE_NAME",
+    "FLOW_NAME",
+    "FLOW_INSTANCE_ID",
+    "CHECKLIST_NAME",
+    "OBJECT_NAME",
+    "TOTAL",
+    "PROCESSED",
+    "ERROR",
+    "SKIPPED",
+    "MARK_FOR_RETRY",
+    "PROCESSING",
+    "UNPROCESSED",
+    "TASK_INSTANCE_ID"
+  ],
+  "query": "select distinct aaa.module_name, aaa.flow_name,aaa.flow_instance_id,aaa.checklist_name,'Records' as Object_name, sum(decode(pra.action_status,null,decode(poa.action_status,null,decode(pta.action_status,null,0,1),1),1)) total, sum(decode(pra.action_status,'C',1,'V',1,'I',1,decode(poa.action_status,'C',1,'V',1,'I',1,decode(pta.action_status,'C',1,'V',1,'I',1,0)))) processed, sum(decode(pra.action_status,'E',1,decode(poa.action_status,'E',1,decode(pta.action_status,'E',1,0)))) error, sum(decode(pra.action_status,'S',1,decode(poa.action_status,'S',1,decode(pta.action_status,'S',1,0)))) skipped, sum(decode(pra.action_status,'M',1,decode(poa.action_status,'M',1,decode(pta.action_status,'M',1,0)))) mark_for_retry, sum(decode(pra.action_status,'P',1,decode(poa.action_status,'P',1,decode(pta.action_status,'P',1,0)))) processing, sum(decode(pra.action_status,'U',1,decode(poa.action_status,'U',1,decode(pta.action_status,'U',1,0)))) unprocessed, aaa.task_instance_id from pay_payroll_rel_actions pra, pay_payroll_actions ppa, pay_requests prq, pay_object_actions poa, pay_temp_object_actions pta, PAY_task_STATUS_VL aaa, (SELECT LOOKUP_CODE FROM HCM_LOOKUPS ACT WHERE LOOKUP_CODE IN('B','C','CP','CA','CQ','CR','D','E','EC','GI','G','H','L','M','P','PP','PS','PRU','Q','R','RG','S','T','TC','U','X','XWr','V','Wr') AND LOOKUP_TYPE='ACTION_TYPE') ACT_FLAG where ppa.action_type=ACT_FLAG.LOOKUP_CODE and prq.flow_instance_id = AAA.flow_instance_id and prq.flow_task_instance_id = aaa.task_instance_id and prq.pay_request_id = ppa.pay_request_id and aaa.batch_id is null and ppa.payroll_action_id = pra.payroll_action_id (+) and ppa.payroll_action_id = poa.payroll_action_id (+) and ppa.payroll_action_id = pta.payroll_action_id (+) and pra.source_action_id is null and pra.RETRO_COMPONENT_ID is null group by aaa.module_name,aaa.flow_name, aaa.flow_instance_id, aaa.checklist_name, aaa.task_instance_id, 'Records' union select distinct aaa.module_name, aaa.flow_name,aaa.flow_instance_id,aaa.checklist_name,'Records' as Object_name, sum(decode(pbl.batch_line_status,null,0,1)) total, sum(decode(pbl.batch_line_status,'T',1,0)) processed, sum(decode(pbl.batch_line_status,'E',1,0)) error, sum(0) skipped, sum(0) mark_for_retry, sum(decode(pbl.batch_line_status,'P',1,0)) processing, sum(decode(pbl.batch_line_status,'U',1,0)) unprocessed, aaa.task_instance_id from pay_batch_lines pbl, PAY_task_STATUS_VL aaa where aaa.batch_id=pbl.batch_id and aaa.batch_id is not null group by aaa.module_name,aaa.flow_name, aaa.flow_instance_id, aaa.checklist_name, aaa.task_instance_id, 'Records' union select distinct aaa.module_name, aaa.flow_name,aaa.flow_instance_id,aaa.checklist_name,'Records' as Object_name, IMPORT_LINES_TOTAL_COUNT total, (IMPORT_LINES_TOTAL_COUNT-LINE_UNPROCESSED_COUNT) processed, LINE_ERROR_COUNT error, skipped_count skipped, corrected_count mark_for_retry, 0 processing, LINE_UNPROCESSED_COUNT unprocessed, aaa.task_instance_id from HRC_DL_DATA_SETS pbl, PAY_task_STATUS_VL aaa where aaa.hdl_batch_id=pbl.data_set_id and aaa.hdl_batch_id is not null",
+  "_parsed_at": "2026-06-09T17:23:36"
+}

@@ -1,0 +1,32 @@
+# PAY_PER_RETRO_SUMMARY_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperretrosummaryvl-4786.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperretrosummaryvl-4786.html)
+
+## Columns
+
+- OBJECT_ACTION_ID
+- TIME_PERIOD_START_DATE
+- TIME_PERIOD_END_DATE
+- ELEMENT_NAME
+- ELEMENT_TOTAL
+- TOTAL
+- CURRENCY_CODE
+- RECOVERY_FLAG
+
+## Query
+
+```sql
+select pra_r.payroll_rel_action_id object_action_id, min(tp.start_date)time_period_start_date, max(tp.end_date)time_period_end_date, et.element_name, sum(ev.screen_entry_value) Element_total, SUM(SUM(ev.screen_entry_value)) OVER () AS total, et.input_currency_code currency_code , CASE WHEN SUM(SUM(ev.screen_entry_value)) OVER () > 0 THEN 'Add' WHEN SUM(SUM(ev.screen_entry_value)) OVER () < 0 THEN 'Subtract' ELSE 'Zero' END AS Recovery_Flag from pay_payroll_actions ppa_r , pay_payroll_rel_actions pra_r , pay_element_entries_f ee, pay_element_entry_values_f ev, pay_input_values_vl ip, pay_entry_proc_details proc, pay_element_types_vl et,pay_input_values_vl ipr, pay_payroll_rel_actions pra, pay_payroll_actions ppa, pay_time_periods tp where ppa_r.payroll_action_id= pra_r.payroll_action_id and ee.ELEMENT_entry_ID=ev.ELEMENT_entry_ID and ee.creator_id=pra_r.payroll_rel_action_id and ee.creator_type in('EE','RR') and ip.input_value_id=ev.input_value_id and ee.effective_start_date between ip.effective_start_date and ip.effective_end_date and proc.ELEMENT_entry_ID=ee.ELEMENT_entry_ID and proc.SOURCE_ELEMENT_TYPE_ID=et.ELEMENT_TYPE_ID and et.ELEMENT_TYPE_ID= ipr.ELEMENT_TYPE_ID and ipr.RESERVED_INPUT_VALUE in('SPECIAL_OUTPUT') and ip.base_name=ipr.base_name and ee.effective_start_date between ipr.effective_start_date and ipr.effective_end_date and ee.effective_start_date between et.effective_start_date and et.effective_end_date and ee.effective_start_date between ev.effective_start_date and ev.effective_end_date and pra.payroll_rel_action_id = proc.SOURCE_REL_ACTION_ID and pra.payroll_Action_id=ppa.payroll_action_id and tp.time_period_id = ppa.earn_time_period_id group by pra_r.payroll_rel_action_id, et.element_name,ip.name,ee.creator_id , et.input_currency_code,ee.person_id
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

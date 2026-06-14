@@ -1,0 +1,249 @@
+# ANC_APP_CONFIG_PARAMS_F
+
+this table contains absence application cofiguration data
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** ANC
+
+**Object type:** TABLE
+
+**Tablespace:** REFERENCE
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancappconfigparamsf-7967.html#ancappconfigparamsf-7967](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ancappconfigparamsf-7967.html#ancappconfigparamsf-7967)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| ANC_APP_CONFIG_PARAMS_F_PK | ANC_APP_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| ANC_APP_ID | NUMBER |  | 18 | Yes | ANC_APP_ID |
+| ABS_RECORD_DEL_FLAG | VARCHAR2 | 240 |  |  | Withdrawn Absences Delete Flag |
+| TYPE_DEFAULT_RULE | VARCHAR2 | 240 |  |  | Absence Type Default Rule. This value indicates how absence type going to get defaulted. |
+| SEED_DATA_SOURCE | VARCHAR2 | 512 |  |  | Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file. |
+| FUTURE_ABSENCE_PROCESSING | VARCHAR2 | 30 |  |  | Determines to processs all future absences or only impacted absences |
+| COMPENSATORY_BAL_PROCESSING | VARCHAR2 | 30 |  |  | Earned comp time to be added to the absence plan either on timecard submission or timecard approval |
+| MODULE_ID | VARCHAR2 | 32 |  |  | Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data. |
+| ENTERPRISE_ID | NUMBER |  | 18 | Yes | ENTERPRISE_ID |
+| LEGISLATION_CODE | VARCHAR2 | 30 |  |  | LEGISLATION_CODE |
+| EFFECTIVE_START_DATE | DATE |  |  | Yes | Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective. |
+| EFFECTIVE_END_DATE | DATE |  |  | Yes | Date Effective Entity: indicates the date at the end of the date range within which the row is effective. |
+| EFFECTIVE_DATE | DATE |  |  |  | Date Effective. |
+| ANC_APP_CONFIG_PARAMS_F_ALTCD | VARCHAR2 | 240 |  | Yes | ANC_APP_CONFIG_PARAMS_F_ALTCD |
+| OTL_FLAG | VARCHAR2 | 30 |  |  | OTL_FLAG |
+| PAY_FLAG | VARCHAR2 | 30 |  |  | PAY_FLAG |
+| RUN_ACCURAL_FLAG | VARCHAR2 | 30 |  |  | RUN_ACCURAL_FLAG |
+| HOURS_FORMAT_TYPE | VARCHAR2 | 30 |  |  | Absence Hours UOM format type. Indicates how Hours UOM values are displayed and entered in Absences. |
+| BALANCE_CALC_DATE | VARCHAR2 | 30 |  |  | Balance calculation display option. Indicates display balance as of effective date or calculation date. |
+| DECIMAL_NBR_FORMAT | VARCHAR2 | 30 |  |  | Decimal number format to display balances in Absences. |
+| DECIMAL_NBR_FORMAT_PRECN | VARCHAR2 | 30 |  |  | Decimal number format precision to display balances in Absences. |
+| RESUBMIT_AFFCTD_TM_CARD_FLAG | VARCHAR2 | 30 |  |  | RESUBMIT_AFFCTD_TM_CARD_FLAG |
+| ASSIGNMENT_PROC_LEVEL | VARCHAR2 | 30 |  |  | Basis for accrual calculation for employees with multiple assignments. |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| ANC_CHAR1 | VARCHAR2 | 255 |  |  | Absence Character column 1 |
+| ANC_CHAR2 | VARCHAR2 | 255 |  |  | Absence Character column 2 |
+| ANC_CHAR3 | VARCHAR2 | 255 |  |  | Absence Character column 3 |
+| ANC_CHAR4 | VARCHAR2 | 255 |  |  | Absence Character column 4 |
+| ANC_CHAR5 | VARCHAR2 | 255 |  |  | Absence Character column 5 |
+| ANC_CHAR6 | VARCHAR2 | 255 |  |  | Absence Character column 6 |
+| ANC_CHAR7 | VARCHAR2 | 255 |  |  | Absence Character column 7 |
+| ANC_CHAR8 | VARCHAR2 | 255 |  |  | Absence Character column 8 |
+| ANC_CHAR9 | VARCHAR2 | 255 |  |  | Absence Character column 9 |
+| ANC_CHAR10 | VARCHAR2 | 255 |  |  | Absence Character column 10 |
+| ANC_CHAR11 | VARCHAR2 | 255 |  |  | Absence Character column 11 |
+| ANC_CHAR12 | VARCHAR2 | 255 |  |  | Absence Character column 12 |
+| ANC_CHAR13 | VARCHAR2 | 255 |  |  | Absence Character column 13 |
+| ANC_CHAR14 | VARCHAR2 | 255 |  |  | Absence Character column 14 |
+| ANC_CHAR15 | VARCHAR2 | 255 |  |  | Absence Character column 15 |
+| ANC_CHAR16 | VARCHAR2 | 255 |  |  | Absence Character column 16 |
+| ANC_CHAR17 | VARCHAR2 | 255 |  |  | Absence Character column 17 |
+| ANC_CHAR18 | VARCHAR2 | 255 |  |  | Absence Character column 18 |
+| ANC_CHAR19 | VARCHAR2 | 255 |  |  | Absence Character column 19 |
+| ANC_CHAR20 | VARCHAR2 | 255 |  |  | Absence Character column 20 |
+| ANC_CHAR21 | VARCHAR2 | 255 |  |  | Absence Character column 21 |
+| ANC_CHAR22 | VARCHAR2 | 255 |  |  | Absence Character column 22 |
+| ANC_CHAR23 | VARCHAR2 | 255 |  |  | Absence Character column 23 |
+| ANC_CHAR24 | VARCHAR2 | 255 |  |  | Absence Character column 24 |
+| ANC_CHAR25 | VARCHAR2 | 255 |  |  | Absence Character column 25 |
+| ANC_CHAR26 | VARCHAR2 | 255 |  |  | Absence Character column 26 |
+| ANC_CHAR27 | VARCHAR2 | 255 |  |  | Absence Character column 27 |
+| ANC_CHAR28 | VARCHAR2 | 255 |  |  | Absence Character column 28 |
+| ANC_CHAR29 | VARCHAR2 | 255 |  |  | Absence Character column 29 |
+| ANC_CHAR30 | VARCHAR2 | 255 |  |  | Absence Character column 30 |
+| ANC_NUMBER1 | NUMBER |  |  |  | Absence Number column 1 |
+| ANC_NUMBER2 | NUMBER |  |  |  | Absence Number column 2 |
+| ANC_NUMBER3 | NUMBER |  |  |  | Absence Number column 3 |
+| ANC_NUMBER4 | NUMBER |  |  |  | Absence Number column 4 |
+| ANC_NUMBER5 | NUMBER |  |  |  | Absence Number column 5 |
+| ANC_NUMBER6 | NUMBER |  |  |  | Absence Number column 6 |
+| ANC_NUMBER7 | NUMBER |  |  |  | Absence Number column 7 |
+| ANC_NUMBER8 | NUMBER |  |  |  | Absence Number column 8 |
+| ANC_NUMBER9 | NUMBER |  |  |  | Absence Number column 9 |
+| ANC_NUMBER10 | NUMBER |  |  |  | Absence Number column 10 |
+| ANC_NUMBER11 | NUMBER |  |  |  | Absence Number column 11 |
+| ANC_NUMBER12 | NUMBER |  |  |  | Absence Number column 12 |
+| ANC_NUMBER13 | NUMBER |  |  |  | Absence Number column 13 |
+| ANC_NUMBER14 | NUMBER |  |  |  | Absence Number column 14 |
+| ANC_NUMBER15 | NUMBER |  |  |  | Absence Number column 15 |
+| ANC_NUMBER16 | NUMBER |  |  |  | Absence Number column 16 |
+| ANC_NUMBER17 | NUMBER |  |  |  | Absence Number column 17 |
+| ANC_NUMBER18 | NUMBER |  |  |  | Absence Number column 18 |
+| ANC_NUMBER19 | NUMBER |  |  |  | Absence Number column 19 |
+| ANC_NUMBER20 | NUMBER |  |  |  | Absence Number column 20 |
+| ANC_DATE1 | DATE |  |  |  | Absence Date column 1 |
+| ANC_DATE2 | DATE |  |  |  | Absence Date column 2 |
+| ANC_DATE3 | DATE |  |  |  | Absence Date column 3 |
+| ANC_DATE4 | DATE |  |  |  | Absence Date column 4 |
+| ANC_DATE5 | DATE |  |  |  | Absence Date column 5 |
+| ANC_DATE6 | DATE |  |  |  | Absence Date column 6 |
+| ANC_DATE7 | DATE |  |  |  | Absence Date column 7 |
+| ANC_DATE8 | DATE |  |  |  | Absence Date column 8 |
+| ANC_DATE9 | DATE |  |  |  | Absence Date column 9 |
+| ANC_DATE10 | DATE |  |  |  | Absence Date column 10 |
+| ATTRIBUTE1 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE2 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE3 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE4 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE5 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE6 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE7 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE8 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE9 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE10 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE11 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE12 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE13 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE14 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE15 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE16 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE17 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE18 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE19 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE20 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE21 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE22 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE23 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE24 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE25 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE26 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE27 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE28 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE29 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE30 | VARCHAR2 | 150 |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER1 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER2 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER3 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER4 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER5 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER6 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER7 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER8 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER9 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER10 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER11 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER12 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER13 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER14 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER15 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER16 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER17 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER18 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER19 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_NUMBER20 | NUMBER |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE1 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE2 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE3 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE4 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE5 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE6 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE7 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE8 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE9 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_DATE10 | DATE |  |  |  | Descriptive Flexfield: segment of the user descriptive flexfield. |
+| ATTRIBUTE_CATEGORY | VARCHAR2 | 30 |  |  | Descriptive Flexfield: structure definition of the user descriptive flexfield. |
+| INFORMATION1 | VARCHAR2 | 150 |  |  | INFORMATION1 |
+| INFORMATION2 | VARCHAR2 | 150 |  |  | INFORMATION2 |
+| INFORMATION3 | VARCHAR2 | 150 |  |  | INFORMATION3 |
+| INFORMATION4 | VARCHAR2 | 150 |  |  | INFORMATION4 |
+| INFORMATION5 | VARCHAR2 | 150 |  |  | INFORMATION5 |
+| INFORMATION6 | VARCHAR2 | 150 |  |  | INFORMATION6 |
+| INFORMATION7 | VARCHAR2 | 150 |  |  | INFORMATION7 |
+| INFORMATION8 | VARCHAR2 | 150 |  |  | INFORMATION8 |
+| INFORMATION9 | VARCHAR2 | 150 |  |  | INFORMATION9 |
+| INFORMATION10 | VARCHAR2 | 150 |  |  | INFORMATION10 |
+| INFORMATION11 | VARCHAR2 | 150 |  |  | INFORMATION11 |
+| INFORMATION12 | VARCHAR2 | 150 |  |  | INFORMATION12 |
+| INFORMATION13 | VARCHAR2 | 150 |  |  | INFORMATION13 |
+| INFORMATION14 | VARCHAR2 | 150 |  |  | INFORMATION14 |
+| INFORMATION15 | VARCHAR2 | 150 |  |  | INFORMATION15 |
+| INFORMATION16 | VARCHAR2 | 150 |  |  | INFORMATION16 |
+| INFORMATION17 | VARCHAR2 | 150 |  |  | INFORMATION17 |
+| INFORMATION18 | VARCHAR2 | 150 |  |  | INFORMATION18 |
+| INFORMATION19 | VARCHAR2 | 150 |  |  | INFORMATION19 |
+| INFORMATION20 | VARCHAR2 | 150 |  |  | INFORMATION20 |
+| INFORMATION21 | VARCHAR2 | 150 |  |  | INFORMATION21 |
+| INFORMATION22 | VARCHAR2 | 150 |  |  | INFORMATION22 |
+| INFORMATION23 | VARCHAR2 | 150 |  |  | INFORMATION23 |
+| INFORMATION24 | VARCHAR2 | 150 |  |  | INFORMATION24 |
+| INFORMATION25 | VARCHAR2 | 150 |  |  | INFORMATION25 |
+| INFORMATION26 | VARCHAR2 | 150 |  |  | INFORMATION26 |
+| INFORMATION27 | VARCHAR2 | 150 |  |  | INFORMATION27 |
+| INFORMATION28 | VARCHAR2 | 150 |  |  | INFORMATION28 |
+| INFORMATION29 | VARCHAR2 | 150 |  |  | INFORMATION29 |
+| INFORMATION30 | VARCHAR2 | 150 |  |  | INFORMATION30 |
+| INFORMATION_NUMBER1 | NUMBER |  |  |  | INFORMATION_NUMBER1 |
+| INFORMATION_NUMBER2 | NUMBER |  |  |  | INFORMATION_NUMBER2 |
+| INFORMATION_NUMBER3 | NUMBER |  |  |  | INFORMATION_NUMBER3 |
+| INFORMATION_NUMBER4 | NUMBER |  |  |  | INFORMATION_NUMBER4 |
+| INFORMATION_NUMBER5 | NUMBER |  |  |  | INFORMATION_NUMBER5 |
+| INFORMATION_NUMBER6 | NUMBER |  |  |  | INFORMATION_NUMBER6 |
+| INFORMATION_NUMBER7 | NUMBER |  |  |  | INFORMATION_NUMBER7 |
+| INFORMATION_NUMBER8 | NUMBER |  |  |  | INFORMATION_NUMBER8 |
+| INFORMATION_NUMBER9 | NUMBER |  |  |  | INFORMATION_NUMBER9 |
+| INFORMATION_NUMBER10 | NUMBER |  |  |  | INFORMATION_NUMBER10 |
+| INFORMATION_NUMBER11 | NUMBER |  |  |  | INFORMATION_NUMBER11 |
+| INFORMATION_NUMBER12 | NUMBER |  |  |  | INFORMATION_NUMBER12 |
+| INFORMATION_NUMBER13 | NUMBER |  |  |  | INFORMATION_NUMBER13 |
+| INFORMATION_NUMBER14 | NUMBER |  |  |  | INFORMATION_NUMBER14 |
+| INFORMATION_NUMBER15 | NUMBER |  |  |  | INFORMATION_NUMBER15 |
+| INFORMATION_NUMBER16 | NUMBER |  |  |  | INFORMATION_NUMBER16 |
+| INFORMATION_NUMBER17 | NUMBER |  |  |  | INFORMATION_NUMBER17 |
+| INFORMATION_NUMBER18 | NUMBER |  |  |  | INFORMATION_NUMBER18 |
+| INFORMATION_NUMBER19 | NUMBER |  |  |  | INFORMATION_NUMBER19 |
+| INFORMATION_NUMBER20 | NUMBER |  |  |  | INFORMATION_NUMBER20 |
+| INFORMATION_DATE1 | DATE |  |  |  | INFORMATION_DATE1 |
+| INFORMATION_DATE2 | DATE |  |  |  | INFORMATION_DATE2 |
+| INFORMATION_DATE3 | DATE |  |  |  | INFORMATION_DATE3 |
+| INFORMATION_DATE4 | DATE |  |  |  | INFORMATION_DATE4 |
+| INFORMATION_DATE5 | DATE |  |  |  | INFORMATION_DATE5 |
+| INFORMATION_DATE6 | DATE |  |  |  | INFORMATION_DATE6 |
+| INFORMATION_DATE7 | DATE |  |  |  | INFORMATION_DATE7 |
+| INFORMATION_DATE8 | DATE |  |  |  | INFORMATION_DATE8 |
+| INFORMATION_DATE9 | DATE |  |  |  | INFORMATION_DATE9 |
+| INFORMATION_DATE10 | DATE |  |  |  | INFORMATION_DATE10 |
+| INFORMATION_CATEGORY | VARCHAR2 | 30 |  |  | INFORMATION_CATEGORY |
+| ORA_SEED_SET1 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N. |
+| ORA_SEED_SET2 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| ANC_APP_CONFIG_PARAMS_F_U1 | Unique | Default | ANC_APP_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, ORA_SEED_SET1 |
+| ANC_APP_CONFIG_PARAMS_F_U11 | Unique | Default | ANC_APP_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, ORA_SEED_SET2 |
+
+---
+
+[← Back to Index](../3_Absence_Management_Tables_Index.md)

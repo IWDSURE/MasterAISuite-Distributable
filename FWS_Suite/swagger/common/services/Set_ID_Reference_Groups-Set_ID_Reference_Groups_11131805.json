@@ -1,0 +1,1359 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Set ID Reference Groups/Set ID Reference Groups 11.13.18.05",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "http://servername/fscmRestApi/resources/11.13.18.05/setIdReferenceGroups": {
+      "get": {
+        "tags": [
+          "Set ID Reference Groups/Set ID Reference Groups 11.13.18.05"
+        ],
+        "summary": "Get all set ID reference groups",
+        "description": "get",
+        "operationId": "getall_setIdReferenceGroups",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>PrimaryKey :Finds the set ID reference group for the given primary key. <br>Finder Variables: <ul><li>ReferenceGroupName :The unique identifier of the set ID reference group. </li></ul></li><li>ReferenceGroupNameFinder :Finds all of the set ID assignments asset books for the given reference group name. <br>Finder Variables: <ul><li>ReferenceGroupName :The unique identifier of the set ID reference group. </li></ul></li></ul>",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "x-adf-finder-formats": [
+                {
+                  "name": "PrimaryKey",
+                  "properties": {
+                    "ReferenceGroupName": {
+                      "type": "string",
+                      "readOnly": false,
+                      "maxLength": 30,
+                      "x-queryable": true,
+                      "x-nullable": false,
+                      "x-hints": {
+                        "updatable": true
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "ReferenceGroupNameFinder",
+                  "title": "ReferenceGroupNameCriteria",
+                  "properties": {
+                    "ReferenceGroupName": {
+                      "type": "string",
+                      "readOnly": false,
+                      "x-queryable": false,
+                      "x-hints": {
+                        "updatable": true,
+                        "adf-required": "Optional"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "ReferenceGroupName": {
+                    "type": "string",
+                    "readOnly": false,
+                    "maxLength": 30,
+                    "x-queryable": true,
+                    "x-nullable": false,
+                    "x-hints": {
+                      "updatable": true
+                    }
+                  }
+                }
+              },
+              {
+                "name": "ReferenceGroupNameFinder",
+                "title": "ReferenceGroupNameCriteria",
+                "properties": {
+                  "ReferenceGroupName": {
+                    "type": "string",
+                    "readOnly": false,
+                    "x-queryable": false,
+                    "x-hints": {
+                      "updatable": true,
+                      "adf-required": "Optional"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourcecollection+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdReferenceGroups-get",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidreferencegroups-get"
+      },
+      "post": {
+        "tags": [
+          "Set ID Reference Groups/Set ID Reference Groups 11.13.18.05"
+        ],
+        "summary": "Create a set ID reference group",
+        "description": "create or upsert",
+        "operationId": "create_setIdReferenceGroups",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "When set to true, the server will perform an Upsert operation instead of a Create. In an Upsert operation the server attempts to find an existing resource that matches the payload. If found, the server updates the existing resource instead of creating a new one. If not found, or when set to false (the default), a Create is performed.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.resourceitem+json": {
+              "schema": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-item-request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-item-request"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourceitem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdReferenceGroups-post",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidreferencegroups-post"
+      }
+    },
+    "http://servername/fscmRestApi/resources/11.13.18.05/setIdReferenceGroups/{setIdReferenceGroups_Id}": {
+      "get": {
+        "tags": [
+          "Set ID Reference Groups/Set ID Reference Groups 11.13.18.05"
+        ],
+        "summary": "Get a set ID reference group",
+        "description": "get",
+        "operationId": "get_setIdReferenceGroups",
+        "parameters": [
+          {
+            "name": "setIdReferenceGroups_Id",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourceitem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdReferenceGroups-{setIdReferenceGroups_Id}-get",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidreferencegroups-setidreferencegroups_id-get"
+      },
+      "delete": {
+        "tags": [
+          "Set ID Reference Groups/Set ID Reference Groups 11.13.18.05"
+        ],
+        "summary": "Delete a set ID reference group",
+        "description": "delete",
+        "operationId": "delete_setIdReferenceGroups",
+        "parameters": [
+          {
+            "name": "setIdReferenceGroups_Id",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body.",
+            "content": {}
+          }
+        },
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdReferenceGroups-{setIdReferenceGroups_Id}-delete",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidreferencegroups-setidreferencegroups_id-delete"
+      },
+      "patch": {
+        "tags": [
+          "Set ID Reference Groups/Set ID Reference Groups 11.13.18.05"
+        ],
+        "summary": "Update a set ID reference group",
+        "description": "update",
+        "operationId": "update_setIdReferenceGroups",
+        "parameters": [
+          {
+            "name": "setIdReferenceGroups_Id",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.resourceitem+json": {
+              "schema": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-item-request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-item-request"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "REST-Framework-Version": {
+                "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/vnd.oracle.adf.resourceitem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "request",
+        "x-internal-id": "http:--servername-fscmRestApi-resources-11.13.18.05-setIdReferenceGroups-{setIdReferenceGroups_Id}-patch",
+        "x-filename-id": "http-servername-fscmrestapi-resources-11.13.18.05-setidreferencegroups-setidreferencegroups_id-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "setIdReferenceGroups": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/__collection_context"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups_item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "__collection_context": {
+        "type": "object",
+        "properties": {
+          "hasMore": {
+            "type": "boolean"
+          }
+        }
+      },
+      "setIdReferenceGroups_item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdReferenceGroup_item"
+          },
+          {
+            "$ref": "#/components/schemas/__busObj_context"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "$translations": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-_translations"
+              },
+              "setIdAssignments": {
+                "$ref": "#/components/schemas/setIdReferenceGroups-setIdAssignments"
+              }
+            }
+          }
+        ]
+      },
+      "oraCommonAppsInfraObjects.SetIdReferenceGroup_item": {
+        "type": "object",
+        "properties": {
+          "referenceGroupName": {
+            "title": "Reference Group Name",
+            "type": "string",
+            "description": "The unique identifier of the set ID reference group.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "determinantType": {
+            "title": "Determinant Type",
+            "type": "string",
+            "description": "The unique identifier of the determinant type.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "applicationId": {
+            "title": "Application ID",
+            "type": "string",
+            "format": "big-integer",
+            "description": "The unique identifier of the application.",
+            "readOnly": true
+          },
+          "createdBy": {
+            "title": "Created By",
+            "type": "string",
+            "description": "The user who created the record.",
+            "readOnly": true
+          },
+          "timeCreated": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was created.",
+            "readOnly": true
+          },
+          "updatedBy": {
+            "title": "Last Updated By",
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "readOnly": true
+          },
+          "timeUpdated": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was last updated.",
+            "readOnly": true
+          },
+          "visibleGroupName": {
+            "title": "Visible Group Name",
+            "type": "string",
+            "description": "The translated visible name of the set ID reference group.",
+            "readOnly": true
+          },
+          "description": {
+            "title": "Reference Group Description",
+            "type": "string",
+            "description": "The description of the reference group.",
+            "readOnly": true
+          },
+          "$sourceLang": {
+            "title": "$sourceLang",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "title": "Set ID Reference Group",
+        "x-hints": {
+          "titlePlural": "Set ID Reference Groups"
+        },
+        "description": "The set ID reference groups list of values resource is used to query the set ID reference groups.",
+        "x-primaryKey": [
+          "referenceGroupName"
+        ]
+      },
+      "__busObj_context": {
+        "type": "object",
+        "properties": {
+          "$id": {
+            "type": "string"
+          },
+          "$context": {
+            "type": "object",
+            "properties": {
+              "etag": {
+                "type": "string"
+              },
+              "links": {
+                "type": "object",
+                "properties": {
+                  "$self": {
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "readOnly": true
+              }
+            }
+          }
+        }
+      },
+      "setIdReferenceGroups-_translations": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/__collection_context"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-_translations_item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "setIdReferenceGroups-_translations_item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdReferenceGroupTranslation_item"
+          },
+          {
+            "$ref": "#/components/schemas/__busObj_context"
+          }
+        ]
+      },
+      "oraCommonAppsInfraObjects.SetIdReferenceGroupTranslation_item": {
+        "type": "object",
+        "properties": {
+          "referenceGroupName": {
+            "type": "string",
+            "description": "The unique identifier of the set ID reference group.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "$language": {
+            "type": "string",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "$sourceLang": {
+            "type": "string",
+            "readOnly": true
+          },
+          "setIdReferenceGroup": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdReferenceGroup_item"
+              },
+              {
+                "$ref": "#/components/schemas/__busObj_context"
+              }
+            ]
+          }
+        },
+        "description": "The translation of the set ID reference group list of values resource.",
+        "x-primaryKey": [
+          "referenceGroupName",
+          "$language"
+        ]
+      },
+      "setIdReferenceGroups-setIdAssignments": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/__collection_context"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/setIdReferenceGroups-setIdAssignments_item-response"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "setIdReferenceGroups-setIdAssignments_item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdAssignment_item"
+          },
+          {
+            "$ref": "#/components/schemas/__busObj_context"
+          }
+        ]
+      },
+      "oraCommonAppsInfraObjects.SetIdAssignment_item": {
+        "type": "object",
+        "properties": {
+          "referenceGroupName": {
+            "title": "Reference Group Name",
+            "type": "string",
+            "description": "The unique identifier of the set ID reference group.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "determinantType": {
+            "allOf": [
+              {
+                "title": "Determinant Type",
+                "type": "string",
+                "description": "The unique identifier of the determinant type.",
+                "x-searchable": true,
+                "x-sortable": true,
+                "readOnly": true
+              },
+              {
+                "$ref": "#/components/schemas/oraCommonAppsInfraObjects.DeterminantType_enum"
+              }
+            ]
+          },
+          "determinantValue": {
+            "title": "Determinant Value",
+            "type": "string",
+            "format": "big-integer",
+            "description": "The set ID assignment determinant value.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "createdBy": {
+            "title": "Created By",
+            "type": "string",
+            "description": "The user who created the record.",
+            "readOnly": true
+          },
+          "timeCreated": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was created.",
+            "readOnly": true
+          },
+          "updatedBy": {
+            "title": "Last Updated By",
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "readOnly": true
+          },
+          "timeUpdated": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was last updated.",
+            "readOnly": true
+          },
+          "setIdSet": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdSet_item"
+              },
+              {
+                "$ref": "#/components/schemas/__busObj_context"
+              }
+            ]
+          },
+          "referenceGroup": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/oraCommonAppsInfraObjects.SetIdReferenceGroup_item"
+              },
+              {
+                "$ref": "#/components/schemas/__busObj_context"
+              }
+            ]
+          }
+        },
+        "title": "Set ID Assignment",
+        "x-hints": {
+          "titlePlural": "Set ID Assignments"
+        },
+        "description": "The set ID assignment list of values resource.",
+        "x-primaryKey": [
+          "determinantType",
+          "referenceGroupName",
+          "determinantValue"
+        ]
+      },
+      "oraCommonAppsInfraObjects.DeterminantType_enum": {
+        "type": "string",
+        "enum": [
+          "AB",
+          "BU",
+          "CST",
+          "PU",
+          "SET"
+        ],
+        "x-enum": {
+          "AB": {
+            "display": "Asset book"
+          },
+          "BU": {
+            "display": "Business unit"
+          },
+          "CST": {
+            "display": "Cost organization"
+          },
+          "PU": {
+            "display": "Project unit"
+          },
+          "SET": {
+            "display": "Set"
+          }
+        },
+        "x-oj": {
+          "transform": {
+            "path": "https://static-stage.oracle.com/cdn/boss/2307.0.480/js/transforms/metadata-transformer-jet-plugin.js",
+            "name": "transformEnumExtensions"
+          }
+        }
+      },
+      "oraCommonAppsInfraObjects.SetIdSet_item": {
+        "type": "object",
+        "properties": {
+          "setId": {
+            "title": "Set ID",
+            "type": "string",
+            "format": "big-integer",
+            "description": "The unique identifier of the set ID set.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "setCode": {
+            "title": "Set Code",
+            "type": "string",
+            "description": "The unique code that identifies the set ID set.",
+            "x-searchable": true,
+            "x-sortable": true,
+            "readOnly": true
+          },
+          "createdBy": {
+            "title": "Created By",
+            "type": "string",
+            "description": "The user who created the record.",
+            "readOnly": true
+          },
+          "timeCreated": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was created.",
+            "readOnly": true
+          },
+          "updatedBy": {
+            "title": "Last Updated By",
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "readOnly": true
+          },
+          "timeUpdated": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time when the record was last updated.",
+            "readOnly": true
+          },
+          "description": {
+            "title": "Set Description",
+            "type": "string",
+            "description": "The description of the set ID set.",
+            "readOnly": true
+          },
+          "$sourceLang": {
+            "type": "string",
+            "readOnly": true
+          },
+          "setName": {
+            "title": "Set Name",
+            "type": "string",
+            "description": "The descriptive name of the Set ID Set.",
+            "readOnly": true
+          }
+        },
+        "title": "Set ID Set",
+        "x-hints": {
+          "titlePlural": "Set ID Sets"
+        },
+        "description": "The set ID sets list of values resource is used to query the set ID sets.",
+        "x-primaryKey": [
+          "setId"
+        ]
+      },
+      "setIdReferenceGroups-item-request": {
+        "$ref": "#/components/schemas/setIdReferenceGroups-item"
+      },
+      "setIdReferenceGroups-item": {
+        "type": "object",
+        "properties": {
+          "ReferenceGroupName": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique identifier of the set ID reference group.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "VisibleGroupName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "The translated visible name of the set ID reference group.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-properties": {
+                "fnd:OA_TRANSLATABLE": "true"
+              }
+            }
+          },
+          "Description": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "The description of the reference group.",
+            "nullable": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ModuleId": {
+            "maxLength": 32,
+            "type": "string",
+            "description": "The unique identifier of the set ID module.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "DeterminantType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The unique identifier of the determinant type.",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true
+            }
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "description": "The unique identifier of the application.",
+            "format": "int64",
+            "nullable": false,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": true,
+              "adf-precision": 18
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who created the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "The date when the record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "The date when the record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "description": "The login credentials of the person who last updated the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          },
+          "ApplicationShortName": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "The short name of the application.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true,
+            "x-hints": {
+              "updatable": false
+            }
+          }
+        },
+        "x-hints": {
+          "titlePlural": "Set ID Reference Groups"
+        }
+      },
+      "setIdReferenceGroups-item-response": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemProperties"
+          },
+          {
+            "$ref": "#/components/schemas/setIdReferenceGroups-item"
+          }
+        ]
+      },
+      "ItemProperties": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,1062 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Recruiting Events",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUIEvents/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "List of Recruiting Events"
+        ],
+        "summary": "Search, filter and sort events",
+        "description": "Retrieves events using search, filter and sort capabilities.",
+        "operationId": "doall_findByAdvancedSearchQuery_recruitingUIEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Offset for the list of events that can be retrieved.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Keyword that retrieves the events.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Limit for the list of events that can be retrieved.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Fields on which a user can perform a keyword search.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Filters that can be applied on the events list.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort parameters for events.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Fields that appear on the events list.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "Automatic suggestions for the entered keyword.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Event information response that's returned as part of the payload response."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Event information response that's returned as part of the payload response."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEvents-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "recruitinguievents-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/recruitingUIEvents/action/eventAction": {
+      "post": {
+        "tags": [
+          "List of Recruiting Events"
+        ],
+        "summary": "Perform an action on an event",
+        "description": "Performs an action on an event.",
+        "operationId": "doall_eventAction_recruitingUIEvents",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "actionType": {
+                    "type": "string",
+                    "description": "Action type required for performing an action on an event.",
+                    "nullable": true
+                  },
+                  "eventNumber": {
+                    "type": "string",
+                    "description": "Event number required for performing an action.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response of the action performed on an event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response of the action performed on an event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEvents-action-eventAction-post",
+        "x-filename-id": "recruitinguievents-action-eventaction-post"
+      }
+    },
+    "/recruitingUIEvents": {
+      "get": {
+        "tags": [
+          "List of Recruiting Events"
+        ],
+        "summary": "Get all events",
+        "operationId": "getall_recruitingUIEvents",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AttendedCount; string; Count of candidates who have attended the event.</li><li>CompleteEventAction; string; Action that allows the user to complete the event.</li><li>CreationDate; string; Event creation date.</li><li>CreationDateTime; string; Event creation date and time.</li><li>DeleteEventAction; string; Action that allows the user to delete the event.</li><li>EditAllowed; string; Indicates whether the logged-in user can edit the event or not.</li><li>EventCategory; string; Event category name.</li><li>EventCategoryCode; string; Event category code.</li><li>EventEndDate; string; End date of the event.</li><li>EventEndDateTime; string; End date of the event formatted as per user preference.</li><li>EventFormat; string; Event format type.</li><li>EventFormatCode; string; Event format code.</li><li>EventId; integer; Event identifier.</li><li>EventName; string; Name of the event.</li><li>EventNumber; string; Number of the event.</li><li>EventOwner; string; Owner of the event.</li><li>EventOwnerId; integer; Owner ID of the event</li><li>EventStartDate; string; Start date of the event.</li><li>EventStartDateTime; string; Start date of the event formatted as per user preference.</li><li>EventVisibilityCode; string; Indicates the event visibility.</li><li>InterviewEnabled; string; Indicates if interviews have been enabled for this event.</li><li>MaximumRegCount; integer; Maximum number of registrations that the event can accept.</li><li>PhaseCode; string; Event phase code.</li><li>PhaseName; string; Event phase name.</li><li>RegisteredCount; number; Count of candidates who have registered for the event.</li><li>ShortlistedCount; string; Count of candidates who have been shortlisted in the event.</li><li>TranslateEventAction; string; Action that allows the user to translate the event.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the events based on the event identifier. <br>Finder Variables <ul><li>EventId; integer;  Event identifier corresponding to an event. </li></ul></li><li>findByEventNumber Finds all the events based on the event number. <br>Finder Variables <ul><li>EventNumber; string;  Event number corresponding to an event. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the events based on the event identifier.",
+                "properties": {
+                  "EventId": {
+                    "nullable": true,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Event identifier corresponding to an event.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByEventNumber",
+                "description": "Finds all the events based on the event number.",
+                "title": "findByEventNumber",
+                "properties": {
+                  "EventNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Event number corresponding to an event.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEvents"
+                }
+              }
+            },
+            "links": {
+              "eventAction": {
+                "operationRef": "#/paths/~1recruitingUIEvents~1action~1eventAction/post",
+                "description": "Performs an action on an event."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1recruitingUIEvents~1action~1findByAdvancedSearchQuery/post",
+                "description": "Retrieves events using search, filter and sort capabilities."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEvents-get",
+        "x-filename-id": "recruitinguievents-get"
+      }
+    },
+    "/recruitingUIEvents/{EventId}": {
+      "get": {
+        "tags": [
+          "List of Recruiting Events"
+        ],
+        "summary": "Get an event",
+        "operationId": "get_recruitingUIEvents",
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Event identifier.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEvents-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEvents-{EventId}-get",
+        "x-filename-id": "recruitinguievents-eventid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUIEvents": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEvents-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingUIEvents-item-response": {
+        "type": "object",
+        "properties": {
+          "AttendedCount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Count of candidates who have attended the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompleteEventAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action that allows the user to complete the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Event creation date.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDateTime": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event creation date and time.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DeleteEventAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action that allows the user to delete the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EditAllowed": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates whether the logged-in user can edit the event or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventCategory": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Event category name.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventCategoryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Event category code.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventEndDate": {
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventEndDateTime": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "End date of the event formatted as per user preference.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventFormat": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Event format type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventFormatCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Event format code.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Event identifier.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Number of the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventOwner": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Owner of the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventOwnerId": {
+            "type": "integer",
+            "description": "Owner ID of the event",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventStartDate": {
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventStartDateTime": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Start date of the event formatted as per user preference.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventVisibilityCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates the event visibility.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InterviewEnabled": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Indicates if interviews have been enabled for this event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumRegCount": {
+            "type": "integer",
+            "description": "Maximum number of registrations that the event can accept.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PhaseCode": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Event phase code.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhaseName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Event phase name.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RegisteredCount": {
+            "type": "number",
+            "description": "Count of candidates who have registered for the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShortlistedCount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Count of candidates who have been shortlisted in the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TranslateEventAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action that allows the user to translate the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

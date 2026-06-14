@@ -1,0 +1,200 @@
+{
+  "name": "IRC_DA_PARTNER_NOTIF",
+  "object_type": "TABLE",
+  "description": "This table contains the partner notification information for third party job site direct apply.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircdapartnernotif-24048.html#ircdapartnernotif-24048",
+  "primary_keys": [
+    {
+      "name": "IRC_DA_PARTNER_NOTIF_PK",
+      "columns": "DA_PARTNER_NOTIF_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "DA_PARTNER_NOTIF_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the table. System generated."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Job Application for which configured action is invoked in the candidate selection process. Foreign Key to IRC_SUBMISSIONS table."
+    },
+    {
+      "Name": "CURRENT_PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Current Phase of Job Application for which this direct apply notification action is invoked. Foreign Key to IRC_PHASES_B table."
+    },
+    {
+      "Name": "CURRENT_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Current State of Job Application for which this direct apply notification action is invoked. Foreign Key to IRC_STATES_B table."
+    },
+    {
+      "Name": "STEP_ACTION_USAGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key IRC_LC_ACTION_USAGES_B table. (Life cycle action context)"
+    },
+    {
+      "Name": "PUBLIC_STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_STATES_B table. This refers to public job application status that can be shared with candidates."
+    },
+    {
+      "Name": "EVENT_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Occurrence time stamp when the direct apply notification action is invoked."
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Processing Status of this direct apply notification.  Possible values are \"Success\", \"Not Implemented\", \"Error\", \"N/A\" etc.  Not look up values."
+    },
+    {
+      "Name": "TRY_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "4",
+      "Not-null": "",
+      "Comments": "This column stores the number of tries made to invoke the partner service."
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the name of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "900",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the package name of the job that created or last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CURRENT_PHASE_ID"
+    },
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CURRENT_STATE_ID"
+    },
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STEP_ACTION_USAGE_ID"
+    },
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PUBLIC_STATE_ID"
+    },
+    {
+      "Index": "IRC_DA_PARTNER_NOTIF_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "DA_PARTNER_NOTIF_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:50:21"
+}

@@ -1,0 +1,152 @@
+{
+  "name": "IRC_CAND_ACTIONS",
+  "object_type": "TABLE",
+  "description": "This table contains information about candidate that requires asynchronous confirmation.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandactions-29467.html#irccandactions-29467",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_ACTIONS_PK",
+      "columns": "CAND_ACTION_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_ACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key of the table."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key association with IRC_CANDIDATES table. Required to retrieve (store/delete) the updated Email address for a particular candidate once the candidate confirms the new Email either via mail or CSS."
+    },
+    {
+      "Name": "ACTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Action specifies the purpose of the row in the new table.\nFor e.g. If it stores updated email address, then the value would be UPDATE_EMAIL."
+    },
+    {
+      "Name": "ACTION_PAYLOAD",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This is used to store non-PII information."
+    },
+    {
+      "Name": "ACTION_SECURE_PAYLOAD",
+      "Datatype": "VARCHAR2",
+      "Length": "1000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This is used to store PII data. For e.g. When new email is entered, the email is stored in this column."
+    },
+    {
+      "Name": "ACTION_STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This field along with 'ACTION_PAYLOAD' gives us the current status of a candidate's action."
+    },
+    {
+      "Name": "ACTION_START_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the timestamp when the Action was triggered. This is one of two columns to track the progress made on the Action."
+    },
+    {
+      "Name": "ACTION_END_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the timestamp when the Action was completed/withdrawn. This is one of two columns to track the progress made on the Action."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "REQUEST_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Counter to track number of times a candidate tries to perform an action."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_ACTIONS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_ACTION_ID"
+    },
+    {
+      "Index": "IRC_CAND_ACTIONS_UK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, ACTION_CODE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:45:30"
+}

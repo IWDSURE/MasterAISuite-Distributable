@@ -1,0 +1,41 @@
+# HRT_PROFILES_SECURED_LIST_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtprofilessecuredlistv-8889.html#hrtprofilessecuredlistv-8889](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtprofilessecuredlistv-8889.html#hrtprofilessecuredlistv-8889)
+
+## Columns
+
+- PROFILE_ID
+- BUSINESS_GROUP_ID
+- DESCRIPTION
+- SUMMARY
+- PROFILE_TYPE_ID
+- PROFILE_CODE
+- PROFILE_STATUS_CODE
+- PROFILE_USAGE_CODE
+- PERSON_ID
+- PARTY_ID
+- OWNER_PERSON_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT PR.PROFILE_ID, PR.BUSINESS_GROUP_ID, PRT.DESCRIPTION, PRT.SUMMARY, PR.PROFILE_TYPE_ID, PR.PROFILE_CODE, PR.PROFILE_STATUS_CODE, PR.PROFILE_USAGE_CODE, PR.PERSON_ID, PR.PARTY_ID, PR.OWNER_PERSON_ID, PR.OBJECT_VERSION_NUMBER, PR.CREATED_BY, PR.CREATION_DATE, PR.LAST_UPDATED_BY, PR.LAST_UPDATE_DATE, PR.LAST_UPDATE_LOGIN FROM HRT_PROFILES_B PR, HRT_PROFILES_TL PRT WHERE PR.PROFILE_ID = PRT.PROFILE_ID AND PRT.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

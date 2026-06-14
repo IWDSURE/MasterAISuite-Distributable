@@ -1,0 +1,192 @@
+{
+  "name": "IRC_PROSPECTS",
+  "object_type": "TABLE",
+  "description": "This table stores all prospects related to a Requisition.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircprospects-8730.html#ircprospects-8730",
+  "primary_keys": [
+    {
+      "name": "IRC_PROSPECTS_PK",
+      "columns": "PROSPECT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PROSPECT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key of the table. Populated by global sequence."
+    },
+    {
+      "Name": "OBJECT_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores whether the record is active or soft deleted. Used in soft delete functionality"
+    },
+    {
+      "Name": "CANDIDATE_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Stores the PersonId of the candidate who is added as a prospect."
+    },
+    {
+      "Name": "REQUISITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Reference to the Requisition against which this prospect is created. Foreign key to IRC_REQUISITIONS_B table."
+    },
+    {
+      "Name": "PROSPECT_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Stores the type of the prospect i.e Match or Referral etc."
+    },
+    {
+      "Name": "PROSPECT_STATUS_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the status of the prospect i.e active or not interested etc."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the Submission created against this prospect. Foreign key to IRC_SUBMISSIONS table."
+    },
+    {
+      "Name": "REFERRAL_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the Referral from which the prospect was created. Foreign key to IRC_REFERRALS table."
+    },
+    {
+      "Name": "ADDED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the PersonId who added this prospect. Foreign key to PER_PERSONS table."
+    },
+    {
+      "Name": "CONTEXT_TYPE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the context from where this prospect was added i.e Requsition or Candidate Pool or Candidate Search"
+    },
+    {
+      "Name": "CONTEXT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Stores the ID of the reference object from where this Prospect was added i.e REQUISITION_ID or CANDIDATE_POOL_ID. Will be null incase of Candidate Search."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_PROSPECTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CANDIDATE_PERSON_ID"
+    },
+    {
+      "Index": "IRC_PROSPECTS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUISITION_ID"
+    },
+    {
+      "Index": "IRC_PROSPECTS_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_PROSPECTS_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REFERRAL_ID"
+    },
+    {
+      "Index": "IRC_PROSPECTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PROSPECT_ID"
+    },
+    {
+      "Index": "IRC_PROSPECTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LAST_UPDATE_DATE"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:58:58"
+}

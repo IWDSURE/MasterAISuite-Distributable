@@ -1,0 +1,25 @@
+{
+  "name": "HRT_PS_ANA_SKILLS_ACHIEVED_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HRT",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtpsanaskillsachievedv-5276.html#hrtpsanaskillsachievedv-5276",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TEXT_TITLE",
+    "TEXT_METRIC",
+    "TEXT_META",
+    "BADGE_TEXT",
+    "BADGE_STATUS",
+    "PERIOD_CHN_IND_VAL",
+    "PERIOD_CHN_IND_CMP",
+    "CHART_TYPE",
+    "CHART_COLOR",
+    "CHART_DATA",
+    "LINK_TEXT"
+  ],
+  "query": "SELECT pr.person_id, asg.assignment_id, '{\"strKey\":\"HdrSCoreskillsachieved\"}' text_title, '{\"strKey\":\"FdHIAttainedSKILLSNUM\", \"tokens\":{\"SKILLS_NUM\":\"' || nvl(skill.developed, 0) || '\"}}' text_metric, '{\"strKey\":\"FdHIDevelopingSKILLSNUM\", \"tokens\":{\"SKILLS_NUM\":\"' || nvl(skill.developing, 0) || '\"}}' text_meta, NULL badge_text, NULL badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, NULL link_text FROM hrt_profiles_vl pr, per_all_assignments_f asg, ( SELECT profile_id, SUM(decode(skill.skill_group, 'ORA_DEVELOPED', 1, 0)) developed, SUM(decode(skill.skill_group, 'ORA_DEVELOPING', 1, 0)) developing FROM hrt_skills_items_v skill, hrt_content_source_rlats csrc WHERE csrc.source_id = 120 AND csrc.content_type_id = 134 AND skill.section_id = csrc.section_id AND skill.business_group_id = csrc.business_group_id GROUP BY profile_id ) skill WHERE asg.person_id = pr.person_id AND trunc(sysdate) BETWEEN asg.effective_start_date AND asg.effective_end_date AND skill.profile_id (+) = pr.profile_id",
+  "_parsed_at": "2026-06-09T18:37:18"
+}

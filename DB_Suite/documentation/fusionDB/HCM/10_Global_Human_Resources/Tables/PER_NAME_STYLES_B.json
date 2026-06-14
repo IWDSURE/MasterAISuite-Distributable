@@ -1,0 +1,156 @@
+{
+  "name": "PER_NAME_STYLES_B",
+  "object_type": "TABLE",
+  "description": "This table is used to associate name style with legislation. It holds one row for the universal name style plus additional rows for legislations that wish to define their own name style.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/pernamestylesb-15862.html#pernamestylesb-15862",
+  "primary_keys": [
+    {
+      "name": "PER_NAME_STYLES_B_PK",
+      "columns": "NAME_STYLE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "NAME_STYLE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Alternate Key. Can be valid legislation code or ???WW??? for the universal style"
+    },
+    {
+      "Name": "ALTERNATE_NAME_REQUIRED",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Y/N flag to indicate whether an alternate-language name (i.e. different language from corporate language) must be entered for this style."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_NAME_STYLES_B_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "NAME_STYLE_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "PER_NAME_STYLES_B_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "NAME_STYLE_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "PER_NAME_STYLES_B_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGISLATION_CODE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "PER_NAME_STYLES_B_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGISLATION_CODE, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:38:31"
+}

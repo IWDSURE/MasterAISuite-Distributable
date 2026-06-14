@@ -1,0 +1,1669 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting CE Candidate Previous Experience",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingCECandidatePreviousExpItems": {
+      "get": {
+        "tags": [
+          "Recruiting CE Candidate Previous Experience"
+        ],
+        "summary": "Get all the candidate previous experience items.",
+        "operationId": "getall_recruitingCECandidatePreviousExpItems",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>BusinessType; string; Business type in the candidate previous experience items.</li><li>CompanyURL; string; Company URL in the candidate previous experience items.</li><li>ContactSupervisorFlag; boolean; Indicates that the supervisor needs to be contacted.</li><li>CountryCode; string; Country code in the candidate previous experience items.</li><li>CurrentJobFlag; boolean; Indicates that it's the current job of the candidate.</li><li>Department; string; Department in the candidate previous experience items.</li><li>DirectReports; integer; Direct Reports in candidate previous experience items.</li><li>EmployerCity; string; Employer city in the candidate previous experience items.</li><li>EmployerCountryId; integer; Employer country ID in the candidate previous experience items.</li><li>EmployerName; string; Employer name in the candidate previous experience items.</li><li>EmployerPhone; string; Employer phone in the candidate previous experience items.</li><li>EmployerStateId; integer; Employer state ID in the candidate previous experience items.</li><li>EndCompensation; number; End compensation in the candidate previous experience items.</li><li>EndDate; string; End date in the candidate previous experience items.</li><li>FlowVersionId; integer; Flow version ID in the candidate previous experience items.</li><li>FullTimeCode; string; Indicates if the previous experience was a full time job.</li><li>InternalFlag; boolean; Indicates if the previous experience was an internal job.</li><li>JobFamilyId; integer; Job family Id in the candidate previous experience items.</li><li>JobFunction; string; Job function in the candidate previous experience items.</li><li>JobTitle; string; Job title in the candidate previous experience items.</li><li>OtherCompensation; string; Other compensation in the candidate previous experience items.</li><li>OtherJobFunction; string; Other job function in the candidate previous experience items.</li><li>PreviousEmploymentId; integer; Previous employment ID in the candidate previous experience items.</li><li>SectionId; integer; Section ID in candidate previous experience items.</li><li>StartCompensation; number; Start compensation in candidate previous experience items.</li><li>StartDate; string; Start date in candidate previous experience items.</li><li>StartingPosition; string; Starting position in the candidate previous experience items.</li><li>StateProvinceCode; string; State province code in the candidate previous experience items.</li><li>SubmissionId; integer; Submission ID in the candidate previous experience items.</li><li>SupervisorEmail; string; Supervisor email in the candidate previous experience items.</li><li>SupervisorName; string; Supervisor name in the candidate previous experience items.</li><li>SupervisorPhone; string; Supervisor phone in the candidate previous experience items.</li><li>SupervisorTitle; string; Supervisor title in the candidate previous experience items.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds the candidate previous experience items by using a unique ID <br>Finder Variables <ul><li>PreviousEmploymentId; integer;  Finds the candidate previous experience items by using a unique ID and the PreviousEmploymentId; integer;  variable </li></ul></li><li>findBySectionId Finds the candidate previous experience items by using the variable findBySectionId <br>Finder Variables <ul><li>FlowVersionId; integer;  Finds candidate previous experience items by using the findBySectionId variable and the FlowVersionId; integer;  variable </li><li>SectionId; integer;  Finds candidate previous experience items by using the findBySectionId variable and the section ID </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds the candidate previous experience items by using a unique ID",
+                "properties": {
+                  "PreviousEmploymentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Finds the candidate previous experience items by using a unique ID and the PreviousEmploymentId variable",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findBySectionId",
+                "description": "Finds the candidate previous experience items by using the variable findBySectionId",
+                "title": "filterBySectionId",
+                "properties": {
+                  "FlowVersionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds candidate previous experience items by using the findBySectionId variable and the FlowVersionId variable",
+                    "type": "integer"
+                  },
+                  "SectionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds candidate previous experience items by using the findBySectionId variable and the section ID",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidatePreviousExpItems-get",
+        "x-filename-id": "recruitingcecandidatepreviousexpitems-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting CE Candidate Previous Experience"
+        ],
+        "summary": "Post all the candidate previous experience items.",
+        "operationId": "create_recruitingCECandidatePreviousExpItems",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCECandidatePreviousExpItems-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidatePreviousExpItems-post",
+        "x-filename-id": "recruitingcecandidatepreviousexpitems-post"
+      }
+    },
+    "/recruitingCECandidatePreviousExpItems/{PreviousEmploymentId}": {
+      "get": {
+        "tags": [
+          "Recruiting CE Candidate Previous Experience"
+        ],
+        "summary": "Get the candidate previous experience item.",
+        "operationId": "get_recruitingCECandidatePreviousExpItems",
+        "parameters": [
+          {
+            "name": "PreviousEmploymentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Previous employment ID in the candidate previous experience items.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidatePreviousExpItems-{PreviousEmploymentId}-get",
+        "x-filename-id": "recruitingcecandidatepreviousexpitems-previousemploymentid-get"
+      },
+      "delete": {
+        "tags": [
+          "Recruiting CE Candidate Previous Experience"
+        ],
+        "summary": "Delete the candidate previous experience items.",
+        "operationId": "delete_recruitingCECandidatePreviousExpItems",
+        "parameters": [
+          {
+            "name": "PreviousEmploymentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Previous employment ID in the candidate previous experience items.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingCECandidatePreviousExpItems-{PreviousEmploymentId}-delete",
+        "x-filename-id": "recruitingcecandidatepreviousexpitems-previousemploymentid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Recruiting CE Candidate Previous Experience"
+        ],
+        "summary": "Patch the candidate previous experience items.",
+        "operationId": "update_recruitingCECandidatePreviousExpItems",
+        "parameters": [
+          {
+            "name": "PreviousEmploymentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Previous employment ID in the candidate previous experience items.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCECandidatePreviousExpItems-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidatePreviousExpItems-{PreviousEmploymentId}-patch",
+        "x-filename-id": "recruitingcecandidatepreviousexpitems-previousemploymentid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingCECandidatePreviousExpItems": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingCECandidatePreviousExpItems-item-response": {
+        "type": "object",
+        "properties": {
+          "Achievements": {
+            "title": "Achievements",
+            "type": "string",
+            "description": "Achievements mentioned in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AdditionalInformation": {
+            "title": "Additional Information",
+            "type": "string",
+            "description": "Additional information in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "BusinessType": {
+            "title": "Type of Business",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Business type in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CompanyURL": {
+            "title": "Company URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Company URL in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContactSupervisorFlag": {
+            "title": "OK to Contact Supervisor",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that the supervisor needs to be contacted.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CountryCode": {
+            "title": "Employer Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CurrentJobFlag": {
+            "title": "Current Job",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that it's the current job of the candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "title": "Department or Division or Post",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DirectReports": {
+            "title": "Direct Reports",
+            "type": "integer",
+            "description": "Direct Reports in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EmployerCity": {
+            "title": "Employer City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer city in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmployerCountryId": {
+            "title": "Employer Country",
+            "type": "integer",
+            "description": "Employer country ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EmployerName": {
+            "title": "Employer Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer name in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmployerPhone": {
+            "title": "Employer Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer phone in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmployerStateId": {
+            "title": "Employer State or Province",
+            "type": "integer",
+            "description": "Employer state ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EndCompensation": {
+            "title": "Ending Compensation",
+            "type": "number",
+            "description": "End compensation in the candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date in the candidate previous experience items.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FlowVersionId": {
+            "type": "integer",
+            "description": "Flow version ID in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FullTimeCode": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the previous experience was a full time job.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "InternalFlag": {
+            "title": "Internal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the previous experience was an internal job.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "JobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family Id in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobFunction": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "JobTitle": {
+            "title": "Job Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Job title in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LeavingReason": {
+            "title": "Reason for Leaving",
+            "type": "string",
+            "description": "Reason for leaving the previous job.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherCompensation": {
+            "title": "Other Compensation",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other compensation in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OtherJobFunction": {
+            "title": "Other Job Function",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other job function in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PreviousEmploymentId": {
+            "type": "integer",
+            "description": "Previous employment ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Responsibilities": {
+            "title": "Responsibilities",
+            "type": "string",
+            "description": "Responsibilities in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StartCompensation": {
+            "title": "Starting Compensation",
+            "type": "number",
+            "description": "Start compensation in candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date in candidate previous experience items.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StartingPosition": {
+            "title": "Starting Position",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Starting position in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StateProvinceCode": {
+            "title": "Employer State or Province",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SupervisorEmail": {
+            "title": "Supervisor Email",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor email in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SupervisorName": {
+            "title": "Supervisor Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor name in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SupervisorPhone": {
+            "title": "Supervisor Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor phone in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SupervisorTitle": {
+            "title": "Supervisor Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor title in the candidate previous experience items.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingCECandidatePreviousExpItems-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Achievements": {
+            "title": "Achievements",
+            "type": "string",
+            "description": "Achievements mentioned in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AdditionalInformation": {
+            "title": "Additional Information",
+            "type": "string",
+            "description": "Additional information in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "BusinessType": {
+            "title": "Type of Business",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Business type in the candidate previous experience items.",
+            "nullable": true
+          },
+          "CompanyURL": {
+            "title": "Company URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Company URL in the candidate previous experience items.",
+            "nullable": true
+          },
+          "ContactSupervisorFlag": {
+            "title": "OK to Contact Supervisor",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that the supervisor needs to be contacted.",
+            "nullable": true
+          },
+          "CountryCode": {
+            "title": "Employer Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code in the candidate previous experience items.",
+            "nullable": true
+          },
+          "CurrentJobFlag": {
+            "title": "Current Job",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that it's the current job of the candidate.",
+            "nullable": true
+          },
+          "Department": {
+            "title": "Department or Division or Post",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department in the candidate previous experience items.",
+            "nullable": true
+          },
+          "DirectReports": {
+            "title": "Direct Reports",
+            "type": "integer",
+            "description": "Direct Reports in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployerCity": {
+            "title": "Employer City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer city in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerCountryId": {
+            "title": "Employer Country",
+            "type": "integer",
+            "description": "Employer country ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployerName": {
+            "title": "Employer Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer name in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerPhone": {
+            "title": "Employer Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer phone in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerStateId": {
+            "title": "Employer State or Province",
+            "type": "integer",
+            "description": "Employer state ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EndCompensation": {
+            "title": "Ending Compensation",
+            "type": "number",
+            "description": "End compensation in the candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date in the candidate previous experience items.",
+            "format": "date",
+            "nullable": true
+          },
+          "FlowVersionId": {
+            "type": "integer",
+            "description": "Flow version ID in the candidate previous experience items.",
+            "nullable": true
+          },
+          "FullTimeCode": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the previous experience was a full time job.",
+            "nullable": true
+          },
+          "InternalFlag": {
+            "title": "Internal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the previous experience was an internal job.",
+            "nullable": true
+          },
+          "JobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family Id in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "JobFunction": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function in the candidate previous experience items.",
+            "nullable": true
+          },
+          "JobTitle": {
+            "title": "Job Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Job title in the candidate previous experience items.",
+            "nullable": true
+          },
+          "LeavingReason": {
+            "title": "Reason for Leaving",
+            "type": "string",
+            "description": "Reason for leaving the previous job.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherCompensation": {
+            "title": "Other Compensation",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other compensation in the candidate previous experience items.",
+            "nullable": true
+          },
+          "OtherJobFunction": {
+            "title": "Other Job Function",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other job function in the candidate previous experience items.",
+            "nullable": true
+          },
+          "PreviousEmploymentId": {
+            "type": "integer",
+            "description": "Previous employment ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Responsibilities": {
+            "title": "Responsibilities",
+            "type": "string",
+            "description": "Responsibilities in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartCompensation": {
+            "title": "Starting Compensation",
+            "type": "number",
+            "description": "Start compensation in candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date in candidate previous experience items.",
+            "format": "date",
+            "nullable": true
+          },
+          "StartingPosition": {
+            "title": "Starting Position",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Starting position in the candidate previous experience items.",
+            "nullable": true
+          },
+          "StateProvinceCode": {
+            "title": "Employer State or Province",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorEmail": {
+            "title": "Supervisor Email",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor email in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorName": {
+            "title": "Supervisor Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor name in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorPhone": {
+            "title": "Supervisor Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor phone in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorTitle": {
+            "title": "Supervisor Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor title in the candidate previous experience items.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidatePreviousExpItems-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Achievements": {
+            "title": "Achievements",
+            "type": "string",
+            "description": "Achievements mentioned in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AdditionalInformation": {
+            "title": "Additional Information",
+            "type": "string",
+            "description": "Additional information in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "BusinessType": {
+            "title": "Type of Business",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Business type in the candidate previous experience items.",
+            "nullable": true
+          },
+          "CompanyURL": {
+            "title": "Company URL",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Company URL in the candidate previous experience items.",
+            "nullable": true
+          },
+          "ContactSupervisorFlag": {
+            "title": "OK to Contact Supervisor",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that the supervisor needs to be contacted.",
+            "nullable": true
+          },
+          "CountryCode": {
+            "title": "Employer Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code in the candidate previous experience items.",
+            "nullable": true
+          },
+          "CurrentJobFlag": {
+            "title": "Current Job",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates that it's the current job of the candidate.",
+            "nullable": true
+          },
+          "Department": {
+            "title": "Department or Division or Post",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department in the candidate previous experience items.",
+            "nullable": true
+          },
+          "DirectReports": {
+            "title": "Direct Reports",
+            "type": "integer",
+            "description": "Direct Reports in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployerCity": {
+            "title": "Employer City",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer city in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerCountryId": {
+            "title": "Employer Country",
+            "type": "integer",
+            "description": "Employer country ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployerName": {
+            "title": "Employer Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer name in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerPhone": {
+            "title": "Employer Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Employer phone in the candidate previous experience items.",
+            "nullable": true
+          },
+          "EmployerStateId": {
+            "title": "Employer State or Province",
+            "type": "integer",
+            "description": "Employer state ID in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EndCompensation": {
+            "title": "Ending Compensation",
+            "type": "number",
+            "description": "End compensation in the candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date in the candidate previous experience items.",
+            "format": "date",
+            "nullable": true
+          },
+          "FlowVersionId": {
+            "type": "integer",
+            "description": "Flow version ID in the candidate previous experience items.",
+            "nullable": true
+          },
+          "FullTimeCode": {
+            "title": "Part Time",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if the previous experience was a full time job.",
+            "nullable": true
+          },
+          "InternalFlag": {
+            "title": "Internal",
+            "maxLength": 30,
+            "type": "boolean",
+            "description": "Indicates if the previous experience was an internal job.",
+            "nullable": true
+          },
+          "JobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family Id in the candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "JobFunction": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function in the candidate previous experience items.",
+            "nullable": true
+          },
+          "JobTitle": {
+            "title": "Job Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Job title in the candidate previous experience items.",
+            "nullable": true
+          },
+          "LeavingReason": {
+            "title": "Reason for Leaving",
+            "type": "string",
+            "description": "Reason for leaving the previous job.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherCompensation": {
+            "title": "Other Compensation",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other compensation in the candidate previous experience items.",
+            "nullable": true
+          },
+          "OtherJobFunction": {
+            "title": "Other Job Function",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Other job function in the candidate previous experience items.",
+            "nullable": true
+          },
+          "Responsibilities": {
+            "title": "Responsibilities",
+            "type": "string",
+            "description": "Responsibilities in the candidate previous experience items.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Section ID in candidate previous experience items.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartCompensation": {
+            "title": "Starting Compensation",
+            "type": "number",
+            "description": "Start compensation in candidate previous experience items.",
+            "nullable": true,
+            "x-hints": {
+              "precision": 15,
+              "scale": 2
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date in candidate previous experience items.",
+            "format": "date",
+            "nullable": true
+          },
+          "StartingPosition": {
+            "title": "Starting Position",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Starting position in the candidate previous experience items.",
+            "nullable": true
+          },
+          "StateProvinceCode": {
+            "title": "Employer State or Province",
+            "maxLength": 360,
+            "type": "string",
+            "description": "State province code in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorEmail": {
+            "title": "Supervisor Email",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor email in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorName": {
+            "title": "Supervisor Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor name in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorPhone": {
+            "title": "Supervisor Phone",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor phone in the candidate previous experience items.",
+            "nullable": true
+          },
+          "SupervisorTitle": {
+            "title": "Supervisor Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Supervisor title in the candidate previous experience items.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingCECandidatePreviousExpItems-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidatePreviousExpItems-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCECandidatePreviousExpItems-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

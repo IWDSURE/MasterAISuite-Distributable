@@ -1,0 +1,43 @@
+# HRA_FEEDBACK_REQUEST_SECURE_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRA
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrafeedbackrequestsecurev-5075.html#hrafeedbackrequestsecurev-5075](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrafeedbackrequestsecurev-5075.html#hrafeedbackrequestsecurev-5075)
+
+## Columns
+
+- FEEDBACK_REQ_ID
+- BUSINESS_GROUP_ID
+- REQUESTED_BY_PERSON_ID
+- REQUESTED_FOR_PERSON_ID
+- PARTICIPANT_PERSON_ID
+- SHARE_WITH_MGR_FLAG
+- SHARE_WITH_WKR_FLAG
+- MESSAGE_TEXT
+- DUE_DATE
+- FEEDBACK_REQ_TMPL_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- LAST_UPDATED_BY
+- OBJECT_VERSION_NUMBER
+- REQUESTED_FOR_ASSIGNMENT_ID
+- FEEDBACK_REQ_GROUP_ID
+- DUE_DATE_ALERT_SENT
+
+## Query
+
+```sql
+SELECT FEEDBACK_REQ_ID, BUSINESS_GROUP_ID, REQUESTED_BY_PERSON_ID, REQUESTED_FOR_PERSON_ID, PARTICIPANT_PERSON_ID, SHARE_WITH_MGR_FLAG, SHARE_WITH_WKR_FLAG, MESSAGE_TEXT, DUE_DATE, FEEDBACK_REQ_TMPL_ID, CREATED_BY, CREATION_DATE, LAST_UPDATE_DATE, LAST_UPDATE_LOGIN, LAST_UPDATED_BY, OBJECT_VERSION_NUMBER, REQUESTED_FOR_ASSIGNMENT_ID, FEEDBACK_REQ_GROUP_ID, DUE_DATE_ALERT_SENT FROM hra_feedback_request
+```
+
+---
+
+[← Back to Index](../19_Performance_Management_Views_Index.md)

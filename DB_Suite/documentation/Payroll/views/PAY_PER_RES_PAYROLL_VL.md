@@ -1,0 +1,37 @@
+# PAY_PER_RES_PAYROLL_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperrespayrollvl-4544.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payperrespayrollvl-4544.html)
+
+## Columns
+
+- OBJECT_ACTION_ID
+- PAYROLL_ACTION_ID
+- PAYROLL_ID
+- PAYROLL_NAME
+- TIME_PERIOD_ID
+- PAYROLL_PERIOD_NAME
+- PAYROLL_PERIOD_NUMBER
+- CALC_FLOW_INSTANCE_ID
+- CALC_FLOW_INSTANCE_NAME
+- CALC_FLOW_PATTERN_ID
+- CALC_FLOW_PATTERN
+- RUN_TYPE_ID
+- RUN_TYPE_NAME
+
+## Query
+
+```sql
+select distinct zzz.OBJECT_ACTION_ID, zzz.PAYROLL_ACTION_ID, zzz.PAYROLL_ID, zzz.PAYROLL_NAME, zzz.time_period_id, zzz.PAYROLL_PERIOD_NAME, zzz.payroll_period_number, zzz.Calc_flow_instance_id, zzz.Calc_flow_instance_name, zzz.Calc_FLOW_PATTERN_ID, zzz.Calc_FLOW_PATTERN, zzz.run_type_id, zzz.RUN_TYPE_NAME from ( select PRA.PAYROLL_REL_ACTION_ID OBJECT_ACTION_ID, ppa.payroll_action_id, ppa.action_type, ppa.payroll_id, pap.payroll_name, ppa.earn_time_period_id time_period_id, tp.period_name payroll_period_name, stp.PERIOD_NUM payroll_period_number, prq.flow_instance_id Calc_flow_instance_id, pfi.instance_name Calc_flow_instance_name, pf.FLOW_ID Calc_FLOW_PATTERN_ID, pf.FLOW_NAME Calc_FLOW_PATTERN, rt.run_type_id, rt.RUN_TYPE_NAME from pay_payroll_actions ppa, PAY_PAYROLL_REL_ACTIONS PRA, PAY_ALL_PAYROLLS_F pap, PAY_TIME_PERIODS tp, PAY_TIME_PERIODS stp, pay_requests prq, pay_flow_instances pfi, pay_flows_vl pf, PAY_RUN_TYPES_VL rt where ppa.PAYROLL_ID=pap.PAYROLL_ID and ppa.payROLL_ACTION_ID=PRA.payROLL_ACTION_ID and rt.run_type_id = ppa.run_type_id and ppa.earn_time_period_id =tp.TIME_PERIOD_ID AND ppa.dedn_time_period_id = stp.time_period_id and ppa.effective_date between pap.effective_start_date and pap.effective_end_date and ppa.pay_request_id(+)= prq.pay_request_id and prq.flow_instance_id=pfi.flow_instance_id(+) and pfi.base_flow_id=pf.flow_id(+) and nvl(rt.BASE_RUN_TYPE_NAME, 'Regular') not in ('On-demand Regular','On-demand Separate') union all select PRA_P.PAYROLL_REL_ACTION_ID OBJECT_ACTION_ID, ppa.payroll_action_id, ppa_p.action_type, ppa.payroll_id, pap.payroll_name, ppa.earn_time_period_id time_period_id, tp.period_name payroll_period_name, stp.PERIOD_NUM payroll_period_number, prq.flow_instance_id Calc_flow_instance_id, pfi.instance_name Calc_flow_instance_name, pf.FLOW_ID Calc_FLOW_PATTERN_ID, pf.FLOW_NAME Calc_FLOW_PATTERN, rt.run_type_id, rt.RUN_TYPE_NAME from pay_payroll_actions ppa, PAY_PAYROLL_REL_ACTIONS PRA, PAY_ALL_PAYROLLS_F pap, PAY_TIME_PERIODS tp, PAY_TIME_PERIODS stp, pay_requests prq, pay_flow_instances pfi, pay_flows_vl pf, PAY_RUN_TYPES_VL rt, PAY_ACTION_INTERLOCKS int_r, PAY_PAYROLL_REL_ACTIONS PRA_P, pay_payroll_actions ppa_p where ppa.PAYROLL_ID=pap.PAYROLL_ID and ppa.payROLL_ACTION_ID=PRA.payROLL_ACTION_ID and rt.run_type_id = ppa.run_type_id and ppa.earn_time_period_id =tp.TIME_PERIOD_ID AND ppa.dedn_time_period_id = stp.time_period_id and ppa.effective_date between pap.effective_start_date and pap.effective_end_date and ppa.pay_request_id(+)= prq.pay_request_id and prq.flow_instance_id=pfi.flow_instance_id(+) and pfi.base_flow_id=pf.flow_id(+) and PRA.PAYROLL_REL_ACTION_ID= int_r.LOCKED_ACTION_ID and PRA_P.PAYROLL_REL_ACTION_ID= int_r.LOCKING_ACTION_ID and ppa_p.payROLL_ACTION_ID=PRA_p.payROLL_ACTION_ID and nvl(rt.BASE_RUN_TYPE_NAME, 'Regular') not in ('On-demand Regular','On-demand Separate') union all select PRA_PS.PAYROLL_REL_ACTION_ID OBJECT_ACTION_ID, ppa.payroll_action_id, ppa_ps.action_type, ppa.payroll_id, pap.payroll_name, ppa.earn_time_period_id time_period_id, tp.period_name payroll_period_name, stp.PERIOD_NUM payroll_period_number, prq.flow_instance_id Calc_flow_instance_id, pfi.instance_name Calc_flow_instance_name, pf.FLOW_ID Calc_FLOW_PATTERN_ID, pf.FLOW_NAME Calc_FLOW_PATTERN, rt.run_type_id, rt.RUN_TYPE_NAME from pay_payroll_actions ppa, PAY_PAYROLL_REL_ACTIONS PRA, PAY_ALL_PAYROLLS_F pap, PAY_TIME_PERIODS tp, PAY_TIME_PERIODS stp, pay_requests prq, pay_flow_instances pfi, pay_flows_vl pf, PAY_RUN_TYPES_VL rt, PAY_ACTION_INTERLOCKS int_r, PAY_PAYROLL_REL_ACTIONS PRA_P, PAY_ACTION_INTERLOCKS int_p, PAY_PAYROLL_REL_ACTIONS PRA_PS, pay_payroll_actions ppa_ps where ppa.PAYROLL_ID=pap.PAYROLL_ID and ppa.payROLL_ACTION_ID=PRA.payROLL_ACTION_ID and rt.run_type_id = ppa.run_type_id and ppa.earn_time_period_id =tp.TIME_PERIOD_ID AND ppa.dedn_time_period_id = stp.time_period_id and ppa.effective_date between pap.effective_start_date and pap.effective_end_date and ppa.pay_request_id(+)= prq.pay_request_id and prq.flow_instance_id=pfi.flow_instance_id(+) and pfi.base_flow_id=pf.flow_id(+) and PRA.PAYROLL_REL_ACTION_ID= int_r.LOCKED_ACTION_ID and PRA_P.PAYROLL_REL_ACTION_ID= int_r.LOCKING_ACTION_ID and PRA_P.PAYROLL_REL_ACTION_ID= int_p.LOCKED_ACTION_ID and PRA_PS.PAYROLL_REL_ACTION_ID= int_p.LOCKING_ACTION_ID and ppa_ps.payROLL_ACTION_ID=PRA_ps.payROLL_ACTION_ID and nvl(rt.BASE_RUN_TYPE_NAME, 'Regular') not in ('On-demand Regular','On-demand Separate') )zzz
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

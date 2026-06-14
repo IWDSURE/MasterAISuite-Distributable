@@ -1,0 +1,168 @@
+{
+  "name": "IRC_CAND_MERGE_LOGS",
+  "object_type": "TABLE",
+  "description": "To retrieve the original candidate number of a merged candidate at a given point of time.\n\nAlso this table can be reuse for the purpose of auditing of merge candidate action.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandmergelogs-9828.html#irccandmergelogs-9828",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_MERGE_LOGS_PK",
+      "columns": "CAND_MERGE_LOG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_MERGE_LOG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "It contains the primary key of the table. Its a auto generated number."
+    },
+    {
+      "Name": "ENTITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "It contains the entitly id from where the audit has been orignated"
+    },
+    {
+      "Name": "ENTITY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "It contains entity type from the module where audit is generated"
+    },
+    {
+      "Name": "ALPHA_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "It stores the person id of the candidate which will get retained post merge."
+    },
+    {
+      "Name": "ALPHA_CANDIDATE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "It stores the candidate number of the candidate which will get retained post merge."
+    },
+    {
+      "Name": "BETA_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "It stores the person id of the candidate which will get discarded  post merge."
+    },
+    {
+      "Name": "BETA_CANDIDATE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "It stores the candidate number of the candidate which will get discarded post merge."
+    },
+    {
+      "Name": "BETA_START_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Captures start of the time or end of previous same entity end time"
+    },
+    {
+      "Name": "BETA_END_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "It contains the timestamp when beta candidate entity was discarded."
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Type of the action like ORA_MERGED or ORA_DELETED"
+    },
+    {
+      "Name": "ADDITIONAL_INFO",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Optional field to persist the logs"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_MERGE_LOGS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_MERGE_LOG_ID"
+    },
+    {
+      "Index": "IRC_CAND_MERGE_LOGS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ALPHA_PERSON_ID, ENTITY_ID, ENTITY_TYPE, BETA_PERSON_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:46:12"
+}

@@ -1,0 +1,785 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Plan Balances/Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/planBalances/{planBalancesUniqID}/child/details/{planBalanceDetailsId}": {
+      "get": {
+        "tags": [
+          "Plan Balances/Details"
+        ],
+        "summary": "Get a plan balance transaction",
+        "operationId": "get_planBalances-details",
+        "parameters": [
+          {
+            "name": "planBalancesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Plan Balances resource and used to uniquely identify an instance of Plan Balances. The client should not generate the hash key value. Instead, the client should query on the Plan Balances collection resource in order to navigate to a specific instance of Plan Balances to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "planBalanceDetailsId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the plan balance details.",
+              "nullable": true,
+              "readOnly": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/planBalances-details-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "planBalances-{planBalancesUniqID}-child-details-{planBalanceDetailsId}-get",
+        "x-filename-id": "planbalances-planbalancesuniqid-child-details-planbalancedetailsid-get"
+      }
+    },
+    "/planBalances/{planBalancesUniqID}/child/details": {
+      "get": {
+        "tags": [
+          "Plan Balances/Details"
+        ],
+        "summary": "Get all plan balance transactions",
+        "operationId": "getall_planBalances-details",
+        "parameters": [
+          {
+            "name": "planBalancesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Plan Balances resource and used to uniquely identify an instance of Plan Balances. The client should not generate the hash key value. Instead, the client should query on the Plan Balances collection resource in order to navigate to a specific instance of Plan Balances to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>additionalInformation; string; Display of additional information about the transaction.</li><li>bucketSequence; integer; Displayed sequence of the transaction types for the plan.</li><li>bucketType; string; Name of the transaction type.</li><li>carryoverExpiryDate; string; Date the carryover balance will expire.</li><li>expiryDate; string; Expiration date of the transaction or balance.</li><li>expiryDateOverReasonCode; string; Code of the expiration date override.</li><li>expiryDateOverReasonMeaning; string; Reason the expiration date was overridden on the transaction.</li><li>formattedRemainingBalance; string; Format of the remaining carryover balance.</li><li>formattedTransactionAmount; string; Format of the absence transaction amount.</li><li>manualAdjustmentReasonCode; string; Code of the manual adjustment reason.</li><li>manualAdjustmentReasonMeaning; string; Reason for the manual adjustment transaction on the plan.</li><li>overrideExpiryDate; string; Override expiry date for a compensatory plan transaction.</li><li>planBalanceDetailsId; integer; Unique identifier of the plan balance details.</li><li>planEndDate; string; End date of the absence plan term.</li><li>projectedStatusFlag; boolean; Indicates whether the transaction type balance is projected. If true, the balance is a projected balance. If false, the balance is the actual balance.</li><li>remainingBalance; number; Remaining balance available for carryover.</li><li>transactionAmount; number; Amount of the absence transaction.</li><li>transactionDate; string; Date of the absence transaction.</li><li>transactionStatus; string; Status of the absence transaction.</li><li>transactionTypeCode; string; Code of the transaction type.</li><li>transactionTypeName; string; Name of the transaction type.</li><li>voidFlag; boolean; Indicates whether a transaction has been voided. If true, the transaction is no longer valid. If false, the transaction is still valid and not voided.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the detail plan balance records that match the specified primary key criteria. <br>Finder Variables <ul><li>planBalanceDetailsId; integer;  Unique identifier of the plan balance details. </li></ul></li><li>findAllTransactions Finds all transactions for the plan balances. <br>Finder Variables <ul><li>balanceAsOfDate; string;  Finds all transactions for the plan balances as of a date. </li></ul></li><li>findByTransactionType Finds the transaction types for the plan. <br>Finder Variables <ul><li>balanceAsOfDate; string;  Balance as of date for the transaction type. </li><li>balanceCalculationMethod; string;  Calculation method used for the transaction type balance. </li><li>bucketType; string;  Type of absence transaction. </li><li>endDate; string;  End date of the transaction type balance calculation. </li><li>startDate; string;  Start date of the transaction type balance calculation. </li><li>userContext; string;  Context of the transaction type data to be displayed. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the detail plan balance records that match the specified primary key criteria.",
+                "properties": {
+                  "planBalanceDetailsId": {
+                    "nullable": true,
+                    "description": "Unique identifier of the plan balance details.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findAllTransactions",
+                "description": "Finds all transactions for the plan balances.",
+                "title": "findAllTransactions",
+                "properties": {
+                  "balanceAsOfDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "format": "date",
+                    "description": "Finds all transactions for the plan balances as of a date.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByTransactionType",
+                "description": "Finds the transaction types for the plan.",
+                "title": "findByTransactionTypeAndDateRange",
+                "properties": {
+                  "balanceCalculationMethod": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "description": "Calculation method used for the transaction type balance.",
+                    "type": "string"
+                  },
+                  "bucketType": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Type of absence transaction.",
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "format": "date",
+                    "description": "End date of the transaction type balance calculation.",
+                    "type": "string"
+                  },
+                  "balanceAsOfDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Balance as of date for the transaction type.",
+                    "type": "string"
+                  },
+                  "userContext": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Context of the transaction type data to be displayed.",
+                    "type": "string"
+                  },
+                  "startDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "SelectivelyRequired"
+                    },
+                    "format": "date",
+                    "description": "Start date of the transaction type balance calculation.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/planBalances-details"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "planBalances-{planBalancesUniqID}-child-details-get",
+        "x-filename-id": "planbalances-planbalancesuniqid-child-details-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "planBalances-details-item-response": {
+        "type": "object",
+        "properties": {
+          "additionalInformation": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Display of additional information about the transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketSequence": {
+            "type": "integer",
+            "description": "Displayed sequence of the transaction types for the plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "bucketType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "carryoverExpiryDate": {
+            "type": "string",
+            "description": "Date the carryover balance will expire.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Expiration date of the transaction or balance.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDateOverReasonCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the expiration date override.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "expiryDateOverReasonMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Reason the expiration date was overridden on the transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedRemainingBalance": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the remaining carryover balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "formattedTransactionAmount": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the absence transaction amount.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "manualAdjustmentReasonCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the manual adjustment reason.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "manualAdjustmentReasonMeaning": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Reason for the manual adjustment transaction on the plan.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "overrideExpiryDate": {
+            "type": "string",
+            "description": "Override expiry date for a compensatory plan transaction.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planBalanceDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier of the plan balance details.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planEndDate": {
+            "type": "string",
+            "description": "End date of the absence plan term.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "projectedStatusFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the transaction type balance is projected. If true, the balance is a projected balance. If false, the balance is the actual balance.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "remainingBalance": {
+            "type": "number",
+            "description": "Remaining balance available for carryover.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionAmount": {
+            "type": "number",
+            "description": "Amount of the absence transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "Date of the absence transaction.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionStatus": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status of the absence transaction.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Code of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "transactionTypeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the transaction type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "voidFlag": {
+            "type": "boolean",
+            "description": "Indicates whether a transaction has been voided. If true, the transaction is no longer valid. If false, the transaction is still valid and not voided.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "planBalances-details": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/planBalances-details-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

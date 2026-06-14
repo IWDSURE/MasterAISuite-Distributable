@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Fusion AI Agent-to-Agent API/Agent Discovery",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/api/fusion-ai/orchestrator/a2a/v1/agents/search": {
+      "post": {
+        "tags": [
+          "Fusion AI Agent-to-Agent API/Agent Discovery"
+        ],
+        "summary": "Search agents",
+        "description": "Search published workflows exposed by the A2A registry. Supports optional pagination through `skip` and `top`.",
+        "operationId": "searchAgents",
+        "requestBody": {
+          "description": "Search criteria for published workflows.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Search results retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentRegistryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not process the search request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "<servername>-api-fusion-ai-orchestrator-a2a-v1-agents-search-post",
+        "x-filename-id": "servername-api-fusion-ai-orchestrator-a2a-v1-agents-search-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgentSearchRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Optional search text used to match published workflow names. If omitted or blank, all published workflows are returned."
+          },
+          "skip": {
+            "type": "integer",
+            "description": "Optional number of results to skip before returning records."
+          },
+          "top": {
+            "type": "integer",
+            "description": "Optional maximum number of results to return."
+          }
+        }
+      },
+      "AgentRegistryResponse": {
+        "type": "object",
+        "properties": {
+          "registry_version": {
+            "type": "string",
+            "description": "Registry response version."
+          },
+          "resources": {
+            "type": "array",
+            "description": "List of published agent registry entries.",
+            "items": {
+              "$ref": "#/components/schemas/AgentRegistryEntry"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "Total number of resources returned."
+          }
+        }
+      },
+      "AgentRegistryEntry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Workflow code exposed through the registry."
+          },
+          "name": {
+            "type": "string",
+            "description": "Workflow display name."
+          },
+          "location": {
+            "$ref": "#/components/schemas/AgentLocation"
+          }
+        }
+      },
+      "AgentLocation": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Agent card URL."
+          },
+          "type": {
+            "type": "string",
+            "description": "Location type.",
+            "example": "agent_card"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

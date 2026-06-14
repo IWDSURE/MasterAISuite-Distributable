@@ -1,0 +1,1078 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - List of Values/Content Items List of Values",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/contentItemsLov": {
+      "get": {
+        "tags": [
+          "List of Values/Content Items List of Values"
+        ],
+        "summary": "Get all content items",
+        "operationId": "getall_contentItemsLov",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ContentItemId; integer; Unique identifier for the content item.</li><li>ContentSectionId; integer; Unique identifier of the content section that matches the value set of the content item. The attribute ContentSectionId is valid only with the finder findGoalLibraryItems and for all other cases the attribute will remain null.</li><li>ContentTypeName; string; Name of the content item.</li><li>ContentValueSetCode; string; Unique code representing content item catalog.</li><li>ContentValueSetId; integer; Unique identifier of the content item catalog.</li><li>GoalBusinessUnitName; string; Business unit name for the library goal.</li><li>GoalCategory; string; Category of the library goal.</li><li>GoalDepartmentName; string; Department name for the library goal.</li><li>GoalJobFamilyName; string; Job family name for the library goal.</li><li>GoalLegalEntityName; string; Legal entity name for the library goal.</li><li>GoalSubType; string; Subtype of the library goal.</li><li>ItemDescription; string; Description for the content item.</li><li>Name; string; Name of the content item.</li><li>RatingModelId; integer; Unique identifier for the content item associated with a content section.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the content items that match the specified primary key criteria. <br>Finder Variables <ul><li>ContentItemId; integer;  Unique identifier for the content item. </li></ul></li><li>findActiveContentItemByDate Finds all the content items active for the specified date criteria. <br>Finder Variables <ul><li>ContentItemIdsNotIn; string;  List of content item to exclude from the search response. </li><li>ContentTypeId; integer;  Unique identifier of the content type. </li><li>DateFrom; string;  Date from which the content item is active. </li><li>DateTo; string;  Date till which the content item is active. </li><li>ItemText9; string;  Indicates the goal type for the search terms. </li><li>Name; string;  Name; string;  of the content item. </li></ul></li><li>findBehForPersonCompetency Finds all the behavior content items to be added to the given person competency items following the precedence order position profile, job profile, organization profile, and item catalogs. <br>Finder Variables <ul><li>CompetencyItemId; integer;  Unique identifier for the person competency item. </li><li>CompetencySectionId; integer;  Unique identifier for the person competency section. </li><li>PersonId; integer;  Unique identifier for the person. </li></ul></li><li>findByContainerValuesets Finds the container catalog for the specified content item catalog. <br>Finder Variables <ul><li>ContentValueSetId; integer;  Unique identifier for the content item catalog. </li></ul></li><li>findByContentItemId Finds all content item based on the specified content item ID. <br>Finder Variables <ul><li>ContentItemId; integer;  Unique identifier for the content item. </li></ul></li><li>findByContentValueSet Finds all content items that match the specified content item catalog criteria. <br>Finder Variables <ul><li>ContentTypeName; string;  Name; string;  of the content type. </li><li>ContentValueSetCode; string;  Unique code representing content item catalog. </li></ul></li><li>findByRatingModelandContentType Finds all the content items that match the specified rating model and content type criteria. <br>Finder Variables <ul><li>ContentTypeId; integer;  Unique identifier of the content type. </li><li>RatingModelId; integer;  Unique identifier of the rating model. </li></ul></li><li>findBySectionContext Finds the content item catalog for the specified section context. <br>Finder Variables <ul><li>SectionContext; string;  Unique code used to identify a content section. </li></ul></li><li>findByWord Finds all content items that match the specified criteria. <br>Finder Variables <ul><li>ContentItemIdsNotIn; string;  List of content item to exclude from the search response. </li><li>ContentTypeId; integer;  Unique identifier of the content type. </li><li>ContentValueSetId; integer;  Unique identifier of the content item catalog. </li><li>FilterAttributes; string;  List of attributes for the search terms. </li><li>GoalTypeFlag; string;  Indicate the type of the library goal. </li><li>SearchTerms; string;  Search term criteria to retrieve data. </li></ul></li><li>findContentItemsForTemplateSection Finds all the content items for a provided template section. <br>Finder Variables <ul><li>ContentItemIdsNotIn; string;  List of content item to exclude from the search response. </li><li>DateFrom; string;  Date from which the content item is active. </li><li>DateTo; string;  Date till which the content item is active. </li><li>Name; string;  Name; string;  of the content item. </li><li>TemplateSectionId; integer;  Unique identifier of the content section. </li></ul></li><li>findGoalLibraryItems Finds all the content items that are related with the specified goal library content item. <br>Finder Variables <ul><li>ContentItemId; integer;  Unique identifier for the goal library content item. </li></ul></li><li>findPublicSkillItems Finds all the skill content items associated with the skill center section. <br>Finder Variables <ul></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the content items that match the specified primary key criteria.",
+                "properties": {
+                  "ContentItemId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "PAYLOADHINT": "Show"
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the content item.",
+                    "readOnly": true,
+                    "type": "integer",
+                    "title": "Content Item ID"
+                  }
+                }
+              },
+              {
+                "name": "findActiveContentItemByDate",
+                "description": "Finds all the content items active for the specified date criteria.",
+                "title": "findByContentTypeIdAndDate",
+                "properties": {
+                  "DateFrom": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date from which the content item is active.",
+                    "type": "string"
+                  },
+                  "ContentTypeId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the content type.",
+                    "type": "integer"
+                  },
+                  "ItemText9": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicates the goal type for the search terms.",
+                    "type": "string"
+                  },
+                  "ContentItemIdsNotIn": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of content item to exclude from the search response.",
+                    "type": "string"
+                  },
+                  "DateTo": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date till which the content item is active.",
+                    "type": "string"
+                  },
+                  "Name": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the content item.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findBehForPersonCompetency",
+                "description": "Finds all the behavior content items to be added to the given person competency items following the precedence order position profile, job profile, organization profile, and item catalogs.",
+                "title": "findForPersonCompetency",
+                "properties": {
+                  "PersonId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the person.",
+                    "type": "integer"
+                  },
+                  "CompetencySectionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the person competency section.",
+                    "type": "integer"
+                  },
+                  "CompetencyItemId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the person competency item.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByContainerValuesets",
+                "description": "Finds the container catalog for the specified content item catalog.",
+                "title": "findByContainerValueset",
+                "properties": {
+                  "ContentValueSetId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the content item catalog.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByContentItemId",
+                "description": "Finds all content item based on the specified content item ID.",
+                "title": "findByContentItemId",
+                "properties": {
+                  "ContentItemId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier for the content item.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByContentValueSet",
+                "description": "Finds all content items that match the specified content item catalog criteria.",
+                "title": "findByContentValueSet",
+                "properties": {
+                  "ContentTypeName": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the content type.",
+                    "type": "string"
+                  },
+                  "ContentValueSetCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique code representing content item catalog.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByRatingModelandContentType",
+                "description": "Finds all the content items that match the specified rating model and content type criteria.",
+                "title": "findByRatingModelandContentType",
+                "properties": {
+                  "RatingModelId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the rating model.",
+                    "type": "integer"
+                  },
+                  "ContentTypeId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the content type.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findBySectionContext",
+                "description": "Finds the content item catalog for the specified section context.",
+                "title": "findBySectionContext",
+                "properties": {
+                  "SectionContext": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique code used to identify a content section.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByWord",
+                "description": "Finds all content items that match the specified criteria.",
+                "title": "findByWord",
+                "properties": {
+                  "FilterAttributes": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of attributes for the search terms.",
+                    "type": "string"
+                  },
+                  "ContentTypeId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier of the content type.",
+                    "type": "integer"
+                  },
+                  "ContentValueSetId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier of the content item catalog.",
+                    "type": "integer"
+                  },
+                  "GoalTypeFlag": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Indicate the type of the library goal.",
+                    "type": "string"
+                  },
+                  "SearchTerms": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Search term criteria to retrieve data.",
+                    "type": "string"
+                  },
+                  "ContentItemIdsNotIn": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of content item to exclude from the search response.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findContentItemsForTemplateSection",
+                "description": "Finds all the content items for a provided template section.",
+                "title": "findByPerformanceSectionId",
+                "properties": {
+                  "DateFrom": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date from which the content item is active.",
+                    "type": "string"
+                  },
+                  "TemplateSectionId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Unique identifier of the content section.",
+                    "type": "integer"
+                  },
+                  "ContentItemIdsNotIn": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "List of content item to exclude from the search response.",
+                    "type": "string"
+                  },
+                  "DateTo": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "format": "date",
+                    "description": "Date till which the content item is active.",
+                    "type": "string"
+                  },
+                  "Name": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Name of the content item.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findGoalLibraryItems",
+                "description": "Finds all the content items that are related with the specified goal library content item.",
+                "title": "findGoalLibraryItems",
+                "properties": {
+                  "ContentItemId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the goal library content item.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findPublicSkillItems",
+                "description": "Finds all the skill content items associated with the skill center section.",
+                "title": "findPublicSkillItems",
+                "properties": {}
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/contentItemsLov"
+                }
+              }
+            },
+            "links": {
+              "getMultipleContentItemDetails": {
+                "operationRef": "#/paths/~1contentItemsLov~1action~1getMultipleContentItemDetails/post",
+                "description": "Gets the details for multiple content items."
+              }
+            }
+          }
+        },
+        "x-internal-id": "contentItemsLov-get",
+        "x-filename-id": "contentitemslov-get"
+      }
+    },
+    "/contentItemsLov/action/getMultipleContentItemDetails": {
+      "post": {
+        "tags": [
+          "List of Values/Content Items List of Values"
+        ],
+        "summary": "Get details for multiple content items",
+        "description": "Gets the details for multiple content items.",
+        "operationId": "doall_getMultipleContentItemDetails_contentItemsLov",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contentItems": {
+                    "type": "string",
+                    "description": "Identifier for the content items retrieved.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for a multiple content items query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response returned for a multiple content items query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "contentItemsLov-action-getMultipleContentItemDetails-post",
+        "x-filename-id": "contentitemslov-action-getmultiplecontentitemdetails-post"
+      }
+    },
+    "/contentItemsLov/{contentItemsLovUniqID}": {
+      "get": {
+        "tags": [
+          "List of Values/Content Items List of Values"
+        ],
+        "summary": "Get a content item",
+        "operationId": "get_contentItemsLov",
+        "parameters": [
+          {
+            "name": "contentItemsLovUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Content Items List of Values resource and used to uniquely identify an instance of Content Items List of Values. The client should not generate the hash key value. Instead, the client should query on the Content Items List of Values collection resource in order to navigate to a specific instance of Content Items List of Values to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/contentItemsLov-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "contentItemsLov-{contentItemsLovUniqID}-get",
+        "x-filename-id": "contentitemslov-contentitemslovuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "contentItemsLov": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/contentItemsLov-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "LOV"
+        }
+      },
+      "contentItemsLov-item-response": {
+        "type": "object",
+        "properties": {
+          "ContentItemId": {
+            "title": "Content Item ID",
+            "type": "integer",
+            "description": "Unique identifier for the content item.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18,
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "ContentSectionId": {
+            "type": "integer",
+            "description": "Unique identifier of the content section that matches the value set of the content item. The attribute ContentSectionId is valid only with the finder findGoalLibraryItems and for all other cases the attribute will remain null.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContentTypeName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the content item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContentValueSetCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code representing content item catalog.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ContentValueSetId": {
+            "type": "integer",
+            "description": "Unique identifier of the content item catalog.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18,
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "GoalBusinessUnitName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit name for the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalCategory": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Category of the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalDepartmentName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Department name for the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalJobFamilyName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Job family name for the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalLegalEntityName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Legal entity name for the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GoalSubType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Subtype of the library goal.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ItemDescription": {
+            "title": "Item Description",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Description for the content item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 700,
+            "type": "string",
+            "description": "Name of the content item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "RatingModelId": {
+            "type": "integer",
+            "description": "Unique identifier for the content item associated with a content section.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

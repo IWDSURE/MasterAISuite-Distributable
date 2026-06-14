@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Configuration Set Migration/Migration Information",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/fscmUI/applcoreApi/v2/csm/module/optional": {
+      "get": {
+        "tags": [
+          "Configuration Set Migration/Migration Information"
+        ],
+        "summary": "Get optional modules",
+        "description": "Retrieve a list of optional modules.",
+        "operationId": "getOptionalModules",
+        "responses": {
+          "200": {
+            "description": "Optional modules retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-module-optional-get",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-module-optional-get"
+      }
+    },
+    "<servername>/fscmUI/applcoreApi/v2/csm/mode/migration": {
+      "get": {
+        "tags": [
+          "Configuration Set Migration/Migration Information"
+        ],
+        "summary": "Get migration mode",
+        "description": "Get the currently applicable migration mode.",
+        "operationId": "getMigrationMode",
+        "responses": {
+          "200": {
+            "description": "Migration mode retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrationModeResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-mode-migration-get",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-mode-migration-get"
+      }
+    },
+    "<servername>/fscmUI/applcoreApi/v2/csm/migrationset/delta": {
+      "get": {
+        "tags": [
+          "Configuration Set Migration/Migration Information"
+        ],
+        "summary": "Get delta migration sets",
+        "description": "Retrieve a list of completed delta migration sets on the environment.",
+        "operationId": "getDeltaMigrationSets",
+        "responses": {
+          "200": {
+            "description": "List of delta migration sets retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrationSetResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "<servername>-fscmUI-applcoreApi-v2-csm-migrationset-delta-get",
+        "x-filename-id": "servername-fscmui-applcoreapi-v2-csm-migrationset-delta-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ModuleResponse": {
+        "type": "object",
+        "properties": {
+          "modules": {
+            "$ref": "#/components/schemas/ModuleList"
+          }
+        }
+      },
+      "ModuleList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Module"
+        }
+      },
+      "Module": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Abbreviated name of the module used in API requests and responses."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Full name of the module."
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of the module."
+          }
+        }
+      },
+      "MigrationModeResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "migrationMode": {
+            "$ref": "#/components/schemas/MigrationMode"
+          }
+        }
+      },
+      "MigrationMode": {
+        "type": "string",
+        "description": "Currently applicable migration mode in the source environment. Depends upon various factors, including but not limited to target connectivity as well as MDS revision match.",
+        "enum": [
+          "FULL",
+          "DELTA"
+        ]
+      },
+      "MigrationSetResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "sandboxNames": {
+            "type": "array",
+            "description": "List of sandbox names.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

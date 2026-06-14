@@ -1,0 +1,39 @@
+# HWR_RECMND_CHECKLIST_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrrecmndchecklistvl-3789.html#hwrrecmndchecklistvl-3789](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrrecmndchecklistvl-3789.html#hwrrecmndchecklistvl-3789)
+
+## Columns
+
+- CHECKLIST_ID
+- IS_SEEDED
+- IS_ACTIVE
+- ORDER_RANK
+- CHECKLST_ATTR_1
+- CHECKLST_ATTR_2
+- CHECKLST_ATTR_3
+- CHECKLIST_NAME
+- DESCRIPTION
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.CHECKLIST_ID, B.IS_SEEDED, B.IS_ACTIVE, B.ORDER_RANK, B.CHECKLST_ATTR_1, B.CHECKLST_ATTR_2, B.CHECKLST_ATTR_3, T.CHECKLIST_NAME, T.DESCRIPTION, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HWR_RECMND_CHECKLIST_B B, HWR_RECMND_CHECKLIST_TL T WHERE B.CHECKLIST_ID = T.CHECKLIST_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

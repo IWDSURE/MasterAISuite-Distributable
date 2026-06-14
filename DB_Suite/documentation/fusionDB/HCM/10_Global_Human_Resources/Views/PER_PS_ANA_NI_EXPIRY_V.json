@@ -1,0 +1,25 @@
+{
+  "name": "PER_PS_ANA_NI_EXPIRY_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PER",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpsananiexpiryv-4961.html#perpsananiexpiryv-4961",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TEXT_TITLE",
+    "TEXT_METRIC",
+    "TEXT_META",
+    "BADGE_TEXT",
+    "BADGE_STATUS",
+    "PERIOD_CHN_IND_VAL",
+    "PERIOD_CHN_IND_CMP",
+    "CHART_TYPE",
+    "CHART_COLOR",
+    "CHART_DATA",
+    "LINK_TEXT"
+  ],
+  "query": "SELECT n.person_id, NULL assignment_id, '{\"strKey\":\"HdrSNationalidentifierCOUNTRY\", \"tokens\":{\"COUNTRY\":\"' || t.territory_short_name || '\"}}' text_title, ( CASE WHEN n.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - n.expiration_date) - 14), - 1, '{\"strKey\":\"PgHIExpiredonDATE\", \"tokens\":{\"DATE\":\"' || hrl_df_util.date_to_char(n.expiration_date) || '\"}}') ELSE decode(trunc(n.expiration_date - trunc(sysdate)), 0, '{\"strKey\":\"PgHIExpiringtoday\"}', 1, '{\"strKey\":\"PgHIExpiringtomorrow\"}', '{\"strKey\":\"PgHIExpiringinDAYSNUMdays\", \"tokens\":{\"DAYS_NUM\":\"' ||(trunc(n.expiration_date - trunc(sysdate))) || '\"}}') END ) text_metric, n.national_identifier_number text_meta, ( CASE WHEN n.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - n.expiration_date) - 14), - 1, '{\"strKey\":\"BdgExpired1\"}') ELSE decode(sign((n.expiration_date - trunc(sysdate)) - 30), - 1, '{\"strKey\":\"BdgExpiring\"}') END ) badge_text, ( CASE WHEN n.expiration_date < trunc(sysdate) THEN decode(sign((trunc(sysdate) - n.expiration_date) - 14), - 1, 'danger') ELSE decode(sign((n.expiration_date - trunc(sysdate)) - 30), - 1, 'warning') END ) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, '?pPersonId=' || n.person_id link_text FROM per_national_identifiers n, fnd_territories_vl t WHERE t.territory_code = n.legislation_code AND nvl(n.issue_date, TO_DATE('12/31/4712', 'mm/dd/rrrr')) = ( SELECT MAX(nvl(n2.issue_date, TO_DATE('12/31/4712', 'mm/dd/rrrr'))) maxissuedate FROM per_national_identifiers n2 WHERE n2.person_id = n.person_id AND n2.legislation_code = n.legislation_code AND n2.national_identifier_type = n.national_identifier_type ) AND n.expiration_date IS NOT NULL AND ( ( n.expiration_date < trunc(sysdate) AND ( sign((trunc(sysdate) - n.expiration_date) - 14) = - 1 ) ) OR ( n.expiration_date >= trunc(sysdate) AND ( sign((n.expiration_date - trunc(sysdate)) - 30) = - 1 ) ) )",
+  "_parsed_at": "2026-06-09T16:56:47"
+}

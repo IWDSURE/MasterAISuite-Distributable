@@ -1,0 +1,32 @@
+# CMP_MS_EVT_SALARY_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmsevtsalaryv-4621.html#cmpmsevtsalaryv-4621](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmsevtsalaryv-4621.html#cmpmsevtsalaryv-4621)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- EVENT_YEAR
+- EVENT_DATE
+- EVENT_DAYS
+- EVENT_TITLE
+- EVENT_DETAILS
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT b.person_id person_id, b.assignment_id assignment_id, EXTRACT(YEAR FROM trunc(a.date_from)) event_year, a.date_from event_date, 0 event_days, a.action_name event_title, decode(sign(nvl(a.last_change_percent, 0)), 0, '', decode(sign(nvl(a.last_change_amount, 0)), 1, '{"strKey":"FdHISALCHNGincrease", "tokens":{"SAL_CHNG":"' || hrl_df_util.number_to_char(round(a.last_change_percent, 2)) || '%"}}', '{"strKey":"FdHISALCHNGdecrease", "tokens":{"SAL_CHNG":"' || hrl_df_util.number_to_char(round(a.last_change_percent * - 1, 2)) || '%"}}')) event_details, '?pPersonId=' || b.person_id || '&pAssignmentId=' || b.assignment_id || '&pAssignmentNumber=' || b.assignment_number || '&pBusinessTitle=' || b.assignment_name || '&pDisplayName=' || c.display_name || '&pPersonNumber=' || d.person_number || '&pEffectiveDate=' || to_char(sysdate, 'YYYY-MM-DD') link_text FROM cmp_asg_salary_v a, per_all_assignments_f b, per_person_names_f_v c, per_all_people_f d WHERE 1 = 1 AND a.assignment_id = b.assignment_id AND trunc(sysdate) BETWEEN b.effective_start_date AND b.effective_end_date AND b.person_id = c.person_id AND trunc(sysdate) BETWEEN c.effective_start_date AND c.effective_end_date AND b.person_id = d.person_id AND trunc(sysdate) BETWEEN d.effective_start_date AND d.effective_end_date AND a.last_change_percent IS NOT NULL
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

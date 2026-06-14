@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Agent Trigger/Streaming",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/orchestrator/internal/agent/v1/api/fusion-ai/orchestrator/a2a/v1/{workflowCode}": {
+      "post": {
+        "tags": [
+          "Agent Trigger/Streaming"
+        ],
+        "summary": "Trigger workflow stream",
+        "description": "Trigger an agent workflow and stream the generated response back to the caller.",
+        "operationId": "invokeStream",
+        "parameters": [
+          {
+            "name": "workflowCode",
+            "in": "path",
+            "description": "Code identifying the workflow to be triggered.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caller",
+            "in": "query",
+            "description": "Identifier for the caller triggering the workflow.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "chatbot"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Information required to trigger the agent workflow.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvokeStreamRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Workflow triggered successfully. Response is streamed to the caller.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvokeStreamEvent"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not trigger workflow because the request is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workflow not found.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error while triggering the workflow.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "<servername>-orchestrator-internal-agent-v1-api-fusion-ai-orchestrator-a2a-v1-{workflowCode}-post",
+        "x-filename-id": "servername-orchestrator-internal-agent-v1-api-fusion-ai-orchestrator-a2a-v1-workflowcode-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InvokeStreamRequest": {
+        "required": [
+          "workflowConfig",
+          "agentConfig",
+          "toolsConfig",
+          "llmConfig",
+          "request"
+        ],
+        "type": "object",
+        "properties": {
+          "workflowConfig": {
+            "type": "object",
+            "description": "The configuration used for triggering the workflow.",
+            "additionalProperties": true
+          },
+          "agentConfig": {
+            "type": "object",
+            "description": "Agent configuration used for triggering the workflow.",
+            "additionalProperties": true
+          },
+          "toolsConfig": {
+            "type": "object",
+            "description": "Tool configuration available to the agent for triggering the workflow.",
+            "additionalProperties": true
+          },
+          "llmConfig": {
+            "type": "object",
+            "description": "Large language model configuration used for triggering the workflow.",
+            "additionalProperties": true
+          },
+          "request": {
+            "$ref": "#/components/schemas/InvocationRequest"
+          }
+        }
+      },
+      "InvocationRequest": {
+        "required": [
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User message or query to send to the agent workflow."
+          },
+          "conversational": {
+            "type": "boolean",
+            "description": "Indicates whether the trigger should use conversation context or not."
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Identifier of the conversation associated with the trigger."
+          },
+          "invocationMode": {
+            "type": "string",
+            "description": "Trigger mode for the request.",
+            "enum": [
+              "ADMIN",
+              "USER"
+            ]
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Optional job identifier associated with the trigger."
+          }
+        }
+      },
+      "InvokeStreamEvent": {
+        "type": "string",
+        "description": "Server-sent event stream containing incremental agent response chunks, tool events, metadata, and completion events."
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+# HRE_PS_ANA_CELEBRATION_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRE
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrepsanacelebrationv-3417.html#hrepsanacelebrationv-3417](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrepsanacelebrationv-3417.html#hrepsanacelebrationv-3417)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- TEXT_TITLE
+- TEXT_METRIC
+- TEXT_META
+- BADGE_TEXT
+- BADGE_STATUS
+- PERIOD_CHN_IND_VAL
+- PERIOD_CHN_IND_CMP
+- CHART_TYPE
+- CHART_COLOR
+- CHART_DATA
+- LINK_TEXT
+
+## Query
+
+```sql
+SELECT cel.person_id person_id, cel.assignment_id assignment_id, '{"strKey":"HdrSCelebrationcards"}' text_title, '{"strKey":"PgHIReceivedCARDSNUMlastmonth", "tokens":{"CARDS_NUM":"' || celdet.cnt || '"}}' text_metric, '{"strKey":"FdHILastreceivedonDATE", "tokens":{"DATE":"' || hrl_df_util.date_to_char(cel.recognition_date) || '"}}' text_meta, decode(sign(last_days - 7), - 1, '{"strKey":"BdgNew3"}', NULL) badge_text, decode(sign(last_days - 7), - 1, 'info', NULL) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, NULL chart_type, NULL chart_color, NULL chart_data, '' link_text FROM cel_recognitions cel, ( SELECT person_id, assignment_id, COUNT(recognition_id) cnt, MAX(recognition_date) last_rcv_date, ceil(sysdate - CAST(MAX(recognition_date) AS DATE)) last_days FROM cel_recognitions WHERE recognition_date >= add_months(sysdate, - 1) AND recognition_date <= sysdate AND NVL(published_flag, 'Y') = 'Y' GROUP BY person_id, assignment_id ) celdet WHERE cel.recognition_date >= add_months(sysdate, - 1) AND cel.recognition_date <= sysdate AND NVL(cel.published_flag, 'Y') = 'Y' AND cel.person_id = celdet.person_id and cel.assignment_id = celdet.assignment_id AND cel.recognition_date = celdet.last_rcv_date
+```
+
+---
+
+[← Back to Index](../27_Touchpoints_Views_Index.md)

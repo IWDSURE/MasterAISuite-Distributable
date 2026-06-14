@@ -1,0 +1,40 @@
+# PER_PERSON_TYPES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpersontypesvl-8284.html#perpersontypesvl-8284](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perpersontypesvl-8284.html#perpersontypesvl-8284)
+
+## Columns
+
+- ROW_ID
+- PERSON_TYPE_ID
+- BUSINESS_GROUP_ID
+- ACTIVE_FLAG
+- DEFAULT_FLAG
+- SYSTEM_PERSON_TYPE
+- USER_PERSON_TYPE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- CREATED_BY
+- CREATION_DATE
+- SEEDED_PERSON_TYPE_KEY
+- OBJECT_VERSION_NUMBER
+- MODULE_ID
+- SGUID
+
+## Query
+
+```sql
+SELECT B.ROWID ROW_ID, B.PERSON_TYPE_ID, B.BUSINESS_GROUP_ID, B.ACTIVE_FLAG, B.DEFAULT_FLAG, B.SYSTEM_PERSON_TYPE, T.USER_PERSON_TYPE, B.LAST_UPDATE_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_LOGIN, B.CREATED_BY, B.CREATION_DATE, B.SEEDED_PERSON_TYPE_KEY, B.OBJECT_VERSION_NUMBER, B.MODULE_ID, B.SGUID SGUID FROM PER_PERSON_TYPES B, PER_PERSON_TYPES_TL T WHERE B.PERSON_TYPE_ID = T.PERSON_TYPE_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

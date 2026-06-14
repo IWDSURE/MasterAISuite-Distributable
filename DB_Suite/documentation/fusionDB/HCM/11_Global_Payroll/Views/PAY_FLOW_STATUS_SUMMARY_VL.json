@@ -1,0 +1,24 @@
+{
+  "name": "PAY_FLOW_STATUS_SUMMARY_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowstatussummaryvl-8364.html#payflowstatussummaryvl-8364",
+  "columns": [
+    "SUMMARY_BREAKDOWN",
+    "HIGHLIGHT_NUM",
+    "TILE_NUMBER",
+    "SUMMARY_TYPE",
+    "TOTAL",
+    "OVERDUE",
+    "TAKING_LONGER",
+    "WITH_ERROR",
+    "TILE_CODE",
+    "TILE_SIZE",
+    "DEFAULT_VIEW",
+    "MODULE_NAME"
+  ],
+  "query": "SELECT SUMMARY_BREAKDOWN, HIGHLIGHT_NUM, TILE_NUMBER, SUMMARY_TYPE, TOTAL, OVERDUE, TAKING_LONGER, WITH_ERROR, TILE_CODE, 73 as TILE_SIZE, decode(summary_breakdown,'FLOWSTATUS','FLOW','TASK') DEFAULT_VIEW, module_name FROM (SELECT module_name, CASE WHEN overdue > 0 THEN 1 ELSE 0 END + CASE WHEN TAKING_LONGER > 0 THEN 1 ELSE 0 END + CASE WHEN WITH_ERROR > 0 THEN 1 ELSE 0 END AS HIGHLIGHT_NUM, decode(summary_breakdown,'STATUS',DECODE(status_code, 'PROCESSING', '1', 'TO_DO', '2', 'REQUIRES_ATTENTION', '3', 'RECENTLY_COMPLETED', '5', 'NOT_STARTED', '4','100'),'100') tile_number, SUMMARY_TYPE, total, overdue, TAKING_LONGER, WITH_ERROR, null tile_code, SUMMARY_BREAKDOWN FROM (SELECT module_name,SUMMARY_BREAKDOWN, SUMMARY_TYPE, decode(summary_breakdown,'STATUS',status_code,null) status_code, COUNT(*) AS total, SUM(OVERDUE) overdue, SUM(TAKING_LONGER) TAKING_LONGER, SUM(WITH_ERROR) WITH_ERROR FROM PAY_FLOW_STATUS_BASIC_VL GROUP BY module_name,SUMMARY_BREAKDOWN, SUMMARY_TYPE, decode(summary_breakdown,'STATUS',status_code,null) order by SUMMARY_TYPE)) ORDER BY module_name,tile_number",
+  "_parsed_at": "2026-06-09T17:22:38"
+}

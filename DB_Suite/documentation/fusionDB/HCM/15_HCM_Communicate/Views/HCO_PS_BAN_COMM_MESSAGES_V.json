@@ -1,0 +1,27 @@
+{
+  "name": "HCO_PS_BAN_COMM_MESSAGES_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HCO",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hcopsbancommmessagesv-4046.html#hcopsbancommmessagesv-4046",
+  "columns": [
+    "PERSON_ID",
+    "ASSIGNMENT_ID",
+    "TEXT_OVERLINE",
+    "TEXT_TITLE",
+    "TEXT_DESCRIPTION",
+    "START_DATE",
+    "END_DATE",
+    "BG_IMG_URL",
+    "LINK_TYPE",
+    "LINK_TEXT",
+    "LINK_LABEL",
+    "LINK2_TYPE",
+    "LINK2_TEXT",
+    "LINK2_LABEL",
+    "TRACK_PAYLOAD"
+  ],
+  "query": "SELECT r.person_id, NULL assignment_id, CASE WHEN l.subject_code = 'ORA_MANAGER_POST' THEN n.display_name ELSE 'HCM Communicate' END text_overline, c.title text_title, c.description text_description, a.start_delivery_date start_date, a.last_delivery_date end_date, c.image_url bg_img_url, decode(c.primary_link_type_code, 'ORA_PREDEFINED_LINK', 'EXT', 'ORA_EXTERNAL_LINK', 'EXT', 'ORA_DISMISS', 'DISMISS') link_type, JSON_VALUE(r.tokens, '$.primaryURL') link_text, DECODE(c.primary_label,'ORA_DISMISS', (select meaning from fnd_lookup_values_vl where lookup_type = 'ORA_HCO_CAMP_POST_LINK_TYPE' and lookup_code = 'ORA_DISMISS'), c.primary_label) link_label, decode(c.secondary_link_type_code, 'ORA_PREDEFINED_LINK', 'EXT', 'ORA_EXTERNAL_LINK', 'EXT', 'ORA_DISMISS', 'DISMISS') link2_type, JSON_VALUE(r.tokens, '$.secondaryURL') link2_text, DECODE(c.secondary_label,'ORA_DISMISS', (select meaning from fnd_lookup_values_vl where lookup_type = 'ORA_HCO_CAMP_POST_LINK_TYPE' and lookup_code = 'ORA_DISMISS'), c.secondary_label) link2_label, JSON_VALUE(r.tokens, '$.viewTrackingURL') track_payload FROM irc_cmt_recipients r, irc_cmt_launches l, irc_camp_post_content_vl c, irc_camp_assets_b a, per_person_names_f n, per_users u WHERE a.asset_id = c.asset_id AND l.launch_id = r.launch_id AND l.subject_id = c.asset_id AND a.created_by = u.username AND u.person_id = n.person_id AND trunc(sysdate) between n.effective_start_date and n.effective_end_date AND n.name_type = 'GLOBAL' AND a.asset_status_code = 'ORA_POSTED' AND a.publish_dest_code = 'ORA_SPOTLIGHT_POST' AND trunc(sysdate) BETWEEN trunc(a.start_delivery_date) AND trunc(a.last_delivery_date) AND NOT EXISTS ( SELECT track.campaign_tracking_id FROM irc_campaign_tracking track JOIN irc_camp_asset_urls_vl url ON track.asset_url_id = url.asset_url_id AND track.person_id = r.person_id JOIN irc_camp_post_content_b content ON ( ( content.primary_link_type_code = 'ORA_DISMISS' AND content.primary_asset_url_id = url.asset_url_id ) OR ( content.secondary_link_type_code = 'ORA_DISMISS' AND content.secondary_asset_url_id = url.asset_url_id ) ) WHERE url.asset_id = a.asset_id )",
+  "_parsed_at": "2026-06-09T18:12:26"
+}

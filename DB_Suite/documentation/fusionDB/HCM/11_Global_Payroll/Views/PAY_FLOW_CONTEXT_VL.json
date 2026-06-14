@@ -1,0 +1,30 @@
+{
+  "name": "PAY_FLOW_CONTEXT_VL",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowcontextvl-7342.html#payflowcontextvl-7342",
+  "columns": [
+    "FLOW_NAME",
+    "FLOW_PATTERN",
+    "FLOW_DESCRIPTION",
+    "SCHEDULE_FREQUENCY",
+    "SCHEDULE_START_DATE",
+    "SCHEDULE_END_DATE",
+    "NEXT_SCHEDULED_DATE",
+    "OWNER",
+    "PARTICIPANTS",
+    "PARAMETERS",
+    "NUMBER_OF_TASKS",
+    "IN_PROGRESS",
+    "COMPLETED",
+    "NOT_STARTED",
+    "SKIPPED",
+    "SKIP_ALLOWED",
+    "REOPEN_ALLOWED",
+    "FLOW_INSTANCE_ID"
+  ],
+  "query": "select flow_Name,Flow_pattern,Flow_desc Flow_description, ((select distinct ff.formula_name from ff_formulas_vl ff where ff.formula_id=bbb.RECUR_SCH_FORMULA_ID union select bbb.RECUR_TIME_COMPONENT from dual where bbb.RECUR_TIME_COMPONENT is not null union select distinct ptd.definition_name from pay_time_definitions ptd where ptd.time_definition_id=bbb.RECUR_SCH_TIME_DEF_ID)) Schedule_Frequency, Scheduled_Date Schedule_Start_Date, SCHEDULE_END_DATE Schedule_End_Date, null Next_Scheduled_Date, submitted_by Owner, (select distinct LISTAGG(ttt.submitted_by, '; ') WITHIN GROUP (ORDER BY ttt.submitted_by) OVER (PARTITION BY ttt.FLOW_INSTANCE_ID) from pay_task_status_vl ttt where ttt.FLOW_INSTANCE_ID=bbb.FLOW_INSTANCE_ID and not exists (select null from pay_task_status_vl vvv where vvv.FLOW_INSTANCE_ID=bbb.FLOW_INSTANCE_ID and ttt.submitted_by=vvv.submitted_by and ttt.TASK_INSTANCE_ID > vvv.TASK_INSTANCE_ID)) Participants, Flow_Param_Full Parameters, (select count(*) from PAY_CHECKLIST_INSTANCES ttt where ttt.flow_instance_id = bbb.flow_instance_id and ttt.FLOW_TASK_INSTANCE_ID is not null) Number_Of_Tasks, (select count(*) from PAY_CHECKLIST_INSTANCES ttt where ttt.flow_instance_id = bbb.flow_instance_id and ttt.FLOW_TASK_INSTANCE_ID is not null and ttt.status not in ('SKIPPED','NOT_STARTED','COMPLETE')) In_progress, (select count(*) from PAY_CHECKLIST_INSTANCES ttt where ttt.flow_instance_id = bbb.flow_instance_id and ttt.FLOW_TASK_INSTANCE_ID is not null and ttt.status= 'COMPLETE') Completed, (select count(*) from PAY_CHECKLIST_INSTANCES ttt where ttt.flow_instance_id = bbb.flow_instance_id and ttt.FLOW_TASK_INSTANCE_ID is not null and ttt.status='NOT_STARTED') Not_started, (select count(*) from PAY_CHECKLIST_INSTANCES ttt where ttt.flow_instance_id = bbb.flow_instance_id and ttt.FLOW_TASK_INSTANCE_ID is not null and ttt.status='SKIPPED') Skipped, (select 1 from dual where bbb.flow_Status='IN_PROGRESS') skip_allowed, (select 1 from dual where bbb.flow_Status='COMPLETE') Reopen_allowed, flow_instance_id from PAY_FLOW_STATUS_VL bbb",
+  "_parsed_at": "2026-06-09T17:22:19"
+}

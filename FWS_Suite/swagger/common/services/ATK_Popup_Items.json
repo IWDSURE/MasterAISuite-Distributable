@@ -1,0 +1,1510 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - ATK Popup Items",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/atkPopupItems": {
+      "get": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Get all popup items",
+        "operationId": "getall_atkPopupItems",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AdditionalAttributes; string; Additional information captured about the popup item.</li><li>DisplayMenu; string; The name of the display menu.</li><li>MessageCreationDate; integer; The date and time when the notification was created.</li><li>MessageCreationTranslatedDate; string; The date on which the translated version of the message was created.</li><li>MessageExpiryDate; integer; The date on which the announcement notification is set to expire.</li><li>MessageId; integer; The unique identifier of the message.</li><li>MessageSummary; string; The title of the notification containing the task details.</li><li>MsgCreationDbDate; string; The date on which the message was created.</li><li>NavigationURLKey; string; The URL used for navigation.</li><li>NotificationType; string; The type of notification.</li><li>ObjectVersionNumber; integer; The version of the message.</li><li>PageParamListString; string; The parameters associated with the page.</li><li>SOAOutcomes; string; The SOA outcome.</li><li>SOAOutcomesArray; object; The array of SOA outcome.</li><li>SOAOutcomesDisplay; string; The displayed array of SOA outcome.</li><li>SOAServer; string; The name of the SOA server.</li><li>Source; string; The source of the message.</li><li>Status; string; The status of the notification.</li><li>TaskCreator; string; Identifies who created the task.</li><li>TaskDetailsAvailableFlag; boolean; Identifies if the task details are available.</li><li>TaskDisplayURL; string; The URL used for displaying the task details dialog box.</li><li>TaskId; string; The unique identifier of the task.</li><li>TaskState; string; The current state of the task in the workflow.</li><li>TaskTabLabel; string; The label of the task.</li><li>TaskflowId; string; The unique identifier of the task flow.</li><li>TfKeyListString; string; The task flow parameters.</li><li>TfParameterString; string; The task flow parameter strings.</li><li>ThingsToFinishState; string; Indicates the state of things to complete.</li><li>UmsMessageId; string; The unique identifier for the message.</li><li>UserGUID; string; The unique identifier of the assigned user.</li><li>ViewId; string; The view identifier for the message.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables:<br><br><ul><li>PrimaryKey: Finds the popup item with the specified popup item identifier.<br>Finder Variables: <ul><li>MessageId; integer; The unique identifier of the popup item.</li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "MessageId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkPopupItems"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkPopupItems-get",
+        "x-filename-id": "atkpopupitems-get"
+      },
+      "post": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Create a popup items",
+        "operationId": "create_atkPopupItems",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/atkPopupItems-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkPopupItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "processOutcome": {
+                "operationRef": "#/paths/~1atkPopupItems~1{MessageId}~1action~1processOutcome/post",
+                "parameters": {
+                  "MessageId": "$request.path.MessageId"
+                },
+                "description": "This method is used to approve or reject a popup item."
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkPopupItems-post",
+        "x-filename-id": "atkpopupitems-post"
+      }
+    },
+    "/atkPopupItems/{MessageId}/action/processOutcome": {
+      "post": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Approve or reject a popup item",
+        "description": "This method is used to approve or reject a popup item.",
+        "operationId": "do_processOutcome_atkPopupItems",
+        "parameters": [
+          {
+            "name": "MessageId",
+            "in": "path",
+            "description": "The unique identifier of the message.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "The unique identifier of the message.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "outcome": {
+                    "type": "string",
+                    "description": "The unique value of the process outcome. that's displayed when the process is complete.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task."
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "atkPopupItems-{MessageId}-action-processOutcome-post",
+        "x-filename-id": "atkpopupitems-messageid-action-processoutcome-post"
+      }
+    },
+    "/atkPopupItems/{MessageId}": {
+      "get": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Get a popup item",
+        "operationId": "get_atkPopupItems",
+        "parameters": [
+          {
+            "name": "MessageId",
+            "in": "path",
+            "description": "The unique identifier of the message.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "The unique identifier of the message.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkPopupItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "processOutcome": {
+                "operationRef": "#/paths/~1atkPopupItems~1{MessageId}~1action~1processOutcome/post",
+                "parameters": {
+                  "MessageId": "$request.path.MessageId"
+                },
+                "description": "This method is used to approve or reject a popup item."
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkPopupItems-{MessageId}-get",
+        "x-filename-id": "atkpopupitems-messageid-get"
+      },
+      "delete": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Delete a popup item",
+        "operationId": "delete_atkPopupItems",
+        "parameters": [
+          {
+            "name": "MessageId",
+            "in": "path",
+            "description": "The unique identifier of the message.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "The unique identifier of the message.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "atkPopupItems-{MessageId}-delete",
+        "x-filename-id": "atkpopupitems-messageid-delete"
+      },
+      "patch": {
+        "tags": [
+          "ATK Popup Items"
+        ],
+        "summary": "Update a popup item",
+        "operationId": "update_atkPopupItems",
+        "parameters": [
+          {
+            "name": "MessageId",
+            "in": "path",
+            "description": "The unique identifier of the message.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "The unique identifier of the message.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/atkPopupItems-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/atkPopupItems-item-response"
+                }
+              }
+            },
+            "links": {
+              "processOutcome": {
+                "operationRef": "#/paths/~1atkPopupItems~1{MessageId}~1action~1processOutcome/post",
+                "parameters": {
+                  "MessageId": "$request.path.MessageId"
+                },
+                "description": "This method is used to approve or reject a popup item."
+              }
+            }
+          }
+        },
+        "x-internal-id": "atkPopupItems-{MessageId}-patch",
+        "x-filename-id": "atkpopupitems-messageid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "atkPopupItems": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/atkPopupItems-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject",
+          "group": "Common"
+        }
+      },
+      "atkPopupItems-item-response": {
+        "type": "object",
+        "properties": {
+          "AdditionalAttributes": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Additional information captured about the popup item.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DisplayMenu": {
+            "type": "string",
+            "description": "The name of the display menu.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MessageCreationDate": {
+            "title": "Creation Date",
+            "type": "integer",
+            "description": "The date and time when the notification was created.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MessageCreationTranslatedDate": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The date on which the translated version of the message was created.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "MessageCreationDate"
+              ]
+            },
+            "x-queryable": true
+          },
+          "MessageExpiryDate": {
+            "type": "integer",
+            "description": "The date on which the announcement notification is set to expire.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MessageId": {
+            "type": "integer",
+            "description": "The unique identifier of the message.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "MessageSummary": {
+            "title": "Message Summary",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The title of the notification containing the task details.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MsgCreationDbDate": {
+            "type": "string",
+            "description": "The date on which the message was created.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "MessageCreationDate"
+              ]
+            },
+            "x-queryable": true
+          },
+          "NavigationURLKey": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "The URL used for navigation.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "NotificationType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The type of notification.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "The version of the message.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PageParamListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The parameters associated with the page.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SOAOutcomes": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The SOA outcome.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SOAOutcomesArray": {
+            "type": "object",
+            "description": "The array of SOA outcome.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "SOAOutcomes",
+                "SOAOutcomesDisplay"
+              ]
+            },
+            "x-queryable": true
+          },
+          "SOAOutcomesDisplay": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The displayed array of SOA outcome.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SOAServer": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "The name of the SOA server.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The source of the message.",
+            "nullable": true,
+            "default": "SOA_HUMAN_TASK",
+            "x-queryable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 20,
+            "type": "string",
+            "description": "The status of the notification.",
+            "nullable": true,
+            "default": "NEW",
+            "x-queryable": true
+          },
+          "TaskCreator": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Identifies who created the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TaskDetailsAvailableFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Identifies if the task details are available.",
+            "nullable": false,
+            "default": true,
+            "x-queryable": true
+          },
+          "TaskDisplayURL": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The URL used for displaying the task details dialog box.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TaskId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier of the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TaskState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "The current state of the task in the workflow.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TaskTabLabel": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The label of the task.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TaskflowId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The unique identifier of the task flow.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TfKeyListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameters.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TfParameterString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameter strings.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThingsToFinishState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Indicates the state of things to complete.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "UmsMessageId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier for the message.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "UserGUID": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier of the assigned user.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ViewId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The view identifier for the message.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "atkPopupItems-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AdditionalAttributes": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Additional information captured about the popup item.",
+            "nullable": true
+          },
+          "DisplayMenu": {
+            "type": "string",
+            "description": "The name of the display menu.",
+            "nullable": true
+          },
+          "MessageCreationDate": {
+            "title": "Creation Date",
+            "type": "integer",
+            "description": "The date and time when the notification was created.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MessageExpiryDate": {
+            "type": "integer",
+            "description": "The date on which the announcement notification is set to expire.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MessageId": {
+            "type": "integer",
+            "description": "The unique identifier of the message.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "MessageSummary": {
+            "title": "Message Summary",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The title of the notification containing the task details.",
+            "nullable": true
+          },
+          "MsgCreationDbDate": {
+            "type": "string",
+            "description": "The date on which the message was created.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "MessageCreationDate"
+              ]
+            }
+          },
+          "NavigationURLKey": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "The URL used for navigation.",
+            "nullable": true
+          },
+          "NotificationType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The type of notification.",
+            "nullable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "The version of the message.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PageParamListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The parameters associated with the page.",
+            "nullable": true
+          },
+          "SOAOutcomes": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The SOA outcome.",
+            "nullable": true
+          },
+          "SOAOutcomesDisplay": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The displayed array of SOA outcome.",
+            "nullable": true
+          },
+          "SOAServer": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "The name of the SOA server.",
+            "nullable": true
+          },
+          "Source": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The source of the message.",
+            "nullable": true,
+            "default": "SOA_HUMAN_TASK"
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 20,
+            "type": "string",
+            "description": "The status of the notification.",
+            "nullable": true,
+            "default": "NEW"
+          },
+          "TaskCreator": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Identifies who created the task.",
+            "nullable": true
+          },
+          "TaskDetailsAvailableFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Identifies if the task details are available.",
+            "nullable": false,
+            "default": true
+          },
+          "TaskDisplayURL": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The URL used for displaying the task details dialog box.",
+            "nullable": true
+          },
+          "TaskId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier of the task.",
+            "nullable": true
+          },
+          "TaskState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "The current state of the task in the workflow.",
+            "nullable": true
+          },
+          "TaskTabLabel": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The label of the task.",
+            "nullable": true
+          },
+          "TaskflowId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The unique identifier of the task flow.",
+            "nullable": true
+          },
+          "TfKeyListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameters.",
+            "nullable": true
+          },
+          "TfParameterString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameter strings.",
+            "nullable": true
+          },
+          "ThingsToFinishState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Indicates the state of things to complete.",
+            "nullable": true
+          },
+          "UmsMessageId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier for the message.",
+            "nullable": true
+          },
+          "UserGUID": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier of the assigned user.",
+            "nullable": false
+          },
+          "ViewId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The view identifier for the message.",
+            "nullable": true
+          }
+        }
+      },
+      "atkPopupItems-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AdditionalAttributes": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Additional information captured about the popup item.",
+            "nullable": true
+          },
+          "DisplayMenu": {
+            "type": "string",
+            "description": "The name of the display menu.",
+            "nullable": true
+          },
+          "MessageExpiryDate": {
+            "type": "integer",
+            "description": "The date on which the announcement notification is set to expire.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MessageSummary": {
+            "title": "Message Summary",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The title of the notification containing the task details.",
+            "nullable": true
+          },
+          "NavigationURLKey": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "The URL used for navigation.",
+            "nullable": true
+          },
+          "NotificationType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "The type of notification.",
+            "nullable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "The version of the message.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PageParamListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The parameters associated with the page.",
+            "nullable": true
+          },
+          "SOAOutcomes": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The SOA outcome.",
+            "nullable": true
+          },
+          "SOAOutcomesDisplay": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "The displayed array of SOA outcome.",
+            "nullable": true
+          },
+          "SOAServer": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "The name of the SOA server.",
+            "nullable": true
+          },
+          "Status": {
+            "title": "Status",
+            "maxLength": 20,
+            "type": "string",
+            "description": "The status of the notification.",
+            "nullable": true,
+            "default": "NEW"
+          },
+          "TaskCreator": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Identifies who created the task.",
+            "nullable": true
+          },
+          "TaskDetailsAvailableFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Identifies if the task details are available.",
+            "nullable": false,
+            "default": true
+          },
+          "TaskDisplayURL": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "The URL used for displaying the task details dialog box.",
+            "nullable": true
+          },
+          "TaskId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier of the task.",
+            "nullable": true
+          },
+          "TaskState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "The current state of the task in the workflow.",
+            "nullable": true
+          },
+          "TaskTabLabel": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The label of the task.",
+            "nullable": true
+          },
+          "TaskflowId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The unique identifier of the task flow.",
+            "nullable": true
+          },
+          "TfKeyListString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameters.",
+            "nullable": true
+          },
+          "TfParameterString": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The task flow parameter strings.",
+            "nullable": true
+          },
+          "ThingsToFinishState": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Indicates the state of things to complete.",
+            "nullable": true
+          },
+          "UmsMessageId": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "The unique identifier for the message.",
+            "nullable": true
+          },
+          "ViewId": {
+            "maxLength": 400,
+            "type": "string",
+            "description": "The view identifier for the message.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "atkPopupItems-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/atkPopupItems-item-post-request"
+            }
+          }
+        }
+      },
+      "atkPopupItems-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/atkPopupItems-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

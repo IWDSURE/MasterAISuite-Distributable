@@ -1,0 +1,2988 @@
+{
+  "name": "PER_ALL_ASSIGNMENTS_M",
+  "object_type": "TABLE",
+  "description": "This stores two levels of the 3-Tier Model: Employment/Placement Terms (Level 2) and Assignments (Level 3). The assignment type is used to differentiate between these two levels as well as it continues to differentiate among employee, contingent worker, applicants, and benefits assignments.\nThis is date-tracked and allows multiple changes in a day.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perallassignmentsm-24924.html#perallassignmentsm-24924",
+  "primary_keys": [
+    {
+      "name": "PER_ALL_ASSIGNMENTS_M_PK",
+      "columns": "ASSIGNMENT_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, EFFECTIVE_LATEST_CHANGE, EFFECTIVE_SEQUENCE"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "This is a system generated primary key. Surrogate key.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the end of the date range within which the row is effective.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifies person holding an assignment or a set of Employment/Placement Terms. Foreign key to PER_PERSONS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERIOD_OF_SERVICE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies the Employment Level. Foreign key to PER_PERIODS_OF_SERVICE.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Identifies the type of record: either assignment (employee, CWK, applicant, non-workers) or a set of Terms.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Uniquely identifies the assignment or terms. Valid for Workers and non-workers. Assignment Level:By default [Person Number ] - [sequence] Work Term Level:[sequence]",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Used when defaulting assignment number.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_STATUS_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Denormalized status of the assignment. This is derived using the Assignment Status Type ID.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PRIMARY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Primary flag. Accepts value of ?Y? or ?N? based on ?YES_NO? lookup type. If set to ?Yes?, record represents the primary assignment associated to the primary Work Relationship and primary set of Employment/Placement Terms.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ORGANIZATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Department Identifier, it is optional.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "JOB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_JOBS_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_LOCATIONS_ALL_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "POSITION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_ALL_POSITIONS_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GRADE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_GRADES_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GRADE_LADDER_PGM_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Link assignment to grade ladder for Benefits.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PEOPLE_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_PEOPLE_GROUPS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "COLLECTIVE_AGREEMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_COLLECTIVE_AGREEMENTS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "BARGAINING_UNIT_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Bargaining unit code.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LABOUR_UNION_MEMBER_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Labour union member flag. Accepts values of ?Y? or ?N?.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CAGR_GRADE_DEF_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_CAGR_GRADES_DEF.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CAGR_ID_FLEX_NUM",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Key flex Structure Identifier for Collectively Agreed Grade.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CONTRACT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_CONTRACTS_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "MANAGER_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether the employee in this assignment is designated a manager. Based on ?YES_NO? lookup type.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DATE_PROBATION_END",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "End date of probation period.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROBATION_PERIOD",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "25",
+      "Not-null": "",
+      "Comments": "Duration of probation period.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROBATION_UNIT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Units of probation period duration. Based on QUALIFYING_UNITS lookup type.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NORMAL_HOURS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "22",
+      "Not-null": "",
+      "Comments": "Normal working hours.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FREQUENCY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Frequency of normal working hours, - week, month, year. Sourced from ?Frequency? lookup type.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "WORK_AT_HOME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Work at home flag.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TIME_NORMAL_FINISH",
+      "Datatype": "VARCHAR2",
+      "Length": "5",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Work day normal end time.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TIME_NORMAL_START",
+      "Datatype": "VARCHAR2",
+      "Length": "5",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Work day normal start time.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NOTICE_PERIOD",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "10",
+      "Not-null": "",
+      "Comments": "Notice period for the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NOTICE_PERIOD_UOM",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Notice period unit of measure.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DEFAULT_CODE_COMB_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to GL_CODE_COMBINATIONS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EMPLOYEE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Based on Lookup Type = ?EMPLOYEE_CATG?: Blue collar, Civil Servant, etc.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EMPLOYMENT_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "User defined category. For example Full-Time Permanent or Part-Time Permanent. Lookup Type = ?EMP_CAT?.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ESTABLISHMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to HR_ORGANIZATION_UNITS_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "HOURLY_SALARIED_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies if the assignment is paid by the hour or by a salary. Either maintained at the assignment level or ?Employment/Placement Terms? but not both.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SAL_REVIEW_PERIOD",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Length of time between salary reviews. Either maintained at the assignment level or ?Employment/Placement Terms? but not both.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SAL_REVIEW_PERIOD_FREQUENCY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Used with SAL REVIEW PERIOD to define time between salary reviews. Based on ?QUALIFYING_UNITS? lookup type.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "JOB_POST_SOURCE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Job post source name.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROJECT_TITLE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Obsolete",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERSON_REFERRED_BY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies person who referred applicant. Foreign key to PER_PERSONS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PO_HEADER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to po_headers_all.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PO_LINE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to po_lines_all.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RECRUITER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies recruiter. Foreign Key to PER_PERSONS.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RECRUITMENT_ACTIVITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies activity associated with the recruitment process. Foreign key to PER_RECRUITMENT_ACTIVITIES.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "VACANCY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_ALL_VACANCIES.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "APPLICANT_RANK",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Rank assigned to an applicant based on suitability and other criteria",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "POSTING_CONTENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The posting to which the applicant has applied.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SOURCE_ORGANIZATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Valid for 'Offer' and 'Applicant' Assignments only. Captured as part of the ?Application Source? details. For instance, Agency or Marketing.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SOURCE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Recruitment activity source for applicant assignment, for example, Advertisement.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROJECTED_ASSIGNMENT_END",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The date the assignment is expected to end.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SET_OF_BOOKS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This is called Ledger in Fusion. Defaulted from Business Unit.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SOFT_CODING_KEYFLEX_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Obsolete",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SPECIAL_CEILING_STEP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_GRADE_STEPS_F.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "VENDOR_ASSIGNMENT_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Assignment number of non-payrolled worker assignment with vending organization.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "VENDOR_EMPLOYEE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Employee number of worker with vending organization.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "VENDOR_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to po_vendors.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "VENDOR_SITE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key reference to po_vendor_sites_all.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: structure definition of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE1",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE2",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE3",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE4",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE5",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE6",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE7",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE8",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE9",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE10",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE11",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE12",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE13",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE14",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE15",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE16",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE17",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE18",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE19",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE20",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE21",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE22",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE23",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE24",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE25",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE26",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE27",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE28",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE29",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE30",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "WORK_TERMS_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_ALL_ASSIGNMENTS_M for a work term.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ACTION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the action performed on the particular record. For example: HIRE, ADD PENDING WORKER, MANAGER CHANGE, etc.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Describes the type of assignment or set of Terms. Users can configure how to derive this (at setup time). This is optional, by default (out-of-the-box) this is derived as follows: [job name] - [department name].",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASSIGNMENT_STATUS_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Denormalized status of the assignment. This is derived using the Assignment Status Type ID.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "AUTO_END_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Used for temporary assignments. Determines whether to end the temporary job automatically.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "DUTIES_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Duties type. Apply for temporary assignments. Derived from a lookup code.  Enterprise stores types in a specific table rather than a lookup.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EFFECTIVE_SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "4",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the order of different changes made during a day. The lowest value represents the earliest change in the day.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EXPENSE_CHECK_ADDRESS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines whether check is sent to the Home or Office address. Based on ?HOME_OFFICE? lookup.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INTERNAL_BUILDING",
+      "Datatype": "VARCHAR2",
+      "Length": "45",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Building information associated with Work location.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INTERNAL_FLOOR",
+      "Datatype": "VARCHAR2",
+      "Length": "45",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Floor information.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INTERNAL_LOCATION",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Additional location details.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INTERNAL_MAILSTOP",
+      "Datatype": "VARCHAR2",
+      "Length": "45",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Internal mail location.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "INTERNAL_OFFICE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "45",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Office Number.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LEGAL_ENTITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Represents Legal Entity. Might be null for Applicants.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Legislation code derived from the Legal Entity. Might be null for Applicants.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LINKAGE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines the type of processing and rules associated with the linking of two assignments.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PARENT_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Allows two assignments to be linked. Used when creating temporary assignments. Also, potentially required when converting the Applicant onto a Worker (i.e. this stores the applicant assignment ID for the worker?s assignment).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERSON_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Defines the worker class. Examples: Assignee, Consultant, Expatriate, Agency/Temp, Intern, Apprentice, Contractor, Trainee. This defaults from the person/org relationship. It is defined at either level (Assignment or Employment/Placement Terms).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PRIMARY_WORK_TERMS_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Accepts value of ?Y? or ?N? based on ?YES_NO? lookup type. If set to ?Yes?, then the current row represents a Assignment attached to the primary set of Employment/Placement.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PRIMARY_ASSIGNMENT_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Accepts value of ?Y? or ?N? based on ?YES_NO? lookup type. If set to ?Yes?, then the current row represents the primary deployment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PRIMARY_WORK_RELATION_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Accepts value of ?Y? or ?N? based on ?YES_NO? lookup type. If set to ?Yes?, then the current row represents an Assignment or Employment/Placement attached to the primary Work Relationship.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROJECTED_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Tentative start date (applicants).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REASON_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the reason for the action performed on the record.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SYSTEM_PERSON_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Derived from the person type id. It is included in this table to aid in performance.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "BUSINESS_UNIT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Determinant for ?Set Enabled? tables and those using BU as a partitioning key.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "BILLING_TITLE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Billing Title for assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "STEP_ENTRY_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "obsolete",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TAX_ADDRESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to PER_ADDRESSES. This represents the address that is used for taxation purposes. This can be different from a ?mailing address?.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASS_ATTRIBUTE31",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE32",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE33",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE34",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE35",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE36",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE37",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE38",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE39",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE40",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE41",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE42",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE43",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE44",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE45",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE46",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE47",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE48",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE49",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE50",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive Flexfield: segment of the user descriptive flexfield.",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "RECORD_CREATOR",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Record created By Module",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ACTION_OCCURRENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_ACTION_OCCURRENCES.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PROPOSED_WORKER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determines whether applicant will be hired/placed as an Employee or Contingent Worker. This represents a SYSTEM PERSON TYPE: EMP or CWK. This is also applicable for Pending Hires (workers).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RETIREMENT_AGE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Represents the age, worker is retiring at.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "RETIREMENT_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Represents the planned retirement date.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "POSITION_OVERRIDE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Override Position related data. Accepts values of ?Y? and ?N?.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "EFFECTIVE_LATEST_CHANGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: 'Y' indicates that this row represents the latest change in the day.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ALLOW_ASG_OVERRIDE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Override Work Term related data. Accepts values of ?Y? and ?N?.  This is set for the Work Term. Default is set to ?N? for rows representing Assignments and it does not change. If row represents a Work Term, then this is user-enterable.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER11",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER12",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER13",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER14",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER15",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER16",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER17",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER18",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER19",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_NUMBER20",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE11",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE12",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE13",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE14",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASS_ATTRIBUTE_DATE15",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column",
+      "Flexfield-mapping": "Assignment Attributes (PER_ASG_DF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Developer Descriptive flexfield structure defining column",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION1",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION2",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION3",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION4",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION5",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION6",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION7",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION8",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION9",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION10",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION11",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION12",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION13",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION14",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION15",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION16",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION17",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION18",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION19",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION20",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION21",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION22",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION23",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION24",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION25",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION26",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION27",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION28",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION29",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION30",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION31",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION32",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION33",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION34",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION35",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION36",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION37",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION38",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION39",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION40",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION41",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION42",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION43",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION44",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION45",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION46",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION47",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION48",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION49",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION50",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field column. Store Legislation specific information",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER1",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER2",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER3",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER4",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER5",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER6",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER7",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER8",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER9",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER10",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER11",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER12",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER13",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER14",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER15",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER16",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER17",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER18",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER19",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_NUMBER20",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field numeric column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE1",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE2",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE3",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE4",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE5",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE6",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE7",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE8",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE9",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE10",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE11",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE12",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE13",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE14",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "ASG_INFORMATION_DATE15",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Descriptive flex field date column.",
+      "Flexfield-mapping": "Legislative Assignment Attributes (PER_ASG_LEG_DDF)"
+    },
+    {
+      "Name": "FREEZE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Represents the Deferred data freeze start date (defaulted to End of time).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FREEZE_UNTIL_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Represents the Deferred data freeze until date (defaulted to Start of Time).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ID_FLEX_NUM",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Represents ID Flex num for PeopleGroup KFF implementation.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "CATEGORY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Extensible Flexfield Category Code",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "FULL_PART_TIME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "FULL_PART_TIME",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "PERMANENT_TEMPORARY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "PERMANENT_TEMPORARY_FLAG",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "GSP_ELIGIBILITY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies if person is included in grade step progression.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "UNION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Union to which a person belongs",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SENIORITY_BASIS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seniority",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "OVERTIME_PERIOD",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Overtime Period",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "SOURCE_ASSIGNMENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier (ID) of the source assignment that was used to create the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "LAST_WORKING_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Last Date Worked (for terminated workers).",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REVIEW_USER_ACCESS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This stores user's option of review user access on Termination. Values accepted are 'I' for Immediately or 'A' for After termination",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REHIRE_RECOMMENDATION",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Accepts Yes or No values. If Yes, person is recommended for re-hiring.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REHIRE_REASON",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If rehire recommendation is 'yes', then reason from recommending person is tracked via this field.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "REHIRE_AUTHORIZER_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_PERSONS. Represents the person who recommends the worker for rehire.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "TERMINATION_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Actual termination date of  an assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "NOTIFICATION_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Date when the termination of employment was notified.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "STANDARD_HOURS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "22",
+      "Not-null": "",
+      "Comments": "The standard working hours for the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "STANDARD_FREQUENCY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Frequency of standard working hours, - week, month, year. Sourced from Frequency lookup type.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "STD_ANNUAL_WORKING_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "8",
+      "Not-null": "",
+      "Comments": "The standard annual working duration for the enterprise, legal employer, department, location, job, position, or assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_WORKING_DURATION_UNITS",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The unit of measure in hours, days, weeks, and months for the annual working and standard annual working durations.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_WORKING_DURATION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "8",
+      "Not-null": "",
+      "Comments": "The annual working duration for the position and assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ANNUAL_WORKING_RATIO",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "8",
+      "Not-null": "",
+      "Comments": "The ratio of annual working hours and standard annual working hours for the assignment.",
+      "Flexfield-mapping": ""
+    },
+    {
+      "Name": "ADJUSTED_FTE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "30",
+      "Not-null": "",
+      "Comments": "The Adjusted Full Time Equivalent value calculated by multiplying the FTE and the Annual Working Ratio for the assignment.",
+      "Flexfield-mapping": ""
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BUSINESS_GROUP_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK13",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "RECRUITMENT_ACTIVITY_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK14",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_ORGANIZATION_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK15",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ORGANIZATION_ID, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK16",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PEOPLE_GROUP_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK17",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOFT_CODING_KEYFLEX_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK18",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "VACANCY_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ESTABLISHMENT_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK21",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTIVE_AGREEMENT_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK22",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONTRACT_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK23",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CAGR_GRADE_DEF_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GRADE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK31",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "POSTING_CONTENT_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "POSITION_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "JOB_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK52",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "VENDOR_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK53",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UNION_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_STATUS_TYPE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK8",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LOCATION_ID, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_FK9",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ACTION_OCCURRENCE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N03",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "GRADE_LADDER_PGM_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N11",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SPECIAL_CEILING_STEP_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N12",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, ASSIGNMENT_TYPE, PRIMARY_FLAG, EFFECTIVE_LATEST_CHANGE, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, ASSIGNMENT_STATUS_TYPE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N13",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, EFFECTIVE_LATEST_CHANGE, EFFECTIVE_SEQUENCE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "RECRUITER_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERIOD_OF_SERVICE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "WORK_TERMS_ASSIGNMENT_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, EFFECTIVE_SEQUENCE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N50",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_NUMBER, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N51",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LAST_UPDATE_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N52",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_TYPE",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N53",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, ASSIGNMENT_STATUS_TYPE, EFFECTIVE_LATEST_CHANGE, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, FREEZE_UNTIL_DATE, FREEZE_START_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N54",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"ASSIGNMENT_NUMBER\"), EFFECTIVE_START_DATE, EFFECTIVE_END_DATE",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N55",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_ASSIGNMENT_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N6",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"ASSIGNMENT_NAME\")",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N7",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "LEGAL_ENTITY_ID, ASSIGNMENT_TYPE, EFFECTIVE_END_DATE, ASSIGNMENT_STATUS_TYPE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_N9",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_REFERRED_BY_ID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "PER_ALL_ASSIGNMENTS_M_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ASSIGNMENT_ID, EFFECTIVE_START_DATE, EFFECTIVE_END_DATE, EFFECTIVE_LATEST_CHANGE, EFFECTIVE_SEQUENCE",
+      "Status": ""
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:24:20"
+}

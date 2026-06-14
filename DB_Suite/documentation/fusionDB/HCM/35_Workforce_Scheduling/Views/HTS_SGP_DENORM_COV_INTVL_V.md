@@ -1,0 +1,36 @@
+# HTS_SGP_DENORM_COV_INTVL_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htssgpdenormcovintvlv-7439.html#htssgpdenormcovintvlv-7439](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htssgpdenormcovintvlv-7439.html#htssgpdenormcovintvlv-7439)
+
+## Columns
+
+- SCHED_GEN_PROFILE_ID
+- SEQ
+- SCHED_PROFILE_INTVL_ID
+- START_TIME_DTL_OFFSET
+- STOP_TIME_DTL_OFFSET
+- START_TIME_DTL
+- STOP_TIME_DTL
+- START_TIME_DTL_TS
+- STOP_TIME_DTL_TS
+- INTERVAL_IN_MINUTES
+- NUMBER_OF_INTERVALS
+- START_TIME_OFFSET
+
+## Query
+
+```sql
+SELECT sched_gen_profile_id , seq , sched_profile_intvl_id , start_time_dtl_offset , stop_time_dtl_offset , ((lpad (trunc(MOD (nvl(START_TIME_DTL_offset,0), 1440) / 60 ),2,0) || ':' || lpad (MOD (nvl(START_TIME_DTL_offset,0) , 60) ,2,0)) || ':00') START_TIME_DTL , ((lpad (trunc(MOD ( nvl(STOP_TIME_DTL_offset,0), 1440) / 60 ),2,0) || ':' || lpad ( MOD ( nvl(STOP_TIME_DTL_offset,0) , 60) ,2,0)) || ':00') STOP_TIME_DTL , TO_TIMESTAMP ('1901-01-0' || (CASE WHEN START_TIME_DTL_offset <= 1440 THEN '1' ELSE '2' END) || ((lpad (trunc(MOD (nvl(START_TIME_DTL_offset,0), 1440) / 60 ),2,0) || ':' || lpad (MOD (nvl(START_TIME_DTL_offset,0) , 60) ,2,0)) || ':00') , 'yyyy-mm-DD HH24:MI:SS') START_TIME_DTL_TS , TO_TIMESTAMP ('1901-01-0' || (CASE WHEN STOP_TIME_DTL_offset <= 1440 THEN '1' ELSE '2' END) || ((lpad (trunc(MOD ( nvl(STOP_TIME_DTL_offset,0), 1440) / 60 ),2,0) || ':' || lpad ( MOD ( nvl(STOP_TIME_DTL_offset,0) , 60) ,2,0)) || ':00') , 'yyyy-mm-DD HH24:MI:SS') STOP_TIME_DTL_ts , interval_in_minutes , number_of_intervals , start_time_offset FROM (SELECT xpnd.sched_gen_profile_id, xpnd.seq, xpnd.sched_profile_intvl_id , ((xpnd.seq -1) * (xpnd.INTERVAL_IN_MINUTES) + xpnd.START_TIME_OFFSET ) START_TIME_DTL_offset, ((xpnd.seq ) * (xpnd.INTERVAL_IN_MINUTES) + xpnd.START_TIME_OFFSET ) STOP_TIME_DTL_offset, xpnd.interval_in_minutes, xpnd.number_of_intervals, xpnd.start_time_offset FROM (SELECT y.sched_gen_profile_id, y.seq, y.sched_profile_intvl_id, y.interval_in_minutes, y.number_of_intervals, y.start_time_offset FROM (SELECT sched_gen_profile_id, counter seq, sched_profile_intvl_id, interval_in_minutes, number_of_intervals, start_time_offset FROM hts_sched_profile_cov_intvls, LATERAL (SELECT level AS counter FROM dual CONNECT BY level <= number_of_intervals)) y UNION SELECT z.sched_gen_profile_id, z.seq, z.sched_profile_intvl_id, z.interval_in_minutes, z.number_of_intervals, z.start_time_offset FROM (SELECT level seq, - 1 sched_profile_intvl_id, sched_gen_profile_id, 240 interval_in_minutes, 6 number_of_intervals, nvl(DAY_START_TIME_OFFSET,0 ) start_time_offset FROM hts_schedule_gen_profiles_b WHERE sched_gen_profile_id NOT IN ( SELECT sched_gen_profile_id FROM hts_sched_profile_cov_intvls ) CONNECT BY level <= 6 AND sched_gen_profile_id = PRIOR sched_gen_profile_id AND PRIOR sys_guid() IS NOT NULL) z ) xpnd )
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

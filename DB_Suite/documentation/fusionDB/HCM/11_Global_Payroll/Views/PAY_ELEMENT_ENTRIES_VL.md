@@ -1,0 +1,60 @@
+# PAY_ELEMENT_ENTRIES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payelemententriesvl-8057.html#payelemententriesvl-8057](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payelemententriesvl-8057.html#payelemententriesvl-8057)
+
+## Columns
+
+- ELEMENT_ENTRY_ID
+- PERSON_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- ELEMENT_TYPE_ID
+- ENTRY_TYPE_CODE
+- ENTRY_TYPE
+- CREATOR_TYPE_CODE
+- CREATOR_ID
+- CREATOR_TYPE
+- DATE_FROM
+- DATE_TO
+- USAGE_LEVEL_CODE
+- USAGE_LEVEL
+- PAYROLL_RELATIONSHIP_ID
+- ASSIGNED_PAYROLL_ID
+- PAYROLL_ASSIGNMENT_ID
+- PAYROLL_TERM_ID
+- PAYROLL_ID
+- REASON
+- REASON_LOOKUP_MEANING
+- SUBPRIORITY
+- CREATION_DATE
+- LAST_UPDATE_DATE
+- CREATED_BY
+- LAST_UPDATED_BY
+- ASSIGNMENT_ID
+- STANDARD_LINK_FLAG
+- MULTIPLE_ENTRY_COUNT
+- ADDITIONAL_FLAG
+- RETRO_FLAG
+- ADJUST_FLAG
+- PROCESSED_FLAG
+- LEGISLATIVE_DATA_GROUP_ID
+- EFFECTIVE_START_DATE1
+- EFFECTIVE_END_DATE1
+
+## Query
+
+```sql
+SELECT ElementEntryDPEO.element_entry_id, ElementEntryDPEO.person_id, ElementEntryDPEO.effective_start_date, ElementEntryDPEO.effective_end_date, ElementEntryDPEO.element_type_id, ElementEntryDPEO.entry_type AS entry_type_code, EntryTypeLookupPEO.meaning AS entry_type, ElementEntryDPEO.creator_type AS creator_type_code, ElementEntryDPEO.creator_id AS creator_id, CreatorTypeLookupPEO.meaning AS creator_type, ElementEntryUsagesPEO.date_from, ElementEntryUsagesPEO.date_to, ElementEntryUsagesPEO.usage_level AS usage_level_code, EntryUsagesLookupPEO.meaning AS usage_level, ElementEntryUsagesPEO.payroll_relationship_id, ElementEntryUsagesPEO.assigned_payroll_id, ElementEntryUsagesPEO.payroll_assignment_id, ElementEntryUsagesPEO.payroll_term_id, PayAssignedPayrollPEO.payroll_id, ElementEntryDPEO.reason AS reason, EntryReasonLookupPEO.meaning AS reason_lookup_meaning, ElementEntryDPEO.subpriority, ElementEntryDPEO.CREATION_DATE, ElementEntryDPEO.LAST_UPDATE_DATE, ElementEntryDPEO.CREATED_BY, ElementEntryDPEO.LAST_UPDATED_BY, nvl(pasg.ASSIGNMENT_ID,asg.ASSIGNMENT_ID) assignment_id, ElementTypesDPEO.STANDARD_LINK_FLAG, ElementEntryDPEO.MULTIPLE_ENTRY_COUNT, DECODE(ElementEntryDPEO.ENTRY_TYPE,'D','Y','N') AS ADDITIONAL_FLAG, DECODE(ElementEntryDPEO.CREATOR_TYPE,'RR','Y','EE','Y','N') AS RETRO_FLAG, DECODE(ElementEntryDPEO.ENTRY_TYPE,'A','Y','R','Y','N') AS ADJUST_FLAG, DECODE((Select max('1') From PAY_RUN_RESULTS RunResultPEO, PAY_PAYROLL_REL_ACTIONS PayrollRelationshipActionPEO, PAY_PAYROLL_ACTIONS PayrollActionPEO, PAY_TIME_PERIODS TimePeriodPEO , PAY_RUN_RESULTS RRS Where RunResultPEO.payroll_rel_action_id = PayrollRelationshipActionPEO.payroll_rel_action_id AND PayrollRelationshipActionPEO.payroll_action_id = PayrollActionPEO.payroll_action_id AND PayrollActionPEO.payroll_id = TimePeriodPEO.payroll_id AND PayrollActionPEO.date_earned BETWEEN TimePeriodPEO.start_date AND TimePeriodPEO.end_date and RunResultPEO.ELEMENT_ENTRY_ID=ElementEntryDPEO.ELEMENT_ENTRY_ID and ElementEntryDPEO.EFFECTIVE_START_DATE BETWEEN TimePeriodPEO.start_date AND TimePeriodPEO.end_date and RRS.SOURCE_ID=RunResultPEO.SOURCE_ID and RRS.SOURCE_TYPE not IN ('R','V')),'1','Y','N') Processed_Flag, prel.legislative_data_group_id, asg.effective_start_date AS effective_start_date1, asg.effective_end_date AS effective_end_date1 FROM pay_element_types_f ElementTypesDPEO, pay_element_entries_f ElementEntryDPEO, pay_entry_usages ElementEntryUsagesPEO, PAY_ASSIGNED_PAYROLLS_dn PayAssignedPayrollPEO, hcm_lookups EntryUsagesLookupPEO, hcm_lookups EntryTypeLookupPEO, hcm_lookups CreatorTypeLookupPEO, hcm_lookups EntryReasonLookupPEO, per_all_assignments_f asg, PAY_REL_GROUPS_DN pasg, pay_pay_relationships_dn prel WHERE ElementTypesDPEO.ELEMENT_TYPE_ID=ElementEntryDPEO.ELEMENT_TYPE_ID AND ElementEntryDPEO.element_entry_id = ElementEntryUsagesPEO.element_entry_id AND ElementEntryUsagesPEO.assigned_payroll_id = PayAssignedPayrollPEO.assigned_payroll_id (+) AND EntryUsagesLookupPEO.lookup_code = ElementEntryUsagesPEO.usage_level AND EntryUsagesLookupPEO.lookup_type ='PAY_USAGE_LEVEL' AND EntryTypeLookupPEO.lookup_code = ElementEntryDPEO.entry_type AND EntryTypeLookupPEO.lookup_type ='PAY_ENTRY_TYPE' AND CreatorTypeLookupPEO.lookup_code = ElementEntryDPEO.creator_type AND CreatorTypeLookupPEO.lookup_type ='PAY_CREATOR_TYPE' AND EntryReasonLookupPEO.lookup_code (+) = ElementEntryDPEO.reason AND EntryReasonLookupPEO.lookup_type (+) ='PAY_ELE_ENTRY_REASON' AND ElementEntryDPEO.effective_start_date BETWEEN ElementTypesDPEO.effective_start_date AND ElementTypesDPEO.effective_end_date and asg.person_id = ElementEntryDPEO.person_id and asg.PRIMARY_FLAG = 'Y' and pasg.RELATIONSHIP_GROUP_ID (+) = ElementEntryUsagesPEO.PAYROLL_ASSIGNMENT_ID and prel.PAYROLL_RELATIONSHIP_ID (+) = ElementEntryUsagesPEO.PAYROLL_RELATIONSHIP_ID AND asg.WORK_TERMS_ASSIGNMENT_ID IS NOT NULL AND (asg.assignment_status_type <> 'INACTIVE' OR (asg.assignment_status_type = 'INACTIVE' AND NOT EXISTS (SELECT NULL FROM per_all_assignments_f aaa WHERE aaa.person_id = asg.person_id AND aaa.WORK_TERMS_ASSIGNMENT_ID IS NOT NULL AND aaa.PRIMARY_FLAG = 'Y' AND aaa.assignment_id <> asg.assignment_id AND ( (asg.effective_start_date BETWEEN aaa.effective_start_date AND aaa.effective_end_date) or (asg.effective_end_date BETWEEN aaa.effective_start_date AND aaa.effective_end_date)) AND (aaa.assignment_status_type <> 'INACTIVE' OR (aaa.assignment_status_type = 'INACTIVE' AND asg.ASSIGNMENT_ID < aaa.ASSIGNMENT_ID)) )))
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

@@ -1,0 +1,1718 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Person Process Results/Payslips Summary/Payslips Summary",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/personProcessResults/{ObjectActionId}/child/costAdjustments/{CostAdjustmentId}/child/costAdjustmentLines": {
+      "get": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "getall_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CostAdjustLineId; integer; Unique identifier for the payroll</li><li>CostAdjustmentId; integer; Unique identifier for the payroll</li><li>CostAllocationKeyflexId; integer; Unique identifier for the payroll</li><li>CostId; integer; Unique identifier for the payroll</li><li>CreatedBy; string; Unique identifier for the payroll</li><li>CreationDate; string; Unique identifier for the payroll</li><li>DebitOrCredit; string; Unique identifier for the payroll</li><li>IdFlexNumber; integer; Unique identifier for the payroll</li><li>LastUpdateDate; string; Unique identifier for the payroll</li><li>LastUpdatedBy; string; Unique identifier for the payroll</li><li>LineEndDate; string; Unique identifier for the payroll</li><li>LineStartDate; string; Unique identifier for the payroll</li><li>LineValue; number; Unique identifier for the payroll</li><li>ReversalEntryFlag; boolean; Unique identifier for the payroll</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Unique identifier for the payroll <br>Finder Variables <ul><li>CostAdjustLineId; integer;  Unique identifier for the payroll </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Unique identifier for the payroll",
+                "properties": {
+                  "CostAdjustLineId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the payroll",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines"
+                }
+              }
+            },
+            "links": {
+              "validateAccount": {
+                "operationRef": "#/paths/~1personProcessResults~1{ObjectActionId}~1child~1costAdjustments~1{CostAdjustmentId100}~1child~1costAdjustmentLines~1action~1validateAccount/post",
+                "parameters": {
+                  "CostAdjustmentId100": "$request.path.CostAdjustmentId100",
+                  "ObjectActionId": "$request.path.ObjectActionId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-get"
+      },
+      "post": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "create_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/personProcessResults-costAdjustments-costAdjustmentLines-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-response"
+                }
+              }
+            },
+            "links": {
+              "costKFF": {
+                "operationRef": "#/paths/~1personProcessResults~1{ObjectActionId}~1child~1costAdjustments~1{CostAdjustmentId100}~1child~1costAdjustmentLines~1{CostAdjustLineId}~1child~1costKFF/get",
+                "parameters": {
+                  "CostAdjustmentId100": "$request.path.CostAdjustmentId100",
+                  "ObjectActionId": "$request.path.ObjectActionId",
+                  "CostAdjustLineId": "$request.path.CostAdjustLineId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-post",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-post"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/costAdjustments/{CostAdjustmentId}/child/costAdjustmentLines/action/validateAccount": {
+      "post": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "description": "Unique identifier for the payroll",
+        "operationId": "doall_validateAccount_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "structureInstanceNumber": {
+                    "type": "number",
+                    "description": "Unique identifier for the payroll",
+                    "nullable": true
+                  },
+                  "bindValues": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "nullable": true
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Unique identifier for the payroll",
+                    "nullable": true
+                  },
+                  "dataSetNumber": {
+                    "type": "number",
+                    "description": "Unique identifier for the payroll",
+                    "nullable": true
+                  },
+                  "combination": {
+                    "type": "string",
+                    "description": "Unique identifier for the payroll",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the payroll"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Unique identifier for the payroll"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-action-validateAccount-post",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-action-validateaccount-post"
+      }
+    },
+    "/personProcessResults/{ObjectActionId}/child/costAdjustments/{CostAdjustmentId}/child/costAdjustmentLines/{CostAdjustLineId}": {
+      "get": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "get_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "CostAdjustLineId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-response"
+                }
+              }
+            },
+            "links": {
+              "costKFF": {
+                "operationRef": "#/paths/~1personProcessResults~1{ObjectActionId}~1child~1costAdjustments~1{CostAdjustmentId100}~1child~1costAdjustmentLines~1{CostAdjustLineId}~1child~1costKFF/get",
+                "parameters": {
+                  "CostAdjustmentId100": "$request.path.CostAdjustmentId100",
+                  "ObjectActionId": "$request.path.ObjectActionId",
+                  "CostAdjustLineId": "$request.path.CostAdjustLineId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-{CostAdjustLineId}-get",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-costadjustlineid-get"
+      },
+      "delete": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "delete_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "CostAdjustLineId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-{CostAdjustLineId}-delete",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-costadjustlineid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Person Process Results/Payslips Summary/Payslips Summary"
+        ],
+        "summary": "Unique identifier for the payroll",
+        "operationId": "update_personProcessResults-costAdjustments-costAdjustmentLines",
+        "parameters": [
+          {
+            "name": "ObjectActionId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "CostAdjustmentId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "CostAdjustLineId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the payroll",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/personProcessResults-costAdjustments-costAdjustmentLines-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-response"
+                }
+              }
+            },
+            "links": {
+              "costKFF": {
+                "operationRef": "#/paths/~1personProcessResults~1{ObjectActionId}~1child~1costAdjustments~1{CostAdjustmentId100}~1child~1costAdjustmentLines~1{CostAdjustLineId}~1child~1costKFF/get",
+                "parameters": {
+                  "CostAdjustmentId100": "$request.path.CostAdjustmentId100",
+                  "ObjectActionId": "$request.path.ObjectActionId",
+                  "CostAdjustLineId": "$request.path.CostAdjustLineId"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "personProcessResults-{ObjectActionId}-child-costAdjustments-{CostAdjustmentId}-child-costAdjustmentLines-{CostAdjustLineId}-patch",
+        "x-filename-id": "personprocessresults-objectactionid-child-costadjustments-costadjustmentid-child-costadjustmentlines-costadjustlineid-patch"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "personProcessResults-costAdjustments-costAdjustmentLines": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-item-response": {
+        "type": "object",
+        "properties": {
+          "Account": {
+            "title": "Concatenated Segments",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "FND_ACFF_ResourceLOVName": "costAccounts",
+              "FND_ACFF_ResourceLOVFinderContext": "oracle.apps.hcm.batchProcesses.results.restModel.person.view.CostAdjustmentLineVO#costKFF",
+              "FND_ACFF_ResourceName": "personProcessResults",
+              "ojStructureInstanceNumber": "IdFlexNumber"
+            },
+            "x-oj": {
+              "controlType": "oj-sp-input-key-flex-field"
+            }
+          },
+          "CostAdjustLineId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "CostAdjustmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "default": -999,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CostAllocationKeyflexId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CostId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DebitOrCredit": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "IdFlexNumber": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LineEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LineStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LineValue": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ReversalEntryFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "costKFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-response": {
+        "type": "object",
+        "properties": {
+          "EnabledFlag": {
+            "maxLength": 1,
+            "type": "string",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "EndDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "StartDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            },
+            "x-queryable": true
+          },
+          "_COST_ALLOCATION_KEYFLEX_ID": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_IsCCID": "true"
+            },
+            "x-queryable": true
+          },
+          "_ID_FLEX_NUM": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_IsStructureID": "true",
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_StructureLookupRequired": "false"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-item-post-request": {
+        "required": [
+          "DebitOrCredit"
+        ],
+        "type": "object",
+        "properties": {
+          "Account": {
+            "title": "Concatenated Segments",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "FND_ACFF_ResourceLOVName": "costAccounts",
+              "FND_ACFF_ResourceLOVFinderContext": "oracle.apps.hcm.batchProcesses.results.restModel.person.view.CostAdjustmentLineVO#costKFF",
+              "FND_ACFF_ResourceName": "personProcessResults",
+              "ojStructureInstanceNumber": "IdFlexNumber"
+            },
+            "x-oj": {
+              "controlType": "oj-sp-input-key-flex-field"
+            }
+          },
+          "CostAdjustLineId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "CostAdjustmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "default": -999,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "CostAllocationKeyflexId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CostId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "DebitOrCredit": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false
+          },
+          "IdFlexNumber": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LineEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true
+          },
+          "LineStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true
+          },
+          "LineValue": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReversalEntryFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "default": false
+          },
+          "costKFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-post-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EnabledFlag": {
+            "maxLength": 1,
+            "type": "string",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EndDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "StartDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "_COST_ALLOCATION_KEYFLEX_ID": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_IsCCID": "true"
+            }
+          },
+          "_ID_FLEX_NUM": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_IsStructureID": "true",
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_StructureLookupRequired": "false"
+            }
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Account": {
+            "title": "Concatenated Segments",
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "FND_ACFF_ResourceLOVName": "costAccounts",
+              "FND_ACFF_ResourceLOVFinderContext": "oracle.apps.hcm.batchProcesses.results.restModel.person.view.CostAdjustmentLineVO#costKFF",
+              "FND_ACFF_ResourceName": "personProcessResults",
+              "ojStructureInstanceNumber": "IdFlexNumber"
+            },
+            "x-oj": {
+              "controlType": "oj-sp-input-key-flex-field"
+            }
+          },
+          "CostAdjustLineId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "CostAdjustmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": false,
+            "default": -999,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "CostAllocationKeyflexId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CostId": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "DebitOrCredit": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "nullable": false
+          },
+          "IdFlexNumber": {
+            "type": "integer",
+            "description": "Unique identifier for the payroll",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "LineEndDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true
+          },
+          "LineStartDate": {
+            "type": "string",
+            "description": "Unique identifier for the payroll",
+            "format": "date",
+            "nullable": true
+          },
+          "LineValue": {
+            "type": "number",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ReversalEntryFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Unique identifier for the payroll",
+            "nullable": true,
+            "default": false
+          },
+          "costKFF": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-patch-request"
+            },
+            "x-cardinality": "1"
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-costKFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EnabledFlag": {
+            "maxLength": 1,
+            "type": "string",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "EndDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "StartDateActive": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide"
+            }
+          },
+          "_COST_ALLOCATION_KEYFLEX_ID": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_IsCCID": "true"
+            }
+          },
+          "_ID_FLEX_NUM": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18,
+              "FND_ACFF_IsStructureID": "true",
+              "FND_ACFF_JavaType": "java.lang.Long",
+              "FND_ACFF_StructureLookupRequired": "false"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "personProcessResults-costAdjustments-costAdjustmentLines-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-post-request"
+            }
+          }
+        }
+      },
+      "personProcessResults-costAdjustments-costAdjustmentLines-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/personProcessResults-costAdjustments-costAdjustmentLines-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

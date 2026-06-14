@@ -1,0 +1,38 @@
+# EEC_REWARDS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/eecrewardsvl-7590.html#eecrewardsvl-7590](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/eecrewardsvl-7590.html#eecrewardsvl-7590)
+
+## Columns
+
+- ROW_ID
+- REWARD_ID
+- POSITION
+- REWARD_CRITERIA
+- THRESHOLD
+- ACTIVE_FLAG
+- NAME
+- REWARD_PRIZE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- CREATION_DATE
+- CREATED_BY
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+
+## Query
+
+```sql
+SELECT B.ROWID ROW_ID, B.REWARD_ID, B.POSITION, B.REWARD_CRITERIA, B.THRESHOLD, B.ACTIVE_FLAG, T.NAME, T.REWARD_PRIZE, B.LAST_UPDATE_DATE, B.LAST_UPDATED_BY, B.CREATION_DATE, B.CREATED_BY, B.LAST_UPDATE_LOGIN, B.OBJECT_VERSION_NUMBER FROM EEC_REWARDS_TL T, EEC_REWARDS_B B WHERE B.REWARD_ID = T.REWARD_ID AND T.LANGUAGE = userenv('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

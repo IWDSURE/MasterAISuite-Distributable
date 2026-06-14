@@ -1,0 +1,22 @@
+{
+  "name": "IRC_CANDIDATE_ADDRESS_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandidateaddressv-3377.html#irccandidateaddressv-3377",
+  "columns": [
+    "PERSON_ID",
+    "CANDIDATE_NUMBER",
+    "ADDRESS_ID",
+    "POSTAL_CODE",
+    "EFFECTIVE_START_DATE",
+    "EFFECTIVE_END_DATE",
+    "REGION_1",
+    "REGION_2",
+    "REGION_3",
+    "TOWN_OR_CITY"
+  ],
+  "query": "SELECT cand.person_id, cand.candidate_number, addresses.address_id, addresses.postal_code, addresses.effective_start_date, addresses.effective_end_date, addresses.region_1, addresses.region_2, addresses.region_3, addresses.town_or_city FROM ( SELECT c.person_id, c.candidate_number, ( CASE WHEN c.cand_address_id IS NOT NULL AND ( EXISTS ( SELECT 1 FROM per_addresses_f a WHERE c.cand_address_id = a.address_id )) THEN c.cand_address_id WHEN EXISTS ( SELECT 1 FROM per_person_type_usages_m u WHERE ( ( EXISTS ( SELECT 1 FROM fnd_profile_options profileoptions, fnd_profile_option_values profileoptionvalues WHERE profileoptions.profile_option_name = 'IRC_TREAT_CWK_AS_EXTERNAL' AND profileoptions.profile_option_id = profileoptionvalues.profile_option_id AND profileoptionvalues.profile_option_value = 'Y' AND profileoptionvalues.level_value = 'SITE' ) AND u.system_person_type IN ( 'EMP' ) ) OR ( NOT EXISTS ( SELECT 1 FROM fnd_profile_options profileoptions, fnd_profile_option_values profileoptionvalues WHERE profileoptions.profile_option_name = 'IRC_TREAT_CWK_AS_EXTERNAL' AND profileoptions.profile_option_id = profileoptionvalues.profile_option_id AND profileoptionvalues.profile_option_value = 'Y' AND profileoptionvalues.level_value = 'SITE' ) AND u.system_person_type IN ( 'EMP', 'CWK' ) ) ) AND u.person_id = c.person_id AND trunc(sysdate) BETWEEN u.effective_start_date AND u.effective_end_date AND u.effective_latest_change = 'Y' ) THEN ( SELECT address_id FROM ( SELECT locadds.address_id AS address_id FROM per_all_assignments_m assignments, per_loc_address_usages_f locadds WHERE c.person_id = assignments.person_id AND trunc(sysdate) BETWEEN assignments.effective_start_date AND assignments.effective_end_date AND assignments.effective_latest_change = 'Y' AND assignments.primary_flag = 'Y' AND assignments.assignment_status_type = 'ACTIVE' AND assignments.assignment_type IN ( 'E', 'C' ) AND trunc(sysdate) BETWEEN locadds.effective_start_date AND locadds.effective_end_date AND locadds.address_usage_type = 'MAIN' AND assignments.location_id = locadds.location_id ORDER BY locadds.last_update_date DESC ) WHERE ROWNUM = 1 ) ELSE ( SELECT address_id FROM ( SELECT padu.address_id AS address_id FROM per_person_addr_usages_f padu WHERE padu.person_id = c.person_id AND trunc(sysdate) BETWEEN padu.effective_start_date AND padu.effective_end_date AND padu.address_type = 'HOME' ORDER BY padu.last_update_date DESC ) WHERE ROWNUM = 1 ) END ) AS address_id FROM irc_candidates c ) cand, per_addresses_f addresses WHERE addresses.address_id = cand.address_id and sysdate between addresses.effective_start_date and addresses.effective_end_date",
+  "_parsed_at": "2026-06-09T19:05:12"
+}

@@ -1,0 +1,4925 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Event Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingUIEventDetails/{EventId}": {
+      "get": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Get an event detail",
+        "operationId": "get_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the event in translations.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "EventCreationModeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CRE_MODE"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCreationMode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCreationMode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1attachments/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The InternalAttachments resource provides information about files attached by the recruiting team."
+              },
+              "eventLocation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLocation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event location resource provides event location related details."
+              },
+              "EventCategoryCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CATEGORY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCategoryCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCategoryCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventTeam": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTeam/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event team resources provides the team members assigned to the recruiting event."
+              },
+              "EventVisibilityCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_VISIBILITY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventVisibilityCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventVisibilityCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventMedia": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventMedia/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event media resource provides media assets related to an event."
+              },
+              "interviewDetails": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1interviewDetails/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The interview resource provides the interview details related to recruiting events."
+              },
+              "eventCareerSites": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventCareerSites/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The career sites resource provides the association of the recruiting event with external career sites."
+              },
+              "RecruitingTimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventTimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventTimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "eventLanguages": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLanguages/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events."
+              },
+              "eventTranslation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTranslation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event translations resource provides the translations of event details for multilingual recruiting events."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEventDetails-{EventId}-get",
+        "x-filename-id": "recruitinguieventdetails-eventid-get"
+      },
+      "patch": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Update event detail",
+        "operationId": "update_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the event in translations.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUIEventDetails-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "EventCreationModeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CRE_MODE"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCreationMode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCreationMode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1attachments/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The InternalAttachments resource provides information about files attached by the recruiting team."
+              },
+              "eventLocation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLocation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event location resource provides event location related details."
+              },
+              "EventCategoryCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CATEGORY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCategoryCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCategoryCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventTeam": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTeam/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event team resources provides the team members assigned to the recruiting event."
+              },
+              "EventVisibilityCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_VISIBILITY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventVisibilityCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventVisibilityCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventMedia": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventMedia/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event media resource provides media assets related to an event."
+              },
+              "interviewDetails": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1interviewDetails/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The interview resource provides the interview details related to recruiting events."
+              },
+              "eventCareerSites": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventCareerSites/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The career sites resource provides the association of the recruiting event with external career sites."
+              },
+              "RecruitingTimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventTimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventTimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "eventLanguages": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLanguages/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events."
+              },
+              "eventTranslation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTranslation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event translations resource provides the translations of event details for multilingual recruiting events."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEventDetails-{EventId}-patch",
+        "x-filename-id": "recruitinguieventdetails-eventid-patch"
+      }
+    },
+    "/recruitingUIEventDetails/action/getCareerSitesForEvents": {
+      "post": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Retrieve career sites linked to events",
+        "description": "Retrieves career sites linked to events.",
+        "operationId": "doall_getCareerSitesForEvents_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Career sites with specific parameters for the event.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Career sites linked to events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Career sites linked to events.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEventDetails-action-getCareerSitesForEvents-post",
+        "x-filename-id": "recruitinguieventdetails-action-getcareersitesforevents-post"
+      }
+    },
+    "/recruitingUIEventDetails/action/executeAction": {
+      "post": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Execute a specific action for event details",
+        "description": "Executes a specific action for event details.",
+        "operationId": "doall_executeAction_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Action with specific parameters for event details.",
+                    "nullable": true
+                  },
+                  "actionName": {
+                    "type": "string",
+                    "description": "Action name for event details.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Results returned after executing a specific action for event details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Results returned after executing a specific action for event details."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEventDetails-action-executeAction-post",
+        "x-filename-id": "recruitinguieventdetails-action-executeaction-post"
+      }
+    },
+    "/recruitingUIEventDetails/action/fetchEventMetaData": {
+      "post": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Event information response that's returned as part of the payload response.",
+        "description": "Event information response that's returned as part of the payload response.",
+        "operationId": "doall_fetchEventMetaData_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Career sites with specific parameters for the event.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Career sites with specific parameters for the event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Career sites with specific parameters for the event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEventDetails-action-fetchEventMetaData-post",
+        "x-filename-id": "recruitinguieventdetails-action-fetcheventmetadata-post"
+      }
+    },
+    "/recruitingUIEventDetails": {
+      "get": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Get all event details",
+        "operationId": "getall_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ApplyFlowId; integer; Apply flow identifier for the event.</li><li>EnableInterviewFlag; boolean; Flag indicating whether interviews are enabled for the event.</li><li>EventCategoryCode; string; Category code for the event.</li><li>EventCreationMode; string; Mode in which the event was created.</li><li>EventEndDate; string; End date of the event.</li><li>EventId; integer; Unique identifier for the event.</li><li>EventLastRegDate; string; The last registration date for the event.</li><li>EventLastUpdateDate; string; Date the event was last updated.</li><li>EventName; string; Name of the event.</li><li>EventNotes; string; Notes associated with the event.</li><li>EventNumber; string; Event number identifier.</li><li>EventOwnerId; integer; The owner identifier of the event.</li><li>EventPurpose; string; Purpose of the event.</li><li>EventStartDate; string; Start date of the event.</li><li>EventTimezoneCode; string; Time zone code for the event.</li><li>EventVisibilityCode; string; Visibility code of the event.</li><li>ExistingEventId; integer; Unique identifier of an existing event used to create a new event.</li><li>ManualRegnConfirmFlag; boolean; Flag for manual registration confirmation for the event</li><li>MaxRegCount; integer; Maximum number of registrations allowed for the event.</li><li>PhaseCode; string; Phase code for the event.</li><li>PublishEndDate; string; End date for publishing the event.</li><li>PublishStartDate; string; Start date for publishing the event.</li><li>PublishStatusCode; string; Status code for publishing the event.</li><li>PublishTimezoneCode; string; Time zone code for publishing the event.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds event details by the primary key. <br>Finder Variables <ul><li>EventId; integer;  Event details provided by the primary key event identifier. </li></ul></li><li>findByEventId Finds event details by event identifier. <br>Finder Variables <ul><li>EventId; integer;  Event details provided by the event identifier parameter. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "EventId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByEventId",
+                "title": "findByEventId",
+                "properties": {
+                  "EventId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEventDetails"
+                }
+              }
+            },
+            "links": {
+              "fetchEventMetaData": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1action~1fetchEventMetaData/post",
+                "description": "Event information response that's returned as part of the payload response."
+              },
+              "executeAction": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1action~1executeAction/post",
+                "description": "Executes a specific action for event details."
+              },
+              "getCareerSitesForEvents": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1action~1getCareerSitesForEvents/post",
+                "description": "Retrieves career sites linked to events."
+              },
+              "fetchSectionsByFlowId": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1action~1fetchSectionsByFlowId/post",
+                "description": "Retrieves sections by the flow identifier for an event."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEventDetails-get",
+        "x-filename-id": "recruitinguieventdetails-get"
+      },
+      "post": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Create an event detail",
+        "operationId": "create_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingUIEventDetails-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingUIEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "EventCreationModeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CRE_MODE"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCreationMode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCreationMode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1attachments/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The InternalAttachments resource provides information about files attached by the recruiting team."
+              },
+              "eventLocation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLocation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event location resource provides event location related details."
+              },
+              "EventCategoryCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_CATEGORY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventCategoryCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventCategoryCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventTeam": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTeam/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event team resources provides the team members assigned to the recruiting event."
+              },
+              "EventVisibilityCodeLookUpTypeLOVVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_REC_EVT_VISIBILITY"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventVisibilityCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventVisibilityCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              },
+              "eventMedia": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventMedia/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event media resource provides media assets related to an event."
+              },
+              "interviewDetails": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1interviewDetails/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The interview resource provides the interview details related to recruiting events."
+              },
+              "eventCareerSites": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventCareerSites/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The career sites resource provides the association of the recruiting event with external career sites."
+              },
+              "RecruitingTimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: EventTimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/EventTimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "eventLanguages": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventLanguages/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events."
+              },
+              "eventTranslation": {
+                "operationRef": "#/paths/~1recruitingUIEventDetails~1{EventId}~1child~1eventTranslation/get",
+                "parameters": {
+                  "EventId": "$request.path.EventId"
+                },
+                "description": "The event translations resource provides the translations of event details for multilingual recruiting events."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingUIEventDetails-post",
+        "x-filename-id": "recruitinguieventdetails-post"
+      }
+    },
+    "/recruitingUIEventDetails/action/fetchSectionsByFlowId": {
+      "post": {
+        "tags": [
+          "Event Details"
+        ],
+        "summary": "Retrieve sections by the flow identifier for an event",
+        "description": "Retrieves sections by the flow identifier for an event.",
+        "operationId": "doall_fetchSectionsByFlowId_recruitingUIEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "applyFlowId": {
+                    "type": "number",
+                    "description": "Sections retrieved based on the apply flow identifier.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Sections retrieved by flow identifier for an event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "Sections retrieved by flow identifier for an event."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "recruitingUIEventDetails-action-fetchSectionsByFlowId-post",
+        "x-filename-id": "recruitinguieventdetails-action-fetchsectionsbyflowid-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingUIEventDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventVisibilityCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility code of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "attachments": {
+            "title": "Candidate Attachments",
+            "type": "array",
+            "description": "The InternalAttachments resource provides information about files attached by the recruiting team.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-attachments-item-response"
+            }
+          },
+          "EventOwnerId": {
+            "type": "integer",
+            "description": "The owner identifier of the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "EventCategoryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "eventTeam": {
+            "title": "Event Team Members",
+            "type": "array",
+            "description": "The event team resources provides the team members assigned to the recruiting event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTeam-item-response"
+            }
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EnableInterviewFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating whether interviews are enabled for the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "eventMedia": {
+            "title": "Event Media Resources",
+            "type": "array",
+            "description": "The event media resource provides media assets related to an event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventMedia-item-response"
+            }
+          },
+          "EventPurpose": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Purpose of the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ManualRegnConfirmFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag for manual registration confirmation for the event",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PublishEndDate": {
+            "type": "string",
+            "description": "End date for publishing the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventEndDate": {
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventStartDate": {
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "eventLanguages": {
+            "title": "Available Languages",
+            "type": "array",
+            "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLanguages-item-response"
+            }
+          },
+          "eventTranslation": {
+            "title": "Event Translations",
+            "type": "array",
+            "description": "The event translations resource provides the translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTranslation-item-response"
+            }
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "ApplyFlowId": {
+            "type": "integer",
+            "description": "Apply flow identifier for the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PublishStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code for publishing the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "eventLocation": {
+            "title": "Recruiting Event Location",
+            "type": "array",
+            "description": "The event location resource provides event location related details.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLocation-item-response"
+            }
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventCreationMode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mode in which the event was created.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "PhaseCode": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Phase code for the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "interviewDetails": {
+            "title": "Event Interview Details",
+            "type": "array",
+            "description": "The interview resource provides the interview details related to recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-item-response"
+            }
+          },
+          "PublishTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for publishing the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "eventCareerSites": {
+            "title": "Career Sites Associated with an Event",
+            "type": "array",
+            "description": "The career sites resource provides the association of the recruiting event with external career sites.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventCareerSites-item-response"
+            }
+          },
+          "EventLastRegDate": {
+            "type": "string",
+            "description": "The last registration date for the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MaxRegCount": {
+            "type": "integer",
+            "description": "Maximum number of registrations allowed for the event.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Event number identifier.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExistingEventId": {
+            "type": "integer",
+            "description": "Unique identifier of an existing event used to create a new event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PublishStartDate": {
+            "type": "string",
+            "description": "Start date for publishing the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventLastUpdateDate": {
+            "type": "string",
+            "description": "Date the event was last updated.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-attachments-item-response": {
+        "type": "object",
+        "properties": {
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "Date and time when the attachment record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "FileWebImage": {
+            "title": "File Web Image",
+            "type": "string",
+            "description": "The base64 encoded image of the file displayed in .png format if the source is a convertible image.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide",
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URI of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "Unique identifier of the attachment. System generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "File content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CreatedByUserName": {
+            "title": "Created By User Name",
+            "type": "string",
+            "description": "Name of the user who created the attachment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "File length of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Version number of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who last updated the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "Error status message for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UserName": {
+            "title": "User Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "User name associated with the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "User who created the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Value that indicates data type code of attachment.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DocumentPreviewURL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attachment context.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "LastUpdatedByUserName": {
+            "title": "Last Updated By User",
+            "type": "string",
+            "description": "Name of the user who last updated the attachment.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates where the attachment is shared. If True, the attachment is shared.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "Contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "Expiration date and time of the attachment content.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "Error status code for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Folder path of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "Text of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "Date and time when the attachment was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "FMT_FORMAT": "d-MMM-yyyy HH:mm:ss"
+            },
+            "x-queryable": true
+          },
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTeam-item-response": {
+        "type": "object",
+        "properties": {
+          "ObjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Object type for the event team member.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "TeamMemberId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person in the event team.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ObjectId": {
+            "type": "integer",
+            "description": "Object identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team assignment.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CollaboratorRespTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Collaborator responsibility type code for the event team.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "MemberTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event team member.",
+            "nullable": false,
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventMedia-item-response": {
+        "type": "object",
+        "properties": {
+          "EventMediaId": {
+            "type": "integer",
+            "description": "Unique identifier for the event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the thumbnail image of the event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SequenceNumber": {
+            "type": "integer",
+            "description": "Sequence number for the event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event for event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Title of the event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "MediaLinkId": {
+            "type": "integer",
+            "description": "Unique identifier for the media link.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MediaTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type code for the event media.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "URL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the event media.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLanguages-item-response": {
+        "type": "object",
+        "properties": {
+          "IsBaseFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating if this is the base language for the event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LanguageCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Code for the event language.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in multiple languages.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "EventLanguageId": {
+            "type": "integer",
+            "description": "Unique identifier for the event language.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTranslation-item-response": {
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LanguageDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the language for the event translation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Language": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Language code for the event translation.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "SourceLang": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Source language for the event translation.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in translations.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event in the translation.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event in the translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event translation.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceLanguageDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the source language for the event translation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventPurpose": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Purpose of the event in the translation.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLocation-item-response": {
+        "type": "object",
+        "properties": {
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building name or number for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor number of the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventFormatCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the format of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "PostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Postal code for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WebConfLink": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conferencing link for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone area code for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TownOrCity": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Town or city for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LocationTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in event locations.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "AddressId": {
+            "type": "integer",
+            "description": "Unique identifier for the address of the event location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MaxCapacity": {
+            "type": "integer",
+            "description": "Maximum capacity for the event location.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PhoneLegislationCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extended postal code for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Region1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 1 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AccessCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Access code for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LocationUsageId": {
+            "type": "integer",
+            "description": "Unique identifier for the usage of the location.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Region3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 3 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Region2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 2 for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 3 of the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddressLine2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 2 of the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddressLine1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 1 of the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 4 of the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MeetingId": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Unique identifier for the meeting location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Country": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Country for the event location.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "eventInterviewers": {
+            "title": "Event Interviewers",
+            "type": "array",
+            "description": "The event interviewers resource provies the details of the recruiting event interviewers.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-eventInterviewers-item-response"
+            }
+          },
+          "InterviewDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier for the interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-eventInterviewers-item-response": {
+        "type": "object",
+        "properties": {
+          "DisplayName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the event interviewer.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "InterviewerPersonId": {
+            "type": "integer",
+            "description": "Person ID in recruiting job requisitions collaborators.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "InterviewMemberId": {
+            "type": "integer",
+            "description": "Unique identifier for the event interviewer.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonNameId": {
+            "type": "integer",
+            "description": "Unique identifier for the interviewer name.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "InterviewDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier for the interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventCareerSites-item-response": {
+        "type": "object",
+        "properties": {
+          "SiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the career site.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SiteName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the career site.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SiteCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site code for the career site.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in career sites.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "SiteNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Career site number identifier.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventSiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the career site.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventVisibilityCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility code of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "attachments": {
+            "title": "Candidate Attachments",
+            "type": "array",
+            "description": "The InternalAttachments resource provides information about files attached by the recruiting team.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-attachments-item-patch-request"
+            }
+          },
+          "EventOwnerId": {
+            "type": "integer",
+            "description": "The owner identifier of the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EventCategoryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "eventTeam": {
+            "title": "Event Team Members",
+            "type": "array",
+            "description": "The event team resources provides the team members assigned to the recruiting event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTeam-item-patch-request"
+            }
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EnableInterviewFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating whether interviews are enabled for the event.",
+            "nullable": true
+          },
+          "eventMedia": {
+            "title": "Event Media Resources",
+            "type": "array",
+            "description": "The event media resource provides media assets related to an event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventMedia-item-patch-request"
+            }
+          },
+          "EventPurpose": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Purpose of the event.",
+            "nullable": true
+          },
+          "ManualRegnConfirmFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag for manual registration confirmation for the event",
+            "nullable": true
+          },
+          "PublishEndDate": {
+            "type": "string",
+            "description": "End date for publishing the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventEndDate": {
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventStartDate": {
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "eventLanguages": {
+            "title": "Available Languages",
+            "type": "array",
+            "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLanguages-item-patch-request"
+            }
+          },
+          "eventTranslation": {
+            "title": "Event Translations",
+            "type": "array",
+            "description": "The event translations resource provides the translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTranslation-item-patch-request"
+            }
+          },
+          "ApplyFlowId": {
+            "type": "integer",
+            "description": "Apply flow identifier for the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PublishStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code for publishing the event.",
+            "nullable": true
+          },
+          "eventLocation": {
+            "title": "Recruiting Event Location",
+            "type": "array",
+            "description": "The event location resource provides event location related details.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLocation-item-patch-request"
+            }
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event.",
+            "nullable": true
+          },
+          "EventCreationMode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mode in which the event was created.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PhaseCode": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Phase code for the event.",
+            "nullable": true
+          },
+          "interviewDetails": {
+            "title": "Event Interview Details",
+            "type": "array",
+            "description": "The interview resource provides the interview details related to recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-item-patch-request"
+            }
+          },
+          "PublishTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for publishing the event.",
+            "nullable": true
+          },
+          "eventCareerSites": {
+            "title": "Career Sites Associated with an Event",
+            "type": "array",
+            "description": "The career sites resource provides the association of the recruiting event with external career sites.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventCareerSites-item-patch-request"
+            }
+          },
+          "EventLastRegDate": {
+            "type": "string",
+            "description": "The last registration date for the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "MaxRegCount": {
+            "type": "integer",
+            "description": "Maximum number of registrations allowed for the event.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ExistingEventId": {
+            "type": "integer",
+            "description": "Unique identifier of an existing event used to create a new event.",
+            "nullable": true
+          },
+          "PublishStartDate": {
+            "type": "string",
+            "description": "Start date for publishing the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventLastUpdateDate": {
+            "type": "string",
+            "description": "Date the event was last updated.",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-attachments-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "Error status message for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Value that indicates data type code of attachment.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URI of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates where the attachment is shared. If True, the attachment is shared.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "Contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "File content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "Expiration date and time of the attachment content.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "Error status code for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Folder path of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "Text of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "File length of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Version number of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTeam-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ObjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Object type for the event team member.",
+            "nullable": false
+          },
+          "TeamMemberId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person in the event team.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ObjectId": {
+            "type": "integer",
+            "description": "Object identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team assignment.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CollaboratorRespTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Collaborator responsibility type code for the event team.",
+            "nullable": true
+          },
+          "MemberTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event team member.",
+            "nullable": false
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventMedia-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EventMediaId": {
+            "type": "integer",
+            "description": "Unique identifier for the event media.",
+            "nullable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the thumbnail image of the event media.",
+            "nullable": true
+          },
+          "SequenceNumber": {
+            "type": "integer",
+            "description": "Sequence number for the event media.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event for event media.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Title of the event media.",
+            "nullable": true
+          },
+          "MediaLinkId": {
+            "type": "integer",
+            "description": "Unique identifier for the media link.",
+            "nullable": true
+          },
+          "MediaTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type code for the event media.",
+            "nullable": true
+          },
+          "URL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the event media.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLanguages-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "IsBaseFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating if this is the base language for the event.",
+            "nullable": true
+          },
+          "LanguageCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Code for the event language.",
+            "nullable": false
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in multiple languages.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventLanguageId": {
+            "type": "integer",
+            "description": "Unique identifier for the event language.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTranslation-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SourceLang": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Source language for the event translation.",
+            "nullable": false
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event in the translation.",
+            "nullable": true
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event in the translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event translation.",
+            "nullable": true
+          },
+          "EventPurpose": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Purpose of the event in the translation.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLocation-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building name or number for the event location.",
+            "nullable": true
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor number of the event location.",
+            "nullable": true
+          },
+          "EventFormatCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the format of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Postal code for the event location.",
+            "nullable": true
+          },
+          "WebConfLink": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conferencing link for the event location.",
+            "nullable": true
+          },
+          "PhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone area code for the event location.",
+            "nullable": true
+          },
+          "PhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true
+          },
+          "TownOrCity": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Town or city for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 for the event location.",
+            "nullable": true
+          },
+          "LocationTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 for the event location.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in event locations.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AddressId": {
+            "type": "integer",
+            "description": "Unique identifier for the address of the event location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MaxCapacity": {
+            "type": "integer",
+            "description": "Maximum capacity for the event location.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PhoneLegislationCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extended postal code for the event location.",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Region1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 1 for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 for the event location.",
+            "nullable": true
+          },
+          "AccessCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Access code for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 for the event location.",
+            "nullable": true
+          },
+          "Region3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 3 for the event location.",
+            "nullable": true
+          },
+          "Region2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 2 for the event location.",
+            "nullable": true
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 3 of the event location.",
+            "nullable": true
+          },
+          "AddressLine2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 2 of the event location.",
+            "nullable": true
+          },
+          "AddressLine1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 1 of the event location.",
+            "nullable": true
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 4 of the event location.",
+            "nullable": true
+          },
+          "MeetingId": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Unique identifier for the meeting location.",
+            "nullable": true
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number for the event location.",
+            "nullable": true
+          },
+          "Country": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Country for the event location.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "eventInterviewers": {
+            "title": "Event Interviewers",
+            "type": "array",
+            "description": "The event interviewers resource provies the details of the recruiting event interviewers.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-eventInterviewers-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-eventInterviewers-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "InterviewDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier for the interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "InterviewerPersonId": {
+            "type": "integer",
+            "description": "Person ID in recruiting job requisitions collaborators.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventCareerSites-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in career sites.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the career site.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-item-response"
+            }
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingUIEventDetails-item-post-request": {
+        "required": [
+          "EventCreationMode"
+        ],
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventVisibilityCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Visibility code of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "attachments": {
+            "title": "Candidate Attachments",
+            "type": "array",
+            "description": "The InternalAttachments resource provides information about files attached by the recruiting team.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-attachments-item-post-request"
+            }
+          },
+          "EventOwnerId": {
+            "type": "integer",
+            "description": "The owner identifier of the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "EventCategoryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category code for the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "eventTeam": {
+            "title": "Event Team Members",
+            "type": "array",
+            "description": "The event team resources provides the team members assigned to the recruiting event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTeam-item-post-request"
+            }
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EnableInterviewFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating whether interviews are enabled for the event.",
+            "nullable": true
+          },
+          "eventMedia": {
+            "title": "Event Media Resources",
+            "type": "array",
+            "description": "The event media resource provides media assets related to an event.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventMedia-item-post-request"
+            }
+          },
+          "EventPurpose": {
+            "maxLength": 512,
+            "type": "string",
+            "description": "Purpose of the event.",
+            "nullable": true
+          },
+          "ManualRegnConfirmFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag for manual registration confirmation for the event",
+            "nullable": true
+          },
+          "PublishEndDate": {
+            "type": "string",
+            "description": "End date for publishing the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventEndDate": {
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventStartDate": {
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "eventLanguages": {
+            "title": "Available Languages",
+            "type": "array",
+            "description": "The event languages resource provides the language-specific translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLanguages-item-post-request"
+            }
+          },
+          "eventTranslation": {
+            "title": "Event Translations",
+            "type": "array",
+            "description": "The event translations resource provides the translations of event details for multilingual recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventTranslation-item-post-request"
+            }
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ApplyFlowId": {
+            "type": "integer",
+            "description": "Apply flow identifier for the event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PublishStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code for publishing the event.",
+            "nullable": true
+          },
+          "eventLocation": {
+            "title": "Recruiting Event Location",
+            "type": "array",
+            "description": "The event location resource provides event location related details.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventLocation-item-post-request"
+            }
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": true
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event.",
+            "nullable": true
+          },
+          "EventCreationMode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mode in which the event was created.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PhaseCode": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Phase code for the event.",
+            "nullable": true
+          },
+          "interviewDetails": {
+            "title": "Event Interview Details",
+            "type": "array",
+            "description": "The interview resource provides the interview details related to recruiting events.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-item-post-request"
+            }
+          },
+          "PublishTimezoneCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for publishing the event.",
+            "nullable": true
+          },
+          "eventCareerSites": {
+            "title": "Career Sites Associated with an Event",
+            "type": "array",
+            "description": "The career sites resource provides the association of the recruiting event with external career sites.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-eventCareerSites-item-post-request"
+            }
+          },
+          "EventLastRegDate": {
+            "type": "string",
+            "description": "The last registration date for the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "MaxRegCount": {
+            "type": "integer",
+            "description": "Maximum number of registrations allowed for the event.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ExistingEventId": {
+            "type": "integer",
+            "description": "Unique identifier of an existing event used to create a new event.",
+            "nullable": true
+          },
+          "PublishStartDate": {
+            "type": "string",
+            "description": "Start date for publishing the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventLastUpdateDate": {
+            "type": "string",
+            "description": "Date the event was last updated.",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-attachments-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URI of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "Unique identifier of the attachment. System generated primary key.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "File content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "File length of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Version number of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "Error status message for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Value that indicates data type code of attachment.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "File name of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "URL of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates where the attachment is shared. If True, the attachment is shared.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "Contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "Expiration date and time of the attachment content.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "Error status code for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Folder path of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "Text of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTeam-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ObjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Object type for the event team member.",
+            "nullable": false
+          },
+          "TeamMemberId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person in the event team.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ObjectId": {
+            "type": "integer",
+            "description": "Object identifier for the event team member.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AssignmentId": {
+            "type": "integer",
+            "description": "Unique identifier for the event team assignment.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CollaboratorRespTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Collaborator responsibility type code for the event team.",
+            "nullable": true
+          },
+          "MemberTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event team member.",
+            "nullable": false
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventMedia-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EventMediaId": {
+            "type": "integer",
+            "description": "Unique identifier for the event media.",
+            "nullable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the thumbnail image of the event media.",
+            "nullable": true
+          },
+          "SequenceNumber": {
+            "type": "integer",
+            "description": "Sequence number for the event media.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event for event media.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Title of the event media.",
+            "nullable": true
+          },
+          "MediaLinkId": {
+            "type": "integer",
+            "description": "Unique identifier for the media link.",
+            "nullable": true
+          },
+          "MediaTypeCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type code for the event media.",
+            "nullable": true
+          },
+          "URL": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "URL for the event media.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLanguages-item-post-request": {
+        "type": "object",
+        "properties": {
+          "IsBaseFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag indicating if this is the base language for the event.",
+            "nullable": true
+          },
+          "LanguageCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Code for the event language.",
+            "nullable": false
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in multiple languages.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventLanguageId": {
+            "type": "integer",
+            "description": "Unique identifier for the event language.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventTranslation-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EventDescHtml": {
+            "type": "string",
+            "description": "HTML description of the event translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Language": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Language code for the event translation.",
+            "nullable": false
+          },
+          "SourceLang": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Source language for the event translation.",
+            "nullable": false
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in translations.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event in the translation.",
+            "nullable": true
+          },
+          "EventShortDesc": {
+            "type": "string",
+            "description": "Short description of the event in the translation.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EventNotes": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Notes associated with the event translation.",
+            "nullable": true
+          },
+          "EventPurpose": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Purpose of the event in the translation.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventLocation-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building name or number for the event location.",
+            "nullable": true
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor number of the event location.",
+            "nullable": true
+          },
+          "EventFormatCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the format of the event.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "PostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Postal code for the event location.",
+            "nullable": true
+          },
+          "WebConfLink": {
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conferencing link for the event location.",
+            "nullable": true
+          },
+          "PhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone area code for the event location.",
+            "nullable": true
+          },
+          "PhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true
+          },
+          "TownOrCity": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Town or city for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 for the event location.",
+            "nullable": true
+          },
+          "LocationTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type code for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 for the event location.",
+            "nullable": true
+          },
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in event locations.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AddressId": {
+            "type": "integer",
+            "description": "Unique identifier for the address of the event location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "MaxCapacity": {
+            "type": "integer",
+            "description": "Maximum capacity for the event location.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PhoneLegislationCode": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Candidate's phone country code in the recruiting tax credits.",
+            "nullable": true
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Extended postal code for the event location.",
+            "nullable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Region1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 1 for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 for the event location.",
+            "nullable": true
+          },
+          "AccessCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Access code for the event location.",
+            "nullable": true
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 for the event location.",
+            "nullable": true
+          },
+          "LocationUsageId": {
+            "type": "integer",
+            "description": "Unique identifier for the usage of the location.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Region3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 3 for the event location.",
+            "nullable": true
+          },
+          "Region2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Region 2 for the event location.",
+            "nullable": true
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 3 of the event location.",
+            "nullable": true
+          },
+          "AddressLine2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 2 of the event location.",
+            "nullable": true
+          },
+          "AddressLine1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 1 of the event location.",
+            "nullable": true
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address line 4 of the event location.",
+            "nullable": true
+          },
+          "MeetingId": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Unique identifier for the meeting location.",
+            "nullable": true
+          },
+          "PhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number for the event location.",
+            "nullable": true
+          },
+          "Country": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Country for the event location.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-item-post-request": {
+        "required": [
+          "EventId"
+        ],
+        "type": "object",
+        "properties": {
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "eventInterviewers": {
+            "title": "Event Interviewers",
+            "type": "array",
+            "description": "The event interviewers resource provies the details of the recruiting event interviewers.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-interviewDetails-eventInterviewers-item-post-request"
+            }
+          },
+          "InterviewDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier for the interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-interviewDetails-eventInterviewers-item-post-request": {
+        "type": "object",
+        "properties": {
+          "InterviewerPersonId": {
+            "type": "integer",
+            "description": "Person ID in recruiting job requisitions collaborators.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "InterviewMemberId": {
+            "type": "integer",
+            "description": "Unique identifier for the event interviewer.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "InterviewDetailsId": {
+            "type": "integer",
+            "description": "Unique identifier for the interview details.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-eventCareerSites-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event in career sites.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the career site.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EventSiteId": {
+            "type": "integer",
+            "description": "Unique identifier for the career site.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingUIEventDetails-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingUIEventDetails-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingUIEventDetails-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

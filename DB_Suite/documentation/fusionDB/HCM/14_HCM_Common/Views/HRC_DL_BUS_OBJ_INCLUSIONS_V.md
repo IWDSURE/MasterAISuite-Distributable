@@ -1,0 +1,46 @@
+# HRC_DL_BUS_OBJ_INCLUSIONS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcdlbusobjinclusionsv-3714.html#hrcdlbusobjinclusionsv-3714](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcdlbusobjinclusionsv-3714.html#hrcdlbusobjinclusionsv-3714)
+
+## Columns
+
+- BUS_OBJ_INCLUSION_ID
+- HSDL_SECURED
+- BUSINESS_OBJECT_ID
+- HSDL_ENABLED
+- DOWNLOAD_ENABLED
+- INCLUSION_ENABLED
+- ROLLBACK_ENABLED
+- ORACLE_SEARCH_ENABLED
+- POST_PROCESS_ENABLED
+- SGUID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- SEED_DATA_SOURCE
+- ORA_SEED_SET1
+- ORA_SEED_SET2
+- DYNAMIC_HIERARCHY
+- DYN_BUS_OBJ_KEY
+
+## Query
+
+```sql
+SELECT bus_obj_inclusion_id , hsdl_secured , business_object_id , hsdl_enabled , download_enabled , inclusion_enabled , rollback_enabled , oracle_search_enabled , post_process_enabled , sguid , created_by , creation_date , last_updated_by , last_update_date , last_update_login , object_version_number , enterprise_id , seed_data_source , ora_seed_set1 , ora_seed_set2 , dynamic_hierarchy , NULL dyn_bus_obj_key FROM hrc_dl_bus_obj_inclusions UNION SELECT dyn.dyn_bus_obj_id , dyn.hsdl_secured , bus.business_object_id , dyn.hsdl_enabled , NULL download_enabled , dyn.inclusion_enabled , NULL rollback_enabled , NULL oracle_search_enabled , NULL post_process_enabled , dyn.sguid , dyn.created_by , dyn.creation_date , dyn.last_updated_by , dyn.last_update_date , dyn.last_update_login , dyn.object_version_number , dyn.enterprise_id , dyn.seed_data_source , dyn.ora_seed_set1 , dyn.ora_seed_set2 , 'Y' dynamic_hierarchy , dyn.dyn_bus_obj_key FROM hrc_dl_dyn_bus_inclusions dyn , hrc_dl_business_objects bus WHERE bus.dyn_bus_obj_key = dyn.dyn_bus_obj_key AND dyn.enabled = 'Y' AND NOT EXISTS ( SELECT 1 FROM hrc_dl_bus_obj_inclusions incl WHERE bus.business_object_id = incl.business_object_id ) AND 'Y' = decode ( ( SELECT count (1) FROM hrc_dl_business_objects busobjs WHERE bus_obj_top_discriminator IN ( SELECT bus_obj_top_discriminator FROM hrc_dl_bus_obj_inclusions inc , hrc_dl_business_objects bo WHERE bus_obj_file_discriminator = bus_obj_top_discriminator AND inc.dynamic_hierarchy = 'Y' AND inc.business_object_id = bo.business_object_id ) AND busobjs.business_object_id = bus.business_object_id AND rownum = 1 ), 1 , 'Y', 'N')
+```
+
+---
+
+[← Back to Index](../14_HCM_Common_Views_Index.md)

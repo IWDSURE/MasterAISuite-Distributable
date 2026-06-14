@@ -1,0 +1,126 @@
+{
+  "name": "HRC_TXN_CHILD_OBJECTS",
+  "object_type": "TABLE",
+  "description": "Transaction Model table: stores one row for each database row that the parent transaction will change. It is used to detect concurrent changes where traditional database locking can't reach.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "TRANSACTION_TABLES",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrctxnchildobjects-6364.html#hrctxnchildobjects-6364",
+  "primary_keys": [
+    {
+      "name": "HRC_TXN_CHILD_OBJECTS_PK",
+      "columns": "CHILD_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CHILD_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "the primary key column"
+    },
+    {
+      "Name": "OVN_AT_SUBMIT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "The OVN of the child record at the time of submit"
+    },
+    {
+      "Name": "PARENT_TXN_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The transaction which this change is part of. Foreign key to hrc_txn_header transaction_id"
+    },
+    {
+      "Name": "PARENT_OBJ_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The ObjectId from the transaction this is part of"
+    },
+    {
+      "Name": "CHILD_OBJ",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The table name of the row being changed"
+    },
+    {
+      "Name": "CHILD_OBJ_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The primary key value of the row being changed"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_TXN_CHILD_OBJECTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PARENT_TXN_ID"
+    },
+    {
+      "Index": "HRC_TXN_CHILD_OBJECTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CHILD_OBJ, CHILD_OBJ_ID"
+    },
+    {
+      "Index": "HRC_TXN_CHILD_OBJECTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CHILD_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:46:48"
+}

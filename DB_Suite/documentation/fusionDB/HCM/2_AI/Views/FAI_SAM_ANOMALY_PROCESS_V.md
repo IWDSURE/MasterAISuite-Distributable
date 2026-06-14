@@ -1,0 +1,53 @@
+# FAI_SAM_ANOMALY_PROCESS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** FAI
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faisamanomalyprocessv-5168.html#faisamanomalyprocessv-5168](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faisamanomalyprocessv-5168.html#faisamanomalyprocessv-5168)
+
+## Columns
+
+- DETECTION_KEY
+- OBJECT_ID
+- ONE_VIEW_PROCESS_ID
+- OBJECT_KEY
+- PROCESS_TYPE
+- PROCESS_NAME
+- ID_METRIC
+- PARENT_ID_METRIC
+- PROCESS_STATUS
+- LOAD
+- LOAD_SUCCESS
+- LOAD_ERROR
+- PROCESSING_TIME
+- THREAD_COUNT
+- DAY
+- START_TIME
+- STOP_TIME
+- PRODUCT
+- RAW_DATA_ID
+- PARAMETER
+- PARAMETER_COMBINE
+- ANOMALY_LOOP
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- ENTERPRISE_ID
+- POD
+
+## Query
+
+```sql
+select detection_key, a.detection_object_id object_id, b."ONE_VIEW_PROCESS_ID",b."OBJECT_KEY",b."PROCESS_TYPE",b."PROCESS_NAME",b."ID_METRIC",b."PARENT_ID_METRIC",b."PROCESS_STATUS",b."LOAD",b."LOAD_SUCCESS",b."LOAD_ERROR",b."PROCESSING_TIME",b."THREAD_COUNT",b."DAY",b."START_TIME",b."STOP_TIME",b."PRODUCT",b."RAW_DATA_ID",b."PARAMETER",b."PARAMETER_COMBINE",b."ANOMALY_LOOP",b."CREATED_BY",b."CREATION_DATE",b."LAST_UPDATED_BY",b."LAST_UPDATE_DATE",b."LAST_UPDATE_LOGIN",b."ENTERPRISE_ID",b."POD" from fai_sam_anomaly_detection a, fai_sam_one_view_process b where a.detection_object_id = b.one_view_process_id and detection_key = 'FAI_SAM_COMPARE_SEQUENCE_GOLDENAPPLE'
+```
+
+---
+
+[← Back to Index](../2_AI_Views_Index.md)

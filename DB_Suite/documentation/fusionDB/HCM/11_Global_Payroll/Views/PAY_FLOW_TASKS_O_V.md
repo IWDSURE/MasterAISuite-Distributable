@@ -1,0 +1,57 @@
+# PAY_FLOW_TASKS_O_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtasksov-3927.html#payflowtasksov-3927](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtasksov-3927.html#payflowtasksov-3927)
+
+## Columns
+
+- FLOW_TASK_ID
+- BASE_FLOW_TASK_ID
+- BASE_FLOW_TASK_NAME
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- BASE_TASK_ID
+- BASE_FLOW_ID
+- DEST_UI_URL
+- CATEGORY_TYPE
+- SUB_CATEGORY_TYPE
+- PRE_CUSTOM_SERVICE
+- POST_CUSTOM_SERVICE
+- OFFSET_VALUE
+- OFFSET_FLOW_PARAMETER_ID
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATION_CODE
+- LAST_UPDATE_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- CREATED_BY
+- CREATION_DATE
+- START_DATE_OFFSET_ID
+- START_DATE_OFFSET_VALUE
+- START_NOTIF_FLAG
+- END_NOTIF_FLAG
+- OVERDUE_NOTIF_FLAG
+- WARNING_NOTIF_FLAG
+- ERROR_NOTIF_FLAG
+- START_SCH_TIME_DEF_ID
+- FLOW_TASK_NAME
+- CHECKLIST_NAME
+- DESCRIPTION
+- FORMULA_ID
+
+## Query
+
+```sql
+SELECT b.flow_task_id, b.base_flow_task_id, b.base_flow_task_name, b.module_id, b.object_version_number , b.base_task_id , b.base_flow_id , b.dest_ui_url, b.category_type , b.sub_category_type , b.pre_custom_service , b.post_custom_service , b.offset_value, b.offset_flow_parameter_id, ldg.legislative_data_group_id , ldg.legislation_code , b.last_update_date , b.last_updated_by , b.last_update_login , b.created_by , b.creation_date , b.start_date_offset_id, b.start_date_offset_value, b.start_notif_flag, b.end_notif_flag, b.overdue_notif_flag, b.warning_notif_flag, b.error_notif_flag, b.start_sch_time_def_id, tl.flow_task_name , tl.checklist_name , tl.description, b.formula_id FROM pay_flow_tasks b, pay_flow_tasks_tl tl, per_legislative_data_groups ldg WHERE b.flow_task_id = tl.flow_task_id AND USERENV('LANG') =tl.language AND ( (b.legislative_data_group_id IS NOT NULL AND b.legislation_code IS NULL AND b.legislative_data_group_id =ldg.legislative_data_group_id) OR (b.legislation_code IS NOT NULL AND b.legislative_data_group_id IS NULL AND b.legislation_code =ldg.legislation_code AND ( NOT EXISTS ( SELECT c1.base_flow_id FROM pay_flow_tasks c1 WHERE b.base_flow_task_id = c1.base_flow_task_id AND (c1.legislative_data_group_id IS NOT NULL AND c1.legislation_code IS NULL AND c1.legislative_data_group_id =ldg.legislative_data_group_id ) ))) OR ( b.legislative_data_group_id IS NULL AND b.legislation_code IS NULL AND ( NOT EXISTS ( SELECT c2.base_flow_id FROM pay_flow_tasks c2 WHERE b.base_flow_task_id = c2.base_flow_task_id AND ( ( c2.legislative_data_group_id IS NOT NULL AND c2.legislation_code IS NULL AND c2.legislative_data_group_id =ldg.legislative_data_group_id ) OR ( c2.legislation_code IS NOT NULL AND c2.legislative_data_group_id IS NULL AND c2.legislation_code =ldg.legislation_code ) ) ) ) ))
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

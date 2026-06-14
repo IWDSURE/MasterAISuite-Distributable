@@ -1,0 +1,2015 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Workload Plan",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/workloadPlans/{WorkloadPlanId}": {
+      "get": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Get a single workload plan",
+        "operationId": "get_workloadPlans",
+        "parameters": [
+          {
+            "name": "WorkloadPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Workload Plan Identifier",
+              "type": "integer",
+              "description": "Workload Plan ID",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workloadPlans-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workloadPlans-{WorkloadPlanId}-get",
+        "x-filename-id": "workloadplans-workloadplanid-get"
+      },
+      "delete": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Delete workload plan",
+        "operationId": "delete_workloadPlans",
+        "parameters": [
+          {
+            "name": "WorkloadPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Workload Plan Identifier",
+              "type": "integer",
+              "description": "Workload Plan ID",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "workloadPlans-{WorkloadPlanId}-delete",
+        "x-filename-id": "workloadplans-workloadplanid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Update workload plan",
+        "operationId": "update_workloadPlans",
+        "parameters": [
+          {
+            "name": "WorkloadPlanId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "title": "Workload Plan Identifier",
+              "type": "integer",
+              "description": "Workload Plan ID",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              },
+              "x-queryable": true
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/workloadPlans-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workloadPlans-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workloadPlans-{WorkloadPlanId}-patch",
+        "x-filename-id": "workloadplans-workloadplanid-patch"
+      }
+    },
+    "/workloadPlans/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Find the workload plans matching the specified criteria",
+        "description": "Finds the workload plans matching the specified criteria such as department or location.",
+        "operationId": "doall_findByAdvancedSearchQuery_workloadPlans",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Start range for the workload plans result limit.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Keywords used to search for the workload plans.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Size limit for fetching workload plans results. The default value is 25.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search fields for the workload plans query, such as WorkloadType, DepartmentName, and JobProfileType.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Filters for the workload plans search.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort order for the workload plans search results.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Fields displayed for the workload plans search response, such as WorkloadType and DepartmentName.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "Indicates whether the query is completed automatically. Valid values are Y and N. The default value is Y.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response for a workload plans query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Response for a workload plans query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "workloadPlans-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "workloadplans-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/workloadPlans": {
+      "get": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Get all workload plans",
+        "operationId": "getall_workloadPlans",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EndDate; string; End Date</li><li>FridayIncludedFlag; boolean; Indicates whether Friday is selected for the workload plan.</li><li>IsConsolidatedFlag; boolean; Indicator for the workload requirement describing when the record was consolidated.</li><li>MondayIncludedFlag; boolean; Indicates whether Mondays is selected for the workload plan.</li><li>SaturdayIncludedFlag; boolean; Indicates whether Saturday is selected for the workload plan.</li><li>ShiftId; integer; Unique identifier for the shift.</li><li>ShiftTypeId; integer; Unique identifier for the shift type.</li><li>StartDate; string; Start Date</li><li>SundayIncludedFlag; boolean; Indicates whether Sunday is selected for the workload plan.</li><li>ThursdayIncludedFlag; boolean; Indicates whether Thursday is selected for the workload plan.</li><li>TuesdayIncludedFlag; boolean; Indicates whether Tuesday is selected for the workload plan.</li><li>WednesdayIncludedFlag; boolean; Indicates whether Wednesday is selected for the workload plan.</li><li>WorkloadImportTag; string; Tag used to uniquely identify the workload import.</li><li>WorkloadMode; string; Type of workload import, such as Shift or Time.</li><li>WorkloadPlanCode; string; Workload Plan Code</li><li>WorkloadPlanId; integer; Workload Plan ID</li><li>WorkloadType; string; Workload Type</li><li>WorkloadUOM; string; UOM Code</li><li>WorkloadValue; number; Workload Value</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds the workload plan by the primary key <br>Finder Variables <ul><li>WorkloadPlanId; integer;  Unique primary key identifier of the workload plan </li></ul></li><li>findByWorkloadPlanCode Finds the workload plan using the specified workload plan code. <br>Finder Variables <ul><li>WorkloadPlanCode; string;  Code for the workload plan. </li></ul></li><li>findByWorkloadPlanId Finds the workload plan using the specified workload plan ID. <br>Finder Variables <ul><li>WorkloadPlanId; integer;  Unique identifier for the workload plan </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds the workload plan by the primary key",
+                "properties": {
+                  "WorkloadPlanId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "description": "Unique primary key identifier of the workload plan",
+                    "type": "integer",
+                    "title": "Workload Plan Identifier"
+                  }
+                }
+              },
+              {
+                "name": "findByWorkloadPlanCode",
+                "description": "Finds the workload plan using the specified workload plan code.",
+                "title": "findByWorkloadPlanCode",
+                "properties": {
+                  "WorkloadPlanCode": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Code for the workload plan.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByWorkloadPlanId",
+                "description": "Finds the workload plan using the specified workload plan ID.",
+                "title": "findbyWorkloadPlanID",
+                "properties": {
+                  "WorkloadPlanId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Unique identifier for the workload plan",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workloadPlans"
+                }
+              }
+            },
+            "links": {
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1workloadPlans~1action~1findByAdvancedSearchQuery/post",
+                "description": "Finds the workload plans matching the specified criteria such as department or location."
+              }
+            }
+          }
+        },
+        "x-internal-id": "workloadPlans-get",
+        "x-filename-id": "workloadplans-get"
+      },
+      "post": {
+        "tags": [
+          "Workload Plan"
+        ],
+        "summary": "Create new workload plan",
+        "operationId": "create_workloadPlans",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/workloadPlans-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workloadPlans-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workloadPlans-post",
+        "x-filename-id": "workloadplans-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "workloadPlans-item-response": {
+        "type": "object",
+        "properties": {
+          "BusinessUnitName": {
+            "title": "Business Unit Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Business Unit Name",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompetencyId": {
+            "type": "integer",
+            "description": "Unique identifier for the competency.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentId": {
+            "title": "Department Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the schedule department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndAfterMidnightFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the workload plan ends after midnight.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End Date",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EndTime": {
+            "title": "End Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "End Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FridayIncludedFlag": {
+            "title": "Friday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Friday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IsConsolidatedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicator for the workload requirement describing when the record was consolidated.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyId": {
+            "type": "integer",
+            "description": "Unique identifier for the job family.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job family used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier for the job.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobProfileType": {
+            "title": "Job Profile Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Profile Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobSetCode": {
+            "title": "Job Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationCode": {
+            "title": "Location Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationId": {
+            "title": "Workload Location Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationSetCode": {
+            "title": "Location Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MondayIncludedFlag": {
+            "title": "Monday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Mondays is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OtherQualification": {
+            "maxLength": 250,
+            "type": "string",
+            "description": "Competency, license or certification, or language value for the selected qualification type for the workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationId": {
+            "type": "integer",
+            "description": "Unique identifier for the other qualification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Competency, license or certification, or language used to define the Other Qualification value for workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionCode": {
+            "title": "Position Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM position used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Unique identifier for the position.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SaturdayIncludedFlag": {
+            "title": "Saturday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Saturday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SchedulingGroupCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM scheduling group used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ShiftName": {
+            "title": "Shift Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the workforce scheduling shift.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeCode": {
+            "type": "string",
+            "description": "Code for the shift type, such as Regular or On-Call.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code used to describe the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCodeName": {
+            "title": "Shift Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift type.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start Date",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "StartTime": {
+            "title": "Start Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Start Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SundayIncludedFlag": {
+            "title": "Sunday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Sunday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThursdayIncludedFlag": {
+            "title": "Thursday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Thursday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TuesdayIncludedFlag": {
+            "title": "Tuesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Tuesday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WednesdayIncludedFlag": {
+            "title": "Wednesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Wednesday is selected for the workload plan.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkloadImportTag": {
+            "title": "Import Tag",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tag used to uniquely identify the workload import.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkloadMode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Type of workload import, such as Shift or Time.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "WorkloadPlanCode": {
+            "title": "Workload Plan Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workload Plan Code",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "WorkloadPlanId": {
+            "title": "Workload Plan Identifier",
+            "type": "integer",
+            "description": "Workload Plan ID",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "WorkloadType": {
+            "title": "Workload Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workload Type",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "WorkloadUOM": {
+            "title": "Workload UOM Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "UOM Code",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "WorkloadValue": {
+            "title": "Workload Value",
+            "type": "number",
+            "description": "Workload Value",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "scale": 6
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "workloadPlans-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "BusinessUnitName": {
+            "title": "Business Unit Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Business Unit Name",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompetencyId": {
+            "type": "integer",
+            "description": "Unique identifier for the competency.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentId": {
+            "title": "Department Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the schedule department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndAfterMidnightFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the workload plan ends after midnight.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End Date",
+            "format": "date",
+            "nullable": false
+          },
+          "EndTime": {
+            "title": "End Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "End Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FridayIncludedFlag": {
+            "title": "Friday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Friday is selected for the workload plan.",
+            "nullable": true
+          },
+          "JobCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyId": {
+            "type": "integer",
+            "description": "Unique identifier for the job family.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job family used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier for the job.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobProfileType": {
+            "title": "Job Profile Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Profile Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobSetCode": {
+            "title": "Job Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationCode": {
+            "title": "Location Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationId": {
+            "title": "Workload Location Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationSetCode": {
+            "title": "Location Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MondayIncludedFlag": {
+            "title": "Monday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Mondays is selected for the workload plan.",
+            "nullable": true
+          },
+          "OtherQualification": {
+            "maxLength": 250,
+            "type": "string",
+            "description": "Competency, license or certification, or language value for the selected qualification type for the workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationId": {
+            "type": "integer",
+            "description": "Unique identifier for the other qualification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Competency, license or certification, or language used to define the Other Qualification value for workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionCode": {
+            "title": "Position Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM position used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Unique identifier for the position.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SaturdayIncludedFlag": {
+            "title": "Saturday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Saturday is selected for the workload plan.",
+            "nullable": true
+          },
+          "SchedulingGroupCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM scheduling group used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ShiftName": {
+            "title": "Shift Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the workforce scheduling shift.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeCode": {
+            "type": "string",
+            "description": "Code for the shift type, such as Regular or On-Call.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code used to describe the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCodeName": {
+            "title": "Shift Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift type.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start Date",
+            "format": "date",
+            "nullable": false
+          },
+          "StartTime": {
+            "title": "Start Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Start Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SundayIncludedFlag": {
+            "title": "Sunday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Sunday is selected for the workload plan.",
+            "nullable": true
+          },
+          "ThursdayIncludedFlag": {
+            "title": "Thursday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Thursday is selected for the workload plan.",
+            "nullable": true
+          },
+          "TuesdayIncludedFlag": {
+            "title": "Tuesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Tuesday is selected for the workload plan.",
+            "nullable": true
+          },
+          "WednesdayIncludedFlag": {
+            "title": "Wednesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Wednesday is selected for the workload plan.",
+            "nullable": true
+          },
+          "WorkloadImportTag": {
+            "title": "Import Tag",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tag used to uniquely identify the workload import.",
+            "nullable": true
+          },
+          "WorkloadMode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Type of workload import, such as Shift or Time.",
+            "nullable": true
+          },
+          "WorkloadType": {
+            "title": "Workload Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workload Type",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WorkloadUOM": {
+            "title": "Workload UOM Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "UOM Code",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WorkloadValue": {
+            "title": "Workload Value",
+            "type": "number",
+            "description": "Workload Value",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "scale": 6
+            }
+          }
+        }
+      },
+      "workloadPlans": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/workloadPlans-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "workloadPlans-item-post-request": {
+        "type": "object",
+        "properties": {
+          "BusinessUnitName": {
+            "title": "Business Unit Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Business Unit Name",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CompetencyId": {
+            "type": "integer",
+            "description": "Unique identifier for the competency.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentId": {
+            "title": "Department Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DepartmentName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the schedule department.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndAfterMidnightFlag": {
+            "type": "boolean",
+            "description": "Indicates whether the workload plan ends after midnight.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End Date",
+            "format": "date",
+            "nullable": false
+          },
+          "EndTime": {
+            "title": "End Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "End Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FridayIncludedFlag": {
+            "title": "Friday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Friday is selected for the workload plan.",
+            "nullable": true
+          },
+          "JobCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyId": {
+            "type": "integer",
+            "description": "Unique identifier for the job family.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobFamilyName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM job family used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Unique identifier for the job.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobProfileType": {
+            "title": "Job Profile Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Profile Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "JobSetCode": {
+            "title": "Job Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationCode": {
+            "title": "Location Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationId": {
+            "title": "Workload Location Identifier",
+            "type": "integer",
+            "description": "Unique identifier for the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the location.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LocationSetCode": {
+            "title": "Location Set Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Location Set Code",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MondayIncludedFlag": {
+            "title": "Monday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Mondays is selected for the workload plan.",
+            "nullable": true
+          },
+          "OtherQualification": {
+            "maxLength": 250,
+            "type": "string",
+            "description": "Competency, license or certification, or language value for the selected qualification type for the workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationId": {
+            "type": "integer",
+            "description": "Unique identifier for the other qualification.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "OtherQualificationType": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Competency, license or certification, or language used to define the Other Qualification value for workload.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionCode": {
+            "title": "Position Code",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM position used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PositionId": {
+            "type": "integer",
+            "description": "Unique identifier for the position.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SaturdayIncludedFlag": {
+            "title": "Saturday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Saturday is selected for the workload plan.",
+            "nullable": true
+          },
+          "SchedulingGroupCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code that uniquely identifies the HCM scheduling group used to identify the workload import record.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ShiftName": {
+            "title": "Shift Name",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the workforce scheduling shift.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeCode": {
+            "type": "string",
+            "description": "Code for the shift type, such as Regular or On-Call.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code used to describe the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeExtendedCodeName": {
+            "title": "Shift Type",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the shift type.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ShiftTypeId": {
+            "type": "integer",
+            "description": "Unique identifier for the shift type.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start Date",
+            "format": "date",
+            "nullable": false
+          },
+          "StartTime": {
+            "title": "Start Time",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Start Time",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SundayIncludedFlag": {
+            "title": "Sunday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Sunday is selected for the workload plan.",
+            "nullable": true
+          },
+          "ThursdayIncludedFlag": {
+            "title": "Thursday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Thursday is selected for the workload plan.",
+            "nullable": true
+          },
+          "TuesdayIncludedFlag": {
+            "title": "Tuesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Tuesday is selected for the workload plan.",
+            "nullable": true
+          },
+          "WednesdayIncludedFlag": {
+            "title": "Wednesday",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether Wednesday is selected for the workload plan.",
+            "nullable": true
+          },
+          "WorkloadImportTag": {
+            "title": "Import Tag",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Tag used to uniquely identify the workload import.",
+            "nullable": true
+          },
+          "WorkloadMode": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Type of workload import, such as Shift or Time.",
+            "nullable": true
+          },
+          "WorkloadPlanCode": {
+            "title": "Workload Plan Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workload Plan Code",
+            "nullable": false
+          },
+          "WorkloadPlanId": {
+            "title": "Workload Plan Identifier",
+            "type": "integer",
+            "description": "Workload Plan ID",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "WorkloadType": {
+            "title": "Workload Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workload Type",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WorkloadUOM": {
+            "title": "Workload UOM Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "UOM Code",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WorkloadValue": {
+            "title": "Workload Value",
+            "type": "number",
+            "description": "Workload Value",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "scale": 6
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "workloadPlans-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/workloadPlans-item-patch-request"
+            }
+          }
+        }
+      },
+      "workloadPlans-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/workloadPlans-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

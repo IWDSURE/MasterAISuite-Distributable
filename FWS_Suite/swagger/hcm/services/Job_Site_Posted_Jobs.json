@@ -1,0 +1,1514 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Job Site Posted Jobs",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingJobSitePostedJobs": {
+      "get": {
+        "tags": [
+          "Job Site Posted Jobs"
+        ],
+        "summary": "Get details about all posted requisitions",
+        "operationId": "getall_recruitingJobSitePostedJobs",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DomesticTravelRequired; string; Indicates whether domestic travel is required or not for the posted requisition.</li><li>EducationLevel; string; Education level of the posted requisition.</li><li>ExternalContactEmail; string; External contact email of the posted requisition.</li><li>ExternalContactName; string; External contact name of the posted requisition.</li><li>ExternalPublishedJobEndDate; string; External published job end date of the posted requisition.</li><li>ExternalPublishedJobStartDate; string; External published job start date of the posted requisition.</li><li>ExternalPublishedJobStatus; string; External published status of the posted requisition.</li><li>FullTimeOrPartTime; string; Full time or part time attribute of the posted requisition.</li><li>GeographyNodeId; integer; Geography node ID of the posted requisition.</li><li>HiredCount; integer; Hire count of the posted requisition.</li><li>HotJob; string; Hot job indicator of the posted requisition.</li><li>InternationalTravelRequired; string; Indicates whether international travel is required or not for the posted requisition.</li><li>JobFunction; string; Job function of the posted requisition.</li><li>JobShift; string; Job shift of the posted requisition.</li><li>JobType; string; Job type of the posted requisition.</li><li>NumberOfOpenings; integer; Number of openings of the posted requisition.</li><li>PrimaryLocationCountryCode; string; Primary location country code of the posted requisition.</li><li>PrimaryLocationLevelTwoCode; string; Primary location level two code of the posted requisition.</li><li>PrimaryWorkLocationId; integer; Primary work location ID of the posted requisition.</li><li>PrimaryWorkLocationName; string; Primary work location name of the posted requisition.</li><li>PrimaryWorkLocationPostalCode; string; Primary work location postal code of the posted requisition.</li><li>PublishedJobLastUpdateDate; string; Published job last update date of the posted requisition.</li><li>RegularOrTemporary; string; Regular or temporary attribute of the posted requisition.</li><li>RequisitionId; integer; Identifier of the posted requisition.</li><li>RequisitionLastUpdateDate; string; Last update date of the posted requisition.</li><li>RequisitionNumber; string; Requisition number of the posted requisition.</li><li>UnlimitedOpenings; string; Unlimited opening indicator of the posted requisition.</li><li>WorkerType; string; Worker type of the posted requisition.</li><li>WorkplaceTypeCode; string; Workplace type code of the posted requisition.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all posted job requisitions using a primary key. <br>Finder Variables <ul><li>RequisitionId; integer;  Requisition identifier used to find a requisition. </li></ul></li><li>RowFinder Finds all posted job requisitions. <br>Finder Variables <ul><li>Language; string;  Requisition language use to find multilingual content. </li><li>RequisitionNumber; string;  Requisition number used to find posted job requisitions. </li><li>SysEffectiveDate; object;   </li></ul></li><li>findByDates Finds all job requisitions using dates. <br>Finder Variables <ul><li>EndDate; string;  End date used to find requisitions based on the last updated date. </li><li>Language; string;  Requisition language use to find multilingual content. </li><li>RequisitionNumber; string;  Requisition number used to find a requisition. </li><li>StartDate; string;  Start date used to find requisitions based on the last updated date. </li><li>SysEffectiveDate; object;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all posted job requisitions using a primary key.",
+                "properties": {
+                  "RequisitionId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Requisition identifier used to find a requisition.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "RowFinder",
+                "description": "Finds all posted job requisitions.",
+                "title": "RecruitingJobSitePostedJobsVOCriteria",
+                "properties": {
+                  "Language": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition language use to find multilingual content.",
+                    "type": "string"
+                  },
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition number used to find posted job requisitions.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByDates",
+                "description": "Finds all job requisitions using dates.",
+                "title": "findByDates",
+                "properties": {
+                  "StartDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Start date used to find requisitions based on the last updated date.",
+                    "type": "string"
+                  },
+                  "Language": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition language use to find multilingual content.",
+                    "type": "string"
+                  },
+                  "SysEffectiveDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "type": "object"
+                  },
+                  "EndDate": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "End date used to find requisitions based on the last updated date.",
+                    "type": "string"
+                  },
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition number used to find a requisition.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "This query parameter is used to fetch resources which are effective dated as of the specified start date. The value of this query parameter is a string having a date in yyyy-MM-dd format",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSitePostedJobs"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSitePostedJobs-get",
+        "x-filename-id": "recruitingjobsitepostedjobs-get"
+      }
+    },
+    "/recruitingJobSitePostedJobs/{recruitingJobSitePostedJobsUniqID}": {
+      "get": {
+        "tags": [
+          "Job Site Posted Jobs"
+        ],
+        "summary": "Get details about a posted job requisition",
+        "operationId": "get_recruitingJobSitePostedJobs",
+        "parameters": [
+          {
+            "name": "recruitingJobSitePostedJobsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Job Site Posted Jobs resource and used to uniquely identify an instance of Job Site Posted Jobs. The client should not generate the hash key value. Instead, the client should query on the Job Site Posted Jobs collection resource in order to navigate to a specific instance of Job Site Posted Jobs to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Effective-Of",
+            "in": "header",
+            "description": "This header accepts a string value. The string is a semi-colon separated list of <parameter-name>=<parameter-value>. It is used to perform effective date range operations. The accepted parameters are RangeMode, RangeSpan, RangeStartDate, RangeEndDate, RangeStartSequence and RangeEndSequence. The parameter values are always strings. The possible values for RangeMode are SET_LOGICAL_START, SET_LOGICAL_END, END_DATE, SET_EFFECTIVE_START, SET_EFFECTIVE_END, REPLACE_CORRECTION, REPLACE_UPDATE, RECONCILE_CORRECTION, CORRECTION, RECONCILE_UPDATE, UPDATE, ZAP and DELETE_CHANGES. The possible values for RangeSpan are PHYSICAL_ROW_END_DATE and LOGICAL_ROW_END_DATE. The values for RangeStartDate and RangeEndDate have to be a string representation of a date in yyyy-MM-dd format. The value for RangeStartSequence and RangeEndSequence must be strings such that when parsed they yield positive integers.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobSitePostedJobs-item-response"
+                }
+              }
+            },
+            "links": {
+              "skills": {
+                "operationRef": "#/paths/~1recruitingJobSitePostedJobs~1{recruitingJobSitePostedJobsUniqID}~1child~1skills/get",
+                "parameters": {
+                  "recruitingJobSitePostedJobsUniqID": "$request.path.recruitingJobSitePostedJobsUniqID"
+                },
+                "description": "The skills resource provides details about the skills included in the job requisition."
+              },
+              "requisitionAdditionalAttributes": {
+                "operationRef": "#/paths/~1recruitingJobSitePostedJobs~1{recruitingJobSitePostedJobsUniqID}~1child~1requisitionAdditionalAttributes/get",
+                "parameters": {
+                  "recruitingJobSitePostedJobsUniqID": "$request.path.recruitingJobSitePostedJobsUniqID"
+                },
+                "description": "The requisitionAdditionalAttributes resource provides the additional attributes of the posted job requisition. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              },
+              "requisitionLanguages": {
+                "operationRef": "#/paths/~1recruitingJobSitePostedJobs~1{recruitingJobSitePostedJobsUniqID}~1child~1requisitionLanguages/get",
+                "parameters": {
+                  "recruitingJobSitePostedJobsUniqID": "$request.path.recruitingJobSitePostedJobsUniqID"
+                },
+                "description": "The requisitionLanguages resource is a child of jobDistributionDetails. It includes the details of the languages mentioned in the job description."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobSitePostedJobs-{recruitingJobSitePostedJobsUniqID}-get",
+        "x-filename-id": "recruitingjobsitepostedjobs-recruitingjobsitepostedjobsuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingJobSitePostedJobs": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingJobSitePostedJobs-item-response": {
+        "type": "object",
+        "properties": {
+          "DomesticTravelRequired": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether domestic travel is required or not for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EducationLevel": {
+            "title": "Lookup Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Education level of the posted requisition.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalContactEmail": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "External contact email of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalContactName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "External contact name of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalPublishedJobEndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "External published job end date of the posted requisition.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalPublishedJobStartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "External published job start date of the posted requisition.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalPublishedJobStatus": {
+            "title": "Posting Status",
+            "maxLength": 30,
+            "type": "string",
+            "description": "External published status of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FullTimeOrPartTime": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Full time or part time attribute of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GeographyNodeId": {
+            "type": "integer",
+            "description": "Geography node ID of the posted requisition.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "HiredCount": {
+            "type": "integer",
+            "description": "Hire count of the posted requisition.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "HotJob": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Hot job indicator of the posted requisition.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InternationalTravelRequired": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether international travel is required or not for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobFunction": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobShift": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job shift of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobType": {
+            "title": "Visibility",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job type of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NumberOfOpenings": {
+            "type": "integer",
+            "description": "Number of openings of the posted requisition.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PhaseName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phase name of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "PrimaryLocationCountryCode": {
+            "maxLength": 2,
+            "type": "string",
+            "description": "Primary location country code of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryLocationLevelTwoCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Primary location level two code of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryWorkLocationId": {
+            "type": "integer",
+            "description": "Primary work location ID of the posted requisition.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PrimaryWorkLocationName": {
+            "title": "Display Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Primary work location name of the posted requisition.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryWorkLocationPostalCode": {
+            "title": "Postal Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Primary work location postal code of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PublishedJobLastUpdateDate": {
+            "title": "Last Updated Date",
+            "type": "string",
+            "description": "Published job last update date of the posted requisition.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RegularOrTemporary": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Regular or temporary attribute of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Identifier of the posted requisition.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequisitionLastUpdateDate": {
+            "type": "string",
+            "description": "Last update date of the posted requisition.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition number of the posted requisition.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StateName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "State name of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "UnlimitedOpenings": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "Unlimited opening indicator of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WorkerType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Worker type of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WorkplaceTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Workplace type code of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "requisitionAdditionalAttributes": {
+            "title": "Recruiting Requisition Additional Attributes",
+            "type": "array",
+            "description": "The requisitionAdditionalAttributes resource provides the additional attributes of the posted job requisition. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionAdditionalAttributes-item-response"
+            }
+          },
+          "requisitionLanguages": {
+            "title": "Requisition Languages",
+            "type": "array",
+            "description": "The requisitionLanguages resource is a child of jobDistributionDetails. It includes the details of the languages mentioned in the job description.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionLanguages-item-response"
+            }
+          },
+          "skills": {
+            "title": "Requisition Skills",
+            "type": "array",
+            "description": "The skills resource provides details about the skills included in the job requisition.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-skills-item-response"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionAdditionalAttributes-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute name of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttributeType": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute type of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FlexContextCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Flexfield context code of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LOVFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "List of value of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Type of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of the additional attribute.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionLanguages-item-response": {
+        "type": "object",
+        "properties": {
+          "ApplyURL": {
+            "type": "string",
+            "description": "The URL for applying in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DefaultLanguageFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Default language of the requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "IsBaseFlag"
+              ]
+            },
+            "x-queryable": true
+          },
+          "EmployerDescriptionStr": {
+            "type": "string",
+            "description": "Description of the employer in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ExternalDescription": {
+            "type": "string",
+            "description": "Description of the external candidate in the requisition languages.",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "ExternalDesc"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ExternalDescriptionHtml": {
+            "type": "string",
+            "description": "HTML description for the external candidate in the requisition languages.",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "ExternalDescHtml"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ExternalQualificationsHTML": {
+            "type": "string",
+            "description": "HTML qualifications for the external candidate in the requisition languages.",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "ExternalQualHtml"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ExternalResponsibilitiesHTML": {
+            "type": "string",
+            "description": "HTML responsibilities for the external candidate in the requisition languages.",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "ExternalRespHtml"
+              ]
+            },
+            "x-queryable": true
+          },
+          "JobFamily": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Details of the job family in the requisition languages.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "LanguageCode": {
+            "type": "string",
+            "description": "Code assigned to the language in the requisition languages.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "OrganizationDescriptionStr": {
+            "type": "string",
+            "description": "Description of the organization in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OrganizationNameML": {
+            "title": "Organization",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name of the organization in the requisition languages.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "PrimaryLocation": {
+            "type": "string",
+            "description": "Primary job location mentioned in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryLocationCountryName": {
+            "type": "string",
+            "description": "Country name of the primary location in the requisition languages.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PrimaryLocationLevelThreeName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Third level name of the primary location in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryLocationLevelTwoName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Second level name of the primary location in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PrimaryWorkLocationCity": {
+            "title": "Town or City",
+            "maxLength": 30,
+            "type": "string",
+            "description": "City of the primary work location in the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShortDescription": {
+            "type": "string",
+            "description": "Short description of the requisition languages.",
+            "nullable": true,
+            "x-hints": {
+              "dependencies": [
+                "ExternalShortDesc"
+              ]
+            },
+            "x-queryable": true
+          },
+          "StudyLevelML": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Educational qualification needed in the requisition languages.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of the requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "PAYLOADHINT": "Show"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "media": {
+            "title": "Requisition Media",
+            "type": "array",
+            "description": "The media resource is a child of requisitionLanguages. It includes the details of the type of media used in the job distribution.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionLanguages-media-item-response"
+            }
+          },
+          "otherWorkLocations": {
+            "title": "Other Work Locations",
+            "type": "array",
+            "description": "The otherWorkLocations resource is a child of the requisitionLanguages resource. It provides the details of the other work locations used in the job distribution. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionLanguages-otherWorkLocations-item-response"
+            }
+          },
+          "secondaryLocations": {
+            "title": "Secondary Locations",
+            "type": "array",
+            "description": "The secondaryLocations resource includes all the details of the secondary preferred location for the job distribution.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionLanguages-secondaryLocations-item-response"
+            }
+          },
+          "skills": {
+            "title": "Requisition Skills",
+            "type": "array",
+            "description": "The skills resource provides details about the skills included in the job requisition.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobSitePostedJobs-requisitionLanguages-skills-item-response"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionLanguages-media-item-response": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "ID assigned to the media used in requisition languages.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Priority": {
+            "type": "integer",
+            "description": "Priority assigned to the media used in requisition languages.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "RequisitionMediaLinkId": {
+            "type": "integer",
+            "description": "Priority assigned to the media used in requisition languages.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ThumbURL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "Thumb URL assigned to the media used in requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title assigned to the media used in requisition languages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "title": "Lookup Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Type assigned to the media used in requisition languages.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "URL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL of the media used in the job application.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionLanguages-otherWorkLocations-item-response": {
+        "type": "object",
+        "properties": {
+          "LocationId": {
+            "title": "Other Work Locations",
+            "type": "integer",
+            "description": "Location ID of the other work location.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:APPLCORE_SETID_DETERMINANT_ATTR": "RequisitionBusinessUnitId"
+            },
+            "x-queryable": true
+          },
+          "LocationName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Location name of the other work location.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionLanguages-secondaryLocations-item-response": {
+        "type": "object",
+        "properties": {
+          "GeographyNodeId": {
+            "title": "Primary Location",
+            "type": "integer",
+            "description": "Geography node ID of the secondary location.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Location": {
+            "type": "string",
+            "description": "Location of requisitions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-requisitionLanguages-skills-item-response": {
+        "type": "object",
+        "properties": {
+          "Importance": {
+            "type": "integer",
+            "description": "High importance indicator of a skill for the posted requisition.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumSkillLevel": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Minimum level of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MinimumYearsExperience": {
+            "type": "integer",
+            "description": "Minimum years of experience for the posted requisition.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Required": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Required indicator of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Section name of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Skill": {
+            "maxLength": 700,
+            "type": "string",
+            "description": "Skill of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SkillType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Skill type of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingJobSitePostedJobs-skills-item-response": {
+        "type": "object",
+        "properties": {
+          "Importance": {
+            "type": "integer",
+            "description": "High importance indicator of a skill for the posted requisition.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumSkillLevel": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Minimum level of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MinimumYearsExperience": {
+            "type": "integer",
+            "description": "Minimum years of experience for the posted requisition.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Required": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Required indicator of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SectionName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Section name of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Skill": {
+            "maxLength": 700,
+            "type": "string",
+            "description": "Skill of the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SkillType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Skill type of a skill for the posted requisition.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

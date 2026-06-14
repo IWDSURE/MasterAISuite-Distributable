@@ -1,0 +1,45 @@
+# PAY_VBC_DEFINITIONS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payvbcdefinitionsvl-3442.html#payvbcdefinitionsvl-3442](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payvbcdefinitionsvl-3442.html#payvbcdefinitionsvl-3442)
+
+## Columns
+
+- VBC_DEFINITION_ID
+- BASE_NAME
+- NAME
+- DESCRIPTION
+- LANGUAGE
+- TYPE
+- MULTIPLE_LEAF_FLAG
+- CALC_TYPE_ID
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATION_CODE
+- ENTERPRISE_ID
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- LAST_UPDATE_DATE
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- SEED_STATUS
+- SGUID
+- SEED_DATA_SOURCE
+
+## Query
+
+```sql
+SELECT pvd.VBC_DEFINITION_ID, pvd.BASE_NAME, pvdtl.NAME, pvdtl.DESCRIPTION, pvdtl.LANGUAGE, pvd.TYPE, pvd.MULTIPLE_LEAF_FLAG, pvd.CALC_TYPE_ID, pvd.LEGISLATIVE_DATA_GROUP_ID, pvd.LEGISLATION_CODE, pvd.ENTERPRISE_ID, pvd.MODULE_ID, pvd.OBJECT_VERSION_NUMBER, pvd.LAST_UPDATE_DATE, pvd.CREATED_BY, pvd.CREATION_DATE, pvd.LAST_UPDATED_BY, pvd.LAST_UPDATE_LOGIN, pvd.SEED_STATUS, pvd.SGUID, pvd.SEED_DATA_SOURCE FROM PAY_VBC_DEFINITIONS pvd, PAY_VBC_DEFINITIONS_TL pvdtl WHERE pvd.VBC_DEFINITION_ID = pvdtl.VBC_DEFINITION_ID AND pvdtl.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

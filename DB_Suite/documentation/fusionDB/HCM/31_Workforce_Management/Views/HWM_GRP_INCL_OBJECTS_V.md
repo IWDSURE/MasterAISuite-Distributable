@@ -1,0 +1,35 @@
+# HWM_GRP_INCL_OBJECTS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmgrpinclobjectsv-3850.html#hwmgrpinclobjectsv-3850](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmgrpinclobjectsv-3850.html#hwmgrpinclobjectsv-3850)
+
+## Columns
+
+- GRP_INCL_OBJECT_ID
+- GRP_ID
+- ORDER_NUM
+- INCL_FLAG
+- INCL_OBJECT_TYPE_CODE
+- INCL_OBJECT_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT GroupInclGrpsPEO.GRP_INCL_GRP_ID GRP_INCL_OBJECT_ID, GroupInclGrpsPEO.GRP_ID, GroupInclGrpsPEO.ORDER_NUM, GroupInclGrpsPEO.INCL_FLAG, GroupInclGrpsPEO.GRP_OR_VALUESET_CD INCL_OBJECT_TYPE_CODE, GroupInclGrpsPEO.INCL_GRP_ID INCL_OBJECT_ID, GroupInclGrpsPEO.CREATED_BY, GroupInclGrpsPEO.CREATION_DATE, GroupInclGrpsPEO.LAST_UPDATED_BY, GroupInclGrpsPEO.LAST_UPDATE_DATE, GroupInclGrpsPEO.LAST_UPDATE_LOGIN FROM HWM_GRP_INCL_GRPS GroupInclGrpsPEO UNION SELECT GroupInclMemberPEO.GRP_INCL_MEMBER_ID GRP_INCL_OBJECT_ID, GroupInclMemberPEO.GRP_ID, NULL ORDER_NUM, GroupInclMemberPEO.INCL_FLAG, 'ORA_HWM_MEMBER' INCL_OBJECT_TYPE_CODE, GroupInclMemberPEO.INCL_MEMBER_ID INCL_OBJECT_ID, GroupInclMemberPEO.CREATED_BY, GroupInclMemberPEO.CREATION_DATE, GroupInclMemberPEO.LAST_UPDATED_BY, GroupInclMemberPEO.LAST_UPDATE_DATE, GroupInclMemberPEO.LAST_UPDATE_LOGIN FROM HWM_GRP_INCL_MEMBERS GroupInclMemberPEO
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

@@ -1,0 +1,37 @@
+# HRT_PERSON_ASSIGNMENTS_X
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtpersonassignmentsx-5800.html#hrtpersonassignmentsx-5800](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrtpersonassignmentsx-5800.html#hrtpersonassignmentsx-5800)
+
+## Columns
+
+- PERSON_ID
+- ASSIGNMENT_ID
+- JOB_ID
+- POSITION_ID
+- BUSINESS_GROUP_ID
+- BUSINESS_UNIT_ID
+- ORGANIZATION_ID
+- LOCATION_ID
+- START_DATE
+- ASSIGNMENT_TYPE
+- GRADE_ID
+- MANAGER_ID
+- MANAGER_ASSIGNMENT_ID
+
+## Query
+
+```sql
+SELECT person.PERSON_ID, assign.ASSIGNMENT_ID, assign.JOB_ID, assign.POSITION_ID, person.BUSINESS_GROUP_ID, assign.BUSINESS_UNIT_ID, assign.ORGANIZATION_ID, assign.LOCATION_ID, person.START_DATE, assign.ASSIGNMENT_TYPE, assign.GRADE_ID, superv.MANAGER_ID, superv.MANAGER_ASSIGNMENT_ID FROM PER_PERSONS_V person, PER_ALL_ASSIGNMENTS_M_V assign, PER_ASSIGNMENT_SUPERVISORS_F_V superv WHERE assign.PERSON_ID = person.PERSON_ID AND assign.ASSIGNMENT_TYPE in ('E','C') AND assign.PRIMARY_FLAG = 'Y' AND TRUNC(SYSDATE) BETWEEN assign.EFFECTIVE_START_DATE AND assign.EFFECTIVE_END_DATE AND assign.ASSIGNMENT_ID = superv.ASSIGNMENT_ID(+) AND superv.EFFECTIVE_START_DATE(+) BETWEEN assign.EFFECTIVE_START_DATE AND assign.EFFECTIVE_END_DATE AND superv.PRIMARY_FLAG(+) = 'Y'
+```
+
+---
+
+[← Back to Index](../20_Profile_Management_Views_Index.md)

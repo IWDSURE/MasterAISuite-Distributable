@@ -1,0 +1,194 @@
+{
+  "name": "IRC_CAND_DUP_CHECK_SUMMARY",
+  "object_type": "TABLE",
+  "description": "This table stores the Duplicate check Status summary for a Candidate.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccanddupchecksummary-26805.html#irccanddupchecksummary-26805",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_DUP_CHECK_SUMMARY_PK",
+      "columns": "DUP_CHK_LOG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "DUP_CHK_LOG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Reference PersonId . This is the candidate on whom dup check is being run. Foreign key to irc_candidates."
+    },
+    {
+      "Name": "DUP_STRENGTH",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates the highest category on which a match has been found for the Reference Person Id. This column will be exposed as a DBI in FF This will store one of the values from the LookupCode from the existing LOV \"ORA_IRC_CAND_MATCHSCORE\":\nORA_HIGHEST - NID match\nORA_HIGHER - 5 columns match\nORA_HIGH - All H categories\nORA_MEDIUM - All M categories\nORA_LOWEST - All L categories."
+    },
+    {
+      "Name": "DUP_STRENGTH_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Number of candidates found in the highest match category."
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "40",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Status of dup check run:\nORA_SUCCESS : if run is successful\nORA_FAILED : if there are any failures during the run."
+    },
+    {
+      "Name": "EXCEPTION",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error message in case of failure."
+    },
+    {
+      "Name": "ES_ENABLED",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the Engine used when the results were stored in this table:\nY : if Elastic Search is used to run the Dup Check\nN : if Sem search is used to run the Dup Check."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key association with IRC_SUBMISSIONS table. \nOne of the three columns required to derive during which CSP, Phase and State a particular Dup Check run was auto-triggered."
+    },
+    {
+      "Name": "STATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key association with IRC_STATES_B.\nOne of the three columns required to derive during which CSP, Phase and State a particular Dup Check run was auto-triggered."
+    },
+    {
+      "Name": "PHASE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key association with IRC_PHASES_B.\nOne of the three columns required to derive during which CSP, Phase and State a particular Dup Check run was auto-triggered."
+    },
+    {
+      "Name": "REQUESTED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the user who initiated the Dup Check Run."
+    },
+    {
+      "Name": "REQUESTED_ON",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates the date and time when the Dup Check Run was initiated."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_DUP_CHECK_SUMMARY_FK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_CAND_DUP_CHECK_SUMMARY_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_CAND_DUP_CHECK_SUMMARY_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STATE_ID"
+    },
+    {
+      "Index": "IRC_CAND_DUP_CHECK_SUMMARY_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PHASE_ID"
+    },
+    {
+      "Index": "IRC_CAND_DUP_CHECK_SUMMARY_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "DUP_CHK_LOG_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:45:45"
+}

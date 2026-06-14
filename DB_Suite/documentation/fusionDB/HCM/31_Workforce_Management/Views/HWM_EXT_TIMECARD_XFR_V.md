@@ -1,0 +1,33 @@
+# HWM_EXT_TIMECARD_XFR_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmexttimecardxfrv-6685.html#hwmexttimecardxfrv-6685](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmexttimecardxfrv-6685.html#hwmexttimecardxfrv-6685)
+
+## Columns
+
+- XFR_READY_REC_GRP_ID
+- TM_REC_GRP_ID
+- TM_REC_GRP_VERSION
+- LDG_OR_BU_ID
+- DATE_FROM
+- DATE_FROM_TRUNCATED
+- ASSIGNMENT_NUMBER
+- PERSON_NUMBER
+- TCSMR_CODE
+
+## Query
+
+```sql
+SELECT xfr_grp.xfr_ready_rec_grp_id, xfr_grp.calc_rec_grp_id tm_rec_grp_id, xfr_grp.calc_rec_grp_version tm_rec_grp_version, xfr_grp.ldg_or_bu_id ldg_or_bu_id, xfr_grp.last_update_date date_from, trunc(xfr_grp.last_update_date) date_from_truncated, paa.assignment_number assignment_number, pap.person_number person_number, tcsmr.tcsmrs_code tcsmr_code FROM HWM_XFR_READY_REC_GRP xfr_grp, PER_ALL_ASSIGNMENTS_M paa, PER_ALL_PEOPLE_F pap, HWM_TCSMRs_B tcsmr, ( select decode(pay_report_utils.get_parameter_value('CONSUMER'),'ORA_HWM_TIME_CONSUMER_PEM','PJT','ORA_HWM_TIME_CONSUMER_PJC','PJC','ORA_HWM_TIME_CONSUMER_PYR','PYR',null) status_def_cd, pay_report_utils.get_parameter_value_number('LDG_OR_BUSINESS_UNIT') LDG_Or_BU_id, pay_report_utils.get_parameter_value_date('EFFECTIVE_DATE') end_date, pay_report_utils.get_parameter_value_date('START_DATE') start_date, pay_report_utils.get_parameter_value_date('FROM_APPROVAL_DATE') apr_date, pay_report_utils.get_parameter_value('ASSIGNMENT_NUMBER') asmnt_number, pay_report_utils.get_parameter_value('PERSON_NUMBER') person_number FROM dual ) para_value WHERE trunc(xfr_grp.start_time) between nvl(trunc(para_value.start_date), to_date('1952-01-01','YYYY-MM-DD')) and nvl(trunc(para_value.end_date), to_date('4712-12-31','YYYY-MM-DD')) AND xfr_grp.last_update_date >= nvl(para_value.apr_date, xfr_grp.last_update_date) AND xfr_grp.ldg_or_bu_id = nvl(para_value.LDG_Or_BU_id, xfr_grp.ldg_or_bu_id) AND tcsmr.TCSMRS_ID = xfr_grp.TCSMRS_ID AND tcsmr.tcsmrs_code = nvl(para_value.status_def_cd,tcsmr.tcsmrs_code) AND paa.assignment_number = nvl(para_value.asmnt_number,paa.assignment_number) AND xfr_grp.subresource_id = paa.assignment_id AND pap.person_number = nvl(para_value.person_number,pap.person_number) AND xfr_grp.resource_id = pap.person_id AND trunc(xfr_grp.start_time) BETWEEN pap.effective_start_date AND pap.effective_end_date AND trunc(xfr_grp.start_time) BETWEEN paa.effective_start_date AND paa.effective_end_date
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

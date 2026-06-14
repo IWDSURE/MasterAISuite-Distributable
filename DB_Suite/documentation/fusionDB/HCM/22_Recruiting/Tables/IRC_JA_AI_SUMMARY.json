@@ -1,0 +1,196 @@
+{
+  "name": "IRC_JA_AI_SUMMARY",
+  "object_type": "TABLE",
+  "description": "This table will store both candidate profile and screening and interview summaries for the overview tab.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircjaaisummary-14540.html#ircjaaisummary-14540",
+  "primary_keys": [
+    {
+      "name": "IRC_JA_AI_SUMMARY_PK",
+      "columns": "JA_AI_SUMMARY_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "JA_AI_SUMMARY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key. Uniquely identifies a job application summary."
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Processing status of this review notification."
+    },
+    {
+      "Name": "TRY_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "4",
+      "Not-null": "",
+      "Comments": "This column stores the number of tries made to invoke the Summary generation."
+    },
+    {
+      "Name": "AGENT_JOB_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Unique identifier for the job assigned to the AI agent."
+    },
+    {
+      "Name": "BULK_SUMMARY_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Indicates whether summary generation was initiated via a bulk process."
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the name of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "900",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the package name of the job that created or last updated the row."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Job application submission id.Foreign key to irc_submissions table."
+    },
+    {
+      "Name": "SUMMARY_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Type of summary (CANDIDATE_PROFILE/SCREENING_AND_INTERVIEW)."
+    },
+    {
+      "Name": "SUMMARY_CONTENT",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "AI-generated summary of the job application."
+    },
+    {
+      "Name": "PROGRESS_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Progress indicator for summary generation."
+    },
+    {
+      "Name": "GENERATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Timestamp when summary was generated."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_JA_AI_SUMMARY_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID, SUMMARY_TYPE"
+    },
+    {
+      "Index": "IRC_JA_AI_SUMMARY_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "REQUEST_ID, BULK_SUMMARY_FLAG, PROCESSING_STATUS, TRY_COUNT"
+    },
+    {
+      "Index": "IRC_JA_AI_SUMMARY_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PROCESSING_STATUS, TRY_COUNT, REQUEST_ID"
+    },
+    {
+      "Index": "IRC_JA_AI_SUMMARY_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "JA_AI_SUMMARY_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:54:56"
+}

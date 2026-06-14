@@ -1,0 +1,282 @@
+{
+  "name": "IRC_IS_INTRVW_REQUESTS",
+  "object_type": "TABLE",
+  "description": "This table stores all the interview requests done to the candidate as well store other information like counts",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircisintrvwrequests-18264.html#ircisintrvwrequests-18264",
+  "primary_keys": [
+    {
+      "name": "IRC_IS_INTRVW_REQUESTS_PK",
+      "columns": "INTRVW_REQUESTS_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "INTRVW_REQUESTS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "The primary key for this table."
+    },
+    {
+      "Name": "SUBMISSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to the submissions (IRC_SUBMISSIONS) to which we are linking the interview request"
+    },
+    {
+      "Name": "SCHEDULE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to the schedules (IRC_IS_SCHEDULES_B) to which we are linking the interview request"
+    },
+    {
+      "Name": "INTERVIEW_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to the interviews (IRC_IS_INTERVIEWS) to which we are linking the interview request"
+    },
+    {
+      "Name": "IS_RSCHLD_RQSTED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag used when reschedule is requested to the candidate, count will not be incremented. (Default value 'N')"
+    },
+    {
+      "Name": "INTRVW_RSCHLD_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Holds the count for the reschedules because it can exceed setting value, default is 0"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "AUTO_O365_IS_OVERRIDDEN_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flag used when the interviewers are overridden."
+    },
+    {
+      "Name": "AUTO_O365_OVERRIDDEN_DURATION",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Determine the overridden interview meeting slot duration. Lookup to use ORA_IRC_IS_MEETING_DURATION."
+    },
+    {
+      "Name": "IS_RESCHEDULED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determine if the Interview Request has been rescheduled."
+    },
+    {
+      "Name": "EARLIEST_AVAILABLE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Manual and proposed slots will be shown starting from this timestamp."
+    },
+    {
+      "Name": "FEEDBACK_REQUEST_CONFIG",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Contains feedback request configuration to be created."
+    },
+    {
+      "Name": "OVERRIDDEN_LOCATION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.LOCATION_TYPE."
+    },
+    {
+      "Name": "OVERRIDDEN_MEETING_PROVIDER",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_INTERVIEWS.INTERVIEW_MEETING_PROVIDER."
+    },
+    {
+      "Name": "OVERRIDDEN_VISBLTY_RANGE_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_SCHEDULES_B.INTERVWS_VISIBILITY_RANGE_CODE."
+    },
+    {
+      "Name": "OVERRIDDEN_CONFERENCE_LINK",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.WEB_CONFERENCE_LINK."
+    },
+    {
+      "Name": "OVERRIDDEN_PHONE_PASSCODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.PHONE_NUMBER_PASSCODE."
+    },
+    {
+      "Name": "OVERRIDDEN_PH_COUNTRY_CODE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign key to a phone country code. (HZ_PHONE_COUNTRY_CODES)"
+    },
+    {
+      "Name": "OVERRIDDEN_PHONE_COUNTRY",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.PHONE_COUNTRY_CODE_NUMBER."
+    },
+    {
+      "Name": "OVERRIDDEN_PHONE_AREA",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.PHONE_AREA_CODE."
+    },
+    {
+      "Name": "OVERRIDDEN_PHONE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.PHONE_NUMBER."
+    },
+    {
+      "Name": "OVERRIDDEN_PHONE_EXTENSION",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.PHONE_EXT."
+    },
+    {
+      "Name": "OVERRIDDEN_LOCATION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.LOCATION_ID."
+    },
+    {
+      "Name": "OVERRIDDEN_LOCATION_DETAILS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Overrides IRC_IS_LOCATIONS.LOCATION_DETAILS."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_IS_INTRVW_REQUESTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SUBMISSION_ID"
+    },
+    {
+      "Index": "IRC_IS_INTRVW_REQUESTS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SCHEDULE_ID"
+    },
+    {
+      "Index": "IRC_IS_INTRVW_REQUESTS_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "OVERRIDDEN_PH_COUNTRY_CODE_ID"
+    },
+    {
+      "Index": "IRC_IS_INTRVW_REQUESTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INTERVIEW_ID, CREATION_DATE"
+    },
+    {
+      "Index": "IRC_IS_INTRVW_REQUESTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "INTRVW_REQUESTS_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:54:30"
+}

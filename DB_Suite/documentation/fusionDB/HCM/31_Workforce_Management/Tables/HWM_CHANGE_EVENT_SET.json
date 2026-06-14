@@ -1,0 +1,160 @@
+{
+  "name": "HWM_CHANGE_EVENT_SET",
+  "object_type": "TABLE",
+  "description": "The table stores metadata about event change sets, which represent a collection of changes made to specific objects (e.g., Absence, Assignment) within a particular time frame. This table tracks the processing of these change sets, including the status, consumer information, and relevant timestamps.",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmchangeeventset-30133.html#hwmchangeeventset-30133",
+  "primary_keys": [
+    {
+      "name": "HWM_CHANGE_EVENT_SET_PK",
+      "columns": "CHANGE_EVENT_SET_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CHANGE_EVENT_SET_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "A unique identifier of change event set"
+    },
+    {
+      "Name": "PUBLISH_START_DATE_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Event feed poll start date time"
+    },
+    {
+      "Name": "PUBLISH_END_DATE_TIME",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Event feed poll end date time"
+    },
+    {
+      "Name": "CONSUMER_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Object which listens to the change events or subscriber of the change events"
+    },
+    {
+      "Name": "CONSUMER_PROCESS_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Field indicating the ID of the consumer process that performed the feed event\npoll."
+    },
+    {
+      "Name": "JOB_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Request Id of the ess job"
+    },
+    {
+      "Name": "FEED_ENTRIES_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The number of feed entries read from the underlying feed"
+    },
+    {
+      "Name": "UPDATED_INSTANT",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The last time the underlying feed or one of its entries was modified"
+    },
+    {
+      "Name": "LATEST_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Flag indicating whether this is the latest change set for the consumer code."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HWM_CHANGE_EVENT_SET_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "CONSUMER_CODE, LATEST_FLAG"
+    },
+    {
+      "Index": "HWM_CHANGE_EVENT_SET_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CHANGE_EVENT_SET_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-10T08:07:53"
+}

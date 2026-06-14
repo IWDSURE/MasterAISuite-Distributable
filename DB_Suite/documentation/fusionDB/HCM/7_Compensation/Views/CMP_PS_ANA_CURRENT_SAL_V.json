@@ -1,0 +1,11 @@
+{
+  "name": "CMP_PS_ANA_CURRENT_SAL_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "CMP",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmppsanacurrentsalv-8300.html#cmppsanacurrentsalv-8300",
+  "columns": [],
+  "query": "SELECT a.person_id, a.assignment_id, '{\"strKey\":\"HdrSSalary1\"}' text_title, hrl_df_util.number_to_char(a.salary_amount) || ' ' || a.currency_code || ' ' || a.salary_frequency text_metric, decode(trunc(months_between(trunc(sysdate), a.date_from)), 0, '{\"strKey\":\"PgHISALCHNGthismonth\",\"tokens\":{\"SAL_CHNG\":\"', 1, '{\"strKey\":\"PgHISALCHNGlastmonth\",\"tokens\":{\"SAL_CHNG\":\"', '{\"strKey\":\"PgHISALCHNGMONDURago\",\"tokens\":{\"SAL_CHNG\":\"' ) || decode(a.last_change_amount, NULL, '', decode(sign(nvl(a.last_change_amount, 0)), 1, '+', -1, '', 0, NULL) || hrl_df_util.number_to_char(round(last_change_percent, 2)) || '% (' || hrl_df_util.number_to_char(round(a.last_change_amount, 2)) || ')') || '\"' || decode(trunc(months_between(trunc(sysdate), a.date_from)),0,'}}',1,'}}', ',\"MON_DUR\":\"'|| trunc(months_between(trunc(sysdate), a.date_from)) || '\"}}') text_meta, decode(sign((sysdate - a.date_from) - 7), - 1, '{\"strKey\":\"BdgNew3\"}', NULL) badge_text, decode(sign((sysdate - a.date_from) - 7), - 1, 'info', NULL) badge_status, NULL period_chn_ind_val, NULL period_chn_ind_cmp, 'lineWithArea' chart_type, decode(sign(a.last_change_amount), 1, 'success', 'neutral') chart_color, ( SELECT JSON_ARRAYAGG( JSON_OBJECT( 'ID' IS hrl_df_util.date_to_char(date_from), 'Value' IS salary_amount ) ORDER BY date_from ) FROM ( SELECT date_from, salary_amount FROM cmp_salary WHERE assignment_id = a.assignment_id and date_from <= TRUNC(sysdate) ORDER BY date_from DESC FETCH FIRST 5 ROWS ONLY ) ) chart_data, '?pSalaryId='|| a.salary_id|| '&pAssignmentId='|| a.assignment_id link_text FROM cmp_asg_salary_v a WHERE trunc(sysdate) BETWEEN a.date_from AND a.date_to",
+  "_parsed_at": "2026-06-10T07:38:09"
+}

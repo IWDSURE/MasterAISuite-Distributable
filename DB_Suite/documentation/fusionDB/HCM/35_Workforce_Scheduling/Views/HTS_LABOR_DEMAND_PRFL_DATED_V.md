@@ -1,0 +1,28 @@
+# HTS_LABOR_DEMAND_PRFL_DATED_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htslabordemandprfldatedv-8722.html#htslabordemandprfldatedv-8722](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htslabordemandprfldatedv-8722.html#htslabordemandprfldatedv-8722)
+
+## Columns
+
+- DEMAND_DATE
+- VAL_INDEX
+- SCHEDULER_PROFILE_ID
+- RESOURCES_REQUIRED
+
+## Query
+
+```sql
+select distinct cal.report_date demand_date, to_char(cal.report_date, 'D') val_index, setup_option_val_id scheduler_profile_id , labor.value resources_required from hxt_setup_option_vals s, fnd_cal_day cal, hts_labor_demand_prfl_vals_v labor where s.type = 'HTS' and (cal.report_date = trunc(s.effective_start_date) or cal.report_date > s.effective_start_date) and (s.effective_end_date is null or (cal.report_date<s.effective_end_date)) and to_char(cal.report_date, 'D') = (labor.val_index+1) and labor.sched_profile_id = s.setup_option_val_id and (cal.report_date = trunc(labor.start_date) or cal.report_date > labor.start_date) and (labor.end_date is null or (cal.report_date<labor.end_date)) order by cal.report_date asc
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

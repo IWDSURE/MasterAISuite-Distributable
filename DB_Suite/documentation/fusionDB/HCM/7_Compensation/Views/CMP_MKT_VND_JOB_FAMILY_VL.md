@@ -1,0 +1,39 @@
+# CMP_MKT_VND_JOB_FAMILY_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndjobfamilyvl-5259.html#cmpmktvndjobfamilyvl-5259](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndjobfamilyvl-5259.html#cmpmktvndjobfamilyvl-5259)
+
+## Columns
+
+- JOB_FAMILY_ID
+- JOB_FAMILY_SEQ_NUM
+- JOB_FAMILY_CODE
+- JOB_FAMILY_NAME
+- JOB_FAMILY_DESCR
+- DESCRIPTION
+- VENDOR_ID
+- STATUS
+- BUSINESS_GROUP_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.JOB_FAMILY_ID, B.JOB_FAMILY_SEQ_NUM, B.JOB_FAMILY_CODE, T.JOB_FAMILY_NAME, T.JOB_FAMILY_DESCR, T.DESCRIPTION, B.VENDOR_ID, B.STATUS, B.BUSINESS_GROUP_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM CMP_MKT_VND_JOB_FAMILY_B B, CMP_MKT_VND_JOB_FAMILY_TL T where B.JOB_FAMILY_ID = T.JOB_FAMILY_ID AND T.LANGUAGE = USERENV('LANG') AND B.BUSINESS_GROUP_ID = T.BUSINESS_GROUP_ID
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

@@ -1,0 +1,38 @@
+# HWR_MNTR_PLAN_GOAL_TASKS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrmntrplangoaltasksvl-6828.html#hwrmntrplangoaltasksvl-6828](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrmntrplangoaltasksvl-6828.html#hwrmntrplangoaltasksvl-6828)
+
+## Columns
+
+- TASK_ID
+- TARGET_COMPLETION_DATE
+- GOAL_ID
+- STATUS
+- PERSON_ID
+- TASKS_ATTR_1
+- TASKS_ATTR_2
+- TASK_NAME
+- DESCRIPTION
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.TASK_ID, B.TARGET_COMPLETION_DATE, B.GOAL_ID, B.STATUS, B.PERSON_ID, B.TASKS_ATTR_1, B.TASKS_ATTR_2, T.TASK_NAME, T.DESCRIPTION, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HWR_MNTR_PLAN_GOAL_TASKS_B B, HWR_MNTR_PLAN_GOAL_TASKS_TL T WHERE B.TASK_ID = T.TASK_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

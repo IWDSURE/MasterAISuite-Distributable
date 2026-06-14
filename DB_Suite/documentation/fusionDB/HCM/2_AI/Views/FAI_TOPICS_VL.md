@@ -1,0 +1,44 @@
+# FAI_TOPICS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** FAI
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faitopicsvl-5130.html#faitopicsvl-5130](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faitopicsvl-5130.html#faitopicsvl-5130)
+
+## Columns
+
+- TOPIC_ID
+- TOPIC_CODE
+- INTERNAL_NAME
+- INTERNAL_DESCRIPTION
+- STATUS
+- SEEDED_FLAG
+- OWNER_ID
+- OWNER_NAME
+- FAMILY
+- PRODUCT
+- TOPIC_CREATED_DATE
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- NAME
+- DESCRIPTION
+
+## Query
+
+```sql
+select B.TOPIC_ID, B.TOPIC_CODE, B.INTERNAL_NAME, B.INTERNAL_DESCRIPTION, B.STATUS, B.SEEDED_FLAG, B.OWNER_ID, B.OWNER_NAME, B.FAMILY, B.PRODUCT, B.TOPIC_CREATED_DATE, B.MODULE_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN, T.NAME, T.DESCRIPTION FROM FAI_TOPICS_B B, FAI_TOPICS_TL T WHERE B.TOPIC_ID = T.TOPIC_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../2_AI_Views_Index.md)

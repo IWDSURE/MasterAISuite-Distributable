@@ -1,0 +1,39 @@
+# CMP_MKT_VND_CAREER_LEVEL_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** CMP
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndcareerlevelvl-6534.html#cmpmktvndcareerlevelvl-6534](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/cmpmktvndcareerlevelvl-6534.html#cmpmktvndcareerlevelvl-6534)
+
+## Columns
+
+- CAREER_LEVEL_ID
+- CAREER_LEVEL_SEQ_NUM
+- CAREER_LEVEL_CODE
+- CAREER_LEVEL_NAME
+- CAREER_LEVEL_DESCR
+- DESCRIPTION
+- VENDOR_ID
+- STATUS
+- BUSINESS_GROUP_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.CAREER_LEVEL_ID, B.CAREER_LEVEL_SEQ_NUM, B.CAREER_LEVEL_CODE, T.CAREER_LEVEL_NAME, T.CAREER_LEVEL_DESCR, T.DESCRIPTION, B.VENDOR_ID, B.STATUS, B.BUSINESS_GROUP_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM CMP_MKT_VND_CAREER_LEVEL_B B, CMP_MKT_VND_CAREER_LEVEL_TL T WHERE B.CAREER_LEVEL_ID = T.CAREER_LEVEL_ID AND T.LANGUAGE = USERENV('LANG') AND B.BUSINESS_GROUP_ID = T.BUSINESS_GROUP_ID
+```
+
+---
+
+[← Back to Index](../7_Compensation_Views_Index.md)

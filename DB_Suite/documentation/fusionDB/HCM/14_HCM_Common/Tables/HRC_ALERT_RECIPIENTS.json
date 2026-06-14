@@ -1,0 +1,200 @@
+{
+  "name": "HRC_ALERT_RECIPIENTS",
+  "object_type": "TABLE",
+  "description": "Contains alert recipients data.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcalertrecipients-22240.html#hrcalertrecipients-22240",
+  "primary_keys": [
+    {
+      "name": "HRC_ALERT_RECIPIENTS_PK",
+      "columns": "RECIPIENT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "RECIPIENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "TEMPLATE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Template Identifier. Foreign Key to HRC_TEMPLATES_B.ALERT_ID"
+    },
+    {
+      "Name": "OBJECT_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Speicifies the object GUID. Primarily used for seed data framework."
+    },
+    {
+      "Name": "DELIVER_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines the delivery type (i.e. To, Cc). Valid values are based on the lookup of HRC_ALERT_DELIVERY_TYPE."
+    },
+    {
+      "Name": "CHANNEL_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Determines the delivery channel type (e.g Email, Sms, Im, Feed, Worklist). Valid values are based on the lookup of HRC_ALERT_CHANNEL_TYPE."
+    },
+    {
+      "Name": "VALUE_EXPRESSION",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Specifies the deliver to value expression. e.g. ${Employees.EmailAddress}, ${USER:martha.kelly@abc.com}"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "DELETED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Used to identify for soft delete."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TEMPLATE_ID"
+    },
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "RECIPIENT_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "RECIPIENT_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_GUID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_ALERT_RECIPIENTS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "OBJECT_GUID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:34:13"
+}

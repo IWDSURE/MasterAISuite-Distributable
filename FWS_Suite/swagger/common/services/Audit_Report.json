@@ -1,0 +1,359 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Audit Report",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/fscmRestApi/fndAuditRESTService/audittrail/getaudithistory": {
+      "post": {
+        "tags": [
+          "Audit Report"
+        ],
+        "description": "Get an audit report",
+        "operationId": "getaudithistory",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "The date from which the audit history is to be retrieved. The format of the date can be yyyy-MM-dd or yyyy-MM-dd HH:mm:ss. You can retrieve audit history for up to one month.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "The date up to which the audit report data is to be retrieved. The format of the date can be yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "description": "The display name of the user.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "description": "A predefined product value provided in the request. The valid values are available in the FND_AUDIT_WEBAPP_AM table.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "A comma-separated list of events you want to include in the audit report such as insert, delete, update, or all events.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "businessObjectType",
+            "in": "query",
+            "description": "The fully qualified view object name of the product to be included in the audit report.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeChildObjects",
+            "in": "query",
+            "description": "Indicates whether to include the child objects of the business object in the audit report. The default value is false.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "includeImpersonator",
+            "in": "query",
+            "description": "Indicates whether to include the impersonator name in the audit report. The default value is false. Note: The impersonation functionality is no longer available. However, if impersonation was used earlier, and if you set this parameter to true, the response displays the name of the impersonator as stored in audit report.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "includeExtendedObjectIdentiferColumns",
+            "in": "query",
+            "description": "Indicates whether to include the context information for the business objects. The default value is false.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "includeAttributes",
+            "in": "query",
+            "description": "Indicates whether the audit report includes business object attributes that were changed in the specified time period. The default value is true.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "timeZone",
+            "in": "query",
+            "description": "The timezone to be used for the specified period of the audit report. The valid values are availbale in the FND_TIMEZONES_VL view.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "description": "The page number in the audit report you want to view.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "path",
+            "description": "The number of records displayed in a page, in the audit report.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "attributeDetailMode",
+            "in": "query",
+            "description": "Indicates whether the old and new attribute values are returned. If true, the old and new values are retrieved. If false, the response contains only attribute names, and not old and new values. The default value is false.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The following table describes the response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auditHistory"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an audit report",
+        "x-internal-id": "fscmRestApi-fndAuditRESTService-audittrail-getaudithistory-post",
+        "x-filename-id": "fscmrestapi-fndauditrestservice-audittrail-getaudithistory-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "auditHistory": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "title": "Page Number",
+            "type": "string",
+            "description": "The current page number in the audit report."
+          },
+          "pageSize": {
+            "title": "Page Size",
+            "type": "string",
+            "description": "The number of records displayed per page in the audit report."
+          },
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "description": "The status of the audit report request. The valid values are SUCCESS and FAIL."
+          },
+          "actionName": {
+            "title": "Action Name",
+            "type": "string",
+            "description": "The request method name for which the response is retrieved such as getAuditHistory."
+          },
+          "auditData": {
+            "title": "Audit data",
+            "type": "array",
+            "description": "The audit data retrieved for the specified criteria.",
+            "items": {
+              "$ref": "#/components/schemas/auditData"
+            }
+          }
+        }
+      },
+      "auditData": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "title": "Date",
+            "type": "string",
+            "description": "The date when the audit record was inserted, updated, or deleted."
+          },
+          "userName": {
+            "title": "User display name",
+            "type": "string",
+            "description": "The display name of the user retrieving the audit report."
+          },
+          "userInternalName": {
+            "title": "User internal name",
+            "type": "string",
+            "description": "The internal name of the user."
+          },
+          "impersonator": {
+            "title": "Impersonator name",
+            "type": "string",
+            "description": "The name of the impersonator."
+          },
+          "eventType": {
+            "title": "Event Type",
+            "type": "string",
+            "description": "The type of event such as insert, delete, update, or all events."
+          },
+          "businessObject": {
+            "title": "Business Object(display name)",
+            "type": "string",
+            "description": "The display name of the business object."
+          },
+          "qualifiedBusinessObject": {
+            "title": "Business Object(internal name)",
+            "type": "string",
+            "description": "The fully qualified view object name."
+          },
+          "description": {
+            "title": "Event description",
+            "type": "string",
+            "description": "The description of the event."
+          },
+          "descriptionInternal": {
+            "title": "Event description(internal name)",
+            "type": "string",
+            "description": "The internal description of the event."
+          },
+          "attributeDetails": {
+            "title": "Attribute Details",
+            "type": "array",
+            "description": "The attribute details displayed in the audit report. To inlcude these details, set includeAttributes attribute to true.",
+            "items": {
+              "$ref": "#/components/schemas/attributeDetails"
+            }
+          },
+          "contextName1": {
+            "title": "Context Name1",
+            "type": "string",
+            "description": "The display name of the first context attribute that defines the context of the change in the view object. The context name/value pairs are included in the audit report only when includeExtendedObjectIdentiferColumns attribute is set to true."
+          },
+          "contextValue1": {
+            "title": "Context Value1",
+            "type": "string",
+            "description": "The value of the first context attribute defined in the view object."
+          },
+          "contextName2": {
+            "title": "Context Name2",
+            "type": "string",
+            "description": "The display name of the second context attribute that defines the context of the change in the view object."
+          },
+          "contextValue2": {
+            "title": "Context Value2",
+            "type": "string",
+            "description": "The value of the second context attribute defined in the view object."
+          },
+          "contextName3": {
+            "title": "Context Name3",
+            "type": "string",
+            "description": "The display name of the third context attribute that defines the context of the change in the view object."
+          },
+          "contextValue3": {
+            "title": "Context Value3",
+            "type": "string",
+            "description": "The value of the third context attribute defined in the view object."
+          }
+        }
+      },
+      "attributeDetails": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "title": "Attribute Name",
+            "type": "string",
+            "description": "The display name of the attribute."
+          },
+          "attributeInternalName": {
+            "title": "Attribute internal name",
+            "type": "string",
+            "description": "The internal name of the attribute."
+          },
+          "newValue": {
+            "title": "Attribute new value",
+            "type": "string",
+            "description": "The new value of the attribute retrieved in the audit report."
+          },
+          "newValueId": {
+            "title": "Attribute new value Id",
+            "type": "string",
+            "description": "The attribute Id for the new value."
+          },
+          "oldValue": {
+            "title": "Attribute old value",
+            "type": "string",
+            "description": "The old value of the attribute retrieved in the audit report."
+          },
+          "oldValueId": {
+            "title": "Attribute old value Id",
+            "type": "string",
+            "description": "The attribute Id of the old value."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

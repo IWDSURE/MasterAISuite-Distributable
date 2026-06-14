@@ -1,0 +1,166 @@
+{
+  "name": "IRC_GEO_LEVEL_MAPPINGS",
+  "object_type": "TABLE",
+  "description": "This table is used to maintain Geography level mappings for each country . This is a 3 level mapping table where for each country a mapping entry is defined to refer a colum name in HZ_GEOGRAPHIES table for level2 and level3 values.\n\nThe main purpose if having a 3 level geo mapping table is while location indexing, the FQN gets built only on 3 levels like \"City, State,Country\".",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircgeolevelmappings-5176.html#ircgeolevelmappings-5176",
+  "primary_keys": [
+    {
+      "name": "IRC_GEO_LEVEL_MAPPINGS_PK",
+      "columns": "GEO_MAPPING_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "GEO_MAPPING_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key - Sequence generated key. Fusion Global sequence generator is used to generate the key at run-time."
+    },
+    {
+      "Name": "COUNTRY_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Country code of the GEOGRAPHY_ID. This columns is created for readability purpose."
+    },
+    {
+      "Name": "GEO_LEVEL2_COLUMN_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This tells what column name should be used for LEVEL2 data. The value for this column name tells what column need to be referred in Hz_GEOGRAPHIES table to fetch LEVEL2 data ."
+    },
+    {
+      "Name": "GEO_LEVEL3_COLUMN_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "60",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This tells what column name should be used for LEVEL3 data. The value for this column name tells what column need to be referred in Hz_GEOGRAPHIES table to fetch LEVEL2 data ."
+    },
+    {
+      "Name": "ACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag to mark when a country is active."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "OBJECT_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Used for Seed Data soft delete purpose."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_GEO_LEVEL_MAPPINGS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_SEED",
+      "Columns": "COUNTRY_CODE"
+    },
+    {
+      "Index": "IRC_GEO_LEVEL_MAPPINGS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_SEED",
+      "Columns": "GEO_MAPPING_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "IRC_GEO_LEVEL_MAPPINGS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_SEED",
+      "Columns": "GEO_MAPPING_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:52:29"
+}

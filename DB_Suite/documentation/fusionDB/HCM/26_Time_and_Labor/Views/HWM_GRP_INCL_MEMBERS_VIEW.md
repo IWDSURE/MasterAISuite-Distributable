@@ -1,0 +1,34 @@
+# HWM_GRP_INCL_MEMBERS_VIEW
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HXT
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmgrpinclmembersview-5010.html#hwmgrpinclmembersview-5010](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmgrpinclmembersview-5010.html#hwmgrpinclmembersview-5010)
+
+## Columns
+
+- GRP_INCL_MEMBER_ID
+- GRP_ID
+- INCL_MEMBER_ID
+- INCL_FLAG
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- SEED_DATA_SOURCE
+
+## Query
+
+```sql
+SELECT GRP_INCL_MEMBER_ID, GRP_ID, INCL_MEMBER_ID, INCL_FLAG, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPDATE_DATE, LAST_UPDATE_LOGIN, SEED_DATA_SOURCE FROM HWM_GRP_INCL_MEMBERS UNION SELECT 999999999999999 GRP_INCL_MEMBER_ID, 999999999999999 GRP_ID, NVL(HRC_SESSION_UTIL.GET_USER_PERSONID,-1) INCL_MEMBER_ID, 'INCL' INCL_FLAG, 'HCM_USER10' CREATED_BY, SYSDATE CREATION_DATE, 'HCM_USER10' LAST_UPDATED_BY, SYSDATE LAST_UPDATE_DATE, 'HCM_USER10' LAST_UPDATE_LOGIN, NULL SEED_DATA_SOURCE FROM DUAL
+```
+
+---
+
+[← Back to Index](../26_Time_and_Labor_Views_Index.md)

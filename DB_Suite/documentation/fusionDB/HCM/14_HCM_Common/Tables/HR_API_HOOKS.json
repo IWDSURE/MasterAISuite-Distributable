@@ -1,0 +1,192 @@
+{
+  "name": "HR_API_HOOKS",
+  "object_type": "TABLE",
+  "description": "This table contains data sourced from HR core development, legislation\ndevelopment teams and legislation vertical market groups. It\ncontains the list of hook points which are available in each API\nmodule. The data in this table must not be updated by customer code.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrapihooks-23008.html#hrapihooks-23008",
+  "primary_keys": [
+    {
+      "name": "HR_API_HOOKS_PK",
+      "columns": "API_HOOK_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "API_HOOK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "System generated primary key column."
+    },
+    {
+      "Name": "API_MODULE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HR_API_MODULES"
+    },
+    {
+      "Name": "API_HOOK_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Type of hook"
+    },
+    {
+      "Name": "HOOK_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the database package which the business process or row handler calls when the hook point is reached."
+    },
+    {
+      "Name": "HOOK_PROCEDURE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the procedure with HOOK_PACKAGE which the business process or row handler calls when the hook point is reached."
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Identifies rows created by legislation group/partners or legislation vertical markets. Will be null for all hooks provided by HR development core products."
+    },
+    {
+      "Name": "LEGISLATION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Holds the name of the database package to be called, to derive the legislation code, when legislation specific logic exists and p_business_group_id is not a known parameter to the hook package."
+    },
+    {
+      "Name": "LEGISLATION_FUNCTION",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Name of the function, within the database package LEGISLATION_PACKAGE, to call when the legislation code needs to be known."
+    },
+    {
+      "Name": "ENCODED_ERROR",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Holds the error text in AOL encoded format if the code to call the legislation_procedure or hook_procedure could not be created by the preprocessor."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HR_API_HOOKS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_HOOK_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_API_HOOKS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_HOOK_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HR_API_HOOKS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_MODULE_ID, API_HOOK_TYPE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_API_HOOKS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "API_MODULE_ID, API_HOOK_TYPE, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HR_API_HOOKS_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "HOOK_PACKAGE, HOOK_PROCEDURE, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HR_API_HOOKS_U21",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "HOOK_PACKAGE, HOOK_PROCEDURE, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:48:16"
+}

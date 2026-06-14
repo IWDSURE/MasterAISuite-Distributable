@@ -1,0 +1,513 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Fusion AI Agent-to-Agent API/Task and Message Operations",
+    "version": "2026.05.27",
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "description": "<div><span style=\"color: #c74634\">Last Updated May 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>\n",
+    "termsOfService": "",
+    "license": {
+      "name": "",
+      "url": "https://xxx.oracle.com"
+    },
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "x-summary": "Last Updated May 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "<servername>/api/fusion-ai/orchestrator/a2a/v1/{workflowCode}": {
+      "post": {
+        "tags": [
+          "Fusion AI Agent-to-Agent API/Task and Message Operations"
+        ],
+        "summary": "Send task, send message, or get task",
+        "description": "Execute a JSON-RPC operation against a published workflow. Supported methods are `tasks/send`, `message/send`, and `tasks/get`.",
+        "operationId": "invokeAgentOperation",
+        "parameters": [
+          {
+            "name": "workflowCode",
+            "in": "path",
+            "description": "Published workflow code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "JSON-RPC request for task send, message send, or task retrieval.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SendTaskJSONRPCRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SendMessageJSONRPCRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/GetTaskJSONRPCRequest"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation completed or task state retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/TaskResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/SendMessageResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or unsupported JSON-RPC method.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workflow not found.",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "x-internal-id": "<servername>-api-fusion-ai-orchestrator-a2a-v1-{workflowCode}-post",
+        "x-filename-id": "servername-api-fusion-ai-orchestrator-a2a-v1-workflowcode-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SendTaskJSONRPCRequest": {
+        "type": "object",
+        "required": [
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "default": "2.0"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "tasks/send"
+            ]
+          },
+          "params": {
+            "$ref": "#/components/schemas/TaskSendRequest"
+          }
+        }
+      },
+      "TaskSendRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TaskQueryRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contextId": {
+                "type": "string",
+                "description": "Optional conversation or context identifier."
+              },
+              "message": {
+                "$ref": "#/components/schemas/Message"
+              }
+            }
+          }
+        ]
+      },
+      "TaskQueryRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TaskIdRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "historyLength": {
+                "type": "integer",
+                "description": "Optional number of history messages to retrieve."
+              }
+            }
+          }
+        ]
+      },
+      "TaskIdRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique task identifier."
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional metadata associated with the request.",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "agent"
+            ]
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPart"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "messageId": {
+            "type": "string"
+          },
+          "contextId": {
+            "type": "string",
+            "description": "Conversation identifier. For `message/stream`, this must be nested under `params.message`."
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Optional task identifier used for resumed or task-associated message flows."
+          },
+          "kind": {
+            "type": "string",
+            "default": "message"
+          }
+        }
+      },
+      "TextPart": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Part type.",
+            "example": "text"
+          },
+          "text": {
+            "type": "string",
+            "description": "Text content."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "kind": {
+            "type": "string",
+            "default": "text"
+          }
+        }
+      },
+      "SendMessageJSONRPCRequest": {
+        "type": "object",
+        "required": [
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "default": "2.0"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "message/send"
+            ]
+          },
+          "params": {
+            "$ref": "#/components/schemas/MessageSendParams"
+          }
+        }
+      },
+      "MessageSendParams": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "configuration": {
+            "$ref": "#/components/schemas/MessageSendConfiguration"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "MessageSendConfiguration": {
+        "type": "object",
+        "properties": {
+          "acceptedOutputModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "historyLength": {
+            "type": "integer"
+          },
+          "blocking": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GetTaskJSONRPCRequest": {
+        "type": "object",
+        "required": [
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "default": "2.0"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "tasks/get"
+            ]
+          },
+          "params": {
+            "$ref": "#/components/schemas/TaskQueryRequest"
+          }
+        }
+      },
+      "TaskResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "default": "2.0"
+          },
+          "method": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Task"
+          },
+          "error": {
+            "$ref": "#/components/schemas/JSONRPCError"
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "contextId": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TaskStatus"
+          },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Artifact"
+            }
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "kind": {
+            "type": "string",
+            "default": "task"
+          },
+          "final": {
+            "type": "boolean",
+            "description": "Indicates whether the task update is the final update."
+          }
+        }
+      },
+      "TaskStatus": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/TaskState"
+          },
+          "message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "UTC timestamp string."
+          }
+        }
+      },
+      "TaskState": {
+        "type": "string",
+        "enum": [
+          "submitted",
+          "working",
+          "input-required",
+          "completed",
+          "canceled",
+          "failed",
+          "unknown"
+        ]
+      },
+      "Artifact": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPart"
+            }
+          },
+          "append": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "lastChunk": {
+            "type": "boolean"
+          }
+        }
+      },
+      "JSONRPCError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "JSON-RPC error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "JSON-RPC error message."
+          }
+        }
+      },
+      "SendMessageResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string",
+            "default": "2.0"
+          },
+          "method": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Task"
+          },
+          "error": {
+            "$ref": "#/components/schemas/JSONRPCError"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Short status code of the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error."
+          },
+          "userDetails": {
+            "type": "string",
+            "description": "Instructions or hint for user to action upon."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    }
+  ]
+}

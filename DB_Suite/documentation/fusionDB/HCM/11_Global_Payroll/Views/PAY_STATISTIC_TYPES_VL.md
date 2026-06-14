@@ -1,0 +1,43 @@
+# PAY_STATISTIC_TYPES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paystatistictypesvl-3381.html#paystatistictypesvl-3381](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paystatistictypesvl-3381.html#paystatistictypesvl-3381)
+
+## Columns
+
+- STATISTIC_TYPE_ID
+- BASE_STATISTIC_TYPE_ID
+- DISPLAY_FLAG
+- LEGISLATION_CODE
+- ENTERPRISE_ID
+- DISPLAY_STAT_NAME
+- OBJECT_VERSION_NUMBER
+- CATEGORY
+- SUB_CATEGORY
+- UOM
+- STATISTIC_TYPE_NAME
+- MODULE_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- NAME
+- SGUID
+
+## Query
+
+```sql
+SELECT b.STATISTIC_TYPE_ID, b.BASE_STATISTIC_TYPE_ID, b.DISPLAY_FLAG, b.LEGISLATION_CODE, b.ENTERPRISE_ID, b.DISPLAY_STAT_NAME, b.OBJECT_VERSION_NUMBER, b.CATEGORY, b.SUB_CATEGORY, b.UOM, b.STATISTIC_TYPE_NAME, b.MODULE_ID, b.CREATED_BY, b.CREATION_DATE, b.LAST_UPDATED_BY, b.LAST_UPDATE_DATE, b.LAST_UPDATE_LOGIN, tl.NAME, b.SGUID SGUID FROM PAY_STATISTIC_TYPES b, PAY_STATISTIC_TYPES_TL tl WHERE b.STATISTIC_TYPE_ID = tl.STATISTIC_TYPE_ID AND USERENV('LANG') = tl.LANGUAGE
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

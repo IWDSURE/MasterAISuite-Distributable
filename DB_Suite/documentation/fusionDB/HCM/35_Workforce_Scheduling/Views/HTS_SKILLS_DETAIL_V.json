@@ -1,0 +1,27 @@
+{
+  "name": "HTS_SKILLS_DETAIL_V",
+  "object_type": "VIEW",
+  "description": "",
+  "schema": "FUSION",
+  "owner": "HTS",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsskillsdetailv-8899.html#htsskillsdetailv-8899",
+  "columns": [
+    "SCHED_SKILL_ID",
+    "SCHED_SKILL_CODE",
+    "JOB_PROFILE_ID",
+    "JOB_PROFILE_TYPE",
+    "COMPETENCY_ID",
+    "COMPETENCY_NAME",
+    "JOB_PROFILE_NAME",
+    "SCHEDULING_GROUP_CODE",
+    "OBJECT_VERSION_NUMBER",
+    "ENTERPRISE_ID",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "LAST_UPDATED_BY",
+    "LAST_UPDATE_DATE",
+    "LAST_UPDATE_LOGIN"
+  ],
+  "query": "SELECT skill.sched_skill_id, skill.sched_skill_code, skill.job_profile_id, skill.job_profile_type, skill.competency_id, (CASE WHEN skill.competency_id IS NULL THEN NULL ELSE (SELECT competency.name FROM hrt_content_items_tl competency WHERE skill.competency_id = competency.content_item_id AND skill.enterprise_id = competency.business_group_id AND competency.language = USERENV('LANG') ) END ) AS COMPETENCY_NAME, (DECODE (skill.job_profile_type, 'ORA_JOB_FAMILY' , (SELECT jobfam.job_family_name FROM per_job_family_f_tl jobfam WHERE skill.job_profile_id = jobfam.job_family_id AND jobfam.language = userenv('LANG') AND trunc(sysdate) BETWEEN trunc(jobfam.effective_start_date) AND trunc(jobfam.effective_end_date)), 'ORA_JOB' , (SELECT jobdpeo.name FROM per_jobs_f_tl jobdpeo WHERE skill.job_profile_id = jobdpeo.job_id AND jobdpeo.language = userenv('LANG') AND trunc(sysdate) BETWEEN trunc(jobdpeo.effective_start_date) AND trunc(jobdpeo.effective_end_date)), 'ORA_POSITION' , (SELECT pos.name FROM hr_all_positions_f_tl pos WHERE skill.job_profile_id = pos.position_id AND pos.language = userenv('LANG') AND trunc(sysdate) BETWEEN trunc(pos.effective_start_date) AND trunc(pos.effective_end_date)), 'ORA_JOB_SCH_GROUP' , (SELECT lkp.meaning FROM fnd_lookup_values_tl lkp WHERE lkp.lookup_type = 'ORA_PER_SCHEDULING_GROUP' AND lkp.lookup_code = skill.SCHEDULING_GROUP_CODE AND lkp.language = USERENV('LANG')),NULL ) ) AS job_profile_name, skill.scheduling_group_code, skill.object_version_number, skill.enterprise_id, skill.created_by, skill.creation_date, skill.last_updated_by, skill.last_update_date, skill.last_update_login FROM hts_skills_b skill",
+  "_parsed_at": "2026-06-09T20:29:50"
+}

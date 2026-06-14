@@ -1,0 +1,29 @@
+# PAY_FLOW_TASK_INSTANCE_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtaskinstancev-7453.html#payflowtaskinstancev-7453](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payflowtaskinstancev-7453.html#payflowtaskinstancev-7453)
+
+## Columns
+
+- FLOW_TASK_INSTANCE_ID
+- CHECKLIST_NAME
+- UI_TASK_STATUS_CODE
+- UI_TASK_SUB_STATUS_CODE
+- FLOW_INSTANCE_ID
+
+## Query
+
+```sql
+SELECT pfti.flow_task_instance_id, ChecklistEO.checklist_name, pay_process_flow_utils.get_ui_status(pfti.flow_task_instance_id) AS UI_TASK_STATUS_CODE, pay_process_flow_utils.get_ui_sub_status(pfti.flow_task_instance_id) AS UI_TASK_SUB_STATUS_CODE, pfti.flow_instance_id FROM pay_flow_task_instances pfti,pay_checklist_instances pci, pay_checklists_vl ChecklistEO, pay_flow_instances pfi WHERE pfti.flow_task_instance_id= pci.flow_task_instance_id AND pci.base_checklist_id=ChecklistEO.base_checklist_id AND pfti.flow_instance_id=pfi.flow_instance_id AND ChecklistEO.checklist_id=ChecklistEO.base_checklist_id
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

@@ -1,0 +1,1471 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting CE Questions",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingCEQuestions": {
+      "get": {
+        "tags": [
+          "Recruiting CE Questions"
+        ],
+        "summary": "Get details of all questions",
+        "operationId": "getall_recruitingCEQuestions",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AttributeName; integer; Attribute Name in questions.</li><li>ConditionAnswerId; integer; ID assigned to the answer which entails an additional questionnaire.</li><li>ConditionDisplay; string; Indicates if an additional questionnaire is associated with the answer.</li><li>ConditionQstnVersionNumber; integer; Version number assigned to the additional questionnaire associated with the answer.</li><li>ConditionQuestionId; integer; ID assigned to the question which entails an additional questionnaire.</li><li>EventNumber; string; Event number associated with the question.</li><li>InstructionsText; string; Additional instructions for the question.</li><li>MaximumDate; string; Maximum date in questions.</li><li>MaximumLength; string; Maximum Length in questions.</li><li>MaximumSelections; integer; Maximum Selections in questions.</li><li>MinimumDate; string; Minimum date in questions.</li><li>MinimumLength; integer; Minimum Length in questions.</li><li>MinimumSelections; integer; Minimum Selections in questions.</li><li>Prompt; string; Prompt in questions.</li><li>QstnrVersionNumber; integer; Questionnaire version number.</li><li>QuestionnaireId; integer; Questionnaire ID.</li><li>RequiredFlag; boolean; Indicates if the question is required to be answered.</li><li>RequisitionNumber; string; Requisition number in questions.</li><li>Type; string; Type in questions.</li><li>UIDisplayType; string; UI display type in questions.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds details of the questionnaire row by a unique ID <br>Finder Variables <ul></ul></li><li>RowFinder Finds details of the questionnaire row <br>Finder Variables <ul><li>QstnrVersionNumber; integer;  Finds details of the questionnaire row by Questionnaire Version Number </li><li>QuestionnaireId; integer;  Finds details of the questionnaire row by Questionnaire ID </li><li>RequisitionNumber; string;  Finds details of the questionnaire row by RequisitionNumber; string;  </li></ul></li><li>RowFinderICE Finds details about the internal questionnaire row. <br>Finder Variables <ul><li>RequisitionNumber; string;  Requisition number used to find details about the internal questionnaire row. </li></ul></li><li>findByEvents Finds details of the questionnaire by event <br>Finder Variables <ul><li>EventNumber; string;  Event number used to find details of the questionnaire </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds details of the questionnaire row by a unique ID",
+                "properties": {}
+              },
+              {
+                "name": "RowFinder",
+                "description": "Finds details of the questionnaire row",
+                "title": "findByRequisitionNumberOrQuestionnaireId",
+                "properties": {
+                  "QstnrVersionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by Questionnaire Version Number",
+                    "type": "integer"
+                  },
+                  "QuestionnaireId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by Questionnaire ID",
+                    "type": "integer"
+                  },
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by RequisitionNumber",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "RowFinderICE",
+                "description": "Finds details about the internal questionnaire row.",
+                "title": "findByReqNumberForInternalJA",
+                "properties": {
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition number used to find details about the internal questionnaire row.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByEvents",
+                "description": "Finds details of the questionnaire by event",
+                "title": "findByEventNumber",
+                "properties": {
+                  "EventNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Event number used to find details of the questionnaire",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEQuestions"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEQuestions-get",
+        "x-filename-id": "recruitingcequestions-get"
+      }
+    },
+    "/recruitingCEQuestions/{recruitingCEQuestionsUniqID}": {
+      "get": {
+        "tags": [
+          "Recruiting CE Questions"
+        ],
+        "summary": "Get details of a question",
+        "operationId": "get_recruitingCEQuestions",
+        "parameters": [
+          {
+            "name": "recruitingCEQuestionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting CE Questions resource and used to uniquely identify an instance of Recruiting CE Questions. The client should not generate the hash key value. Instead, the client should query on the Recruiting CE Questions collection resource in order to navigate to a specific instance of Recruiting CE Questions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCEQuestions-item-response"
+                }
+              }
+            },
+            "links": {
+              "answers": {
+                "operationRef": "#/paths/~1recruitingCEQuestions~1{recruitingCEQuestionsUniqID}~1child~1answers/get",
+                "parameters": {
+                  "recruitingCEQuestionsUniqID": "$request.path.recruitingCEQuestionsUniqID"
+                },
+                "description": "The answers resource is a child of the recruitingJobSiteApplicationQuestions resource and provides details about the answers provided by the candidate to the prescreening questions being asked when they apply for a job. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCEQuestions-{recruitingCEQuestionsUniqID}-get",
+        "x-filename-id": "recruitingcequestions-recruitingcequestionsuniqid-get"
+      }
+    },
+    "/recruitingICEQuestions": {
+      "get": {
+        "tags": [
+          "Recruiting CE Questions"
+        ],
+        "summary": "Get details of all questions",
+        "operationId": "getall_recruitingICEQuestions",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AttributeName; integer; Attribute Name in questions.</li><li>ConditionAnswerId; integer; ID assigned to the answer which entails an additional questionnaire.</li><li>ConditionDisplay; string; Indicates if an additional questionnaire is associated with the answer.</li><li>ConditionQstnVersionNumber; integer; Version number assigned to the additional questionnaire associated with the answer.</li><li>ConditionQuestionId; integer; ID assigned to the question which entails an additional questionnaire.</li><li>EventNumber; string; Event number associated with the question.</li><li>InstructionsText; string; Additional instructions for the question.</li><li>MaximumDate; string; Maximum date in questions.</li><li>MaximumLength; string; Maximum Length in questions.</li><li>MaximumSelections; integer; Maximum Selections in questions.</li><li>MinimumDate; string; Minimum date in questions.</li><li>MinimumLength; integer; Minimum Length in questions.</li><li>MinimumSelections; integer; Minimum Selections in questions.</li><li>Prompt; string; Prompt in questions.</li><li>QstnrVersionNumber; integer; Questionnaire version number.</li><li>QuestionnaireId; integer; Questionnaire ID.</li><li>RequiredFlag; boolean; Indicates if the question is required to be answered.</li><li>RequisitionNumber; string; Requisition number in questions.</li><li>Type; string; Type in questions.</li><li>UIDisplayType; string; UI display type in questions.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds details of the questionnaire row by a unique ID <br>Finder Variables <ul></ul></li><li>RowFinder Finds details of the questionnaire row <br>Finder Variables <ul><li>QstnrVersionNumber; integer;  Finds details of the questionnaire row by Questionnaire Version Number </li><li>QuestionnaireId; integer;  Finds details of the questionnaire row by Questionnaire ID </li><li>RequisitionNumber; string;  Finds details of the questionnaire row by RequisitionNumber; string;  </li></ul></li><li>RowFinderICE Finds details about the internal questionnaire row. <br>Finder Variables <ul><li>RequisitionNumber; string;  Requisition number used to find details about the internal questionnaire row. </li></ul></li><li>findByEvents Finds details of the questionnaire by event <br>Finder Variables <ul><li>EventNumber; string;  Event number used to find details of the questionnaire </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds details of the questionnaire row by a unique ID",
+                "properties": {}
+              },
+              {
+                "name": "RowFinder",
+                "description": "Finds details of the questionnaire row",
+                "title": "findByRequisitionNumberOrQuestionnaireId",
+                "properties": {
+                  "QstnrVersionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by Questionnaire Version Number",
+                    "type": "integer"
+                  },
+                  "QuestionnaireId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by Questionnaire ID",
+                    "type": "integer"
+                  },
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds details of the questionnaire row by RequisitionNumber",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "RowFinderICE",
+                "description": "Finds details about the internal questionnaire row.",
+                "title": "findByReqNumberForInternalJA",
+                "properties": {
+                  "RequisitionNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Requisition number used to find details about the internal questionnaire row.",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "name": "findByEvents",
+                "description": "Finds details of the questionnaire by event",
+                "title": "findByEventNumber",
+                "properties": {
+                  "EventNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Event number used to find details of the questionnaire",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingICEQuestions"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingICEQuestions-get",
+        "x-filename-id": "recruitingicequestions-get"
+      }
+    },
+    "/recruitingICEQuestions/{recruitingICEQuestionsUniqID}": {
+      "get": {
+        "tags": [
+          "Recruiting CE Questions"
+        ],
+        "summary": "Get details of a question",
+        "operationId": "get_recruitingICEQuestions",
+        "parameters": [
+          {
+            "name": "recruitingICEQuestionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting CE Questions resource and used to uniquely identify an instance of Recruiting CE Questions. The client should not generate the hash key value. Instead, the client should query on the Recruiting CE Questions collection resource in order to navigate to a specific instance of Recruiting CE Questions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingICEQuestions-item-response"
+                }
+              }
+            },
+            "links": {
+              "answers": {
+                "operationRef": "#/paths/~1recruitingICEQuestions~1{recruitingICEQuestionsUniqID}~1child~1answers/get",
+                "parameters": {
+                  "recruitingICEQuestionsUniqID": "$request.path.recruitingICEQuestionsUniqID"
+                },
+                "description": "The answers resource is a child of the recruitingJobSiteApplicationQuestions resource and provides details about the answers provided by the candidate to the prescreening questions being asked when they apply for a job. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingICEQuestions-{recruitingICEQuestionsUniqID}-get",
+        "x-filename-id": "recruitingicequestions-recruitingicequestionsuniqid-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingCEQuestions": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEQuestions-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingCEQuestions-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "type": "integer",
+            "description": "Attribute Name in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionAnswerId": {
+            "type": "integer",
+            "description": "ID assigned to the answer which entails an additional questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionDisplay": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if an additional questionnaire is associated with the answer.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ConditionQstnVersionNumber": {
+            "type": "integer",
+            "description": "Version number assigned to the additional questionnaire associated with the answer.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionQuestionId": {
+            "type": "integer",
+            "description": "ID assigned to the question which entails an additional questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "type": "string",
+            "description": "Event number associated with the question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InstructionsText": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Additional instructions for the question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumDate": {
+            "type": "string",
+            "description": "Maximum date in questions.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumLength": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Maximum Length in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumSelections": {
+            "type": "integer",
+            "description": "Maximum Selections in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumDate": {
+            "type": "string",
+            "description": "Minimum date in questions.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MinimumLength": {
+            "type": "integer",
+            "description": "Minimum Length in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumSelections": {
+            "type": "integer",
+            "description": "Minimum Selections in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Prompt": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Prompt in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QstnrVersionNumber": {
+            "type": "integer",
+            "description": "Questionnaire version number.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QuestionnaireId": {
+            "type": "integer",
+            "description": "Questionnaire ID.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequiredFlag": {
+            "maxLength": 5,
+            "type": "boolean",
+            "description": "Indicates if the question is required to be answered.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Requisition number in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "maxLength": 6,
+            "type": "string",
+            "description": "Type in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "UIDisplayType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "UI display type in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "answers": {
+            "title": "Answers to the Questions",
+            "type": "array",
+            "description": "The answers resource is a child of the recruitingJobSiteApplicationQuestions resource and provides details about the answers provided by the candidate to the prescreening questions being asked when they apply for a job. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCEQuestions-answers-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCEQuestions-answers-item-response": {
+        "type": "object",
+        "properties": {
+          "LookupCode": {
+            "type": "integer",
+            "description": "Lookup code of the answers to a question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Meaning": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Meaning of the answer to a question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingICEQuestions": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingICEQuestions-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingICEQuestions-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "type": "integer",
+            "description": "Attribute Name in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionAnswerId": {
+            "type": "integer",
+            "description": "ID assigned to the answer which entails an additional questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionDisplay": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates if an additional questionnaire is associated with the answer.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ConditionQstnVersionNumber": {
+            "type": "integer",
+            "description": "Version number assigned to the additional questionnaire associated with the answer.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ConditionQuestionId": {
+            "type": "integer",
+            "description": "ID assigned to the question which entails an additional questionnaire.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "type": "string",
+            "description": "Event number associated with the question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InstructionsText": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Additional instructions for the question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumDate": {
+            "type": "string",
+            "description": "Maximum date in questions.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumLength": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Maximum Length in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumSelections": {
+            "type": "integer",
+            "description": "Maximum Selections in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumDate": {
+            "type": "string",
+            "description": "Minimum date in questions.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MinimumLength": {
+            "type": "integer",
+            "description": "Minimum Length in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MinimumSelections": {
+            "type": "integer",
+            "description": "Minimum Selections in questions.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Prompt": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Prompt in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "QstnrVersionNumber": {
+            "type": "integer",
+            "description": "Questionnaire version number.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QuestionnaireId": {
+            "type": "integer",
+            "description": "Questionnaire ID.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequiredFlag": {
+            "maxLength": 5,
+            "type": "boolean",
+            "description": "Indicates if the question is required to be answered.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "maxLength": 360,
+            "type": "string",
+            "description": "Requisition number in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "maxLength": 6,
+            "type": "string",
+            "description": "Type in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "UIDisplayType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "UI display type in questions.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "answers": {
+            "title": "Answers to the Questions",
+            "type": "array",
+            "description": "The answers resource is a child of the recruitingJobSiteApplicationQuestions resource and provides details about the answers provided by the candidate to the prescreening questions being asked when they apply for a job. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingICEQuestions-answers-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingICEQuestions-answers-item-response": {
+        "type": "object",
+        "properties": {
+          "LookupCode": {
+            "type": "integer",
+            "description": "Lookup code of the answers to a question.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Meaning": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Meaning of the answer to a question.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,792 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting Candidate Assessment Results/Packages of Recruiting Candidate Assessment Results",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingCandidateAssessmentResults/{recruitingCandidateAssessmentResultsUniqID}/child/packages/{packagesUniqID}": {
+      "get": {
+        "tags": [
+          "Recruiting Candidate Assessment Results/Packages of Recruiting Candidate Assessment Results"
+        ],
+        "summary": "GET action not supported",
+        "operationId": "get_recruitingCandidateAssessmentResults-packages",
+        "parameters": [
+          {
+            "name": "recruitingCandidateAssessmentResultsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PartnerId, RequisitionNumber and CandidateNumber ---for the Recruiting Candidate Assessment Results resource and used to uniquely identify an instance of Recruiting Candidate Assessment Results. The client should not generate the hash key value.  Instead, the client should query on the Recruiting Candidate Assessment Results collection resource with a filter on the primary key values in order to navigate to a specific instance of Recruiting Candidate Assessment Results.<br><br>For example: recruitingCandidateAssessmentResults?q=PartnerId=&lt;value1&gt;;RequisitionNumber=&lt;value2&gt;;CandidateNumber=&lt;value3&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "packagesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- TriggerType and PackageCode ---for the Packages of Recruiting Candidate Assessment Results resource and used to uniquely identify an instance of Packages of Recruiting Candidate Assessment Results. The client should not generate the hash key value.  Instead, the client should query on the Packages of Recruiting Candidate Assessment Results collection resource with a filter on the primary key values in order to navigate to a specific instance of Packages of Recruiting Candidate Assessment Results.<br><br>For example: packages?q=TriggerType=&lt;value1&gt;;PackageCode=&lt;value2&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-item-response"
+                }
+              }
+            },
+            "links": {
+              "AdditionalResultsAttributes": {
+                "operationRef": "#/paths/~1recruitingCandidateAssessmentResults~1{recruitingCandidateAssessmentResultsUniqID}~1child~1packages~1{packagesUniqID}~1child~1AdditionalResultsAttributes/get",
+                "parameters": {
+                  "packagesUniqID": "$request.path.packagesUniqID",
+                  "recruitingCandidateAssessmentResultsUniqID": "$request.path.recruitingCandidateAssessmentResultsUniqID"
+                },
+                "description": "The additionalResultsAttributes resource is a child of recruitingCandidateAssessmentResults. It includes additional details of the packages of recruiting candidate assessment results. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCandidateAssessmentResults-{recruitingCandidateAssessmentResultsUniqID}-child-packages-{packagesUniqID}-get",
+        "x-filename-id": "recruitingcandidateassessmentresults-recruitingcandidateassessmentresultsuniqid-child-packages-packagesuniqid-get"
+      }
+    },
+    "/recruitingCandidateAssessmentResults/{recruitingCandidateAssessmentResultsUniqID}/child/packages": {
+      "get": {
+        "tags": [
+          "Recruiting Candidate Assessment Results/Packages of Recruiting Candidate Assessment Results"
+        ],
+        "summary": "GET action not supported",
+        "operationId": "getall_recruitingCandidateAssessmentResults-packages",
+        "parameters": [
+          {
+            "name": "recruitingCandidateAssessmentResultsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PartnerId, RequisitionNumber and CandidateNumber ---for the Recruiting Candidate Assessment Results resource and used to uniquely identify an instance of Recruiting Candidate Assessment Results. The client should not generate the hash key value.  Instead, the client should query on the Recruiting Candidate Assessment Results collection resource with a filter on the primary key values in order to navigate to a specific instance of Recruiting Candidate Assessment Results.<br><br>For example: recruitingCandidateAssessmentResults?q=PartnerId=&lt;value1&gt;;RequisitionNumber=&lt;value2&gt;;CandidateNumber=&lt;value3&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Band; string; Band in packages of recruiting candidate assessment results.</li><li>PackageCode; string; Package code in packages of recruiting candidate assessment results.</li><li>Percentile; number; Percentile in packages of recruiting candidate assessment results.</li><li>Score; number; Score in packages of recruiting candidate assessment results.</li><li>StatusCode; string; Status code in packages of recruiting candidate assessment results.</li><li>StatusDescription; string; Status description in packages of recruiting candidate assessment results.</li><li>TriggerType; string; Trigger type in packages of recruiting candidate assessment results.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds packages in recruiting candidate assessment results using unique ID. <br>Finder Variables <ul><li>PackageCode; string;  Package code in packages of recruiting candidate assessment results. </li><li>TriggerType; string;  Trigger type in packages of recruiting candidate assessment results. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds packages in recruiting candidate assessment results using unique ID.",
+                "properties": {
+                  "TriggerType": {
+                    "nullable": true,
+                    "description": "Trigger type in packages of recruiting candidate assessment results.",
+                    "type": "string"
+                  },
+                  "PackageCode": {
+                    "nullable": true,
+                    "description": "Package code in packages of recruiting candidate assessment results.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCandidateAssessmentResults-{recruitingCandidateAssessmentResultsUniqID}-child-packages-get",
+        "x-filename-id": "recruitingcandidateassessmentresults-recruitingcandidateassessmentresultsuniqid-child-packages-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting Candidate Assessment Results/Packages of Recruiting Candidate Assessment Results"
+        ],
+        "summary": "Submit all packages of recruiting candidate assessment results",
+        "operationId": "create_recruitingCandidateAssessmentResults-packages",
+        "parameters": [
+          {
+            "name": "recruitingCandidateAssessmentResultsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key--- PartnerId, RequisitionNumber and CandidateNumber ---for the Recruiting Candidate Assessment Results resource and used to uniquely identify an instance of Recruiting Candidate Assessment Results. The client should not generate the hash key value.  Instead, the client should query on the Recruiting Candidate Assessment Results collection resource with a filter on the primary key values in order to navigate to a specific instance of Recruiting Candidate Assessment Results.<br><br>For example: recruitingCandidateAssessmentResults?q=PartnerId=&lt;value1&gt;;RequisitionNumber=&lt;value2&gt;;CandidateNumber=&lt;value3&gt;",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCandidateAssessmentResults-packages-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-item-response"
+                }
+              }
+            },
+            "links": {
+              "AdditionalResultsAttributes": {
+                "operationRef": "#/paths/~1recruitingCandidateAssessmentResults~1{recruitingCandidateAssessmentResultsUniqID}~1child~1packages~1{packagesUniqID}~1child~1AdditionalResultsAttributes/get",
+                "parameters": {
+                  "packagesUniqID": "$request.path.packagesUniqID",
+                  "recruitingCandidateAssessmentResultsUniqID": "$request.path.recruitingCandidateAssessmentResultsUniqID"
+                },
+                "description": "The additionalResultsAttributes resource is a child of recruitingCandidateAssessmentResults. It includes additional details of the packages of recruiting candidate assessment results. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCandidateAssessmentResults-{recruitingCandidateAssessmentResultsUniqID}-child-packages-post",
+        "x-filename-id": "recruitingcandidateassessmentresults-recruitingcandidateassessmentresultsuniqid-child-packages-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingCandidateAssessmentResults-packages-item-response": {
+        "type": "object",
+        "properties": {
+          "AdditionalResultsAttributes": {
+            "title": "Additional Candidate Assessment Results",
+            "type": "array",
+            "description": "The additionalResultsAttributes resource is a child of recruitingCandidateAssessmentResults. It includes additional details of the packages of recruiting candidate assessment results. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-AdditionalResultsAttributes-item-response"
+            }
+          },
+          "Band": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Band in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PackageCode": {
+            "type": "string",
+            "description": "Package code in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Percentile": {
+            "type": "number",
+            "description": "Percentile in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Score": {
+            "type": "number",
+            "description": "Score in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "type": "string",
+            "description": "Status code in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "StatusDescription": {
+            "type": "string",
+            "description": "Status description in packages of recruiting candidate assessment results.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TriggerType": {
+            "type": "string",
+            "description": "Trigger type in packages of recruiting candidate assessment results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCandidateAssessmentResults-packages-AdditionalResultsAttributes-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "type": "string",
+            "description": "Attribute name of recruiting candidate assessment additional results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AttributeValue": {
+            "type": "string",
+            "description": "Attribute value of recruiting candidate assessment additional results.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingCandidateAssessmentResults-packages": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "recruitingCandidateAssessmentResults-packages-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AdditionalResultsAttributes": {
+            "title": "Additional Candidate Assessment Results",
+            "type": "array",
+            "description": "The additionalResultsAttributes resource is a child of recruitingCandidateAssessmentResults. It includes additional details of the packages of recruiting candidate assessment results. Note that the service endpoints in this resource category can only be used by approved Oracle Cloud Marketplace partners.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-AdditionalResultsAttributes-item-post-request"
+            }
+          },
+          "Band": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Band in packages of recruiting candidate assessment results.",
+            "nullable": true
+          },
+          "PackageCode": {
+            "type": "string",
+            "description": "Package code in packages of recruiting candidate assessment results.",
+            "nullable": true
+          },
+          "Percentile": {
+            "type": "number",
+            "description": "Percentile in packages of recruiting candidate assessment results.",
+            "nullable": true
+          },
+          "Score": {
+            "type": "number",
+            "description": "Score in packages of recruiting candidate assessment results.",
+            "nullable": true
+          },
+          "StatusCode": {
+            "type": "string",
+            "description": "Status code in packages of recruiting candidate assessment results.",
+            "nullable": true
+          },
+          "StatusDescription": {
+            "type": "string",
+            "description": "Status description in packages of recruiting candidate assessment results.",
+            "format": "byte",
+            "nullable": true
+          },
+          "TriggerType": {
+            "type": "string",
+            "description": "Trigger type in packages of recruiting candidate assessment results.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCandidateAssessmentResults-packages-AdditionalResultsAttributes-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AttributeName": {
+            "type": "string",
+            "description": "Attribute name of recruiting candidate assessment additional results.",
+            "nullable": true
+          },
+          "AttributeValue": {
+            "type": "string",
+            "description": "Attribute value of recruiting candidate assessment additional results.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingCandidateAssessmentResults-packages-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCandidateAssessmentResults-packages-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

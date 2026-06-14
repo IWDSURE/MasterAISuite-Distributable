@@ -1,0 +1,278 @@
+{
+  "name": "PER_LDAP_USERS",
+  "object_type": "TABLE",
+  "description": "Table for storing one record for each user to be processed in OIM when creating new users or maintaining user details (including username and preferred language)",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perldapusers-23300.html#perldapusers-23300",
+  "primary_keys": [
+    {
+      "name": "PER_LDAP_USERS_PK",
+      "columns": "LDAP_USER_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "LDAP_USER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Mandatory primary key updatable while new key generation"
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "LDAP_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to LDAP request. Mandatory. Updatable while new mandatory FK association."
+    },
+    {
+      "Name": "REQUEST_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The type of request to perform: CREATE, UPDATE, SUSPEND, ACTIVATE"
+    },
+    {
+      "Name": "REQUEST_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The current status of the user portion of the request: REQUEST, IN PROGRESS, COMPLETE"
+    },
+    {
+      "Name": "USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The user Guid of the user the request is for (if available)"
+    },
+    {
+      "Name": "USERNAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The username of the user the request is for (if not auto generated)"
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "REQUESTOR_USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The user Guid of the user who is making the LDAP request (if available)"
+    },
+    {
+      "Name": "PREFERRED_LANGUAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The preferred language of the user the request is for. Default taken if not provided."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SEND_CREDENTIALS_EMAIL",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates whether credential emails will be sent for the user"
+    },
+    {
+      "Name": "CREDENTIALS_EMAIL_ADDRESS",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Set this column If you want to send the credentials email to another email address"
+    },
+    {
+      "Name": "EXTERNAL_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EXTERNAL_ID"
+    },
+    {
+      "Name": "ATOMPUB_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ATOMPUB_ID"
+    },
+    {
+      "Name": "LAST_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "LAST_NAME"
+    },
+    {
+      "Name": "FIRST_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "FIRST_NAME"
+    },
+    {
+      "Name": "EMAIL",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EMAIL"
+    },
+    {
+      "Name": "COMMONNAME",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "COMMONNAME"
+    },
+    {
+      "Name": "USER_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "USER_CATEGORY"
+    },
+    {
+      "Name": "TWO_FACTOR_AUTH",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "TWO_FACTOR_AUTH"
+    },
+    {
+      "Name": "MFA_PHONE",
+      "Datatype": "VARCHAR2",
+      "Length": "150",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "MFA_PHONE"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_LDAP_USERS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_USERS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_USERS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "USER_GUID"
+    },
+    {
+      "Index": "PER_LDAP_USERS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPPER(\"USERNAME\")"
+    },
+    {
+      "Index": "PER_LDAP_USERS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "USERNAME"
+    },
+    {
+      "Index": "PER_LDAP_USERS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUEST_STATUS, REQUEST_TYPE, LDAP_REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_USERS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_USER_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:36:51"
+}

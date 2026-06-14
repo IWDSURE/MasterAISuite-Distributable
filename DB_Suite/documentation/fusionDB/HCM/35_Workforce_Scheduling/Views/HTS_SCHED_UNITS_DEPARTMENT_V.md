@@ -1,0 +1,42 @@
+# HTS_SCHED_UNITS_DEPARTMENT_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedunitsdepartmentv-5091.html#htsschedunitsdepartmentv-5091](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedunitsdepartmentv-5091.html#htsschedunitsdepartmentv-5091)
+
+## Columns
+
+- SCHED_UNIT_ID
+- SCHED_UNIT_CODE
+- MEMBER_TYPE
+- MEMBER_ID
+- ORGANIZATION_ID
+- DEPARTMENT_NAME
+- DEPARTMENT_STATUS
+- LOCATION_ID
+- LOCATION_CODE
+- LOCATION_NAME
+- JOB_PROFILE_TYPE_CODE
+- ENTERPRISE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT su.sched_unit_id, su.sched_unit_code, su.member_type, su.member_id, dept.organization_id, dept.name department_name, dept.status department_status, su.location_id, locn.location_code, locn.location_name, ( CASE WHEN sched_unit_id in (WITH DATA AS ( select substr(REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_POSITION=<<(.*?)>>',1),38, ( length (REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_POSITION=<<(.*?)>>',1)) - 39) ) position_unit_list from FND_PROFILE_OPTION_values pv, FND_PROFILE_OPTIONS_B po where po.profile_option_Id = pv.profile_option_Id and profile_option_name = 'ORA_HWM_INTERNAL_TEST_FLAGS' ) SELECT trim(regexp_substr(position_unit_list, '[^,]+', 1, LEVEL)) position_unit_list FROM DATA CONNECT BY instr(position_unit_list, ',', 1, LEVEL - 1) > 0 ) then 'ORA_POSITION' WHEN sched_unit_id in (WITH DATA AS ( select substr(REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_JOB=<<(.*?)>>',1),33, (length (REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_JOB=<<(.*?)>>',1)) - 34) ) JOB_UNIT_LIST from FND_PROFILE_OPTION_values pv, FND_PROFILE_OPTIONS_B po where po.profile_option_Id = pv.profile_option_Id and profile_option_name = 'ORA_HWM_INTERNAL_TEST_FLAGS' ) SELECT trim(regexp_substr(JOB_UNIT_LIST, '[^,]+', 1, LEVEL)) JOB_UNIT_LIST FROM DATA CONNECT BY instr(JOB_UNIT_LIST, ',', 1, LEVEL - 1) > 0 ) then 'ORA_JOB' WHEN sched_unit_id in (WITH DATA AS ( select substr(REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_FAMILY=<<(.*?)>>',1),36, (length (REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_FAMILY=<<(.*?)>>',1)) - 37) ) FAMILY_UNIT_LIST from FND_PROFILE_OPTION_values pv, FND_PROFILE_OPTIONS_B po where po.profile_option_Id = pv.profile_option_Id and profile_option_name = 'ORA_HWM_INTERNAL_TEST_FLAGS' ) SELECT trim(regexp_substr(FAMILY_UNIT_LIST, '[^,]+', 1, LEVEL)) FAMILY_UNIT_LIST FROM DATA CONNECT BY instr(FAMILY_UNIT_LIST, ',', 1, LEVEL - 1) > 0 ) then 'ORA_JOB_FAMILY' WHEN sched_unit_id in (WITH DATA AS ( select substr(REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_GROUP=<<(.*?)>>',1),35, (length (REGEXP_SUBSTR ( pv.profile_option_value ,'HTS_OVERRIDE_PROFILE_TYPE_GROUP=<<(.*?)>>',1)) - 36) ) TYPE_GROUP_LIST from FND_PROFILE_OPTION_values pv, FND_PROFILE_OPTIONS_B po where po.profile_option_Id = pv.profile_option_Id and profile_option_name = 'ORA_HWM_INTERNAL_TEST_FLAGS' ) SELECT trim(regexp_substr(TYPE_GROUP_LIST, '[^,]+', 1, LEVEL)) TYPE_GROUP_LIST FROM DATA CONNECT BY instr(TYPE_GROUP_LIST, ',', 1, LEVEL - 1) > 0 ) then 'ORA_JOB_SCH_GROUP' WHEN nvl(gs.value_text, 'ORA_JOB') = 'ORA_JOB' THEN 'ORA_JOB' WHEN nvl(gs.value_text, 'NONE') = 'ORA_POSITION' THEN 'ORA_POSITION' WHEN nvl(gs.value_text, 'NONE') = 'ORA_JOB_FAMILY' THEN 'ORA_JOB_FAMILY' WHEN nvl(gs.value_text, 'NONE') = 'ORA_JOB_SCH_GROUP' THEN 'ORA_JOB_SCH_GROUP' ELSE NULL END ) job_profile_type_code, su.enterprise_id, su.object_version_number, su.created_by, su.creation_date, su.last_updated_by, su.last_update_date, su.last_update_login FROM hts_sched_units su, hts_global_setups_b gs, per_departments dept, per_location_details_f_vl locn WHERE su.member_type = 'ORA_HTS_MBR_TYPE_DEPARTMENT' AND gs.parameter_code = 'SKILL_TYPE' AND su.member_id = dept.organization_id AND su.enterprise_id = dept.business_group_id AND ( trunc(sysdate) BETWEEN dept.effective_start_date AND dept.effective_end_date ) AND ( trunc(sysdate) BETWEEN locn.effective_start_date (+) AND locn.effective_end_date (+) ) AND su.location_id = locn.location_id(+)
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

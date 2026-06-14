@@ -1,0 +1,118 @@
+{
+  "name": "IRC_CONVERSATION_PARTICIPANTS",
+  "object_type": "TABLE",
+  "description": "This table stores the participants of a conversation between recruiters & hiring managers and the candidate on an interaction. Different participants can span different email messages, so this table stores all of the individuals who are part of the entire conversation on an interaction.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircconversationparticipants-20591.html#ircconversationparticipants-20591",
+  "primary_keys": [
+    {
+      "name": "IRC_CONV_PARTICIPANTS_PK",
+      "columns": "CONVERSATION_PARTICIPANT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CONVERSATION_PARTICIPANT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for IRC_CONVERSATION_PARTICIPANTS table."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key into PER_PERSONS. PersonId for the candidate or recruiter/ hiring manager that is part of the conversation."
+    },
+    {
+      "Name": "INTERACTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key into IRC_INTERACTIONS. Unique identifier for the interaction (and thus conversation) that is taking place. Filtering by this column will give us the participants/persons that are part of a conversation."
+    },
+    {
+      "Name": "IS_CANDIDATE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indicates whether this person is the candidate in the conversation."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CONV_PARTICIPANTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID"
+    },
+    {
+      "Index": "IRC_CONV_PARTICIPANTS_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "INTERACTION_ID"
+    },
+    {
+      "Index": "IRC_CONV_PARTICIPANTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CONVERSATION_PARTICIPANT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:47:42"
+}

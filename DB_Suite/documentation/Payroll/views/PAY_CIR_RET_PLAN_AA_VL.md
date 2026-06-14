@@ -1,0 +1,31 @@
+# PAY_CIR_RET_PLAN_AA_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycirretplanaavl-3366.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycirretplanaavl-3366.html)
+
+## Columns
+
+- ASSOCIATION_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- RETIREMENT_PLAN_INSTANCE_ID
+- ASSOCIATED_ASSIGNMENT
+- ASSOCIATED_ASSIGNMENT_ID
+- RELATIONSHIP_GROUP_ID
+
+## Query
+
+```sql
+SELECT pdrcu.DIR_REP_CARD_ID ASSOCIATION_ID, pdrc.EFFECTIVE_START_DATE, pdrc.EFFECTIVE_END_DATE, pdcc.DIR_CARD_COMP_ID RETIREMENT_PLAN_INSTANCE_ID, asg.ASSIGNMENT_NUMBER ASSOCIATED_ASSIGNMENT, asg.ASSIGNMENT_ID ASSOCIATED_ASSIGNMENT_ID , asg.RELATIONSHIP_GROUP_ID FROM PAY_DIR_REP_CARD_USAGES_F pdrcu, PAY_DIR_REP_CARDS_F pdrc, PAY_DIR_CARD_COMPONENTS_F pdcc, PAY_DIR_CARD_COMP_DEFS_F pdccd, PAY_REL_GROUPS_DN asg WHERE pdrcu.DIR_REP_CARD_ID = pdrc.DIR_REP_CARD_ID AND pdrcu.DIR_CARD_COMP_ID = pdcc.DIR_CARD_COMP_ID AND asg.RELATIONSHIP_GROUP_ID = pdrcu.RELATIONSHIP_GROUP_ID AND asg.GROUP_TYPE = 'A' AND pdccd.DIR_CARD_COMP_DEF_ID = pdcc.DIR_CARD_COMP_DEF_ID
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

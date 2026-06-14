@@ -1,0 +1,224 @@
+{
+  "name": "PER_LDAP_REQUESTS",
+  "object_type": "TABLE",
+  "description": "Table for storing one record per OIM request made by the calling system.",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perldaprequests-14222.html#perldaprequests-14222",
+  "primary_keys": [
+    {
+      "name": "PER_LDAP_REQUESTS_PK",
+      "columns": "LDAP_REQUEST_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "LDAP_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Mandatory Primary Key Updatable While New Key Generation"
+    },
+    {
+      "Name": "ACTIVE_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Flag to identify if the request is active and therefore either due to be processed or in progress within the SOA composite"
+    },
+    {
+      "Name": "REQUESTING_PRODUCT",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The product performing the LDAP requesting (HCM or TCA)"
+    },
+    {
+      "Name": "REQUESTING_REFERENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The Person Id of the requesting product is HCM. The Party Id if the requesting product is TCA"
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "REQUESTOR_USER_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The user Guid of the user who is making the LDAP request (if available)"
+    },
+    {
+      "Name": "REQUEST_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The current status of the request: REQUEST, IN PROGRESS, COMPLETE, PART-COMPLETE"
+    },
+    {
+      "Name": "ACTION_OCCURRENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_ACTION_OCCURRENCES."
+    },
+    {
+      "Name": "REQUEST_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The date that the request should be or was processed."
+    },
+    {
+      "Name": "LDAP_POLICY_FILE",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The name of the policy file that should be used to process this request"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "ERROR_DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Displayed error that comes back from OIM"
+    },
+    {
+      "Name": "ERROR_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "230",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error code that corresponds to MESSAGE_NAME attribute from the FND_MESSAGES table"
+    },
+    {
+      "Name": "SOD_ERROR_DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Segregation of duties error description"
+    },
+    {
+      "Name": "REQUESTING_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "REQUESTING_SOURCE- INTERNAL or EXTERNAL"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_LDAP_REQUESTS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUESTING_REFERENCE_ID"
+    },
+    {
+      "Index": "PER_LDAP_REQUESTS_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_REQUESTS_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ACTION_OCCURRENCE_ID"
+    },
+    {
+      "Index": "PER_LDAP_REQUESTS_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_REQUEST_ID, REQUEST_STATUS, LDAP_POLICY_FILE"
+    },
+    {
+      "Index": "PER_LDAP_REQUESTS_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "REQUEST_STATUS"
+    },
+    {
+      "Index": "PER_LDAP_REQUESTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_REQUEST_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:36:40"
+}

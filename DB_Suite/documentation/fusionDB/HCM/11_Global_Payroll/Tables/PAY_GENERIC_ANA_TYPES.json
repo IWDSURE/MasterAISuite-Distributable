@@ -1,0 +1,182 @@
+{
+  "name": "PAY_GENERIC_ANA_TYPES",
+  "object_type": "TABLE",
+  "description": "This table contains pay generic ANALYTICS type.",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paygenericanatypes-25641.html#paygenericanatypes-25641",
+  "primary_keys": [
+    {
+      "name": "PAY_GENERIC_ANA_TYPES_PK",
+      "columns": "PAY_GEN_ANA_TYPE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "PAY_GEN_ANA_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "PAY_GEN_ANA_TYPE_ID, Unique Id for pay generic analytics type"
+    },
+    {
+      "Name": "BASE_GEN_ANA_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "128",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Base Generic Analytics Type. Unique Code"
+    },
+    {
+      "Name": "ANALYTICS_CATEGORY",
+      "Datatype": "VARCHAR2",
+      "Length": "128",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "ANALYTICS_CATEGORY, default is Data Collection. Can be Validation"
+    },
+    {
+      "Name": "LEGISLATIVE_DATA_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Legislative Data Group Id. Foreign key to PER_LEGISLATIVE_DATA_GROUPS_vl table."
+    },
+    {
+      "Name": "LEGISLATION_CODE",
+      "Datatype": "VARCHAR2",
+      "Length": "10",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Legislation Code. Identify legislation code."
+    },
+    {
+      "Name": "METHOD_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "METHOD_TYPE: JAVA or PLSQL. Execution Method."
+    },
+    {
+      "Name": "METHOD",
+      "Datatype": "VARCHAR2",
+      "Length": "128",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Method name. Java or PLSQL name will be used at runtime."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to PER_ENTERPRISES."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_GENERIC_ANA_TYPES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "BASE_GEN_ANA_TYPE, LEGISLATION_CODE"
+    },
+    {
+      "Index": "PAY_GENERIC_ANA_TYPES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PAY_GEN_ANA_TYPE_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "PAY_GENERIC_ANA_TYPES_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PAY_GEN_ANA_TYPE_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:07:38"
+}

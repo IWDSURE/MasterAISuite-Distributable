@@ -1,0 +1,33 @@
+# WLF_CLASS_WITH_DUEDATE_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** WLF
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfclasswithduedatev-5150.html#wlfclasswithduedatev-5150](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/wlfclasswithduedatev-5150.html#wlfclasswithduedatev-5150)
+
+## Columns
+
+- CLASS_ASSIGNMENT_REC_ID
+- CLASS_DUE_DATE
+- CLASS_EFFECTIVE_START_DATE
+- CLASS_EFFECTIVE_END_DATE
+- COURSE_ASSIGNMENT_RECORD_ID
+- COURSE_EFFECTIVE_START_DATE
+- COURSE_EFFECTIVE_END_DATE
+- COURSE_DUE_DATE
+- RELATION_ID
+
+## Query
+
+```sql
+SELECT class_arec.assignment_record_id class_assignment_rec_id, class_arec.calculated_due_date class_due_date, class_arec.effective_start_date class_effective_start_date, class_arec.effective_end_date class_effective_end_date, course_arec.assignment_record_id course_assignment_record_id, course_arec.effective_start_date course_effective_start_date, course_arec.effective_end_date course_effective_end_date, course_arec.calculated_due_date course_due_date, ar.relation_id FROM wlf_ar_relations_f ar INNER JOIN wlf_assignment_records_f class_arec ON class_arec.assignment_record_id = ar.assignment_record_id AND trunc(SYSDATE) BETWEEN class_arec.effective_start_date AND class_arec.effective_end_date AND class_arec.calculated_due_date IS NOT NULL INNER JOIN wlf_assignment_records_f course_arec ON course_arec.assignment_record_id = ar.related_object_id AND trunc(SYSDATE) BETWEEN course_arec.effective_start_date AND course_arec.effective_end_date WHERE ar.relation_type = 'ORA_OFFERING_COURSE' AND ar.related_object_type = 'ORA_COURSE' AND trunc(SYSDATE) BETWEEN ar.effective_start_date AND ar.effective_end_date ORDER BY ar.assignment_record_id
+```
+
+---
+
+[← Back to Index](../28_Work_Life_Views_Index.md)

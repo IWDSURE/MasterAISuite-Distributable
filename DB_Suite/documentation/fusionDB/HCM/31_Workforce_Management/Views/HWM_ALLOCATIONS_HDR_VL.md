@@ -1,0 +1,38 @@
+# HWM_ALLOCATIONS_HDR_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWM
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmallocationshdrvl-8231.html#hwmallocationshdrvl-8231](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmallocationshdrvl-8231.html#hwmallocationshdrvl-8231)
+
+## Columns
+
+- ALLOCATION_ID
+- EFFECTIVE_START_DATE
+- EFFECTIVE_END_DATE
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- ALLOCATION_NAME
+- DESCRIPTION
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- DATA_LEVEL
+- MODULE_ID
+
+## Query
+
+```sql
+SELECT TAH.ALLOCATION_ID ,TAH.EFFECTIVE_START_DATE ,TAH.EFFECTIVE_END_DATE ,TAH.OBJECT_VERSION_NUMBER ,TAH.ENTERPRISE_ID ,TAH.ALLOCATION_NAME ,TAL.DESCRIPTION ,TAH.CREATED_BY ,TAH.CREATION_DATE ,TAH.LAST_UPDATED_BY ,TAH.LAST_UPDATE_DATE ,TAH.LAST_UPDATE_LOGIN ,TAH.DATA_LEVEL ,TAH.MODULE_ID FROM HWM_ALLOCATIONS_HDR_F TAH, HWM_ALLOCATIONS_HDR_TL TAL WHERE TAH.ALLOCATION_ID = TAL.ALLOCATION_ID AND TAL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../31_Workforce_Management_Views_Index.md)

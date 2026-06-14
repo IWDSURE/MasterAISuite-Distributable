@@ -1,0 +1,38 @@
+# IRC_MP_SITE_CONFIG_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmpsiteconfigvl-5970.html#ircmpsiteconfigvl-5970](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircmpsiteconfigvl-5970.html#ircmpsiteconfigvl-5970)
+
+## Columns
+
+- SITE_CONFIG_ID
+- SITE_CODE
+- SITE_TYPE
+- SITE_NAME
+- ELIGIBILITY_OBJECT_ID
+- ELIGIBILITY_PROFILE_ID
+- STATUS_CODE
+- OBJECT_VERSION_NUMBER
+- SEQUENCE_ORDER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.SITE_CONFIG_ID, B.SITE_CODE, B.SITE_TYPE, TL.SITE_NAME, B.ELIGIBILITY_OBJECT_ID, B.ELIGIBILITY_PROFILE_ID, B.STATUS_CODE, B.OBJECT_VERSION_NUMBER, B.SEQUENCE_ORDER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM IRC_MP_SITE_CONFIG_B B, IRC_MP_SITE_CONFIG_TL TL WHERE B.SITE_CONFIG_ID = TL.SITE_CONFIG_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

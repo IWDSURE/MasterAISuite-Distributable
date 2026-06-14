@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Common Features in Oracle Fusion Cloud Applications - User Requests",
+    "description": "<div><span style=\"color: #c74634\">Last Updated January 2026</span><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start how-to that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST resource.</li></ul><p>Some REST resources have more than one version. In the Tasks section, when you expand a resource that has more than one version, you'll notice that the main folder contains subfolders, such as 11.13.18.05 and v1 (latest), corresponding to the available resource versions. Resources that don't have a newer version continue to appear without any change in their folder structure. You can find additional details on how to work with the different resource versions in the Quick Start and other topics in the Get Started section.</p></div>",
+    "version": "2026.01.21",
+    "termsOfService": "https://www.oracle.com/legal/terms.html",
+    "contact": {
+      "email": "xxxx@oracle.com"
+    },
+    "license": {
+      "name": "Copyright (c) 2022, Oracle and/or its affiliates.",
+      "url": "https://www.oracle.com/legal/copyright.html"
+    },
+    "x-framework": {
+      "name": "Oracle-BOSS-BO",
+      "version": "1"
+    },
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud Applications."
+  },
+  "servers": [],
+  "paths": {
+    "/hcmRestApi/atomservlet/user/userRequests": {
+      "get": {
+        "tags": [
+          "User Requests"
+        ],
+        "description": "Get all user requests",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "This parameter specifies the query expression to retrieve a subset of resource instances. Format: ?filter=<scim-filter>",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "description": "This parameter specifies use of 1-based index for the first result included in the response. Specify this query parameter to use pagination.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "The number of resource instances returned in the current range.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "This parameter specifies the attributes based on which the resource collection is sorted.Format:  ?sortBy=<scim-attribute> where the attribute name must be of the format <attribute> for simple attributes and <attribute.subattribute> for complex attributes.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "This parameter specifies the attributes based on which the resource collection is ordered.Example: sortOrder=ascending",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "description": "This parameter specifies a comma-separated list of attribute values to be included in the response.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User Requests"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all user requests",
+        "x-internal-id": "hcmRestApi-atomservlet-user-userRequests-get",
+        "x-filename-id": "hcmrestapi-atomservlet-user-userrequests-get"
+      }
+    },
+    "/hcmRestApi/atomservlet/user/userRequests/{id}": {
+      "get": {
+        "tags": [
+          "User Requests"
+        ],
+        "description": "Get a user request",
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the user.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRequest-item"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a user request",
+        "x-internal-id": "hcmRestApi-atomservlet-user-userRequests-{id}-get",
+        "x-filename-id": "hcmrestapi-atomservlet-user-userrequests-id-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User Requests": {
+        "type": "object",
+        "properties": {
+          "itemsPerPage": {
+            "title": "Count",
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "startIndex": {
+            "title": "start index",
+            "type": "integer",
+            "description": "This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20."
+          },
+          "Resources": {
+            "title": "Resources",
+            "type": "array",
+            "description": "The user request resources in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/UserRequest-item"
+            }
+          }
+        }
+      },
+      "UserRequest-item": {
+        "type": "object",
+        "properties": {
+          "userRequestType": {
+            "title": "UserRequestType",
+            "type": "string",
+            "description": "The action code of the user request. For example, to create, update, activate, disable, or delete a user."
+          },
+          "addresses": {
+            "title": "Addresses",
+            "type": "object",
+            "properties": {},
+            "description": "The address information of the user."
+          },
+          "employeeNumber": {
+            "title": "EmployeeNumber",
+            "type": "string",
+            "description": "A unique employee number for the user's account in Oracle Fusion Cloud Applications."
+          },
+          "manager": {
+            "title": "Manager",
+            "type": "object",
+            "properties": {},
+            "description": "The details of the user's manager."
+          },
+          "phoneNumbers": {
+            "title": "PhoneNumbers",
+            "type": "object",
+            "properties": {},
+            "description": "The user's phone number information."
+          },
+          "userType": {
+            "title": "UserType",
+            "type": "string",
+            "description": "Worker type of the user that identifies the organization-user relationship."
+          },
+          "user": {
+            "title": "User",
+            "type": "object",
+            "properties": {},
+            "description": "The user information in Oracle Fusion Cloud Applications."
+          }
+        }
+      }
+    },
+    "headers": {},
+    "requestBodies": {},
+    "securitySchemes": {
+      "audit_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "in": "header",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

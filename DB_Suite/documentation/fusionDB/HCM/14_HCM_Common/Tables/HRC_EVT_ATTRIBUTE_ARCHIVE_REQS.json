@@ -1,0 +1,192 @@
+{
+  "name": "HRC_EVT_ATTRIBUTE_ARCHIVE_REQS",
+  "object_type": "TABLE",
+  "description": "An Archive Attribute identifies that a particular entity object attribute or PLSQL row handler column should be stored in the Source Object Change tables. There is the option to always store the column/attribute value regardless of whether the value changed or to only store it when its value changes. In addition it is possible to indicate whether both Old and New values are required.\nN.B. If no archive attribute records are created, then a detected event will still be stored in the Source Object Change tables, however there will be no attribute data stored The data that will be stored in this case will be the primary key data and, in the case of date effective change, the date ranges over which the changes took place.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcevtattributearchivereqs-31194.html#hrcevtattributearchivereqs-31194",
+  "primary_keys": [
+    {
+      "name": "HRC_EVT_ATTR_ARCH_REQS_PK",
+      "columns": "ATTRIBUTE_ARCHIVE_REQ_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ATTRIBUTE_ARCHIVE_REQ_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique Identifier"
+    },
+    {
+      "Name": "EVENT_TYPE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Event Type"
+    },
+    {
+      "Name": "SOURCE_OBJECT_ATTRIBUTE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Source Object Attribute"
+    },
+    {
+      "Name": "CHANGED_ALWAYS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indication of whether the value should always be stored or only when changed. Values must be either \"ALWAYS\" or \"CHANGED\""
+    },
+    {
+      "Name": "OLD_VALUE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indication of whether the Old Value should be stored"
+    },
+    {
+      "Name": "NEW_VALUE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indication of whether the New Value should be stored"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only."
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file."
+    },
+    {
+      "Name": "ORA_SEED_SET1",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N."
+    },
+    {
+      "Name": "ORA_SEED_SET2",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_EVT_ATTRIBUTE_ARCHIVE_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID"
+    },
+    {
+      "Index": "HRC_EVT_ATTR_ARCH_REQS_F2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "SOURCE_OBJECT_ATTRIBUTE_ID"
+    },
+    {
+      "Index": "HRC_EVT_ATTR_ARCH_REQS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ATTRIBUTE_ARCHIVE_REQ_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_EVT_ATTR_ARCH_REQS_PK1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ATTRIBUTE_ARCHIVE_REQ_ID, ORA_SEED_SET2"
+    },
+    {
+      "Index": "HRC_EVT_ATTR_ARCH_REQS_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_TYPE_ID, SOURCE_OBJECT_ATTRIBUTE_ID, ORA_SEED_SET1"
+    },
+    {
+      "Index": "HRC_EVT_ATTR_ARCH_REQS_U11",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "EVENT_TYPE_ID, SOURCE_OBJECT_ATTRIBUTE_ID, ORA_SEED_SET2"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:42:24"
+}

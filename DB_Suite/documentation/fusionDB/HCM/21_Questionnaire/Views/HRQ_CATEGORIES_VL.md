@@ -1,0 +1,38 @@
+# HRQ_CATEGORIES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRQ
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqcategoriesvl-3975.html#hrqcategoriesvl-3975](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqcategoriesvl-3975.html#hrqcategoriesvl-3975)
+
+## Columns
+
+- BUSINESS_GROUP_ID
+- CATEGORY_ID
+- NAME
+- PARENT_CATEGORY_ID
+- SUBSCRIBER_ID
+- CONTAIN_QUESTIONS
+- CONTAIN_QUESTIONNAIRES
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.BUSINESS_GROUP_ID, B.CATEGORY_ID, L.NAME, B.PARENT_CATEGORY_ID, B.SUBSCRIBER_ID, B.CONTAIN_QUESTIONS, B.CONTAIN_QUESTIONNAIRES, B.MODULE_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HRQ_CATEGORIES_B B, HRQ_CATEGORIES_TL L WHERE B.BUSINESS_GROUP_ID = L.BUSINESS_GROUP_ID AND B.CATEGORY_ID = L.CATEGORY_ID AND L.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../21_Questionnaire_Views_Index.md)

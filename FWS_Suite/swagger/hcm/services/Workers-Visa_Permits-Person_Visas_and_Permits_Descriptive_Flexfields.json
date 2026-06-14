@@ -1,0 +1,1200 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Workers/Visa Permits/Person Visas and Permits Descriptive Flexfields",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/workers/{workersUniqID}/child/visasPermits/{visasPermitsUniqID}/child/visasPermitsDFF/{visasPermitsDFFUniqID}": {
+      "get": {
+        "tags": [
+          "Workers/Visa Permits/Person Visas and Permits Descriptive Flexfields"
+        ],
+        "summary": "Get a person visa and permit descriptive flexfield",
+        "operationId": "get_workers-visasPermits-visasPermitsDFF",
+        "parameters": [
+          {
+            "name": "workersUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Workers resource and used to uniquely identify an instance of Workers. The client should not generate the hash key value. Instead, the client should query on the Workers collection resource in order to navigate to a specific instance of Workers to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Visa Permits resource and used to uniquely identify an instance of Visa Permits. The client should not generate the hash key value. Instead, the client should query on the Visa Permits collection resource in order to navigate to a specific instance of Visa Permits to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsDFFUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-response"
+                }
+              }
+            },
+            "links": {
+              "LVVO___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "fieldMap": {
+                    "$this#/__FLEX_Context_DisplayValue": "Name"
+                  },
+                  "itemsPath": "items",
+                  "valueField": "ContextCode",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "LVVO_V___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context_DisplayValue",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "FlexFndDffDescriptiveFlexfieldContexts.ContextCode": [
+                      "__FLEX_Context"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name",
+                    "Description"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workers-{workersUniqID}-child-visasPermits-{visasPermitsUniqID}-child-visasPermitsDFF-{visasPermitsDFFUniqID}-get",
+        "x-filename-id": "workers-workersuniqid-child-visaspermits-visaspermitsuniqid-child-visaspermitsdff-visaspermitsdffuniqid-get"
+      },
+      "patch": {
+        "tags": [
+          "Workers/Visa Permits/Person Visas and Permits Descriptive Flexfields"
+        ],
+        "summary": "Update a person visa and permit descriptive flexfield",
+        "operationId": "update_workers-visasPermits-visasPermitsDFF",
+        "parameters": [
+          {
+            "name": "workersUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Workers resource and used to uniquely identify an instance of Workers. The client should not generate the hash key value. Instead, the client should query on the Workers collection resource in order to navigate to a specific instance of Workers to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Visa Permits resource and used to uniquely identify an instance of Visa Permits. The client should not generate the hash key value. Instead, the client should query on the Visa Permits collection resource in order to navigate to a specific instance of Visa Permits to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsDFFUniqID",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/workers-visasPermits-visasPermitsDFF-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-response"
+                }
+              }
+            },
+            "links": {
+              "LVVO___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "fieldMap": {
+                    "$this#/__FLEX_Context_DisplayValue": "Name"
+                  },
+                  "itemsPath": "items",
+                  "valueField": "ContextCode",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "LVVO_V___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context_DisplayValue",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "FlexFndDffDescriptiveFlexfieldContexts.ContextCode": [
+                      "__FLEX_Context"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name",
+                    "Description"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workers-{workersUniqID}-child-visasPermits-{visasPermitsUniqID}-child-visasPermitsDFF-{visasPermitsDFFUniqID}-patch",
+        "x-filename-id": "workers-workersuniqid-child-visaspermits-visaspermitsuniqid-child-visaspermitsdff-visaspermitsdffuniqid-patch"
+      }
+    },
+    "/workers/{workersUniqID}/child/visasPermits/{visasPermitsUniqID}/child/visasPermitsDFF": {
+      "get": {
+        "tags": [
+          "Workers/Visa Permits/Person Visas and Permits Descriptive Flexfields"
+        ],
+        "summary": "Get all person visa and permit descriptive flexfields",
+        "operationId": "getall_workers-visasPermits-visasPermitsDFF",
+        "parameters": [
+          {
+            "name": "workersUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Workers resource and used to uniquely identify an instance of Workers. The client should not generate the hash key value. Instead, the client should query on the Workers collection resource in order to navigate to a specific instance of Workers to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Visa Permits resource and used to uniquely identify an instance of Visa Permits. The client should not generate the hash key value. Instead, the client should query on the Visa Permits collection resource in order to navigate to a specific instance of Visa Permits to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EmailAddressId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ReligionId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignGradeStepId; integer; Surrogate identifier for the assignment grade step record.</li><li>CreatedBy; string; User who created the grade step.</li><li>CreationDate; string; Date and time when the grade step was created.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>GradeStepId; integer; Surrogate identifier for the grade step.</li><li>GradeStepName; string; Name of the grade step. Valid values are defined in the gradeStepNamesLOV.</li><li>LastUpdateDate; string; User who last updated the grade step.</li><li>LastUpdatedBy; string; Date and time when the grade step was last updated.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>PhotoName; string; Name of the image file.</li><li>PhotoType; string; Type of photo such as Profile or Cover. Valid values are defined in the commonLookupsLOV.</li><li>PrimaryFlag; boolean; Indicates whether the image is primary.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ExpirationDate; string; Expiration date of the passport.</li><li>IssuingCountry; string; Country in which the passport was issued. Valid values are defined in the hcmCountriesLov.</li><li>IssuingCountryName; string; Name of the country issuing the person's passport.</li><li>PassportId; integer; Surrogate identifier for the passport.</li><li>PassportNumber; string; Passport number of the person.</li><li>PassportType; string; Type or category of the passport. Valid values are defined in the commonLookupsLOV.</li><li>PassportTypeMeaning; string; Meaning of the person's passport type.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AsgResponsibilityId; integer; Surrogate identifier for the responsibility.</li><li>AssignmentId; integer; Internal identifier for the representative's assignment.</li><li>AssignmentName; string; Name of the person's assignment.</li><li>AssignmentNumber; string; Assignment number of the representative.</li><li>DisplayName; string; Display name of the representative.</li><li>PersonId; integer; Internal identifier for the representative.</li><li>PersonNumber; string; Person number of the representative.</li><li>ResponsibilityName; string; Name of the area of responsibility of the representative such as Benefits Representative.</li><li>ResponsibilityType; string; Responsibility type of the representative such as Human Resource Representative.</li><li>Usage; string; Description of the purpose for the responsibility.</li><li>WorkContactsFlag; boolean; Indicates whether the representatives should be displayed.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveEndDate; string</li><li>EffectiveStartDate; string</li><li>PersonAddrUsageId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ImageId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DeliveryMethodId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AddressId; integer; Surrogate identifier for the address record.</li><li>AddressType; string; Type of address. Valid values are defined in the commonLookupsLOV.</li><li>AddressTypeMeaning; string; Meaning of the person's address type.</li><li>Building; string; Building information associated with the address.</li><li>Country; string; Country in which the address is located. Valid values are defined in the hcmCountriesLov.</li><li>CountryName; string; Name of the country in which the person's address is located.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>FloorNumber; string; Floor number associated with the building.</li><li>Latitude; number; Distance between the equator and an address located to its north or south, expressed in degrees and minutes.</li><li>LongPostalCode; string; Long postal code of the primary mail address.</li><li>Longitude; number; Distance between the prime meridian and an address located to its east or west, expressed in degrees and minutes.</li><li>PersonAddrUsageId; integer; Surrogate identifier for the address usage record.</li><li>PostalCode; string; Postal code of the primary mail address.</li><li>PrimaryFlag; boolean; Indicates whether the address is the primary mailing address.</li><li>Provider; string; Company that has validated the address.</li><li>Region1; string; Primary region in which the address is located.</li><li>Region2; string; Secondary region within the primary region.</li><li>Region3; string; Additional secondary region within the primary region.</li><li>TownOrCity; string; Town or city in which the address is located.</li><li>ValidationStatusCode; string; Level of accuracy of an address, as determined by an address provider.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Ethnicity; string; Person's ethnicity. Valid values are defined in the commonLookupsLOV.</li><li>EthnicityId; integer; Surrogate identifier for the person's ethnicity.</li><li>EthnicityMeaning; string; Meaning of the person's ethnicity.</li><li>LegislationCode; string; Legislation code of the ethnicity. Valid values are defined in the hcmCountriesLov.</li><li>LegislationName; string; Name of the person's legislation.</li><li>PrimaryFlag; boolean; Indicates whether the ethnicity is the primary ethnicity record for the person.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CreationDate; string; Date and time when the supervisor record was created.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>LastUpdateDate; string; User who last updated the supervisor record.</li><li>ManagerAssignmentId; integer; Surrogate identifier for the assignment manager.</li><li>ManagerAssignmentNumber; string; Assignment number of the supervisor.</li><li>ManagerType; string; Role the supervisor has with regards to the overall organization structure such as functional, project leader, and so on. Valid values are defined in the commonLookupsLOV.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DisplayName; string; Person's display name.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>FirstName; string; Person's first name.</li><li>FullName; string; Person's full name.</li><li>Honors; string; Higher qualification appended to a person's name such as PhD.</li><li>KnownAs; string; Person's preferred name.</li><li>LastName; string; Person's last name.</li><li>LegislationCode; string; Legislation code. Valid values are defined in the hcmCountriesLov.</li><li>LegislationName; string; Name of the person's legislation.</li><li>ListName; string; Person's listed name.</li><li>LocalCreatedBy; string; User who created the local name information.</li><li>LocalCreationDate; string; Date and time when the local name information was created.</li><li>LocalDisplayName; string; Person's display name in local language.</li><li>LocalEffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>LocalEffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>LocalFirstName; string; Person's first name in local language.</li><li>LocalFullName; string; Person's full name in local language.</li><li>LocalHonors; string; Higher qualification appended to a person's name such as PhD in local language.</li><li>LocalKnownAs; string; Person's preferred name in local language.</li><li>LocalLastName; string; Person's last name in local language.</li><li>LocalLastUpdateDate; string; Date and time when the local name information was last updated.</li><li>LocalLastUpdatedBy; string; User who last updated the local name information.</li><li>LocalLegislationCode; string; Legislation code of the local language. Valid values are defined in the hcmCountriesLov.</li><li>LocalLegislationName; string; Name of the person's legislation in local language.</li><li>LocalListName; string; Person's listed name in local language.</li><li>LocalMiddleNames; string; Person's middle name in local language.</li><li>LocalMilitaryRank; string; Person's military rank in local language.</li><li>LocalNameInformation1; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation10; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation11; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation12; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation13; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation14; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation15; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation16; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation17; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation18; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation19; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation2; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation20; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation21; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation22; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation23; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation24; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation25; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation26; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation27; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation28; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation29; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation3; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation30; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation4; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation5; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation6; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation7; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation8; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameInformation9; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>LocalNameLanguage; string; Local language of the name. This isn't required for global names. If you're creating a local name, you must provide the language code.</li><li>LocalNameLanguageMeaning; string; Meaning of the local language code for the person's name.</li><li>LocalOrderName; string; Person's order name in local language.</li><li>LocalPersonNameId; integer; Surrogate identifier for the local name record.</li><li>LocalPreNameAdjunct; string; Part of the name added before a person's first name in local language.</li><li>LocalPreviousLastName; string; Person's previous last name in local language.</li><li>LocalSuffix; string; Part of the name appended to a person's last name such as Jr., III, and so on, in local language.</li><li>LocalTitle; string; Person's salutation such as Mr., Ms., and so on in local language. Valid values are defined in the commonLookupsLOV.</li><li>LocalTitleMeaning; string; Meaning of the person's title in local language.</li><li>MiddleNames; string; Person's middle name.</li><li>MilitaryRank; string; Person's military rank.</li><li>NameInformation1; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation10; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation11; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation12; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation13; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation14; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation15; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation16; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation17; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation18; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation19; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation2; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation20; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation21; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation22; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation23; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation24; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation25; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation26; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation27; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation28; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation29; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation3; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation30; string; Additional name attribute reserved for customer legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation4; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation5; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation6; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation7; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation8; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameInformation9; string; Additional name attribute reserved for Oracle Development for legislation-specific name requirements as defined in the person name style definition.</li><li>NameLanguage; string; Language of the name. This isn't required for global names. If you're creating a local name, you must provide the language code.</li><li>NameLanguageMeaning; string; Meaning of the language code for the person's name.</li><li>OrderName; string; Person's order name.</li><li>PersonNameId; integer; Surrogate identifier for the name record.</li><li>PreNameAdjunct; string; Part of the name added before a person's first name.</li><li>PreviousLastName; string; Person's previous last name.</li><li>Suffix; string; Part of the name appended to a person's last name such as Jr., III, and so on.</li><li>Title; string; Person salutation such as Mr., Ms., and so on. Valid values are defined in the commonLookupsLOV.</li><li>TitleMeaning; string; Meaning of the person's title.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveEndDate; string</li><li>EffectiveStartDate; string</li><li>PersonLegislativeId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveEndDate; string</li><li>EffectiveStartDate; string</li><li>VisaPermitId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>LegalEmployerName; string; Name of the legal employer for the work relationship.</li><li>LegalEntityId; integer; Unique identifier for the legal entity of the work relationship.</li><li>LegislationCode; string; Legislation associated with the period of service.</li><li>PeriodOfServiceId; integer; Surrogate identifier for the period of service.</li><li>PrimaryFlag; boolean; Indicates whether the work relationship is the primary work relationship for the worker. Valid values are Yes and No.</li><li>ProjectedTerminationDate; string; Projected last date of employment for the period of service.</li><li>ReadyToConvertFlag; boolean; Indicates whether the pending worker is ready to be converted to the proposed worker type.</li><li>StartDate; string; Start date of the period of employment.</li><li>TerminationDate; string; Last date of employment for this period of service.</li><li>WorkerType; string; Worker type for the period of service such as Employee (E), Contingent Worker (C), Pending Worker (P), or Nonworker (N). Valid values are defined in the commonLookupsLOV.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>PersonId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AreaCode; string; Area code of the phone number.</li><li>CountryCodeNumber; string; Country code of the phone number. Valid values are defined in the hcmCountriesLov.</li><li>Extension; string; Extension number for the phone.</li><li>LegislationCode; string; Phone legislation code.</li><li>LegislationName; string; Name of the person's legislation.</li><li>PhoneId; integer; Surrogate identifier for the phone.</li><li>PhoneNumber; string; Phone number of various phone types such as Work, Home, and so on.</li><li>PhoneType; string; Type of phone such as Work, Home, and so on. Valid values are defined in the commonLookupsLOV.</li><li>PhoneTypeMeaning; string; Meaning of the person's phone type.</li><li>PrimaryFlag; boolean; Indicates whether the phone number is the primary phone of the worker.</li><li>ToDate; string; Date until when the phone number is valid.</li><li>Validity; string; Time of day when a person can be reached at a specific phone number.</li><li>ValidityMeaning; string; Description of the phone validity. Valid values are defined in the commonLookupsLOV.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>FromDate; string; Date from when the message is effective.</li><li>MessageContent; string; Content of the message notification.</li><li>MessageId; integer; Surrogate identifier for the worker message.</li><li>ToDate; string; Date until when the message is effective.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EmailAddress; string; Email address of the person.</li><li>EmailAddressId; integer; Surrogate identifier for the email address of a worker.</li><li>EmailType; string; Type of email such as work, personal, and so on. Valid values are defined in the commonLookupsLOV.</li><li>EmailTypeMeaning; string; Meaning of the person's email type.</li><li>PrimaryFlag; boolean; Indicates whether the email is the person's primary email.</li><li>ToDate; string; Date until when the email address is valid.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ApplicantNumber; string; Applicant number in the external application.</li><li>BloodTypeMeaning; string; Meaning of the blood type of the person.</li><li>CorrLanguageMeaning; string; Meaning of the person's preferred language of communication.</li><li>CountryOfBirthName; string; Name of the country of birth of the person.</li><li>DateOfBirth; string; Date of birth of the person.</li><li>DisplayName; string; Person's display name.</li><li>FullName; string; Person's full name.</li><li>ListName; string; Person's list name.</li><li>PersonId; integer; Surrogate identifier for the person.</li><li>PersonNumber; string; Number assigned to a person to identify the person uniquely. Doesn't depend on the person type such as employee, contingent worker, and so on.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccommodationRequest; string; Request for accommodation.</li><li>Category; string; Category of the disability such as Physical or Intellectual.</li><li>CreatedBy; string; User who created the disability record.</li><li>CreationDate; string; Date and time when the disability record was created.</li><li>Degree; number; Extent to which the disability impacts the person's abilities.</li><li>Description; string; Description of the person's disability.</li><li>DisabilityCode; string; Code for the disability.</li><li>DisabilityId; integer; Surrogate identifier for the disability of a worker.</li><li>DisclosureDate; string; Date on which the disability has been disclosed by the worker. Used explicitly for the Japanese, United Kingdom, and United States legislation.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>LastUpdateDate; string; Date and time when the disability record was last updated.</li><li>LastUpdatedBy; string; User who last updated the disability record.</li><li>LegislationCode; string; Legislation code for the disability. Valid values are defined in the hcmCountriesLov.</li><li>OrganizationId; integer; Unique identifier of the organization.</li><li>OrganizationName; string; Organization name to which the disability is registered.</li><li>QuotaFTE; number; Person's full time equivalency.</li><li>Reason; string; Reason for the person's disability.</li><li>RegistrationDate; string; Date on which the disability was registered with the disability organization.</li><li>RegistrationExpDate; string; Expiration date of the disability registration.</li><li>RegistrationId; string; Identification detail given to the person by the disability organization.</li><li>SelfDisclosedType; string; Type of disability disclosed by the worker. Used explicitly for the Japanese, United Kingdom, and United States legislation.</li><li>Status; string; Status of the person's disability.</li><li>WorkRestriction; string; Details of any work restrictions due to the disability.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignmentId; integer; Internal identifier for the reports assignment.</li><li>AssignmentName; string; Business title of the report.</li><li>AssignmentNumber; string; Assignment number of the report.</li><li>DisplayName; string; Display name of the report.</li><li>Level; integer; Level of the report in the manager's hierarchy.</li><li>PersonId; integer; Surrogate identifier for the report.</li><li>PersonNumber; string; Person number of the report.</li><li>RelationshipType; string; Type of managerial relationship with the report such as line manager.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignmentId; integer</li><li>AssignmentType; string</li><li>EffectiveEndDate; string</li><li>EffectiveLatestChange; string</li><li>EffectiveSequence; integer</li><li>EffectiveStartDate; string</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>LegislationCode; string; Religion legislation code. Valid values are defined in the hcmCountriesLov.</li><li>LegislationName; string; Name of the person's legislation.</li><li>PrimaryFlag; boolean; Indicates whether the religion is the person's primary religion for this legislation.</li><li>Religion; string; Religion of the person. Valid values are defined in the commonLookupsLOV.</li><li>ReligionId; integer; Surrogate identifier for the religion.</li><li>ReligionMeaning; string; Meaning of the person's religion code.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ContractId; integer</li><li>EffectiveEndDate; string</li><li>EffectiveStartDate; string</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>NationalIdentifierId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DriversLicenseId; integer; Surrogate identifier for the driver's license of a worker.</li><li>IssuingCountry; string; Country in which the driver's license was issued. Valid values are defined in the hcmCountriesLov.</li><li>IssuingCountryName; string; Name of the country issuing the person's license.</li><li>LicenseNumber; string; Driver's license number.</li><li>LicenseSuspendedFlag; boolean; Indicates whether the driver's license is suspended.</li><li>LicenseType; string; Type of license. Valid values are defined in the commonLookupsLOV.</li><li>LicenseTypeMeaning; string; Meaning of the person's license type.</li><li>SuspendedFromDate; string; Start date of suspension period, if any.</li><li>SuspendedToDate; string; End date of suspension period, if any.</li><li>ToDate; string; Date until when the driver's license is valid.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>PeriodOfServiceId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActionCode; string; Action being performed for this assignment, such as, Hire, Add Pending Worker, Manager Change and so on. Valid values are defined in the actionsLOV.</li><li>AssignmentCategory; string; User-defined category for the assignment such as full-time, permanent, and so on. Valid values are defined in the commonLookupsLOV.</li><li>AssignmentId; integer; Surrogate identifier for the worker assignment.</li><li>AssignmentName; string; Business title of the worker assignment.</li><li>AssignmentNumber; string; Unique identifier for the assignment.</li><li>AssignmentStatusType; string; Assignment status type. Valid values are defined in the assignmentStatusTypesLov.</li><li>AssignmentType; string; Type of the assignment such as employee or contingent worker.</li><li>BargainingUnitCode; string; Code for the bargaining unit.</li><li>BusinessUnitId; integer; Unique identifier for the business unit of the assignment.</li><li>BusinessUnitName; string; Name of the business unit for the worker assignment. Valid values are defined in the hcmBusinesUnitsLOV.</li><li>CollectiveAgreementId; integer; Surrogate identifier for the collective agreement.</li><li>CollectiveAgreementName; string; Name for the collective agreement. Valid values are defined in the collectiveAgreementsLov.</li><li>ContractId; integer; Surrogate identifier for the contract.</li><li>ContractNumber; string; Number of the contract.</li><li>DefaultExpenseAccount; string; Default expense account of the assignment. If the expense account is configured with multiple segments, then provide the concatenated value. Separate the values using the separator configured for the expense account.</li><li>DepartmentId; integer; Unique identifier for the worker's department.</li><li>DepartmentName; string; Name of the department for the worker assignment. Valid values are defined in the departmentsLov.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveLatestChange; string; Set to Y if this is the last change on the effective start date. Otherwise, set to N.</li><li>EffectiveSequence; integer; Sequence number of the change on the effective start date. For the first change on the effective start date, set this value to 1. For incremental changes, leave this value blank to generate the next number in the sequence.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>FullPartTime; string; Indicates whether the worker works full-time or part-time. Valid values are defined in the commonLookupsLOV.</li><li>GradeCode; string; Code of the assignment grade. Valid values are defined in the gradesLov.</li><li>GradeId; integer; Unique identifier for the worker's grade.</li><li>GradeLadderId; integer; Unique identifier for the grade ladder used for benefits.</li><li>GradeLadderName; string; Name of the grade ladder used for benefits. Valid values are defined in the gradeLaddersLov.</li><li>GradeStepEligibilityFlag; boolean; Indicates whether the assignment is eligible for grade-step progression. Valid values are true or false.</li><li>HourlySalariedCode; string; Identifies whether the assignment is paid by the hour or by a salary. Either maintained at the assignment level or employment or placement terms but not both. Valid values are defined in the commonLookupsLOV.</li><li>JobCode; string; Code for the worker's job. Valid values are defined in the jobsLov.</li><li>JobId; integer; Unique identifier for the worker's job.</li><li>LabourUnionMemberFlag; boolean; Indicates whether the worker is a labor union member.</li><li>LocationCode; string; Code for the worker's location.</li><li>LocationId; integer; Unique identifier for the worker's location.</li><li>ManagerFlag; boolean; Indicates whether the worker is a manager.</li><li>NoticePeriod; integer; Notice period for the assignment. Specify with the NoticePeriodUOM attribute.</li><li>NoticePeriodUOM; string; Unit of measure for the notice period. Specify with the NoticePeriod attribute. Valid values are defined in the commonLookupsLOV.</li><li>PeopleGroup; string; People Group Key flexfield for the assignment. If people group is configured with multiple segments, provide the concatenated value, separating the values with the separator configured for the People Group Key flexfield.</li><li>PermanentTemporary; string; Indicates whether the worker is regular or temporary. Valid values are defined in the commonLookupsLOV.</li><li>PositionCode; string; Code for the worker's position.</li><li>PositionId; integer; Unique identifier for the worker's position.</li><li>PrimaryAssignmentFlag; boolean; Indicates whether the current assignment is primary for the work relationship. Valid values are true or false.</li><li>PrimaryFlag; boolean; Indicates whether the current assignment is the primary assignment for the worker. Valid values are true or false.</li><li>ProbationEndDate; string; End date of the probation period.</li><li>ProbationPeriod; number; Duration of the probation period. Specify with the ProbationPeriodUnit attribute.</li><li>ProbationPeriodUnit; string; Unit of measure for the probation period. Specify with the ProbationPeriod attribute. Valid values are defined in the commonLookupsLOV.</li><li>ProjectedEndDate; string; Date when the assignment is expected to end.</li><li>ProjectedStartDate; string; Expected start date for applicants. This value is required for pending workers.</li><li>ProposedUserPersonType; string; Code of the proposed user person type. Valid values are defined in the personTypesLOV.</li><li>ProposedUserPersonTypeId; string; Unique identifier for the proposed user person type.</li><li>ReportingEstablishmentId; integer; Unique identifier for the reporting establishment.</li><li>ReportingEstablishmentName; string; Name of the reporting establishment. Valid values are defined in the reportingEstablishmentsLOV.</li><li>RetirementAge; integer; Age at which the worker is retiring.</li><li>RetirementDate; string; Planned retirement date of the worker.</li><li>SeniorityBasis; string; Basis for calculating seniority for the person. Valid values are defined in the commonLookupsLOV.</li><li>SynchronizeFromPositionFlag; boolean; Indicates whether attributes from the position can be overridden on the assignment when using position synchronization. Valid values are true or false.</li><li>UnionId; integer; Unique identifier of the worker union for the assignment.</li><li>UnionName; string; Name of the worker union for the assignment. Valid values are defined in the unionsLov.</li><li>UserPersonTypeId; integer; Unique identifier for the user person type.</li><li>WorkAtHomeFlag; boolean; Indicates whether the worker works at home for the assignment.</li><li>WorkerCategory; string; Category of the worker such as blue collar, civil servant, and so on. Valid values are defined in the commonLookupsLOV.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AccountName; string; Name of the account.</li><li>DeliveryMethodId; integer; Surrogate identifier for the delivery method.</li><li>EndDate; string; End date of the account.</li><li>Provider; string; Provider of the account such as Facebook and Twitter. Valid values are defined in the commonLookupsLOV.</li><li>ProviderMeaning; string; Meaning of the person's provider type.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>Citizenship; string; Citizenship legislation code. Valid values are defined in the hcmCountriesLov.</li><li>CitizenshipId; integer; Surrogate identifier for the citizenship of a worker.</li><li>CitizenshipMeaning; string; Name of the citizenship legislation code.</li><li>CitizenshipStatus; string; Status of the citizenship. Valid values are defined in the commonLookupsLOV.</li><li>CitizenshipStatusMeaning; string; Meaning of the person's citizenship status code.</li><li>ToDate; string; Date until when the citizenship is valid.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AssignmentId; integer; Unique identifier of the assignment to which this external identifier relates.</li><li>AssignmentName; string; Name of the person's assignment.</li><li>AssignmentNumber; string; Assignment number to which the external identifier belongs.</li><li>ExternalIdentifierId; integer; Surrogate identifier for the external identifier.</li><li>ExternalIdentifierNumber; string; External identifier number.</li><li>ExternalIdentifierSequence; integer; Sequence of the external identifier.</li><li>ExternalIdentifierType; string; Type of external identifier, such as Third-Party Payroll ID. Valid values are defined in the commonLookupsLOV.</li><li>ExternalIdentifierTypeMeaning; string; Meaning of the person's external identifier.</li><li>FromDate; string; Date and time from when the external identifier is valid.</li><li>ToDate; string; Date and time until when the external identifier is valid.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>ExpirationDate; string; Expiration date of the visa or permit.</li><li>IssuingCountry; string; Country in which the visa or permit was issued. Valid values are defined in the hcmCountriesLov.</li><li>IssuingCountryName; string; Name of the country issuing the person's visa.</li><li>VisaPermitCategory; string; Category of the visa or permit. Valid values are defined in the commonLookupsLOV.</li><li>VisaPermitCategoryMeaning; string; Meaning of the person's visa permit category.</li><li>VisaPermitId; integer; Surrogate identifier for the visa or permit.</li><li>VisaPermitNumber; string; Visa or permit number.</li><li>VisaPermitStatus; string; Indicates if the visa or permit is current. Valid values are defined in the commonLookupsLOV.</li><li>VisaPermitStatusDate; string; Date from when the permit status is effective.</li><li>VisaPermitStatusMeaning; string; Meaning of the person's visa permit status.</li><li>VisaPermitType; string; Visa or permit type. Valid values are defined in the commonLookupsLOV.</li><li>VisaPermitTypeMeaning; string; Meaning of the person's visa permit type.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActionCode; string; Action code for the employment contract.</li><li>ContractEndDate; string; Date when the contract ends.</li><li>ContractExtensionFlag; boolean; Indicates whether the contract should be extended. Valid values are Yes and No. The default value is null.</li><li>ContractId; integer; Surrogate identifier for the contract.</li><li>ContractNumber; string; Number of the contract.</li><li>ContractType; string; Type of the contract.</li><li>EffectiveEndDate; string; End date of the date-effective changes to the record.</li><li>EffectiveStartDate; string; Start date of the date-effective changes to the record.</li><li>ExtensionNumber; integer; Extension number of the contract.</li><li>ExtensionPeriod; number; Extension period of the contract.</li><li>ExtensionPeriodUnits; string; Unit for the extension period of the contract.</li><li>InitialDuration; number; Initial duration of the contract.</li><li>InitialDurationUnits; string; Unit for the initial duration of the contract.</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CitizenshipId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>DriversLicenseTypeId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul><br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>PhoneId; integer</li><li>__FLEX_Context; string; Context Value</li><li>__FLEX_Context_DisplayValue; string; Context Value</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey  <br>Finder Variables <ul><li>EffectiveEndDate; string;   </li><li>EffectiveStartDate; string;   </li><li>VisaPermitId; integer;   </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "properties": {
+                  "VisaPermitId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "DISPLAYHINT": "Hide",
+                      "includeInCompactView": true,
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "type": "integer",
+                    "title": "Visa Permit ID"
+                  },
+                  "EffectiveEndDate": {
+                    "nullable": false,
+                    "x-hints": {
+                      "DISPLAYHINT": "Hide",
+                      "includeInCompactView": true
+                    },
+                    "format": "date",
+                    "type": "string",
+                    "title": "Effective End Date"
+                  },
+                  "EffectiveStartDate": {
+                    "nullable": false,
+                    "x-hints": {
+                      "DISPLAYHINT": "Hide",
+                      "includeInCompactView": true
+                    },
+                    "format": "date",
+                    "type": "string",
+                    "title": "Effective Start Date"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workers-{workersUniqID}-child-visasPermits-{visasPermitsUniqID}-child-visasPermitsDFF-get",
+        "x-filename-id": "workers-workersuniqid-child-visaspermits-visaspermitsuniqid-child-visaspermitsdff-get"
+      },
+      "post": {
+        "tags": [
+          "Workers/Visa Permits/Person Visas and Permits Descriptive Flexfields"
+        ],
+        "summary": "Create a person visa and permit descriptive flexfield",
+        "operationId": "create_workers-visasPermits-visasPermitsDFF",
+        "parameters": [
+          {
+            "name": "workersUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Workers resource and used to uniquely identify an instance of Workers. The client should not generate the hash key value. Instead, the client should query on the Workers collection resource in order to navigate to a specific instance of Workers to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visasPermitsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Visa Permits resource and used to uniquely identify an instance of Visa Permits. The client should not generate the hash key value. Instead, the client should query on the Visa Permits collection resource in order to navigate to a specific instance of Visa Permits to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/workers-visasPermits-visasPermitsDFF-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-response"
+                }
+              }
+            },
+            "links": {
+              "LVVO___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "fieldMap": {
+                    "$this#/__FLEX_Context_DisplayValue": "Name"
+                  },
+                  "itemsPath": "items",
+                  "valueField": "ContextCode",
+                  "displayFields": [
+                    "Name"
+                  ]
+                }
+              },
+              "LVVO_V___FLEX_Context": {
+                "operationRef": "#/paths/~1FlexFndDffDescriptiveFlexfieldContexts/get",
+                "parameters": {
+                  "finder": "ValidValuesFinder%3BBind_ApplicationId%3D800%2CBind_DescriptiveFlexfieldCode%3DPER_VISA_PERMIT_DFF"
+                },
+                "x-lov": {
+                  "definedOn": "$request.body#/__FLEX_Context_DisplayValue",
+                  "displayValues": [
+                    "Name"
+                  ],
+                  "derivedFieldsMapping": {
+                    "FlexFndDffDescriptiveFlexfieldContexts.ContextCode": [
+                      "__FLEX_Context"
+                    ]
+                  },
+                  "itemsPath": "items",
+                  "valueField": "Name",
+                  "displayFields": [
+                    "Name",
+                    "Description"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "workers-{workersUniqID}-child-visasPermits-{visasPermitsUniqID}-child-visasPermitsDFF-post",
+        "x-filename-id": "workers-workersuniqid-child-visaspermits-visaspermitsuniqid-child-visaspermitsdff-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "workers-visasPermits-visasPermitsDFF-item-response": {
+        "type": "object",
+        "properties": {
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "VisaPermitId": {
+            "title": "Visa Permit ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "workers-visasPermits-visasPermitsDFF-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "workers-visasPermits-visasPermitsDFF": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "workers-visasPermits-visasPermitsDFF-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EffectiveEndDate": {
+            "title": "Effective End Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveStartDate": {
+            "title": "Effective Start Date",
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true
+            }
+          },
+          "VisaPermitId": {
+            "title": "Visa Permit ID",
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Value",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Value",
+            "type": "string",
+            "description": "Context Value",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Value"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "HIDDEN"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "workers-visasPermits-visasPermitsDFF-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-patch-request"
+            }
+          }
+        }
+      },
+      "workers-visasPermits-visasPermitsDFF-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/workers-visasPermits-visasPermitsDFF-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

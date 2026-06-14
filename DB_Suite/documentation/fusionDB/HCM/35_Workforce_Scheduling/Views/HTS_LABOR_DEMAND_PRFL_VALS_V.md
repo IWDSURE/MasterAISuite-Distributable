@@ -1,0 +1,29 @@
+# HTS_LABOR_DEMAND_PRFL_VALS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htslabordemandprflvalsv-8082.html#htslabordemandprflvalsv-8082](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htslabordemandprflvalsv-8082.html#htslabordemandprflvalsv-8082)
+
+## Columns
+
+- SCHED_PROFILE_ID
+- START_DATE
+- END_DATE
+- VAL_INDEX
+- VALUE
+
+## Query
+
+```sql
+select s.sched_profile_id,s.start_date, s.end_date, P.val_index, p.value from hts_labor_demand_prfl_vals P, hts_labor_demand_prfl_defs D, hts_labor_demand_prfl_defsets S where P.lbr_dmd_prfl_def_id = D.lbr_dmd_prfl_def_id and d.lbr_dmd_prfl_set_id = s.lbr_dmd_prfl_set_id order by S.sched_profile_id, D.lbr_dmd_prfl_set_id, P.lbr_dmd_prfl_def_id, P.val_index
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

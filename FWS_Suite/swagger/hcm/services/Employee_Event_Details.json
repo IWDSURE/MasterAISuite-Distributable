@@ -1,0 +1,2229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Employee Event Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/communicateUIEmployeeEventDetails/action/processEmpEventAction": {
+      "post": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Perform employee event related actions",
+        "description": "Performs employee event related actions such as cancel event and send message.",
+        "operationId": "doall_processEmpEventAction_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "eventNumber": {
+                    "type": "string",
+                    "description": "Event identifier used to fetch an event.",
+                    "nullable": true
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "Context parameter that represents the origin of an action, such as employee event details or employee event respondents list.",
+                    "nullable": true
+                  },
+                  "actionData": {
+                    "type": "string",
+                    "description": "Payload containing the actions to be performed.",
+                    "nullable": true
+                  },
+                  "actionTypeCode": {
+                    "type": "string",
+                    "description": "Employee event action identifier.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when an event action is performed successfully with action_tracking_id."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when an event action is performed successfully with action_tracking_id."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-action-processEmpEventAction-post",
+        "x-filename-id": "communicateuiemployeeeventdetails-action-processempeventaction-post"
+      }
+    },
+    "/communicateUIEmployeeEventDetails": {
+      "get": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Get all employee events",
+        "operationId": "getall_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>CategoryCodes; string; Employee event category codes.</li><li>CategoryDescriptions; string; Employee event category descriptions.</li><li>City; string; City of an in-person event.</li><li>CityGeographyId; integer; City geography identifier of an in-person event.</li><li>Country; string; Country of an in-person event's location.</li><li>CountryCode; string; Country code for the location of an in-person event.</li><li>EmployeeEventId; integer; Unique identifier for the event.</li><li>EmployeeEventLocationId; integer; Location identifier for the event.</li><li>EndDate; string; End date of the event.</li><li>EventLastModifiedDate; string; Last modified date of the event.</li><li>EventNumber; string; Event number of the event.</li><li>EventStatus; string; Event status description.</li><li>EventStatusCode; string; Status code of the event.</li><li>Format; string; Format of the event.</li><li>FormatCode; string; Format code for the event.</li><li>LastRegisterDate; string; Last registration date for the event.</li><li>MaximumCapacity; integer; Maximum number of registrants allowed for the event.</li><li>MaximumCapacityInperson; integer; Maximum number of registrants allowed for an in-person event.</li><li>MaximumCapacityVirtual; integer; Maximum number of registrants allowed for a virtual event.</li><li>Name; string; Name of the event.</li><li>RegisteredCount; integer; Number of registrants in the event.</li><li>RegisteredCountInperson; integer; Number of registrants in the in-person event.</li><li>RegisteredCountVirtual; integer; Number of registrants in the virtual event.</li><li>StartDate; string; Start date of the event.</li><li>State; string; State in which the in-person event takes place.</li><li>StateGeographyId; integer; Geography identifier of the state in which the event takes place.</li><li>StatusUpdatedDate; string; Date the event's status was updated.</li><li>TimezoneCode; string; Time zone code for the event.</li><li>TimezoneDescription; string; Time zone description for the event.</li><li>WebConfLink; string; Web conference link for the virtual event.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds an event using event identifier. <br>Finder Variables <ul><li>EmployeeEventId; integer;  Event identifier finder parameter to used fetch an event. </li><li>EmployeeEventLocationId; integer;  Event location identifier finder parameter used to fetch an event using event location identifier. </li></ul></li><li>findByNumber Finds an event by event number. <br>Finder Variables <ul><li>EventNumber; string;  Event number finder parameter used to fetch an event. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds an event using event identifier.",
+                "properties": {
+                  "EmployeeEventLocationId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Event location identifier finder parameter used to fetch an event using event location identifier.",
+                    "type": "integer"
+                  },
+                  "EmployeeEventId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Event identifier finder parameter to used fetch an event.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByNumber",
+                "description": "Finds an event by event number.",
+                "title": "findByNumber",
+                "properties": {
+                  "EventNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Required"
+                    },
+                    "description": "Event number finder parameter used to fetch an event.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/communicateUIEmployeeEventDetails"
+                }
+              }
+            },
+            "links": {
+              "processEmpEventAction": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1action~1processEmpEventAction/post",
+                "description": "Performs employee event related actions such as cancel event and send message."
+              },
+              "updateStatusCode": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1action~1updateStatusCode/post",
+                "description": "Updates the status code of the employee event. This is used when the event transitions from one status to another."
+              }
+            }
+          }
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-get",
+        "x-filename-id": "communicateuiemployeeeventdetails-get"
+      },
+      "post": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Create an employee event",
+        "operationId": "create_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/communicateUIEmployeeEventDetails-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "eventMetrics": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMetrics/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event metrics."
+              },
+              "eventMessages": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMessages/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event messages."
+              },
+              "TimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: TimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/TimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "owners": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1owners/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource that provides details of the owners of the employee event."
+              },
+              "FormatLovVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_EMP_EVENT_FORMAT"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: FormatCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/FormatCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-post",
+        "x-filename-id": "communicateuiemployeeeventdetails-post"
+      }
+    },
+    "/communicateUIEmployeeEventDetails/{EventNumber}": {
+      "get": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Get an employee event",
+        "operationId": "get_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "EventNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "eventMetrics": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMetrics/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event metrics."
+              },
+              "eventMessages": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMessages/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event messages."
+              },
+              "TimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: TimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/TimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "owners": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1owners/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource that provides details of the owners of the employee event."
+              },
+              "FormatLovVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_EMP_EVENT_FORMAT"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: FormatCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/FormatCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-{EventNumber}-get",
+        "x-filename-id": "communicateuiemployeeeventdetails-eventnumber-get"
+      },
+      "delete": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Delete an employee event",
+        "operationId": "delete_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "EventNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-{EventNumber}-delete",
+        "x-filename-id": "communicateuiemployeeeventdetails-eventnumber-delete"
+      },
+      "patch": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Update an employee event",
+        "operationId": "update_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "EventNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/communicateUIEmployeeEventDetails-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "eventMetrics": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMetrics/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event metrics."
+              },
+              "eventMessages": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1eventMessages/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource for event messages."
+              },
+              "TimezoneLOVVA": {
+                "operationRef": "#/paths/~1recruitingTimezonesLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: TimezoneCode; Target Attribute: TimezoneId</li><li>Display Attribute: TimezoneDisplayName</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/TimezoneCode",
+                  "displayValues": [
+                    "TimezoneDisplayName"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "TimezoneId",
+                  "displayFields": [
+                    "TimezoneDisplayName"
+                  ]
+                }
+              },
+              "owners": {
+                "operationRef": "#/paths/~1communicateUIEmployeeEventDetails~1{EventNumber}~1child~1owners/get",
+                "parameters": {
+                  "EventNumber": "$request.path.EventNumber"
+                },
+                "description": "The child resource that provides details of the owners of the employee event."
+              },
+              "FormatLovVA": {
+                "operationRef": "#/paths/~1commonLookupsLOV/get",
+                "parameters": {
+                  "finder": "LookupTypeFinder%3BLookupType%3DORA_IRC_EMP_EVENT_FORMAT"
+                },
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: FormatCode; Target Attribute: LookupCode</li><li>Display Attribute: Meaning</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/FormatCode",
+                  "displayValues": [
+                    "Meaning"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "LookupCode",
+                  "displayFields": [
+                    "Meaning"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-{EventNumber}-patch",
+        "x-filename-id": "communicateuiemployeeeventdetails-eventnumber-patch"
+      }
+    },
+    "/communicateUIEmployeeEventDetails/action/updateStatusCode": {
+      "post": {
+        "tags": [
+          "Employee Event Details"
+        ],
+        "summary": "Update a status code",
+        "description": "Updates the status code of the employee event. This is used when the event transitions from one status to another.",
+        "operationId": "doall_updateStatusCode_communicateUIEmployeeEventDetails",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "eventNumber": {
+                    "type": "string",
+                    "description": "Event number to be passed when updating event's status code.",
+                    "nullable": true
+                  },
+                  "statusCode": {
+                    "type": "string",
+                    "description": "Status code to be used when updating an event's status code.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when update event's status code is invoked."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Response returned when update event's status code is invoked."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "communicateUIEmployeeEventDetails-action-updateStatusCode-post",
+        "x-filename-id": "communicateuiemployeeeventdetails-action-updatestatuscode-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "communicateUIEmployeeEventDetails": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "communicateUIEmployeeEventDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "CategoryCodes": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category codes.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CategoryDescriptions": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category descriptions.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "City": {
+            "title": "City",
+            "maxLength": 255,
+            "type": "string",
+            "description": "City of an in-person event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CityGeographyId": {
+            "title": "City",
+            "type": "integer",
+            "description": "City geography identifier of an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Country": {
+            "title": "Country",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Country of an in-person event's location.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the location of an in-person event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Event Description",
+            "type": "string",
+            "description": "Description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EmployeeEventLocationId": {
+            "type": "integer",
+            "description": "Location identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventLastModifiedDate": {
+            "type": "string",
+            "description": "Last modified date of the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Event number of the event.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "EventStatus": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Event status description.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventStatusCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Status code of the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Format": {
+            "title": "Format",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Format of the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FormatCode": {
+            "title": "Format",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Format code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "LastRegisterDate": {
+            "title": "Last Day to Register",
+            "type": "string",
+            "description": "Last registration date for the event.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LocationDetails": {
+            "title": "Location Details",
+            "type": "string",
+            "description": "Location details for the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MaximumCapacity": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MaximumCapacityInperson": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            },
+            "x-queryable": true
+          },
+          "MaximumCapacityVirtual": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for a virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            },
+            "x-queryable": true
+          },
+          "MeetingDetails": {
+            "title": "Meeting Info",
+            "type": "string",
+            "description": "Meeting details for a virtual event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "RegisteredCount": {
+            "type": "integer",
+            "description": "Number of registrants in the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RegisteredCountInperson": {
+            "type": "integer",
+            "description": "Number of registrants in the in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            },
+            "x-queryable": true
+          },
+          "RegisteredCountVirtual": {
+            "type": "integer",
+            "description": "Number of registrants in the virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            },
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "State": {
+            "title": "State",
+            "maxLength": 255,
+            "type": "string",
+            "description": "State in which the in-person event takes place.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StateGeographyId": {
+            "title": "State",
+            "type": "integer",
+            "description": "Geography identifier of the state in which the event takes place.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StatusUpdatedDate": {
+            "type": "string",
+            "description": "Date the event's status was updated.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TimezoneCode": {
+            "title": "Time Zone",
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "TimezoneDescription": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Time zone description for the event.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "WebConfLink": {
+            "title": "Meeting Web Link",
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conference link for the virtual event.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "eventMessages": {
+            "title": "Employee Event Messages",
+            "type": "array",
+            "description": "The child resource for event messages.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMessages-item-response"
+            }
+          },
+          "eventMetrics": {
+            "title": "Employee Event Metrics",
+            "type": "array",
+            "description": "The child resource for event metrics.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMetrics-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "owners": {
+            "title": "Employee Event Owners",
+            "type": "array",
+            "description": "The child resource that provides details of the owners of the employee event.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-owners-item-response"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-eventMessages-item-response": {
+        "type": "object",
+        "properties": {
+          "Body": {
+            "type": "string",
+            "description": "Body of event messages.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Identifier of the event to which the messages belongs.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Number of the event to which the messages belongs.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MsgSenderEmailAddress": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email Address of the message sender to which the event messages belongs.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MsgSenderId": {
+            "type": "integer",
+            "description": "Identifier of the message sender to which the event messages belongs.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MsgSenderName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the message sender to which the event messages belongs.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MsgSentTime": {
+            "type": "string",
+            "description": "Time the event messages were sent.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Subject": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Subject of event messages.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-eventMetrics-item-response": {
+        "type": "object",
+        "properties": {
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Identifier of the event to which the metric belongs.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Number of the event to which the metric belongs.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShareCount": {
+            "type": "integer",
+            "description": "Number of times event shared.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ViewCount": {
+            "type": "integer",
+            "description": "Number of times event was viewed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-owners-item-response": {
+        "type": "object",
+        "properties": {
+          "DisplayName": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display name for the event owner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the employee event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EmployeeEventOwnerId": {
+            "type": "integer",
+            "description": "Unique identifier for the event owner.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "FirstName": {
+            "title": "First Name",
+            "maxLength": 150,
+            "type": "string",
+            "description": "First name of the event owner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FullName": {
+            "title": "Full Name",
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Full name of the event owner.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastName": {
+            "title": "Last Name",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Last name of the event owner.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Person identifier for the event owner.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "OwnerTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether a person is an event owner or co-owner.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-item-post-request": {
+        "required": [
+          "EventNumber",
+          "FormatCode",
+          "Name",
+          "StartDate",
+          "TimezoneCode"
+        ],
+        "type": "object",
+        "properties": {
+          "CategoryCodes": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category codes.",
+            "nullable": true
+          },
+          "CategoryDescriptions": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category descriptions.",
+            "nullable": true
+          },
+          "CityGeographyId": {
+            "title": "City",
+            "type": "integer",
+            "description": "City geography identifier of an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the location of an in-person event.",
+            "nullable": true
+          },
+          "Description": {
+            "title": "Event Description",
+            "type": "string",
+            "description": "Description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployeeEventLocationId": {
+            "type": "integer",
+            "description": "Location identifier for the event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventLastModifiedDate": {
+            "type": "string",
+            "description": "Last modified date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventNumber": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Event number of the event.",
+            "nullable": false
+          },
+          "FormatCode": {
+            "title": "Format",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Format code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LastRegisterDate": {
+            "title": "Last Day to Register",
+            "type": "string",
+            "description": "Last registration date for the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "LocationDetails": {
+            "title": "Location Details",
+            "type": "string",
+            "description": "Location details for the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MaximumCapacityInperson": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "MaximumCapacityVirtual": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for a virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "MeetingDetails": {
+            "title": "Meeting Info",
+            "type": "string",
+            "description": "Meeting details for a virtual event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": false
+          },
+          "RegisteredCountInperson": {
+            "type": "integer",
+            "description": "Number of registrants in the in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "RegisteredCountVirtual": {
+            "type": "integer",
+            "description": "Number of registrants in the virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "StateGeographyId": {
+            "title": "State",
+            "type": "integer",
+            "description": "Geography identifier of the state in which the event takes place.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StatusUpdatedDate": {
+            "type": "string",
+            "description": "Date the event's status was updated.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "TimezoneCode": {
+            "title": "Time Zone",
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WebConfLink": {
+            "title": "Meeting Web Link",
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conference link for the virtual event.",
+            "nullable": true
+          },
+          "eventMessages": {
+            "title": "Employee Event Messages",
+            "type": "array",
+            "description": "The child resource for event messages.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMessages-item-post-request"
+            }
+          },
+          "eventMetrics": {
+            "title": "Employee Event Metrics",
+            "type": "array",
+            "description": "The child resource for event metrics.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMetrics-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "owners": {
+            "title": "Employee Event Owners",
+            "type": "array",
+            "description": "The child resource that provides details of the owners of the employee event.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-owners-item-post-request"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-eventMessages-item-post-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "communicateUIEmployeeEventDetails-eventMetrics-item-post-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "communicateUIEmployeeEventDetails-owners-item-post-request": {
+        "type": "object",
+        "properties": {
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the employee event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "EmployeeEventOwnerId": {
+            "type": "integer",
+            "description": "Unique identifier for the event owner.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Person identifier for the event owner.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether a person is an event owner or co-owner.",
+            "nullable": true
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CategoryCodes": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category codes.",
+            "nullable": true
+          },
+          "CategoryDescriptions": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Employee event category descriptions.",
+            "nullable": true
+          },
+          "CityGeographyId": {
+            "title": "City",
+            "type": "integer",
+            "description": "City geography identifier of an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "CountryCode": {
+            "title": "Country",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Country code for the location of an in-person event.",
+            "nullable": true
+          },
+          "Description": {
+            "title": "Event Description",
+            "type": "string",
+            "description": "Description of the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EventLastModifiedDate": {
+            "type": "string",
+            "description": "Last modified date of the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "FormatCode": {
+            "title": "Format",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Format code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "LastRegisterDate": {
+            "title": "Last Day to Register",
+            "type": "string",
+            "description": "Last registration date for the event.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "LocationDetails": {
+            "title": "Location Details",
+            "type": "string",
+            "description": "Location details for the event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MaximumCapacityInperson": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for an in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "MaximumCapacityVirtual": {
+            "title": "Maximum Capacity",
+            "type": "integer",
+            "description": "Maximum number of registrants allowed for a virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "MeetingDetails": {
+            "title": "Meeting Info",
+            "type": "string",
+            "description": "Meeting details for a virtual event.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Name": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the event.",
+            "nullable": false
+          },
+          "RegisteredCountInperson": {
+            "type": "integer",
+            "description": "Number of registrants in the in-person event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "RegisteredCountVirtual": {
+            "type": "integer",
+            "description": "Number of registrants in the virtual event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 10
+            }
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of the event.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "StateGeographyId": {
+            "title": "State",
+            "type": "integer",
+            "description": "Geography identifier of the state in which the event takes place.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "StatusUpdatedDate": {
+            "type": "string",
+            "description": "Date the event's status was updated.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "TimezoneCode": {
+            "title": "Time Zone",
+            "maxLength": 50,
+            "type": "string",
+            "description": "Time zone code for the event.",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice"
+            }
+          },
+          "WebConfLink": {
+            "title": "Meeting Web Link",
+            "maxLength": 300,
+            "type": "string",
+            "description": "Web conference link for the virtual event.",
+            "nullable": true
+          },
+          "eventMessages": {
+            "title": "Employee Event Messages",
+            "type": "array",
+            "description": "The child resource for event messages.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMessages-item-patch-request"
+            }
+          },
+          "eventMetrics": {
+            "title": "Employee Event Metrics",
+            "type": "array",
+            "description": "The child resource for event metrics.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-eventMetrics-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "owners": {
+            "title": "Employee Event Owners",
+            "type": "array",
+            "description": "The child resource that provides details of the owners of the employee event.",
+            "items": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-owners-item-patch-request"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-eventMessages-item-patch-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "communicateUIEmployeeEventDetails-eventMetrics-item-patch-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "communicateUIEmployeeEventDetails-owners-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "EmployeeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the employee event.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerPersonId": {
+            "type": "integer",
+            "description": "Person identifier for the event owner.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OwnerTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Indicates whether a person is an event owner or co-owner.",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "communicateUIEmployeeEventDetails-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-post-request"
+            }
+          }
+        }
+      },
+      "communicateUIEmployeeEventDetails-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/communicateUIEmployeeEventDetails-item-patch-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

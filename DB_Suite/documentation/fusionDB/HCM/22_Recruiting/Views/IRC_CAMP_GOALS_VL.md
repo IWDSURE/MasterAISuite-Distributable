@@ -1,0 +1,36 @@
+# IRC_CAMP_GOALS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccampgoalsvl-7530.html#irccampgoalsvl-7530](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccampgoalsvl-7530.html#irccampgoalsvl-7530)
+
+## Columns
+
+- GOAL_ID
+- CAMPAIGN_ID
+- GOAL_NAME
+- PRIMARY_GOAL_FLAG
+- GOAL_TYPE_CODE
+- SYSTEM_GOAL_FLAG
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.GOAL_ID, B.CAMPAIGN_ID, TL.GOAL_NAME, B.PRIMARY_GOAL_FLAG, B.GOAL_TYPE_CODE, B.SYSTEM_GOAL_FLAG, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM IRC_CAMP_GOALS_B B, IRC_CAMP_GOALS_TL TL WHERE B.GOAL_ID = TL.GOAL_ID AND TL.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../22_Recruiting_Views_Index.md)

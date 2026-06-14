@@ -1,0 +1,3743 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - HCM Data Loader Data Sets",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/dataLoadDataSets/{RequestId}/action/generateFailedLinesFile": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Generate failed lines files for the business objects within the data set.",
+        "description": "Submits a request to generate files of the data lines that have failed to load for each business object within the data set which are then compressed into a single file.",
+        "operationId": "do_generateFailedLinesFile_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "messageLanguage": {
+                    "type": "string",
+                    "description": "Language of the error messages included in the generated file. Defaults to the session language.",
+                    "nullable": true
+                  },
+                  "encryptionKey": {
+                    "type": "string",
+                    "description": "Submits a request to generate files of the data lines that have failed to load for each business object within the data set which are then compressed into a single file.",
+                    "nullable": true
+                  },
+                  "fileEncryption": {
+                    "type": "string",
+                    "description": "Encryption type of the generated dat file. Valid values are NONE, PGPSIGNED, and PGPUNSIGNED.",
+                    "nullable": true
+                  },
+                  "includeMessagesFlag": {
+                    "type": "string",
+                    "description": "Indicates if error messages should be included in the generated files. Valid valued are Y and N.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the generated failed lines file request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the generated failed lines file request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-action-generateFailedLinesFile-post",
+        "x-filename-id": "dataloaddatasets-requestid-action-generatefailedlinesfile-post"
+      }
+    },
+    "/dataLoadDataSets/{RequestId}/action/stop": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Stop data set processing",
+        "description": "Request that the data set processing is stopped. Any business object records already processed won't be rolled back.",
+        "operationId": "do_stop_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Status of the stop request. Returns Y when the stop request was submitted successfully."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string",
+                      "description": "Status of the stop request. Returns Y when the stop request was submitted successfully."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-action-stop-post",
+        "x-filename-id": "dataloaddatasets-requestid-action-stop-post"
+      }
+    },
+    "/dataLoadDataSets/{RequestId}/action/deleteDataSet": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Delete a data set",
+        "description": "Submits a request to delete the staging table data for the specified data set from the HCM Data Loader staging tables.",
+        "operationId": "do_deleteDataSet_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deleteSourceFileFlag": {
+                    "type": "string",
+                    "description": "Indicates if the source file should be deleted along with the stage table data.",
+                    "nullable": true
+                  },
+                  "deleteOracleSearchRecordsFlag": {
+                    "type": "string",
+                    "description": "Indicates if records in the Oracle Search bulk import table should be deleted for the data set. The default value is Y.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the delete stage table data request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the delete stage table data request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-action-deleteDataSet-post",
+        "x-filename-id": "dataloaddatasets-requestid-action-deletedataset-post"
+      }
+    },
+    "/dataLoadDataSets/{RequestId}": {
+      "get": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Get a data set",
+        "operationId": "get_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dataLoadDataSets-item-response"
+                }
+              }
+            },
+            "links": {
+              "businessObjects": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1child~1businessObjects/get",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "The businessObjects resource is a child of the dataLoadDataSets resource. It's used to view details of the business objects included in the data set."
+              },
+              "processes": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1child~1processes/get",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "The processes resource is a child of the dataLoadDataSets resource. It's used to view details of the processes submitted to action the data set."
+              },
+              "stop": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1action~1stop/post",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "Request that the data set processing is stopped. Any business object records already processed won't be rolled back."
+              },
+              "submit": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1action~1submit/post",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "Submits a request to load or rollback a data set. Roll back is only initiated for business objects that support the roll back action."
+              },
+              "deleteSpreadsheetDataSet": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1action~1deleteSpreadsheetDataSet/post",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "Submits a request to delete a spreadsheet data set from the HCM Spreadsheet Data Loader and HCM Data Loader staging tables."
+              },
+              "generateFailedLinesFile": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1action~1generateFailedLinesFile/post",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "Submits a request to generate files of the data lines that have failed to load for each business object within the data set which are then compressed into a single file."
+              },
+              "messages": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1child~1messages/get",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "The messages resource is a child of the dataLoadDataSets resource. It's used to view details of the messages raised for a data set, including the details of the record the message was raised against."
+              },
+              "deleteDataSet": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1{RequestId}~1action~1deleteDataSet/post",
+                "parameters": {
+                  "RequestId": "$request.path.RequestId"
+                },
+                "description": "Submits a request to delete the staging table data for the specified data set from the HCM Data Loader staging tables."
+              }
+            }
+          }
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-get",
+        "x-filename-id": "dataloaddatasets-requestid-get"
+      }
+    },
+    "/dataLoadDataSets/action/createSpreadsheetDataSet": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Submit HCM Spreadsheet Data Loader",
+        "description": "Submits a file previously loaded to the Oracle WebCenter content server for processing by Oracle Fusion Cloud HCM Spreadsheet Data Loader. Specify the template code and whether to only import the file into the staging tables, or to import and load valid objects into the application tables. When you import and load data, the application returns the identifier for the data set creation request. Use this identifier to get the current data set status and perform other actions. When you only import the file into the staging tables, the application returns the data set name. You'll then need to manually load the data set from a spreadsheet generated using the same template. You can't initiate the load using REST service, if you've only imported the data to the staging tables.",
+        "operationId": "doall_createSpreadsheetDataSet_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newLineIndicator": {
+                    "type": "string",
+                    "description": "Characters used to indicate a new line. The default value is n, prefixed with the escape character.",
+                    "nullable": true
+                  },
+                  "deleteSourceFileFlag": {
+                    "type": "string",
+                    "description": "Indicates if the file generated by the template for HCM Data Loader processing should be deleted after the data is imported into the staging tables. The default value is Y.",
+                    "nullable": true
+                  },
+                  "dateFormat": {
+                    "type": "string",
+                    "description": "Date format used for attributes with the date data type. The default format is YYYY/MM/DD.",
+                    "nullable": true
+                  },
+                  "dataSetName": {
+                    "type": "string",
+                    "description": "Name of the data set.",
+                    "nullable": true
+                  },
+                  "contentId": {
+                    "type": "string",
+                    "description": "Unique identifier for the file on the Oracle WebCenter content server to be processed.",
+                    "nullable": true
+                  },
+                  "templateCode": {
+                    "type": "string",
+                    "description": "Spreadsheet template code to load data.",
+                    "nullable": true
+                  },
+                  "verificationKey": {
+                    "type": "string",
+                    "description": "Verification key used for the source file encryption.",
+                    "nullable": true
+                  },
+                  "fileEncryption": {
+                    "type": "string",
+                    "description": "Encryption used for the source file. The default is defined by the File Encryption parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "fileAction": {
+                    "type": "string",
+                    "description": "Action for the spreadsheet data. Valid values are IMPORT_AND_LOAD and IMPORT_ONLY. The default is IMPORT_AND_LOAD.",
+                    "nullable": true
+                  },
+                  "headerIncludedFlag": {
+                    "type": "string",
+                    "description": "Indicates if a header is included in the source file to name the attributes included in the file. The default value is Y.",
+                    "nullable": true
+                  },
+                  "attributeDelimiter": {
+                    "type": "string",
+                    "description": "Characters used to separate values in the file. The default is comma.",
+                    "nullable": true
+                  },
+                  "escapeIndicator": {
+                    "type": "string",
+                    "description": "Characters used to escape the delimiter characters within an attribute value. The default is backslash.",
+                    "nullable": true
+                  },
+                  "loadConcurrentThreads": {
+                    "type": "number",
+                    "description": "Maximum number of concurrent threads to assign to the load process. The default is defined by the Maximum Concurrent Threads for Load parameter in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "importMaxErrorPercentage": {
+                    "type": "number",
+                    "description": "Maximum percentage of records in error before the import ceases. The default is defined by the Maximum Percentage of Import Errors parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "loadMaxErrorPercentage": {
+                    "type": "number",
+                    "description": "Maximum percentage of records in error before the load ceases. The default is defined by the Maximum Percentage of Load Errors parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "importConcurrentThreads": {
+                    "type": "number",
+                    "description": "Maximum number of concurrent threads to assign to the import process. The default is defined by the Maximum Concurrent Threads for Import parameter in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the data set creation request, or the data set name when only importing data into the staging tables."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the data set creation request, or the data set name when only importing data into the staging tables."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-action-createSpreadsheetDataSet-post",
+        "x-filename-id": "dataloaddatasets-action-createspreadsheetdataset-post"
+      }
+    },
+    "/dataLoadDataSets/action/createFileDataSet": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Submit HCM Data Loader",
+        "description": "Submits a previously loaded compressed file to the Oracle WebCenter content server for processing by the HCM Data Loader. Specify whether to only import the file data into staging tables, or import and load valid objects into the application tables. The identifier for the data set creation request is returned. Use this to get the current data set status and perform additional actions.",
+        "operationId": "doall_createFileDataSet_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deleteSourceFileFlag": {
+                    "type": "string",
+                    "description": "Indicates if the source file should be deleted after the data is imported into the staging tables.",
+                    "nullable": true
+                  },
+                  "dataSetName": {
+                    "type": "string",
+                    "description": "Name of the data set.",
+                    "nullable": true
+                  },
+                  "contentId": {
+                    "type": "string",
+                    "description": "Unique identifier of the file on the Oracle WebCenter content server.",
+                    "nullable": true
+                  },
+                  "loadConcurrentThreads": {
+                    "type": "number",
+                    "description": "Maximum number of concurrent threads to assign to the load process. The default is defined by the Maximum Concurrent Threads for Load parameter in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "importMaxErrorPercentage": {
+                    "type": "number",
+                    "description": "Maximum percentage of records in error before the import ceases. The default is defined by the Maximum Percentage of Import Errors parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "verificationKey": {
+                    "type": "string",
+                    "description": "Verification key used for the source file encryption.",
+                    "nullable": true
+                  },
+                  "loadMaxErrorPercentage": {
+                    "type": "number",
+                    "description": "Maximum percentage of records in error before the load ceases. The default is defined by the Maximum Percentage of Load Errors parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "fileEncryption": {
+                    "type": "string",
+                    "description": "Encryption used for the source file. The default is defined by the File Encryption parameter found in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "fileAction": {
+                    "type": "string",
+                    "description": "Action for the data set. Valid values are IMPORT_AND_LOAD and IMPORT_ONLY. The default is defined by the File Action parameter in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  },
+                  "importConcurrentThreads": {
+                    "type": "number",
+                    "description": "Maximum number of concurrent threads to assign to the import process. The default is defined by the Maximum Concurrent Threads for Import parameter in the Configure HCM Data Loader task.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the data set creation request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Returns the identifier of the data set creation request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-action-createFileDataSet-post",
+        "x-filename-id": "dataloaddatasets-action-createfiledataset-post"
+      }
+    },
+    "/dataLoadDataSets/{RequestId}/action/submit": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Submit data set processing",
+        "description": "Submits a request to load or rollback a data set. Roll back is only initiated for business objects that support the roll back action.",
+        "operationId": "do_submit_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "loadConcurrentThreads": {
+                    "type": "number",
+                    "description": "Maximum number of concurrent threads to assign to the load process.",
+                    "nullable": true
+                  },
+                  "fileAction": {
+                    "type": "string",
+                    "description": "Action to perform for the data set. Valid values are LOAD and ROLLBACK. Default value is LOAD.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the submit request. Returns the request identifier of the parent process when the request was submitted successfully. It's used to identify the processes submitted to process the business objects within the data set."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the submit request. Returns the request identifier of the parent process when the request was submitted successfully. It's used to identify the processes submitted to process the business objects within the data set."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-action-submit-post",
+        "x-filename-id": "dataloaddatasets-requestid-action-submit-post"
+      }
+    },
+    "/dataLoadDataSets/action/uploadFile": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Upload file to HDL import account",
+        "description": "Uploads file to the HCM Data Loader import account of the Oracle WebCenter content server for processing by HCM Data Loader or HCM Spreadsheet Data Loader.",
+        "operationId": "doall_uploadFile_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "description": "Name of the file to upload.",
+                    "nullable": true
+                  },
+                  "contentId": {
+                    "type": "string",
+                    "description": "Content identifier to assign to the uploaded file. Automatically generated when not supplied.",
+                    "nullable": true
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Base 64 encoded file to upload.",
+                    "nullable": true
+                  },
+                  "fileEncryption": {
+                    "type": "string",
+                    "description": "Encryption used for the file being uploaded. Valid values are NONE, PGPSIGNED, and PGPUNSIGNED.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the file upload request. Returns the content identifier of the file on the Oracle WebCenter Content server."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Status of the file upload request. Returns the content identifier of the file on the Oracle WebCenter Content server."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-action-uploadFile-post",
+        "x-filename-id": "dataloaddatasets-action-uploadfile-post"
+      }
+    },
+    "/dataLoadDataSets/{RequestId}/action/deleteSpreadsheetDataSet": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Delete a spreadsheet data set",
+        "description": "Submits a request to delete a spreadsheet data set from the HCM Spreadsheet Data Loader and HCM Data Loader staging tables.",
+        "operationId": "do_deleteSpreadsheetDataSet_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "RequestId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier of the request.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-queryable": false,
+              "x-hints": {
+                "includeInCompactView": true,
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Identifier of the delete spreadsheet stage table data request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Identifier of the delete spreadsheet stage table data request."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-{RequestId}-action-deleteSpreadsheetDataSet-post",
+        "x-filename-id": "dataloaddatasets-requestid-action-deletespreadsheetdataset-post"
+      }
+    },
+    "/dataLoadDataSets/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Perform advanced search",
+        "description": "Finds all data sets using the specified advanced search query criteria.",
+        "operationId": "doall_findByAdvancedSearchQuery_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Starting position of the resource collection. If the offset exceeds the resource count then no resources are returned. Default value is 0.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Filter criteria in the advanced search query consisting of one or more expressions applied to the resource collection.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Maximum number of data set records returned based on the search criteria. If the value exceeds the maximum, then the maximum value will be used.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search field for the data set keyword query such as the Oracle WebCenter content identifier.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Facet filters for the data set search. These filters can include attributes such as the data set name, archival status and created by.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort criteria for the data set search results.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Display fields for the data set search response. The display fields can include fields such as data set name, import success count, load success count, and so on.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "Indicates whether the query for data sets is auto completed. Valid values are Y and N. The default value is Y.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Results of the advanced search query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Results of the advanced search query."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "dataLoadDataSets-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "dataloaddatasets-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/dataLoadDataSets": {
+      "get": {
+        "tags": [
+          "HCM Data Loader Data Sets"
+        ],
+        "summary": "Get all data sets",
+        "operationId": "getall_dataLoadDataSets",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ContentId; string; Oracle WebCenter content server identifier for the file.</li><li>DataSetId; integer; System-generated unique identifier for the data set.</li><li>DataSetName; string; Name of the data set.</li><li>DataSetStatusCode; string; Overall data set status derived from the transfer, import and load statuses.</li><li>DataSetStatusMeaning; string; Description of the data set status.</li><li>ImportStatusCode; string; Code for the import status of the data set.</li><li>ImportStatusMeaning; string; Description of the import status of the data set.</li><li>IntegrationTypeCode; string; Code for the integration type.</li><li>IntegrationTypeMeaning; string; Description of the integration type of the data set.</li><li>LoadStatusCode; string; Code for the status of loading staging table data into the application tables.</li><li>LoadStatusMeaning; string; Description of load status of the data set.</li><li>RequestId; integer; System-generated primary key for the request used to create the data set.</li><li>SourceTypeCode; string; Code for the source type of the data set.</li><li>SourceTypeMeaning; string; Description of the source type of the data set.</li><li>SpreadsheetTemplateCode; string; Code of the spreadsheet template used to create the data set.</li><li>SpreadsheetTemplateName; string; Name of the spreadsheet template used to create the data set.</li><li>TransferStatusCode; string; Code for the file data transfer status from the Oracle WebCenter Content server for the data set.</li><li>TransferStatusMeaning; string; Description of the transfer status for the data set.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all the data sets that match the primary key criteria specified. <br>Finder Variables <ul><li>DataSetId; integer;  Unique identifier of the data set. </li></ul></li><li>findByRequestId Finds all the data sets that match the specified criteria. <br>Finder Variables <ul><li>RequestId; integer;  System-generated identifier for the request. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all the data sets that match the primary key criteria specified.",
+                "properties": {
+                  "DataSetId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of the data set.",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByRequestId",
+                "description": "Finds all the data sets that match the specified criteria.",
+                "title": "findByRequestId",
+                "properties": {
+                  "RequestId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "System-generated identifier for the request.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dataLoadDataSets"
+                }
+              }
+            },
+            "links": {
+              "createFileDataSet": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1action~1createFileDataSet/post",
+                "description": "Submits a previously loaded compressed file to the Oracle WebCenter content server for processing by the HCM Data Loader. Specify whether to only import the file data into staging tables, or import and load valid objects into the application tables. The identifier for the data set creation request is returned. Use this to get the current data set status and perform additional actions."
+              },
+              "uploadFile": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1action~1uploadFile/post",
+                "description": "Uploads file to the HCM Data Loader import account of the Oracle WebCenter content server for processing by HCM Data Loader or HCM Spreadsheet Data Loader."
+              },
+              "createSpreadsheetDataSet": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1action~1createSpreadsheetDataSet/post",
+                "description": "Submits a file previously loaded to the Oracle WebCenter content server for processing by Oracle Fusion Cloud HCM Spreadsheet Data Loader. Specify the template code and whether to only import the file into the staging tables, or to import and load valid objects into the application tables. When you import and load data, the application returns the identifier for the data set creation request. Use this identifier to get the current data set status and perform other actions. When you only import the file into the staging tables, the application returns the data set name. You'll then need to manually load the data set from a spreadsheet generated using the same template. You can't initiate the load using REST service, if you've only imported the data to the staging tables."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1dataLoadDataSets~1action~1findByAdvancedSearchQuery/post",
+                "description": "Finds all data sets using the specified advanced search query criteria."
+              }
+            }
+          }
+        },
+        "x-internal-id": "dataLoadDataSets-get",
+        "x-filename-id": "dataloaddatasets-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "dataLoadDataSets-item-response": {
+        "type": "object",
+        "properties": {
+          "ContentId": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Oracle WebCenter content server identifier for the file.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the person who submitted the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the data set was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DataSetId": {
+            "type": "integer",
+            "description": "System-generated unique identifier for the data set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DataSetName": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DataSetStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Overall data set status derived from the transfer, import and load statuses.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DataSetStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the data set status.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "FailedLinesFileContentId": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Oracle WebCenter content server identifier for the generated failed lines file.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "FailedLinesFileEncryptionKey": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the PGP certificate used to encrypt the failed lines file generated for the data set.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FailedLinesFileEncryptionType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Encryption key to use when encrypting the failed lines file. Specify the name of a valid PGP certificate other than fusion-key.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "FileLineImportErrorCount": {
+            "type": "integer",
+            "description": "Number of data file lines within the data set that failed to import into the staging tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileLineImportSuccessCount": {
+            "type": "integer",
+            "description": "Number of data file lines within the data set that were successfully imported into the staging tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileLineTotalCount": {
+            "type": "integer",
+            "description": "Total number of data file lines found in all business objects files within the data set.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileSize": {
+            "type": "integer",
+            "description": "File size in bytes transferred from the Oracle WebCenter Content server.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "ImportPercentageComplete": {
+            "type": "integer",
+            "description": "Percentage of records processed by the import process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ImportStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the import status of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ImportStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the import status of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ImportSuccessPercentage": {
+            "type": "integer",
+            "description": "Percentage of records in the data set that are imported successfully.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "IntegrationTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the integration type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "IntegrationTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the integration type of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date and time when the data set was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the user who last updated the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LoadPercentageComplete": {
+            "type": "integer",
+            "description": "Percentage of records processed by the load process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LoadStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the status of loading staging table data into the application tables.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LoadStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of load status of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LoadSuccessPercentage": {
+            "type": "integer",
+            "description": "Percentage of objects in the data set that are loaded successfully.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ObjectLoadErrorCount": {
+            "type": "integer",
+            "description": "Number of objects within the data set that failed to load into the application tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectRollbackErrorCount": {
+            "type": "integer",
+            "description": "Number of objects within the data set that failed to be rolled back.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ObjectSuccessCount": {
+            "type": "integer",
+            "description": "Number of successfully processed business objects within the data set.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectTotalCount": {
+            "type": "integer",
+            "description": "Total number of business objects within the data set.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectUnprocessedCount": {
+            "type": "integer",
+            "description": "Count of unprocessed business objects within the data set.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ProtectedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates if the data set is protected from being deleted.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "RequestId": {
+            "type": "integer",
+            "description": "System-generated primary key for the request used to create the data set.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Review": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Link to generate a spreadsheet to review the data set.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceTypeCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the source type of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the source type of the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SpreadsheetMessage": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Message associated with the spreadsheet data set.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SpreadsheetTemplateCode": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Code of the spreadsheet template used to create the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SpreadsheetTemplateName": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Name of the spreadsheet template used to create the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SpreadsheetTemplateUserTypeCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "Code for the user type of the spreadsheet template for the data set.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SpreadsheetTemplateUserTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description for the user type of the spreadsheet template for the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TransferStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the file data transfer status from the Oracle WebCenter Content server for the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "TransferStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the transfer status for the data set.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "businessObjects": {
+            "title": "Data Set Business Objects",
+            "type": "array",
+            "description": "The businessObjects resource is a child of the dataLoadDataSets resource. It's used to view details of the business objects included in the data set.",
+            "items": {
+              "$ref": "#/components/schemas/dataLoadDataSets-businessObjects-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "messages": {
+            "title": "Messages",
+            "type": "array",
+            "description": "The messages resource is a child of the dataLoadDataSets resource. It's used to view details of the messages raised for a data set, including the details of the record the message was raised against.",
+            "items": {
+              "$ref": "#/components/schemas/dataLoadDataSets-messages-item-response"
+            }
+          },
+          "processes": {
+            "title": "Submitted Processes",
+            "type": "array",
+            "description": "The processes resource is a child of the dataLoadDataSets resource. It's used to view details of the processes submitted to action the data set.",
+            "items": {
+              "$ref": "#/components/schemas/dataLoadDataSets-processes-item-response"
+            }
+          }
+        }
+      },
+      "dataLoadDataSets-businessObjects-item-response": {
+        "type": "object",
+        "properties": {
+          "BusinessObjectDiscriminator": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Discriminator that identifies the business object.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "BusinessObjectId": {
+            "type": "integer",
+            "description": "System-generated unique identifier for the business object.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "BusinessObjectName": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Name of the business object.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the person who created the data set business object.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the business object was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DatFileName": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of the data file. Only applicable to compressed dat files processed by HCM Data Loader.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DataSetBusObjId": {
+            "type": "integer",
+            "description": "System-generated unique identifier for the business object within the data set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DataSetId": {
+            "type": "integer",
+            "description": "System-generated unique identifier for the data set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "FailedLinesFileContentId": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Oracle WebCenter content server identifier for the generated failed lines file.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "FailedLinesFileEncryptionKey": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the PGP certificate used to encrypt the failed lines file generated for the business object.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FailedLinesFileEncryptionType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Encryption details for the generated failed lines file.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "FileLineImportErrorCount": {
+            "type": "integer",
+            "description": "Number of data lines within the business object file that failed to import into the staging tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileLineImportSuccessCount": {
+            "type": "integer",
+            "description": "Number of data file lines within the business object file that were successfully imported into the staging tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileLineTotalCount": {
+            "type": "integer",
+            "description": "Total number of data lines found in the business object file.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ImportPercentageComplete": {
+            "type": "integer",
+            "description": "Percentage of records processed by the import process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ImportStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the import status of the business object objects.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ImportStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the import status for the business objects.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ImportSuccessPercentage": {
+            "type": "integer",
+            "description": "Percentage of records in the business object file or spreadsheet that are imported successfully.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Date and time when the data set business object was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the person who last processed the data set business object.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LoadOrder": {
+            "type": "integer",
+            "description": "Loading order of the business object within the data set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "default": 1,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "LoadPercentageComplete": {
+            "type": "integer",
+            "description": "Percentage of records processed by the load process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LoadStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the loading status of the staging table data into the application tables.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LoadStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the load status of the business objects.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LoadSuccessPercentage": {
+            "type": "integer",
+            "description": "Percentage of objects in the business object file or spreadsheet that are loaded successfully.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "ObjectLoadErrorCount": {
+            "type": "integer",
+            "description": "Number of objects in the business object file or spreadsheet that failed to load into the application tables.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectRollbackErrorCount": {
+            "type": "integer",
+            "description": "Number of objects in the business object file or spreadsheet that failed to be rolled back.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ObjectSuccessCount": {
+            "type": "integer",
+            "description": "Number of successfully processed business objects in the data file or spreadsheet.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectTotalCount": {
+            "type": "integer",
+            "description": "Total number of objects found for the business object.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ObjectUnprocessedCount": {
+            "type": "integer",
+            "description": "Number of unprocessed business objects in the data file or spreadsheet.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "default": 0,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "RequestId": {
+            "type": "integer",
+            "description": "Process identifier submitted to create the business object.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "RollbackEnabledFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates if the business object supports being rolled back.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "TransferStatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Transfer status code for the business object file data from the Oracle WebCenter Content server.",
+            "nullable": false,
+            "readOnly": true,
+            "default": "UNPROCESSED",
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "TransferStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the transfer status.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "dataLoadDataSets-messages-item-response": {
+        "type": "object",
+        "properties": {
+          "BusinessObjectDiscriminator": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Discriminator of the business object in the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ConcatenatedUserKey": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Concatenated user key values that identify the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DatFileName": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of the business object file.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DataSetBusObjId": {
+            "type": "integer",
+            "description": "Surrogate identifier of the business object.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DataSetId": {
+            "type": "integer",
+            "description": "System-generated unique identifier of the data set.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EffectiveEndDate": {
+            "type": "string",
+            "description": "Effective end date of the record associated with the message.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveLatestChange": {
+            "maxLength": 4,
+            "type": "string",
+            "description": "Effective latest change flag for the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveSequence": {
+            "type": "integer",
+            "description": "Effective sequence number of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EffectiveStartDate": {
+            "type": "string",
+            "description": "Effective start date of the record associated with the message.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileLine": {
+            "type": "integer",
+            "description": "File line number in the data file associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FusionGUID": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Globally unique identifier of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GeneratedByCode": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Code for the generating source of the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GeneratedByMeaning": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the generating source of the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LineOperation": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Operation supplied for the file line associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MessageLineId": {
+            "type": "integer",
+            "description": "System-generated identifier for the message.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "MessageText": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "Error or warning message text.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "MessageTypeCode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Code for the message type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MessageTypeMeaning": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the message type.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "MessageUserDetails": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "User details of the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "OriginatingProcessCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the originating process of the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OriginatingProcessName": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the originating process of the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReportedAgainstCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the type of record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ReportedAgainstMeaning": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Name of the type of record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "SourceReference001": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "First source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceReference002": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Second source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceReference003": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Third source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceReference004": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Fourth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceReference005": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Fifth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReference006": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Sixth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReference007": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Seventh source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReference008": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Eighth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReference009": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Ninth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReference010": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Tenth source reference value of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName001": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "First source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName002": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Second source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName003": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Third source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName004": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Fourth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName005": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Fifth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName006": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Sixth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName007": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Seventh source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName008": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Eighth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName009": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Ninth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceReferenceName010": {
+            "maxLength": 800,
+            "type": "string",
+            "description": "Tenth source reference name of the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SourceSystemId": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Source system identifier used to uniquely identify the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SourceSystemOwner": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "Source system owner used to uniquely identify the record associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "SurrogateId": {
+            "type": "integer",
+            "description": "Surrogate identifier of the record the message associated with the message.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "dataLoadDataSets-processes-item-response": {
+        "type": "object",
+        "properties": {
+          "BusinessObjectName": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "Name of the business object associated with the process.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the user who submitted the process.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the process was requested.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DatFileName": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Name of the file processed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "DataSetBusObjId": {
+            "type": "integer",
+            "description": "Unique identifier of the business object being processed within the data set.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "DataSetId": {
+            "type": "integer",
+            "description": "Unique identifier of the data set.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "ElapsedTime": {
+            "maxLength": 108,
+            "type": "string",
+            "description": "Process running time.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "EndTime": {
+            "type": "string",
+            "description": "Process end time.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ErrorCount": {
+            "type": "integer",
+            "description": "Number of records that failed to be processed.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "FileActionCode": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Code of the action performed by the load business object process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileActionMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the file action.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "User name of the user who last updated the process.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Last updated date and time for the process.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "ParentRequestId": {
+            "type": "integer",
+            "description": "Unique identifier of the parent request responsible for submitting this request.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Name of the process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "ProcessId": {
+            "type": "integer",
+            "description": "Unique identifier of the process record.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessName": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the process name.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "RequestId": {
+            "type": "integer",
+            "description": "Unique identifier of the request.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18
+            }
+          },
+          "StartTime": {
+            "type": "string",
+            "description": "Process start time.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "SuccessCount": {
+            "type": "integer",
+            "description": "Number of successfully processed records.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ThreadsAllocated": {
+            "type": "integer",
+            "description": "Number of concurrent threads allocated for the process.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "ThreadsUsed": {
+            "type": "integer",
+            "description": "Number of concurrent threads used by the process.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "TotalCount": {
+            "type": "integer",
+            "description": "Total number of records to be processed.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "UnprocessedCount": {
+            "type": "integer",
+            "description": "Count of unprocessed records.",
+            "format": "int32",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 9
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "subprocesses": {
+            "title": "Submitted Subprocesses",
+            "type": "array",
+            "description": "The subprocesses resource is a child of the processes resource. It provides details of the subprocesses submitted by a specific HCM Data Loader data set process.",
+            "items": {
+              "$ref": "#/components/schemas/dataLoadDataSets-processes-subprocesses-item-response"
+            }
+          }
+        }
+      },
+      "dataLoadDataSets-processes-subprocesses-item-response": {
+        "type": "object",
+        "properties": {
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the user who submitted the process.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date and time when the subprocess was requested.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Elapsedtime": {
+            "maxLength": 108,
+            "type": "string",
+            "description": "Subprocess running time.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EndTime": {
+            "type": "string",
+            "description": "Subprocess end time.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Last updated date and time for the subprocess.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "User name of the user who last updated the subprocess.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Parentrequestid": {
+            "type": "integer",
+            "description": "Unique identifier of the request that initiated the subprocess.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessCode": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Code that identifies the subprocess.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProcessId": {
+            "type": "integer",
+            "description": "Unique identifier for the subprocess submission.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProcessName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the subprocess.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProcessStatusCode": {
+            "title": "Lookup Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code of the subprocess status.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProcessStatusMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Description of the subprocess status.",
+            "nullable": false,
+            "readOnly": true,
+            "default": "NVL(post_proc_name,hcmlookuppeo_processname.meaning)",
+            "x-queryable": true
+          },
+          "RequestId": {
+            "type": "integer",
+            "description": "Unique identifier of the request.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StartTime": {
+            "type": "string",
+            "description": "Subprocess start time.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "dataLoadDataSets": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/dataLoadDataSets-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

@@ -1,0 +1,2796 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Gig Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingOppMktGigDetails/{GigId}": {
+      "get": {
+        "tags": [
+          "Gig Details"
+        ],
+        "summary": "Get a detail on an opportunity marketplace gig",
+        "operationId": "get_recruitingOppMktGigDetails",
+        "parameters": [
+          {
+            "name": "GigId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Gig identifier for a classification in opportunity marketplace.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "benefits": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1benefits/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace."
+              },
+              "gigMediaLinks": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigMediaLinks/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace."
+              },
+              "gigClassifications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigClassifications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace."
+              },
+              "gigDff": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigDff/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                }
+              },
+              "GeoHierarchyNodesVA": {
+                "operationRef": "#/paths/~1recruitingGeographyHierarchyLocationsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: GeographyNodeId; Target Attribute: GeographyNodeId</li><li>Display Attribute: GeographyNodeId</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/GeographyNodeId",
+                  "displayValues": [
+                    "GeographyNodeId"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "GeographyNodeId",
+                  "displayFields": [
+                    "GeographyNodeId"
+                  ]
+                }
+              },
+              "gigApplications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigApplications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace."
+              },
+              "gigSkills": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigSkills/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace."
+              },
+              "teamMembers": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1teamMembers/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingOppMktGigDetails-{GigId}-get",
+        "x-filename-id": "recruitingoppmktgigdetails-gigid-get"
+      },
+      "delete": {
+        "tags": [
+          "Gig Details"
+        ],
+        "summary": "Delete a detail on a gig in opportunity marketplace",
+        "operationId": "delete_recruitingOppMktGigDetails",
+        "parameters": [
+          {
+            "name": "GigId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Gig identifier for a classification in opportunity marketplace.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingOppMktGigDetails-{GigId}-delete",
+        "x-filename-id": "recruitingoppmktgigdetails-gigid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Gig Details"
+        ],
+        "summary": "Update a detail on a gig in opportunity marketplace",
+        "operationId": "update_recruitingOppMktGigDetails",
+        "parameters": [
+          {
+            "name": "GigId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Gig identifier for a classification in opportunity marketplace.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingOppMktGigDetails-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "benefits": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1benefits/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace."
+              },
+              "gigMediaLinks": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigMediaLinks/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace."
+              },
+              "gigClassifications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigClassifications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace."
+              },
+              "gigDff": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigDff/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                }
+              },
+              "GeoHierarchyNodesVA": {
+                "operationRef": "#/paths/~1recruitingGeographyHierarchyLocationsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: GeographyNodeId; Target Attribute: GeographyNodeId</li><li>Display Attribute: GeographyNodeId</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/GeographyNodeId",
+                  "displayValues": [
+                    "GeographyNodeId"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "GeographyNodeId",
+                  "displayFields": [
+                    "GeographyNodeId"
+                  ]
+                }
+              },
+              "gigApplications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigApplications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace."
+              },
+              "gigSkills": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigSkills/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace."
+              },
+              "teamMembers": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1teamMembers/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingOppMktGigDetails-{GigId}-patch",
+        "x-filename-id": "recruitingoppmktgigdetails-gigid-patch"
+      }
+    },
+    "/recruitingOppMktGigDetails": {
+      "get": {
+        "tags": [
+          "Gig Details"
+        ],
+        "summary": "Get all details on an opportunity marketplace gig",
+        "operationId": "getall_recruitingOppMktGigDetails",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>BookmarkFlag; boolean; Indicates whether a gig is bookmarked in opportunity marketplace. The default value is 0</li><li>CanceledApplicationsCount; integer; Number of canceled applications for a gig in opportunity marketplace.</li><li>ClassifyBUId; integer; Business unit identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyBUName; string; Business unit identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyJobFamilyId; integer; Job family identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyJobFamilyName; string; Business unit identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyJobFuncCode; string; Job function code for the classification of a gig in opportunity marketplace.</li><li>ClassifyJobFuncName; string; Business unit identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyOrgId; integer; Organization identifier for the classification of a gig in opportunity marketplace.</li><li>ClassifyOrgName; string; Business unit identifier for the classification of a gig in opportunity marketplace.</li><li>CompletedApplicationsCount; integer; Number of completed applications for a gig in opportunity marketplace.</li><li>CreatorEmail; string; Email of the gig creator in opportunity marketplace.</li><li>CreatorName; string; Name of the gig creator in opportunity marketplace.</li><li>CreatorPersonId; integer; Person ID of the gig creator in opportunity marketplace.</li><li>CreatorPhoneNumber; string; Phone of the gig creator in opportunity marketplace.</li><li>CreatorPosition; string; Position of the gig creator in opportunity marketplace.</li><li>EndDate; string; End date of a gig in opportunity marketplace.</li><li>FilledCount; integer; Number filled applications for a gig in opportunity marketplace.</li><li>GeographyNodeId; integer; Geographical node ID of the gig location in opportunity marketplace.</li><li>GigId; integer; Gig ID of a gig in opportunity marketplace.</li><li>GigManagerEmail; string; Gig manager email</li><li>GigManagerName; string; Name of the gig manager in opportunity marketplace.</li><li>GigManagerPersonId; integer; Person ID of a gig manager in opportunity marketplace.</li><li>GigManagerPhoneNumber; string; Gig manager phone number</li><li>GigManagerPosition; string; Gig manager position</li><li>GigNumber; string; Gig number of a gig in opportunity marketplace.</li><li>GigValidFlag; boolean; Indicates whether a gig is valid in opportunity marketplace. No default value.</li><li>HasAppliedFlag; boolean; Indicates whether someone applied to a gig in opportunity marketplace. The default value is 0.</li><li>Location; string; Location of a gig in opportunity marketplace.</li><li>NewApplicationsCount; integer; Number of new applications for a gig in opportunity marketplace.</li><li>NotSelectedApplicationsCount; integer; Number of applications not selected for a gig in opportunity marketplace.</li><li>OpeningsCount; integer; Number of openings for a gig in opportunity marketplace.</li><li>OrganizationId; integer; Organization ID of a gig in opportunity marketplace.</li><li>PendingApprovalAppsCount; integer; Number of applications pending approval for a gig in opportunity marketplace.</li><li>ProfileId; integer; Profile ID of a gig in opportunity marketplace.</li><li>PublishDate; string; Publish date of a gig in opportunity marketplace.</li><li>RemoteOpportunityFlag; boolean; Indicates whether the gig in opportunity marketplace is a remote opportunity. The default value is 0</li><li>StartDate; string; Start date of a gig in opportunity marketplace.</li><li>StatusCode; string; Status code of a gig in opportunity marketplace.</li><li>TimeCommitment; integer; Time commitment of a gig in opportunity marketplace.</li><li>Title; string; Title of a gig in opportunity marketplace.</li><li>TotalApplicationsCount; integer; Number of all the applications for a gig in opportunity marketplace.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds gig details in opportunity marketplace using a unique ID. <br>Finder Variables <ul><li>GigId; integer;  Finds gig details in opportunity marketplace using a unique ID and the gig ID. </li></ul></li><li>findById Finds gig details in opportunity marketplace using findByGidId. <br>Finder Variables <ul><li>GigId; integer;  Finds gig details in opportunity marketplace using findByGidId and GigIdBindVar. </li></ul></li><li>findByNumber Finds gig details in opportunity marketplace using findByNumber. <br>Finder Variables <ul><li>GigNumber; string;  Finds gig details in opportunity marketplace using the number entered by the consumer. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds gig details in opportunity marketplace using a unique ID.",
+                "properties": {
+                  "GigId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "description": "Finds gig details in opportunity marketplace using a unique ID and the gig ID.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findById",
+                "description": "Finds gig details in opportunity marketplace using findByGidId.",
+                "title": "findById",
+                "properties": {
+                  "GigId": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds gig details in opportunity marketplace using findByGidId and GigIdBindVar.",
+                    "type": "integer"
+                  }
+                }
+              },
+              {
+                "name": "findByNumber",
+                "description": "Finds gig details in opportunity marketplace using findByNumber.",
+                "title": "findByNumber",
+                "properties": {
+                  "GigNumber": {
+                    "x-queryable": false,
+                    "x-hints": {
+                      "required": "Optional"
+                    },
+                    "description": "Finds gig details in opportunity marketplace using the number entered by the consumer.",
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingOppMktGigDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingOppMktGigDetails-get",
+        "x-filename-id": "recruitingoppmktgigdetails-get"
+      },
+      "post": {
+        "tags": [
+          "Gig Details"
+        ],
+        "summary": "Create gig details in opportunity marketplace",
+        "operationId": "create_recruitingOppMktGigDetails",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingOppMktGigDetails-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-response"
+                }
+              }
+            },
+            "links": {
+              "benefits": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1benefits/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace."
+              },
+              "gigMediaLinks": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigMediaLinks/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace."
+              },
+              "gigClassifications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigClassifications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace."
+              },
+              "gigDff": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigDff/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                }
+              },
+              "GeoHierarchyNodesVA": {
+                "operationRef": "#/paths/~1recruitingGeographyHierarchyLocationsLOV/get",
+                "description": "The following properties are defined on the LOV link relation:<br><ul><li>Source Attribute: GeographyNodeId; Target Attribute: GeographyNodeId</li><li>Display Attribute: GeographyNodeId</li></ul>",
+                "x-lov": {
+                  "definedOn": "$request.body#/GeographyNodeId",
+                  "displayValues": [
+                    "GeographyNodeId"
+                  ],
+                  "itemsPath": "items",
+                  "valueField": "GeographyNodeId",
+                  "displayFields": [
+                    "GeographyNodeId"
+                  ]
+                }
+              },
+              "gigApplications": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigApplications/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace."
+              },
+              "gigSkills": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1gigSkills/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace."
+              },
+              "teamMembers": {
+                "operationRef": "#/paths/~1recruitingOppMktGigDetails~1{GigId}~1child~1teamMembers/get",
+                "parameters": {
+                  "GigId": "$request.path.GigId"
+                },
+                "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingOppMktGigDetails-post",
+        "x-filename-id": "recruitingoppmktgigdetails-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingOppMktGigDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "BookmarkFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether a gig is bookmarked in opportunity marketplace. The default value is 0",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CanceledApplicationsCount": {
+            "type": "integer",
+            "description": "Number of canceled applications for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ClassifyBUId": {
+            "title": "Business Unit",
+            "type": "integer",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ClassifyBUName": {
+            "title": "Business Unit",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "ClassifyBUId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ClassifyJobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ClassifyJobFamilyName": {
+            "title": "Job Family",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "ClassifyJobFamilyId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ClassifyJobFuncCode": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function code for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ClassifyJobFuncName": {
+            "title": "Job Function",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "ClassifyJobFuncCode"
+              ]
+            },
+            "x-queryable": true
+          },
+          "ClassifyOrgId": {
+            "title": "Organization",
+            "type": "integer",
+            "description": "Organization identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ClassifyOrgName": {
+            "title": "Organization",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "ClassifyOrgId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "CompletedApplicationsCount": {
+            "type": "integer",
+            "description": "Number of completed applications for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreatorEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email of the gig creator in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreatorName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the gig creator in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreatorPersonId": {
+            "type": "integer",
+            "description": "Person ID of the gig creator in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "CreatorPhoneNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phone of the gig creator in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreatorPosition": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Position of the gig creator in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the gig in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          },
+          "DescriptionStr": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description details of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FilledCount": {
+            "type": "integer",
+            "description": "Number filled applications for a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "readOnly": true,
+            "default": 0,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "GeographyNodeId": {
+            "title": "Location",
+            "type": "integer",
+            "description": "Geographical node ID of the gig location in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GigId": {
+            "type": "integer",
+            "description": "Gig ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "GigManagerEmail": {
+            "title": "Gig Manager Email",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Gig manager email",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GigManagerName": {
+            "title": "Gig Manager Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the gig manager in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GigManagerPersonId": {
+            "title": "Gig Manager",
+            "type": "integer",
+            "description": "Person ID of a gig manager in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "GigManagerPhoneNumber": {
+            "title": "Gig Manager Phone Number",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Gig manager phone number",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GigManagerPosition": {
+            "title": "Gig Manager Position",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Gig manager position",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "GigNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Gig number of a gig in opportunity marketplace.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "GigId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "GigValidFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether a gig is valid in opportunity marketplace. No default value.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HasAppliedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether someone applied to a gig in opportunity marketplace. The default value is 0.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Location": {
+            "title": "Location",
+            "maxLength": 255,
+            "type": "string",
+            "description": "Location of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "GeographyNodeId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "NewApplicationsCount": {
+            "type": "integer",
+            "description": "Number of new applications for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NotSelectedApplicationsCount": {
+            "type": "integer",
+            "description": "Number of applications not selected for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OpeningsCount": {
+            "title": "Number of Openings",
+            "type": "integer",
+            "description": "Number of openings for a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "OrganizationId": {
+            "type": "integer",
+            "description": "Organization ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PendingApprovalAppsCount": {
+            "type": "integer",
+            "description": "Number of applications pending approval for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PublishDate": {
+            "title": "Posted Date",
+            "type": "string",
+            "description": "Publish date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RemoteOpportunityFlag": {
+            "title": "Remote Opportunity",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the gig in opportunity marketplace is a remote opportunity. The default value is 0",
+            "nullable": true,
+            "default": false,
+            "x-queryable": true
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code of a gig in opportunity marketplace.",
+            "nullable": false,
+            "default": "Draft",
+            "x-queryable": true
+          },
+          "TimeCommitment": {
+            "title": "Hours per Week",
+            "type": "integer",
+            "description": "Time commitment of a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 3
+            },
+            "x-queryable": true
+          },
+          "Title": {
+            "title": "Role",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of a gig in opportunity marketplace.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "TotalApplicationsCount": {
+            "type": "integer",
+            "description": "Number of all the applications for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "benefits": {
+            "title": "Gig Benefits",
+            "type": "array",
+            "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-benefits-item-response"
+            }
+          },
+          "gigApplications": {
+            "title": "Gig Applications",
+            "type": "array",
+            "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigApplications-item-response"
+            }
+          },
+          "gigClassifications": {
+            "title": "Gig Classifications",
+            "type": "array",
+            "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigClassifications-item-response"
+            }
+          },
+          "gigDff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigDff-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "gigMediaLinks": {
+            "title": "Gig Media Links",
+            "type": "array",
+            "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigMediaLinks-item-response"
+            }
+          },
+          "gigSkills": {
+            "title": "Gig Skills",
+            "type": "array",
+            "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigSkills-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "teamMembers": {
+            "title": "Gig Team Members",
+            "type": "array",
+            "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-teamMembers-item-response"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-benefits-item-response": {
+        "type": "object",
+        "properties": {
+          "BenefitId": {
+            "type": "integer",
+            "description": "Benefit ID of a gig benefit in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of a gig benefit in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          },
+          "DescriptionStr": {
+            "type": "string",
+            "description": "Description details of a gig benefit in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigApplications-item-response": {
+        "type": "object",
+        "properties": {
+          "ApplicationDate": {
+            "type": "string",
+            "description": "Application date of opportunities in Opportunity Marketplace.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "description": "Application ID of a gig application in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AssignmentName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the assignment in a gig application in Opportunity Marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CompletedGigCount": {
+            "type": "integer",
+            "description": "Number of gigs completed by a candidate in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "IsRecommendedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Flag denoting whether this candidate was a recommended candidate in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Job name in a gig application in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationName": {
+            "type": "string",
+            "description": "Location name of the candidate in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name in a gig application in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "OrganizationName": {
+            "type": "string",
+            "description": "Organization name of the candidate in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person ID in a gig application in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code of an application for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigClassifications-item-response": {
+        "type": "object",
+        "properties": {
+          "ClassificationId": {
+            "type": "integer",
+            "description": "Classification identifier for the specific classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "GigId": {
+            "type": "integer",
+            "description": "Gig identifier for a classification in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Job identifier for a classification in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "JobName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "dependencies": [
+                "JobId"
+              ]
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigDff-item-response": {
+        "type": "object",
+        "properties": {
+          "GigId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigMediaLinks-item-response": {
+        "type": "object",
+        "properties": {
+          "GigMediaLinkId": {
+            "type": "integer",
+            "description": "Unique ID for the gig media link in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "LookupCode": {
+            "type": "string",
+            "description": "Code for the gig media link in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL for the media thumbnail in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of gig media link in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "URL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL of the gig media link in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigSkills-item-response": {
+        "type": "object",
+        "properties": {
+          "ContentItemId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SkillId": {
+            "type": "integer",
+            "description": "Skill ID for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SkillName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Skills": {
+            "title": "Skill",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Source": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-teamMembers-item-response": {
+        "type": "object",
+        "properties": {
+          "OpportunityType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Opportunity type for a gig team member in opportunity marketplace.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "TeamMemberEmailAddress": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email address of a gig team member in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TeamMemberId": {
+            "type": "integer",
+            "description": "Team member ID in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "TeamMemberName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of a gig team member in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TeamMemberPersonId": {
+            "type": "integer",
+            "description": "Person ID of a gig team member in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TeamMemberPhoneNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phone of a gig team member in opportunity marketplace.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "TeamMemberRole": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Role of a gig team member in opportunity marketplace.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ClassifyBUId": {
+            "title": "Business Unit",
+            "type": "integer",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ClassifyJobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ClassifyJobFuncCode": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function code for the classification of a gig in opportunity marketplace.",
+            "nullable": true
+          },
+          "ClassifyOrgId": {
+            "title": "Organization",
+            "type": "integer",
+            "description": "Organization identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the gig in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "GeographyNodeId": {
+            "title": "Location",
+            "type": "integer",
+            "description": "Geographical node ID of the gig location in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "GigManagerPersonId": {
+            "title": "Gig Manager",
+            "type": "integer",
+            "description": "Person ID of a gig manager in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OpeningsCount": {
+            "title": "Number of Openings",
+            "type": "integer",
+            "description": "Number of openings for a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PublishDate": {
+            "title": "Posted Date",
+            "type": "string",
+            "description": "Publish date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "RemoteOpportunityFlag": {
+            "title": "Remote Opportunity",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the gig in opportunity marketplace is a remote opportunity. The default value is 0",
+            "nullable": true,
+            "default": false
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code of a gig in opportunity marketplace.",
+            "nullable": false,
+            "default": "Draft"
+          },
+          "TimeCommitment": {
+            "title": "Hours per Week",
+            "type": "integer",
+            "description": "Time commitment of a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 3
+            }
+          },
+          "Title": {
+            "title": "Role",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of a gig in opportunity marketplace.",
+            "nullable": false
+          },
+          "benefits": {
+            "title": "Gig Benefits",
+            "type": "array",
+            "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-benefits-item-patch-request"
+            }
+          },
+          "gigApplications": {
+            "title": "Gig Applications",
+            "type": "array",
+            "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigApplications-item-patch-request"
+            }
+          },
+          "gigClassifications": {
+            "title": "Gig Classifications",
+            "type": "array",
+            "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigClassifications-item-patch-request"
+            }
+          },
+          "gigDff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigDff-item-patch-request"
+            },
+            "x-cardinality": "1"
+          },
+          "gigMediaLinks": {
+            "title": "Gig Media Links",
+            "type": "array",
+            "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigMediaLinks-item-patch-request"
+            }
+          },
+          "gigSkills": {
+            "title": "Gig Skills",
+            "type": "array",
+            "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigSkills-item-patch-request"
+            }
+          },
+          "teamMembers": {
+            "title": "Gig Team Members",
+            "type": "array",
+            "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-teamMembers-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-benefits-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Description": {
+            "type": "string",
+            "description": "Description of a gig benefit in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigApplications-item-patch-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "recruitingOppMktGigDetails-gigClassifications-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "type": "integer",
+            "description": "Job identifier for a classification in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigDff-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigMediaLinks-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "LookupCode": {
+            "type": "string",
+            "description": "Code for the gig media link in opportunity marketplace.",
+            "nullable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL for the media thumbnail in opportunity marketplace.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of gig media link in opportunity marketplace.",
+            "nullable": true
+          },
+          "URL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL of the gig media link in opportunity marketplace.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigSkills-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ContentItemId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SkillName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true
+          },
+          "Skills": {
+            "title": "Skill",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-teamMembers-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "TeamMemberPersonId": {
+            "type": "integer",
+            "description": "Person ID of a gig team member in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "TeamMemberRole": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Role of a gig team member in opportunity marketplace.",
+            "nullable": false
+          }
+        }
+      },
+      "recruitingOppMktGigDetails": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingOppMktGigDetails-item-post-request": {
+        "required": [
+          "Description",
+          "StartDate",
+          "Title"
+        ],
+        "type": "object",
+        "properties": {
+          "ClassifyBUId": {
+            "title": "Business Unit",
+            "type": "integer",
+            "description": "Business unit identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ClassifyJobFamilyId": {
+            "title": "Job Family",
+            "type": "integer",
+            "description": "Job family identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ClassifyJobFuncCode": {
+            "title": "Job Function",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Job function code for the classification of a gig in opportunity marketplace.",
+            "nullable": true
+          },
+          "ClassifyOrgId": {
+            "title": "Organization",
+            "type": "integer",
+            "description": "Organization identifier for the classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "type": "string",
+            "description": "Description of the gig in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          },
+          "EndDate": {
+            "title": "End Date",
+            "type": "string",
+            "description": "End date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "GeographyNodeId": {
+            "title": "Location",
+            "type": "integer",
+            "description": "Geographical node ID of the gig location in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "GigId": {
+            "type": "integer",
+            "description": "Gig ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "GigManagerPersonId": {
+            "title": "Gig Manager",
+            "type": "integer",
+            "description": "Person ID of a gig manager in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "OpeningsCount": {
+            "title": "Number of Openings",
+            "type": "integer",
+            "description": "Number of openings for a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "PublishDate": {
+            "title": "Posted Date",
+            "type": "string",
+            "description": "Publish date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "RemoteOpportunityFlag": {
+            "title": "Remote Opportunity",
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the gig in opportunity marketplace is a remote opportunity. The default value is 0",
+            "nullable": true,
+            "default": false
+          },
+          "StartDate": {
+            "title": "Start Date",
+            "type": "string",
+            "description": "Start date of a gig in opportunity marketplace.",
+            "format": "date-time",
+            "nullable": false
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status code of a gig in opportunity marketplace.",
+            "nullable": false,
+            "default": "Draft"
+          },
+          "TimeCommitment": {
+            "title": "Hours per Week",
+            "type": "integer",
+            "description": "Time commitment of a gig in opportunity marketplace.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 3
+            }
+          },
+          "Title": {
+            "title": "Role",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of a gig in opportunity marketplace.",
+            "nullable": false
+          },
+          "benefits": {
+            "title": "Gig Benefits",
+            "type": "array",
+            "description": "The benefits resource is the child of the recruitingOppMktGigDetails resource and provides the benefits of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-benefits-item-post-request"
+            }
+          },
+          "gigApplications": {
+            "title": "Gig Applications",
+            "type": "array",
+            "description": "The gigApplications resource is the child of the recruitingOppMktGigDetails resource and provides the list of applications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigApplications-item-post-request"
+            }
+          },
+          "gigClassifications": {
+            "title": "Gig Classifications",
+            "type": "array",
+            "description": "The gig classification resource is the child of the recruitingOppMktGigDetails resource and provides the list of classifications for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigClassifications-item-post-request"
+            }
+          },
+          "gigDff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigDff-item-post-request"
+            },
+            "x-cardinality": "1"
+          },
+          "gigMediaLinks": {
+            "title": "Gig Media Links",
+            "type": "array",
+            "description": "The gigMediaLinks resource is the child of the recruitingOppMktGigDetails resource and provides the list of media for a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigMediaLinks-item-post-request"
+            }
+          },
+          "gigSkills": {
+            "title": "Gig Skills",
+            "type": "array",
+            "description": "The skills resource is the child of the recruitingOppMktGigDetails resource and provides the skills of a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-gigSkills-item-post-request"
+            }
+          },
+          "teamMembers": {
+            "title": "Gig Team Members",
+            "type": "array",
+            "description": "The teamMembers resource is the child of the recruitingOppMktGigDetails resource and provides the list of team members working on a gig in opportunity marketplace.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-teamMembers-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-benefits-item-post-request": {
+        "type": "object",
+        "properties": {
+          "BenefitId": {
+            "type": "integer",
+            "description": "Benefit ID of a gig benefit in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of a gig benefit in opportunity marketplace.",
+            "format": "byte",
+            "nullable": false,
+            "x-queryable": false
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigApplications-item-post-request": {
+        "type": "object",
+        "properties": {}
+      },
+      "recruitingOppMktGigDetails-gigClassifications-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ClassificationId": {
+            "type": "integer",
+            "description": "Classification identifier for the specific classification of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "GigId": {
+            "type": "integer",
+            "description": "Gig identifier for a classification in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Job identifier for a classification in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigDff-item-post-request": {
+        "type": "object",
+        "properties": {
+          "GigId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "__FLEX_Context": {
+            "title": "Context Segment",
+            "maxLength": 150,
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "FND_ACFF_ValueSetInfo": "_FLEX_ContextValueSet_Internal#INDEPENDENT",
+              "controlType": "choice",
+              "FND_ACFF_AkaAttrName": "__FLEX_Context_DisplayValue",
+              "includeInCompactView": true,
+              "FND_ACFF_IsDiscriminator": "true",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          },
+          "__FLEX_Context_DisplayValue": {
+            "title": "Context Segment",
+            "type": "string",
+            "description": "Context Segment",
+            "nullable": true,
+            "x-hints": {
+              "updateable": "false",
+              "help": {
+                "instruction": "Context Segment"
+              },
+              "DISPLAYHINT": "Hide",
+              "FND_ACFF_IsReadOnly": "true",
+              "FND_ACFF_AkaRealSegmentAttrName": "__FLEX_Context",
+              "FND_ACFF_JavaType": "java.lang.String",
+              "FND_ACFF_ListDisplayAttrName": "Name",
+              "FND_ACFF_MaximumLength": "1024",
+              "FND_ACFF_PreferredDisplayType": "LOV"
+            },
+            "x-oj": {
+              "transform": {
+                "path": "oj-sp/common-util/flex-util",
+                "name": "transformFlexUIHints"
+              }
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigMediaLinks-item-post-request": {
+        "type": "object",
+        "properties": {
+          "GigMediaLinkId": {
+            "type": "integer",
+            "description": "Unique ID for the gig media link in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "LookupCode": {
+            "type": "string",
+            "description": "Code for the gig media link in opportunity marketplace.",
+            "nullable": true
+          },
+          "ThumbnailURL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL for the media thumbnail in opportunity marketplace.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Title of gig media link in opportunity marketplace.",
+            "nullable": true
+          },
+          "URL": {
+            "maxLength": 1000,
+            "type": "string",
+            "description": "URL of the gig media link in opportunity marketplace.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-gigSkills-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ContentItemId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ProfileId": {
+            "type": "integer",
+            "description": "Profile ID of a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SectionId": {
+            "type": "integer",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SkillId": {
+            "type": "integer",
+            "description": "Skill ID for a gig in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "SkillName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true
+          },
+          "Skills": {
+            "title": "Skill",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Skill content for a gig in opportunity marketplace.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-teamMembers-item-post-request": {
+        "type": "object",
+        "properties": {
+          "OpportunityType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Opportunity type for a gig team member in opportunity marketplace.",
+            "nullable": false
+          },
+          "TeamMemberId": {
+            "type": "integer",
+            "description": "Team member ID in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "TeamMemberPersonId": {
+            "type": "integer",
+            "description": "Person ID of a gig team member in opportunity marketplace.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "controlType": "choice",
+              "precision": 18
+            }
+          },
+          "TeamMemberRole": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Role of a gig team member in opportunity marketplace.",
+            "nullable": false
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingOppMktGigDetails-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingOppMktGigDetails-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingOppMktGigDetails-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

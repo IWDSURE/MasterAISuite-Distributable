@@ -1,0 +1,77 @@
+# HTS_SCHEDULE_GEN_PROFILES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedulegenprofilesvl-8537.html#htsschedulegenprofilesvl-8537](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsschedulegenprofilesvl-8537.html#htsschedulegenprofilesvl-8537)
+
+## Columns
+
+- SCHED_GEN_PROFILE_ID
+- OBJECT_VERSION_NUMBER
+- ENTERPRISE_ID
+- SCHED_PROFILE_CODE
+- ACTIVE_START_DATE
+- ACTIVE_END_DATE
+- SCHEDULE_PERIOD_WEEKS
+- SCHEDULE_PERIOD_START_DATE
+- GEN_WINDOW_START
+- GEN_WINDOW_END
+- SELF_SCHED_START_OFFSET
+- SELF_SCHED_END_OFFSET
+- START_OF_WORK_WEEK
+- MON_IS_WEEKEND_FLAG
+- TUE_IS_WEEKEND_FLAG
+- WED_IS_WEEKEND_FLAG
+- THU_IS_WEEKEND_FLAG
+- FRI_IS_WEEKEND_FLAG
+- SAT_IS_WEEKEND_FLAG
+- SUN_IS_WEEKEND_FLAG
+- AUTO_GENERATE_SCHED_FLAG
+- AUTO_GENERATE_TYPE
+- AUTO_PUBLISH_SCHED_FLAG
+- ALERT_FINALIZE_FLAG
+- ALERT_FINALIZE_DAYS_OFFSET
+- JOB_POS_INCL_EXCL_RULE
+- IS_DRAFT
+- DAY_START_TIME_OFFSET
+- FLOAT_BETWEEN_DEPTS_FLAG
+- FLOAT_POOL_DEPTS_FLAG
+- GRACE_PERIOD
+- START_EARLY_PERIOD
+- START_LATE_PERIOD
+- END_EARLY_PERIOD
+- END_LATE_PERIOD
+- START_EARLY_VIOLATION_TYPE
+- START_LATE_VIOLATION_TYPE
+- END_EARLY_VIOLATION_TYPE
+- END_LATE_VIOLATION_TYPE
+- RULE_SET_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- PROFILE_NAME
+- PROFILE_DESCRIPTION
+- SELF_SCHED_ROTATION_TYPE
+- SELF_SCHED_RTN_ENABLED_FLAG
+- SELF_SCHED_RTN_LAST_UPD_DATE
+- DEVIATION_ALLOW_TIME_FLAG
+- DEVIATION_ALLOW_START_MINUTES
+- DEVIATION_ALLOW_END_MINUTES
+
+## Query
+
+```sql
+SELECT gpb.sched_gen_profile_id, gpb.object_version_number, gpb.enterprise_id, gpb.sched_profile_code, gpb.active_start_date, gpb.active_end_date, gpb.schedule_period_weeks, gpb.schedule_period_start_date, gpb.gen_window_start, gpb.gen_window_end, gpb.self_sched_start_offset, gpb.self_sched_end_offset, gpb.start_of_work_week, gpb.mon_is_weekend_flag, gpb.tue_is_weekend_flag, gpb.wed_is_weekend_flag, gpb.thu_is_weekend_flag, gpb.fri_is_weekend_flag, gpb.sat_is_weekend_flag, gpb.sun_is_weekend_flag, gpb.auto_generate_sched_flag, gpb.auto_generate_type, gpb.auto_publish_sched_flag, gpb.alert_finalize_flag, gpb.alert_finalize_days_offset, gpb.job_pos_incl_excl_rule, gpb.is_draft, gpb.day_start_time_offset, gpb.float_between_depts_flag, gpb.float_pool_depts_flag, gpb.grace_period, gpb.start_early_period, gpb.start_late_period, gpb.end_early_period, gpb.end_late_period, gpb.start_early_violation_type, gpb.start_late_violation_type, gpb.end_early_violation_type, gpb.end_late_violation_type, gpb.rule_set_id, gpb.created_by, gpb.creation_date, gpb.last_updated_by, gpb.last_update_date, gpb.last_update_login, gpt.profile_name, gpt.profile_description, gpb.self_sched_rotation_type, gpb.self_sched_rtn_enabled_flag, gpb.self_sched_rtn_last_upd_date, NVL(gpb.deviation_allow_time_flag,'N') deviation_allow_time_flag, gpb.deviation_allow_start_minutes, gpb.deviation_allow_end_minutes FROM hts_schedule_gen_profiles_b gpb, hts_schedule_gen_profiles_tl gpt WHERE gpb.sched_gen_profile_id = gpt.sched_gen_profile_id AND gpt.language = userenv('LANG')
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

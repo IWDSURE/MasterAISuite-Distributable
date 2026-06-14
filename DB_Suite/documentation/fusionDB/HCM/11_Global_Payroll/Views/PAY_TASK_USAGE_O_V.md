@@ -1,0 +1,38 @@
+# PAY_TASK_USAGE_O_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paytaskusageov-4281.html#paytaskusageov-4281](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paytaskusageov-4281.html#paytaskusageov-4281)
+
+## Columns
+
+- TASK_USAGE_ID
+- BASE_TASK_USAGE_ID
+- BASE_TASK_USAGE_NAME
+- LEGISLATIVE_DATA_GROUP_ID
+- LEGISLATION_CODE
+- BASE_TASK_ID
+- USAGE_TYPE
+- MODULE_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+
+## Query
+
+```sql
+SELECT b.TASK_USAGE_ID, b.BASE_TASK_USAGE_ID, b.BASE_TASK_USAGE_NAME, ldg.LEGISLATIve_DATA_GROUP_ID, ldg.LEGISLATION_CODE, b.BASE_TASK_ID, b.USAGE_TYPE, b.MODULE_ID, b.CREATED_BY, b.CREATION_DATE, b.LAST_UPDATED_BY, b.LAST_UPDATE_DATE, b.LAST_UPDATE_LOGIN, b.OBJECT_VERSION_NUMBER FROM pay_task_usage b, per_legislative_data_groups ldg WHERE ( (b.LEGISLATION_DATA_GROUP_ID IS NOT NULL AND b.legislation_code IS NULL AND b.LEGISLATION_DATA_GROUP_ID =ldg.legislative_data_group_id) OR (b.legislation_code IS NOT NULL AND b.LEGISLATION_DATA_GROUP_ID IS NULL AND b.legislation_code =ldg.legislation_code AND ( NOT EXISTS ( SELECT NULL FROM pay_task_usage c1 WHERE b.BASE_TASK_USAGE_ID = c1.BASE_TASK_USAGE_ID AND (c1.LEGISLATION_DATA_GROUP_ID IS NOT NULL AND c1.legislation_code IS NULL AND c1.LEGISLATION_DATA_GROUP_ID =ldg.legislative_data_group_id ) ))) OR ( b.LEGISLATION_DATA_GROUP_ID IS NULL AND b.legislation_code IS NULL AND ( NOT EXISTS ( SELECT NULL FROM pay_task_usage c2 WHERE b.BASE_TASK_USAGE_ID = c2.BASE_TASK_USAGE_ID AND ( ( c2.LEGISLATION_DATA_GROUP_ID IS NOT NULL AND c2.legislation_code IS NULL AND c2.LEGISLATION_DATA_GROUP_ID =ldg.legislative_data_group_id ) OR ( c2.legislation_code IS NOT NULL AND c2.LEGISLATION_DATA_GROUP_ID IS NULL AND c2.legislation_code =ldg.legislation_code ) ) ) ) ))
+```
+
+---
+
+[← Back to Index](../11_Global_Payroll_Views_Index.md)

@@ -1,0 +1,56 @@
+# HTS_WORKERS_WITH_SHIFTS_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HTS
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsworkerswithshiftsv-5040.html#htsworkerswithshiftsv-5040](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/htsworkerswithshiftsv-5040.html#htsworkerswithshiftsv-5040)
+
+## Columns
+
+- PERSON_ID
+- PERSON_NUMBER
+- ASSIGNMENT_ID
+- ASSIGNMENT_NAME
+- PERSON_NAME
+- ASSIGNMENT_TYPE
+- ASSIGNMENT_STATUS
+- PERSON_TYPE
+- DEPARTMENT_ID
+- DEPARTMENT_NAME
+- SCHEDULE_UNIT_ID
+- LOCATION_ID
+- LOCATION_NAME
+- LOCATION_CODE
+- JOB_ID
+- JOB_CODE
+- JOB_NAME
+- SCHEDULE_GROUP_CODE
+- SCHEDULE_GROUP_MEANING
+- POSITION_ID
+- POSITION_CODE
+- POSITION_NAME
+- ASG_EFFECTIVE_START_DATE
+- ASG_EFFECTIVE_END_DATE
+- ASG_EFFECTIVE_START_DATE1
+- ASG_EFFECTIVE_END_DATE1
+- PERSON_EFFECT_START_DATE
+- PERSON_EFFECT_END_DATE
+- SCHEDULE_SHIFT_ID
+- START_DATE_TIME
+- END_DATE_TIME
+- SHIFT_ID
+
+## Query
+
+```sql
+SELECT assignment_info.person_id, ppf.person_number, assignment_info.assignment_id, assignment_info.assignment_name, personnamedpeo.display_name person_name, assignment_info.assignment_type assignment_type, (CASE WHEN period_service.actual_termination_date IS NOT NULL AND sh.ref_date > period_service.actual_termination_date THEN 'TERMINATED' ELSE status.per_system_status END ) AS assignment_status, person_type_name.user_person_type person_type, assignment_info.organization_id department_id, org.name department_name, sh_unit.sched_unit_id schedule_unit_id, sh_unit.location_id, lot.location_name, loa.internal_location_code location_code, jobdpeo.job_id, jobdpeo.job_code, job_tl.name job_name, jobdpeo.scheduling_group schedule_group_code, sched_group_lookup_vals.meaning schedule_group_meaning, pos.position_id, pos.position_code, pos_tl.name position_name, GREATEST(assignment_info.effective_start_date, person_type_info.effective_start_date, jobdpeo.effective_start_date, nvl(pos.effective_start_date, TO_DATE('1900-01-01', 'YYYY-MM-DD'))) asg_effective_start_date, LEAST(assignment_info.effective_end_date, person_type_info.effective_end_date, jobdpeo.effective_end_date, nvl(pos.effective_end_date, TO_DATE('4712-12-31', 'YYYY-MM-DD'))) asg_effective_end_date, GREATEST(assignment_info.effective_start_date, jobdpeo.effective_start_date, nvl(pos.effective_start_date, TO_DATE('1900-01-01', 'YYYY-MM-DD'))) asg_effective_start_date1, LEAST(assignment_info.effective_end_date, jobdpeo.effective_end_date, nvl(pos.effective_end_date, TO_DATE('4712-12-31', 'YYYY-MM-DD'))) asg_effective_end_date1, person_type_info.effective_start_date person_effect_start_date, person_type_info.effective_end_date person_effect_end_date, sh.schedule_shift_id, sh.start_date_time, sh.end_date_time, sh.shift_id FROM per_person_names_f_v personnamedpeo, per_all_people_f ppf, per_person_type_usages_m person_type_info, per_person_types_tl person_type_name, per_all_assignments_m assignment_info, per_jobs_f jobdpeo, per_jobs_f_tl job_tl, hr_all_positions_f pos, hr_all_positions_f_tl pos_tl, fnd_lookup_values_tl sched_group_lookup_vals, hts_schedule_shifts sh, hts_sched_units sh_unit, fusion.hr_organization_units_f_tl org, per_locations loa, per_location_details_f loc, per_location_details_f_tl lot, per_assignment_status_types_vl status, per_periods_of_service period_service WHERE assignment_info.job_id = jobdpeo.job_id AND jobdpeo.effective_start_date <= assignment_info.effective_end_date AND jobdpeo.effective_end_date >= assignment_info.effective_start_date AND jobdpeo.job_id = job_tl.job_id AND jobdpeo.effective_start_date = job_tl.effective_start_date AND jobdpeo.effective_end_date = job_tl.effective_end_date AND job_tl.LANGUAGE(+) = userenv('LANG') AND assignment_info.person_id = ppf.person_id AND TRUNC(sysdate) BETWEEN ppf.effective_start_date AND ppf.effective_end_date AND assignment_info.person_id = personnamedpeo.person_id AND TRUNC(sysdate) BETWEEN personnamedpeo.effective_start_date AND personnamedpeo.effective_end_date AND assignment_info.person_id = person_type_info.person_id AND person_type_info.effective_latest_change = 'Y' AND person_type_info.person_type_id = person_type_name.person_type_id AND person_type_name.LANGUAGE = userenv('LANG') AND assignment_info.assignment_type IN ( 'E', 'C') AND assignment_info.effective_latest_change = 'Y' AND assignment_info.position_id = pos.position_id(+) AND pos.position_id = pos_tl.position_id(+) AND sh.assignment_id = assignment_info.assignment_id AND sh.person_id = assignment_info.person_id AND assignment_info.assignment_status_type_id = status.assignment_status_type_id (+) AND assignment_info.period_of_service_id = period_service.period_of_service_id (+) AND sh.schedule_unit_id = sh_unit.sched_unit_id AND sh_unit.location_id = loc.location_id(+) AND sh_unit.member_id = org.organization_id AND org.LANGUAGE = userenv('LANG') AND loc.location_details_id = lot.location_details_id(+) AND loc.effective_start_date = lot.effective_start_date(+) AND loc.effective_end_date = lot.effective_end_date(+) AND lot.LANGUAGE(+) = userenv('LANG') AND loc.location_id = loa.location_id(+) AND pos_tl.LANGUAGE(+) = USERENV('LANG') AND pos.effective_start_date(+) <= assignment_info.effective_end_date AND pos.effective_end_date(+) >= assignment_info.effective_start_date AND pos.effective_start_date = pos_tl.effective_start_date(+) AND pos.effective_end_date = pos_tl.effective_end_date(+) AND pos.effective_start_date(+) <= jobdpeo.effective_end_date AND pos.effective_end_date(+) >= jobdpeo.effective_start_date AND person_type_info.effective_start_date <= assignment_info.effective_end_date AND person_type_info.effective_end_date >= assignment_info.effective_start_date AND person_type_info.effective_start_date <= jobdpeo.effective_end_date AND person_type_info.effective_end_date >= jobdpeo.effective_start_date AND person_type_info.effective_start_date <= pos.effective_end_date(+) AND person_type_info.effective_end_date >= pos.effective_start_date(+) AND sched_group_lookup_vals.lookup_type(+) = 'ORA_PER_SCHEDULING_GROUP' AND sched_group_lookup_vals.LANGUAGE(+) = userenv('LANG') AND jobdpeo.scheduling_group = sched_group_lookup_vals.lookup_code(+)
+```
+
+---
+
+[← Back to Index](../35_Workforce_Scheduling_Views_Index.md)

@@ -1,0 +1,1397 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Activity Items/Job Application List",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingRACItems/{SubscriberTypeCode}/child/jobApplicationList/{ItemId}": {
+      "get": {
+        "tags": [
+          "Activity Items/Job Application List"
+        ],
+        "summary": "Get a job application list item",
+        "operationId": "get_recruitingRACItems-jobApplicationList",
+        "parameters": [
+          {
+            "name": "SubscriberTypeCode",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ItemId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the job application action activity item.",
+              "format": "int64",
+              "nullable": true,
+              "readOnly": true,
+              "x-hints": {
+                "precision": 18
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList-item-response"
+                }
+              }
+            },
+            "links": {
+              "jobApplicationPreviews": {
+                "operationRef": "#/paths/~1recruitingRACItems~1{SubscriberTypeCode}~1child~1jobApplicationList~1{ItemId}~1child~1jobApplicationPreviews/get",
+                "parameters": {
+                  "SubscriberTypeCode": "$request.path.SubscriberTypeCode",
+                  "ItemId": "$request.path.ItemId"
+                },
+                "description": "The jobApplicationPreviews resource is the child of the recruitingRACItems resource. It provide details about a job application item."
+              },
+              "actions": {
+                "operationRef": "#/paths/~1recruitingRACItems~1{SubscriberTypeCode}~1child~1jobApplicationList~1{ItemId}~1child~1actions/get",
+                "parameters": {
+                  "SubscriberTypeCode": "$request.path.SubscriberTypeCode",
+                  "ItemId": "$request.path.ItemId"
+                },
+                "description": "The actions resource is the child of the recruitingRACItems resource. It provides a list of job requisition actions that a user can take based on the requisition activity item."
+              },
+              "jobApplicationActionPreviews": {
+                "operationRef": "#/paths/~1recruitingRACItems~1{SubscriberTypeCode}~1child~1jobApplicationList~1{ItemId}~1child~1jobApplicationActionPreviews/get",
+                "parameters": {
+                  "SubscriberTypeCode": "$request.path.SubscriberTypeCode",
+                  "ItemId": "$request.path.ItemId"
+                },
+                "description": "The jobApplicationActionPreviews resource is the child of the recruitingRACItems resource. It provides the action preview for the selected action for job application item."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingRACItems-{SubscriberTypeCode}-child-jobApplicationList-{ItemId}-get",
+        "x-filename-id": "recruitingracitems-subscribertypecode-child-jobapplicationlist-itemid-get"
+      }
+    },
+    "/recruitingRACItems/{SubscriberTypeCode}/child/jobApplicationList": {
+      "get": {
+        "tags": [
+          "Activity Items/Job Application List"
+        ],
+        "summary": "Get all job application list items",
+        "operationId": "getall_recruitingRACItems-jobApplicationList",
+        "parameters": [
+          {
+            "name": "SubscriberTypeCode",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>ActionDate; string; Action date of the job application activity item.</li><li>Candidate; string; Name of the candidate the job application activity item relates to.</li><li>CandidateNumber; string; Candidate number of the candidate associated with the activity item.</li><li>CandidatePersonId; integer; Person identifier of the candidate associated with the activity item.</li><li>DefaultAction; string; Default action of the job application activity item.</li><li>DefaultActionName; string; Default action name of the job application activity item.</li><li>HiringManager; string; Hiring manager name the job application activity item relates to.</li><li>HiringManagerId; integer; Person identifier of the hiring manager associated with the activity item.</li><li>ItemId; integer; Unique identifier of the job application activity item.</li><li>ItemName; string; Name of the job application activity item.</li><li>Priority; string; Job application activity item priority. It can be high or null.</li><li>Recruiter; string; Recruiter name the job application activity item relates to.</li><li>RecruiterId; integer; Person identifier of the recruiter associated with the activity item.</li><li>RequisitionNumber; string; Requisition number the job application activity item relates to.</li><li>RequisitionTitle; string; Requisition title the job application activity item relates to.</li><li>RulePriorityCode; string; Rule priority code the job application activity relates to.</li><li>Subject; string; Subject of the job application list.</li><li>SubmissionId; integer; Submission ID the job application activity relates to.</li><li>SubscriberLookupCode; string; Lookup code of the subscriber associated with the activity item.</li><li>SubscriberLookupType; string; Lookup type of the subscriber associated with the activity item.</li><li>SubscriberRuleCode; string; Subscriber rule code the job application activity item relates to.</li><li>SubscriberTypeMeaning; string; Subscriber type meaning of the subscriber associated with the activity item.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all job application lists by a primary key. <br>Finder Variables <ul><li>ItemId; integer;  Primary key and ItemId; integer;  used to find all job application lists. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all job application lists by a primary key.",
+                "properties": {
+                  "ItemId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Primary key and ItemId used to find all job application lists.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingRACItems-{SubscriberTypeCode}-child-jobApplicationList-get",
+        "x-filename-id": "recruitingracitems-subscribertypecode-child-jobapplicationlist-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingRACItems-jobApplicationList-item-response": {
+        "type": "object",
+        "properties": {
+          "ActionDate": {
+            "title": "Date",
+            "type": "string",
+            "description": "Action date of the job application activity item.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Candidate": {
+            "title": "Candidate",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the candidate the job application activity item relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "title": "Candidate Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate number of the candidate associated with the activity item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidatePersonId": {
+            "title": "Candidate Name",
+            "type": "integer",
+            "description": "Person identifier of the candidate associated with the activity item.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DefaultAction": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Default action of the job application activity item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DefaultActionName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Default action name of the job application activity item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManager": {
+            "title": "Hiring Manager",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Hiring manager name the job application activity item relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "HiringManagerId": {
+            "type": "integer",
+            "description": "Person identifier of the hiring manager associated with the activity item.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ItemId": {
+            "type": "integer",
+            "description": "Unique identifier of the job application activity item.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ItemName": {
+            "title": "Activity",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the job application activity item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "Priority": {
+            "title": "Priority",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Job application activity item priority. It can be high or null.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Recruiter": {
+            "title": "Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Recruiter name the job application activity item relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RecruiterId": {
+            "type": "integer",
+            "description": "Person identifier of the recruiter associated with the activity item.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "title": "Requisition Number",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition number the job application activity item relates to.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionTitle": {
+            "title": "Requisition",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition title the job application activity item relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RulePriorityCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Rule priority code the job application activity relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Subject": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Subject of the job application list.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID the job application activity relates to.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "SubscriberLookupCode": {
+            "title": "Lookup Code",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Lookup code of the subscriber associated with the activity item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberLookupType": {
+            "title": "Lookup Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Lookup type of the subscriber associated with the activity item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberRuleCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Subscriber rule code the job application activity item relates to.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberTypeMeaning": {
+            "title": "Meaning",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Subscriber type meaning of the subscriber associated with the activity item.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "actions": {
+            "title": "Job Requisition Actions List",
+            "type": "array",
+            "description": "The actions resource is the child of the recruitingRACItems resource. It provides a list of job requisition actions that a user can take based on the requisition activity item.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList-actions-item-response"
+            }
+          },
+          "jobApplicationActionPreviews": {
+            "title": "Job Application Action Previews",
+            "type": "array",
+            "description": "The jobApplicationActionPreviews resource is the child of the recruitingRACItems resource. It provides the action preview for the selected action for job application item.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList-jobApplicationActionPreviews-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "jobApplicationPreviews": {
+            "title": "Job Application Preview",
+            "type": "array",
+            "description": "The jobApplicationPreviews resource is the child of the recruitingRACItems resource. It provide details about a job application item.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList-jobApplicationPreviews-item-response"
+            },
+            "x-cardinality": "1"
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingRACItems-jobApplicationList-actions-item-response": {
+        "type": "object",
+        "properties": {
+          "ActionCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Action code the job requisition activity item relates to.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "ActionName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action name the job requisition activity item relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DefaultFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the job requisition action is the default action for the activity item. If an action is the default action for an activity item it's displayed in the action column in the activity list.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingRACItems-jobApplicationList-jobApplicationActionPreviews-item-response": {
+        "type": "object",
+        "properties": {
+          "ActiveOnAnotherRequisition": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Active on another requisition indicator displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone number area code of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateLocation": {
+            "title": "Candidate Location",
+            "maxLength": 366,
+            "type": "string",
+            "description": "Candidate location of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateName": {
+            "title": "Candidate Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "title": "Candidate Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate number of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateType": {
+            "title": "Candidate Type When Applying",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Candidate type of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CountryCodeNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone number country code of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CurrentPhaseId": {
+            "type": "integer",
+            "description": "Current phase identifier of the job application displayed in the job application action preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "DaysinStatus": {
+            "title": "Days in Status",
+            "type": "integer",
+            "description": "Days in status count of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DisqualifiedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in the job application action preview is disqualified.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmailAddress": {
+            "title": "Candidate Email",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email address of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InternalFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in the job application action preview is internal or external.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ItemId": {
+            "type": "integer",
+            "description": "Unique identifier for the job application action activity item.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastContacted": {
+            "title": "Last Contacted",
+            "type": "integer",
+            "description": "Date and time when the candidate was last contacted, displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastContactedMode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Last contacted method for the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NextInterviewDate": {
+            "title": "Most Recent Interview Date",
+            "type": "string",
+            "description": "Next interview date for the candidate displayed in the job application action preview.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ObjectId": {
+            "type": "integer",
+            "description": "Object identifier of the activity for the job application action preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person identifier of the candidate displayed in the job application action preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PhaseName": {
+            "title": "Job Application Status",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Phase of the job application displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneNumber": {
+            "title": "Candidate Phone Number",
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number of the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PreScreeningTotalScore": {
+            "type": "integer",
+            "description": "Prescreening question total score displayed in the candidate for job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ProcessId": {
+            "type": "integer",
+            "description": "Process identifier for the job application action preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "QstnrScore": {
+            "title": "Prescreening Score",
+            "type": "number",
+            "description": "Prescreening question maximum possible score for the candidate displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "ReferredByAgentFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the candidate is referred by an agent, displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the candidate is referred by an employee, displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition identifier of the job requisition for the job application action preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "title": "Requisition Number",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition number of the job requisition displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionTitle": {
+            "title": "Requisition Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition title of the job requisition displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StateName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "State of the job application displayed in the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Subject": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Subject associated with the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubjectType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Subject type associated with the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID for the job application action preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubscriberRuleCode": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "Subscriber rule code for the job application action activity item.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "UpdatedExpirationDate": {
+            "title": "New Expiration Date",
+            "type": "string",
+            "description": "Updated expiration date for the job application action activity item.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingRACItems-jobApplicationList-jobApplicationPreviews-item-response": {
+        "type": "object",
+        "properties": {
+          "ActiveOnAnotherRequisition": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Active on another requisition indicator displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone number area code of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateLocation": {
+            "title": "Candidate Location",
+            "maxLength": 366,
+            "type": "string",
+            "description": "Candidate location of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateName": {
+            "title": "Candidate Name",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateNumber": {
+            "title": "Candidate Number",
+            "maxLength": 30,
+            "type": "string",
+            "description": "Candidate number of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CandidateType": {
+            "title": "Candidate Type When Applying",
+            "maxLength": 80,
+            "type": "string",
+            "description": "Candidate type of the candidate displayed in the job application preview. For example, internal or external.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CountryCodeNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Phone number country code of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DaysinStatus": {
+            "title": "Days in Status",
+            "type": "integer",
+            "description": "Days in status count of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DisqualifiedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in the job application preview is disqualified or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "EmailAddress": {
+            "title": "Candidate Email",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email address of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "InternalFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in the job application preview is internal or external.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastContacted": {
+            "title": "Last Contacted",
+            "type": "integer",
+            "description": "Last contacted day count for the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastContactedMode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Last contacted method for the candidate displayed in the job application preview. For example, email or phone call.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "NextInterviewDate": {
+            "title": "Most Recent Interview Date",
+            "type": "string",
+            "description": "Next interview date for the candidate displayed in the job application preview.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Person ID of the candidate displayed in the job application preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PhaseName": {
+            "title": "Job Application Status",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Phase name of the job application displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneNumber": {
+            "title": "Candidate Phone Number",
+            "maxLength": 60,
+            "type": "string",
+            "description": "Phone number of the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PreScreeningTotalScore": {
+            "type": "integer",
+            "description": "Prescreening question total score for the candidate displayed in the job application preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 255
+            },
+            "x-queryable": true
+          },
+          "QstnrScore": {
+            "title": "Prescreening Score",
+            "type": "number",
+            "description": "Prescreening question maximum possible score for the candidate displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18,
+              "scale": 2
+            },
+            "x-queryable": true
+          },
+          "ReferredByAgentFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in job application preview is referred by an agent or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ReferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates whether the candidate displayed in job application preview is referred by an employee or not.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionId": {
+            "type": "integer",
+            "description": "Requisition ID of the job requisition displayed in the job application preview.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RequisitionNumber": {
+            "title": "Requisition Number",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition number the job application preview relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "RequisitionTitle": {
+            "title": "Requisition Title",
+            "maxLength": 240,
+            "type": "string",
+            "description": "Requisition title the job application preview relates to.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StateName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "State name of the job application displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "SubmissionId": {
+            "type": "integer",
+            "description": "Submission ID of the job application displayed in the job application preview.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingRACItems-jobApplicationList": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingRACItems-jobApplicationList-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

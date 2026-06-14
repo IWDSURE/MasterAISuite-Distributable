@@ -1,0 +1,31 @@
+# PAY_COST_SUMMARY_STAT_V
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycostsummarystatv-5620.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycostsummarystatv-5620.html)
+
+## Columns
+
+- FLOW_INSTANCE_ID
+- STATUS_CODE
+- MEANING
+- SOURCE_TYPE
+- SOURCE_VALUE
+- CREDIT
+- DEBIT
+
+## Query
+
+```sql
+select d.flow_instance_id, substr(b.statistic_type_name, 0, 1) status_code, e.meaning, source_type, source_value, decode(substr(b.statistic_type_name, instr(b.statistic_type_name,'_')+1), 'CREDIT', sum(a.statistic_value)) credit, decode(substr(b.statistic_type_name, instr(b.statistic_type_name,'_')+1), 'DEBIT', sum(a.statistic_value)) debit from pay_statistics a, pay_statistic_types b, pay_requests c, pay_flow_task_instances d, hcm_lookups e where a.statistic_type_id = b.statistic_type_id and a.pay_request_id = c.pay_request_id and c.flow_task_instance_id = d.flow_task_instance_id and substr(b.statistic_type_name, 0, 1) = e.lookup_code and e.lookup_type = 'PAY_COST_DISTRIBUTION_STATUS' group by d.flow_instance_id, b.statistic_type_name, e.meaning, source_type, source_value
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)

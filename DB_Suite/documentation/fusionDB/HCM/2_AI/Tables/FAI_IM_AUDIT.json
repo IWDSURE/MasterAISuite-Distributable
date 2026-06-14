@@ -1,0 +1,168 @@
+{
+  "name": "FAI_IM_AUDIT",
+  "object_type": "TABLE",
+  "description": "This table is for tracking ingestion and storing historical data.",
+  "schema": "FUSION",
+  "owner": "FAI",
+  "tablespace": "REFERENCE",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/faiimaudit-13551.html#faiimaudit-13551",
+  "primary_keys": [
+    {
+      "name": "FAI_IM_AUDIT_PK",
+      "columns": "ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Auto generated primary key for this table Incremented by 1 for every new row."
+    },
+    {
+      "Name": "FILE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "400",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the file (For eg, 1617962340770.json)"
+    },
+    {
+      "Name": "APP_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the app (orc or talent)"
+    },
+    {
+      "Name": "ENTITY_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the Entity for the file (Among person and model)"
+    },
+    {
+      "Name": "STEP",
+      "Datatype": "VARCHAR2",
+      "Length": "50",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The search engine for which the file ingestion status\nis depicted. (can be vectorStore)\nAlso, it can be stage if the file location is currently in stage folder"
+    },
+    {
+      "Name": "STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "20",
+      "Not-null": "Yes",
+      "Comments": "It depicts the success/failure status for the file for the given step\n1000 - file is in stage\n1111 -  File has successfully reached OSCS\n1112 - File has failed to reach/index to OSCS"
+    },
+    {
+      "Name": "STATUS_DETAILS",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If the file is failed in indexing/ parsing - the error is tracked here.\nIf status is 1112 → Error represents the number of retries done (1 to 5 and \nReprocess OSCS File exceeded 5times)"
+    },
+    {
+      "Name": "RECORD_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "22",
+      "Not-null": "",
+      "Comments": "It represents the number of records in the file"
+    },
+    {
+      "Name": "STAGE_TIMESTAMP",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "It depicts the date and time of the file ingestion in stage folder"
+    },
+    {
+      "Name": "INDEXED_TIMESTAMP",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "It depicts the date and time of the file ingestion to OSCS"
+    },
+    {
+      "Name": "VECTOR_VERSION_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "It depicts the level of vector generation of the file.\nIf \"null\", V2 vectors are generated.\nIf \"V1V2\", both V1 and V2 vectors are generated.\nIf \"V1V2DAS\", V2 vectors are generated and V1 embeddings are ready for generation\nIf \"V2V2Complete\", V2 vectors and V1 embedding are generated and waiting to reach OSCS\nIf \"V1V2_DAS_ERROR\", V2 vectors are generated and file failed to move to DAS.\nIf \"V1V2_COMPLETE_ERROR\", V2 vectors and V1 embeddings are generated and file failed to move to complete folder\nIf \"V1V2_INDEX_ERROR\", V2 vectors and V1 embeddings are generated and file failed to reach OSCS"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "FAI_IM_AUDIT_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "STEP, ENTITY_NAME, STATUS"
+    },
+    {
+      "Index": "FAI_IM_AUDIT_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:31:29"
+}

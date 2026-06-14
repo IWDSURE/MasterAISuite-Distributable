@@ -1,0 +1,40 @@
+# HRQ_RESPONSE_TYPES_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRQ
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqresponsetypesvl-3263.html#hrqresponsetypesvl-3263](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrqresponsetypesvl-3263.html#hrqresponsetypesvl-3263)
+
+## Columns
+
+- BUSINESS_GROUP_ID
+- RESPONSE_TYPE_ID
+- RESPONSE_TYPE_CODE
+- QUESTION_TYPE
+- NAME
+- USE_AS_DEFAULT
+- VIEW_ID
+- NUM_ROWS
+- QSTN_WIDTH_PCT
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.BUSINESS_GROUP_ID, B.RESPONSE_TYPE_ID, B.RESPONSE_TYPE_CODE, B.QUESTION_TYPE, L.NAME, B.USE_AS_DEFAULT, B.VIEW_ID, B.NUM_ROWS, B.QSTN_WIDTH_PCT, B.MODULE_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN FROM HRQ_RESPONSE_TYPES_B B, HRQ_RESPONSE_TYPES_TL L WHERE B.BUSINESS_GROUP_ID = L.BUSINESS_GROUP_ID AND B.RESPONSE_TYPE_ID = L.RESPONSE_TYPE_ID AND L.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../21_Questionnaire_Views_Index.md)

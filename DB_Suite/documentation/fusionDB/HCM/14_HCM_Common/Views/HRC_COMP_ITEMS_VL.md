@@ -1,0 +1,55 @@
+# HRC_COMP_ITEMS_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HRC
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrccompitemsvl-8584.html#hrccompitemsvl-8584](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrccompitemsvl-8584.html#hrccompitemsvl-8584)
+
+## Columns
+
+- ITEM_ID
+- IKEY
+- TEMPLATE_ID
+- ENTERPRISE_ID
+- ITEM_TYPE
+- PARENT_ITEM_ID
+- DISPLAY_SEQUENCE
+- DISPLAY_TEXT
+- INFO_TEXT
+- CAT_FLAG
+- OPT_FLAG
+- HIDE_FLAG
+- ITEM_USER_CODE
+- ATTR_CHAR1
+- ATTR_CHAR2
+- ATTR_CHAR3
+- ATTR_NUMBER1
+- ATTR_NUMBER2
+- ATTR_NUMBER3
+- ATTR_DATE1
+- ATTR_DATE2
+- ATTR_DATE3
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- OBJECT_VERSION_NUMBER
+- MODULE_ID
+- SGUID
+- SEED_DATA_SOURCE
+
+## Query
+
+```sql
+select items.item_id ,items.ikey ,items.template_id ,items.enterprise_id ,items.item_type ,items.parent_item_id ,items.display_sequence ,tl.display_text ,tl.info_text ,items.cat_flag ,items.opt_flag ,items.hide_flag ,items.item_user_code ,items.attr_char1 ,items.attr_char2 ,items.attr_char3 ,items.attr_number1 ,items.attr_number2 ,items.attr_number3 ,items.attr_date1 ,items.attr_date2 ,items.attr_date3 ,items.created_by ,items.creation_date ,items.last_updated_by ,items.last_update_date ,items.last_update_login ,items.object_version_number ,items.module_id ,items.sguid ,items.seed_data_source FROM HRC_COMP_ITEMS_B items, HRC_COMP_ITEMS_TL tl WHERE items.item_id = tl.item_id(+) AND tl.LANGUAGE(+) = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../14_HCM_Common_Views_Index.md)

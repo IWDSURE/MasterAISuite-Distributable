@@ -1,0 +1,184 @@
+{
+  "name": "IRC_CAND_PREFERENCES",
+  "object_type": "TABLE",
+  "description": "Stores candidate preferences in Recruiting.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandpreferences-14967.html#irccandpreferences-14967",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_PREFERENCES_PK",
+      "columns": "CAND_PREF_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_PREF_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for this table. System generated."
+    },
+    {
+      "Name": "PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to PER_PERSONS."
+    },
+    {
+      "Name": "SITE_NUMBER",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Foreign key to IRC_CX_SITES_B table."
+    },
+    {
+      "Name": "TC_AF_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Apply Flow that was used for talent community signup. Foreign key to IRC_AF_VERSIONS table."
+    },
+    {
+      "Name": "TC_LEGAL_DESC_VERSION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "To track the legal disclaimer accepted by the candidate during talent community signup. Foreign key to IRC_DESC_VERSIONS_B table."
+    },
+    {
+      "Name": "OPT_IN_TC_EMAILS_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores whether the candidate has opted-in or opted-out for receiving job alerts for the site. Null value means unspecified."
+    },
+    {
+      "Name": "OPT_IN_TC_EMAILS_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Stores the date and time at which the candidate updated this preference of whether or not to receive job alerts for the site."
+    },
+    {
+      "Name": "TC_CONFIRMED_FLAG",
+      "Datatype": "VARCHAR2",
+      "Length": "1",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This flag is used to determine whether talent community signup of candidate is confirmed for the site or not."
+    },
+    {
+      "Name": "TC_CONFIRMED_BY_PERSON_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Foreign Key to PER_PERSONS table."
+    },
+    {
+      "Name": "TC_CONFIRMED_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "To track when the talent community signup of candidate changed from Unconfirmed to Confirmed."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_PREFERENCES_FK2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SITE_NUMBER"
+    },
+    {
+      "Index": "IRC_CAND_PREFERENCES_FK3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TC_AF_VERSION_ID"
+    },
+    {
+      "Index": "IRC_CAND_PREFERENCES_FK4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TC_LEGAL_DESC_VERSION_ID"
+    },
+    {
+      "Index": "IRC_CAND_PREFERENCES_FK5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TC_CONFIRMED_BY_PERSON_ID"
+    },
+    {
+      "Index": "IRC_CAND_PREFERENCES_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_PREF_ID"
+    },
+    {
+      "Index": "IRC_CAND_PREFERENCES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "PERSON_ID, SITE_NUMBER"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:46:41"
+}

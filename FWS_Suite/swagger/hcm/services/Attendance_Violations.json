@@ -1,0 +1,1787 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Attendance Violations",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/attendanceViolations/{AttendanceViolationId}": {
+      "get": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Get an attendance violation",
+        "operationId": "get_attendanceViolations",
+        "parameters": [
+          {
+            "name": "AttendanceViolationId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the attendance violation.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/attendanceViolations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "attendanceViolations-{AttendanceViolationId}-get",
+        "x-filename-id": "attendanceviolations-attendanceviolationid-get"
+      },
+      "patch": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Update an attendance violation",
+        "operationId": "update_attendanceViolations",
+        "parameters": [
+          {
+            "name": "AttendanceViolationId",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "description": "Unique identifier for the attendance violation.",
+              "format": "int64",
+              "nullable": false,
+              "x-hints": {
+                "precision": 18,
+                "fnd:GLOBALLY_UNIQUE": "true"
+              }
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/attendanceViolations-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/attendanceViolations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "attendanceViolations-{AttendanceViolationId}-patch",
+        "x-filename-id": "attendanceviolations-attendanceviolationid-patch"
+      }
+    },
+    "/attendanceViolations/action/findByAdvancedSearchQuery": {
+      "post": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Find the attendance violations that match the search criteria",
+        "description": "Finds the attendance violations that match the advanced search query.",
+        "operationId": "doall_findByAdvancedSearchQuery_attendanceViolations",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offset": {
+                    "type": "number",
+                    "description": "Number of attendance violation records retrieved using the search criteria.",
+                    "nullable": true
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Keyword value, such as the attendance violation date or rule.",
+                    "nullable": true
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Limit applied to the number of attendance violation records retrieved using the search criteria.",
+                    "nullable": true
+                  },
+                  "searchFields": {
+                    "type": "array",
+                    "description": "Search criteria from the keyword field, such as attendance violation date or rule.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "description": "Criteria used to filter attendance violations, such as the attendance violation date or the person.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sort": {
+                    "type": "array",
+                    "description": "Sort order applied to the attendance violation search results. The default sort is based on the attendance violation date, descending order.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "displayFields": {
+                    "type": "array",
+                    "description": "Attendance violation search result fields, such as the attendance violation date or rule.",
+                    "nullable": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "autocompleteQuery": {
+                    "type": "string",
+                    "description": "The autocomplete query that applies to the attendance violation data search.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Search results for the specified attendance violation search criteria."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "Search results for the specified attendance violation search criteria."
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "attendanceViolations-action-findByAdvancedSearchQuery-post",
+        "x-filename-id": "attendanceviolations-action-findbyadvancedsearchquery-post"
+      }
+    },
+    "/attendanceViolations": {
+      "get": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Get all attendance violations",
+        "operationId": "getall_attendanceViolations",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AbsenceId; integer; Unique identifier for the absence entry.</li><li>AbsenceReportingTime; string; Date and time when the absence was reported.</li><li>AcknowledgmentRequired; string; Indicates whether an acknowledgment of the attendance violation is required from the manager. Valid values are true and false. The default value is false.</li><li>AttendanceViolationDate; string; Date for the attendance violation.</li><li>AttendanceViolationId; integer; Unique identifier for the attendance violation.</li><li>Comments; string; Comments associated with the acknowledgment or dismissal of the attendance violation.</li><li>CreatedBy; string; Violations generated by the attendance rules process.</li><li>CreationDate; string; Date when the attendance violation was generated.</li><li>Department; string; Department criteria available to filter attendance violations.</li><li>DepartmentId; integer; Identifier for the department used to filter attendance violations.</li><li>EntryStartTime; string; Start time for the reported time entry with an attendance violation.</li><li>EntryStopTime; string; Stop time for the reported time entry with an attendance violation.</li><li>ExcusedBy; integer; Manager who dismissed the attendance violation.</li><li>ExcusedTime; string; Date and time when the manager dismissed the attendance violation.</li><li>IdentificationKey; integer; Identification key used to get the approval task details for the attendance violation.</li><li>Job; string; Job criteria available to filter attendance violations.</li><li>JobId; integer; Identifier for the job used to filter attendance violations.</li><li>LastUpdateDate; string; Most recent date when the attendance violation was updated.</li><li>LastUpdateLogin; string; Most recent user who updated the attendance violation.</li><li>LastUpdatedBy; string; Most recent manager who updated the attendance violation.</li><li>Location; string; Location criteria available to filter attendance violations.</li><li>LocationId; integer; Identifier for the location used to filter attendance violations.</li><li>LoggedInUserId; integer; Identifier for the user who's logged in.</li><li>ObjectVersionNumber; integer; Version for the attendance violation.</li><li>PersonId; integer; Unique identifier for the person associated with the attendance violation.</li><li>PersonName; string; Name of the person associated with the attendance violation.</li><li>PersonNumber; string; Number for the person associated with the attendance violation.</li><li>Points; number; Points related to the attendance violation.</li><li>RuleId; integer; Unique identifier for the attendance rule.</li><li>RuleSetId; integer; Unique identifier for the attendance rule set.</li><li>RuleType; string; Rule associated with the attendance violation, such as Tardy or Leave early.</li><li>RuleTypeName; string; Name for the rule associated to the attendance violation, such as Tardy or Leave early.</li><li>ShiftId; integer; Unique identifier for the schedule shift.</li><li>ShiftStartTime; string; Start time for the schedule shift.</li><li>ShiftStopTime; string; Stop time for the schedule shift.</li><li>Status; string; Status for the attendance violation, such as not reviewed or dismissed.</li><li>StatusCode; string; Code for the status of the attendance violation, such as ACKNOWLEDGED or DISMISSED.</li><li>StatusMeaning; string; Status of the attendance violation, such as Acknowledged or Dismissed.</li><li>ThresholdPeriodStartDate; string; Start date for the period when attendance violations are counted.</li><li>ThresholdPeriodStopDate; string; End date for the period when attendance violations are counted.</li><li>ThresholdViolatedFlag; boolean; Indicates whether the violation exceeds the number of allowed occurrences. Valid values are true and false. The default value is false.</li><li>TimeEntryId; integer; Unique identifier for the time entry.</li><li>TimeEntryVersion; integer; Version for the time entry.</li><li>TimeEventId; integer; Unique identifier for the time event.</li><li>TotalPoints; number; Total number of points the worker is being granted as of the date of the attendance violation.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds all attendance violations based on the specified primary key criteria. <br>Finder Variables <ul><li>AttendanceViolationId; integer;  Unique identifier for the attendance violation. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds all attendance violations based on the specified primary key criteria.",
+                "properties": {
+                  "AttendanceViolationId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18,
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier for the attendance violation.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/attendanceViolations"
+                }
+              }
+            },
+            "links": {
+              "processViolationsByActionWithComment": {
+                "operationRef": "#/paths/~1attendanceViolations~1action~1processViolationsByActionWithComment/post",
+                "description": "Acknowledges or dismisses attendance violations."
+              },
+              "findByAdvancedSearchQuery": {
+                "operationRef": "#/paths/~1attendanceViolations~1action~1findByAdvancedSearchQuery/post",
+                "description": "Finds the attendance violations that match the advanced search query."
+              }
+            }
+          }
+        },
+        "x-internal-id": "attendanceViolations-get",
+        "x-filename-id": "attendanceviolations-get"
+      },
+      "post": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Create an attendance violation",
+        "operationId": "create_attendanceViolations",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/attendanceViolations-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/attendanceViolations-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "attendanceViolations-post",
+        "x-filename-id": "attendanceviolations-post"
+      }
+    },
+    "/attendanceViolations/action/processViolationsByActionWithComment": {
+      "post": {
+        "tags": [
+          "Attendance Violations"
+        ],
+        "summary": "Acknowledge or dismiss attendance violations",
+        "description": "Acknowledges or dismisses attendance violations.",
+        "operationId": "doall_processViolationsByActionWithComment_attendanceViolations",
+        "parameters": [
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The following table describes the body parameters in the request for this task.",
+          "content": {
+            "application/vnd.oracle.adf.action+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "performAction": {
+                    "type": "string",
+                    "description": "Action carried out on the attendance violation, such as acknowledge or dismiss.",
+                    "nullable": true
+                  },
+                  "violations": {
+                    "type": "array",
+                    "description": "Attendance violation generated for a tardy or leave early entry, an unplanned absence, or a missing entry.",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comments associated with the acknowledgment or dismissal of the attendance violation.",
+                    "nullable": true
+                  },
+                  "userContext": {
+                    "type": "string",
+                    "description": "Role of the person reviewing the attendance violations, such as line manager or time and labor manager.",
+                    "nullable": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results including the attendance violation details.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "application/vnd.oracle.adf.actionresult+json": {
+                "schema": {
+                  "required": [
+                    "result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Results including the attendance violation details.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "x-hints": {
+          "batchEnabled": false
+        },
+        "x-internal-id": "attendanceViolations-action-processViolationsByActionWithComment-post",
+        "x-filename-id": "attendanceviolations-action-processviolationsbyactionwithcomment-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "attendanceViolations-item-response": {
+        "type": "object",
+        "properties": {
+          "AbsenceId": {
+            "type": "integer",
+            "description": "Unique identifier for the absence entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "AbsenceReportingTime": {
+            "type": "string",
+            "description": "Date and time when the absence was reported.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "AcknowledgmentRequired": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Indicates whether an acknowledgment of the attendance violation is required from the manager. Valid values are true and false. The default value is false.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "AttendanceViolationDate": {
+            "type": "string",
+            "description": "Date for the attendance violation.",
+            "format": "date",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "AttendanceViolationId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "Comments": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Comments associated with the acknowledgment or dismissal of the attendance violation.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CreatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Violations generated by the attendance rules process.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "type": "string",
+            "description": "Date when the attendance violation was generated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Department": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Department criteria available to filter attendance violations.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DepartmentId": {
+            "type": "integer",
+            "description": "Identifier for the department used to filter attendance violations.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "EntryStartTime": {
+            "type": "string",
+            "description": "Start time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EntryStopTime": {
+            "type": "string",
+            "description": "Stop time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ExcusedBy": {
+            "type": "integer",
+            "description": "Manager who dismissed the attendance violation.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ExcusedTime": {
+            "type": "string",
+            "description": "Date and time when the manager dismissed the attendance violation.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IdentificationKey": {
+            "type": "integer",
+            "description": "Identification key used to get the approval task details for the attendance violation.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "Job": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Job criteria available to filter attendance violations.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "JobId": {
+            "type": "integer",
+            "description": "Identifier for the job used to filter attendance violations.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LastUpdateDate": {
+            "type": "string",
+            "description": "Most recent date when the attendance violation was updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdateLogin": {
+            "maxLength": 32,
+            "type": "string",
+            "description": "Most recent user who updated the attendance violation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Most recent manager who updated the attendance violation.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Location": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Location criteria available to filter attendance violations.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "LocationId": {
+            "type": "integer",
+            "description": "Identifier for the location used to filter attendance violations.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "LoggedInUserId": {
+            "type": "integer",
+            "description": "Identifier for the user who's logged in.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version for the attendance violation.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person associated with the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "PersonName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Name of the person associated with the attendance violation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PersonNumber": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Number for the person associated with the attendance violation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "Points": {
+            "type": "number",
+            "description": "Points related to the attendance violation.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RuleId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RuleSetId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule set.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "RuleType": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Rule associated with the attendance violation, such as Tardy or Leave early.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "RuleTypeName": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Name for the rule associated to the attendance violation, such as Tardy or Leave early.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the schedule shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "ShiftStartTime": {
+            "type": "string",
+            "description": "Start time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ShiftStopTime": {
+            "type": "string",
+            "description": "Stop time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Status": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status for the attendance violation, such as not reviewed or dismissed.",
+            "nullable": false,
+            "x-queryable": true
+          },
+          "StatusCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Code for the status of the attendance violation, such as ACKNOWLEDGED or DISMISSED.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "StatusMeaning": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status of the attendance violation, such as Acknowledged or Dismissed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "ThresholdPeriodStartDate": {
+            "type": "string",
+            "description": "Start date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThresholdPeriodStopDate": {
+            "type": "string",
+            "description": "End date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ThresholdViolatedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the violation exceeds the number of allowed occurrences. Valid values are true and false. The default value is false.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "TimeEntryId": {
+            "type": "integer",
+            "description": "Unique identifier for the time entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TimeEntryVersion": {
+            "type": "integer",
+            "description": "Version for the time entry.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            },
+            "x-queryable": true
+          },
+          "TimeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "TotalPoints": {
+            "type": "number",
+            "description": "Total number of points the worker is being granted as of the date of the attendance violation.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "attendanceViolations-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AbsenceId": {
+            "type": "integer",
+            "description": "Unique identifier for the absence entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AbsenceReportingTime": {
+            "type": "string",
+            "description": "Date and time when the absence was reported.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "AttendanceViolationDate": {
+            "type": "string",
+            "description": "Date for the attendance violation.",
+            "format": "date",
+            "nullable": false
+          },
+          "AttendanceViolationId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "Comments": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Comments associated with the acknowledgment or dismissal of the attendance violation.",
+            "nullable": true
+          },
+          "EntryStartTime": {
+            "type": "string",
+            "description": "Start time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EntryStopTime": {
+            "type": "string",
+            "description": "Stop time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ExcusedBy": {
+            "type": "integer",
+            "description": "Manager who dismissed the attendance violation.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ExcusedTime": {
+            "type": "string",
+            "description": "Date and time when the manager dismissed the attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version for the attendance violation.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person associated with the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Points": {
+            "type": "number",
+            "description": "Points related to the attendance violation.",
+            "nullable": true
+          },
+          "RuleId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RuleSetId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule set.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RuleType": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Rule associated with the attendance violation, such as Tardy or Leave early.",
+            "nullable": false
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the schedule shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ShiftStartTime": {
+            "type": "string",
+            "description": "Start time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ShiftStopTime": {
+            "type": "string",
+            "description": "Stop time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Status": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status for the attendance violation, such as not reviewed or dismissed.",
+            "nullable": false
+          },
+          "ThresholdPeriodStartDate": {
+            "type": "string",
+            "description": "Start date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true
+          },
+          "ThresholdPeriodStopDate": {
+            "type": "string",
+            "description": "End date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true
+          },
+          "ThresholdViolatedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the violation exceeds the number of allowed occurrences. Valid values are true and false. The default value is false.",
+            "nullable": true
+          },
+          "TimeEntryId": {
+            "type": "integer",
+            "description": "Unique identifier for the time entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TimeEntryVersion": {
+            "type": "integer",
+            "description": "Version for the time entry.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "TimeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      },
+      "attendanceViolations": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/attendanceViolations-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "attendanceViolations-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AbsenceId": {
+            "type": "integer",
+            "description": "Unique identifier for the absence entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "AbsenceReportingTime": {
+            "type": "string",
+            "description": "Date and time when the absence was reported.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "AttendanceViolationDate": {
+            "type": "string",
+            "description": "Date for the attendance violation.",
+            "format": "date",
+            "nullable": false
+          },
+          "AttendanceViolationId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18,
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "Comments": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Comments associated with the acknowledgment or dismissal of the attendance violation.",
+            "nullable": true
+          },
+          "EntryStartTime": {
+            "type": "string",
+            "description": "Start time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "EntryStopTime": {
+            "type": "string",
+            "description": "Stop time for the reported time entry with an attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ExcusedBy": {
+            "type": "integer",
+            "description": "Manager who dismissed the attendance violation.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ExcusedTime": {
+            "type": "string",
+            "description": "Date and time when the manager dismissed the attendance violation.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ObjectVersionNumber": {
+            "type": "integer",
+            "description": "Version for the attendance violation.",
+            "format": "int32",
+            "nullable": false,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "PersonId": {
+            "type": "integer",
+            "description": "Unique identifier for the person associated with the attendance violation.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "Points": {
+            "type": "number",
+            "description": "Points related to the attendance violation.",
+            "nullable": true
+          },
+          "RuleId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RuleSetId": {
+            "type": "integer",
+            "description": "Unique identifier for the attendance rule set.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "RuleType": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Rule associated with the attendance violation, such as Tardy or Leave early.",
+            "nullable": false
+          },
+          "ShiftId": {
+            "type": "integer",
+            "description": "Unique identifier for the schedule shift.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "ShiftStartTime": {
+            "type": "string",
+            "description": "Start time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ShiftStopTime": {
+            "type": "string",
+            "description": "Stop time for the schedule shift.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Status": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Status for the attendance violation, such as not reviewed or dismissed.",
+            "nullable": false
+          },
+          "ThresholdPeriodStartDate": {
+            "type": "string",
+            "description": "Start date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true
+          },
+          "ThresholdPeriodStopDate": {
+            "type": "string",
+            "description": "End date for the period when attendance violations are counted.",
+            "format": "date",
+            "nullable": true
+          },
+          "ThresholdViolatedFlag": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Indicates whether the violation exceeds the number of allowed occurrences. Valid values are true and false. The default value is false.",
+            "nullable": true
+          },
+          "TimeEntryId": {
+            "type": "integer",
+            "description": "Unique identifier for the time entry.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          },
+          "TimeEntryVersion": {
+            "type": "integer",
+            "description": "Version for the time entry.",
+            "format": "int32",
+            "nullable": true,
+            "x-hints": {
+              "precision": 9
+            }
+          },
+          "TimeEventId": {
+            "type": "integer",
+            "description": "Unique identifier for the time event.",
+            "format": "int64",
+            "nullable": true,
+            "x-hints": {
+              "precision": 18
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "attendanceViolations-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/attendanceViolations-item-patch-request"
+            }
+          }
+        }
+      },
+      "attendanceViolations-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/attendanceViolations-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

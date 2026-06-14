@@ -1,0 +1,186 @@
+{
+  "name": "HWM_TM_REC_CHANGES",
+  "object_type": "TABLE",
+  "description": "Table to store changes for time record or time events.",
+  "schema": "FUSION",
+  "owner": "HWM",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwmtmrecchanges-27818.html#hwmtmrecchanges-27818",
+  "primary_keys": [
+    {
+      "name": "hwm_tm_rec_changes_PK",
+      "columns": "TM_REC_CHANGE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "TM_REC_CHANGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "TM_REC_CHANGE_ID"
+    },
+    {
+      "Name": "SECONDARY_TM_REC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Time Record Id to store start time entry for OUT_IN Event type."
+    },
+    {
+      "Name": "SECONDARY_TM_REC_VER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Time Record Version to store start time entry for OUT_IN Event type."
+    },
+    {
+      "Name": "TM_REC_CHANGE_REQ_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Foreign key to HWM_TM_REC_CHANGE_REQS"
+    },
+    {
+      "Name": "TM_REC_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Time record that needs to be updated, for new time records, this will be null."
+    },
+    {
+      "Name": "TM_REC_VERSION",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Version of the time record that needs to be updated, it will be used for tracking concurrent updates"
+    },
+    {
+      "Name": "TM_EVENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Time event id in case the request is created on time event."
+    },
+    {
+      "Name": "CRUD_STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Action being performed on the record, we will use the enum that we have."
+    },
+    {
+      "Name": "PROCESS_STATUS",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Status of the event  (SUBMITTED, SUBMITTED PENDING INTERNALIZATION, APPROVED, APPROVED PENDING INTERNALIZATION, REJECTED, CANCELLED, IN-PROCESS, COMPLETE)"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "COMMENTS",
+      "Datatype": "VARCHAR2",
+      "Length": "250",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Used to store justification of the change."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "hwm_tm_rec_changes_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_REC_ID, TM_REC_VERSION"
+    },
+    {
+      "Index": "hwm_tm_rec_changes_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_EVENT_ID"
+    },
+    {
+      "Index": "hwm_tm_rec_changes_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_REC_CHANGE_REQ_ID"
+    },
+    {
+      "Index": "hwm_tm_rec_changes_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SECONDARY_TM_REC_ID, SECONDARY_TM_REC_VER"
+    },
+    {
+      "Index": "hwm_tm_rec_changes_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "TM_REC_CHANGE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:47:24"
+}

@@ -1,0 +1,3406 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting CE Candidate Details",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingCECandidates/{CandidateNumber}": {
+      "get": {
+        "tags": [
+          "Recruiting CE Candidate Details"
+        ],
+        "summary": "Get the details of a candidate",
+        "operationId": "get_recruitingCECandidates",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidates-item-response"
+                }
+              }
+            },
+            "links": {
+              "CandidatePIIData": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1CandidatePIIData/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1attachments/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "citizenships": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1citizenships/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "candidateExtraInformation": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1candidateExtraInformation/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidates-{CandidateNumber}-get",
+        "x-filename-id": "recruitingcecandidates-candidatenumber-get"
+      },
+      "delete": {
+        "tags": [
+          "Recruiting CE Candidate Details"
+        ],
+        "summary": "Delete details of a candidate",
+        "operationId": "delete_recruitingCECandidates",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingCECandidates-{CandidateNumber}-delete",
+        "x-filename-id": "recruitingcecandidates-candidatenumber-delete"
+      },
+      "patch": {
+        "tags": [
+          "Recruiting CE Candidate Details"
+        ],
+        "summary": "Patch details of a candidate",
+        "operationId": "update_recruitingCECandidates",
+        "parameters": [
+          {
+            "name": "CandidateNumber",
+            "in": "path",
+            "description": "The value of this parameter could be a hash of the key that is used to uniquely identify the resource item. The client should not generate the hash key value.  Instead, the client should query on the collection resource with a filter to navigate to a specific resource item. For example: products?q=InventoryItemId=<value1>",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCECandidates-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidates-item-response"
+                }
+              }
+            },
+            "links": {
+              "CandidatePIIData": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1CandidatePIIData/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1attachments/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "citizenships": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1citizenships/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "candidateExtraInformation": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1candidateExtraInformation/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidates-{CandidateNumber}-patch",
+        "x-filename-id": "recruitingcecandidates-candidatenumber-patch"
+      }
+    },
+    "/recruitingCECandidates": {
+      "get": {
+        "tags": [
+          "Recruiting CE Candidate Details"
+        ],
+        "summary": "Get all details of recruitingCECandidates",
+        "operationId": "getall_recruitingCECandidates",
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AddressLine4; string; Value of line 4 of the candidate's address.</li><li>CwkCandidateFlag; boolean; Indicates if it's a contingent worker candidate in recruitingCECandidates</li><li>DateOfBirth; string; Date of birth in recruitingCECandidates</li><li>EmailChangeConfirmed; string; Email Change Confirmed in recruitingCECandidates.</li><li>EmailChangeRequested; string; Email Change Requested in recruitingCECandidates.</li><li>EmailPreferredFlag; boolean; Indicates that the candidate has selected email as the preferred communication channel.</li><li>EmailVerificationRequested; string; Indicates that the candidate has requested for an email verification.</li><li>EmailVerifiedFlag; boolean; Indicates that the email ID is verified.</li><li>ExWorkerFlag; boolean; Indicates if the candidate is an ex worker in recruitingCECandidates.</li><li>NewPhone; string; Phone number specified by the candidate in the event of a change in the existing phone number.</li><li>PhoneChannelType; string; Channel type, whether SMS or WhatsApp, to be used for phone communication in recruitingCECandidates.</li><li>PhonePreferredFlag; boolean; Indicates that the candidate has selected phone as the preferred communication channel.</li><li>PhoneValidationFailed; string; Indicates that the candidate phone validation failed.</li><li>PhoneVerificationRequested; string; Indicates that the candidate has requested for a phone verification.</li><li>PhoneVerifiedFlag; boolean; Indicates that the phone number is verified.</li><li>PreferredLanguage; string; Preferred language in recruitingCECandidates.</li><li>PreferredTimezone; string; Preferred time zone of the external candidate.</li><li>PreviousPhone; string; Previous phone number specified by the candidate before the change in the number.</li><li>SiteNumber; string; Site Number in recruitingCECandidates.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds recruitingCECandidates by a unique ID <br>Finder Variables <ul><li>CandidateNumber; string;  Finds recruitingCECandidates by a unique ID and the candidate number </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds recruitingCECandidates by a unique ID",
+                "properties": {
+                  "CandidateNumber": {
+                    "x-queryable": false,
+                    "nullable": true,
+                    "description": "Finds recruitingCECandidates by a unique ID and the candidate number",
+                    "type": "string",
+                    "maxLength": 240
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidates"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidates-get",
+        "x-filename-id": "recruitingcecandidates-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting CE Candidate Details"
+        ],
+        "summary": "Post all details of recruitingCECandidates",
+        "operationId": "create_recruitingCECandidates",
+        "parameters": [
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingCECandidates-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingCECandidates-item-response"
+                }
+              }
+            },
+            "links": {
+              "CandidatePIIData": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1CandidatePIIData/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "attachments": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1attachments/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "citizenships": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1citizenships/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use."
+              },
+              "candidateExtraInformation": {
+                "operationRef": "#/paths/~1recruitingCECandidates~1{CandidateNumber}~1child~1candidateExtraInformation/get",
+                "parameters": {
+                  "CandidateNumber": "$request.path.CandidateNumber"
+                },
+                "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use."
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingCECandidates-post",
+        "x-filename-id": "recruitingcecandidates-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingCECandidates-item-response": {
+        "type": "object",
+        "properties": {
+          "Action": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine1": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine2": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address Line 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of line 4 of the candidate's address.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidateLastModifiedDate": {
+            "type": "string",
+            "description": "Candidate last modified date.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidatePIIData": {
+            "title": "Candidate Details with PII Data",
+            "type": "array",
+            "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-CandidatePIIData-item-response"
+            }
+          },
+          "City": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "City in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Country": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Country in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CwkCandidateFlag": {
+            "type": "boolean",
+            "description": "Indicates if it's a contingent worker candidate in recruitingCECandidates",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "description": "Date of birth in recruitingCECandidates",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DisplayName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Email": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmailChangeConfirmed": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Confirmed in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmailChangeRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Requested in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmailPreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected email as the preferred communication channel.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmailVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for an email verification.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "EmailVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the email ID is verified.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ExWorkerFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates if the candidate is an ex worker in recruitingCECandidates.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "FirstName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "First Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Honors": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Honors in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "KnownAs": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute to represent a candidate's name also KnownAs.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LastName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Last Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ListName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "List Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Long Postal Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MiddleNames": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Middle Names in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MilitaryRank": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Military Rank in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Area Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Country Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneLegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile phone legislation code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Mobile Phone Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation1": {
+            "type": "string",
+            "description": "NamInformation 1 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation10": {
+            "type": "string",
+            "description": "NamInformation 10 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation11": {
+            "type": "string",
+            "description": "NamInformation 11 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation12": {
+            "type": "string",
+            "description": "NamInformation 12 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation13": {
+            "type": "string",
+            "description": "NamInformation 13 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation14": {
+            "type": "string",
+            "description": "NamInformation 14 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation15": {
+            "type": "string",
+            "description": "NamInformation 15 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation16": {
+            "type": "string",
+            "description": "NamInformation 16 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation17": {
+            "type": "string",
+            "description": "NamInformation 17 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation18": {
+            "type": "string",
+            "description": "NamInformation 18 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation19": {
+            "type": "string",
+            "description": "NamInformation 19 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation2": {
+            "type": "string",
+            "description": "NamInformation 2 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation20": {
+            "type": "string",
+            "description": "NamInformation 20 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation21": {
+            "type": "string",
+            "description": "NamInformation 21 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation22": {
+            "type": "string",
+            "description": "NamInformation 22 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation23": {
+            "type": "string",
+            "description": "NamInformation 23 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation24": {
+            "type": "string",
+            "description": "NamInformation 24 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation25": {
+            "type": "string",
+            "description": "NamInformation 25 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation26": {
+            "type": "string",
+            "description": "NamInformation 26 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation27": {
+            "type": "string",
+            "description": "NamInformation 27 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation28": {
+            "type": "string",
+            "description": "NamInformation 28 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation29": {
+            "type": "string",
+            "description": "NamInformation 29 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation3": {
+            "type": "string",
+            "description": "NamInformation 3 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation30": {
+            "type": "string",
+            "description": "NamInformation 30 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation4": {
+            "type": "string",
+            "description": "NamInformation 4 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation5": {
+            "type": "string",
+            "description": "NamInformation 5 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation6": {
+            "type": "string",
+            "description": "NamInformation 6 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation7": {
+            "type": "string",
+            "description": "NamInformation 7 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation8": {
+            "type": "string",
+            "description": "NamInformation 8 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation9": {
+            "type": "string",
+            "description": "NamInformation 9 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "New email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phone number specified by the candidate in the event of a change in the existing phone number.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneChannelType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Channel type, whether SMS or WhatsApp, to be used for phone communication in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhonePreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected phone as the preferred communication channel.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneValidationFailed": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate phone validation failed.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "PhoneVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for a phone verification.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PhoneVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the phone number is verified.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PostalCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Postal code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreNameAdjunct": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous name adjunct as entered by the candidate.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreferredLanguage": {
+            "type": "string",
+            "description": "Preferred language in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PreferredTimezone": {
+            "type": "string",
+            "description": "Preferred time zone of the external candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PreviousEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousLastName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous last name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous phone number specified by the candidate before the change in the number.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Region1": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region2": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region3": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SiteNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Suffix": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Suffix in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Title in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "attachments": {
+            "title": "Candidate Details with Attachments",
+            "type": "array",
+            "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-attachments-item-response"
+            }
+          },
+          "candidateExtraInformation": {
+            "title": "Candidate Details with Extra Information Data",
+            "type": "array",
+            "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-item-response"
+            }
+          },
+          "citizenships": {
+            "title": "Candidate Details with Citizenship Data",
+            "type": "array",
+            "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-citizenships-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-CandidatePIIData-item-response": {
+        "type": "object",
+        "properties": {
+          "ExpirationDate": {
+            "type": "string",
+            "description": "Expiration date in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "ID for Candidate PII data",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "IssueDate": {
+            "type": "string",
+            "description": "Date of issue in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "LegislationCode": {
+            "type": "string",
+            "description": "Legislation code in the recruiting candidate PII data.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "NationalIdentifierNumber": {
+            "type": "string",
+            "description": "National identifier number in the recruiting candidate PII data.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "NationalIdentifierType": {
+            "type": "string",
+            "description": "National identifier type in the recruiting candidate PII data.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "PlaceOfIssue": {
+            "type": "string",
+            "description": "Place of issue in the recruiting candidate PII data.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-attachments-item-response": {
+        "type": "object",
+        "properties": {
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment in the recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Category": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category in recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Description": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description in recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DocumentId": {
+            "type": "integer",
+            "description": "ID assigned to documents in recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File Contents in recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Id": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "ID assigned to the recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type in the recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "SourceAttachmentId": {
+            "type": "integer",
+            "description": "ID assigned to the source attachment in the recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Title": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of recruitingCECandidates attachments.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-item-response": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextLink": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the extra information context.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the extra information data of the candidate.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique identifier for the person.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "dataRows": {
+            "title": "Candidate Details with Extra Information Rows",
+            "type": "array",
+            "description": "The Rows resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information rows. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-item-response": {
+        "type": "object",
+        "properties": {
+          "ContextRowId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the context corresponding to the extra information rows.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ContextRowLink": {
+            "maxLength": 3000,
+            "type": "string",
+            "description": "Unique identifier for the extra information context row.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique link corresponding to the extra information context row.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for the extra information data row.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "RowAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for extra information row attribute.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "attributes": {
+            "title": "Candidate Details with Extra Information Attributes",
+            "type": "array",
+            "description": "The attributes resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information row attributes. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-response"
+            }
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-response": {
+        "type": "object",
+        "properties": {
+          "AttributeId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row context corresponding to the attributes.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row data corresponding to the attributes.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Name": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the candidate extra information row attribute.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "Value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of the candidate extra information row attribute.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-citizenships-item-response": {
+        "type": "object",
+        "properties": {
+          "Citizenship": {
+            "type": "string",
+            "description": "Citizenship value of the candidate citizenship.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CitizenshipId": {
+            "type": "integer",
+            "description": "Citizenship identifier of the candidate citizenship.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "CitizenshipStatus": {
+            "type": "string",
+            "description": "Citizenship status of the candidate citizenship.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "FromDate": {
+            "type": "string",
+            "description": "From date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "ToDate": {
+            "type": "string",
+            "description": "To date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Action": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine1": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine2": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address Line 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of line 4 of the candidate's address.",
+            "nullable": true
+          },
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidatePIIData": {
+            "title": "Candidate Details with PII Data",
+            "type": "array",
+            "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-CandidatePIIData-item-patch-request"
+            }
+          },
+          "City": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "City in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Country": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Country in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "description": "Date of birth in recruitingCECandidates",
+            "format": "date",
+            "nullable": true
+          },
+          "DisplayName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Email": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmailChangeConfirmed": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Confirmed in recruitingCECandidates.",
+            "nullable": true
+          },
+          "EmailChangeRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Requested in recruitingCECandidates.",
+            "nullable": true
+          },
+          "EmailPreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected email as the preferred communication channel.",
+            "nullable": true
+          },
+          "EmailVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for an email verification.",
+            "nullable": true
+          },
+          "EmailVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the email ID is verified.",
+            "nullable": true
+          },
+          "FirstName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "First Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Honors": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Honors in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "KnownAs": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute to represent a candidate's name also KnownAs.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LastName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Last Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ListName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "List Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Long Postal Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MiddleNames": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Middle Names in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MilitaryRank": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Military Rank in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Area Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Country Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneLegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile phone legislation code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Mobile Phone Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation1": {
+            "type": "string",
+            "description": "NamInformation 1 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation10": {
+            "type": "string",
+            "description": "NamInformation 10 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation11": {
+            "type": "string",
+            "description": "NamInformation 11 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation12": {
+            "type": "string",
+            "description": "NamInformation 12 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation13": {
+            "type": "string",
+            "description": "NamInformation 13 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation14": {
+            "type": "string",
+            "description": "NamInformation 14 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation15": {
+            "type": "string",
+            "description": "NamInformation 15 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation16": {
+            "type": "string",
+            "description": "NamInformation 16 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation17": {
+            "type": "string",
+            "description": "NamInformation 17 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation18": {
+            "type": "string",
+            "description": "NamInformation 18 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation19": {
+            "type": "string",
+            "description": "NamInformation 19 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation2": {
+            "type": "string",
+            "description": "NamInformation 2 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation20": {
+            "type": "string",
+            "description": "NamInformation 20 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation21": {
+            "type": "string",
+            "description": "NamInformation 21 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation22": {
+            "type": "string",
+            "description": "NamInformation 22 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation23": {
+            "type": "string",
+            "description": "NamInformation 23 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation24": {
+            "type": "string",
+            "description": "NamInformation 24 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation25": {
+            "type": "string",
+            "description": "NamInformation 25 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation26": {
+            "type": "string",
+            "description": "NamInformation 26 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation27": {
+            "type": "string",
+            "description": "NamInformation 27 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation28": {
+            "type": "string",
+            "description": "NamInformation 28 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation29": {
+            "type": "string",
+            "description": "NamInformation 29 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation3": {
+            "type": "string",
+            "description": "NamInformation 3 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation30": {
+            "type": "string",
+            "description": "NamInformation 30 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation4": {
+            "type": "string",
+            "description": "NamInformation 4 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation5": {
+            "type": "string",
+            "description": "NamInformation 5 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation6": {
+            "type": "string",
+            "description": "NamInformation 6 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation7": {
+            "type": "string",
+            "description": "NamInformation 7 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation8": {
+            "type": "string",
+            "description": "NamInformation 8 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation9": {
+            "type": "string",
+            "description": "NamInformation 9 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "New email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phone number specified by the candidate in the event of a change in the existing phone number.",
+            "nullable": true
+          },
+          "PhoneChannelType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Channel type, whether SMS or WhatsApp, to be used for phone communication in recruitingCECandidates.",
+            "nullable": true
+          },
+          "PhonePreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected phone as the preferred communication channel.",
+            "nullable": true
+          },
+          "PhoneVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for a phone verification.",
+            "nullable": true
+          },
+          "PhoneVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the phone number is verified.",
+            "nullable": true
+          },
+          "PostalCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Postal code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreNameAdjunct": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous name adjunct as entered by the candidate.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreferredLanguage": {
+            "type": "string",
+            "description": "Preferred language in recruitingCECandidates.",
+            "nullable": true
+          },
+          "PreferredTimezone": {
+            "type": "string",
+            "description": "Preferred time zone of the external candidate.",
+            "nullable": true
+          },
+          "PreviousEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousLastName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous last name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous phone number specified by the candidate before the change in the number.",
+            "nullable": true
+          },
+          "Region1": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region2": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region3": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SiteNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site Number in recruitingCECandidates.",
+            "nullable": true
+          },
+          "Suffix": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Suffix in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Title in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "attachments": {
+            "title": "Candidate Details with Attachments",
+            "type": "array",
+            "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-attachments-item-patch-request"
+            }
+          },
+          "candidateExtraInformation": {
+            "title": "Candidate Details with Extra Information Data",
+            "type": "array",
+            "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-item-patch-request"
+            }
+          },
+          "citizenships": {
+            "title": "Candidate Details with Citizenship Data",
+            "type": "array",
+            "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-citizenships-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-CandidatePIIData-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ExpirationDate": {
+            "type": "string",
+            "description": "Expiration date in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "ID for Candidate PII data",
+            "nullable": true
+          },
+          "IssueDate": {
+            "type": "string",
+            "description": "Date of issue in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true
+          },
+          "LegislationCode": {
+            "type": "string",
+            "description": "Legislation code in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "NationalIdentifierNumber": {
+            "type": "string",
+            "description": "National identifier number in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "NationalIdentifierType": {
+            "type": "string",
+            "description": "National identifier type in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "PlaceOfIssue": {
+            "type": "string",
+            "description": "Place of issue in the recruiting candidate PII data.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-attachments-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Category": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Description": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "DocumentId": {
+            "type": "integer",
+            "description": "ID assigned to documents in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File Contents in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Id": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "ID assigned to the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "SourceAttachmentId": {
+            "type": "integer",
+            "description": "ID assigned to the source attachment in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of recruitingCECandidates attachments.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the candidate.",
+            "nullable": true
+          },
+          "ContextLink": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the extra information context.",
+            "nullable": true
+          },
+          "ContextName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the extra information data of the candidate.",
+            "nullable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique identifier for the person.",
+            "nullable": true
+          },
+          "dataRows": {
+            "title": "Candidate Details with Extra Information Rows",
+            "type": "array",
+            "description": "The Rows resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information rows. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "ContextRowId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the context corresponding to the extra information rows.",
+            "nullable": true
+          },
+          "ContextRowLink": {
+            "maxLength": 3000,
+            "type": "string",
+            "description": "Unique identifier for the extra information context row.",
+            "nullable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique link corresponding to the extra information context row.",
+            "nullable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for the extra information data row.",
+            "nullable": true
+          },
+          "RowAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for extra information row attribute.",
+            "nullable": true
+          },
+          "attributes": {
+            "title": "Candidate Details with Extra Information Attributes",
+            "type": "array",
+            "description": "The attributes resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information row attributes. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "AttributeId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row context corresponding to the attributes.",
+            "nullable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row data corresponding to the attributes.",
+            "nullable": true
+          },
+          "Name": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the candidate extra information row attribute.",
+            "nullable": true
+          },
+          "Value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of the candidate extra information row attribute.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-citizenships-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "Citizenship": {
+            "type": "string",
+            "description": "Citizenship value of the candidate citizenship.",
+            "nullable": true
+          },
+          "CitizenshipId": {
+            "type": "integer",
+            "description": "Citizenship identifier of the candidate citizenship.",
+            "nullable": true
+          },
+          "CitizenshipStatus": {
+            "type": "string",
+            "description": "Citizenship status of the candidate citizenship.",
+            "nullable": true
+          },
+          "FromDate": {
+            "type": "string",
+            "description": "From date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true
+          },
+          "ToDate": {
+            "type": "string",
+            "description": "To date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        },
+        "x-hints": {
+          "usage": "BusinessObject"
+        }
+      },
+      "recruitingCECandidates-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Action": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Action in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 4 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddlAddressAttribute5": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Additional address attribute 5 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine1": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine2": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Address Line 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Address Line 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "AddressLine4": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of line 4 of the candidate's address.",
+            "nullable": true
+          },
+          "Building": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Building in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidateNumber": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Candidate Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "CandidatePIIData": {
+            "title": "Candidate Details with PII Data",
+            "type": "array",
+            "description": "The CandidatePIIData resource is a child of the recruitingCECandidates resource. It includes the details of the candidate national identifiers and date of birth. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-CandidatePIIData-item-post-request"
+            }
+          },
+          "City": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "City in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Country": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Country in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "DateOfBirth": {
+            "type": "string",
+            "description": "Date of birth in recruitingCECandidates",
+            "format": "date",
+            "nullable": true
+          },
+          "DisplayName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Display Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Email": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "Email in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "EmailChangeConfirmed": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Confirmed in recruitingCECandidates.",
+            "nullable": true
+          },
+          "EmailChangeRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Email Change Requested in recruitingCECandidates.",
+            "nullable": true
+          },
+          "EmailPreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected email as the preferred communication channel.",
+            "nullable": true
+          },
+          "EmailVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for an email verification.",
+            "nullable": true
+          },
+          "EmailVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the email ID is verified.",
+            "nullable": true
+          },
+          "FirstName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "First Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "FloorNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Floor Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Honors": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Honors in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "KnownAs": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Attribute to represent a candidate's name also KnownAs.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LastName": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Last Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "ListName": {
+            "maxLength": 240,
+            "type": "string",
+            "description": "List Name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "LongPostalCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Long Postal Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MiddleNames": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Middle Names in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MilitaryRank": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Military Rank in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneAreaCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Area Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneCountryCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile Phone Country Code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneLegislationCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Mobile phone legislation code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "MobilePhoneNumber": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Mobile Phone Number in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation1": {
+            "type": "string",
+            "description": "NamInformation 1 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation10": {
+            "type": "string",
+            "description": "NamInformation 10 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation11": {
+            "type": "string",
+            "description": "NamInformation 11 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation12": {
+            "type": "string",
+            "description": "NamInformation 12 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation13": {
+            "type": "string",
+            "description": "NamInformation 13 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation14": {
+            "type": "string",
+            "description": "NamInformation 14 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation15": {
+            "type": "string",
+            "description": "NamInformation 15 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation16": {
+            "type": "string",
+            "description": "NamInformation 16 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation17": {
+            "type": "string",
+            "description": "NamInformation 17 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation18": {
+            "type": "string",
+            "description": "NamInformation 18 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation19": {
+            "type": "string",
+            "description": "NamInformation 19 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation2": {
+            "type": "string",
+            "description": "NamInformation 2 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation20": {
+            "type": "string",
+            "description": "NamInformation 20 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation21": {
+            "type": "string",
+            "description": "NamInformation 21 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation22": {
+            "type": "string",
+            "description": "NamInformation 22 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation23": {
+            "type": "string",
+            "description": "NamInformation 23 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation24": {
+            "type": "string",
+            "description": "NamInformation 24 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation25": {
+            "type": "string",
+            "description": "NamInformation 25 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation26": {
+            "type": "string",
+            "description": "NamInformation 26 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation27": {
+            "type": "string",
+            "description": "NamInformation 27 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation28": {
+            "type": "string",
+            "description": "NamInformation 28 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation29": {
+            "type": "string",
+            "description": "NamInformation 29 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation3": {
+            "type": "string",
+            "description": "NamInformation 3 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation30": {
+            "type": "string",
+            "description": "NamInformation 30 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation4": {
+            "type": "string",
+            "description": "NamInformation 4 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation5": {
+            "type": "string",
+            "description": "NamInformation 5 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation6": {
+            "type": "string",
+            "description": "NamInformation 6 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation7": {
+            "type": "string",
+            "description": "NamInformation 7 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation8": {
+            "type": "string",
+            "description": "NamInformation 8 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NamInformation9": {
+            "type": "string",
+            "description": "NamInformation 9 is a configurable attribute in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "New email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "NewPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Phone number specified by the candidate in the event of a change in the existing phone number.",
+            "nullable": true
+          },
+          "PhoneChannelType": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Channel type, whether SMS or WhatsApp, to be used for phone communication in recruitingCECandidates.",
+            "nullable": true
+          },
+          "PhonePreferredFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the candidate has selected phone as the preferred communication channel.",
+            "nullable": true
+          },
+          "PhoneVerificationRequested": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Indicates that the candidate has requested for a phone verification.",
+            "nullable": true
+          },
+          "PhoneVerifiedFlag": {
+            "maxLength": 255,
+            "type": "boolean",
+            "description": "Indicates that the phone number is verified.",
+            "nullable": true
+          },
+          "PostalCode": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Postal code in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreNameAdjunct": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous name adjunct as entered by the candidate.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreferredLanguage": {
+            "type": "string",
+            "description": "Preferred language in recruitingCECandidates.",
+            "nullable": true
+          },
+          "PreferredTimezone": {
+            "type": "string",
+            "description": "Preferred time zone of the external candidate.",
+            "nullable": true
+          },
+          "PreviousEmail": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous email ID in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousLastName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous last name in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "PreviousPhone": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Previous phone number specified by the candidate before the change in the number.",
+            "nullable": true
+          },
+          "Region1": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 1 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region2": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 2 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Region3": {
+            "maxLength": 120,
+            "type": "string",
+            "description": "Region 3 in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "SiteNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Site Number in recruitingCECandidates.",
+            "nullable": true
+          },
+          "Suffix": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Suffix in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "Title": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Title in recruitingCECandidates.",
+            "nullable": true,
+            "x-queryable": false
+          },
+          "attachments": {
+            "title": "Candidate Details with Attachments",
+            "type": "array",
+            "description": "The attachments resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with attachments. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-attachments-item-post-request"
+            }
+          },
+          "candidateExtraInformation": {
+            "title": "Candidate Details with Extra Information Data",
+            "type": "array",
+            "description": "The CandidateExtraInformation resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-item-post-request"
+            }
+          },
+          "citizenships": {
+            "title": "Candidate Details with Citizenship Data",
+            "type": "array",
+            "description": "The citizenships resource is a child of the recruitingCECandidates resource. It includes the details about citizenship data. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-citizenships-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-CandidatePIIData-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ExpirationDate": {
+            "type": "string",
+            "description": "Expiration date in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true
+          },
+          "Id": {
+            "type": "string",
+            "description": "ID for Candidate PII data",
+            "nullable": true
+          },
+          "IssueDate": {
+            "type": "string",
+            "description": "Date of issue in the recruiting candidate PII data.",
+            "format": "date",
+            "nullable": true
+          },
+          "LegislationCode": {
+            "type": "string",
+            "description": "Legislation code in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "NationalIdentifierNumber": {
+            "type": "string",
+            "description": "National identifier number in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "NationalIdentifierType": {
+            "type": "string",
+            "description": "National identifier type in the recruiting candidate PII data.",
+            "nullable": true
+          },
+          "PlaceOfIssue": {
+            "type": "string",
+            "description": "Place of issue in the recruiting candidate PII data.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-attachments-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Attachment": {
+            "type": "string",
+            "description": "Attachment in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Category": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Category in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Description": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Description in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "DocumentId": {
+            "type": "integer",
+            "description": "ID assigned to documents in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "FileContents": {
+            "type": "string",
+            "description": "File Contents in recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Id": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "ID assigned to the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "MimeType": {
+            "type": "string",
+            "description": "Mime type in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "SourceAttachmentId": {
+            "type": "integer",
+            "description": "ID assigned to the source attachment in the recruitingCECandidates attachments.",
+            "nullable": true
+          },
+          "Title": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "Title of the attachment.",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of recruitingCECandidates attachments.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-item-post-request": {
+        "type": "object",
+        "properties": {
+          "CandidateNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the candidate.",
+            "nullable": true
+          },
+          "ContextLink": {
+            "maxLength": 2000,
+            "type": "string",
+            "description": "Name of the extra information context.",
+            "nullable": true
+          },
+          "ContextName": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for the extra information data of the candidate.",
+            "nullable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique identifier for the person.",
+            "nullable": true
+          },
+          "dataRows": {
+            "title": "Candidate Details with Extra Information Rows",
+            "type": "array",
+            "description": "The Rows resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information rows. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-item-post-request": {
+        "type": "object",
+        "properties": {
+          "ContextRowId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the context corresponding to the extra information rows.",
+            "nullable": true
+          },
+          "ContextRowLink": {
+            "maxLength": 3000,
+            "type": "string",
+            "description": "Unique identifier for the extra information context row.",
+            "nullable": true
+          },
+          "DataId": {
+            "type": "integer",
+            "description": "Unique link corresponding to the extra information context row.",
+            "nullable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for the extra information data row.",
+            "nullable": true
+          },
+          "RowAction": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique identifier for extra information row attribute.",
+            "nullable": true
+          },
+          "attributes": {
+            "title": "Candidate Details with Extra Information Attributes",
+            "type": "array",
+            "description": "The attributes resource is a child of the recruitingCECandidates resource. It includes the details of recruitingCECandidates with extra information row attributes. Note that the service endpoints in this resource category are only for Oracle internal use.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-post-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-candidateExtraInformation-dataRows-attributes-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AttributeId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row context corresponding to the attributes.",
+            "nullable": true
+          },
+          "DataRowId": {
+            "type": "integer",
+            "description": "Unique identifier for extra information row data corresponding to the attributes.",
+            "nullable": true
+          },
+          "Name": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Name of the candidate extra information row attribute.",
+            "nullable": true
+          },
+          "Value": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Value of the candidate extra information row attribute.",
+            "nullable": true
+          }
+        }
+      },
+      "recruitingCECandidates-citizenships-item-post-request": {
+        "type": "object",
+        "properties": {
+          "Citizenship": {
+            "type": "string",
+            "description": "Citizenship value of the candidate citizenship.",
+            "nullable": true
+          },
+          "CitizenshipId": {
+            "type": "integer",
+            "description": "Citizenship identifier of the candidate citizenship.",
+            "nullable": true
+          },
+          "CitizenshipStatus": {
+            "type": "string",
+            "description": "Citizenship status of the candidate citizenship.",
+            "nullable": true
+          },
+          "FromDate": {
+            "type": "string",
+            "description": "From date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true
+          },
+          "ToDate": {
+            "type": "string",
+            "description": "To date of the candidate citizenship.",
+            "format": "date",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingCECandidates-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCECandidates-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingCECandidates-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingCECandidates-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

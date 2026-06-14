@@ -1,0 +1,192 @@
+{
+  "name": "HRC_EVT_OBJ_CHANGE_COMPONENTS",
+  "object_type": "TABLE",
+  "description": "An Source Object Change Component stores information about the date range over which a specific change takes place. In the case of a non-DE change there will be a single record with no Validation start/end dates. In the case of a DE change each individual change that is part of a series of changes brought about by the DE Operation will be captured.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcevtobjchangecomponents-22122.html#hrcevtobjchangecomponents-22122",
+  "primary_keys": [
+    {
+      "name": "HRC_EVT_OBJ_CHG_CMPNTS_PK",
+      "columns": "CHANGE_COMPONENT_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CHANGE_COMPONENT_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Unique Identifier"
+    },
+    {
+      "Name": "CHANGE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of the Change Instance"
+    },
+    {
+      "Name": "PHYSICAL_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indication that the component contains physical record changes"
+    },
+    {
+      "Name": "LOGICAL_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Indication that the component contains logical record changes"
+    },
+    {
+      "Name": "VALIDATION_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For DE entities the Validation Start Date of the affected change"
+    },
+    {
+      "Name": "VALIDATION_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "For DE entities the Validation End Date of the affected change"
+    },
+    {
+      "Name": "OLD_EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Effective Start Date old value"
+    },
+    {
+      "Name": "NEW_EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Effective Start Date new value"
+    },
+    {
+      "Name": "OLD_EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Effective End Date old value"
+    },
+    {
+      "Name": "NEW_EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Effective End Date new value"
+    },
+    {
+      "Name": "OLD_SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "The old sequence number of the changed record in the case of Multiple Changes per Day"
+    },
+    {
+      "Name": "NEW_SEQUENCE",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "The new sequence number of the changed record in the case of Multiple Changes per Day"
+    },
+    {
+      "Name": "CHANGE_ATTRS",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Changed Attributes stored in the form of name and values"
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_EVT_OBJ_CHG_CMPNTS_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "CHANGE_ID"
+    },
+    {
+      "Index": "HRC_EVT_OBJ_CHG_CMPNTS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "CHANGE_COMPONENT_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:42:49"
+}

@@ -1,0 +1,284 @@
+{
+  "name": "HRC_ATOMPUB_ENTRIES",
+  "object_type": "TABLE",
+  "description": "Represents  entries, acting as a container for metadata and data associated with an entry.  An element can appear as a child of the atom:feed element, or it can \nappear as the document (i.e., top-level) element of a stand-alone Atom Entry Document.",
+  "schema": "FUSION",
+  "owner": "HRC",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrcatompubentries-19989.html#hrcatompubentries-19989",
+  "primary_keys": [
+    {
+      "name": "HRC_ATOMPUB_ENTRIES_PK",
+      "columns": "ENTRY_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "ENTRY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Uniquely identifies an atom entry  row.",
+      "Status": ""
+    },
+    {
+      "Name": "COLLECTION_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to HRC_ATOMPUB_COLLECTIONS.COLLECTION_ID",
+      "Status": ""
+    },
+    {
+      "Name": "ATOM_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The ATOM Entry UUID which is a GUID",
+      "Status": ""
+    },
+    {
+      "Name": "TITLE",
+      "Datatype": "VARCHAR2",
+      "Length": "2000",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Specifies the <title> tag value containing Human readable title for the entry",
+      "Status": ""
+    },
+    {
+      "Name": "UPDATED",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Updated entry timestamp. Can be set to a future time.",
+      "Status": ""
+    },
+    {
+      "Name": "ARCHIVED",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Entry archived timestamp",
+      "Status": ""
+    },
+    {
+      "Name": "PURGED",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Entry purged timestamp",
+      "Status": ""
+    },
+    {
+      "Name": "SECURITY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "The security identifier which is a fusion surrogate key value based on the HRC_ATOMPUB_COLLECTIONS.SECURITY_TYPE value",
+      "Status": ""
+    },
+    {
+      "Name": "SOURCE_ENTRY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifies a source atom entry. Foreign Key to HRC_ATOM_ENTRIES.ENTRY_ID\n\nIf an atom:entry is copied from one feed into another feed then SOURCE_ENTRY_ID points to the original entry.",
+      "Status": ""
+    },
+    {
+      "Name": "ENTRY_XML",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "XML Fragment for Entry. Containing root node is <entry>",
+      "Status": ""
+    },
+    {
+      "Name": "MODULE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Seed Data Framework: indicates the module that owns the row. A module is an entry in Application Taxonomy such as a Logical Business Area. When the MODULE_ID column exists and the owner of the row is not specified, then the Seed Data Framework will not extract the row as seed data.",
+      "Status": "Obsolete"
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "SGUID",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The seed global unique identifier. Oracle internal use only.",
+      "Status": "Obsolete"
+    },
+    {
+      "Name": "SEED_DATA_SOURCE",
+      "Datatype": "VARCHAR2",
+      "Length": "512",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file.",
+      "Status": "Obsolete"
+    },
+    {
+      "Name": "REFERENCE_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Reference ID for atompub entries",
+      "Status": ""
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "COLLECTION_ID, UPDATED, ARCHIVED, PURGED",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "COLLECTION_ID, ARCHIVED, PURGED",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N20",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SGUID",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "ENTRY_XML",
+      "Status": "Obsolete"
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N4",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTION_ID, UPPER(\"TITLE\")",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_N5",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_ENTRY_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "ATOM_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U2",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "ENTRY_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U4",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTION_ID, UPDATED, ENTRY_ID, ARCHIVED, PURGED",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U5",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTION_ID, CREATION_DATE, ENTRY_ID, ARCHIVED, PURGED",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U6",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTION_ID, UPDATED, ENTRY_ID, ARCHIVED, PURGED, REFERENCE_ID",
+      "Status": ""
+    },
+    {
+      "Index": "HRC_ATOMPUB_ENTRIES_U7",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "COLLECTION_ID, CREATION_DATE, ENTRY_ID, ARCHIVED, PURGED, REFERENCE_ID",
+      "Status": ""
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:35:22"
+}

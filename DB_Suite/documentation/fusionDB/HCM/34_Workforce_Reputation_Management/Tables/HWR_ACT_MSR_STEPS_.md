@@ -1,0 +1,48 @@
+# HWR_ACT_MSR_STEPS_
+
+This stores the Information on the activity Measure of a Simple Activity
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** TABLE
+
+**Tablespace:** FUSION_TS_TX_DATA
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwractmsrsteps-12429.html#hwractmsrsteps-12429](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwractmsrsteps-12429.html#hwractmsrsteps-12429)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| HWR_ACT_MSR_STEPS_PK_ | LAST_UPDATE_DATE, LAST_UPDATED_BY, ACTIVITY_ID |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| ACTIVITY_ID | NUMBER |  | 18 | Yes | ACTIVITY_ID which maps back to it's parent activity |
+| VALUE | NUMBER |  |  |  | This stores the values of the activity measure |
+| UNITS | VARCHAR2 | 500 |  |  | This stores the type of Unit to be used for the activity measure |
+| CREATION_DATE | TIMESTAMP |  |  |  | Who column: indicates the date and time of the creation of the row. |
+| CREATED_BY | VARCHAR2 | 64 |  |  | Who column: indicates the user who created the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| AUDIT_ACTION_TYPE_ | VARCHAR2 | 10 |  |  | Action Type - have values like INSERT, UPDATE and DELETE. |
+| AUDIT_CHANGE_BIT_MAP_ | VARCHAR2 | 1000 |  |  | Used to store a bit map of 1s and 0s for each column in the table. |
+| AUDIT_IMPERSONATOR_ | VARCHAR2 | 64 |  |  | This column contains the Original Impersonator User. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| HWR_ACT_MSR_STEPSN1_ | Non Unique | Default | ACTIVITY_ID |
+| HWR_ACT_MSR_STEPS_U1_ | Unique | FUSION_TS_TX_DATA | LAST_UPDATE_DATE, LAST_UPDATED_BY, ACTIVITY_ID |
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Tables_Index.md)

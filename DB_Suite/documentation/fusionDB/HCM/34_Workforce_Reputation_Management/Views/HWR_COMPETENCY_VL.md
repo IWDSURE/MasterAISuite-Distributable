@@ -1,0 +1,42 @@
+# HWR_COMPETENCY_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** HWR
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrcompetencyvl-8650.html#hwrcompetencyvl-8650](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hwrcompetencyvl-8650.html#hwrcompetencyvl-8650)
+
+## Columns
+
+- COMPETENCY_ID
+- SOURCE_ID
+- COMPETENCY_TEXT
+- EVALUATION_TYPE
+- PROFICIENCY
+- START_DATE
+- END_DATE
+- YEARS_OF_EXPERIENCE
+- LAST_USED_DATE
+- ACQUIRED_DATE
+- RECOMMENDER_ID
+- RECOMMENDER_URI
+- PRFL_ID
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+
+## Query
+
+```sql
+SELECT B.COMPETENCY_ID , B.SOURCE_ID , B.COMPETENCY_TEXT , B.EVALUATION_TYPE , B.PROFICIENCY , B.START_DATE , B.END_DATE , B.YEARS_OF_EXPERIENCE , B.LAST_USED_DATE , B.ACQUIRED_DATE , B.RECOMMENDER_ID , B.RECOMMENDER_URI , X.PRFL_ID , B.CREATED_BY , B.CREATION_DATE , B.LAST_UPDATED_BY , B.LAST_UPDATE_DATE , B.LAST_UPDATE_LOGIN FROM HWR_COMPETENCY_B B LEFT JOIN HWR_COMPETENCY_PRFL_X X ON (B.COMPETENCY_ID = X.COMPETENCY_ID AND B.SOURCE_ID = X.SOURCE_ID)
+```
+
+---
+
+[← Back to Index](../34_Workforce_Reputation_Management_Views_Index.md)

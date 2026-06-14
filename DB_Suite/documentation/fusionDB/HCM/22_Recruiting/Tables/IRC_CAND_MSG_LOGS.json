@@ -1,0 +1,184 @@
+{
+  "name": "IRC_CAND_MSG_LOGS",
+  "object_type": "TABLE",
+  "description": "This table stores a dump of the email and SMS content  as it is used to process newly received emails and SMS.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/irccandmsglogs-30156.html#irccandmsglogs-30156",
+  "primary_keys": [
+    {
+      "name": "IRC_CAND_MSG_LOGS_PK",
+      "columns": "CAND_MSG_LOG_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CAND_MSG_LOG_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary key for the IRC_CAND_MSG_LOGS table."
+    },
+    {
+      "Name": "MSG_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "20",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This is a discriminator column .possible values will be ORA_EMAIL/ORA_SMS"
+    },
+    {
+      "Name": "PROCESSING_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Processing status of the record.'ORA_NEW' when the message dump row is created (default value).\n'ORA_PROCESSED' when the processing is successful.'ORA_FAILED' if the processing fails even after retries."
+    },
+    {
+      "Name": "REFERENCE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Store INTERACTION_ID in case of SMS.\nCAND_MSG_ID in case of Email (Optional)."
+    },
+    {
+      "Name": "RETRY_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "How many times the batch job has tried to process the record."
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "100",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the name of the job that created or last updated the row."
+    },
+    {
+      "Name": "JOB_DEFINITION_PACKAGE",
+      "Datatype": "VARCHAR2",
+      "Length": "900",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the package name of the job that created or last updated the row."
+    },
+    {
+      "Name": "MESSAGE_IDENTIFIER",
+      "Datatype": "VARCHAR2",
+      "Length": "400",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Contains the message identifier for both email and SMS. For email stores the UMS SMTP message id and for SMS stores the id sent by the provider."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "MESSAGE_DUMP",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Email or SMS raw content from the Email Provider or SMS Provider"
+    },
+    {
+      "Name": "PROCESSING_ERROR_MESSAGE",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Error message while processing the row"
+    },
+    {
+      "Name": "ATTACHMENT_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "2",
+      "Not-null": "",
+      "Comments": "Total number of attachments available in the email"
+    },
+    {
+      "Name": "ATTACHMENT_INFO",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Information about attachments uploaded in UMC or errored out in the form of json"
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_CAND_MSG_LOGS_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MSG_TYPE, PROCESSING_STATUS"
+    },
+    {
+      "Index": "IRC_CAND_MSG_LOGS_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CAND_MSG_LOG_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T18:46:15"
+}

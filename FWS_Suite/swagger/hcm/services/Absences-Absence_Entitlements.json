@@ -1,0 +1,914 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Absences/Absence Entitlements",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/absences/{absencesUniqID}/child/absenceEntitlements/{absenceEntitlementsUniqID}": {
+      "get": {
+        "tags": [
+          "Absences/Absence Entitlements"
+        ],
+        "summary": "Get an entitlement summary record",
+        "operationId": "get_absences-absenceEntitlements",
+        "parameters": [
+          {
+            "name": "absencesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Absences resource and used to uniquely identify an instance of Absences. The client should not generate the hash key value. Instead, the client should query on the Absences collection resource in order to navigate to a specific instance of Absences to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "absenceEntitlementsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Absence Entitlements resource and used to uniquely identify an instance of Absence Entitlements. The client should not generate the hash key value. Instead, the client should query on the Absence Entitlements collection resource in order to navigate to a specific instance of Absence Entitlements to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/absences-absenceEntitlements-item-response"
+                }
+              }
+            },
+            "links": {
+              "absenceEntitlementDetails": {
+                "operationRef": "#/paths/~1absences~1{absencesUniqID}~1child~1absenceEntitlements~1{absenceEntitlementsUniqID}~1child~1absenceEntitlementDetails/get",
+                "parameters": {
+                  "absenceEntitlementsUniqID": "$request.path.absenceEntitlementsUniqID",
+                  "absencesUniqID": "$request.path.absencesUniqID"
+                },
+                "description": "The absenceEntitlementDetails resource is a child of the absences resource. It provides a list of all the entitlements consumed by an absence each day of the absence."
+              }
+            }
+          }
+        },
+        "x-internal-id": "absences-{absencesUniqID}-child-absenceEntitlements-{absenceEntitlementsUniqID}-get",
+        "x-filename-id": "absences-absencesuniqid-child-absenceentitlements-absenceentitlementsuniqid-get"
+      }
+    },
+    "/absences/{absencesUniqID}/child/absenceEntitlements": {
+      "get": {
+        "tags": [
+          "Absences/Absence Entitlements"
+        ],
+        "summary": "Get all entitlement summary records",
+        "operationId": "getall_absences-absenceEntitlements",
+        "parameters": [
+          {
+            "name": "absencesUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Absences resource and used to uniquely identify an instance of Absences. The client should not generate the hash key value. Instead, the client should query on the Absences collection resource in order to navigate to a specific instance of Absences to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>absenceCaseId; integer; Unique identifier for an absence case.</li><li>absencePlanId; integer; Unique identifier for the absence plan.</li><li>absencePlanName; string; Name of absence plan.</li><li>absencePlanUOMMeaning; string; Unit of measure used to record the absence, such as Days or Hours.</li><li>activityCd; string; Unique activity code for the entitlement summary record. For example, ORA_ANC_QUAL, ORA_ANC_EXCEED.</li><li>activityCdMeaning; string; Meaning of activity code for the entitlement summary record. For example, Qualified Entitlement, Entitlement exceeded.</li><li>activityEndCalendarDate; string; End Date for the entitlements.</li><li>activityEndDate; string; End date of the entitlement record.</li><li>activityStartCalendarDate; string; Start Date for the entitlements.</li><li>activityStartDate; string; Start date of the entitlement record.</li><li>assignmentId; integer; Unique assignment identifier for which entitlement is calculated.</li><li>assignmentName; string; Name of the assignment for which entitlement is calculated.</li><li>assignmentNumber; string; Unique number of the assignment for which entitlement is calculated.</li><li>calculationDate; string; Date of entitlement calculation.</li><li>changeReasonCd; string; Unique reason code for override of the payment percentage, such as ORA_AUTO_ADJ, ORA_NOT_SPEC.</li><li>changeReasonCdMeaning; string; Meaning of reason code for override of the payment percentage, such as Adjusted, Not specified.</li><li>entitlementId; integer; Unique identifier for each entitlement detail of the absence.</li><li>entitlementMethodCd; string; Unique code for type of entitlement plan, such as Q.</li><li>entitlementMethodCdMeaning; string; Meaning of entitlement method code for the plan, such as Qualification.</li><li>formattedUnits; string; Units used up by the worker as part of their absence entitlement.</li><li>payFactor; number; Payment percentage of the entitlement.</li><li>personAbsenceEntryId; integer; Unique identifier of the absence.</li><li>personAbsenceTypeEntryId; integer; Unique identifier for the absence type entry for each continuous absence.</li><li>personId; integer; Unique identifier for the person.</li><li>planPeriodStartCalendarDate; string; Plan period start date for the entitlements.</li><li>planPeriodStartDate; string; Start date of the entitlement plan period.</li><li>remaining; number; Remaining entitlement for the person for same assignment, plan and payment factor.</li><li>source; string; Unique code for source of entitlement. For example, ORA_ANC_SYSTEM, ORA_ANC_PAY_PCT.</li><li>sourceCdMeaning; string; Meaning of source for entitlement. For example, Calculated entitlement, Payment percentage override.</li><li>unitOfMeasure; string; Unique code used to identify the unit of measure used to record the absence, such as D or H.</li><li>used; number; Used entitlement for the person for same assignment, plan and payment factor.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds entitlement summary record based on the unique identifier of the entitlement summary record. <br>Finder Variables <ul><li>entitlementId; integer;  Unique identifier of entitlement summary. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds entitlement summary record based on the unique identifier of the entitlement summary record.",
+                "properties": {
+                  "entitlementId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "precision": 18
+                    },
+                    "format": "int64",
+                    "description": "Unique identifier of entitlement summary.",
+                    "type": "integer"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/absences-absenceEntitlements"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "absences-{absencesUniqID}-child-absenceEntitlements-get",
+        "x-filename-id": "absences-absencesuniqid-child-absenceentitlements-get"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "absences-absenceEntitlements-item-response": {
+        "type": "object",
+        "properties": {
+          "absenceCaseId": {
+            "type": "integer",
+            "description": "Unique identifier for an absence case.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "absenceEntitlementDetails": {
+            "title": "Absence Entitlement Details",
+            "type": "array",
+            "description": "The absenceEntitlementDetails resource is a child of the absences resource. It provides a list of all the entitlements consumed by an absence each day of the absence.",
+            "items": {
+              "$ref": "#/components/schemas/absences-absenceEntitlements-absenceEntitlementDetails-item-response"
+            }
+          },
+          "absencePlanId": {
+            "type": "integer",
+            "description": "Unique identifier for the absence plan.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "absencePlanName": {
+            "type": "string",
+            "description": "Name of absence plan.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "absencePlanUOMMeaning": {
+            "type": "string",
+            "description": "Unit of measure used to record the absence, such as Days or Hours.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "activityCd": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique activity code for the entitlement summary record. For example, ORA_ANC_QUAL, ORA_ANC_EXCEED.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "activityCdMeaning": {
+            "type": "string",
+            "description": "Meaning of activity code for the entitlement summary record. For example, Qualified Entitlement, Entitlement exceeded.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "activityEndCalendarDate": {
+            "type": "string",
+            "description": "End Date for the entitlements.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "activityEndDate": {
+            "type": "string",
+            "description": "End date of the entitlement record.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "activityStartCalendarDate": {
+            "type": "string",
+            "description": "Start Date for the entitlements.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "activityStartDate": {
+            "type": "string",
+            "description": "Start date of the entitlement record.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "assignmentId": {
+            "type": "integer",
+            "description": "Unique assignment identifier for which entitlement is calculated.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "assignmentName": {
+            "type": "string",
+            "description": "Name of the assignment for which entitlement is calculated.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "assignmentNumber": {
+            "type": "string",
+            "description": "Unique number of the assignment for which entitlement is calculated.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "calculationDate": {
+            "type": "string",
+            "description": "Date of entitlement calculation.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "changeReasonCd": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique reason code for override of the payment percentage, such as ORA_AUTO_ADJ, ORA_NOT_SPEC.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "changeReasonCdMeaning": {
+            "type": "string",
+            "description": "Meaning of reason code for override of the payment percentage, such as Adjusted, Not specified.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "entitlementId": {
+            "type": "integer",
+            "description": "Unique identifier for each entitlement detail of the absence.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "entitlementMethodCd": {
+            "type": "string",
+            "description": "Unique code for type of entitlement plan, such as Q.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "entitlementMethodCdMeaning": {
+            "type": "string",
+            "description": "Meaning of entitlement method code for the plan, such as Qualification.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "formattedUnits": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Units used up by the worker as part of their absence entitlement.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "payFactor": {
+            "type": "number",
+            "description": "Payment percentage of the entitlement.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "personAbsenceEntryId": {
+            "type": "integer",
+            "description": "Unique identifier of the absence.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "personAbsenceTypeEntryId": {
+            "type": "integer",
+            "description": "Unique identifier for the absence type entry for each continuous absence.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "personId": {
+            "type": "integer",
+            "description": "Unique identifier for the person.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "planPeriodStartCalendarDate": {
+            "type": "string",
+            "description": "Plan period start date for the entitlements.",
+            "format": "date",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "planPeriodStartDate": {
+            "type": "string",
+            "description": "Start date of the entitlement plan period.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "remaining": {
+            "type": "number",
+            "description": "Remaining entitlement for the person for same assignment, plan and payment factor.",
+            "nullable": true,
+            "x-queryable": true
+          },
+          "source": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Unique code for source of entitlement. For example, ORA_ANC_SYSTEM, ORA_ANC_PAY_PCT.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "sourceCdMeaning": {
+            "type": "string",
+            "description": "Meaning of source for entitlement. For example, Calculated entitlement, Payment percentage override.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "unitOfMeasure": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code used to identify the unit of measure used to record the absence, such as D or H.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "units": {
+            "type": "number",
+            "description": "Number of units used in this entitlement.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": false
+          },
+          "used": {
+            "type": "number",
+            "description": "Used entitlement for the person for same assignment, plan and payment factor.",
+            "nullable": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "absences-absenceEntitlements-absenceEntitlementDetails-item-response": {
+        "type": "object",
+        "properties": {
+          "absencePlanUOMMeaning": {
+            "type": "string",
+            "description": "Meaning of code of unit of measure used to record the absence, such as Days or Hours.",
+            "nullable": true,
+            "x-hints": {
+              "controlType": "choice"
+            },
+            "x-queryable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date of absence entitlement details.",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "entitlementDetailId": {
+            "type": "integer",
+            "description": "Unique identifier of the entitlement detail record.",
+            "format": "int64",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "entitlementId": {
+            "type": "integer",
+            "description": "Unique identifier associated with this entitlement detail record. Foreign key to ANC_PER_ABS_PLN_SUMM_ENT.",
+            "format": "int64",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "precision": 18
+            },
+            "x-queryable": true
+          },
+          "formattedUnits": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Units used up by the worker as part of their absence entitlement shown in detail.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "payFactor": {
+            "type": "number",
+            "description": "Payment percentage of the entitlement.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date of absence entitlement details.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "unitOfMeasure": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "Unique code used to identify the unit of measure used to record the absence, such as D or H.",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": true
+          },
+          "units": {
+            "type": "number",
+            "description": "Number of entitlement units used.",
+            "nullable": false,
+            "readOnly": true,
+            "x-queryable": true
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "absences-absenceEntitlements": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/absences-absenceEntitlements-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {},
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

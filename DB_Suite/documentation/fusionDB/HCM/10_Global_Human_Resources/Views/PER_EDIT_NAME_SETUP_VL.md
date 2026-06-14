@@ -1,0 +1,42 @@
+# PER_EDIT_NAME_SETUP_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/pereditnamesetupvl-4691.html#pereditnamesetupvl-4691](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/pereditnamesetupvl-4691.html#pereditnamesetupvl-4691)
+
+## Columns
+
+- EDIT_NAME_SETUP_ID
+- NAME_STYLE_ID
+- ENTERPRISE_ID
+- DISPLAY_SEQUENCE
+- COLUMN_NAME
+- REQUIRED_FLAG
+- PROMPT
+- COLUMN_LOOKUP
+- MODULE_ID
+- OBJECT_VERSION_NUMBER
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_DATE
+- LAST_UPDATE_LOGIN
+- SEEDED_REQUIRED_FLAG
+- SGUID
+- ACTIVE_FLAG
+
+## Query
+
+```sql
+SELECT B.EDIT_NAME_SETUP_ID, B.NAME_STYLE_ID, B.ENTERPRISE_ID, B.DISPLAY_SEQUENCE, B.COLUMN_NAME, B.REQUIRED_FLAG, T.PROMPT, B.COLUMN_LOOKUP, B.MODULE_ID, B.OBJECT_VERSION_NUMBER, B.CREATED_BY, B.CREATION_DATE, B.LAST_UPDATED_BY, B.LAST_UPDATE_DATE, B.LAST_UPDATE_LOGIN, B.SEEDED_REQUIRED_FLAG, B.SGUID SGUID, B.ACTIVE_FLAG FROM PER_EDIT_NAME_SETUP_B B, PER_EDIT_NAME_SETUP_TL T WHERE B.EDIT_NAME_SETUP_ID = T.EDIT_NAME_SETUP_ID AND T.LANGUAGE = USERENV('LANG')
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

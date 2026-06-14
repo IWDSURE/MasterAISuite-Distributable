@@ -1,0 +1,54 @@
+# IRC_DESC_VERSIONS_TL
+
+Translation table for versions of description library items
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** IRC
+
+**Object type:** TABLE
+
+**Tablespace:** REFERENCE
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircdescversionstl-16120.html#ircdescversionstl-16120](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircdescversionstl-16120.html#ircdescversionstl-16120)
+
+## Primary Key
+
+| Name | Columns |
+|------|----------|
+| IRC_DESC_VERSIONS_TL_PK | DESC_VERSION_ID, LANGUAGE |
+
+## Columns
+
+| Name | Datatype | Length | Precision | Not-null | Comments |
+|---|---|---|---|---|---|
+| DESC_VERSION_ID | NUMBER |  | 18 | Yes | The system generated surrogate key for this entry. |
+| LANGUAGE | VARCHAR2 | 4 |  | Yes | Indicates the code of the language into which the contents of the translatable columns are translated. |
+| SOURCE_LANG | VARCHAR2 | 4 |  | Yes | Indicates the code of the language in which the contents of the translatable columns were originally created. |
+| DESCRIPTION | CLOB |  |  |  | The actual html text content of this description library item. |
+| QUALIFICATIONS | CLOB |  |  |  | The actual html text content of qualifications of this description library item. |
+| RESPONSIBILITIES | CLOB |  |  |  | The actual html text content of responsibilities of this description library item. |
+| SHORT_DESCRIPTION | CLOB |  |  |  | The alternate html text content of this library item |
+| TXT_DESCRIPTION | CLOB |  |  |  | The alternate raw text content of this library item |
+| OBJECT_VERSION_NUMBER | NUMBER |  | 9 | Yes | Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried. |
+| CREATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who created the row. |
+| CREATION_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the creation of the row. |
+| LAST_UPDATED_BY | VARCHAR2 | 64 |  | Yes | Who column: indicates the user who last updated the row. |
+| LAST_UPDATE_DATE | TIMESTAMP |  |  | Yes | Who column: indicates the date and time of the last update of the row. |
+| LAST_UPDATE_LOGIN | VARCHAR2 | 32 |  |  | Who column: indicates the session login associated to the user who last updated the row. |
+| SEED_DATA_SOURCE | VARCHAR2 | 512 |  |  | Source of seed data record. A value of 'BULK_SEED_DATA_SCRIPT' indicates that record was bulk loaded. Otherwise, specifies the name of the seed data file. |
+| ORA_SEED_SET1 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET1. Context values are Y or N. |
+| ORA_SEED_SET2 | VARCHAR2 | 1 |  | Yes | Oracle internal use only. Indicates the edition-based redefinition (EBR) context of the row for SET2. Context values are Y or N. |
+
+## Indexes
+
+| Index | Uniqueness | Tablespace | Columns |
+|---|---|---|---|
+| IRC_DESC_VERSIONS_TL_U1 | Unique | FUSION_TS_SEED | DESC_VERSION_ID, LANGUAGE, ORA_SEED_SET1 |
+| IRC_DESC_VERSIONS_TL_U11 | Unique | FUSION_TS_SEED | DESC_VERSION_ID, LANGUAGE, ORA_SEED_SET2 |
+
+---
+
+[← Back to Index](../22_Recruiting_Tables_Index.md)

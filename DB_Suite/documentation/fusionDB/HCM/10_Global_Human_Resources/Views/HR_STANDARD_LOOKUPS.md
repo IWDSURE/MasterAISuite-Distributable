@@ -1,0 +1,38 @@
+# HR_STANDARD_LOOKUPS
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PER
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrstandardlookups-5918.html#hrstandardlookups-5918](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/hrstandardlookups-5918.html#hrstandardlookups-5918)
+
+## Columns
+
+- LOOKUP_TYPE
+- LOOKUP_CODE
+- MEANING
+- DESCRIPTION
+- ENABLED_FLAG
+- DISPLAY_SEQUENCE
+- START_DATE_ACTIVE
+- END_DATE_ACTIVE
+- TAG
+- CREATED_BY
+- CREATION_DATE
+- LAST_UPDATED_BY
+- LAST_UPDATE_LOGIN
+- LAST_UPDATE_DATE
+
+## Query
+
+```sql
+SELECT B.LOOKUP_TYPE, B.LOOKUP_CODE, T.MEANING, T.DESCRIPTION, B.ENABLED_FLAG, B.DISPLAY_SEQUENCE, B.START_DATE_ACTIVE, B.END_DATE_ACTIVE, B.TAG, T.CREATED_BY, T.CREATION_DATE, T.LAST_UPDATED_BY, T.LAST_UPDATE_LOGIN, T.LAST_UPDATE_DATE FROM FND_LOOKUP_VALUES_TL T, FND_LOOKUP_VALUES_B B WHERE T.LOOKUP_TYPE = B.LOOKUP_TYPE AND T.LOOKUP_CODE = B.LOOKUP_CODE AND T.VIEW_APPLICATION_ID = B.VIEW_APPLICATION_ID AND T.SET_ID = B.SET_ID AND T.LANGUAGE = USERENV('LANG') AND T.VIEW_APPLICATION_ID=3
+```
+
+---
+
+[← Back to Index](../10_Global_Human_Resources_Views_Index.md)

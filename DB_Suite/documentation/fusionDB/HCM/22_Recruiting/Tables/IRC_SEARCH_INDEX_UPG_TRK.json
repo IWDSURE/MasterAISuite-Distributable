@@ -1,0 +1,200 @@
+{
+  "name": "IRC_SEARCH_INDEX_UPG_TRK",
+  "object_type": "TABLE",
+  "description": "Table used for tracking upgrade of search indexes.",
+  "schema": "FUSION",
+  "owner": "IRC",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/ircsearchindexupgtrk-15066.html#ircsearchindexupgtrk-15066",
+  "primary_keys": [
+    {
+      "name": "IRC_SEARCH_INDEX_UPG_TRK_PK",
+      "columns": "UPGRADE_TRK_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "UPGRADE_TRK_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Primary Key for this table. System generated."
+    },
+    {
+      "Name": "UPGRADE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to IRC_SEARCH_INDEX_UPGRADES."
+    },
+    {
+      "Name": "ENTITY_SUB_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The sub entity type (ex: EXTERNAL) for which the index must be upgraded."
+    },
+    {
+      "Name": "UPGRADE_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Status of the index upgrade."
+    },
+    {
+      "Name": "UPGRADE_START_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Timestamp for when the upgrade has started."
+    },
+    {
+      "Name": "UPGRADE_END_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Timestamp for when the upgrade has completed."
+    },
+    {
+      "Name": "UPGRADE_FAILURE_REASON",
+      "Datatype": "CLOB",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The upgrade failure reason."
+    },
+    {
+      "Name": "ASYNC_TASK_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Holds task id returned for  OSCS asynch operation."
+    },
+    {
+      "Name": "LATEST_INDEX_VERSION",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the latest version of OSCS Index."
+    },
+    {
+      "Name": "LATEST_INDEX_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the latest name of OSCS Index."
+    },
+    {
+      "Name": "UPGRADE_RETRY_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Specifies the number of times upgrade operation has been retried."
+    },
+    {
+      "Name": "REINDEX_ATTEMPTED_COUNT",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "",
+      "Comments": "Specifies the number of times re-index operation is attempted but returned 429 response code."
+    },
+    {
+      "Name": "INDEX_TO_BE_PURGED",
+      "Datatype": "VARCHAR2",
+      "Length": "256",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Specifies the name of the old index to be purged after a specified period determined by profile options."
+    },
+    {
+      "Name": "INDEX_PURGE_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Status of index purge. Ex. COMPLETED, PENDING."
+    },
+    {
+      "Name": "INDEX_PURGE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Timestamp for when the index is purged."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "IRC_SEARCH_INDEX_UPG_TRK_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "UPGRADE_ID, UPGRADE_STATUS"
+    },
+    {
+      "Index": "IRC_SEARCH_INDEX_UPG_TRK_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "UPGRADE_TRK_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T19:01:21"
+}

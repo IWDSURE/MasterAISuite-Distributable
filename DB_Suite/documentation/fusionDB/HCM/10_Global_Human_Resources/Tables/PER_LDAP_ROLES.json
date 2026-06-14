@@ -1,0 +1,212 @@
+{
+  "name": "PER_LDAP_ROLES",
+  "object_type": "TABLE",
+  "description": "Table for storing one record for each Role Addition or Removal to be processed in OIM",
+  "schema": "FUSION",
+  "owner": "PER",
+  "tablespace": "FUSION_TS_TX_DATA",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/perldaproles-22715.html#perldaproles-22715",
+  "primary_keys": [
+    {
+      "name": "PER_LDAP_ROLES_PK",
+      "columns": "LDAP_ROLE_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "LDAP_ROLE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Mandatory Primary Key. Updatable while new key generation.",
+      "Status": ""
+    },
+    {
+      "Name": "BUSINESS_GROUP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Identifier of Enterprise, used for multi-tenancy partitioning. Foreign key to HR_ORGANIZATION_UNITS.",
+      "Status": ""
+    },
+    {
+      "Name": "LDAP_REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Foreign Key to LDAP request",
+      "Status": ""
+    },
+    {
+      "Name": "REQUEST_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The type of request to perform: ADD, REMOVE",
+      "Status": ""
+    },
+    {
+      "Name": "REQUEST_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The current status of this part of the request: REQUEST, IN PROGRESS, COMPLETE, REJECTED",
+      "Status": ""
+    },
+    {
+      "Name": "ROLE_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The role Guid of the role that is to be added as a member of another role (is renamed from PARENT_ROLE_GUID).",
+      "Status": ""
+    },
+    {
+      "Name": "PARENT_ROLE_GUID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The role Guid of the role that is the parent of the role to be added.",
+      "Status": "Obsolete"
+    },
+    {
+      "Name": "ROLE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "80",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "The name of the role being added",
+      "Status": ""
+    },
+    {
+      "Name": "DESCRIPTION",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "The description of the role being added",
+      "Status": ""
+    },
+    {
+      "Name": "REQUEST_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Enterprise Service Scheduler: indicates the request ID of the job that created or last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row.",
+      "Status": ""
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row.",
+      "Status": ""
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row.",
+      "Status": ""
+    },
+    {
+      "Name": "ROLE_COMMON_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "240",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Role common name",
+      "Status": ""
+    },
+    {
+      "Name": "EXTERNAL_ID",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "EXTERNAL_ID",
+      "Status": ""
+    },
+    {
+      "Name": "ROLE_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "ROLE_TYPE",
+      "Status": ""
+    },
+    {
+      "Name": "APPLICATION",
+      "Datatype": "VARCHAR2",
+      "Length": "255",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "APPLICATION",
+      "Status": ""
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PER_LDAP_ROLES_FK1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_REQUEST_ID"
+    },
+    {
+      "Index": "PER_LDAP_ROLES_U1",
+      "Uniqueness": "Unique",
+      "Tablespace": "FUSION_TS_TX_DATA",
+      "Columns": "LDAP_ROLE_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T16:36:43"
+}

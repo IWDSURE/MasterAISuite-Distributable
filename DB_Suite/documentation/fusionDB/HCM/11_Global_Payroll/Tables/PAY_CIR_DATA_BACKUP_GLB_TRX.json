@@ -1,0 +1,260 @@
+{
+  "name": "PAY_CIR_DATA_BACKUP_GLB_TRX",
+  "object_type": "TABLE",
+  "description": "This table backup cir data whose effective start date is after global transfer date for later processing.",
+  "schema": "FUSION",
+  "owner": "PAY",
+  "tablespace": "Default",
+  "source_url": "https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/paycirdatabackupglbtrx-19911.html#paycirdatabackupglbtrx-19911",
+  "primary_keys": [
+    {
+      "name": "PAY_CIR_DATA_BACKUP_GLB_TRX_PK",
+      "columns": "CIR_DATA_BACKUP_GLB_TRX_ID"
+    }
+  ],
+  "columns": [
+    {
+      "Name": "CIR_DATA_BACKUP_GLB_TRX_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Table surrogate key id CIR_DATA_BACKUP_GLB_TRX_ID"
+    },
+    {
+      "Name": "MASS_ACTION_HEADER_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier for the mass global transfer batch. To be populated during copy future phase."
+    },
+    {
+      "Name": "MASS_ACTION_LINE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Identifier for the mass global transfer line (person level). To be populated during copy future phase."
+    },
+    {
+      "Name": "SOURCE_PAYROLL_RELATIONSHIP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "Payroll Relationship Id of the source"
+    },
+    {
+      "Name": "ENTITY_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "This would be the table name e.g. PAY_DIR_CARDS_F, PAY_DIR_CARD_COMPONENTS_F etc"
+    },
+    {
+      "Name": "SOURCE_SURROGATE_KEY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "This is the surrogate key ID i.e. dir_card_id, dir_card_comp_id etc of the source (from where we are copying the data)"
+    },
+    {
+      "Name": "EFFECTIVE_START_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+    },
+    {
+      "Name": "EFFECTIVE_END_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+    },
+    {
+      "Name": "ACTION_TYPE",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Possible values are:  CREATE, UPDATE (i.e. date effective update)"
+    },
+    {
+      "Name": "ATTRIBUTE_NAME",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Name of the attribute that is being stored e.g. DIR_CARD_COMP_DEF_ID.  If new physical record but no change in any attribute from previous record then store \"DUMMY\" here."
+    },
+    {
+      "Name": "OLD_VALUE_CHAR",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is char, then store the old value of the attribute here in case of both INSERT and INSERT_UPDATE (i.e. date effective update)"
+    },
+    {
+      "Name": "NEW_VALUE_CHAR",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is char, then store the new value of the attribute here in case of INSERT_UPDATE"
+    },
+    {
+      "Name": "OLD_VALUE_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is number, then store the old value of the attribute here in case of both INSERT and INSERT_UPDATE (i.e. date effective update)"
+    },
+    {
+      "Name": "NEW_VALUE_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is number, then store the new value of the attribute here in case of INSERT_UPDATE"
+    },
+    {
+      "Name": "OLD_VALUE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is date, then store the old value of the attribute here in case of both INSERT and INSERT_UPDATE (i.e. date effective update)"
+    },
+    {
+      "Name": "NEW_VALUE_DATE",
+      "Datatype": "DATE",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "If attribute is date, then store the new value of the attribute here in case of INSERT_UPDATE"
+    },
+    {
+      "Name": "DEST_PAYROLL_RELATIONSHIP_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "Target Payroll Relationship Id. To be populated during copy future phase."
+    },
+    {
+      "Name": "DESTINATION_SURROGATE_KEY_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "",
+      "Comments": "This is the surrogate key ID i.e. dir_card_id, dir_card_comp_id etc of the target (where we are copying the data to).  If the card, component is being re-used it could be the same id as the source.  To be populated during copy future phase."
+    },
+    {
+      "Name": "COPY_STATUS",
+      "Datatype": "VARCHAR2",
+      "Length": "30",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "This represents the status of future copy to destination (i.e. during copyFutureCIRChangesForGLBTransfer). Possible values are SUCCESS, FAILURE. To be populated during copy future phase."
+    },
+    {
+      "Name": "COPY_INFORMATION",
+      "Datatype": "VARCHAR2",
+      "Length": "4000",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Log messages that give more information about the copy status. To be populated during copy future phase."
+    },
+    {
+      "Name": "ENTERPRISE_ID",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "18",
+      "Not-null": "Yes",
+      "Comments": "ENTERPRISE_ID. Flag used to mark obsolete data when upgrading the seed data in customer pod"
+    },
+    {
+      "Name": "CREATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who created the row."
+    },
+    {
+      "Name": "CREATION_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the creation of the row."
+    },
+    {
+      "Name": "LAST_UPDATED_BY",
+      "Datatype": "VARCHAR2",
+      "Length": "64",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the user who last updated the row."
+    },
+    {
+      "Name": "LAST_UPDATE_DATE",
+      "Datatype": "TIMESTAMP",
+      "Length": "",
+      "Precision": "",
+      "Not-null": "Yes",
+      "Comments": "Who column: indicates the date and time of the last update of the row."
+    },
+    {
+      "Name": "OBJECT_VERSION_NUMBER",
+      "Datatype": "NUMBER",
+      "Length": "",
+      "Precision": "9",
+      "Not-null": "Yes",
+      "Comments": "Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+    },
+    {
+      "Name": "LAST_UPDATE_LOGIN",
+      "Datatype": "VARCHAR2",
+      "Length": "32",
+      "Precision": "",
+      "Not-null": "",
+      "Comments": "Who column: indicates the session login associated to the user who last updated the row."
+    }
+  ],
+  "indexes": [
+    {
+      "Index": "PAY_CIR_DATA_BACKUP_GLB_TRX_N1",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_SURROGATE_KEY_ID"
+    },
+    {
+      "Index": "PAY_CIR_DATA_BACKUP_GLB_TRX_N2",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "SOURCE_PAYROLL_RELATIONSHIP_ID, ENTITY_NAME"
+    },
+    {
+      "Index": "PAY_CIR_DATA_BACKUP_GLB_TRX_N3",
+      "Uniqueness": "Non Unique",
+      "Tablespace": "Default",
+      "Columns": "MASS_ACTION_LINE_ID"
+    },
+    {
+      "Index": "PAY_CIR_DATA_BACKUP_GLB_TRX_PK",
+      "Uniqueness": "Unique",
+      "Tablespace": "Default",
+      "Columns": "CIR_DATA_BACKUP_GLB_TRX_ID"
+    }
+  ],
+  "_parsed_at": "2026-06-09T17:01:50"
+}

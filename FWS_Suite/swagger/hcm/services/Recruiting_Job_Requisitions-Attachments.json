@@ -1,0 +1,1716 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for Oracle Fusion Cloud HCM - Recruiting Job Requisitions/Attachments",
+    "description": "<div><span><span style=\"color: #c74634;\">Last Updated January 2026</span><br>\n<p>You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM.</p>\n<p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p>\n<ul>\n<li>A quick start how-to that walks you through a simple request example.</li>\n<li>Use cases that provide real-world solutions with code examples.</li>\n<li>Detailed descriptions for each REST resource.</li>\n</ul>\n</div>",
+    "version": "2025.12.15",
+    "contact": {},
+    "x-summary": "Last Updated January 2026 You can use Oracle REST APIs to view and manage data stored in Oracle Fusion Cloud HCM."
+  },
+  "servers": [
+    {
+      "url": "https://fa-euyp-dev1-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Dev"
+    },
+    {
+      "url": "https://fa-euyp-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Prod"
+    },
+    {
+      "url": "https://fa-euyp-test-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest",
+      "description": "Fusion Test"
+    }
+  ],
+  "paths": {
+    "/recruitingJobRequisitions/{recruitingJobRequisitionsUniqID}/child/attachments/{attachmentsUniqID}": {
+      "get": {
+        "tags": [
+          "Recruiting Job Requisitions/Attachments"
+        ],
+        "summary": "Get an attachment",
+        "operationId": "get_recruitingJobRequisitions-attachments",
+        "parameters": [
+          {
+            "name": "recruitingJobRequisitionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting Job Requisitions resource and used to uniquely identify an instance of Recruiting Job Requisitions. The client should not generate the hash key value. Instead, the client should query on the Recruiting Job Requisitions collection resource in order to navigate to a specific instance of Recruiting Job Requisitions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Attachments resource and used to uniquely identify an instance of Attachments. The client should not generate the hash key value. Instead, the client should query on the Attachments collection resource in order to navigate to a specific instance of Attachments to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobRequisitions-{recruitingJobRequisitionsUniqID}-child-attachments-{attachmentsUniqID}-get",
+        "x-filename-id": "recruitingjobrequisitions-recruitingjobrequisitionsuniqid-child-attachments-attachmentsuniqid-get"
+      },
+      "delete": {
+        "tags": [
+          "Recruiting Job Requisitions/Attachments"
+        ],
+        "summary": "Delete an attachment",
+        "operationId": "delete_recruitingJobRequisitions-attachments",
+        "parameters": [
+          {
+            "name": "recruitingJobRequisitionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting Job Requisitions resource and used to uniquely identify an instance of Recruiting Job Requisitions. The client should not generate the hash key value. Instead, the client should query on the Recruiting Job Requisitions collection resource in order to navigate to a specific instance of Recruiting Job Requisitions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Attachments resource and used to uniquely identify an instance of Attachments. The client should not generate the hash key value. Instead, the client should query on the Attachments collection resource in order to navigate to a specific instance of Attachments to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "No Content. This task does not return elements in the response body."
+          }
+        },
+        "x-internal-id": "recruitingJobRequisitions-{recruitingJobRequisitionsUniqID}-child-attachments-{attachmentsUniqID}-delete",
+        "x-filename-id": "recruitingjobrequisitions-recruitingjobrequisitionsuniqid-child-attachments-attachmentsuniqid-delete"
+      },
+      "patch": {
+        "tags": [
+          "Recruiting Job Requisitions/Attachments"
+        ],
+        "summary": "Update an attachment",
+        "operationId": "update_recruitingJobRequisitions-attachments",
+        "parameters": [
+          {
+            "name": "recruitingJobRequisitionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting Job Requisitions resource and used to uniquely identify an instance of Recruiting Job Requisitions. The client should not generate the hash key value. Instead, the client should query on the Recruiting Job Requisitions collection resource in order to navigate to a specific instance of Recruiting Job Requisitions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachmentsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Attachments resource and used to uniquely identify an instance of Attachments. The client should not generate the hash key value. Instead, the client should query on the Attachments collection resource in order to navigate to a specific instance of Attachments to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingJobRequisitions-attachments-item-patch-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobRequisitions-{recruitingJobRequisitionsUniqID}-child-attachments-{attachmentsUniqID}-patch",
+        "x-filename-id": "recruitingjobrequisitions-recruitingjobrequisitionsuniqid-child-attachments-attachmentsuniqid-patch"
+      }
+    },
+    "/recruitingJobRequisitions/{recruitingJobRequisitionsUniqID}/child/attachments": {
+      "get": {
+        "tags": [
+          "Recruiting Job Requisitions/Attachments"
+        ],
+        "summary": "Get all attachments",
+        "operationId": "getall_recruitingJobRequisitions-attachments",
+        "parameters": [
+          {
+            "name": "recruitingJobRequisitionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting Job Requisitions resource and used to uniquely identify an instance of Recruiting Job Requisitions. The client should not generate the hash key value. Instead, the client should query on the Recruiting Job Requisitions collection resource in order to navigate to a specific instance of Recruiting Job Requisitions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "This parameter filters the resource fields. Only the specified fields are returned, which means that if no fields are specified, no fields are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource fields. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyData",
+            "in": "query",
+            "description": "The resource item payload will be filtered in order to contain only data (no links section, for example).",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "dependency",
+            "in": "query",
+            "description": "This parameter specifies dependencies which are fields that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The fields specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the fields will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency fields.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "links",
+            "in": "query",
+            "description": "This parameter can be used to show only certain links while accessing a singular resource or a resource collection. The parameter value format is a comma-separated list of : &lt;link_relation&gt;<br><br>Example:<br>self,canonical<br>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "totalResults",
+            "in": "query",
+            "description": "The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2<br><br>You can use these queryable attributes to filter this collection resource using the q query parameter:<br><ul><li>AttachedDocumentId; integer; The unique identifier of the attached document.</li><li>CategoryName; string; The category of the attachment.</li><li>CreatedBy; string; The user who created the record.</li><li>CreatedByUserName; string; The user name who created the record.</li><li>CreationDate; string; The date when the record was created.</li><li>DatatypeCode; string; A value that indicates the data type.</li><li>DmDocumentId; string; The document ID from which the attachment is created.</li><li>DmFolderPath; string; The folder path from which the attachment is created.</li><li>DmVersionNumber; string; The document version number from which the attachment is created.</li><li>ExpirationDate; string; The expiration date of the contents in the attachment.</li><li>FileName; string; The file name of the attachment.</li><li>LastUpdateDate; string; The date when the record was last updated.</li><li>LastUpdatedBy; string; The user who last updated the record.</li><li>LastUpdatedByUserName; string; The user name who last updated the record.</li><li>Uri; string; The URI of a Topology Manager type attachment.</li><li>Url; string; The URL of a web page type attachment.</li><li>UserName; string; The login credentials of the user who created the attachment.</li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "This parameter orders a resource collection based on the specified fields.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "finder",
+            "in": "query",
+            "description": "Used as a predefined finder to search the collection.<br><br>Format ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;<br><br>The following are the available finder names and corresponding finder variables<br><br><ul><li>PrimaryKey Finds the attached document with the specified primary key. <br>Finder Variables <ul><li>AttachedDocumentId; integer;  The unique identifier of the attached document. </li></ul></li></ul>",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-adf-finder-formats": [
+              {
+                "name": "PrimaryKey",
+                "description": "Finds the attached document with the specified primary key.",
+                "properties": {
+                  "AttachedDocumentId": {
+                    "nullable": false,
+                    "x-hints": {
+                      "includeInCompactView": true,
+                      "precision": 18,
+                      "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+                      "fnd:GLOBALLY_UNIQUE": "true"
+                    },
+                    "format": "int64",
+                    "description": "The unique identifier of the attached document.",
+                    "type": "integer",
+                    "title": "Attached Document Id"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobRequisitions-attachments"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobRequisitions-{recruitingJobRequisitionsUniqID}-child-attachments-get",
+        "x-filename-id": "recruitingjobrequisitions-recruitingjobrequisitionsuniqid-child-attachments-get"
+      },
+      "post": {
+        "tags": [
+          "Recruiting Job Requisitions/Attachments"
+        ],
+        "summary": "Create an attachment",
+        "operationId": "create_recruitingJobRequisitions-attachments",
+        "parameters": [
+          {
+            "name": "recruitingJobRequisitionsUniqID",
+            "in": "path",
+            "description": "This is the hash key of the attributes which make up the composite key for the Recruiting Job Requisitions resource and used to uniquely identify an instance of Recruiting Job Requisitions. The client should not generate the hash key value. Instead, the client should query on the Recruiting Job Requisitions collection resource in order to navigate to a specific instance of Recruiting Job Requisitions to get the hash key.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Upsert-Mode",
+            "in": "header",
+            "description": "Contains one of the following values: true or false. If true, the server performs an Upsert operation instead of a Create operation. During an Upsert operation, the server attempts to find an existing resource that matches the payload. If a match is found, the server updates the existing resource instead of creating a new one. If not found or false (default), the server performs a Create operation. Note that the Upsert operation isn't supported for date-effective REST resources.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "REST-Framework-Version",
+            "in": "header",
+            "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ]
+            }
+          },
+          {
+            "name": "Metadata-Context",
+            "in": "header",
+            "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/recruitingJobRequisitions-attachments-item-post-request"
+        },
+        "responses": {
+          "default": {
+            "description": "The following table describes the default response for this task.",
+            "headers": {
+              "Metadata-Context": {
+                "$ref": "#/components/headers/Metadata-Context"
+              },
+              "REST-Framework-Version": {
+                "$ref": "#/components/headers/REST-Framework-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-response"
+                }
+              }
+            }
+          }
+        },
+        "x-internal-id": "recruitingJobRequisitions-{recruitingJobRequisitionsUniqID}-child-attachments-post",
+        "x-filename-id": "recruitingjobrequisitions-recruitingjobrequisitionsuniqid-child-attachments-post"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "recruitingJobRequisitions-attachments-item-response": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            },
+            "x-queryable": true
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "CreatedBy": {
+            "title": "Created By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who created the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "CreatedByUserName": {
+            "title": "Created By User Name",
+            "type": "string",
+            "description": "The user name who created the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "CreationDate": {
+            "title": "Creation Date",
+            "type": "string",
+            "description": "The date when the record was created.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            },
+            "x-queryable": true
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "FileWebImage": {
+            "title": "File Web Image",
+            "type": "string",
+            "description": "The base64 encoded image of the file displayed in .png format if the source is a convertible image.",
+            "format": "byte",
+            "nullable": true,
+            "readOnly": true,
+            "x-queryable": false,
+            "x-hints": {
+              "help": {
+                "instruction": "The base64 encoded image of the file displayed in .png format if the source is a convertible image."
+              },
+              "XML_ELEMENT": "#hide",
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "LastUpdateDate": {
+            "title": "Last Update Date",
+            "type": "string",
+            "description": "The date when the record was last updated.",
+            "format": "date-time",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "FMT_FORMAT": "d-MMM-yyyy HH:mm:ss"
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedBy": {
+            "title": "Last Updated By",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The user who last updated the record.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true
+            },
+            "x-queryable": true
+          },
+          "LastUpdatedByUserName": {
+            "title": "Last Updated By User",
+            "type": "string",
+            "description": "The user name who last updated the record.",
+            "nullable": true,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            },
+            "x-queryable": true
+          },
+          "UserName": {
+            "title": "User Name",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The login credentials of the user who created the attachment.",
+            "nullable": false,
+            "readOnly": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            },
+            "x-queryable": true
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "title": "kind",
+            "type": "string",
+            "description": "The kind of the related resource.",
+            "enum": [
+              "collection",
+              "item",
+              "describe",
+              "other"
+            ]
+          },
+          "rel": {
+            "title": "relation",
+            "type": "string",
+            "description": "The name of the relation to the resource instance.  Example: self.",
+            "enum": [
+              "self",
+              "lov",
+              "parent",
+              "canonical",
+              "child",
+              "enclosure",
+              "action",
+              "custom"
+            ]
+          },
+          "name": {
+            "title": "name",
+            "type": "string",
+            "description": "The name of the link to the related resource."
+          },
+          "href": {
+            "title": "hyperlink reference",
+            "type": "string",
+            "description": "The URI to the related resource."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "changeIndicator": {
+                "type": "string",
+                "description": "Change indicator or the ETag value of the resource instance."
+              }
+            }
+          }
+        }
+      },
+      "recruitingJobRequisitions-attachments-item-patch-request": {
+        "type": "object",
+        "properties": {
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      },
+      "recruitingJobRequisitions-attachments": {
+        "required": [
+          "count",
+          "hasMore",
+          "limit",
+          "links",
+          "offset"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of resource instances returned in the current range."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false."
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "description": "The items in the collection.",
+            "items": {
+              "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-response"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The actual paging size used by the server."
+          },
+          "links": {
+            "title": "Links",
+            "type": "array",
+            "description": "The link relations associated with the resource instance.",
+            "items": {
+              "$ref": "#/components/schemas/link"
+            }
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset value used in the current page."
+          },
+          "totalResults": {
+            "type": "integer",
+            "description": "The estimated row count when \"?totalResults=true\", otherwise the count is not included."
+          }
+        }
+      },
+      "recruitingJobRequisitions-attachments-item-post-request": {
+        "type": "object",
+        "properties": {
+          "AsyncTrackerId": {
+            "title": "Asynchronous Upload Tracker Id",
+            "type": "string",
+            "description": "Attribute provided for the exclusive use by the Attachment UI components to assist in uploading files.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "DISPLAYHINT": "Hide",
+              "includeInCompactView": true,
+              "PAYLOADHINT": "Show"
+            }
+          },
+          "AttachedDocumentId": {
+            "title": "Attached Document Id",
+            "type": "integer",
+            "description": "The unique identifier of the attached document.",
+            "format": "int64",
+            "nullable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "precision": 18,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:GLOBALLY_UNIQUE": "true"
+            }
+          },
+          "CategoryName": {
+            "title": "Category",
+            "maxLength": 30,
+            "type": "string",
+            "description": "The category of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "ContentRepositoryFileShared": {
+            "title": "Shared",
+            "type": "boolean",
+            "description": "Indicates whether the attachment is shared",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DatatypeCode": {
+            "title": "Type",
+            "maxLength": 30,
+            "type": "string",
+            "description": "A value that indicates the data type.",
+            "nullable": false,
+            "default": "FILE",
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "Description": {
+            "title": "Description",
+            "maxLength": 255,
+            "type": "string",
+            "description": "The description of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "DmDocumentId": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document ID from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true",
+              "fnd:OA_TRANSLATABLE": "true"
+            }
+          },
+          "DmFolderPath": {
+            "title": "Dm Folder Path",
+            "maxLength": 1000,
+            "type": "string",
+            "description": "The folder path from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DmVersionNumber": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The document version number from which the attachment is created.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "DownloadInfo": {
+            "title": "DownloadInfo",
+            "type": "string",
+            "description": "JSON object represented as a string containing information used to programmatically retrieve a file attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusCode": {
+            "title": "Error Status Code",
+            "type": "string",
+            "description": "The error code, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ErrorStatusMessage": {
+            "title": "Error Status Message",
+            "type": "string",
+            "description": "The error message, if any, for the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "ExpirationDate": {
+            "title": "Expiration Date",
+            "type": "string",
+            "description": "The expiration date of the contents in the attachment.",
+            "format": "date-time",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true
+            }
+          },
+          "FileContents": {
+            "title": "File Contents",
+            "type": "string",
+            "description": "The contents of the attachment.",
+            "format": "byte",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "XML_ELEMENT": "#hide"
+            }
+          },
+          "FileName": {
+            "title": "File Name",
+            "maxLength": 2048,
+            "type": "string",
+            "description": "The file name of the attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          },
+          "FileUrl": {
+            "title": "File Url",
+            "type": "string",
+            "description": "The URI of the file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "PostProcessingAction": {
+            "title": "PostProcessingAction",
+            "type": "string",
+            "description": "The name of the action that can be performed after an attachment is uploaded.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Title": {
+            "title": "Title",
+            "type": "string",
+            "description": "The title of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileContentType": {
+            "title": "Uploaded File Content Type",
+            "type": "string",
+            "description": "The content type of the attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileLength": {
+            "title": "File Size",
+            "type": "integer",
+            "description": "The size of the attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedFileName": {
+            "title": "Uploaded File Name",
+            "type": "string",
+            "description": "The name to assign to a new attachment file.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "UploadedText": {
+            "title": "Uploaded Text",
+            "type": "string",
+            "description": "The text content for a new text attachment.",
+            "nullable": true,
+            "x-queryable": false,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Uri": {
+            "title": "Uri",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URI of a Topology Manager type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "false"
+            }
+          },
+          "Url": {
+            "title": "Url",
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The URL of a web page type attachment.",
+            "nullable": true,
+            "x-hints": {
+              "includeInCompactView": true,
+              "fnd:FND_AUDIT_ATTR_ENABLED": "true"
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "Metadata-Context": {
+        "description": "If the REST API supports runtime customizations, the shape of the service may change during runtime. The REST client may isolate itself from these changes or choose to interact with the latest version of the API by specifying this header. For example: Metadata-Context:sandbox=\"TrackEmployeeFeature\".",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "REST-Framework-Version": {
+        "description": "The protocol version between a REST client and service. If the client does not specify this header in the request the server will pick a default version for the API.",
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "recruitingJobRequisitions-attachments-item-patch-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-patch-request"
+            }
+          }
+        }
+      },
+      "recruitingJobRequisitions-attachments-item-post-request": {
+        "description": "The following table describes the body parameters in the request for this task.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recruitingJobRequisitions-attachments-item-post-request"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ]
+}

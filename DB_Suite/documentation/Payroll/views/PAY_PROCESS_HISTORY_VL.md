@@ -1,0 +1,42 @@
+# PAY_PROCESS_HISTORY_VL
+
+## Details
+
+**Schema:** FUSION
+
+**Object owner:** PAY
+
+**Object type:** VIEW
+
+**Source:** [https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payprocesshistoryvl-8429.html](https://docs.oracle.com/en/cloud/saas/human-resources/oedmh/payprocesshistoryvl-8429.html)
+
+## Columns
+
+- FLOW_NAME
+- PROCESS_DATE
+- ACTION_LEVEL
+- ACTION_NAME
+- ERROR_SUB_STATUS
+- PERSON_IDENTFIER
+- IMPACTED_POPULATION
+- USER_NAME
+- SUBMITTED_ON
+- REQUEST_ID
+- ESS_ID
+- PARENT_ESS_ID
+- FLOW_INSTANCE_ID
+- FLOW_TASK_INSTANCE_ID
+- TASK_ID
+- ACTION_ID
+- PAYROLL_ID
+- FLOW_PATTERN_ID
+
+## Query
+
+```sql
+select PSFA.FLOW_NAME,PSFA.PROCESS_DATE, decode(prq.call_type,'CHILD_ACTION','PERSON','PROCESS') ACTION_LEVEL, nvl(nvl(h2.meaning,REGEXP_SUBSTR(e.definition, '[^//]*$', 1)), case when prq.call_type ='CHILD_ACTION' AND psfa.RB_SUB_STATUS='Y' then 'Roll Back Person' when prq.call_type ='CHILD_ACTION' AND psfa.MFR_SUB_STATUS='Y' then 'Mark for Retry Person' when prq.call_type ='DAEMON_ACTION' then 'Daemon Job' else decode(prq.call_type,'CHILD_ACTION','Child Job',prq.call_type) end) Action_name, psfa.ERROR_SUB_STATUS, (case when prq.call_type ='CHILD_ACTION' then pay_feature_upg_pkg.get_legislative_parameter('PERSON_PROCESS', prq.PARAM_NAME_VALS) else null end) Person_Identfier, (case when prq.call_type ='CHILD_ACTION' AND psfa.MFR_SUB_STATUS='Y' then psfa.UNPROCESSED else abs(psfa.total_completed) end) Impacted_Population, psfa.last_updated_by User_name,psfa.last_update_date Submitted_On, psfa.request_id,ESS_ID, psfa.PARENT_ESS_ID, psfa.FLOW_INSTANCE_ID,psfa.FLOW_TASK_INSTANCE_ID,psfa.task_id,psfa.action_id,psfa.payroll_id,PSFA.FLOW_PATTERN_ID FROM ess_request_history e, hr_lookups h2, pay_stats_flow_actions psfa, pay_requests prq WHERE h2.LOOKUP_TYPE (+) = 'ORA_PAY_FLOW_EXTRACT_ESS_DEFN' AND h2.LOOKUP_CODE (+) = substrb(REGEXP_SUBSTR(e.definition, '[^//]*$', 1),1,30) and prq.pay_request_id=psfa.request_id and nvl(psfa.active_flag,'Z') <> 'Y' and psfa.ESS_ID=e.requestid(+) and prq.call_type in('ESS','CHILD_ACTION') and psfa.ESS_ID is not null order by psfa.last_update_date desc
+```
+
+---
+
+[← Back to HRMS Views Index](../HRMS_Views_Index.md)
